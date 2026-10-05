@@ -46,7 +46,7 @@
     "„u.“ → „und“",
     "Planung (i. w. S.) als rote Klammer",
     "Informationsflüsse gestrichelt",
-    "Darstellung wirkt aus der Literatur übernommen – Quellenangabe in der Caption prüfen"
+    "Caption im Manuskript der 6. Auflage: „(In Anlehnung an: Hahn 1994, S. 42)“ – übernehmen; dort steht noch ein Rest „Abb. 6: Phasen des Entscheidungsprozesses“ in der Grafik"
    ],
    "alt": "Tabelle der sechs Phasen des Führungsprozesses mit den Tätigkeiten: Problemstellung, Suche und Beurteilung dienen der Entscheidungsvorbereitung, die Entscheidungsphase der Entscheidungsfällung, die Realisationsphase der Festlegung und Veranlassung der Durchführung, die Kontrollphase dem Soll-Ist-Vergleich. Klammern ordnen Planaufstellung, Planverabschiedung, Steuerung und Kontrolle zu; die Phasen 1 bis 4 bilden die Planung im weiteren Sinne. Gestrichelte Pfeile zeigen Zielvorgabe, Vorgabeinformation an die Durchführung und Rückinformation."
   },
@@ -175,6 +175,21 @@
    "kommentare": [
     "Abb. 3.79–3.177 (Kap. 3.9) liegen in einer eigenen PowerPoint-Datei – noch nicht geliefert"
    ]
+  },
+  "3.3": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Als interaktives Dashboard neu aufgebaut (HTML für die Lernplattform, PNG für das Buch), gleicher Datensatz wie Abb. 3.5 – Status, Fertigstellung und Terminverzug stimmen zwischen beiden Abbildungen überein",
+    "Gantt ist kein Power-BI-Standardvisual – Nachbau aus zwei deckungsgleichen gestapelten Balkendiagrammen (Ebene „Nachbau in Power BI“)",
+    "Projektliste aus Abb. 3.5 übernommen (19 statt 21 Projekte, Namen angeglichen, z. B. „Zukauf Digital GmbH“ → „Übernahme Digitalanbieter“) – prüfen, ob das zum Buchtext passt",
+    "Gelbe „Planungsphase“ und grüne „Umsetzung Plan“ als umrandete Planbalken gedeutet, schwarze „Durchführung“ als Ist-Verlauf bis zum Stichtag",
+    "Prognose-Ende = Plan-Ende + Terminverzug (Wochen); Überschreitung des Plan-Endes rot",
+    "Zeitachse 2025–2028 statt 2025–2029 (kein Projekt endet 2029); Projekte mit Beginn 2024 links offen gezeichnet",
+    "Daten erfunden und plausibel, Berichtsstand 30.06.2026 wie Abb. 3.5",
+    "Caption „Exemplarische Roadmap“ und Berichtstitel „Strategische Projektroadmap – Zeitplan“ angleichen"
+   ],
+   "alt": "Dashboard „Strategische Projektroadmap – Zeitplan“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlen: 19 Projekte, 10 in Umsetzung, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Ø Terminverzug 3,8 Wochen, 7 Projekte enden in den nächsten 12 Monaten. Darunter ein Zeitplan der Projekte, nach Status gruppiert, auf einer Zeitachse von 2025 bis 2028: umrandete Planbalken mit hellgrauer Planungsphase und weißer Umsetzung, ein dunkler Ist-Strich bis zum Stichtag, ein grauer Vorschau-Strich bis zum Prognose-Ende und rote Verlängerungen, wo das Plan-Ende überschritten wird; links Fertigstellung und Terminabweichung in Wochen."
   }
  }
 }

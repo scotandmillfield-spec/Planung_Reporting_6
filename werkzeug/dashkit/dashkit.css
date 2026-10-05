@@ -1,0 +1,135 @@
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }

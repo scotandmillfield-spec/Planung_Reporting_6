@@ -1,0 +1,180 @@
+{
+ "_hinweis": [
+  "Pflegeliste der Abbildungsinventur. Schlüssel: Abbildungsnummer (\"3.5\"), \"Tab. 4.8\" oder \"Folie 5\".",
+  "status: freigegeben | pruefung | latex | offen | screenshot | klaerung | entfaellt | hinweis",
+  "Ohne Eintrag ergibt sich der Status aus der Einordnung und den vorhandenen Dateien.",
+  "Nach jeder Änderung: python3 werkzeug/inventur.py"
+ ],
+ "eintraege": {
+  "2.1": {
+   "status": "pruefung",
+   "kommentare": [
+    "Bildtitel „Management-Regelkreis“ entfernt",
+    "blaue Drehpfeile entfernt (der Kreislauf ergibt sich aus der Form)",
+    "Planungsphasen grau hinterlegt, Planungsprozess als rote Klammer",
+    "Kern rot"
+   ],
+   "alt": "Kreisförmiger Management-Regelkreis aus fünf Phasen: Ziele setzen, Planen und Gestalten, Entscheiden, Realisieren/Durchführen sowie Kontrollieren, Vergleichen, Analysieren und Berichten. Die ersten drei Phasen bilden den Planungsprozess. Im Zentrum stehen Information, Kommunikation und Koordination; außen stehen die ausgetauschten Größen Ziel-Größen, Plan-Werte, Ist-Werte und Abweichungen."
+  },
+  "2.2": {
+   "status": "pruefung",
+   "kommentare": [
+    "„Zeithorizont“ einmal im Spaltenkopf statt in jeder Zeile",
+    "„2-3“ → „2–3“, „z.B.“ → „z. B.“",
+    "hellblaue Flächen → Grau",
+    "Rahmen „Unternehmenskultur“ als gestrichelte Gruppe",
+    "Vorgaben links als Sammelleitung"
+   ],
+   "alt": "Gestapelte Ebenen der Unternehmensführung im Rahmen der Unternehmenskultur: generelle Zielplanung, strategische Planung (z. B. Geschäftsfelder, Regionen; etwa 5 Jahre), Mittelfristplanung (Maßnahmen, Projekte; 2–3 Jahre), operative Planung (Prozesse, Ressourcen; bis 1 Jahr), Steuerung und Kontrolle sowie Durchführung. Die generelle Zielplanung gibt allen Ebenen Vorgaben, jede Ebene meldet an die darüberliegende zurück."
+  },
+  "2.3": {
+   "status": "pruefung",
+   "kommentare": [
+    "Hochkant-Duplikat (Folie 5) entfällt",
+    "„Potential“ → „Potenzial“",
+    "Abkürzungen ausgeschrieben (Einzahlungs-, Auszahlungs-, Forschungs-/Entwicklungsplanung)",
+    "Ebenen als Bänder, Verbindungen gebündelt"
+   ],
+   "alt": "Ganzseitiges Netz der betrieblichen Teilpläne in drei Ebenen: generelle Zielplanung mit Unternehmensgrundsätzen, strategische Planung mit Erfolgspotenzialplanung und Ableitung strategischer Zielgrößen sowie operative Planung mit Mengen-, Ressourcen- und wertmäßigen Plänen. Pfeile zeigen, wie Absatz-, Produktions- und Beschaffungsplanung über die Ressourcenpläne in Kosten-, Ergebnis-, Finanz- und Bilanzplanung münden.",
+   "quer": true
+  },
+  "2.4": {
+   "status": "pruefung",
+   "kommentare": [
+    "Lag als eingebettetes Objekt in Times vor, jetzt native Formen",
+    "Spaltenköpfe von unten nach oben",
+    "„u.“ → „und“",
+    "Planung (i. w. S.) als rote Klammer",
+    "Informationsflüsse gestrichelt",
+    "Darstellung wirkt aus der Literatur übernommen – Quellenangabe in der Caption prüfen"
+   ],
+   "alt": "Tabelle der sechs Phasen des Führungsprozesses mit den Tätigkeiten: Problemstellung, Suche und Beurteilung dienen der Entscheidungsvorbereitung, die Entscheidungsphase der Entscheidungsfällung, die Realisationsphase der Festlegung und Veranlassung der Durchführung, die Kontrollphase dem Soll-Ist-Vergleich. Klammern ordnen Planaufstellung, Planverabschiedung, Steuerung und Kontrolle zu; die Phasen 1 bis 4 bilden die Planung im weiteren Sinne. Gestrichelte Pfeile zeigen Zielvorgabe, Vorgabeinformation an die Durchführung und Rückinformation."
+  },
+  "2.5": {
+   "status": "pruefung",
+   "kommentare": [
+    "„Anreiz-/ und Motivationsfunktion“ → „Anreiz- und Motivationsfunktion“",
+    "Verbindungen als Sammelleitungen mit Knotenpunkten"
+   ],
+   "alt": "Funktionen der Planung von unten nach oben: Planung/Kontrolle erfüllt vier Teilfunktionen (Information und Dokumentation, Koordination und Integration, Gestaltung und Prognose, Anreiz und Motivation), die gemeinsam in die Zielsetzungsfunktion münden; darüber folgen Steuerungs-, Innovations- und Zielerreichungsfunktion."
+  },
+  "2.6": {
+   "status": "pruefung",
+   "kommentare": [
+    "Gesamtrahmen entfernt",
+    "„externe“ → „Externe“",
+    "Prozessschritte als Kästen mit Pfeilen",
+    "Inhaltsfläche grau hinterlegt"
+   ],
+   "alt": "Koordinatensystem mit drei Dimensionen des Reportings: senkrecht die Prozesse von der Informationsbedarfsermittlung über Datenbeschaffung, Informationsaufbereitung, Berichtsaufbereitung und Berichtsbereitstellung bis zur Informationsanalyse; waagerecht die Empfänger (interne und externe Adressaten); diagonal der inhaltliche Umfang, also Informationen aus Betrieb und Umwelt."
+  },
+  "2.7": {
+   "status": "pruefung",
+   "kommentare": [
+    "„Anaytics“ → „Analytics“",
+    "„u.a.“ → „u. a.“",
+    "Felder als Karten mit Kopfleiste"
+   ],
+   "alt": "Vier-Felder-Ordnungsrahmen mit den Feldern fachlicher Inhalt, IT-Unterstützung, Organisation und Prozesse, jeweils mit den Gestaltungsgegenständen für Reporting und Planung."
+  },
+  "3.5": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Aus der Testphase: als interaktives Dashboard neu aufgebaut (HTML für die Lernplattform, PNG für das Buch)",
+    "„BCR-Felder“ des Originals als BSC-Perspektive gedeutet – fachlich prüfen",
+    "Terminverzug in Wochen angenommen (Original ohne Einheit)",
+    "Ideen nur mit Grobschätzung der Kosten, ohne Fertigstellung und Termin",
+    "Ø Fertigstellung nur über Projekte in Umsetzung",
+    "Daten erfunden und plausibel, Berichtsstand 30.06.2026",
+    "Caption „Projektroadmap Übersicht“ und Berichtstitel „Strategische Projektroadmap“ angleichen"
+   ],
+   "alt": "Dashboard „Strategische Projektroadmap“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlenzeile: 19 Projekte, Plan-Kosten 35,3 Mio. €, Kostenabweichung +1,5 Mio. €, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Kapitalwert 22,8 Mio. €, Ø Risikoindex 50. Darunter eine Projekttabelle nach Status mit Plan-Kosten, Abweichung zum Plan bei Kosten und Termin sowie Fertigstellungsgrad als Balken; rechts ein Portfolio aus Risikoindex und Nutzwert (Kreisfläche = Plan-Kosten) und die Plan-Kosten nach Status."
+  },
+  "3.6": {
+   "status": "pruefung",
+   "kommentare": [
+    "Aus der Testphase: Würfel-Icons, 3D-Pfeile und Verlaufsfarben entfernt, Verbindungen als Sammelleitung",
+    "Kostenplan fließt nur in den Bilanzplan – fachlich prüfen (nicht auch in den Ergebnisplan?)"
+   ],
+   "alt": "Sieben Teilpläne in zwei Spalten: links Absatz-, Umsatz-, Ressourcen-, Personal- und Kostenplan, rechts Ergebnis- und Bilanzplan. Absatz- und Umsatzplan, Ressourcen-, Personal- und Kostenplan sowie Ergebnis- und Bilanzplan stimmen sich wechselseitig ab. Der Absatzplan speist den Ressourcenplan; Umsatz- und Ressourcenplan fließen gemeinsam in Ergebnis- und Bilanzplan, der Kostenplan in den Bilanzplan."
+  },
+  "3.31": {
+   "status": "klaerung",
+   "kommentare": [
+    "Notiz „3.31 Tabelle mit einer oben dargestellten Summe“ passt nicht zum Bild (Cubeware-Auslastungsanalyse) – welches ist die richtige Abbildung?"
+   ]
+  },
+  "3.193": {
+   "status": "klaerung",
+   "kommentare": [
+    "Montage aus Diagramm und Screenshots (Monte-Carlo-Simulation) – als Diagramm neu zeichnen oder als Screenshot behalten?"
+   ]
+  },
+  "5.39": {
+   "status": "latex",
+   "latex": "tabellen/lst_5-39.tex",
+   "kommentare": [
+    "SQL lag als eingebettetes Word-Objekt vor – als gesetztes Listing (Paket listings) statt Bild",
+    "Abfrage zeilenweise eingerückt, Inhalt unverändert; Schriftgrad 7 pt wie die Abbildungstexte",
+    "Nummer bleibt Abb. 5.39 (figure-Umgebung um das Listing)"
+   ]
+  },
+  "Tab. 3.1": {
+   "status": "latex",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen, Werte geprüft",
+    "Kopfzeile ohne Einheiten – „Preis (€)“ und „Umsatz (€)“ ergänzen?"
+   ]
+  },
+  "Tab. 3.2": {
+   "status": "latex",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
+    "Eckzelle „Absatz“ ohne Einheit – „Absatz (Stück)“?"
+   ]
+  },
+  "Tab. 3.3": {
+   "status": "latex",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
+    "„Zwischensumme“ (Summe je Produkt) und „Summe“ (Summe je Produktgruppe) sind missverständlich benannt – z. B. „Summe Produkt“ und „Summe Produktgruppe“"
+   ]
+  },
+  "Tab. 4.6": {
+   "status": "latex",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen",
+    "Spaltenbreiten für den Satzspiegel von 110 mm gesetzt; Auslassungszeilen („…“) wie im Original"
+   ]
+  },
+  "Tab. 4.7": {
+   "status": "latex",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen; footnotesize nötig, sonst zu breit für 110 mm",
+    "Zeile „Produktergebnisplanung“ ohne Durchführung und Genehmigung – wie im Original, prüfen"
+   ]
+  },
+  "Tab. 4.8": {
+   "status": "latex",
+   "kommentare": [
+    "Aus dem eingebetteten Word-Objekt übernommen; „.Je“ → „. Je“, „z. B.“, „110–150 %“",
+    "Begriffe „Anlagendeckung“ und „Deckungsgrad II“ wechseln – einmal gleichsetzen: „Anlagendeckung (Deckungsgrad II)“",
+    "Zielgröße 110–150 % und Text „Ziel z. B. 150 %“ abgleichen",
+    "Quellenhinweis aus der Notiz in die Caption übernommen (Kurzform im Tabellenverzeichnis)"
+   ]
+  },
+  "Folie 5": {
+   "status": "entfaellt",
+   "kommentare": [
+    "Hochkant-Duplikat von Abb. 2.3 – entfällt, Abb. 2.3 wird quer gesetzt"
+   ]
+  },
+  "Folie 92": {
+   "status": "hinweis",
+   "kommentare": [
+    "Abb. 3.79–3.177 (Kap. 3.9) liegen in einer eigenen PowerPoint-Datei – noch nicht geliefert"
+   ]
+  }
+ }
+}

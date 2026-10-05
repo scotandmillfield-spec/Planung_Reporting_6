@@ -1,0 +1,30 @@
+% benötigt im Präambel: \usepackage{listings}
+% Abb. 5.39 als gesetztes Listing statt Bild (Inhalt aus dem eingebetteten Word-Objekt der 5. Auflage).
+% Die figure-Umgebung hält die Nummer „Abb. 5.39“; scriptsize entspricht 7 pt wie die Abbildungstexte.
+\begin{figure}[htbp]
+\begin{lstlisting}[language=SQL, basicstyle=\ttfamily\scriptsize, columns=fullflexible,
+  keepspaces=true, breaklines=true, frame=tb, framerule=0.4pt, aboveskip=0pt, belowskip=0pt]
+SELECT Kunden.KNDNR, Artikel.ARTNR, Auftrag.PLIKZ,
+       Kunden.Name, Auftrag.KHIER, Artikel.Farbe,
+       Sum(Auftrag.[Umsatz Flaschen])   AS [Summe von Umsatz Flaschen],
+       Sum(Auftrag.[Umsatz Verpackung]) AS [Summe von Umsatz Verpackung],
+       Sum(Auftrag.Rabatt)              AS [Summe von Rabatt],
+       Sum(Auftrag.Skonto)              AS [Summe von Skonto],
+       Sum(Auftrag.Bonus)               AS [Summe von Bonus],
+       Sum(Auftrag.Fracht)              AS [Summe von Fracht],
+       Sum(Auftrag.Gruppenbonus)        AS [Summe von Gruppenbonus],
+       Sum(Auftrag.Herstellkosten)      AS [Summe von Herstellkosten],
+       Sum(Auftrag.Provision)           AS [Summe von Provision],
+       Sum(Auftrag.Sonderbonus)         AS [Summe von Sonderbonus]
+FROM Kunden
+     INNER JOIN (Farbe
+       INNER JOIN (Artikel
+         INNER JOIN Auftrag ON Artikel.ARTNR = Auftrag.ARTNR)
+       ON Farbe.Farbnr = Artikel.Farbe)
+     ON Kunden.KNDNR = Auftrag.KNDNR
+GROUP BY Kunden.KNDNR, Artikel.ARTNR, Auftrag.PLIKZ,
+         Kunden.Name, Auftrag.KHIER, Artikel.Farbe;
+\end{lstlisting}
+\caption{Beispiel zur freien Datenrecherche (z.\,B. SELECT-Anweisung)}
+\label{fig:5-39}
+\end{figure}

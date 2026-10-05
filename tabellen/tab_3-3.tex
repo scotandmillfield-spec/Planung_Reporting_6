@@ -1,0 +1,23 @@
+% benötigt im Präambel: \usepackage{booktabs}
+\begin{table}[htbp]
+  \centering
+  \caption{Erweiterte Kreuztabelle}
+  \label{tab:3-3}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Absatz & \multicolumn{2}{c}{Produktgruppe A} & \multicolumn{2}{c}{Produktgruppe B} & \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+     & Produkt 1 & Produkt 2 & Produkt 3 & Produkt 4 & Summe \\
+    \midrule
+    Kunde 1 & 200 & 100 & 100 & 0 & 400 \\
+    Kunde 2 & 100 & 50 & 200 & 100 & 450 \\
+    Kunde 3 & 50 & 100 & 50 & 0 & 200 \\
+    Kunde 4 & 100 & 300 & 100 & 50 & 550 \\
+    \midrule
+    Zwischensumme & 450 & 550 & 450 & 150 & 1.600 \\
+    Summe & \multicolumn{2}{c}{1.000} & \multicolumn{2}{c}{600} & 1.600 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

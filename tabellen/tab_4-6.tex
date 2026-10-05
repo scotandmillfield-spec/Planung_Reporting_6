@@ -1,0 +1,31 @@
+% benötigt im Präambel: \usepackage{booktabs,tabularx}
+\begin{table}[htbp]
+  \centering
+  \caption{Beispiel für eine Berichts-Organisationsmatrix}
+  \label{tab:4-6}
+  \small
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.3cm}l@{}}
+    \toprule
+    Reporting\-gebiete & Berichte & Berichts\-intervall & Führungskreis \\
+    \midrule
+    Top-Management & Bilanz & Quartal & Geschäftsleitung \\
+     & GuV & Quartal & Geschäftsleitung \\
+     & Erfolgsrechnung & Monat & Geschäftsleitung \\
+     & Umsatzstatistik & Woche & Geschäftsleitung \\
+     & Produkterfolgsrechnung & Monat & Geschäftsleitung \\
+     & \dots &  &  \\
+    \addlinespace
+    Vertrieb & Umsatzstatistik & Woche & Vertriebsleitung \\
+     & Produkterfolgsrechnung & Monat & Vertriebsleitung \\
+     & Verkäuferstatistik & Woche & Vertriebsleitung \\
+     & \dots &  &  \\
+    \addlinespace
+    Produktion & Kapazitätsstatistik & Monat & Technikleitung \\
+     & Produkterfolgsrechnung & Monat & Technikleitung \\
+     & Stundenstatistik & Woche & Technikleitung \\
+     & Wartungsstatistik & Quartal & Technikleitung \\
+    \addlinespace
+    \dots & \dots & \dots & \dots \\
+    \bottomrule
+  \end{tabularx}
+\end{table}

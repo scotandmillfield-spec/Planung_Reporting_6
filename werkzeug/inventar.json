@@ -1,0 +1,1707 @@
+[
+ {
+  "folie": 1,
+  "nr": "",
+  "titel": "",
+  "notiz": "",
+  "form": 4
+ },
+ {
+  "folie": 2,
+  "nr": "2.1",
+  "titel": "Planung und Reporting im Management-Regelkreis, S. 10",
+  "notiz": "Abbildung 2.1\tPlanung und Reporting im Management-Regelkreis, S. 10",
+  "gruppe": 1,
+  "form": 31
+ },
+ {
+  "folie": 3,
+  "nr": "2.2",
+  "titel": "Zeitdimensionen der Unternehmensführung, S. 11",
+  "notiz": "Abbildung 2.2\tZeitdimensionen der Unternehmensführung, S. 11",
+  "gruppe": 7,
+  "form": 89
+ },
+ {
+  "folie": 4,
+  "nr": "2.3",
+  "titel": "Interdependenzen der betrieblichen Teilpläne",
+  "notiz": "Abbildung 2.3\tInterdependenzen der betrieblichen Teilpläne",
+  "gruppe": 83,
+  "form": 1519
+ },
+ {
+  "folie": 5,
+  "nr": "2.3",
+  "titel": "Interdependenzen der betrieblichen Teilpläne",
+  "notiz": "Doppelte Abbildung 2.3\tInterdependenzen der betrieblichen Teilpläne",
+  "form": 3,
+  "bild": 1
+ },
+ {
+  "folie": 6,
+  "nr": "2.4",
+  "titel": "Phasen des Planungs- und Steuerungsprozesses",
+  "notiz": "Abbildung 2.4\tPhasen des Planungs- und Steuerungsprozesses",
+  "ole": 1
+ },
+ {
+  "folie": 7,
+  "nr": "2.5",
+  "titel": "Ziele und Aufgaben der Planung",
+  "notiz": "Abbildung 2.5\tZiele und Aufgaben der Planung",
+  "gruppe": 1,
+  "form": 24
+ },
+ {
+  "folie": 8,
+  "nr": "2.6",
+  "titel": "Dimensionen der Reportingdefinition",
+  "notiz": "Abb. 2.6 Dimensionen der Reportingdefinition",
+  "gruppe": 1,
+  "form": 15
+ },
+ {
+  "folie": 9,
+  "nr": "2.7",
+  "titel": "Vier-Felder-Ordnungsrahmen für das Reporting und die Planung",
+  "notiz": "Abb. 2.7\tVier-Felder-Ordnungsrahmen für das Reporting und die Planung",
+  "gruppe": 1,
+  "form": 8
+ },
+ {
+  "folie": 10,
+  "nr": "",
+  "titel": "",
+  "notiz": "",
+  "form": 1
+ },
+ {
+  "folie": 11,
+  "nr": "3.1",
+  "titel": "Gesamtmodellüberblick für die integrierte Unternehmensplanung und –steuerung",
+  "notiz": "Abbildung 3.1\tGesamtmodellüberblick für die integrierte Unternehmensplanung und –steuerung",
+  "form": 123,
+  "ole": 1,
+  "gruppe": 5,
+  "bild": 2
+ },
+ {
+  "folie": 12,
+  "nr": "3.2",
+  "titel": "Exemplarische Balanced Chance and Risk Card (Leicht verändert zu Schön und Irmer 2007, S. 251. Die Balanced Chance and Risk Card® ist ein geschütztes Markenzeichen von Prof. Dr. Thomas Reichmann, CIC GmbH & Co. KG (vgl. Reichmann 2011, S. 590 ff.))",
+  "notiz": "Abb. 3.2 Exemplarische Balanced Chance and Risk Card (Leicht verändert zu Schön und Irmer 2007, S. 251. Die Balanced Chance and Risk Card® ist ein geschütztes Markenzeichen von Prof. Dr. Thomas Reichmann, CIC GmbH & Co. KG (vgl. Reichmann 2011, S. 590 ff.))",
+  "form": 13,
+  "chart": 1,
+  "bild": 3
+ },
+ {
+  "folie": 13,
+  "nr": "3.3",
+  "titel": "Exemplarische Roadmap (In Anlehnung zur Quelle: Schön und Irmer 2007, S. 248)",
+  "notiz": "Abb. 3.3 Exemplarische Roadmap (In Anlehnung zur Quelle: Schön und Irmer 2007, S. 248)",
+  "form": 9,
+  "bild": 2
+ },
+ {
+  "folie": 14,
+  "nr": "3.4",
+  "titel": "Strategisches Projektportfolio",
+  "notiz": "Abb. 3.4 Strategisches Projektportfolio",
+  "form": 10,
+  "chart": 1,
+  "bild": 1
+ },
+ {
+  "folie": 15,
+  "nr": "3.5",
+  "titel": "Projektroadmap Übersicht",
+  "notiz": "Abb. 3.5 Projektroadmap Übersicht",
+  "form": 10,
+  "bild": 2
+ },
+ {
+  "folie": 16,
+  "nr": "3.6",
+  "titel": "Interdependenzen der betrieblichen Teilpläne",
+  "notiz": "Abbildung 3.6\tInterdependenzen der betrieblichen Teilpläne",
+  "gruppe": 1,
+  "form": 34,
+  "bild": 42
+ },
+ {
+  "folie": 17,
+  "nr": "3.7",
+  "titel": "Exemplarische Prämissenplanung",
+  "notiz": "Abbildung 3.7\tExemplarische Prämissenplanung",
+  "bild": 1
+ },
+ {
+  "folie": 18,
+  "nr": "3.8",
+  "titel": "Exemplarische Top-Down-Vorgaben und Abstimmungen",
+  "notiz": "Abb. 3.8 Exemplarische Top-Down-Vorgaben und Abstimmungen",
+  "bild": 1
+ },
+ {
+  "folie": 19,
+  "nr": "3.9",
+  "titel": "Exemplarische Struktur im Reporting",
+  "notiz": "Abb. 3.9 Exemplarische Struktur im Reporting",
+  "gruppe": 1,
+  "form": 23
+ },
+ {
+  "folie": 20,
+  "nr": "3.10",
+  "titel": "Analysewege im Reporting.",
+  "notiz": "Abb. 3.10 Analysewege im Reporting.",
+  "gruppe": 1,
+  "form": 20,
+  "bild": 10
+ },
+ {
+  "folie": 21,
+  "nr": "3.11",
+  "titel": "Exemplarische Startnavigation.",
+  "notiz": "Abb. 3.11 Exemplarische Startnavigation.",
+  "bild": 1
+ },
+ {
+  "folie": 22,
+  "nr": "3.12",
+  "titel": "Reporting- und Planungskalender mit prevero",
+  "notiz": "Abb. 3.12 Reporting- und Planungskalender mit prevero",
+  "bild": 1
+ },
+ {
+  "folie": 23,
+  "nr": "3.13",
+  "titel": "Modell der Teilplanungsgebiete.",
+  "notiz": "Abb. 3.13 Modell der Teilplanungsgebiete.",
+  "gruppe": 1,
+  "form": 40
+ },
+ {
+  "folie": 24,
+  "nr": "3.14",
+  "titel": "Ist-Ist-Vergleiche",
+  "notiz": "Abb. 3.14 Ist-Ist-Vergleiche",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 25,
+  "nr": "3.15",
+  "titel": "Soll-Ist- bzw. Plan-Ist-Vergleiche",
+  "notiz": "Abb. 3.15 Soll-Ist- bzw. Plan-Ist-Vergleiche",
+  "form": 2,
+  "bild": 1
+ },
+ {
+  "folie": 26,
+  "nr": "3.16",
+  "titel": "Grafisch unterstützte Tabellendarstellung",
+  "notiz": "Abb. 3.16 Grafisch unterstützte Tabellendarstellung",
+  "bild": 1
+ },
+ {
+  "folie": 27,
+  "nr": "3.17",
+  "titel": "Plan-Wird-Vergleich (Forecast)",
+  "notiz": "Abb. 3.17 Plan-Wird-Vergleich (Forecast)",
+  "bild": 1
+ },
+ {
+  "folie": 28,
+  "nr": "3.18",
+  "titel": "Zielerreichungsbericht",
+  "notiz": "Abb. 3.18 Zielerreichungsbericht",
+  "bild": 1
+ },
+ {
+  "folie": 29,
+  "nr": "3.19",
+  "titel": "Zeitreihenanalysen",
+  "notiz": "Abb. 3.19 Zeitreihenanalysen",
+  "bild": 1
+ },
+ {
+  "folie": 30,
+  "nr": "3.20",
+  "titel": "Top-Ten-Analyse (Beispiel MS Excel)",
+  "notiz": "Abb. 3.20 Top-Ten-Analyse (Beispiel MS Excel)",
+  "bild": 1
+ },
+ {
+  "folie": 31,
+  "nr": "3.21",
+  "titel": "ABC-Analyse (Beispiel MS Excel)",
+  "notiz": "Abb. 3.21 ABC-Analyse (Beispiel MS Excel)",
+  "form": 6,
+  "bild": 1
+ },
+ {
+  "folie": 32,
+  "nr": "3.22",
+  "titel": "ABC-Analyse (Beispiel Cubeware).",
+  "notiz": "Abb. 3.22 ABC-Analyse (Beispiel Cubeware).",
+  "form": 7,
+  "bild": 1
+ },
+ {
+  "folie": 33,
+  "nr": "3.23",
+  "titel": "Portfolio-Analyse",
+  "notiz": "Abb. 3.23 Portfolio-Analyse",
+  "form": 6,
+  "bild": 1
+ },
+ {
+  "folie": 34,
+  "nr": "3.24",
+  "titel": "Objekt-Vergleich",
+  "notiz": "Abb. 3.24 Objekt-Vergleich",
+  "bild": 1
+ },
+ {
+  "folie": 35,
+  "nr": "3.25",
+  "titel": "Benchmark-Vergleich",
+  "notiz": "Abb. 3.25 Benchmark-Vergleich",
+  "bild": 1
+ },
+ {
+  "folie": 36,
+  "nr": "3.26",
+  "titel": "Break-Even-Point-Analyse",
+  "notiz": "Abb. 3.26 Break-Even-Point-Analyse",
+  "form": 6,
+  "bild": 1
+ },
+ {
+  "folie": 37,
+  "nr": "3.27",
+  "titel": "Scoring-Analyse",
+  "notiz": "Abb. 3.27 Scoring-Analyse",
+  "bild": 1
+ },
+ {
+  "folie": 38,
+  "nr": "3.28",
+  "titel": "Exemplarisches Grundraster eines Berichtes",
+  "notiz": "Abb. 3.28 Exemplarisches Grundraster eines Berichtes",
+  "gruppe": 1,
+  "form": 36
+ },
+ {
+  "folie": 39,
+  "nr": "3.29",
+  "titel": "Exemplarische Aufteilungsmöglichkeiten des Auswertungsbereiches",
+  "notiz": "Abb. 3.29 Exemplarische Aufteilungsmöglichkeiten des Auswertungsbereiches",
+  "bild": 1
+ },
+ {
+  "folie": 40,
+  "nr": "3.30",
+  "titel": "Exemplarischer Bericht in Anlehnung an das Grundraster",
+  "notiz": "Abb. 3.30 Exemplarischer Bericht in Anlehnung an das Grundraster",
+  "bild": 1
+ },
+ {
+  "folie": 41,
+  "nr": "3.31",
+  "titel": "Tabelle mit einer oben dargestellten Summe.",
+  "notiz": "Abb. 3.31 Tabelle mit einer oben dargestellten Summe.",
+  "bild": 1
+ },
+ {
+  "folie": 42,
+  "nr": "",
+  "titel": "Tab. 3.1 Flache Tabelle",
+  "notiz": "Tab. 3.1 Flache Tabelle",
+  "form": 3,
+  "ole": 1
+ },
+ {
+  "folie": 43,
+  "nr": "",
+  "titel": "Tab. 3.2 Einfache Kreuztabelle",
+  "notiz": "Tab. 3.2 Einfache Kreuztabelle",
+  "form": 3,
+  "ole": 1
+ },
+ {
+  "folie": 44,
+  "nr": "",
+  "titel": "Tab. 3.3 Erweiterte Kreuztabelle",
+  "notiz": "Tab. 3.3 Erweiterte Kreuztabelle",
+  "ole": 1
+ },
+ {
+  "folie": 45,
+  "nr": "3.32",
+  "titel": "Pivottabelle (MS Excel)",
+  "notiz": "Abb. 3.32 Pivottabelle (MS Excel)",
+  "bild": 1
+ },
+ {
+  "folie": 46,
+  "nr": "3.33",
+  "titel": "Einfacher Datenwürfel",
+  "notiz": "Abb. 3.33 Einfacher Datenwürfel",
+  "gruppe": 1,
+  "form": 187
+ },
+ {
+  "folie": 47,
+  "nr": "3.34",
+  "titel": "Rotation bzw. Pivoting",
+  "notiz": "Abb. 3.34 Rotation bzw. Pivoting",
+  "gruppe": 4,
+  "form": 567
+ },
+ {
+  "folie": 48,
+  "nr": "3.35",
+  "titel": "Slice",
+  "notiz": "Abb. 3.35 Slice",
+  "form": 190,
+  "gruppe": 1
+ },
+ {
+  "folie": 49,
+  "nr": "3.36",
+  "titel": "Dice",
+  "notiz": "Abb. 3.36 Dice",
+  "gruppe": 1,
+  "form": 189
+ },
+ {
+  "folie": 50,
+  "nr": "3.37",
+  "titel": "Drill-Down und Roll-Up",
+  "notiz": "Abb. 3.37 Drill-Down und Roll-Up",
+  "gruppe": 3,
+  "form": 335
+ },
+ {
+  "folie": 51,
+  "nr": "3.38",
+  "titel": "Drill-Through",
+  "notiz": "Abb. 3.38 Drill-Through",
+  "gruppe": 3,
+  "form": 320
+ },
+ {
+  "folie": 52,
+  "nr": "3.39",
+  "titel": "Drill Across",
+  "notiz": "Abb. 3.39 Drill Across",
+  "gruppe": 2,
+  "form": 510,
+  "ole": 1
+ },
+ {
+  "folie": 53,
+  "nr": "3.40",
+  "titel": "Split und Merge",
+  "notiz": "Abb. 3.40 Split und Merge",
+  "gruppe": 1,
+  "form": 293
+ },
+ {
+  "folie": 54,
+  "nr": "3.41",
+  "titel": "Vermeidung von Visualisierungsfehlern",
+  "notiz": "Abb. 3.41 Vermeidung von Visualisierungsfehlern",
+  "bild": 1
+ },
+ {
+  "folie": 55,
+  "nr": "3.42",
+  "titel": "Kreis- bzw. Kuchendiagramme",
+  "notiz": "Abb. 3.42 Kreis- bzw. Kuchendiagramme",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 56,
+  "nr": "3.43",
+  "titel": "Pie- bzw. Donut-Chart. (Quelle: bime Showcase 2017)",
+  "notiz": "Abb. 3.43 Pie- bzw. Donut-Chart. (Quelle: bime Showcase 2017)",
+  "bild": 1
+ },
+ {
+  "folie": 57,
+  "nr": "3.44",
+  "titel": "Sunburst-Chart. (Quelle: Microsoft 2017a)",
+  "notiz": "Abb. 3.44 Sunburst-Chart. (Quelle: Microsoft 2017a)",
+  "bild": 1
+ },
+ {
+  "folie": 58,
+  "nr": "3.45",
+  "titel": "Treemap-Chart. (Quelle: Microsoft 2017b)",
+  "notiz": "Abb. 3.45 Treemap-Chart. (Quelle: Microsoft 2017b)",
+  "bild": 1
+ },
+ {
+  "folie": 59,
+  "nr": "3.46",
+  "titel": "Beispiel zu einem Portfolio-/Blasendiagramm. (Bildauszug entnommen aus Schön et al. 2001, S. 386)",
+  "notiz": "Abb. 3.46 Beispiel zu einem Portfolio-/Blasendiagramm. (Bildauszug entnommen aus Schön et al. 2001, S. 386)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 60,
+  "nr": "3.47",
+  "titel": "Bubble-Chart. (Quelle a: PPM Execution 2017, Quelle b: react 2017)",
+  "notiz": "Abb. 3.47 Bubble-Chart. (Quelle a: PPM Execution 2017, Quelle b: react 2017)",
+  "bild": 2
+ },
+ {
+  "folie": 61,
+  "nr": "3.48",
+  "titel": "Säulendiagramm",
+  "notiz": "Abb. 3.48 Säulendiagramm",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 62,
+  "nr": "3.49",
+  "titel": "Balkendiagramm",
+  "notiz": "Abb. 3.49 Balkendiagramm",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 63,
+  "nr": "3.50",
+  "titel": "Balkendiagramm mit negativen und positiven Werten",
+  "notiz": "Abb. 3.50 Balkendiagramm mit negativen und positiven Werten",
+  "bild": 1
+ },
+ {
+  "folie": 64,
+  "nr": "3.51",
+  "titel": "Normale Stapelsäulen",
+  "notiz": "Abb. 3.51 Normale Stapelsäulen",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 65,
+  "nr": "3.52",
+  "titel": "Prozentual gewichtete Stapelsäulen",
+  "notiz": "Abb. 3.52 Prozentual gewichtete Stapelsäulen",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 66,
+  "nr": "3.53",
+  "titel": "Vermeidung von Verzerrungen",
+  "notiz": "Abb. 3.53 Vermeidung von Verzerrungen",
+  "bild": 1
+ },
+ {
+  "folie": 67,
+  "nr": "3.54",
+  "titel": "Bullet-Chart. (Quelle: Online Chart Makers – amCharts 2017b)",
+  "notiz": "Abb. 3.54 Bullet-Chart. (Quelle: Online Chart Makers – amCharts 2017b)",
+  "bild": 2
+ },
+ {
+  "folie": 68,
+  "nr": "3.55",
+  "titel": "Wasserfalldiagramm mit MS Excel",
+  "notiz": "Abb. 3.55 Wasserfalldiagramm mit MS Excel",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 69,
+  "nr": "3.56",
+  "titel": "Wasserfalldiagramm mit Cubeware. (Quelle: Cubeware Bildergalerie 2011)",
+  "notiz": "Abb. 3.56 Wasserfalldiagramm mit Cubeware. (Quelle: Cubeware Bildergalerie 2011)",
+  "bild": 1
+ },
+ {
+  "folie": 70,
+  "nr": "3.57",
+  "titel": "Histogramm und Box-Plot. (Quelle a: XLSTAT 2017, Quelle b: Sullivan und LaMorte 2017)",
+  "notiz": "Abb. 3.57 Histogramm und Box-Plot. (Quelle a: XLSTAT 2017, Quelle b: Sullivan und LaMorte 2017)",
+  "bild": 2,
+  "form": 2
+ },
+ {
+  "folie": 71,
+  "nr": "3.58",
+  "titel": "Trichter- bzw. Funnel-Chart. (Quelle: Online Chart Makers – amCharts 2017a)",
+  "notiz": "Abb. 3.58 Trichter- bzw. Funnel-Chart. (Quelle: Online Chart Makers – amCharts 2017a)",
+  "bild": 1
+ },
+ {
+  "folie": 72,
+  "nr": "3.59",
+  "titel": "Normales Kurven- bzw. Liniendiagramm",
+  "notiz": "Abb. 3.59 Normales Kurven- bzw. Liniendiagramm",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 73,
+  "nr": "3.60",
+  "titel": "Verzerrte Vergleiche bei Preisentwicklungen",
+  "notiz": "Abb. 3.60 Verzerrte Vergleiche bei Preisentwicklungen",
+  "bild": 1
+ },
+ {
+  "folie": 74,
+  "nr": "3.61",
+  "titel": "Punktdiagramm",
+  "notiz": "Abb. 3.61 Punktdiagramm",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 75,
+  "nr": "3.62",
+  "titel": "Koordinatensystem mit vier Quadranten",
+  "notiz": "Abb. 3.62 Koordinatensystem mit vier Quadranten",
+  "bild": 1
+ },
+ {
+  "folie": 76,
+  "nr": "3.63",
+  "titel": "Flächendiagramm",
+  "notiz": "Abb. 3.63 Flächendiagramm",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 77,
+  "nr": "3.64",
+  "titel": "Ampelsignale/Heatmap. (Berichtselemente u. a. entnommen aus Schön und Müller 2010, S. 123–165 und Schön 2004b, S. 328)",
+  "notiz": "Abb. 3.64 Ampelsignale/Heatmap. (Berichtselemente u. a. entnommen aus Schön und Müller 2010, S. 123–165 und Schön 2004b, S. 328)",
+  "form": 1,
+  "gruppe": 1,
+  "bild": 4
+ },
+ {
+  "folie": 78,
+  "nr": "3.65",
+  "titel": "Tachos und Thermometer",
+  "notiz": "Abb. 3.65 Tachos und Thermometer",
+  "form": 5,
+  "gruppe": 2,
+  "bild": 2
+ },
+ {
+  "folie": 79,
+  "nr": "3.66",
+  "titel": "Geo-Visualisierung. (Quelle: SAP AG 2003)",
+  "notiz": "Abb. 3.66 Geo-Visualisierung. (Quelle: SAP AG 2003)",
+  "form": 2,
+  "bild": 1
+ },
+ {
+  "folie": 80,
+  "nr": "3.67",
+  "titel": "Lieferantenvergleich mit Schwellenwert",
+  "notiz": "Abb. 3.67 Lieferantenvergleich mit Schwellenwert",
+  "bild": 1
+ },
+ {
+  "folie": 81,
+  "nr": "3.68",
+  "titel": "(Spinnen-)Netzdiagramm. (Eigene Darstellung in Anlehnung an Gehringer und Michel 2000, S. 28)",
+  "notiz": "Abb. 3.68 (Spinnen-)Netzdiagramm. (Eigene Darstellung in Anlehnung an Gehringer und Michel 2000, S. 28)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 82,
+  "nr": "3.69",
+  "titel": "Sparkline-Beispiel. (Das Beispiel wurde entnommen von den Internetpräsentationsseiten der Bissantz & Company GmbH 2011)",
+  "notiz": "Abb. 3.69 Sparkline-Beispiel. (Das Beispiel wurde entnommen von den Internetpräsentationsseiten der Bissantz & Company GmbH 2011)",
+  "form": 2,
+  "bild": 1
+ },
+ {
+  "folie": 83,
+  "nr": "3.70",
+  "titel": "Beispiel Kursdiagramm",
+  "notiz": "Abb. 3.70 Beispiel Kursdiagramm",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 84,
+  "nr": "3.71",
+  "titel": "Beispiel Chartanalysediagramm. (Quelle: godmode-trader 2011)",
+  "notiz": "Abb. 3.71 Beispiel Chartanalysediagramm. (Quelle: godmode-trader 2011)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 85,
+  "nr": "3.72",
+  "titel": "Kombination Kreis-Säulen-Diagramm",
+  "notiz": "Abb. 3.72 Kombination Kreis-Säulen-Diagramm",
+  "bild": 1
+ },
+ {
+  "folie": 86,
+  "nr": "3.73",
+  "titel": "Verzerrungen durch 3D-Effekte",
+  "notiz": "Abb. 3.73 Verzerrungen durch 3D-Effekte",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 87,
+  "nr": "3.74",
+  "titel": "Durch Selektion änderbare dynamische Diagramme – vorher (QlikView). (Quelle:",
+  "notiz": "Abb. 3.74 Durch Selektion änderbare dynamische Diagramme – vorher (QlikView). (Quelle:\nQlik-View-Demo Market Share 2015)",
+  "bild": 1
+ },
+ {
+  "folie": 88,
+  "nr": "3.75",
+  "titel": "Durch Selektion änderbare dynamische Diagramme – nachher (QlikView). (Quelle: QlikView-Demo Market Share 2015)",
+  "notiz": "Abb. 3.75 Durch Selektion änderbare dynamische Diagramme – nachher (QlikView). (Quelle: QlikView-Demo Market Share 2015)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 89,
+  "nr": "3.76",
+  "titel": "Dynamische Vollkräfte-Statistik mit HEARTBEAT – vorher. (Quelle: Pradtke GmbH 2021)",
+  "notiz": "Abb. 3.76 Dynamische Vollkräfte-Statistik mit HEARTBEAT – vorher. (Quelle: Pradtke GmbH 2021)",
+  "bild": 1
+ },
+ {
+  "folie": 90,
+  "nr": "3.77",
+  "titel": "Dynamische Vollkräfte-Statistik mit HEARTBEAT – nacher. (Quelle: Pradtke GmbH 2021)",
+  "notiz": "Abb. 3.77 Dynamische Vollkräfte-Statistik mit HEARTBEAT – nacher. (Quelle: Pradtke GmbH 2021)",
+  "bild": 1
+ },
+ {
+  "folie": 91,
+  "nr": "3.78",
+  "titel": "Integrierte Fotos und Logos (Beispiel Cubeware). (Quelle: Cubeware Bildergalerie 2011)",
+  "notiz": "Abb. 3.78 Integrierte Fotos und Logos (Beispiel Cubeware). (Quelle: Cubeware Bildergalerie 2011)",
+  "bild": 1
+ },
+ {
+  "folie": 92,
+  "nr": "",
+  "titel": "",
+  "notiz": "",
+  "form": 2
+ },
+ {
+  "folie": 93,
+  "nr": "3.178",
+  "titel": "Verteilungs- und Verdichtungsfunktionen",
+  "notiz": "Abb. 3.178 Verteilungs- und Verdichtungsfunktionen",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 94,
+  "nr": "3.179",
+  "titel": "Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung mit prevero.",
+  "notiz": "Abb. 3.179 Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung mit prevero.\n(Leicht geändert entnommen aus den Vortragsunterlagen von Hein 2011, S. 42)",
+  "gruppe": 9,
+  "bild": 1,
+  "form": 59
+ },
+ {
+  "folie": 95,
+  "nr": "3.180",
+  "titel": "Integrierte Planungsfunktionen in Power BI mit Power ON von Insightsoftware (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
+  "notiz": "Abb. 3.180 Integrierte Planungsfunktionen in Power BI mit Power ON von Insightsoftware (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
+  "form": 1
+ },
+ {
+  "folie": 96,
+  "nr": "3.181",
+  "titel": "Abstimmung von Planungs- und Reportinginhalten",
+  "notiz": "Abb. 3.181 Abstimmung von Planungs- und Reportinginhalten",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 97,
+  "nr": "3.182",
+  "titel": "Exemplarische Balanced Scorecard Planung mit SAP NetWeaver-Technologie. (Entnommen aus Schön et al. 2010, S. 25)",
+  "notiz": "Abb. 3.182 Exemplarische Balanced Scorecard Planung mit SAP NetWeaver-Technologie. (Entnommen aus Schön et al. 2010, S. 25)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 98,
+  "nr": "3.183",
+  "titel": "Rollierende Absatzplanung mit dem Cubeware-Cockpit",
+  "notiz": "Abb. 3.183 Rollierende Absatzplanung mit dem Cubeware-Cockpit",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 99,
+  "nr": "3.184",
+  "titel": "Selektive Gruppenplanung von Preisveränderungen und Konditionen. (Quelle: Schön",
+  "notiz": "Abb. 3.184 Selektive Gruppenplanung von Preisveränderungen und Konditionen. (Quelle: Schön\nund Irmer 2010, S. 52. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application\nDesigner von der SAP AG)",
+  "gruppe": 2,
+  "bild": 2,
+  "form": 1
+ },
+ {
+  "folie": 100,
+  "nr": "3.185",
+  "titel": "Detaillierte Umsatzplanung auf Ebene Kunde/Artikel. (Quelle: Schön und Irmer 2010, S. 52. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "notiz": "Abb. 3.185 Detaillierte Umsatzplanung auf Ebene Kunde/Artikel. (Quelle: Schön und Irmer 2010, S. 52. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "bild": 1,
+  "form": 5
+ },
+ {
+  "folie": 101,
+  "nr": "3.186",
+  "titel": "Exemplarische Zuschläge in der Einkaufspreisplanung. (Quelle: Schön und Irmer 2009, S. 296. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
+  "notiz": "Abb. 3.186 Exemplarische Zuschläge in der Einkaufspreisplanung. (Quelle: Schön und Irmer 2009, S. 296. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
+  "form": 2,
+  "gruppe": 2,
+  "bild": 2
+ },
+ {
+  "folie": 102,
+  "nr": "3.187",
+  "titel": "Detail-Planungsmaske für die Einkaufspreisplanung. (Quelle: Schön und Irmer 2010, S. 54. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
+  "notiz": "Abb. 3.187 Detail-Planungsmaske für die Einkaufspreisplanung. (Quelle: Schön und Irmer 2010, S. 54. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
+  "bild": 1,
+  "form": 4
+ },
+ {
+  "folie": 103,
+  "nr": "3.188",
+  "titel": "Abstimmung der Personalplanung. (Entnommen aus: Schön und Irmer 2009, S. 301)",
+  "notiz": "Abb. 3.188 Abstimmung der Personalplanung. (Entnommen aus: Schön und Irmer 2009, S. 301)",
+  "form": 41,
+  "gruppe": 3
+ },
+ {
+  "folie": 104,
+  "nr": "3.189",
+  "titel": "Planungsformular Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 253. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "notiz": "Abb. 3.189 Planungsformular Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 253. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 105,
+  "nr": "3.190",
+  "titel": "Planungsauswertung Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 254. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "notiz": "Abb. 3.190 Planungsauswertung Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 254. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 106,
+  "nr": "3.191",
+  "titel": "Planungsformular Kapazitätsbedarf Anlagen. (Quelle: Schön und Irmer 2010, S. 55. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "notiz": "Abb. 3.191 Planungsformular Kapazitätsbedarf Anlagen. (Quelle: Schön und Irmer 2010, S. 55. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
+  "bild": 1
+ },
+ {
+  "folie": 107,
+  "nr": "3.192",
+  "titel": "Stufen der Absatz-/Umsatzplanung",
+  "notiz": "Abb. 3.192 Stufen der Absatz-/Umsatzplanung",
+  "gruppe": 1,
+  "form": 19
+ },
+ {
+  "folie": 108,
+  "nr": "3.193",
+  "titel": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: Geißner, W. 2016. Bandbreitenplanung, Planungssicherheit und Monte-Carlo-Simulation mehrerer Planjahre. In Controller Magazin. Juli/August 2016. S. 16 –23",
+  "notiz": "Abb. 3.193 Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: Geißner, W. 2016. Bandbreitenplanung, Planungssicherheit und Monte-Carlo-Simulation mehrerer Planjahre. In Controller Magazin. Juli/August 2016. S. 16 –23",
+  "bild": 1
+ },
+ {
+  "folie": 109,
+  "nr": "3.194",
+  "titel": "Liniendiagramm mit Prognosewerten sowie Prognoseintervallen mit der SAP Analytic Cloud",
+  "notiz": "Abb. 3.194 Liniendiagramm mit Prognosewerten sowie Prognoseintervallen mit der SAP Analytic Cloud",
+  "bild": 1
+ },
+ {
+  "folie": 110,
+  "nr": "3.195",
+  "titel": "Prognosemodelle mit R-Studio (Quelle: Oehler, K. 2019. Advanced Analytics fur Controller",
+  "notiz": "Abb. 3.195 Prognosemodelle mit R-Studio (Quelle: Oehler, K. 2019. Advanced Analytics fur Controller\nEinsetzbare Anwendungen zum Nachbauen mit R. S. 111.)",
+  "bild": 1
+ },
+ {
+  "folie": 111,
+  "nr": "",
+  "titel": "",
+  "notiz": ""
+ },
+ {
+  "folie": 112,
+  "nr": "4.1",
+  "titel": "Einfluss der Holding-Art auf Planung und Reporting. (Leicht abgeändert im Vgl. zu: Weber et al. 2008, S. 25)",
+  "notiz": "Abb. 4.1 Einfluss der Holding-Art auf Planung und Reporting. (Leicht abgeändert im Vgl. zu: Weber et al. 2008, S. 25)",
+  "gruppe": 2,
+  "form": 12
+ },
+ {
+  "folie": 113,
+  "nr": "4.2",
+  "titel": "Mögliche Konzernverflechtungen hinsichtlich SGE- und Gesellschaftsbeziehungen",
+  "notiz": "Abb. 4.2 Mögliche Konzernverflechtungen hinsichtlich SGE- und Gesellschaftsbeziehungen",
+  "gruppe": 1,
+  "form": 32
+ },
+ {
+  "folie": 114,
+  "nr": "4.3",
+  "titel": "Funktionale Organisation",
+  "notiz": "Abb. 4.3 Funktionale Organisation",
+  "gruppe": 1,
+  "form": 12
+ },
+ {
+  "folie": 115,
+  "nr": "4.4",
+  "titel": "Divisionale Organisation",
+  "notiz": "Abb. 4.4 Divisionale Organisation",
+  "gruppe": 1,
+  "form": 12
+ },
+ {
+  "folie": 116,
+  "nr": "4.5",
+  "titel": "Matrixorganisation",
+  "notiz": "Abb. 4.5 Matrixorganisation",
+  "gruppe": 1,
+  "form": 21
+ },
+ {
+  "folie": 117,
+  "nr": "4.6",
+  "titel": "Hierarchische Beziehung im Unternehmen",
+  "notiz": "Abb. 4.6 Hierarchische Beziehung im Unternehmen",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 118,
+  "nr": "4.7",
+  "titel": "Controlling in größeren (mittelständischen) Unternehmen",
+  "notiz": "Abb. 4.7 Controlling in größeren (mittelständischen) Unternehmen",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 119,
+  "nr": "4.8",
+  "titel": "Prozesse der Planung und des Reportings",
+  "notiz": "Abb. 4.8 Prozesse der Planung und des Reportings",
+  "gruppe": 1,
+  "form": 29
+ },
+ {
+  "folie": 120,
+  "nr": "4.9",
+  "titel": "Einführungsprozess für die Planung und das Reporting",
+  "notiz": "Abb. 4.9 Einführungsprozess für die Planung und das Reporting",
+  "gruppe": 1,
+  "form": 2
+ },
+ {
+  "folie": 121,
+  "nr": "",
+  "titel": "Tab. 4.6 Beispiel für eine Berichts-Organisationsmatrix",
+  "notiz": "Tab. 4.6 Beispiel für eine Berichts-Organisationsmatrix",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 122,
+  "nr": "",
+  "titel": "Tab. 4.7 Beispiel für eine Planungs-Organisationsmatrix",
+  "notiz": "Tab. 4.7 Beispiel für eine Planungs-Organisationsmatrix",
+  "form": 2,
+  "ole": 1
+ },
+ {
+  "folie": 123,
+  "nr": "4.10",
+  "titel": "Scoring-Analyse (hier der Bereich Planung)",
+  "notiz": "Abb. 4.10 Scoring-Analyse (hier der Bereich Planung)",
+  "gruppe": 1,
+  "bild": 1,
+  "form": 26
+ },
+ {
+  "folie": 124,
+  "nr": "",
+  "titel": "Tab. 4.8 Kennzahlenblatt. (Vgl. zur Ausgestaltung von Kennzahlenblättern z. B. Schulte 2002, S. 170 und Eisele und Doyé 2010, S. 384)",
+  "notiz": "Tab. 4.8 Kennzahlenblatt. (Vgl. zur Ausgestaltung von Kennzahlenblättern z. B. Schulte 2002, S. 170 und Eisele und Doyé 2010, S. 384)",
+  "form": 1,
+  "ole": 1
+ },
+ {
+  "folie": 125,
+  "nr": "4.11",
+  "titel": "Planungskalender. (Der Planungskalender wurde mit MS Projekt erstellt.)",
+  "notiz": "Abb. 4.11 Planungskalender. (Der Planungskalender wurde mit MS Projekt erstellt.)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 126,
+  "nr": "4.12",
+  "titel": "Rollierende Planung/rollierender Forecast",
+  "notiz": "Abb. 4.12 Rollierende Planung/rollierender Forecast",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 127,
+  "nr": "4.13",
+  "titel": "Zyklischer Planungsprozess",
+  "notiz": "Abb. 4.13 Zyklischer Planungsprozess",
+  "form": 4
+ },
+ {
+  "folie": 128,
+  "nr": "4.14",
+  "titel": "Planungsgrundausrichtung",
+  "notiz": "Abb. 4.14 Planungsgrundausrichtung",
+  "gruppe": 1,
+  "form": 37
+ },
+ {
+  "folie": 129,
+  "nr": "4.15",
+  "titel": "Reportingkalender. (Der Reportingkalender wurde mit MS Projekt erstellt.)",
+  "notiz": "Abb. 4.15 Reportingkalender. (Der Reportingkalender wurde mit MS Projekt erstellt.)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 130,
+  "nr": "4.16",
+  "titel": "Reportingkalender Monatsabschluss. (Der Reportingkalender (Monatsabschluss) wurde mit MS Projekt erstellt.)",
+  "notiz": "Abb. 4.16 Reportingkalender Monatsabschluss. (Der Reportingkalender (Monatsabschluss) wurde mit MS Projekt erstellt.)",
+  "form": 2,
+  "bild": 1
+ },
+ {
+  "folie": 131,
+  "nr": "4.17",
+  "titel": "Zyklischer Reportingprozess",
+  "notiz": "Abb. 4.17 Zyklischer Reportingprozess",
+  "form": 3
+ },
+ {
+  "folie": 132,
+  "nr": "4.18",
+  "titel": "Hyperion Application Link. (Entnommen aus Schön 2004, S. 323)",
+  "notiz": "Abb. 4.18 Hyperion Application Link. (Entnommen aus Schön 2004, S. 323)",
+  "bild": 1
+ },
+ {
+  "folie": 133,
+  "nr": "4.19",
+  "titel": "SAP BW-Bericht mit dem Bex-Analyser (MS Excel-Integration). (Quelle: SAP BW-Bericht mit dem Bex-Analyser (MS Excel-Integration) basierend auf Daten eines SAP-IDES-Systems. Entnommen aus Schön 2004, S. 331)",
+  "notiz": "Abb. 4.19 SAP BW-Bericht mit dem Bex-Analyser (MS Excel-Integration). (Quelle: SAP BW-Bericht mit dem Bex-Analyser (MS Excel-Integration) basierend auf Daten eines SAP-IDES-Systems. Entnommen aus Schön 2004, S. 331)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 134,
+  "nr": "4.20",
+  "titel": "Web-Bericht-Beispiel mit Cognos ReportNet. (Entnommen aus Schön 2004, S. 324)",
+  "notiz": "Abb. 4.20 Web-Bericht-Beispiel mit Cognos ReportNet. (Entnommen aus Schön 2004, S. 324)",
+  "bild": 1
+ },
+ {
+  "folie": 135,
+  "nr": "4.21",
+  "titel": "Forderungs-Cockpit mit Power BI im Webbrowser (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
+  "notiz": "Abb. 4.21 Forderungs-Cockpit mit Power BI im Webbrowser (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
+  "bild": 1
+ },
+ {
+  "folie": 136,
+  "nr": "4.22",
+  "titel": "Forderungs-Cockpit mit PowerBI im Kollaborationstool MS Teams (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
+  "notiz": "Abb. 4.22 Forderungs-Cockpit mit PowerBI im Kollaborationstool MS Teams (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 137,
+  "nr": "4.23",
+  "titel": "Multidimensionale Analysen mit Powerplay von Cognos",
+  "notiz": "Abbildung 4.23\tMultidimensionale Analysen mit Powerplay von Cognos",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 138,
+  "nr": "4.24",
+  "titel": "Qualitätssicherungsprozess",
+  "notiz": "Abbildung 4.24\tQualitätssicherungsprozess",
+  "form": 1
+ },
+ {
+  "folie": 139,
+  "nr": "",
+  "titel": "",
+  "notiz": "",
+  "form": 1
+ },
+ {
+  "folie": 140,
+  "nr": "5.1",
+  "titel": "BI-Ordnungsrahmen. (Quelle: H. G. Kemper et al. 2010, S. 11)",
+  "notiz": "Abb. 5.1 BI-Ordnungsrahmen. (Quelle: H. G. Kemper et al. 2010, S. 11)",
+  "bild": 1
+ },
+ {
+  "folie": 141,
+  "nr": "5.2",
+  "titel": "Unterschiedliche Facetten von BI. (Von Kemper modifiziert ¨ubernommen aus Gluchowski",
+  "notiz": "Abb. 5.2 Unterschiedliche Facetten von BI. (Von Kemper modifiziert ¨ubernommen aus Gluchowski\n2001, S. 7 und H. G. Kemper et al. 2010, S. 4)",
+  "form": 34
+ },
+ {
+  "folie": 142,
+  "nr": "5.3",
+  "titel": "Business Performance Management (eigene Darstellung)",
+  "notiz": "Abb. 5.3 Business Performance Management (eigene Darstellung)",
+  "gruppe": 1,
+  "form": 25
+ },
+ {
+  "folie": 143,
+  "nr": "5.4",
+  "titel": "Enge und weite BI-Definition (eigene Darstellung)",
+  "notiz": "Abb. 5.4 Enge und weite BI-Definition (eigene Darstellung)",
+  "form": 12
+ },
+ {
+  "folie": 144,
+  "nr": "5.5",
+  "titel": "Einsatzfelder von BI-Anwendungssystemen. (Vgl. H. G. Kemper et al. 2010, S. 9. Den",
+  "notiz": "Abb. 5.5 Einsatzfelder von BI-Anwendungssystemen. (Vgl. H. G. Kemper et al. 2010, S. 9. Den\nBI-Einsatz im Controlling insbesondere im Reporting und in der Planung heben u. a. Seufert und\nOehler hervor, vgl. Seufert und Oehler 2009)",
+  "gruppe": 1,
+  "form": 21,
+  "bild": 1
+ },
+ {
+  "folie": 145,
+  "nr": "5.6",
+  "titel": "Business Intelligence Referanzarchitektur als Ordnungsrahmen (eigene Darstellung)",
+  "notiz": "Abb. 5.6 Business Intelligence Referanzarchitektur als Ordnungsrahmen (eigene Darstellung)",
+  "bild": 1
+ },
+ {
+  "folie": 146,
+  "nr": "5.7",
+  "titel": "Dimensionsebenen von betrieblichen IT-Systemen",
+  "notiz": "Abb. 5.7 Dimensionsebenen von betrieblichen IT-Systemen",
+  "form": 47,
+  "gruppe": 1,
+  "bild": 2
+ },
+ {
+  "folie": 147,
+  "nr": "5.8",
+  "titel": "Horizontale und vertikale Integration von Informationssystemen (modifiziert",
+  "notiz": "Abb. 5.8 Horizontale und vertikale Integration von Informationssystemen (modifiziert\n¨ubernommen aus Hansen (2019, S.9))",
+  "gruppe": 1,
+  "form": 25
+ },
+ {
+  "folie": 148,
+  "nr": "5.9",
+  "titel": "Beispiel einer horizontalen Integration (eigene Darstellung)",
+  "notiz": "Abb. 5.9 Beispiel einer horizontalen Integration (eigene Darstellung)",
+  "bild": 1
+ },
+ {
+  "folie": 149,
+  "nr": "5.10",
+  "titel": "Schematische Darstellung des ETL-Prozesses (eigene Darstellung)",
+  "notiz": "Abb. 5.10 Schematische Darstellung des ETL-Prozesses (eigene Darstellung)",
+  "bild": 1
+ },
+ {
+  "folie": 150,
+  "nr": "5.11",
+  "titel": "Beispiel zu Defektklassen: Ausgangspunkt Rohdaten",
+  "notiz": "Abb. 5.11 Beispiel zu Defektklassen: Ausgangspunkt Rohdaten",
+  "bild": 1
+ },
+ {
+  "folie": 151,
+  "nr": "5.12",
+  "titel": "Beispiel zu Defektklassen: Automatische Korrektur Defektklasse 1",
+  "notiz": "Abb. 5.12 Beispiel zu Defektklassen: Automatische Korrektur Defektklasse 1",
+  "bild": 1
+ },
+ {
+  "folie": 152,
+  "nr": "5.13",
+  "titel": "Beispiel zu Defektklassen: Manuelle Korrektur Defektklasse 2",
+  "notiz": "Abbildung 5.13\tBeispiel zu Defektklassen: Manuelle Korrektur Defektklasse 2",
+  "bild": 1
+ },
+ {
+  "folie": 153,
+  "nr": "5.14",
+  "titel": "Beispiel zu Defektklassen: Manuelle Korrektur Defektklasse 3",
+  "notiz": "Abbildung 5.14\tBeispiel zu Defektklassen: Manuelle Korrektur Defektklasse 3",
+  "bild": 1
+ },
+ {
+  "folie": 154,
+  "nr": "5.15",
+  "titel": "Ergebnis manuelle Korrektur eines Defekts dritten Grades",
+  "notiz": "Abbildung 5.15\tErgebnis manuelle Korrektur eines Defekts dritten Grades",
+  "bild": 1
+ },
+ {
+  "folie": 155,
+  "nr": "5.16",
+  "titel": "Drei Ebenen der Data-Warehouse-Architektur",
+  "notiz": "Abbildung 5.16\tDrei Ebenen der Data-Warehouse-Architektur",
+  "gruppe": 1,
+  "form": 63
+ },
+ {
+  "folie": 156,
+  "nr": "5.17",
+  "titel": "Datenbankschema in 3NF (eigene Darstellung)",
+  "notiz": "Abbildung 5.17\tDatenbankschema in 3NF (eigene Darstellung)",
+  "bild": 1
+ },
+ {
+  "folie": 157,
+  "nr": "5.18",
+  "titel": "Normalisierte Tabellenstruktur in der 3. Normalform (eigene Darstellung)",
+  "notiz": "Abbildung 5.18\tNormalisierte Tabellenstruktur in der 3. Normalform (eigene Darstellung)",
+  "bild": 1
+ },
+ {
+  "folie": 158,
+  "nr": "5.19",
+  "titel": "Star-Schema mit Fakten- und Dimensionstabellen",
+  "notiz": "Abbildung 5.19\tStar-Schema mit Fakten- und Dimensionstabellen",
+  "bild": 1
+ },
+ {
+  "folie": 159,
+  "nr": "5.20",
+  "titel": "Analyse gemäß eines Stern-Schemas in PowerBI",
+  "notiz": "Abbildung 5.20\tAnalyse gemäß eines Stern-Schemas in PowerBI",
+  "bild": 1
+ },
+ {
+  "folie": 160,
+  "nr": "5.21",
+  "titel": "Galaxy-Schema. (Eigene Darstellung. Vgl. auch Mohr 2006, S. 97)",
+  "notiz": "Abbildung 5.21\tGalaxy-Schema. (Eigene Darstellung. Vgl. auch Mohr 2006, S. 97)",
+  "bild": 1
+ },
+ {
+  "folie": 161,
+  "nr": "5.22",
+  "titel": "Snowflake-Schema. (Eigene Darstellung. Vgl. auch Mohr 2006, S. 98)",
+  "notiz": "Abbildung 5.22\tSnowflake-Schema. (Eigene Darstellung. Vgl. auch Mohr 2006, S. 98)",
+  "bild": 1
+ },
+ {
+  "folie": 162,
+  "nr": "5.23",
+  "titel": "Kennzahlenmodell",
+  "notiz": "Abbildung 5.23 Kennzahlenmodell",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 163,
+  "nr": "5.24",
+  "titel": "Kennzahlenzuordnung zu Berichtszeilen",
+  "notiz": "Abb. 5.24 Kennzahlenzuordnung zu Berichtszeilen",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 164,
+  "nr": "5.25",
+  "titel": "Kontenmodell mit Parent-Child-Hierarchie",
+  "notiz": "Abb. 5.25 Kontenmodell mit Parent-Child-Hierarchie",
+  "form": 3,
+  "bild": 5
+ },
+ {
+  "folie": 165,
+  "nr": "5.26",
+  "titel": "Kontenmodell ohne Parent-Child-Hierarchie",
+  "notiz": "Abb. 5.26 Kontenmodell ohne Parent-Child-Hierarchie",
+  "form": 4,
+  "bild": 5
+ },
+ {
+  "folie": 166,
+  "nr": "5.27",
+  "titel": "Hierarchieaufbau ohne Parent-Child-Hierarchie",
+  "notiz": "Abb. 5.27 Hierarchieaufbau ohne Parent-Child-Hierarchie",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 167,
+  "nr": "5.28",
+  "titel": "Stufenorientiertes Erlösschemata",
+  "notiz": "Abb. 5.28 Stufenorientiertes Erlösschemata",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 168,
+  "nr": "5.29",
+  "titel": "4-V-Modell",
+  "notiz": "Abbildung 5.29 4-V-Modell",
+  "bild": 1
+ },
+ {
+  "folie": 169,
+  "nr": "5.30",
+  "titel": "CAP-Theorem",
+  "notiz": "Abbildung 5.30 CAP-Theorem",
+  "gruppe": 1,
+  "form": 10
+ },
+ {
+  "folie": 170,
+  "nr": "5.31",
+  "titel": "Zeilen- bzw. spaltenorientierte Speicherung",
+  "notiz": "Abbildung 5.31 Zeilen- bzw. spaltenorientierte Speicherung",
+  "gruppe": 2,
+  "form": 252
+ },
+ {
+  "folie": 171,
+  "nr": "5.32",
+  "titel": "Traditionelle und explorative BI-Architektur",
+  "notiz": "Abbildung 5.32\tTraditionelle und explorative BI-Architektur",
+  "gruppe": 3,
+  "form": 59
+ },
+ {
+  "folie": 172,
+  "nr": "5.33",
+  "titel": "ʎ-Architektur zur Echtzeitdatenverarbeitung",
+  "notiz": "Abb. 5.33 ʎ-Architektur zur Echtzeitdatenverarbeitung",
+  "form": 22
+ },
+ {
+  "folie": 173,
+  "nr": "5.34",
+  "titel": "Technologien sowie Analyse- und Prognosemethoden im Einsatz von Business Intelligence bzw. Business Analytics",
+  "notiz": "Abb. 5.34 Technologien sowie Analyse- und Prognosemethoden im Einsatz von Business Intelligence bzw. Business Analytics",
+  "form": 8,
+  "gruppe": 1
+ },
+ {
+  "folie": 174,
+  "nr": "5.35",
+  "titel": "BI-Analysespektrum nach Lanquillon und Mallow in Anlehnung an Eckerson",
+  "notiz": "Abb. 5.35 BI-Analysespektrum nach Lanquillon und Mallow in Anlehnung an Eckerson\nQuelle Lanquillon, C. und Mallow, H. 2015. Advanced Analytics mit Big Data. In Praxishandbuch Big Data. Hrsg. J. Dorchel. S. 55-89. hier S. 56. Wiesbaden\nBI-Analysespektrum: Fragestellungen im Kontext von Business Intelligence (BI) in Anlehnung an Eckerson W (2007) Predictive Analytics: Extending the Value of Your Data Warehousing Investment. TDWI Best Practices Report, TDWI Research.",
+  "bild": 1
+ },
+ {
+  "folie": 175,
+  "nr": "5.36",
+  "titel": "Phasenzuordnung von Analyse- und Prognosetypen",
+  "notiz": "Abb. 5.36 Phasenzuordnung von Analyse- und Prognosetypen",
+  "ole": 1
+ },
+ {
+  "folie": 176,
+  "nr": "5.37",
+  "titel": "Aufwand- und Nutzeneinschätzung von Analyse- und Prognosetypen",
+  "notiz": "Abb. 5.37  Aufwand- und Nutzeneinschätzung von Analyse- und Prognosetypen",
+  "ole": 1
+ },
+ {
+  "folie": 177,
+  "nr": "5.38",
+  "titel": "Explorative BI, Cloud Computing, Sandboxing und Self-Service BI",
+  "notiz": "Abbildung 5.38\tExplorative BI, Cloud Computing, Sandboxing und Self-Service BI",
+  "form": 65,
+  "gruppe": 2
+ },
+ {
+  "folie": 178,
+  "nr": "5.39",
+  "titel": "Beispiel zur freien Datenrecherche (z.B. Select-Anweisung",
+  "notiz": "Abbildung 5.39\tBeispiel zur freien Datenrecherche (z.B. Select-Anweisung",
+  "ole": 1
+ },
+ {
+  "folie": 179,
+  "nr": "5.40",
+  "titel": "SQL-Abfragegenerator (MS Access)",
+  "notiz": "Abbildung 5.40\tSQL-Abfragegenerator (MS Access)",
+  "bild": 1
+ },
+ {
+  "folie": 180,
+  "nr": "5.41",
+  "titel": "InSight-Reportgenerator mit Drag- und Drop von Arcplan",
+  "notiz": "Abbildung 5.41\tInSight-Reportgenerator mit Drag- und Drop von Arcplan",
+  "bild": 1
+ },
+ {
+  "folie": 181,
+  "nr": "5.42",
+  "titel": "Reportinganalyse u.a. mit Ampelsteuerung, Nutzwertanalysen und Portfoliotechnik (mit DynaSight von Arcplan)",
+  "notiz": "Abbildung 5.42\tReportinganalyse u.a. mit Ampelsteuerung, Nutzwertanalysen und Portfoliotechnik (mit DynaSight von Arcplan)",
+  "bild": 1
+ },
+ {
+  "folie": 182,
+  "nr": "5.43",
+  "titel": "Cockpit-/Dash-Board-Beispiel (Diamant®/3 IQ)",
+  "notiz": "Abbildung 5.43\tCockpit-/Dash-Board-Beispiel (Diamant®/3 IQ)",
+  "bild": 1
+ },
+ {
+  "folie": 183,
+  "nr": "5.44",
+  "titel": "Cockpit-/Dash-Board-Beispiel (SAP Analytic Cloud)",
+  "notiz": "Abb. 5.44 Cockpit-/Dash-Board-Beispiel (SAP Analytic Cloud)",
+  "bild": 1
+ },
+ {
+  "folie": 184,
+  "nr": "5.45",
+  "titel": "Excel-Add-in als Oberfläche (hier SAP BEx Analyser)",
+  "notiz": "Abbildung 5.45\tExcel-Add-in als Oberfläche (hier SAP BEx Analyser)",
+  "bild": 1
+ },
+ {
+  "folie": 185,
+  "nr": "5.46",
+  "titel": "What-If-Simulation  (Beispiel QlikView)",
+  "notiz": "Abbildung 5.46\tWhat-If-Simulation  (Beispiel QlikView)",
+  "bild": 1
+ },
+ {
+  "folie": 186,
+  "nr": "5.47",
+  "titel": "Schematischer Aufbau eines Portals",
+  "notiz": "Abbildung 5.47\tSchematischer Aufbau eines Portals",
+  "bild": 1
+ },
+ {
+  "folie": 187,
+  "nr": "5.48",
+  "titel": "Main Dashboard des Qlik View Governance Dashboards",
+  "notiz": "Abb. 5.48 Main Dashboard des Qlik View Governance Dashboards",
+  "bild": 1
+ },
+ {
+  "folie": 188,
+  "nr": "5.49",
+  "titel": "Bildschirmauflösung und Bildschirmgröße",
+  "notiz": "Abbildung 5.49\tBildschirmauflösung und Bildschirmgröße",
+  "gruppe": 1,
+  "form": 9,
+  "bild": 3
+ },
+ {
+  "folie": 189,
+  "nr": "5.50",
+  "titel": "Exemplarischer Du-Pont-Kennzahlen-Baum",
+  "notiz": "Abbildung 5.50\tExemplarischer Du-Pont-Kennzahlen-Baum",
+  "ole": 1
+ },
+ {
+  "folie": 190,
+  "nr": "5.51",
+  "titel": "Scorecard-Analyse mit SAP SEM",
+  "notiz": "Abbildung 5.51\tScorecard-Analyse mit SAP SEM",
+  "bild": 1
+ },
+ {
+  "folie": 191,
+  "nr": "5.52",
+  "titel": "SAP Fiori Launchpad Homepage im Editiermodus; Quelle SAP Fiori (2017a)",
+  "notiz": "Abb. 5.52 SAP Fiori Launchpad Homepage im Editiermodus; Quelle SAP Fiori (2017a)",
+  "bild": 1,
+  "form": 1
+ },
+ {
+  "folie": 192,
+  "nr": "5.53",
+  "titel": "SAP Fiori Responsive Design für verschiedene Endgeräte; Quelle SAP Fiori (2017a)",
+  "notiz": "Abb. 5.53 SAP Fiori Responsive Design für verschiedene Endgeräte; Quelle SAP Fiori (2017a)",
+  "bild": 1
+ },
+ {
+  "folie": 193,
+  "nr": "5.54",
+  "titel": "Management-Dashboard mit Diamant/4 (Quelle: Diamant Software 2021)",
+  "notiz": "Abbildung 5.54\tManagement-Dashboard mit Diamant/4 (Quelle: Diamant Software 2021)",
+  "bild": 1
+ },
+ {
+  "folie": 194,
+  "nr": "5.55",
+  "titel": "Mobile Computing, Mobile BI and Mobil Reporting and Planning",
+  "notiz": "Abbildung 5.55\tMobile Computing, Mobile BI and Mobil Reporting and Planning",
+  "gruppe": 1,
+  "form": 5
+ },
+ {
+  "folie": 195,
+  "nr": "5.56",
+  "titel": "Aufbau von mobilen BI-Systemen",
+  "notiz": "Abbildung 5.56\tAufbau von mobilen BI-Systemen",
+  "form": 75,
+  "gruppe": 3
+ },
+ {
+  "folie": 196,
+  "nr": "5.57",
+  "titel": "Mobile Zugangsarten und Endgeräte",
+  "notiz": "Abbildung 5.57\tMobile Zugangsarten und Endgeräte",
+  "gruppe": 1,
+  "form": 23,
+  "bild": 2
+ },
+ {
+  "folie": 197,
+  "nr": "5.58",
+  "titel": "SAP BusinessObjects Mobile Architecture",
+  "notiz": "Abb. 5.58 SAP BusinessObjects Mobile Architecture\nQuelle: SAP AG. 2016. SAP BusinessObjects Mobile for iOS  -  Document Version: 6.3.10 – 2016-02-09. S. 5.",
+  "bild": 1
+ },
+ {
+  "folie": 198,
+  "nr": "5.59",
+  "titel": "Mobile Reporting mit einem Smarphone (C8 Cubeware)",
+  "notiz": "Abbildung 5.59 Mobile Reporting mit einem Smarphone (C8 Cubeware)\nVgl. Cubeware, URL:  http://de.cubeware.com/produkte/c8-mobile/galerie-mobile-bi-android.html [Zugriff am 23.03.2015]",
+  "bild": 1
+ },
+ {
+  "folie": 199,
+  "nr": "5.60",
+  "titel": "Mobile Reporting mit einem Tablet (C8 Cubeware)",
+  "notiz": "Abbildung 5.60\tMobile Reporting mit einem Tablet (C8 Cubeware) \nVgl. Cubeware, URL:  http://de.cubeware.com/produkte/c8-mobile/galerie-mobile-bi-ios.html\n[Zugriff am 23.03.2015]",
+  "bild": 1
+ },
+ {
+  "folie": 200,
+  "nr": "5.61",
+  "titel": "Einfache Exemplarische Eingabefunktionen",
+  "notiz": "Abbildung 5.61\tEinfache Exemplarische Eingabefunktionen",
+  "gruppe": 1,
+  "bild": 4,
+  "form": 5
+ },
+ {
+  "folie": 201,
+  "nr": "5.62",
+  "titel": "Metadatenbeschreibung Sternschema f¨ur einen Sales Data Mart",
+  "notiz": "Abbildung 5.62\tMetadatenbeschreibung Sternschema f¨ur einen Sales Data Mart",
+  "bild": 1
+ },
+ {
+  "folie": 202,
+  "nr": "5.63",
+  "titel": "Machine Learning",
+  "notiz": "Abbildung 5.63\tMachine Learning",
+  "form": 7
+ },
+ {
+  "folie": 203,
+  "nr": "5.64",
+  "titel": "Künstliche Neuronale Netze",
+  "notiz": "Abbildung 5.64\tKünstliche Neuronale Netze",
+  "form": 81
+ },
+ {
+  "folie": 204,
+  "nr": "5.65",
+  "titel": "CRISP DM Modell - Prozessschritte",
+  "notiz": "Abbildung 5.65\tCRISP DM Modell - Prozessschritte",
+  "form": 22
+ },
+ {
+  "folie": 205,
+  "nr": "5.66",
+  "titel": "Diagramme zur Big-Data-Datenvisualisierung",
+  "notiz": "Abb. 5.66 Diagramme zur Big-Data-Datenvisualisierung",
+  "bild": 1
+ },
+ {
+  "folie": 206,
+  "nr": "5.67",
+  "titel": "Architektur von RPA",
+  "notiz": "Abbildung 5.67\tArchitektur von RPA",
+  "gruppe": 1,
+  "form": 17,
+  "bild": 2
+ },
+ {
+  "folie": 207,
+  "nr": "5.68",
+  "titel": "Arten von RPA-Lösun",
+  "notiz": "Abbildung 5.68\tArten von RPA-Lösun",
+  "form": 3
+ },
+ {
+  "folie": 208,
+  "nr": "5.69",
+  "titel": "Isi: Sprachassistentin in der Diamant-Software Diamant/4 (Quelle: Diamant Software 2021)",
+  "notiz": "Abbildung 5.69\tIsi: Sprachassistentin in der Diamant-Software Diamant/4 (Quelle: Diamant Software 2021)",
+  "bild": 1
+ },
+ {
+  "folie": 209,
+  "nr": "5.70",
+  "titel": "Bandbreitenplanung - Eingabeparameter",
+  "notiz": "Abbildung 5.70\tBandbreitenplanung - Eingabeparameter",
+  "form": 6,
+  "bild": 2
+ },
+ {
+  "folie": 210,
+  "nr": "5.71",
+  "titel": "Bandbreitenplanung Ergebnisse",
+  "notiz": "Abbildung 5.71\tBandbreitenplanung Ergebnisse",
+  "form": 8,
+  "bild": 2,
+  "chart": 2
+ },
+ {
+  "folie": 211,
+  "nr": "5.72",
+  "titel": "Standardbericht SAP ERP CC (Selektionsmaske)",
+  "notiz": "Abbildung 5.72\tStandardbericht SAP ERP CC (Selektionsmaske)",
+  "form": 3,
+  "bild": 1
+ },
+ {
+  "folie": 212,
+  "nr": "5.73",
+  "titel": "Standardbericht SAP ERP CC (Detailbild)",
+  "notiz": "Abbildung 5.73\tStandardbericht SAP ERP CC (Detailbild)",
+  "form": 2,
+  "bild": 1
+ },
+ {
+  "folie": 213,
+  "nr": "5.74",
+  "titel": "Planungsformular SAP ERP CC",
+  "notiz": "Abbildung 5.74\tPlanungsformular SAP ERP CC",
+  "form": 1,
+  "bild": 1
+ },
+ {
+  "folie": 214,
+  "nr": "5.75",
+  "titel": "Planung eines Projektfertigers mit MS Excel",
+  "notiz": "Abbildung 5.75\tPlanung eines Projektfertigers mit MS Excel",
+  "bild": 1
+ },
+ {
+  "folie": 215,
+  "nr": "5.76",
+  "titel": "Reporting mit MS Access",
+  "notiz": "Abb. 5.76 Reporting mit MS Access",
+  "bild": 1
+ },
+ {
+  "folie": 216,
+  "nr": "5.77",
+  "titel": "Star-Schema für den Einkauf mit dem Microsoft Visual Studio",
+  "notiz": "Abbildung 5.77 Star-Schema für den Einkauf mit dem Microsoft Visual Studio",
+  "bild": 1
+ },
+ {
+  "folie": 217,
+  "nr": "5.78",
+  "titel": "Hyperion Planning: Mehrdimensionale Planungsformulare",
+  "notiz": "Abbildung 5.78\tHyperion Planning: Mehrdimensionale Planungsformulare",
+  "gruppe": 1,
+  "bild": 1,
+  "form": 4
+ },
+ {
+  "folie": 218,
+  "nr": "5.79",
+  "titel": "Hyperion Planning: Individuelle Planungsmodelle (Business Rules)",
+  "notiz": "Abbildung 5.79\tHyperion Planning: Individuelle Planungsmodelle (Business Rules)",
+  "gruppe": 1,
+  "bild": 1,
+  "form": 2
+ },
+ {
+  "folie": 219,
+  "nr": "5.80",
+  "titel": "Hyperion Planning: Auswertungen",
+  "notiz": "Abbildung 5.80\tHyperion Planning: Auswertungen",
+  "gruppe": 1,
+  "bild": 2,
+  "form": 3
+ },
+ {
+  "folie": 220,
+  "nr": "5.81",
+  "titel": "Hyperion Planning: Kommentarfunktion",
+  "notiz": "Abbildung 5.81\tHyperion Planning: Kommentarfunktion",
+  "gruppe": 1,
+  "bild": 1,
+  "form": 2
+ },
+ {
+  "folie": 221,
+  "nr": "5.82",
+  "titel": "Hyperion Planning: Workflowkomponente",
+  "notiz": "Abbildung 5.82\tHyperion Planning: Workflowkomponente",
+  "gruppe": 1,
+  "bild": 1,
+  "form": 2
+ },
+ {
+  "folie": 222,
+  "nr": "",
+  "titel": "",
+  "notiz": "",
+  "form": 1
+ },
+ {
+  "folie": 223,
+  "nr": "6.1",
+  "titel": "Werttreiberbasierte Planung mit prevero Planung & Berichtswesen",
+  "notiz": "Abbildung 6.1\tWerttreiberbasierte Planung mit prevero Planung & Berichtswesen",
+  "bild": 1
+ }
+]

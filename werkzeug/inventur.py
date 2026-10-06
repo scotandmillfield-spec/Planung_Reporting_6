@@ -52,6 +52,8 @@ ABSTIMMUNG = OrderedDict([
     ("offen", "offen"),
     ("arbeit", "in Arbeit"),
     ("pruefung", "zur Prüfung"),
+    ("revision", "Revision"),
+    ("version", "Nächste Version"),
     ("aenderung", "Änderung nötig"),
     ("klaerung", "Klärung nötig"),
     ("freigegeben", "freigegeben"),
@@ -534,6 +536,8 @@ h2.kap span{color:var(--muted);font-weight:normal;font-size:15px}
 .st-offen{border-color:#9A9A9A;color:var(--muted)}
 .st-arbeit{color:var(--ac)}
 .st-pruefung{background:var(--ac);color:#fff}
+.st-revision{border-color:var(--rot);color:var(--rot);font-weight:bold}
+.st-version{background:#5E646A;border-color:#5E646A;color:#fff}
 .st-aenderung{border-color:var(--rot);color:var(--rot);font-weight:bold}
 .st-klaerung{background:var(--rot);border-color:var(--rot);color:#fff}
 .st-freigegeben{background:var(--gut);border-color:var(--gut);color:#fff}
@@ -682,7 +686,7 @@ function eintragZeigen(id,v){
     if(m){li.append(el('span',m[1]+' ','wer'),m[2]);} else li.textContent=zeile;
     ul.appendChild(li);}
   $('.abst-zuletzt',k).textContent=(v.von||v.am)?'· zuletzt geändert: '+[v.von,v.am].filter(Boolean).join(', '):'';
-  k.dataset.offen=(k.dataset.offenFix==='1'||key==='aenderung'||key==='klaerung')?'1':'0';
+  k.dataset.offen=(k.dataset.offenFix==='1'||key==='aenderung'||key==='revision'||key==='klaerung')?'1':'0';
   k.dataset.sucheAbst=String(v.kommentare||'').toLowerCase();
 }
 async function laden(){

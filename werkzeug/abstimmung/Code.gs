@@ -16,7 +16,8 @@
 
 const PASSWORT = 'bitte-aendern';
 const BLATT = 'Status';
-const STATUSWERTE = ['offen', 'in Arbeit', 'zur Prüfung', 'Änderung nötig', 'Klärung nötig', 'freigegeben', 'entfällt'];
+const STATUSWERTE = ['offen', 'in Arbeit', 'zur Prüfung', 'Revision', 'Nächste Version', 'Änderung nötig', 'Klärung nötig',
+                     'freigegeben', 'entfällt'];
 const SP = { schluessel: 1, status: 6, kommentare: 7, von: 8, am: 9 };   // Spalten, 1-basiert
 const ZONE = 'Europe/Berlin';
 
@@ -108,7 +109,8 @@ function einrichten() {
   const regel = (text, farbe) => SpreadsheetApp.newConditionalFormatRule()
     .whenTextEqualTo(text).setFontColor(farbe).setBold(true).setRanges([statusBereich]).build();
   blatt.setConditionalFormatRules([
-    regel('freigegeben', '#00806B'), regel('Änderung nötig', '#C62828'), regel('Klärung nötig', '#C62828')]);
+    regel('freigegeben', '#00806B'), regel('Revision', '#C62828'), regel('Änderung nötig', '#C62828'),
+    regel('Klärung nötig', '#C62828')]);
   if (!blatt.getFilter()) blatt.getRange(1, 1, n + 1, SP.am).createFilter();
 
   hinweiseAnlegen_(ss);
@@ -123,6 +125,8 @@ function hinweiseAnlegen_(ss) {
     ['offen', 'noch nicht bearbeitet'],
     ['in Arbeit', 'wird gerade neu gezeichnet oder gesetzt'],
     ['zur Prüfung', 'neue Fassung liegt vor und wartet auf Durchsicht'],
+    ['Revision', 'Änderungswunsch steht im Kommentar und wird in die nächste Fassung eingearbeitet'],
+    ['Nächste Version', 'überarbeitete Fassung nach einer Revision liegt vor und wartet auf Durchsicht'],
     ['Änderung nötig', 'Durchsicht abgeschlossen, Kommentare umsetzen'],
     ['Klärung nötig', 'inhaltliche Frage offen, vor der Umsetzung klären'],
     ['freigegeben', 'fertig für das Manuskript'],

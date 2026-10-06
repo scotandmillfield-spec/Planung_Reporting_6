@@ -19,6 +19,7 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 
 - **Tabellen:** „LaTeX kopieren“ und einfügen. Die erste Kommentarzeile nennt die nötigen Pakete (`booktabs`, `tabularx`, `amsmath`, `listings`).
 - **Abbildungen:** „LaTeX (figure) kopieren“ und den Ordner `abbildungen/` mit gleichem Pfad ins Overleaf-Projekt hochladen. Die PDFs werden ohne Skalierung eingebunden, damit die Schrift bei 7 pt bleibt. Querformate brauchen `\usepackage{rotating}`.
+- **Labels:** Jedes `\label` wird aus der Caption gebildet, nicht aus der Nummer – Wörter mit `_` verbunden, Präfix `fig:` bzw. `tab:`, ohne Quellenangabe am Ende und ohne Kommas, Klammern und Anführungszeichen (z. B. `\label{fig:Exemplarische_Struktur_im_Reporting}`). So bleiben Verweise stabil, wenn sich die Reihenfolge ändert. Ändert sich die Caption, ändert sich das Label mit; gleiche Captions meldet die Inventur.
 - **Dashboards im Querformat:** werden um 90° gedreht auf einer Hochformatseite eingebunden, Pfad wie im Overleaf-Projekt (`author/content/abbildungen/…`):
 
   ```latex
@@ -26,7 +27,7 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
       \centering
       \includegraphics[angle=90, width=\linewidth, height=1\textheight, keepaspectratio]{author/content/abbildungen/kap3/abb_3-22.png}
       \caption{ABC-Analyse}
-      \label{fig:3-22}
+      \label{fig:ABC-Analyse}
   \end{figure}
   ```
 

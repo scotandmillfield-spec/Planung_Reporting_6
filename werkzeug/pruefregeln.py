@@ -118,6 +118,34 @@ def caption_aus_notiz(notiz):
     return t.strip()
 
 
+# Quellenangabe am Ende der Caption (gehört nicht ins Label)
+QUELLE_ANFANG = re.compile(r"(In Anlehnung|[Vv]gl\.|Quelle|Entnommen|Leicht|Eigene|Daten|Mit freundlicher|[Mm]odifiziert|Von |Nach |Aus |Darstellung)")
+LABEL_WEG = re.compile(r"[,;()\[\]{}\"„“”‚‘’'%#&\\~^$®™!?…]")
+
+
+def label_aus_caption(caption, praefix="fig"):
+    """LaTeX-Label aus der Caption: Wörter mit „_“ verbunden, ohne Quellenangabe am Ende und ohne Zeichen,
+    die in Labels stören (Komma trennt bei \\cref mehrere Labels, Klammern, Anführungszeichen, Sonderzeichen).
+    Unabhängig von der Abbildungsnummer, damit Verweise beim Umnummerieren stabil bleiben."""
+    t = caption.replace("\\,", " ").replace("~", " ")
+    t = re.sub(r"\\[a-zA-Z]+", "", t).strip()
+    if t.endswith(")"):
+        tiefe, j = 0, len(t) - 1
+        for j in range(len(t) - 1, -1, -1):
+            if t[j] == ")":
+                tiefe += 1
+            elif t[j] == "(":
+                tiefe -= 1
+                if tiefe == 0:
+                    break
+        inhalt = t[j + 1:-1]
+        if j > 0 and (QUELLE_ANFANG.match(inhalt) or re.search(r"\b(19|20)\d{2}\b", inhalt)):
+            t = t[:j]
+    t = LABEL_WEG.sub("", t).strip().rstrip(".")
+    t = re.sub(r"_+", "_", re.sub(r"\s+", "_", t))
+    return f"{praefix}:{t}"
+
+
 def pruefe(nr, art, caption):
     kom = []
     v = caption

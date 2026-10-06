@@ -29,7 +29,7 @@ from PIL import Image
 HIER = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HIER)
 sys.path.insert(0, HIER)
-from pruefregeln import caption_aus_notiz, pruefe  # noqa: E402
+from pruefregeln import caption_aus_notiz, label_aus_caption, pruefe  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 STATUS = OrderedDict([
@@ -58,6 +58,15 @@ START = {"pruefung": "pruefung", "latex": "pruefung", "freigegeben": "freigegebe
 ART = {"D": "Diagramm", "V": "Dashboard/Visual", "S": "Screenshot", "T": "Tabelle", "DUP": "Duplikat", "X": "Hinweis"}
 WEG = {"D": "neu als PNG + PPTX", "V": "neu als PNG + HTML", "S": "Skill Screenshots", "T": "LaTeX-Tabelle"}
 OFFEN_MUSTER = re.compile(r"prüfen|klären|\?|abgleichen|angleichen|unterscheiden|welche|gleichsetzen|vereinheitlichen")
+
+
+def label_setzen(code):
+    """Label einer Tabelle bzw. eines Listings aus der Caption ableiten (Präfix wie im Code, z. B. tab:)."""
+    cap = tex_caption(code)
+    m = re.search(r"\\label\{([a-z]+):[^}]*\}", code)
+    if not cap or not m:
+        return code
+    return code[:m.start()] + "\\label{" + label_aus_caption(cap, m.group(1)) + "}" + code[m.end():]
 
 
 def tex_caption(code):
@@ -128,7 +137,7 @@ def dashboard_latex(nr, caption, datei):
         r"    \centering",
         rf"    \includegraphics[angle=90, width=\linewidth, height=1\textheight, keepaspectratio]{{{OVERLEAF_PFAD}{datei}}}",
         rf"    \caption{{{latex_text(caption)}}}",
-        rf"    \label{{fig:{nr.replace('.', '-')}}}",
+        rf"    \label{{{label_aus_caption(caption)}}}",
         r"\end{figure}"]) + "\n"
 
 
@@ -144,7 +153,7 @@ def figure_latex(nr, caption, datei, breite_mm, quer, vektor):
         zeilen.append(f"% PNG mit 600 dpi, {breite_mm} mm breit")
         gfx = rf"\includegraphics[width={breite_mm}mm]{{{datei}}}"
     zeilen += [rf"\begin{{{umg}}}" + ("" if quer else "[htbp]"), r"  \centering", "  " + gfx,
-               rf"  \caption{{{latex_text(caption)}}}", rf"  \label{{fig:{nr.replace('.', '-')}}}", rf"\end{{{umg}}}"]
+               rf"  \caption{{{latex_text(caption)}}}", rf"  \label{{{label_aus_caption(caption)}}}", rf"\end{{{umg}}}"]
     return "\n".join(zeilen) + "\n"
 
 
@@ -246,7 +255,7 @@ def eintraege():
         latex = None
         if tex:
             with open(os.path.join(ROOT, tex), encoding="utf-8") as fh:
-                latex = fh.read()
+                latex = label_setzen(fh.read())
         elif "HTML" in dateien and "PNG" in dateien and quer:
             latex = dashboard_latex(nr, cap_neu, dateien["PNG"])
         elif "PDF" in dateien or "PNG" in dateien:
@@ -270,6 +279,16 @@ def eintraege():
 
 
 def pruefe_dubletten(liste):
+    nach_label = {}
+    for x in liste:
+        m = re.search(r"\\label\{([^}]*)\}", x["latex"] or "")
+        if m:
+            nach_label.setdefault(m.group(1), []).append(x)
+    for lab, gruppe in nach_label.items():
+        if len(gruppe) > 1:
+            for x in gruppe:
+                andere = ", ".join(y["label"] for y in gruppe if y is not x)
+                x["cap_kom"].append(f"Gleiches LaTeX-Label wie {andere} ({lab}) – Captions unterscheiden")
     nach_caption = {}
     for x in liste:
         if x["art"] in ("DUP", "X"):
@@ -671,7 +690,7 @@ def seite(liste):
         ("<ul>" + "".join(f"<li>{e(b)}</li>" for b in befunde) + "</ul>") if befunde else "",
         "<ul><li>Bild anklicken: große Ansicht. Links das Original der 5. Auflage, rechts die neue Fassung.</li>"
         "<li>„LaTeX kopieren“ legt den Code der Tabelle in die Zwischenablage – direkt in Overleaf einfügen. "
-        "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label; dafür die Datei aus "
+        "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label (aus der Caption gebildet, nicht aus der Nummer); dafür die Datei aus "
         "<code>abbildungen/</code> mit gleichem Pfad nach Overleaf hochladen. Dashboards im Querformat werden um 90° "
         "gedreht auf einer Hochformatseite eingebunden (Pfad <code>author/content/abbildungen/…</code>).</li>"
         "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "

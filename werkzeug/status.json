@@ -214,6 +214,21 @@
     "Klassenzuordnung wie im Original: A, solange der kumulierte Anteil ≤ Grenze (Rang 12 mit 62,3 % → B)"
    ],
    "alt": "Dashboard „ABC-Analyse Produkte“ für das Jahr 2025, alle Kunden, Kennzahl Absatz in Stück, Klassengrenzen A 60 % und B 20 %. Links die Produkte nach Rang mit Stück, Anteil und kumuliertem Anteil, nach Klassen gegliedert. Rechts oben die ABC-Klassen: 11 A-Produkte (22,4 % der Produkte) bringen 59,8 % des Absatzes, 10 B-Produkte 20,2 % und 28 C-Produkte 20,0 %; darunter die Konzentrationskurve mit den Klassengrenzen bei 22,4 % und 42,9 % der Produkte."
+  },
+  "3.2": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Vorschlag: als Dashboard im Buchstil neu aufgebaut (HTML für die Lernplattform, PNG für das Buch); Abweichungen sowie Chancen und Risiken in den Kontrastfarben Blaugrün (günstig, Chance) und Rot (ungünstig, Risiko)",
+    "Struktur des Originals bleibt: 5 Perspektiven, 17 Ziele, 24 Kennzahlen, je Kennzahl Maßnahme und Chance bzw. Risiko mit Beurteilung und Wert",
+    "Vorjahr und Plan teilen sich eine Spalte (Schalter ΔPL/ΔVJ, Druck zeigt ΔPL); Mittelfristplanung 2027–2029 im Tooltip; ROI-Balken oben, Logo und Navigationsschaltflächen entfallen; Saldo aus Chancen und Risiken je Perspektive neu",
+    "Kennzahlenwerte erfunden (Stand 30.06.2026, gleiches Unternehmen wie Abb. 3.3/3.5); Unstimmigkeiten des Originals beseitigt (Umsatz/Verkäufer 21.450 → 1.875, negative „Personalentwicklung“, ROI 10,5 % im Balken vs. 10,1 % in der Tabelle, Debitorenziel 133 % grün)",
+    "Chancen und Risiken mit den Werten des Originals, aber in Mio. € statt T€ (Unternehmen zehnmal größer, passend zur Projektroadmap)",
+    "Maßnahmen tragen die Projektnamen der Roadmap (Abb. 3.3/3.5), z. B. „Zukäufe, u. a. Digital GmbH“ → „Übernahme Digitalanbieter“; Status und Fertigstellung im Tooltip",
+    "Ziel- und Kennzahltexte gekürzt bzw. ausgeschrieben (z. B. „AE Produkte < 2 Y“ → „Neuprodukte“ mit Erläuterung im Tooltip, „Kompetenzen mit Int. E.“ → „Auslandserfahrung“); Tippfehler „Kenzahlen“ entfällt",
+    "Zu klären: „Orga/F/S/K“ als „Organisation“ gedeutet; „Beurteilung“ als Eintrittswahrscheinlichkeit gedeutet; Wirkungsrichtung angenommen: Abbau „Umsatz Poor Dogs“ günstig, „Variantenanteil“ neutral"
+   ],
+   "alt": "Dashboard „Balanced Chance and Risk Card“ der Unternehmensleitung, Stand 30.06.2026. Links die strategischen Ziele und Kennzahlen in den Perspektiven Finanzen; Markt, Kunde, Produkt; Prozesse; Organisation und Mitarbeiter mit Forecast, Plan und der Abweichung zum Plan als Balken: 15 von 24 Kennzahlen liegen hinter Plan, am weitesten das Umsatzwachstum mit −40 %. Rechts zu jeder Kennzahl die Maßnahme sowie eine Chance oder ein Risiko mit fünfstufiger Eintrittswahrscheinlichkeit und Wert; der Saldo aus Chancen und Risiken beträgt −16,1 Mio. €, größtes Risiko ist der Forderungsausfall mit −15,0 Mio. €."
   }
  }
 }

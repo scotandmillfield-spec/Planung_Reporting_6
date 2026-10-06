@@ -132,12 +132,12 @@ def latex_text(s):
     return s
 
 
-# Pfad aller Abbildungen im Overleaf-Projekt des Buchs (author/content/abbildungen/kapN/…);
-# Dashboards (Querformat) stehen gedreht auf einer Hochformatseite
+# Pfad aller Abbildungen im Overleaf-Projekt des Buchs (author/content/abbildungen/kapN/…)
 OVERLEAF_PFAD = "author/content/"
 
 
-def dashboard_latex(nr, caption, datei):
+def quer_latex(nr, caption, datei):
+    """Jede Abbildung im Querformat (Dashboard oder nicht): PNG um 90° gedreht auf einer Hochformatseite."""
     return "\n".join([
         r"\begin{figure}",
         r"    \centering",
@@ -147,19 +147,17 @@ def dashboard_latex(nr, caption, datei):
         r"\end{figure}"]) + "\n"
 
 
-def figure_latex(nr, caption, datei, breite_mm, quer, vektor):
-    umg = "sidewaysfigure" if quer else "figure"
+def figure_latex(nr, caption, datei, breite_mm, vektor):
+    """Abbildung im Hochformat (110 mm breit)."""
     zeilen = []
-    if quer:
-        zeilen.append(r"% benötigt im Präambel: \usepackage{rotating}")
     if vektor:
         zeilen.append(f"% Vektor-PDF in Originalgröße ({breite_mm} mm breit) – nicht skalieren, dann bleibt die Schrift bei 7 pt")
         gfx = rf"\includegraphics{{{OVERLEAF_PFAD}{datei}}}"
     else:
         zeilen.append(f"% PNG mit 600 dpi, {breite_mm} mm breit")
         gfx = rf"\includegraphics[width={breite_mm}mm]{{{OVERLEAF_PFAD}{datei}}}"
-    zeilen += [rf"\begin{{{umg}}}" + ("" if quer else "[htbp]"), r"  \centering", "  " + gfx,
-               rf"  \caption{{{latex_text(caption)}}}", rf"  \label{{{label_aus_caption(caption)}}}", rf"\end{{{umg}}}"]
+    zeilen += [r"\begin{figure}[htbp]", r"  \centering", "  " + gfx,
+               rf"  \caption{{{latex_text(caption)}}}", rf"  \label{{{label_aus_caption(caption)}}}", r"\end{figure}"]
     return "\n".join(zeilen) + "\n"
 
 
@@ -329,12 +327,12 @@ def eintraege():
         if tex:
             with open(os.path.join(ROOT, tex), encoding="utf-8") as fh:
                 latex = label_setzen(fh.read())
-        elif "HTML" in dateien and "PNG" in dateien and quer:
-            latex = dashboard_latex(nr, cap_neu, dateien["PNG"])
+        elif "PNG" in dateien and quer:                  # Querformat: immer gedrehtes PNG (Dashboards und Abbildungen)
+            latex = quer_latex(nr, cap_neu, dateien["PNG"])
         elif "PDF" in dateien or "PNG" in dateien:
             vektor = "PDF" in dateien
             latex = figure_latex(nr, cap_neu, dateien["PDF"] if vektor else dateien["PNG"],
-                                 groesse[0] if groesse else 110, quer, vektor)
+                                 groesse[0] if groesse else 110, vektor)
 
         vorgehen = x["hinweis"]
         if (re.match(r"(bereits|Tabelle mit Tab|Titel|Doppelte|Hinweis|Notiz)", vorgehen) or "klären" in vorgehen
@@ -451,6 +449,9 @@ def karte(x):
     if x["latex"]:
         was = "LaTeX kopieren" if x["tex"] else "LaTeX (figure) kopieren"
         knoepfe.append(f"<button class='kn kopie' data-ziel='tex-{x['anker']}'>{was}</button>")
+    if "PNG" in x["dateien"]:
+        pfad = OVERLEAF_PFAD + x["dateien"]["PNG"]
+        knoepfe.append(f"<button class='kn kopie' data-text='{e(pfad)}' title='{e(pfad)}'>PNG-Pfad kopieren</button>")
     if knoepfe:
         teile.append("<nav class='dateien'>" + "".join(knoepfe) + "</nav>")
     if x["quellen"]:
@@ -655,8 +656,8 @@ async function kopiere(text){
     document.body.appendChild(t);t.select();let ok=false;try{ok=document.execCommand('copy');}catch(e2){}
     t.remove();return ok;}
 }
-for(const b of $$('.kopie[data-ziel]')) b.addEventListener('click',async()=>{
-  const ok=await kopiere(document.getElementById(b.dataset.ziel).textContent);
+for(const b of $$('.kopie[data-ziel],.kopie[data-text]')) b.addEventListener('click',async()=>{
+  const ok=await kopiere(b.dataset.text||document.getElementById(b.dataset.ziel).textContent);
   const alt=b.textContent; b.textContent=ok?'Kopiert ✓':'Kopieren fehlgeschlagen'; b.classList.toggle('ok',ok);
   setTimeout(()=>{b.textContent=alt;b.classList.remove('ok');},1600);});
 // ---------- Abstimmung über die Google-Tabelle ----------
@@ -767,8 +768,9 @@ def seite(liste):
         "<ul><li>Bild anklicken: große Ansicht. Links das Original der 5. Auflage, rechts die neue Fassung.</li>"
         "<li>„LaTeX kopieren“ legt den Code der Tabelle in die Zwischenablage – direkt in Overleaf einfügen. "
         "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label (aus der Caption gebildet, nicht aus der Nummer); dafür die Datei aus "
-        "<code>abbildungen/</code> mit gleichem Pfad nach Overleaf hochladen. Dashboards im Querformat werden um 90° "
-        "gedreht auf einer Hochformatseite eingebunden (Pfad <code>author/content/abbildungen/…</code>).</li>"
+        "<code>abbildungen/</code> nach <code>author/content/</code> in Overleaf hochladen. Querformate (Dashboards und "
+        "Abbildungen) werden als PNG um 90° gedreht auf einer Hochformatseite eingebunden. „PNG-Pfad kopieren“ legt "
+        "den vollständigen Pfad <code>author/content/abbildungen/kapN/….png</code> in die Zwischenablage.</li>"
         "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "
         "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"
         "<li>„Hinweise aus der Umsetzung“ sind die Anmerkungen beim Neuzeichnen; rote Punkte markieren Stellen, "

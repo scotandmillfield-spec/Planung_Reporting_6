@@ -145,7 +145,7 @@ THEME = THEMES["buch"]
 
 # Gestaltungsbreite = Satzspiegelbreite der 5. Auflage; LaTeX skaliert das PNG auf \textwidth.
 FIG_W = 110.0
-FIG_W_QUER = 155.0   # ganzseitige Querabbildung (sidewaysfigure), Höhe max. 98 mm
+FIG_W_QUER = 155.0   # ganzseitige Querabbildung (in LaTeX als PNG um 90° gedreht), Höhe max. 98 mm
 
 
 # --------------------------------------------------------------------------

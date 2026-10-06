@@ -5,7 +5,6 @@ STEM = "Zeitdimensionen_der_Unternehmensfuehrung"
 from bookfig import Fig, P
 
 W = 110
-ELL = "…"
 NB = chr(0xA0)
 
 
@@ -24,11 +23,11 @@ def ebenen():
     def bl(t): return P(t, size=7, bullet="•", align="l")
     return [
         ("Generelle Zielplanung", [P("Generelle Zielplanung", bold=True)], None),
-        ("Strategische Planung", [P("Strategische Planung", bold=True), bl("Geschäftsfelder"), bl("Regionen"), bl(ELL)],
+        ("Strategische Planung", [P("Strategische Planung", bold=True), bl("Geschäftsfelder"), bl("Regionen")],
          "5 Jahre"),
-        ("Mittelfristplanung", [P("Mittelfristplanung", bold=True), bl("Maßnahmen"), bl("Projekte"), bl(ELL)],
+        ("Mittelfristplanung", [P("Mittelfristplanung", bold=True), bl("Maßnahmen"), bl("Projekte")],
          "2–3 Jahre"),
-        ("Operative Planung", [P("Operative Planung", bold=True), bl("Prozesse"), bl("Ressourcen"), bl(ELL)],
+        ("Operative Planung", [P("Operative Planung", bold=True), bl("Prozesse"), bl("Ressourcen")],
          "bis 1 Jahr"),
         ("Steuerung und Kontrolle", [P("Steuerung und Kontrolle", bold=True)], None),
         ("Durchführung", [P("Durchführung", bold=True)], None),

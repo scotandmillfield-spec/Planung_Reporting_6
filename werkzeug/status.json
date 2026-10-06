@@ -28,7 +28,17 @@
     "Vorgaben links als Sammelleitung"
    ],
    "alt": "Gestapelte Ebenen der Unternehmensführung im Rahmen der Unternehmenskultur: generelle Zielplanung, strategische Planung (z. B. Geschäftsfelder, Regionen; etwa 5 Jahre), Mittelfristplanung (Maßnahmen, Projekte; 2–3 Jahre), operative Planung (Prozesse, Ressourcen; bis 1 Jahr), Steuerung und Kontrolle sowie Durchführung. Die generelle Zielplanung gibt allen Ebenen Vorgaben, jede Ebene meldet an die darüberliegende zurück.",
-   "datei": "Zeitdimensionen_der_Unternehmensfuehrung"
+   "datei": "Zeitdimensionen_der_Unternehmensfuehrung",
+   "revisionen": [
+    {
+     "datum": "06.10.2026",
+     "wunsch": [
+      "06.10.2026 MD: Ich möchte, dass die drei Punkte \"...\" aus der Abbildung verschwinden. Das sieht optisch dann eher unvollständig aus. Hier bitte einmal ändern und neu machen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Auslassungspunkte „…“ in Strategischer, Mittelfrist- und Operativer Planung entfernt; die Kästen sind dadurch niedriger, die Abbildung ist 78,8 statt 87,6 mm hoch. Neue Fassung in der Inventur."
+    }
+   ]
   },
   "2.3": {
    "status": "pruefung",

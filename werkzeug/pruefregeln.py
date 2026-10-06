@@ -100,7 +100,7 @@ GEZIELT = {
 }
 
 # Software in der Caption, die in der neu gezeichneten Fassung nicht mehr zu sehen ist
-WERKZEUG_IN_CAPTION = re.compile(r"\((Beispiel )?MS Excel\)|mit MS Excel")
+WERKZEUG_IN_CAPTION = re.compile(r"\((?:Beispiel )?(MS Excel|Cubeware)\)|mit (MS Excel)")
 
 
 def _umlaute(s):
@@ -152,8 +152,9 @@ def pruefe(nr, art, caption):
         if v2 != v:
             kom.append("Neu gezeichnet – Quellenformel „In Anlehnung an“ statt „Quelle“/„Entnommen aus“")
             v = v2
-        if WERKZEUG_IN_CAPTION.search(v):
-            kom.append("Caption nennt MS Excel – die Neuzeichnung ist werkzeugneutral, Caption anpassen")
+        m = WERKZEUG_IN_CAPTION.search(v)
+        if m:
+            kom.append(f"Caption nennt {m.group(1) or m.group(2)} – die Neuzeichnung ist werkzeugneutral, Caption anpassen")
     for alt, neu, text in GEZIELT.get(nr, []):
         if alt is None:  # Caption vollständig ersetzt – Einzelbefunde davor sind hinfällig
             v = neu

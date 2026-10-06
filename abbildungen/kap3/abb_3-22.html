@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABC-Analyse Produkte</title>
+<style>
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }
+
+</style>
+</head>
+<body>
+<script>const DATA = {"jahre":[2024,2025],"kunden":["Maschinenbau","Fördertechnik","Fahrzeugbau","Handel"],"produkte":["Kupplung KU 10","Kupplung KU 63","Kupplung KU 20","Kupplung KU 40","Frequenzumrichter FU 30","Kugelgewindetrieb KG 40","Kugelgewindetrieb KG 63","Kupplung KU 30","Kupplung KU 50","Kupplung KU 80","Frequenzumrichter FU 40","Getriebemotor GM 40","Kugelgewindetrieb KG 50","Linearachse LA 20","Kugelgewindetrieb KG 10","Getriebemotor GM 30","Servomotor SM 30","Kugelgewindetrieb KG 80","Planetengetriebe PG 20","Frequenzumrichter FU 63","Getriebemotor GM 20","Servomotor SM 10","Frequenzumrichter FU 20","Servomotor SM 20","Planetengetriebe PG 10","Kugelgewindetrieb KG 20","Getriebemotor GM 10","Getriebemotor GM 63","Getriebemotor GM 80","Kugelgewindetrieb KG 30","Planetengetriebe PG 40","Frequenzumrichter FU 10","Frequenzumrichter FU 80","Frequenzumrichter FU 50","Getriebemotor GM 50","Linearachse LA 63","Planetengetriebe PG 50","Planetengetriebe PG 63","Planetengetriebe PG 30","Linearachse LA 50","Servomotor SM 63","Linearachse LA 10","Planetengetriebe PG 80","Linearachse LA 30","Linearachse LA 40","Servomotor SM 40","Servomotor SM 50","Servomotor SM 80","Linearachse LA 80"],"zeilen":[[24,0,0,231,11204,6429],[24,0,1,229,10773,6374],[24,0,2,216,9847,6012],[24,0,3,110,4695,3062],[25,0,0,189,9450,5368],[25,0,1,257,12464,7299],[25,0,2,190,8930,5396],[25,0,3,96,4224,2726],[24,1,0,207,22087,13411],[24,1,1,105,10867,6803],[24,1,2,264,26479,17104],[24,1,3,97,9108,6284],[25,1,0,231,25410,15271],[25,1,1,97,10350,6413],[25,1,2,193,19956,12759],[25,1,3,70,6776,4628],[24,2,0,165,11203,6723],[24,2,1,55,3622,2241],[24,2,2,53,3383,2160],[24,2,3,52,3107,2119],[25,2,0,218,15260,9064],[25,2,1,78,5296,3243],[25,2,2,71,4672,2952],[25,2,3,50,3080,2079],[24,3,0,122,11834,7042],[24,3,1,82,7715,4733],[24,3,2,58,5288,3348],[24,3,3,64,5463,3694],[25,3,0,122,12200,7186],[25,3,1,66,6402,3887],[25,3,2,53,4982,3122],[25,3,3,70,6160,4123],[24,4,0,82,31021,17770],[24,4,1,32,11742,6935],[24,4,2,46,16358,9969],[24,4,3,41,13649,8885],[25,4,0,90,35100,19902],[25,4,1,39,14754,8624],[25,4,2,62,22729,13710],[25,4,3,51,17503,11278],[24,5,0,75,20370,14447],[24,5,1,43,11328,8283],[24,5,2,52,13276,10017],[24,5,3,32,7648,6164],[25,5,0,72,20160,14152],[25,5,1,50,13580,9828],[25,5,2,59,15529,11597],[25,5,3,31,7638,6093],[24,6,0,65,24590,14682],[24,6,1,39,14311,8809],[24,6,2,23,8179,5195],[24,6,3,22,7324,4969],[25,6,0,74,28860,17056],[25,6,1,44,16645,10142],[25,6,2,32,11731,7376],[25,6,3,35,12012,8067],[24,7,0,56,4346,2529],[24,7,1,44,3312,1987],[24,7,2,47,3428,2122],[24,7,3,16,1093,723],[25,7,0,61,4880,2811],[25,7,1,44,3414,2028],[25,7,2,49,3685,2258],[25,7,3,13,915,599],[24,8,0,44,4695,3439],[24,8,1,38,3933,2970],[24,8,2,58,5817,4533],[24,8,3,21,1972,1641],[25,8,0,49,5390,3908],[25,8,1,34,3628,2712],[25,8,2,56,5790,4466],[25,8,3,18,1742,1436],[24,9,0,69,10040,7009],[24,9,1,30,4234,3047],[24,9,2,37,5060,3758],[24,9,3,12,1536,1219],[25,9,0,64,9600,6634],[25,9,1,32,4656,3317],[25,9,2,41,5781,4250],[25,9,3,12,1584,1244],[24,10,0,47,23707,15880],[24,10,1,36,17614,12163],[24,10,2,21,9957,7095],[24,10,3,10,4439,3379],[25,10,0,58,30160,19996],[25,10,1,47,23707,16204],[25,10,2,24,11731,8274],[25,10,3,10,4576,3448],[24,11,0,70,38703,30030],[24,11,1,28,15017,12012],[24,11,2,24,12473,10296],[24,11,3,18,8758,7722],[25,11,0,65,37050,28454],[25,11,1,31,17140,13571],[25,11,2,24,12859,10506],[25,11,3,17,8527,7442],[24,12,0,64,21728,12798],[24,12,1,21,6916,4199],[24,12,2,53,16914,10598],[24,12,3,16,4780,3200],[25,12,0,59,20650,12039],[25,12,1,18,6111,3673],[25,12,2,43,14147,8774],[25,12,3,12,3696,2449],[24,13,0,34,32650,22695],[24,13,1,39,36328,26032],[24,13,2,29,26178,19357],[24,13,3,34,28732,22695],[25,13,0,33,32670,22477],[25,13,1,30,28809,20434],[25,13,2,30,27918,20434],[25,13,3,29,25265,19752],[24,14,0,24,3958,2863],[24,14,1,29,4639,3459],[24,14,2,46,7130,5487],[24,14,3,20,2902,2386],[25,14,0,21,3570,2556],[25,14,1,33,5442,4017],[25,14,2,42,6712,5112],[25,14,3,19,2842,2313],[24,15,0,34,13852,9082],[24,15,1,41,16202,10952],[24,15,2,24,9191,6411],[24,15,3,20,7170,5343],[25,15,0,38,15960,10358],[25,15,1,37,15074,10085],[25,15,2,23,9080,6269],[25,15,3,15,5544,4089],[24,16,0,19,13822,8966],[24,16,1,20,14114,9437],[24,16,2,30,20516,14156],[24,16,3,17,10883,8022],[25,16,0,25,18750,12038],[25,16,1,25,18188,12038],[25,16,2,39,27495,18778],[25,16,3,17,11220,8186],[24,17,0,28,12494,7245],[24,17,1,25,10820,6469],[24,17,2,19,7969,4916],[24,17,3,15,5890,3881],[25,17,0,35,16100,9241],[25,17,1,30,13386,7921],[25,17,2,18,7783,4753],[25,17,3,17,6882,4489],[24,18,0,38,19904,12005],[24,18,1,13,6605,4107],[24,18,2,20,9847,6319],[24,18,3,6,2766,1896],[25,18,0,44,23760,14185],[25,18,1,18,9428,5803],[25,18,2,27,13705,8704],[25,18,3,9,4277,2901],[24,19,0,38,24696,15220],[24,19,1,13,8195,5207],[24,19,2,16,9774,6408],[24,19,3,12,6863,4806],[25,19,0,46,30820,18800],[25,19,1,20,12998,8174],[25,19,2,16,10077,6539],[25,19,3,13,7665,5313],[24,20,0,48,19090,12555],[24,20,1,17,6558,4447],[24,20,2,16,5981,4185],[24,20,3,16,5600,4185],[25,20,0,45,18450,12011],[25,20,1,18,7159,4804],[25,20,2,16,6166,4271],[25,20,3,16,5773,4271],[24,21,0,33,17285,11840],[24,21,1,14,7113,5023],[24,21,2,19,9355,6817],[24,21,3,14,6453,5023],[25,21,0,40,21600,14645],[25,21,1,17,8905,6224],[25,21,2,20,10152,7322],[25,21,3,18,8554,6590],[24,22,0,37,12920,8341],[24,22,1,18,6097,4058],[24,22,2,24,7878,5411],[24,22,3,8,2458,1804],[25,22,0,45,16200,10352],[25,22,1,18,6286,4141],[25,22,2,23,7783,5291],[25,22,3,7,2218,1610],[24,23,0,27,18333,11558],[24,23,1,27,17783,11558],[24,23,2,38,24254,16266],[24,23,3,11,6573,4709],[25,23,0,23,16100,10046],[25,23,1,24,16296,10483],[25,23,2,31,20398,13541],[25,23,3,10,6160,4368],[24,24,0,30,12222,7483],[24,24,1,18,7113,4490],[24,24,2,11,4213,2744],[24,24,3,16,5736,3991],[25,24,0,28,11760,7127],[25,24,1,18,7333,4581],[25,24,2,11,4343,2800],[25,24,3,14,5174,3563],[24,25,0,35,7130,4912],[24,25,1,13,2569,1825],[24,25,2,9,1723,1263],[24,25,3,14,2510,1965],[25,25,0,35,7350,5013],[25,25,1,11,2241,1575],[25,25,2,9,1777,1289],[25,25,3,14,2587,2005],[24,26,0,14,4617,2696],[24,26,1,12,3839,2311],[24,26,2,13,4030,2504],[24,26,3,11,3192,2118],[25,26,0,18,6120,3537],[25,26,1,14,4617,2751],[25,26,2,15,4794,2948],[25,26,3,14,4189,2751],[24,27,0,29,20254,14999],[24,27,1,8,5420,4138],[24,27,2,16,10504,8275],[24,27,3,9,5531,4655],[25,27,0,24,17280,12666],[25,27,1,8,5587,4222],[25,27,2,19,12859,10027],[25,27,3,7,4435,3694],[24,28,0,27,20428,15479],[24,28,1,10,7339,5733],[24,28,2,10,7112,5733],[24,28,3,10,6658,5733],[25,28,0,28,21840,16380],[25,28,1,9,6809,5265],[25,28,2,11,8065,6435],[25,28,3,8,5491,4680],[24,29,0,26,6557,4352],[24,29,1,11,2691,1841],[24,29,2,14,3319,2344],[24,29,3,6,1332,1004],[25,29,0,19,4940,3246],[25,29,1,13,3279,2221],[25,29,2,14,3422,2391],[25,29,3,8,1830,1367],[24,30,0,19,12164,6919],[24,30,1,11,6831,4006],[24,30,2,5,3009,1821],[24,30,3,7,3944,2549],[25,30,0,22,14520,8175],[25,30,1,14,8963,5202],[25,30,2,6,3722,2229],[25,30,3,7,4066,2601],[24,31,0,23,6470,4314],[24,31,1,7,1910,1313],[24,31,2,15,3966,2814],[24,31,3,6,1485,1125],[25,31,0,19,5510,3637],[25,31,1,7,1969,1340],[25,31,2,12,3271,2297],[25,31,3,7,1786,1340],[24,32,0,16,11485,7588],[24,32,1,8,5570,3794],[24,32,2,8,5398,3794],[24,32,3,4,2527,1897],[25,32,0,19,14060,9195],[25,32,1,9,6460,4356],[25,32,2,9,6260,4356],[25,32,3,4,2605,1936],[24,33,0,16,8846,5202],[24,33,1,8,4291,2601],[24,33,2,10,5197,3251],[24,33,3,4,1946,1300],[25,33,0,16,9120,5308],[25,33,1,8,4423,2654],[25,33,2,9,4822,2986],[25,33,3,4,2006,1327],[24,34,0,12,7333,4653],[24,34,1,8,4742,3102],[24,34,2,9,5170,3490],[24,34,3,9,4840,3490],[25,34,0,11,6930,4352],[25,34,1,6,3667,2374],[25,34,2,8,4738,3165],[25,34,3,9,4990,3561],[24,35,0,13,20050,11506],[24,35,1,8,11968,7080],[24,35,2,8,11598,7080],[24,35,3,4,5429,3540],[25,35,0,10,15900,9031],[25,35,1,7,10796,6322],[25,35,2,10,14946,9031],[25,35,3,4,5597,3612],[24,36,0,15,11494,7188],[24,36,1,7,5203,3355],[24,36,2,4,2881,1917],[24,36,3,2,1349,958],[25,36,0,14,11060,6846],[25,36,1,6,4598,2934],[25,36,2,5,3713,2445],[25,36,3,3,2086,1467],[24,37,0,9,8119,5602],[24,37,1,4,3500,2490],[24,37,2,5,4240,3112],[24,37,3,6,4763,3735],[25,37,0,10,9300,6352],[25,37,1,4,3608,2541],[25,37,2,6,5245,3811],[25,37,3,6,4910,3811],[24,38,0,6,3608,2235],[24,38,1,5,2917,1862],[24,38,2,9,5088,3352],[24,38,3,4,2117,1490],[25,38,0,7,4340,2660],[25,38,1,5,3007,1900],[25,38,2,8,4662,3040],[25,38,3,4,2182,1520],[24,39,0,10,14162,9787],[24,39,1,6,8242,5872],[24,39,2,5,6656,4893],[24,39,3,3,3739,2936],[25,39,0,8,11680,7989],[25,39,1,6,8497,5992],[25,39,2,4,5490,3995],[25,39,3,3,3854,2996],[24,40,0,5,5578,3330],[24,40,1,3,3246,1998],[24,40,2,8,8389,5328],[24,40,3,6,5890,3996],[25,40,0,5,5750,3398],[25,40,1,3,3346,2039],[25,40,2,7,7567,4758],[25,40,3,5,5060,3398],[24,41,0,6,4656,3401],[24,41,1,5,3764,2834],[24,41,2,5,3647,2834],[24,41,3,3,2049,1700],[25,41,0,6,4800,3470],[25,41,1,5,3880,2892],[25,41,2,4,3008,2314],[25,41,3,3,2112,1735],[24,42,0,8,9002,5457],[24,42,1,1,1091,682],[24,42,2,2,2115,1364],[24,42,3,3,2971,2046],[25,42,0,8,9280,5568],[25,42,1,2,2250,1392],[25,42,2,2,2181,1392],[25,42,3,4,4083,2784],[24,43,0,6,6868,4545],[24,43,1,4,4441,3030],[24,43,2,3,3228,2272],[24,43,3,4,4029,3030],[25,43,0,6,7080,4637],[25,43,1,4,4578,3092],[25,43,2,2,2218,1546],[25,43,3,3,3115,2319],[24,44,0,6,6518,4076],[24,44,1,5,5269,3397],[24,44,2,2,2042,1359],[24,44,3,2,1912,1359],[25,44,0,6,6720,4160],[25,44,1,4,4346,2773],[25,44,2,2,2106,1387],[25,44,3,2,1971,1387],[24,45,0,4,3182,2485],[24,45,1,2,1543,1242],[24,45,2,3,2243,1864],[24,45,3,2,1400,1242],[25,45,0,4,3280,2535],[25,45,1,2,1591,1268],[25,45,2,4,3083,2535],[25,45,3,2,1443,1268],[24,46,0,5,5092,3596],[24,46,1,1,988,719],[24,46,2,2,1915,1439],[24,46,3,1,896,719],[25,46,0,6,6300,4404],[25,46,1,2,2037,1468],[25,46,2,2,1974,1468],[25,46,3,1,924,734],[24,47,0,2,2794,2089],[24,47,1,3,4065,3133],[24,47,2,4,5252,4177],[24,47,3,1,1229,1044],[25,47,0,3,4320,3197],[25,47,1,2,2794,2131],[25,47,2,3,4061,3197],[25,47,3,2,2534,2131],[24,48,0,3,5587,4375],[24,48,1,2,3613,2916],[24,48,2,1,1751,1458],[24,48,3,1,1639,1458],[25,48,0,4,7680,5952],[25,48,1,2,3725,2976],[25,48,2,1,1805,1488],[25,48,3,2,3379,2976]]};</script>
+<script>
+/* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
+   Jeder Baustein entspricht einem Standard-Visual von Power BI.
+   Seite: 1024 x 646 px. Parameter: ?print (Druckansicht ohne Leiste), ?gut=gruen (Farbvariante). */
+const DK = (() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  let SEITE_B = 1024, SEITE_H = 646;          // Dashboard; Einzelvisual: init({breite: 727, hoehe: …})
+  if (Q.get("gut") === "gruen") document.body.dataset.gut = "gruen";
+  if (PRINT) document.body.classList.add("print");
+
+  /* ---------------- Format ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  const MINUS = "−", NBSP = String.fromCharCode(0xA0);
+  function zahl(v, nk = 0) { return (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function delta(v, nk = 0, einheit = "") {
+    const r = Number(v.toFixed(nk));
+    const vz = r > 0 ? "+" : r < 0 ? MINUS : "±";
+    return vz + nf(nk).format(Math.abs(r)) + einheit;
+  }
+  function prozent(v, nk = 1) { return zahl(v * 100, nk) + NBSP + "%"; }
+  /* Wirkung: richtung +1 = Anstieg günstig, -1 = Anstieg ungünstig, 0 = neutral */
+  function wirkung(d, richtung, nk = 1) {
+    if (!richtung || Number(d.toFixed(nk)) === 0) return "neutral";
+    return d * richtung > 0 ? "gut" : "schlecht";
+  }
+  const FARBE = { gut: "var(--gut)", schlecht: "var(--schlecht)", neutral: "var(--ac)",
+                  ist: "var(--ac)", fc: "var(--fc)", vj: "var(--py)" };
+
+  /* ---------------- Textmessung ---------------- */
+  const ctx = document.createElement("canvas").getContext("2d");
+  function tw(t, px = 14, bold = false) {
+    ctx.font = (bold ? "bold " : "") + px + "px Arial, 'Liberation Sans', Helvetica, sans-serif";
+    return ctx.measureText(String(t)).width;
+  }
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------------- Tooltip ---------------- */
+  let tip;
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      const zeilen = zeilenFn();
+      tip.textContent = "";
+      zeilen.forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel;
+  function init(o) {
+    document.title = o.titel;
+    if (o.breite) SEITE_B = o.breite;
+    if (o.hoehe) SEITE_H = o.hoehe;
+    if (!PRINT) {
+      const leiste = el("div", { class: "dk-leiste" }, document.body);
+      el("div", { class: "dk-leiste-titel" }, leiste, o.titel);
+      o.knoepfe = leiste;
+    }
+    buehne = el("div", { class: "dk-buehne" }, document.body);
+    rahmen = el("div", { class: "dk-rahmen" }, buehne);
+    seite = el("div", { class: "dk-seite", id: "seite", style: `width:${SEITE_B}px;height:${SEITE_H}px` }, rahmen);
+    panel = el("div", { class: "dk-panel" }, document.body);
+    tip = el("div", { class: "dk-tooltip" }, document.body);
+    const skalieren = () => {
+      if (PRINT) { rahmen.style.width = SEITE_B + "px"; rahmen.style.height = SEITE_H + "px"; return; }
+      const frei = panel.style.display === "block" ? 380 : 0;
+      const s = Math.max(0.4, Math.min((innerWidth - frei - 32) / SEITE_B, (innerHeight - 44 - 32) / SEITE_H));
+      seite.style.transform = `scale(${s})`;
+      rahmen.style.width = SEITE_B * s + "px"; rahmen.style.height = SEITE_H * s + "px";
+      rahmen.style.marginLeft = frei ? "16px" : "auto";
+    };
+    addEventListener("resize", skalieren);
+    DK._skalieren = skalieren;
+    skalieren();
+    return seite;
+  }
+  function box(id, x, y, w, h, cls = "") {
+    return el("div", { id, class: "dk-abs " + cls, style: `left:${x}px;top:${y}px;width:${w}px;height:${h}px` }, seite);
+  }
+  function haarlinie(y, links = 16, rechts = 16) {
+    el("div", { class: "dk-haar", style: `top:${y}px;left:${links}px;right:${rechts}px` }, seite);
+  }
+
+  /* ---------------- Kopf ---------------- */
+  function kopf(ziel, o) {
+    ziel.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0" }, ziel);
+    el("div", { class: "dk-titel" }, l, o.titel);
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, o.untertitel);
+    const r = el("div", { style: "position:absolute;right:0;top:2px;text-align:right" }, ziel);
+    el("div", { class: "dk-quelle" }, r, o.quelle);
+    const lg = el("div", { id: "kopf-legende", class: "dk-legende", style: "margin-top:8px" }, r);
+    o.legende.forEach(([farbe, text, rahmenFarbe]) => {
+      const s = el("span", {}, lg);
+      el("i", { style: `background:${farbe};${rahmenFarbe ? "outline:1px solid " + rahmenFarbe + ";outline-offset:-1px" : ""}` }, s);
+      s.appendChild(document.createTextNode(text));
+    });
+  }
+
+  /* ---------------- Datenschnitte (Slicer) ---------------- */
+  function knoepfe(ziel, o) {
+    const g = el("div", { class: "dk-knoepfe", role: "group" }, ziel);
+    const bs = o.optionen.map(([wert, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(wert === o.wert) }, g, text);
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); o.onChange(wert); });
+      return b;
+    });
+    return g;
+  }
+  function schnitt(ziel, label, typ, o) {
+    const s = el("div", { class: "dk-schnitt" }, ziel);
+    el("label", {}, s, label);
+    if (typ === "knoepfe") return knoepfe(s, o);
+    const sel = el("select", { "aria-label": label, style: o.breite ? `width:${o.breite}px` : "" }, s);
+    o.optionen.forEach(([wert, text]) => { const op = el("option", { value: wert }, sel, text); if (wert === o.wert) op.selected = true; });
+    sel.addEventListener("change", () => o.onChange(sel.value));
+    return sel;
+  }
+
+  /* ---------------- KPI-Leiste (Karte mit Referenzbeschriftung) ---------------- */
+  function kpis(ziel, items) {
+    ziel.textContent = "";
+    const w = el("div", { class: "dk-kpis" }, ziel);
+    items.forEach(k => {
+      const c = el("div", { class: "dk-kpi" }, w);
+      el("div", { class: "dk-kpi-label" }, c, k.label);
+      const wz = el("div", { class: "dk-kpi-wert" + (k.wertKlasse ? " " + k.wertKlasse : "") }, c, k.wert);
+      if (k.einheit) el("span", { class: "dk-kpi-einheit" }, wz, k.einheit);
+      const d = el("div", { class: "dk-kpi-delta" }, c, (k.bezug ?? "ΔVJ") + " ");
+      el("b", { class: k.klasse }, d, k.delta);
+    });
+  }
+
+  /* ---------------- Visual-Rahmen: Titel + Botschaft ---------------- */
+  function visual(ziel, o) {
+    ziel.textContent = "";
+    ziel.classList.add("dk-visual");
+    const tz = el("div", { class: "dk-titelzeile" }, ziel);
+    const t = el("div", { class: "dk-visual-titel" }, tz, o.titel);
+    if (o.einheit) { t.appendChild(document.createTextNode(", ")); el("span", { class: "dk-einheit" }, t, o.einheit); }
+    if (o.schalter) knoepfe(tz, o.schalter);
+    if (o.botschaft !== undefined) el("div", { class: "dk-botschaft", title: o.botschaft }, ziel, o.botschaft);
+    const top = (o.botschaft !== undefined ? 42 : 24) + (o.abstand || 6);
+    return { flaeche: el("div", { style: `position:absolute;left:0;top:${top}px;right:0;bottom:0` }, ziel),
+             breite: ziel.clientWidth, hoehe: ziel.clientHeight - top };
+  }
+
+  /* ---------------- Balkendiagramm (gruppiertes Balkendiagramm) ---------------- */
+  function balken(ziel, o) {
+    const W = o.breite, n = o.zeilen.length;
+    const rh = o.zeilenhoehe || Math.floor(o.hoehe / n), bh = Math.round(rh * 0.7);
+    const H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = o.labelBreite || Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9);
+    const pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bw = Math.max(z.wert > 0 ? 1 : 0, z.wert / max * pw);
+      if (z.kontur) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: Math.max(0, bw - 1), height: bh - 1,
+                                 fill: "#FFFFFF", stroke: z.kontur, "stroke-width": 1 }, g);
+      else sv("rect", { x: lw, y: y + (rh - bh) / 2, width: bw, height: bh, fill: z.farbe || FARBE.ist }, g);
+      sv("text", { x: lw + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    return svg;
+  }
+
+  /* ---------------- Bevölkerungspyramide (gestapeltes Balkendiagramm, Männer negativ) ---------------- */
+  function pyramide(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, kopfH = 18;
+    const rh = o.zeilenhoehe || Math.floor((o.hoehe - kopfH) / n), bh = Math.round(rh * 0.72);
+    const H = kopfH + rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vl = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.m))))) + 7;
+    const vr = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.w))))) + 7;
+    const maxM = Math.max(...o.zeilen.map(z => z.m), 1e-9), maxW = Math.max(...o.zeilen.map(z => z.w), 1e-9);
+    const k = (W - lw - vl - vr - 2) / (maxM + maxW);      // ein Maßstab für beide Seiten
+    const x0 = lw + vl + maxM * k + 1;
+    sv("text", { x: x0 - 6, y: 12, "text-anchor": "end", class: "muted" }, svg, o.kopf[0]);
+    sv("text", { x: x0 + 6, y: 12, class: "muted" }, svg, o.kopf[1]);
+    o.zeilen.forEach((z, i) => {
+      const y = kopfH + i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, z.label);
+      const bm = z.m * k, bw = z.w * k;
+      sv("rect", { x: x0 - 1 - bm, y: y + (rh - bh) / 2, width: bm, height: bh, fill: FARBE.ist }, g);
+      sv("rect", { x: x0 + 1, y: y + (rh - bh) / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: x0 - 1 - bm - 5, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, o.fmt(z.m));
+      sv("text", { x: x0 + 1 + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.w));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: x0, x2: x0, y1: kopfH - 2, y2: H, stroke: "#FFFFFF", "stroke-width": 2 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Gestapeltes Säulendiagramm ---------------- */
+  function saeulen(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.segNamen.map(t => tw(t)))) + 10;
+    const oben = 20, unten = 20, PH = H - oben - unten;
+    const slot = (W - lw) / n, bw = Math.min(26, slot * 0.72);
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9);
+    const k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = lw + slot * i + slot / 2, x = cx - bw / 2;
+      const g = sv("g", {}, svg);
+      let y = basis, summe = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        sv("rect", { x, y: y - h, width: bw, height: Math.max(0, h - (j < s.segs.length - 1 ? 0 : 0)),
+                     fill: FARBE[s.szenario] }, g);
+        if (j > 0) sv("line", { x1: x - 1, x2: x + bw + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, g);
+        if (i === 0 && h >= 15) sv("text", { x: lw - 10, y: y - h / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, o.segNamen[j]);
+        y -= h; summe += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(summe));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: lw + slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      if (o.tooltip) tooltip(hit, () => o.tooltip(s, summe));
+    });
+    sv("line", { x1: lw - 2, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Matrix / Tabelle mit Datenbalken ----------------
+     Spaltentypen: (leer) Zahl rechtsbündig über s.fmt · "text" linksbündig · "delta" Abweichung mit Balken
+     an einer Mittellinie, gefärbt nach Wirkung (s.richtung) · "anteil" Fortschritt 0..1 als Balken ab Null.
+     null-Werte erscheinen als „–“ ohne Balken. o.zeilenhoehe (Standard 21), o.onSort(key) macht Köpfe klickbar. */
+  function matrix(ziel, o) {
+    ziel.textContent = "";
+    const zh = o.zeilenhoehe || 21, H = zh - 3;
+    const t = el("table", { class: "dk-matrix" }, ziel);
+    const kopf = el("tr", {}, el("thead", {}, t));
+    o.spalten.forEach(s => {
+      const st = (s.breite ? `width:${s.breite}px;` : "") + (s.typ === "delta" || s.typ === "anteil" ? "text-align:center;" : "") +
+                 (s.typ === "text" ? "text-align:left;" : "");
+      const th = el("th", s.id ? { style: st, id: s.id } : { style: st }, kopf, s.titel);
+      if (o.onSort && !PRINT) {
+        th.classList.add("dk-sortierbar");
+        th.title = "Klick sortiert";
+        th.addEventListener("click", () => o.onSort(s.key));
+        if (o.sortierung && o.sortierung.key === s.key) th.appendChild(document.createTextNode(o.sortierung.ab ? " ▾" : " ▴"));
+      }
+    });
+    const tb = el("tbody", {}, t);
+    // Achse der Abweichungsbalken proportional (wie „Achse: automatisch“ bei Datenbalken in Power BI)
+    const spanne = {};
+    o.spalten.filter(s => s.typ === "delta").forEach(s => {
+      const w = o.zeilen.filter(z => !z.summe && z.werte[s.key] != null).map(z => z.werte[s.key]);
+      spanne[s.key] = { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) };
+    });
+    const hoehe = o.zeilenhoehe ? `height:${zh}px` : "";
+    o.zeilen.forEach(z => {
+      const blass = !z.summe && o.auswahl != null && o.auswahl !== z.key;
+      // Trennlinie über einer neuen Gruppe: an der Vorzeile setzen (im border-collapse gewinnt die obere Zelle)
+      if (z.trenner && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
+      const tr = el("tr", { class: (z.summe ? "dk-summe" : "dk-zeile") + (blass ? " dk-blass" : "") }, tb);
+      o.spalten.forEach((s, j) => {
+        if (j === 0) { el("td", { style: hoehe }, tr, z.label); return; }
+        const v = z.werte[s.key];
+        if (s.typ === "text") { el("td", { style: "text-align:left;" + hoehe }, tr, v); return; }
+        if (s.typ !== "delta" && s.typ !== "anteil") { el("td", { style: hoehe }, tr, v == null ? "–" : s.fmt(v)); return; }
+        const td = el("td", { class: "dk-dbalken", style: hoehe }, tr);
+        const W = s.breite - 8, svg = sv("svg", { width: W, height: H, style: "display:block" }, td);
+        if (s.typ === "anteil") {
+          const txtW = s.textBreite || 48, pw = W - txtW - 2;
+          sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end", style: "font-size:14px" }, svg,
+             v == null ? "–" : zahl(v * 100, 0) + NBSP + "%");
+          if (v != null) sv("rect", { x: txtW, y: (H - 10) / 2, width: Math.max(v > 0 ? 1 : 0, Math.min(1, v) * pw), height: 10, fill: FARBE.ist }, svg);
+          sv("line", { x1: txtW, x2: txtW, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+          return;
+        }
+        const txtW = s.textBreite || 50, sp = spanne[s.key];
+        const k = (W - txtW - 4) / Math.max(sp.neg + sp.pos, 1e-9), mitte = txtW + 2 + sp.neg * k;
+        const kl = v == null ? "neutral" : wirkung(v, s.richtung, s.nk ?? 1);
+        sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end",
+                     style: `font-size:14px;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};font-weight:${z.summe ? "bold" : "normal"}` },
+           svg, v == null ? "–" : delta(v, s.nk ?? 1));
+        if (!z.summe && v != null) {
+          const bwid = Math.abs(v) * k;
+          sv("rect", { x: v >= 0 ? mitte : mitte - bwid, y: (H - 10) / 2, width: bwid, height: 10, fill: FARBE[kl] }, svg);
+        }
+        sv("line", { x1: mitte, x2: mitte, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+      });
+      if (!z.summe && o.onClick) tr.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip && !z.summe) tooltip(tr, () => o.tooltip(z));
+    });
+    return t;
+  }
+
+  /* ---------------- Streudiagramm (Punktdiagramm mit Größe) ----------------
+     o.punkte: [{key, x, y, g}] – g bestimmt die Kreisfläche. o.x / o.y: {min, max, ticks, titel, fmt}.
+     o.linien: {x, y} Konstantenlinien; o.felder: [{ecke: "ol"|"or"|"ul"|"ur", text}] Beschriftung der Quadranten. */
+  function streuung(ziel, o) {
+    const W = o.breite, H = o.hoehe;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const fx = o.x.fmt || String, fy = o.y.fmt || String;
+    const links = Math.ceil(Math.max(...o.y.ticks.map(t => tw(fy(t))))) + 8;
+    const rechts = Math.ceil(tw(fx(o.x.ticks[o.x.ticks.length - 1])) / 2) + 2;
+    const oben = 22, unten = 38, PW = W - links - rechts, PH = H - oben - unten;
+    const sx = v => links + (v - o.x.min) / (o.x.max - o.x.min) * PW;
+    const sy = v => oben + PH - (v - o.y.min) / (o.y.max - o.y.min) * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, o.y.titel);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, o.x.titel);
+    o.y.ticks.forEach(t => sv("text", { x: links - 6, y: sy(t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, fy(t)));
+    o.x.ticks.forEach(t => sv("text", { x: sx(t), y: oben + PH + 16, "text-anchor": "middle", class: "muted" }, svg, fx(t)));
+    if (o.linien) {
+      const st = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+      if (o.linien.x != null) sv("line", { x1: sx(o.linien.x), x2: sx(o.linien.x), y1: oben, y2: oben + PH, ...st }, svg);
+      if (o.linien.y != null) sv("line", { x1: links, x2: links + PW, y1: sy(o.linien.y), y2: sy(o.linien.y), ...st }, svg);
+    }
+    (o.felder || []).forEach(f => {
+      const l = f.ecke[1] === "l", ob = f.ecke[0] === "o";
+      sv("text", { x: l ? links + 6 : links + PW - 6, y: ob ? oben + 13 : oben + PH - 6, "text-anchor": l ? "start" : "end",
+                   class: "muted" }, svg, f.text);
+    });
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    const gMax = Math.max(...o.punkte.map(p => p.g || 0), 1e-9), rMax = o.rMax || 13, rMin = o.rMin || 3;
+    const kreise = o.punkte.slice().sort((a, b) => (b.g || 0) - (a.g || 0))
+      .map(p => ({ p, cx: sx(p.x), cy: sy(p.y), r: Math.max(rMin, Math.sqrt((p.g || 0) / gMax) * rMax) }));
+    const gruppen = new Map();
+    kreise.forEach(({ p, cx, cy, r }) => {
+      const blass = o.auswahl && !o.auswahl(p);
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("circle", { cx, cy, r, fill: p.farbe || FARBE.ist, "fill-opacity": 0.8, stroke: "#FFFFFF", "stroke-width": 1 }, g);
+      const hit = sv("circle", { cx, cy, r: Math.max(r, 6), fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(p.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(p));
+      gruppen.set(p, g);
+    });
+    // Beschriftungen nach allen Kreisen: rechts, links, oben, unten – erste Lage ohne Überdeckung
+    const belegt = [];
+    const schneidetKreis = (b, k) => {
+      const nx = Math.max(b.x, Math.min(k.cx, b.x + b.w)), ny = Math.max(b.y, Math.min(k.cy, b.y + b.h));
+      return (nx - k.cx) ** 2 + (ny - k.cy) ** 2 < (k.r + 1) ** 2;
+    };
+    const schneidet = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    kreise.filter(k => k.p.label).forEach(k => {
+      const w = tw(k.p.label), h = 16, { cx, cy, r } = k;
+      const lagen = [[cx + r + 4, cy - h / 2], [cx - r - 4 - w, cy - h / 2], [cx - w / 2, cy - r - 2 - h], [cx - w / 2, cy + r + 2]];
+      const frei = b => b.x >= links && b.x + b.w <= links + PW && b.y >= oben && b.y + b.h <= oben + PH &&
+        !kreise.some(a => a !== k && schneidetKreis(b, a)) && !belegt.some(c => schneidet(b, c));
+      const b = lagen.map(([x, y]) => ({ x, y, w, h })).find(frei) || { x: lagen[0][0], y: lagen[0][1], w, h };
+      belegt.push(b);
+      sv("text", { x: b.x, y: b.y + h / 2, dy: "0.35em" }, gruppen.get(k.p), k.p.label);
+    });
+    return svg;
+  }
+
+  /* ---------------- Berichtsdesign für Power BI (Theme-JSON) ---------------- */
+  function thema() {
+    const GUT = getComputedStyle(document.body).getPropertyValue("--gut").trim() || "#00806B";
+    return { name: "6. Auflage – Buchstil", dataColors: ["#3A3F44", "#8F8F8F", "#C9C9C9", GUT, "#C62828"],
+      background: "#FFFFFF", foreground: "#1A1A1A", tableAccent: "#3A3F44", good: GUT, neutral: "#8F8F8F", bad: "#C62828",
+      maximum: "#3A3F44", center: "#C9C9C9", minimum: "#F6F6F6",
+      textClasses: { callout: { fontSize: 19.5, fontFace: "Arial", color: "#1A1A1A" },
+                     title: { fontSize: 12, fontFace: "Arial", color: "#1A1A1A" },
+                     header: { fontSize: 10.5, fontFace: "Arial", color: "#4D4D4D" },
+                     label: { fontSize: 10.5, fontFace: "Arial", color: "#1A1A1A" } },
+      visualStyles: { "*": { "*": { border: [{ show: false }], dropShadow: [{ show: false }], background: [{ show: false }] } } } };
+  }
+
+  /* ---------------- Ebenen der Lernplattform ---------------- */
+  function download(name, inhalt, typ = "text/csv;charset=utf-8") {
+    const blob = new Blob([String.fromCharCode(0xFEFF) + inhalt], { type: typ });
+    const a = el("a", { href: URL.createObjectURL(blob), download: name }, document.body);
+    a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function ebenen(o) {
+    if (PRINT) return;
+    const leiste = document.querySelector(".dk-leiste");
+    let modus = null;
+    const marken = [];
+    const knopf = (text, fn) => { const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text); b.addEventListener("click", fn); return b; };
+    const kRegeln = knopf("Designregeln", () => umschalten("regeln"));
+    const kNachbau = knopf("Nachbau in Power BI", () => umschalten("nachbau"));
+    const kTab = knopf("Werte als Tabelle", () => umschalten("tabelle"));
+    knopf("Daten (CSV)", () => download(o.csv.name, o.csv.text()));
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; }
+    function markeSetzen(eintrag, text, cls) {
+      const z = document.getElementById(eintrag.ziel);
+      if (!z) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / SEITE_B;
+      // anker "rechts" (Standard): Marke auf der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "dk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text));
+      marken.push(m);
+    }
+    function aktiv(text) {
+      panel.querySelectorAll(".dk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      const e = panel.querySelector(`.dk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(m) {
+      modus = modus === m ? null : m;
+      [kRegeln, kNachbau, kTab].forEach((b, i) => b.setAttribute("aria-pressed", String(modus === ["regeln", "nachbau", "tabelle"][i])));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      DK._skalieren();
+      if (modus === "regeln") {
+        el("h2", {}, panel, "Designregeln (SUCCESS)");
+        el("div", { class: "dk-panel-intro" }, panel, "SUCCESS-Formel nach Hichert/Faisst (IBCS): Say, Unify, Condense, Check, Express, Simplify, Structure. Die Nummern im Dashboard zeigen, wo eine Regel angewendet ist.");
+        o.regeln.forEach(r => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": String(r.nr) }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, r.nr + "."); el("span", {}, k, r.titel);
+          el("div", { class: "dk-regel" }, e, r.regel);
+          el("div", {}, e, r.text);
+          markeSetzen(r, String(r.nr), "");
+        });
+      } else if (modus === "nachbau") {
+        el("h2", {}, panel, "Nachbau in Power BI");
+        el("div", { class: "dk-panel-intro" }, panel, o.nachbauIntro);
+        if (o.theme) { const b = el("button", { type: "button", style: "margin-bottom:10px;font:inherit;padding:5px 10px;border:1px solid #9A9A9A;background:#fff;border-radius:3px;cursor:pointer" }, panel, "Berichtsdesign (JSON) herunterladen");
+          b.addEventListener("click", () => download("berichtsdesign.json", JSON.stringify(o.theme, null, 2), "application/json")); }
+        o.nachbau.forEach(n => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": n.id }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, n.id); el("span", {}, k, n.titel);
+          const dl = el("dl", {}, e);
+          [["Visual", n.visual], ["Felder", n.felder], ["Format", n.format], ["Hinweis", n.hinweis]].forEach(([a, b]) => {
+            if (!b) return; el("dt", {}, dl, a); el("dd", {}, dl, b);
+          });
+          markeSetzen(n, n.id, "nachbau");
+        });
+      } else if (modus === "tabelle") {
+        el("h2", {}, panel, "Werte als Tabelle");
+        el("div", { class: "dk-panel-intro" }, panel, "Alle Werte der Visuals in der aktuellen Filterung (entspricht „Als Tabelle anzeigen“ in Power BI).");
+        o.tabellen().forEach(tab => {
+          el("div", { style: "font-weight:bold;margin:12px 0 4px" }, panel, tab.titel);
+          const t = el("table", { class: "dk-matrix" }, panel);
+          const hr = el("tr", {}, el("thead", {}, t));
+          tab.kopf.forEach(h => el("th", {}, hr, h));
+          const tb = el("tbody", {}, t);
+          tab.zeilen.forEach(z => { const tr = el("tr", {}, tb); z.forEach(c => el("td", {}, tr, c)); });
+        });
+      }
+    }
+    DK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+  }
+
+  return { PRINT, NBSP, zahl, delta, prozent, wirkung, FARBE, tw, el, sv, init, box, haarlinie, kopf, schnitt, knoepfe,
+           kpis, visual, balken, pyramide, saeulen, matrix, streuung, thema, ebenen, download };
+})();
+
+</script>
+<script>
+/* Abb. 3.22 „ABC-Analyse Produkte“ (6. Auflage) – Neuaufbau des Cubeware-Beispiels der 5. Auflage.
+   Inhalt wie im Original: Kennzahlwahl, Jahr, Kunden, Klassengrenzen; ABC-Klassen, Produktrangliste, Konzentrationskurve.
+   Daten: daten_abc.py (Absatz 2025 über alle Kunden = Werte des Originals). Alle Werte werden hier aus den Einzelsätzen berechnet. */
+(() => {
+  "use strict";
+  const { zahl, prozent, sv, tw, NBSP } = DK;
+  const PROD = DATA.produkte, KUNDEN = DATA.kunden, JAHRE = DATA.jahre;
+  const R = DATA.zeilen.map(z => ({ j: 2000 + z[0], p: z[1], k: z[2], st: z[3], u: z[4], we: z[5] }));
+  const KZ = {
+    stueck: { name: "Absatz", spalte: "Stück", einheit: "Stück", gen: "des Absatzes", nk: 0, f: v => v },
+    umsatz: { name: "Umsatz", spalte: "Umsatz", einheit: "Tsd. €", gen: "des Umsatzes", nk: 1, f: v => v / 1000 },
+    we: { name: "Wareneinsatz", spalte: "Wareneinsatz", einheit: "Tsd. €", gen: "des Wareneinsatzes", nk: 1, f: v => v / 1000 },
+    db: { name: "Deckungsbeitrag", spalte: "DB", einheit: "Tsd. €", gen: "des Deckungsbeitrags", nk: 1, f: v => v / 1000 },
+  };
+  const KL = ["A", "B", "C"];
+  const pz = v => zahl(v * 100, 1);                       // Anteil ohne Prozentzeichen (Einheit im Spaltenkopf)
+
+  /* ---------- Zustand ---------- */
+  const S = { kz: "stueck", jahr: 2025, kunde: "alle", a: 60, b: 20, auswahl: null };
+  const K = () => KZ[S.kz];
+  const fw = v => zahl(K().f(v), K().nk);
+  function auswaehlen(typ, wert) {
+    S.auswahl = S.auswahl && S.auswahl.typ === typ && S.auswahl.wert === wert ? null : { typ, wert };
+    zeichnen();
+  }
+  addEventListener("keydown", e => { if (e.key === "Escape" && S.auswahl) { S.auswahl = null; zeichnen(); } });
+
+  /* ---------- ABC-Berechnung ---------- */
+  function abc() {
+    const agg = PROD.map((name, p) => ({ p, name, st: 0, u: 0, we: 0 }));
+    R.forEach(r => {
+      if (r.j !== S.jahr || (S.kunde !== "alle" && r.k !== +S.kunde)) return;
+      const x = agg[r.p]; x.st += r.st; x.u += r.u; x.we += r.we;
+    });
+    agg.forEach(x => { x.db = x.u - x.we; x.wert = S.kz === "stueck" ? x.st : S.kz === "umsatz" ? x.u : S.kz === "we" ? x.we : x.db; });
+    const liste = agg.slice().sort((a, b) => b.wert - a.wert || a.p - b.p);
+    const ges = liste.reduce((s, x) => s + x.wert, 0) || 1e-9, N = liste.length;
+    let kum = 0;
+    liste.forEach((x, i) => {
+      kum += x.wert;
+      x.rang = i + 1; x.anteil = x.wert / ges; x.kum = kum / ges;
+      x.kl = i === 0 || x.kum <= S.a / 100 + 1e-9 ? 0 : x.kum <= (S.a + S.b) / 100 + 1e-9 ? 1 : 2;
+    });
+    let kumK = 0;
+    const klassen = KL.map((label, k) => {
+      const xs = liste.filter(x => x.kl === k), w = xs.reduce((s, x) => s + x.wert, 0);
+      kumK += w;
+      return { key: k, label, n: xs.length, anteilN: xs.length / N, wert: w, anteil: w / ges, kum: kumK / ges,
+               bisRang: xs.length ? xs[xs.length - 1].rang : null };
+    });
+    return { liste, klassen, ges, N };
+  }
+  const klasseVon = (d, p) => (d.liste.find(x => x.p === p) || {}).kl;
+
+  /* ---------- Layout (Seite 1024 x 646) ---------- */
+  DK.init({ titel: "ABC-Analyse Produkte" });
+  const bKopf = DK.box("kopf", 16, 10, 992, 46);
+  DK.haarlinie(62);
+  const bFilter = DK.box("filter", 16, 68, 992, 50, "dk-filter");
+  DK.haarlinie(128);
+  const bProd = DK.box("v-produkte", 16, 138, 520, 504);
+  const bKlassen = DK.box("v-klassen", 556, 138, 452, 156);
+  DK.haarlinie(302, 556, 16);
+  const bKurve = DK.box("v-kurve", 556, 310, 452, 332);
+  const css = DK.el("style", {}, document.head);
+  css.textContent = ".dk-rollen { overflow-y: auto; } .dk-rollen thead th { position: sticky; top: 0; background: #FFFFFF; z-index: 1; }" +
+    " .dk-rest td { color: var(--muted); }";
+
+  /* ---------- Tooltip (gleiches Verhalten wie die Bausteine von DK) ---------- */
+  const tip = document.querySelector(".dk-tooltip");
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      tip.textContent = "";
+      zeilenFn().forEach((z, i) => DK.el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+  const tipProdukt = x => [x.name, `Rang ${x.rang} · Klasse ${KL[x.kl]}`,
+    `${K().spalte}: ${fw(x.wert)} ${K().einheit}`, `Anteil: ${prozent(x.anteil, 1)} · kumuliert: ${prozent(x.kum, 1)}`,
+    `Stück ${zahl(x.st, 0)} · Umsatz ${zahl(x.u / 1000, 1)} Tsd. € · DB ${zahl(x.db / 1000, 1)} Tsd. €`, "Klick hebt hervor"];
+
+  /* ---------- Datenschnitte ---------- */
+  DK.schnitt(bFilter, "Kennzahl", "knoepfe", { optionen: Object.entries(KZ).map(([k, v]) => [k, v.spalte]), wert: S.kz,
+    onChange: v => { S.kz = v; zeichnen(); } });
+  DK.schnitt(bFilter, "Jahr", "knoepfe", { optionen: JAHRE.map(j => [j, String(j)]), wert: S.jahr,
+    onChange: v => { S.jahr = v; zeichnen(); } });
+  DK.schnitt(bFilter, "Kunden", "dropdown", { breite: 170, optionen: [["alle", "Alle Kunden"], ...KUNDEN.map((k, i) => [String(i), k])],
+    wert: "alle", onChange: v => { S.kunde = v; zeichnen(); } });
+  const rechts = DK.el("div", { class: "dk-rechts", id: "grenzen", style: "display:flex;gap:24px" }, bFilter);
+  DK.schnitt(rechts, "Klasse A bis", "dropdown", { breite: 90, optionen: [50, 60, 70, 80].map(v => [String(v), v + NBSP + "%"]),
+    wert: String(S.a), onChange: v => { S.a = +v; zeichnen(); } });
+  DK.schnitt(rechts, "Klasse B weitere", "dropdown", { breite: 90, optionen: [10, 15, 20, 25, 30].map(v => [String(v), v + NBSP + "%"]),
+    wert: String(S.b), onChange: v => { S.b = +v; zeichnen(); } });
+
+  /* ---------- Spalten ---------- */
+  const spKlassen = () => [
+    { key: "label", titel: "Klasse", breite: 58 },
+    { key: "n", titel: "Produkte", breite: 70, fmt: v => zahl(v, 0) },
+    { key: "anteilN", titel: "Anteil %", breite: 70, fmt: pz },
+    { key: "wert", titel: K().spalte, breite: 96, fmt: fw },
+    { key: "anteil", titel: "Anteil %", breite: 70, fmt: pz },
+    { key: "kum", titel: "kumuliert %", breite: 88, fmt: pz, id: "sp-kum" },
+  ];
+  const spProdukte = () => [
+    { key: "label", titel: "Rang", breite: 46 },
+    { key: "name", titel: "Produkt", breite: 182, typ: "text" },
+    { key: "kl", titel: "Klasse", breite: 56, typ: "text", id: "sp-klasse" },
+    { key: "wert", titel: K().spalte, breite: 92, fmt: fw },
+    { key: "anteil", titel: "Anteil %", breite: 62, fmt: pz },
+    { key: "kum", titel: "kumuliert %", breite: 82, fmt: pz },
+  ];
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    const d = abc(), k = K();
+    const kundeText = S.kunde === "alle" ? "alle Kunden" : "Kundengruppe " + KUNDEN[+S.kunde];
+    DK.kopf(bKopf, { titel: "ABC-Analyse Produkte",
+      untertitel: `${k.name} in ${k.einheit} · Jahr ${S.jahr} · ${kundeText} · Klassengrenzen A ${S.a}${NBSP}%, B ${S.b}${NBSP}%`,
+      quelle: "Quelle: Absatzstatistik · Stand 31.12.2025", legende: [] });
+    bKopf.querySelector(".dk-quelle").id = "kopf-quelle";
+
+    const selKlasse = !S.auswahl ? null : S.auswahl.typ === "klasse" ? S.auswahl.wert : klasseVon(d, S.auswahl.wert);
+    const selProdukt = S.auswahl && S.auswahl.typ === "produkt" ? S.auswahl.wert : null;
+    const blassProdukt = x => S.auswahl != null && (selProdukt != null ? x.p !== selProdukt : x.kl !== selKlasse);
+
+    // ABC-Klassen
+    const A = d.klassen[0];
+    let v = DK.visual(bKlassen, { titel: "ABC-Klassen", einheit: k.einheit,
+      botschaft: `${A.n} A-${A.n === 1 ? "Produkt" : "Produkte"} (${prozent(A.anteilN, 0)}) ${A.n === 1 ? "bringt" : "bringen"} ${prozent(A.anteil, 0)} ${k.gen}` });
+    const zk = d.klassen.map(x => ({ key: x.key, label: x.label, werte: x }));
+    zk.push({ key: "summe", label: "Gesamt", summe: true, werte: { n: d.N, anteilN: 1, wert: d.ges, anteil: 1, kum: null } });
+    DK.matrix(v.flaeche, { spalten: spKlassen(), zeilen: zk, auswahl: selKlasse, onClick: key => auswaehlen("klasse", key),
+      tooltip: z => [`Klasse ${z.label}`, `${z.werte.n} ${z.werte.n === 1 ? "Produkt" : "Produkte"}` +
+        (z.werte.n ? ` (Rang ${z.werte.bisRang - z.werte.n + 1}–${z.werte.bisRang})` : ""),
+        `${k.spalte}: ${fw(z.werte.wert)} ${k.einheit}`, `Anteil: ${prozent(z.werte.anteil, 1)}`, "Klick hebt hervor"] });
+
+    // Produkte nach Rang
+    const top = d.liste[0];
+    v = DK.visual(bProd, { titel: `Produkte nach ${k.name}`, einheit: k.einheit,
+      botschaft: `Rang 1: ${top.name} mit ${prozent(top.anteil, 1)} ${k.gen}` });
+    let zeigen = d.liste, rest = null;
+    if (DK.PRINT) {                                          // Druck: so viele Zeilen, wie passen, dann „übrige“
+      const passen = Math.floor((v.hoehe - 23) / 18);
+      if (d.N > passen) {
+        zeigen = d.liste.slice(0, passen - 1);
+        const r = d.liste.slice(passen - 1);
+        rest = { n: r.length, wert: r.reduce((s, x) => s + x.wert, 0), kl: [...new Set(r.map(x => KL[x.kl]))].join(", ") };
+      }
+    } else v.flaeche.classList.add("dk-rollen");
+    const zp = zeigen.map((x, i) => ({ key: x.p, label: String(x.rang), x, trenner: i > 0 && zeigen[i - 1].kl !== x.kl,
+      werte: { name: x.name, kl: i === 0 || zeigen[i - 1].kl !== x.kl ? KL[x.kl] : "", wert: x.wert, anteil: x.anteil, kum: x.kum } }));
+    if (rest) zp.push({ key: "rest", label: "", trenner: true,
+      werte: { name: `übrige ${rest.n} Produkte`, kl: rest.kl, wert: rest.wert, anteil: rest.wert / d.ges, kum: 1 } });
+    DK.matrix(v.flaeche, { spalten: spProdukte(), zeilen: zp, zeilenhoehe: 18,
+      onClick: key => { if (key !== "rest") auswaehlen("produkt", key); },
+      tooltip: z => (z.x ? tipProdukt(z.x) : [z.werte.name, `Klasse ${z.werte.kl}`, `${k.spalte}: ${fw(z.werte.wert)} ${k.einheit}`]) });
+    const trs = v.flaeche.querySelectorAll("tbody tr");
+    zp.forEach((z, i) => { if (z.x && blassProdukt(z.x)) trs[i].classList.add("dk-blass"); if (!z.x) trs[i].classList.add("dk-rest"); });
+
+    // Konzentrationskurve
+    const AB = d.klassen[1];
+    const xAB = (A.n + AB.n) / d.N;
+    v = DK.visual(bKurve, { titel: "Konzentrationskurve", einheit: "kumulierte Anteile in %",
+      botschaft: d.klassen[2].n === 0 ? "keine C-Produkte: A und B umfassen alle Produkte"
+        : `${prozent(xAB, 0)} der Produkte (A und B) bringen ${prozent(AB.kum, 0)} ${k.gen}` });
+    kurve(v, d, selKlasse, selProdukt);
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Konzentrationskurve (Liniendiagramm) ---------- */
+  function kurve(v, d, selKlasse, selProdukt) {
+    const W = v.breite, H = v.hoehe, k = K();
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": "Konzentrationskurve der ABC-Analyse" }, v.flaeche);
+    const grenzen = d.klassen.slice(0, 2).filter(x => x.n > 0 && x.bisRang < d.N).map(x => ({ x: x.bisRang / d.N, y: x.kum }));
+    const links = Math.ceil(tw("100")) + 8, rechts = 14, oben = 22, unten = 38;
+    const PW = W - links - rechts, PH = H - oben - unten;
+    const sx = t => links + t * PW, sy = t => oben + PH - t * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, `Anteil ${k.name} kumuliert`);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, "Anteil Produkte nach Rang");
+    // Achsenbeschriftung nur an 0, den Klassengrenzen und 100
+    const yT = [{ t: 0, txt: "0" }, ...grenzen.map(g => ({ t: g.y, txt: pz(g.y) })), { t: 1, txt: "100" }];
+    yT.filter((a, i) => !yT.some((b, j) => j !== i && (a.t === 0 || a.t === 1) && Math.abs(sy(a.t) - sy(b.t)) < 15))
+      .forEach(a => sv("text", { x: links - 6, y: sy(a.t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, a.txt));
+    const xT = [{ t: 0, txt: "0" }, ...grenzen.map(g => ({ t: g.x, txt: pz(g.x) })), { t: 1, txt: "100" }];
+    xT.filter((a, i) => !xT.some((b, j) => j !== i && (a.t === 0 || a.t === 1) &&
+        Math.abs(sx(a.t) - sx(b.t)) < (tw(a.txt) + tw(b.txt)) / 2 + 8))
+      .forEach(a => sv("text", { x: sx(a.t), y: oben + PH + 16, "text-anchor": a.t === 1 ? "end" : "middle", class: "muted" }, svg, a.txt));
+    // Klassengrenzen
+    const strich = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+    grenzen.forEach(g => {
+      sv("line", { x1: sx(g.x), x2: sx(g.x), y1: sy(g.y), y2: oben + PH, ...strich }, svg);
+      sv("line", { x1: links, x2: sx(g.x), y1: sy(g.y), y2: sy(g.y), ...strich }, svg);
+    });
+    // Klassenfelder beschriften
+    const xs = [0, ...d.klassen.map((x, i) => d.klassen.slice(0, i + 1).reduce((s, y) => s + y.n, 0) / d.N)];
+    d.klassen.forEach((x, i) => {
+      if (!x.n || sx(xs[i + 1]) - sx(xs[i]) < 16) return;
+      sv("text", { x: (sx(xs[i]) + sx(xs[i + 1])) / 2, y: oben + PH - 7, "text-anchor": "middle", "font-weight": "bold",
+                   class: selKlasse != null && selKlasse !== i ? "dk-blass" : "" }, svg, x.label);
+    });
+    // Achsen
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    // Kurve je Klasse (für die Hervorhebung), beginnend im Ursprung
+    const pkt = [{ x: 0, y: 0, kl: 0 }, ...d.liste.map(x => ({ x: x.rang / d.N, y: x.kum, kl: x.kl }))];
+    KL.forEach((_, kl) => {
+      const seg = pkt.filter((p, i) => i > 0 && p.kl === kl);
+      if (!seg.length) return;
+      const start = pkt[pkt.indexOf(seg[0]) - 1];
+      const pfad = [start, ...seg].map((p, i) => (i ? "L" : "M") + sx(p.x).toFixed(1) + " " + sy(p.y).toFixed(1)).join(" ");
+      sv("path", { d: pfad, fill: "none", stroke: "#3A3F44", "stroke-width": 2, "stroke-linejoin": "round",
+                   class: selKlasse != null && selKlasse !== kl ? "dk-blass" : "" }, svg);
+    });
+    grenzen.forEach(g => sv("circle", { cx: sx(g.x), cy: sy(g.y), r: 3.5, fill: "#3A3F44", stroke: "#FFFFFF", "stroke-width": 1 }, svg));
+    // Ausgewähltes Produkt
+    const sel = selProdukt != null ? d.liste.find(x => x.p === selProdukt) : null;
+    if (sel) {
+      const cx = sx(sel.rang / d.N), cy = sy(sel.kum), txt = `${sel.name} (${pz(sel.kum)})`, w = tw(txt);
+      sv("circle", { cx, cy, r: 5, fill: "#FFFFFF", stroke: "#3A3F44", "stroke-width": 2 }, svg);
+      const rechtsFrei = cx + 9 + w <= links + PW;
+      sv("text", { x: rechtsFrei ? cx + 9 : cx - 9, y: cy + 16, "text-anchor": rechtsFrei ? "start" : "end" }, svg, txt);
+    }
+    // Trefferflächen je Produkt
+    d.liste.forEach(x => {
+      const g = sv("g", { class: "dk-klick" }, svg);
+      const hit = sv("circle", { cx: sx(x.rang / d.N), cy: sy(x.kum), r: 6, fill: "transparent" }, g);
+      hit.addEventListener("click", () => auswaehlen("produkt", x.p));
+      tooltip(hit, () => tipProdukt(x));
+    });
+  }
+
+  /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
+  DK.ebenen({
+    regeln: [
+      { nr: 1, ziel: "v-klassen", regel: "SAY – Botschaft vermitteln", titel: "Kernaussage statt Bedienhinweis",
+        text: "Unter jedem Titel steht die Aussage, z. B. „11 A-Produkte (22 %) bringen 60 % des Absatzes“. Das Original hatte an dieser Stelle einen gelben Kasten mit einer Bedienanleitung." },
+      { nr: 2, ziel: "kopf-titel", versatz: [26, 0], regel: "UNIFY – Titel und Sprache", titel: "Ein Titel, eine Sprache",
+        text: "Kennzahl, Einheit, Jahr, Kunden und Klassengrenzen stehen im Untertitel. Das Original mischte Deutsch und Englisch (Count, Quantity Share, Cumulative value, Percentage of Elements)." },
+      { nr: 3, ziel: "v-produkte", regel: "UNIFY – Zahlenformate", titel: "Stück ohne Nachkommastellen",
+        text: "Stück sind ganze Zahlen, Euro in Tsd. € mit einer Stelle, Anteile in % mit einer Stelle. Das Original zeigte kumulierte Stück mit zwei Nachkommastellen („3.302,00“) und Anteile mit zwei Stellen." },
+      { nr: 4, ziel: "sp-klasse", versatz: [24, -3], regel: "UNIFY – Semantische Notation", titel: "Klasse als Spalte, nicht als Farbe",
+        text: "Die Klasse steht als Buchstabe in einer eigenen Spalte, Trennlinien gliedern die Liste. Das Original kennzeichnete A magenta und C türkis; Farbe bleibt hier Abweichungen vorbehalten." },
+      { nr: 5, ziel: "v-kurve", regel: "CHECK – Visuelle Integrität", titel: "Volle Achsen, nur relevante Werte",
+        text: "Beide Achsen reichen von 0 bis 100 %. Beschriftet sind nur 0, die Klassengrenzen und 100; die Hilfslinien führen von den Grenzpunkten zu den Achsen." },
+      { nr: 6, ziel: "v-kurve", versatz: [0, 26], regel: "EXPRESS – Passende Darstellung", titel: "Eine Kurve, Klassen als Felder",
+        text: "Die Konzentrationskurve (Lorenzkurve) bleibt. Statt drei Linienfarben sind die Felder A, B und C beschriftet; Klick auf eine Klasse hebt ihren Abschnitt hervor." },
+      { nr: 7, ziel: "kopf-quelle", anker: "links", regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Logo, Hinweiskasten und Drehfelder",
+        text: "Logo, gelber Hinweiskasten, Drehfelder, Bildlaufleisten und die Schaltflächen „zurück“ und „Erklärung“ entfallen. Die Bedienung erklärt sich aus der Filterzeile." },
+      { nr: 8, ziel: "grenzen", anker: "links", regel: "STRUCTURE – Inhalte ordnen", titel: "Alle Einstellungen in einer Zeile",
+        text: "Kennzahl, Jahr, Kunden und Klassengrenzen stehen in einer Zeile über dem Inhalt; im Original verteilten sie sich auf eine Registerleiste und zwei Filterkästen. Die Produktliste folgt dem Rang." },
+    ],
+    nachbauIntro: "Alle Elemente sind Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Das Berichtsdesign (JSON) setzt Farben und Schriften. Die Klassen hängen von Filter und Grenzen ab und werden deshalb als Measures berechnet, nicht als berechnete Spalte.",
+    nachbau: [
+      { id: "A", ziel: "kopf-titel", versatz: [26, 0], titel: "Kopfzeile", visual: "Textfeld",
+        felder: "Untertitel mit dynamischem Wert: Measure „Untertitel“ aus Kennzahl, Jahr, Kunden und Grenzen",
+        format: "Titel 16,5 pt fett, Untertitel 10,5 pt #4D4D4D" },
+      { id: "B", ziel: "grenzen", anker: "links", titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln bzw. Dropdown)",
+        felder: "Kennzahl als Feldparameter (Stück, Umsatz, Wareneinsatz, DB); Jahr; Kundengruppe; Grenzen A und B als Was-wäre-wenn-Parameter (Liste 50–80 bzw. 10–30)",
+        format: "Ausgewählt: Füllung #3A3F44, Schrift weiß; nicht ausgewählt: weiß, Rahmen #9A9A9A" },
+      { id: "C", ziel: "v-klassen", titel: "ABC-Klassen", visual: "Matrix",
+        felder: "Zeilen: Klasse aus einer getrennten Tabelle (A, B, C); Werte: Produkte, Anteil Produkte, Wert, Anteil, kumuliert",
+        format: "Gesamtzeile fett, Linie oben; keine Rasterlinien",
+        hinweis: "Kum. Anteil je Produkt: Summe der Werte aller Produkte mit Wert ≥ eigenem Wert (ALLSELECTED) / Gesamtwert. Klasse: SWITCH(TRUE(); kum ≤ A; \"A\"; kum ≤ A + B; \"B\"; \"C\"). Produkte je Klasse: COUNTROWS(FILTER(VALUES(Produkt); [Klasse] = SELECTEDVALUE(Klassen[Klasse])))." },
+      { id: "D", ziel: "v-produkte", titel: "Produkte nach Rang", visual: "Tabelle",
+        felder: "Rang (RANKX über ALLSELECTED(Produkt)), Produkt, Klasse, Wert, Anteil, kumulierter Anteil",
+        format: "Sortierung nach Wert absteigend; Zeilenabstand kompakt; Tabelle scrollt, Kopf bleibt stehen" },
+      { id: "E", ziel: "v-kurve", titel: "Konzentrationskurve", visual: "Liniendiagramm",
+        felder: "X-Achse: Produkt, nach Wert absteigend sortiert (gleiche Abstände = Anteil der Produkte); Y-Achse: Measure kumulierter Anteil",
+        format: "Linie #3A3F44, 2 px; Y-Achse 0–1 fest, Format 0 %; X-Achsenbeschriftung aus; Y-Konstantenlinien bei A und A + B (Wert aus den Parametern), gestrichelt #9A9A9A",
+        hinweis: "Senkrechte Grenzlinien gibt es im Standardvisual nicht; die Datenbeschriftung nur an den beiden Grenzprodukten (Measure liefert sonst BLANK()) zeigt die Grenzpunkte." },
+      { id: "F", ziel: "v-kurve", versatz: [-28, 0], titel: "Kernaussagen", visual: "Textfeld mit dynamischem Wert",
+        felder: "Je Visual ein Text-Measure, z. B. Anzahl A-Produkte und ihr Anteil am Wert", format: "10,5 pt, #4D4D4D" },
+    ],
+    theme: DK.thema(),
+    csv: { name: "abc_analyse_beispieldaten.csv", text: () => {
+      const kopf = "Jahr;Produkt;Kundengruppe;Stück;Umsatz_EUR;Wareneinsatz_EUR;DB_EUR";
+      return [kopf, ...R.map(r => [r.j, PROD[r.p], KUNDEN[r.k], r.st, r.u, r.we, r.u - r.we].join(";"))].join("\r\n"); } },
+    tabellen: () => {
+      const d = abc(), k = K();
+      return [
+        { titel: `ABC-Klassen (${k.einheit}, %)`, kopf: ["Klasse", "Produkte", "Anteil %", k.spalte, "Anteil %", "kumuliert %"],
+          zeilen: d.klassen.map(x => [x.label, String(x.n), pz(x.anteilN), fw(x.wert), pz(x.anteil), pz(x.kum)])
+            .concat([["Gesamt", String(d.N), "100,0", fw(d.ges), "100,0", "–"]]) },
+        { titel: `Produkte nach ${k.name} (${k.einheit}, %)`, kopf: ["Rang", "Produkt", "Klasse", k.spalte, "Anteil %", "kumuliert %"],
+          zeilen: d.liste.map(x => [String(x.rang), x.name, KL[x.kl], fw(x.wert), pz(x.anteil), pz(x.kum)]) },
+      ];
+    },
+  });
+  zeichnen();
+})();
+
+</script>
+</body>
+</html>

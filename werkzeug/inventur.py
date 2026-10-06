@@ -153,7 +153,7 @@ def figure_latex(nr, caption, datei, breite_mm, vektor):
     """Abbildung im Hochformat (110 mm breit)."""
     zeilen = []
     if vektor:
-        zeilen.append(f"% Vektor-PDF in Originalgröße ({breite_mm} mm breit) – nicht skalieren, dann bleibt die Schrift bei 7 pt")
+        zeilen.append(f"% Vektor-PDF in Originalgröße ({breite_mm} mm breit) – nicht skalieren, dann bleibt die Schriftgröße erhalten")
         gfx = rf"\includegraphics{{{OVERLEAF_PFAD}{datei}}}"
     else:
         zeilen.append(f"% PNG mit 600 dpi, {breite_mm} mm breit")

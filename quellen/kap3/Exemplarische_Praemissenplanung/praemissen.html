@@ -1,0 +1,105 @@
+<!-- Abb. 3.7 „Exemplarische Prämissenplanung“: Maske „Planungsbrief“ (softwareneutral nachgebaut).
+     Raster: Maske 727 px = 110 mm; Inhalt 695 px = Beschriftung 160 · Feld 192 · Abstand 20 · rechte Spalte 315. -->
+<style>
+  #praemissen { --sp-label: 160px; --sp-feld: 192px; --sp-links: 360px; --sp-rechts: 315px; }
+  /* Prämissenraster: Beschriftung | Standard | Variante 1 | Variante 2 (Varianten in der rechten Spalte) */
+  #praemissen .praem { display: grid; grid-template-columns: 160px 8px 192px 20px 154px 7px 154px; row-gap: 4px; align-items: center; }
+  #praemissen .praem > .s1 { grid-column: 1; }
+  #praemissen .praem > .s2 { grid-column: 3; }
+  #praemissen .praem > .s3 { grid-column: 5; }
+  #praemissen .praem > .s4 { grid-column: 7; }
+  #praemissen .praem > .abstand { grid-column: 1 / -1; height: 6px; }
+  #praemissen .rechts { display: flex; flex-direction: column; align-self: stretch; }
+  #praemissen .rechts .mk-textbereich { flex: 1 1 auto; }
+  #praemissen .brief-liste { display: grid; grid-template-columns: 172px 48px; }
+  #praemissen .brief-liste span:nth-child(2n) { text-align: right; }
+  #praemissen .mk-spalten { align-items: stretch; }
+</style>
+<form class="mk-maske" id="praemissen" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span>Planungsbrief</span></div>
+  <div class="mk-inhalt">
+
+    <section class="mk-abschnitt" id="abschnitt-allgemein">
+      <div class="mk-band" id="band-allgemein">Allgemeine Planungsprämissen</div>
+      <div class="praem" id="praem-raster">
+        <label class="mk-label s1" for="f-budgetjahr">Aktuelles Budgetjahr</label>
+        <select class="mk-feld s2" id="f-budgetjahr">
+          <option value="B2027" selected>Budget 2027</option>
+          <option value="F2026">Forecast 2026</option>
+          <option value="M2028">Mittelfristplanung 2028–2030</option>
+        </select>
+        <div class="abstand"></div>
+        <span class="mk-label mk-neben s1" id="einheit">Prämisse in %</span>
+        <select class="mk-feld s2 spalte" id="sp-1" data-spalte="0" aria-label="Prämissensatz Spalte 1"></select>
+        <select class="mk-feld s3 spalte" id="sp-2" data-spalte="1" aria-label="Prämissensatz Spalte 2"></select>
+        <select class="mk-feld s4 spalte" id="sp-3" data-spalte="2" aria-label="Prämissensatz Spalte 3"></select>
+        <!-- Zeilen der Prämissen erzeugt praemissen.js -->
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-teilplaene">
+      <div class="mk-band" id="band-teilplaene">Planungsprämissen für Teilpläne</div>
+      <div class="mk-spalten">
+        <div class="links">
+          <div class="mk-zeile" id="z-teilplan">
+            <label class="mk-label" for="f-teilplan">Teilplan</label>
+            <select class="mk-feld" id="f-teilplan"></select>
+          </div>
+          <div class="mk-zeile" id="z-zeitraum">
+            <label class="mk-label" for="f-von">Planungszeitraum</label>
+            <div class="mk-feldgruppe">
+              <input class="mk-feld mk-datum" id="f-von" value="14.09.2026" inputmode="numeric" aria-label="Planungszeitraum von" data-hilfe="Datum TT.MM.JJJJ">
+              <span class="mk-zwischen">bis</span>
+              <input class="mk-feld mk-datum" id="f-bis" value="25.09.2026" inputmode="numeric" aria-label="Planungszeitraum bis" data-hilfe="Datum TT.MM.JJJJ">
+            </div>
+          </div>
+          <div class="mk-zeile" id="z-variante">
+            <label class="mk-label" for="f-variante">Variante</label>
+            <select class="mk-feld" id="f-variante"></select>
+          </div>
+
+          <div class="mk-gruppe" id="g-ansprech" style="margin-top:12px">
+            <div class="mk-gruppenkopf">Ansprechpartner Zentrales Controlling</div>
+            <div class="mk-zeile">
+              <label class="mk-label" for="f-name">Name</label>
+              <select class="mk-feld" id="f-name"></select>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">E-Mail-Adresse</span>
+              <div class="mk-feld mk-anzeige" id="f-email"></div>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">Telefon</span>
+              <div class="mk-feld mk-anzeige" id="f-telefon"></div>
+            </div>
+          </div>
+
+          <div class="mk-gruppe" id="g-dokumente">
+            <div class="mk-gruppenkopf">Dokumente</div>
+            <div class="mk-zeile">
+              <span class="mk-label">Planungsformular</span>
+              <div class="mk-feld mk-anzeige" id="f-formular"><a class="mk-link" data-dok="Planungsformular">Zugangslink öffnen</a></div>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">Planungshandbuch</span>
+              <div class="mk-feld mk-anzeige" id="f-handbuch"></div>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">Anwenderleitfaden</span>
+              <div class="mk-feld mk-anzeige" id="f-leitfaden"><a class="mk-link" data-dok="Anwenderleitfaden">Dokument öffnen</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rechts" id="g-brief">
+          <div class="mk-gruppenkopf" id="brief-kopf">Planungsbrief für Key-Account-Manager</div>
+          <div class="mk-textbereich mk-anzeige" id="brief" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="mk-knopfleiste">
+        <button type="button" class="mk-knopf" id="k-veroeffentlichen">Vorgabewerte veröffentlichen</button>
+      </div>
+    </section>
+
+  </div>
+</form>

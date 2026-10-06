@@ -1,0 +1,151 @@
+/* maskkit.css – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Maßstab wie bei den Dashboards: 727 px = 110 mm (Abbildungsbreite), 1024 px = 155 mm; 14 px = 6 pt im Druck.
+   Rollen: Eingabefeld weiß mit Rahmen · Anzeigefeld grau ohne Rahmen · Abschnittsband · Gruppenkopf · Knopf. */
+:root {
+  --ac: #3A3F44;          /* Anthrazit: Kopfleiste, Knopf, Pfeile, Links */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --rahmen: #9A9A9A;      /* Kontur der Eingabefelder und der Maske */
+  --linie: #D9D9D9;       /* Haarlinien */
+  --anzeige: #EFEFEF;     /* Anzeigefelder (nicht editierbar) */
+  --band: #F6F6F6;        /* Abschnittsband */
+  --schlecht: #C62828;    /* nur Fehlermeldungen in der interaktiven Fassung */
+  --gut: #00806B;
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+  --zh: 26px;             /* Feldhöhe */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste und Panel (nicht im Druck) ---------- */
+.mk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.mk-leiste .mk-leiste-titel { font-weight: bold; margin-right: auto; }
+.mk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid var(--rahmen); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.mk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .mk-leiste, body.print .mk-panel, body.print .mk-meldung { display: none !important; }
+.mk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .mk-buehne { position: static; overflow: visible; }
+.mk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .mk-rahmen { margin: 0; box-shadow: none; }
+.mk-seite { position: relative; transform-origin: 0 0; background: #FFFFFF; }
+
+.mk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.mk-marke.gestaltung { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.mk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.mk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.mk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.mk-panel .mk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.mk-panel .mk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); cursor: pointer; }
+.mk-panel .mk-eintrag.aktiv { background: var(--band); margin: 0 -18px; padding: 10px 18px; }
+.mk-panel .mk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.mk-panel .mk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.mk-meldung { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ac); color: #FFFFFF;
+  padding: 10px 16px; border-radius: 3px; font-size: 14px; z-index: 40; display: none; }
+.mk-markiert { outline: 2px solid var(--schlecht); outline-offset: 2px; }
+
+/* ---------- Maske ---------- */
+.mk-maske { position: relative; width: 727px; background: #FFFFFF; border: 1px solid var(--rahmen);
+  font-size: 14px; line-height: 18px; color: var(--text); margin: 0; }
+.mk-kopf { height: 30px; background: var(--ac); color: #FFFFFF; font-size: 16px; font-weight: bold;
+  line-height: 30px; padding: 0 15px; display: flex; justify-content: space-between; }
+.mk-kopf .mk-kopf-info { font-weight: normal; font-size: 14px; color: #FFFFFF; }
+.mk-inhalt { padding: 14px 15px 16px; }
+
+/* Abschnitt mit Band (in der interaktiven Fassung auf- und zuklappbar) */
+.mk-abschnitt + .mk-abschnitt { margin-top: 18px; }
+.mk-band { height: 26px; line-height: 26px; background: var(--band); color: var(--ac); font-size: 14px; font-weight: bold;
+  text-transform: uppercase; letter-spacing: .02em; padding: 0 8px; margin-bottom: 10px; position: relative; }
+.mk-band .mk-klapp { position: absolute; right: 9px; top: 10px; }
+body:not(.print) .mk-band { cursor: pointer; user-select: none; }
+.mk-abschnitt.zu > :not(.mk-band) { display: none; }
+.mk-abschnitt.zu .mk-klapp { transform: rotate(180deg); }
+
+/* Gruppen */
+.mk-gruppenkopf { font-weight: bold; height: 24px; line-height: 18px; border-bottom: 1px solid var(--rahmen);
+  margin-bottom: 6px; white-space: nowrap; overflow: hidden; }
+.mk-gruppe + .mk-gruppe { margin-top: 12px; }
+
+/* Zeilen: Beschriftung + Feld(er); Spaltenbreiten über --sp-label, --sp-feld */
+.mk-zeile { display: grid; grid-template-columns: var(--sp-label, 160px) var(--sp-feld, 192px); column-gap: 8px;
+  align-items: center; min-height: var(--zh); }
+.mk-zeile + .mk-zeile { margin-top: 4px; }
+.mk-label { white-space: nowrap; overflow: hidden; }
+.mk-label.mk-neben, .mk-neben { color: var(--muted); }
+.mk-feldgruppe { display: flex; align-items: center; gap: 0; }
+.mk-feldgruppe > .mk-feld { flex: 1 1 0; min-width: 0; }
+.mk-feldgruppe > .mk-zwischen { flex: 0 0 auto; padding: 0 6px; color: var(--muted); }
+.mk-feld.mk-datum { padding: 0 4px; text-align: center; }
+
+/* Felder: input, select, textarea und deren Druckfassung (div) sehen gleich aus */
+.mk-feld { display: block; width: 100%; height: var(--zh); margin: 0; padding: 0 7px; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; color: var(--text); font: inherit; font-size: 14px; line-height: 24px;
+  white-space: nowrap; overflow: hidden; text-overflow: clip; position: relative; text-align: left; }
+input.mk-feld, select.mk-feld, textarea.mk-feld { -webkit-appearance: none; appearance: none; outline: none; }
+input.mk-feld:focus, select.mk-feld:focus, textarea.mk-feld:focus { border-color: var(--ac); box-shadow: 0 0 0 1px var(--ac); }
+.mk-feld.mk-zahl { text-align: right; }
+.mk-feld.mk-mitte { text-align: center; }
+.mk-feld.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-feld.mk-leer { color: var(--muted); }
+.mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: 0 0 0 1px var(--schlecht); }
+select.mk-feld, .mk-feld.mk-auswahl { padding-right: 24px; cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><polygon points='0,0 8,0 4,5' fill='%233A3F44'/></svg>");
+  background-repeat: no-repeat; background-position: right 9px center; background-size: 8px 5px; }
+div.mk-feld.mk-auswahl { background-image: none; }
+.mk-feld .mk-pfeil { position: absolute; right: 9px; top: 10px; }
+textarea.mk-feld, .mk-feld.mk-mehrzeilig { height: auto; white-space: pre-wrap; line-height: 18px; padding: 6px 8px; resize: none; }
+
+/* Mehrzeiliger Anzeige- bzw. Textbereich (z. B. Brief), Absätze als <p> */
+.mk-textbereich { border: 1px solid var(--rahmen); border-radius: 2px; background: #FFFFFF; padding: 8px 10px;
+  font-size: 14px; line-height: 18px; overflow: hidden; }
+.mk-textbereich.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-textbereich p { margin: 0 0 8px; }
+.mk-textbereich p:last-child { margin-bottom: 0; }
+
+/* Links */
+.mk-link, a.mk-link { color: var(--ac); text-decoration: underline; cursor: pointer; }
+
+/* Knöpfe */
+.mk-knopf { display: inline-block; height: 30px; padding: 0 16px; border-radius: 3px; border: 1px solid var(--ac);
+  background: var(--ac); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: bold; line-height: 28px; cursor: pointer;
+  white-space: nowrap; margin: 0; vertical-align: top; }
+.mk-knopf.mk-zweit { background: #FFFFFF; color: var(--ac); }
+button.mk-knopf { -webkit-appearance: none; appearance: none; }
+.mk-knopfleiste { display: flex; gap: 8px; margin-top: 16px; }
+
+/* Kontrollkästchen und Optionsfelder (Druckfassung als SVG) */
+.mk-option { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+input.mk-check { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin: 0; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; position: relative; cursor: pointer; flex: 0 0 auto; }
+input.mk-check[type="radio"] { border-radius: 7px; }
+input.mk-check:checked { background: var(--ac); border-color: var(--ac); }
+input.mk-check[type="checkbox"]:checked::after { content: ""; position: absolute; left: 4px; top: 1px; width: 3px; height: 7px;
+  border: solid #FFFFFF; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+input.mk-check[type="radio"]:checked { background: #FFFFFF; }
+input.mk-check[type="radio"]:checked::after { content: ""; position: absolute; left: 3px; top: 3px; width: 6px; height: 6px;
+  border-radius: 3px; background: var(--ac); }
+.mk-check-druck { width: 14px; height: 14px; flex: 0 0 auto; display: block; }
+
+/* Raster / Tabelle mit Eingabezellen */
+table.mk-tabelle { border-collapse: separate; border-spacing: 0 4px; margin: -4px 0; }
+table.mk-tabelle th { font-weight: normal; color: var(--muted); text-align: left; padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td { padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td:last-child, table.mk-tabelle th:last-child { padding-right: 0; }
+
+/* Reiter */
+.mk-reiter { display: flex; gap: 2px; border-bottom: 1px solid var(--ac); margin-bottom: 10px; }
+.mk-reiter > * { height: 26px; line-height: 26px; padding: 0 12px; background: var(--anzeige); color: var(--text); white-space: nowrap; }
+.mk-reiter > .aktiv { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+
+/* Hilfsklassen für das Raster */
+.mk-spalten { display: grid; grid-template-columns: var(--sp-links, 360px) var(--sp-rechts, 315px); column-gap: 20px; align-items: start; }
+.mk-nur-interaktiv { }
+body.print .mk-nur-interaktiv { display: none !important; }

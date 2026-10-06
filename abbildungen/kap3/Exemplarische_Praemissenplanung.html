@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exemplarische Prämissenplanung</title>
+<style>
+/* maskkit.css – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Maßstab wie bei den Dashboards: 727 px = 110 mm (Abbildungsbreite), 1024 px = 155 mm; 14 px = 6 pt im Druck.
+   Rollen: Eingabefeld weiß mit Rahmen · Anzeigefeld grau ohne Rahmen · Abschnittsband · Gruppenkopf · Knopf. */
+:root {
+  --ac: #3A3F44;          /* Anthrazit: Kopfleiste, Knopf, Pfeile, Links */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --rahmen: #9A9A9A;      /* Kontur der Eingabefelder und der Maske */
+  --linie: #D9D9D9;       /* Haarlinien */
+  --anzeige: #EFEFEF;     /* Anzeigefelder (nicht editierbar) */
+  --band: #F6F6F6;        /* Abschnittsband */
+  --schlecht: #C62828;    /* nur Fehlermeldungen in der interaktiven Fassung */
+  --gut: #00806B;
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+  --zh: 26px;             /* Feldhöhe */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste und Panel (nicht im Druck) ---------- */
+.mk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.mk-leiste .mk-leiste-titel { font-weight: bold; margin-right: auto; }
+.mk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid var(--rahmen); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.mk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .mk-leiste, body.print .mk-panel, body.print .mk-meldung { display: none !important; }
+.mk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .mk-buehne { position: static; overflow: visible; }
+.mk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .mk-rahmen { margin: 0; box-shadow: none; }
+.mk-seite { position: relative; transform-origin: 0 0; background: #FFFFFF; }
+
+.mk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.mk-marke.gestaltung { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.mk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.mk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.mk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.mk-panel .mk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.mk-panel .mk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); cursor: pointer; }
+.mk-panel .mk-eintrag.aktiv { background: var(--band); margin: 0 -18px; padding: 10px 18px; }
+.mk-panel .mk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.mk-panel .mk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.mk-meldung { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ac); color: #FFFFFF;
+  padding: 10px 16px; border-radius: 3px; font-size: 14px; z-index: 40; display: none; }
+.mk-markiert { outline: 2px solid var(--schlecht); outline-offset: 2px; }
+
+/* ---------- Maske ---------- */
+.mk-maske { position: relative; width: 727px; background: #FFFFFF; border: 1px solid var(--rahmen);
+  font-size: 14px; line-height: 18px; color: var(--text); margin: 0; }
+.mk-kopf { height: 30px; background: var(--ac); color: #FFFFFF; font-size: 16px; font-weight: bold;
+  line-height: 30px; padding: 0 15px; display: flex; justify-content: space-between; }
+.mk-kopf .mk-kopf-info { font-weight: normal; font-size: 14px; color: #FFFFFF; }
+.mk-inhalt { padding: 14px 15px 16px; }
+
+/* Abschnitt mit Band (in der interaktiven Fassung auf- und zuklappbar) */
+.mk-abschnitt + .mk-abschnitt { margin-top: 18px; }
+.mk-band { height: 26px; line-height: 26px; background: var(--band); color: var(--ac); font-size: 14px; font-weight: bold;
+  text-transform: uppercase; letter-spacing: .02em; padding: 0 8px; margin-bottom: 10px; position: relative; }
+.mk-band .mk-klapp { position: absolute; right: 9px; top: 10px; }
+body:not(.print) .mk-band { cursor: pointer; user-select: none; }
+.mk-abschnitt.zu > :not(.mk-band) { display: none; }
+.mk-abschnitt.zu .mk-klapp { transform: rotate(180deg); }
+
+/* Gruppen */
+.mk-gruppenkopf { font-weight: bold; height: 24px; line-height: 18px; border-bottom: 1px solid var(--rahmen);
+  margin-bottom: 6px; white-space: nowrap; overflow: hidden; }
+.mk-gruppe + .mk-gruppe { margin-top: 12px; }
+
+/* Zeilen: Beschriftung + Feld(er); Spaltenbreiten über --sp-label, --sp-feld */
+.mk-zeile { display: grid; grid-template-columns: var(--sp-label, 160px) var(--sp-feld, 192px); column-gap: 8px;
+  align-items: center; min-height: var(--zh); }
+.mk-zeile + .mk-zeile { margin-top: 4px; }
+.mk-label { white-space: nowrap; overflow: hidden; }
+.mk-label.mk-neben, .mk-neben { color: var(--muted); }
+.mk-feldgruppe { display: flex; align-items: center; gap: 0; }
+.mk-feldgruppe > .mk-feld { flex: 1 1 0; min-width: 0; }
+.mk-feldgruppe > .mk-zwischen { flex: 0 0 auto; padding: 0 6px; color: var(--muted); }
+.mk-feld.mk-datum { padding: 0 4px; text-align: center; }
+
+/* Felder: input, select, textarea und deren Druckfassung (div) sehen gleich aus */
+.mk-feld { display: block; width: 100%; height: var(--zh); margin: 0; padding: 0 7px; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; color: var(--text); font: inherit; font-size: 14px; line-height: 24px;
+  white-space: nowrap; overflow: hidden; text-overflow: clip; position: relative; text-align: left; }
+input.mk-feld, select.mk-feld, textarea.mk-feld { -webkit-appearance: none; appearance: none; outline: none; }
+input.mk-feld:focus, select.mk-feld:focus, textarea.mk-feld:focus { border-color: var(--ac); box-shadow: 0 0 0 1px var(--ac); }
+.mk-feld.mk-zahl { text-align: right; }
+.mk-feld.mk-mitte { text-align: center; }
+.mk-feld.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-feld.mk-leer { color: var(--muted); }
+.mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: 0 0 0 1px var(--schlecht); }
+select.mk-feld, .mk-feld.mk-auswahl { padding-right: 24px; cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><polygon points='0,0 8,0 4,5' fill='%233A3F44'/></svg>");
+  background-repeat: no-repeat; background-position: right 9px center; background-size: 8px 5px; }
+div.mk-feld.mk-auswahl { background-image: none; }
+.mk-feld .mk-pfeil { position: absolute; right: 9px; top: 10px; }
+textarea.mk-feld, .mk-feld.mk-mehrzeilig { height: auto; white-space: pre-wrap; line-height: 18px; padding: 6px 8px; resize: none; }
+
+/* Mehrzeiliger Anzeige- bzw. Textbereich (z. B. Brief), Absätze als <p> */
+.mk-textbereich { border: 1px solid var(--rahmen); border-radius: 2px; background: #FFFFFF; padding: 8px 10px;
+  font-size: 14px; line-height: 18px; overflow: hidden; }
+.mk-textbereich.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-textbereich p { margin: 0 0 8px; }
+.mk-textbereich p:last-child { margin-bottom: 0; }
+
+/* Links */
+.mk-link, a.mk-link { color: var(--ac); text-decoration: underline; cursor: pointer; }
+
+/* Knöpfe */
+.mk-knopf { display: inline-block; height: 30px; padding: 0 16px; border-radius: 3px; border: 1px solid var(--ac);
+  background: var(--ac); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: bold; line-height: 28px; cursor: pointer;
+  white-space: nowrap; margin: 0; vertical-align: top; }
+.mk-knopf.mk-zweit { background: #FFFFFF; color: var(--ac); }
+button.mk-knopf { -webkit-appearance: none; appearance: none; }
+.mk-knopfleiste { display: flex; gap: 8px; margin-top: 16px; }
+
+/* Kontrollkästchen und Optionsfelder (Druckfassung als SVG) */
+.mk-option { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+input.mk-check { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin: 0; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; position: relative; cursor: pointer; flex: 0 0 auto; }
+input.mk-check[type="radio"] { border-radius: 7px; }
+input.mk-check:checked { background: var(--ac); border-color: var(--ac); }
+input.mk-check[type="checkbox"]:checked::after { content: ""; position: absolute; left: 4px; top: 1px; width: 3px; height: 7px;
+  border: solid #FFFFFF; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+input.mk-check[type="radio"]:checked { background: #FFFFFF; }
+input.mk-check[type="radio"]:checked::after { content: ""; position: absolute; left: 3px; top: 3px; width: 6px; height: 6px;
+  border-radius: 3px; background: var(--ac); }
+.mk-check-druck { width: 14px; height: 14px; flex: 0 0 auto; display: block; }
+
+/* Raster / Tabelle mit Eingabezellen */
+table.mk-tabelle { border-collapse: separate; border-spacing: 0 4px; margin: -4px 0; }
+table.mk-tabelle th { font-weight: normal; color: var(--muted); text-align: left; padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td { padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td:last-child, table.mk-tabelle th:last-child { padding-right: 0; }
+
+/* Reiter */
+.mk-reiter { display: flex; gap: 2px; border-bottom: 1px solid var(--ac); margin-bottom: 10px; }
+.mk-reiter > * { height: 26px; line-height: 26px; padding: 0 12px; background: var(--anzeige); color: var(--text); white-space: nowrap; }
+.mk-reiter > .aktiv { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+
+/* Hilfsklassen für das Raster */
+.mk-spalten { display: grid; grid-template-columns: var(--sp-links, 360px) var(--sp-rechts, 315px); column-gap: 20px; align-items: start; }
+.mk-nur-interaktiv { }
+body.print .mk-nur-interaktiv { display: none !important; }
+
+</style>
+</head>
+<body>
+<!-- Abb. 3.7 „Exemplarische Prämissenplanung“: Maske „Planungsbrief“ (softwareneutral nachgebaut).
+     Raster: Maske 727 px = 110 mm; Inhalt 695 px = Beschriftung 160 · Feld 192 · Abstand 20 · rechte Spalte 315. -->
+<style>
+  #praemissen { --sp-label: 160px; --sp-feld: 192px; --sp-links: 360px; --sp-rechts: 315px; }
+  /* Prämissenraster: Beschriftung | Standard | Variante 1 | Variante 2 (Varianten in der rechten Spalte) */
+  #praemissen .praem { display: grid; grid-template-columns: 160px 8px 192px 20px 154px 7px 154px; row-gap: 4px; align-items: center; }
+  #praemissen .praem > .s1 { grid-column: 1; }
+  #praemissen .praem > .s2 { grid-column: 3; }
+  #praemissen .praem > .s3 { grid-column: 5; }
+  #praemissen .praem > .s4 { grid-column: 7; }
+  #praemissen .praem > .abstand { grid-column: 1 / -1; height: 6px; }
+  #praemissen .rechts { display: flex; flex-direction: column; align-self: stretch; }
+  #praemissen .rechts .mk-textbereich { flex: 1 1 auto; }
+  #praemissen .brief-liste { display: grid; grid-template-columns: 172px 48px; }
+  #praemissen .brief-liste span:nth-child(2n) { text-align: right; }
+  #praemissen .mk-spalten { align-items: stretch; }
+</style>
+<form class="mk-maske" id="praemissen" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span>Planungsbrief</span></div>
+  <div class="mk-inhalt">
+
+    <section class="mk-abschnitt" id="abschnitt-allgemein">
+      <div class="mk-band" id="band-allgemein">Allgemeine Planungsprämissen</div>
+      <div class="praem" id="praem-raster">
+        <label class="mk-label s1" for="f-budgetjahr">Aktuelles Budgetjahr</label>
+        <select class="mk-feld s2" id="f-budgetjahr">
+          <option value="B2027" selected>Budget 2027</option>
+          <option value="F2026">Forecast 2026</option>
+          <option value="M2028">Mittelfristplanung 2028–2030</option>
+        </select>
+        <div class="abstand"></div>
+        <span class="mk-label mk-neben s1" id="einheit">Prämisse in %</span>
+        <select class="mk-feld s2 spalte" id="sp-1" data-spalte="0" aria-label="Prämissensatz Spalte 1"></select>
+        <select class="mk-feld s3 spalte" id="sp-2" data-spalte="1" aria-label="Prämissensatz Spalte 2"></select>
+        <select class="mk-feld s4 spalte" id="sp-3" data-spalte="2" aria-label="Prämissensatz Spalte 3"></select>
+        <!-- Zeilen der Prämissen erzeugt praemissen.js -->
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-teilplaene">
+      <div class="mk-band" id="band-teilplaene">Planungsprämissen für Teilpläne</div>
+      <div class="mk-spalten">
+        <div class="links">
+          <div class="mk-zeile" id="z-teilplan">
+            <label class="mk-label" for="f-teilplan">Teilplan</label>
+            <select class="mk-feld" id="f-teilplan"></select>
+          </div>
+          <div class="mk-zeile" id="z-zeitraum">
+            <label class="mk-label" for="f-von">Planungszeitraum</label>
+            <div class="mk-feldgruppe">
+              <input class="mk-feld mk-datum" id="f-von" value="14.09.2026" inputmode="numeric" aria-label="Planungszeitraum von" data-hilfe="Datum TT.MM.JJJJ">
+              <span class="mk-zwischen">bis</span>
+              <input class="mk-feld mk-datum" id="f-bis" value="25.09.2026" inputmode="numeric" aria-label="Planungszeitraum bis" data-hilfe="Datum TT.MM.JJJJ">
+            </div>
+          </div>
+          <div class="mk-zeile" id="z-variante">
+            <label class="mk-label" for="f-variante">Variante</label>
+            <select class="mk-feld" id="f-variante"></select>
+          </div>
+
+          <div class="mk-gruppe" id="g-ansprech" style="margin-top:12px">
+            <div class="mk-gruppenkopf">Ansprechpartner Zentrales Controlling</div>
+            <div class="mk-zeile">
+              <label class="mk-label" for="f-name">Name</label>
+              <select class="mk-feld" id="f-name"></select>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">E-Mail-Adresse</span>
+              <div class="mk-feld mk-anzeige" id="f-email"></div>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">Telefon</span>
+              <div class="mk-feld mk-anzeige" id="f-telefon"></div>
+            </div>
+          </div>
+
+          <div class="mk-gruppe" id="g-dokumente">
+            <div class="mk-gruppenkopf">Dokumente</div>
+            <div class="mk-zeile">
+              <span class="mk-label">Planungsformular</span>
+              <div class="mk-feld mk-anzeige" id="f-formular"><a class="mk-link" data-dok="Planungsformular">Zugangslink öffnen</a></div>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">Planungshandbuch</span>
+              <div class="mk-feld mk-anzeige" id="f-handbuch"></div>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label">Anwenderleitfaden</span>
+              <div class="mk-feld mk-anzeige" id="f-leitfaden"><a class="mk-link" data-dok="Anwenderleitfaden">Dokument öffnen</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rechts" id="g-brief">
+          <div class="mk-gruppenkopf" id="brief-kopf">Planungsbrief für Key-Account-Manager</div>
+          <div class="mk-textbereich mk-anzeige" id="brief" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="mk-knopfleiste">
+        <button type="button" class="mk-knopf" id="k-veroeffentlichen">Vorgabewerte veröffentlichen</button>
+      </div>
+    </section>
+
+  </div>
+</form>
+
+<script>
+/* maskkit.js – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Die Maske ist HTML5 (<form class="mk-maske">) mit den Klassen aus maskkit.css.
+   ?print: Druckfassung – Steuerelemente werden zu statischen Elementen gleicher Geometrie, ohne Leiste.
+   MK.exportieren() liefert alle Flächen, Linien, Formen und Textzeilen in px für die PowerPoint-Ausgabe. */
+const MK = (() => {
+  "use strict";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  if (PRINT) document.body.classList.add("print");
+  const NS = "http://www.w3.org/2000/svg";
+  const NBSP = String.fromCharCode(0xA0), MINUS = String.fromCharCode(0x2212);
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  // Pfeil nach unten (Auswahlfeld) bzw. oben (Klappband), 8 x 5 px
+  function pfeil(cls, oben = false) {
+    const s = sv("svg", { width: 8, height: 5, viewBox: "0 0 8 5", class: cls, "aria-hidden": "true" });
+    sv("polygon", { points: oben ? "0,5 8,5 4,0" : "0,0 8,0 4,5", fill: "#3A3F44" }, s);
+    return s;
+  }
+
+  /* ---------------- Zahlen und Datum (deutsches Format) ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  function zahl(v, nk = 1) { return v == null || isNaN(v) ? "" : (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function leseZahl(text) {
+    const t = String(text).trim().replace(MINUS, "-").replace(/\s/g, "");
+    if (!t) return null;
+    if (!/^-?(\d{1,3}(\.\d{3})+|\d+)(,\d+)?$/.test(t)) return NaN;
+    return parseFloat(t.replace(/\./g, "").replace(",", "."));
+  }
+  function leseDatum(text) {
+    const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(String(text).trim());
+    if (!m) return null;
+    const d = new Date(+m[3], +m[2] - 1, +m[1]);
+    return d.getMonth() === +m[2] - 1 ? d : null;
+  }
+  function datum(d) { return d ? String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear() : ""; }
+  // Eingabe prüfen und markieren; liefert den Wert oder null
+  function pruefeFeld(feld, art = "zahl", opt = {}) {
+    const t = feld.value;
+    let v = null, ok = true;
+    if (art === "zahl") {
+      v = leseZahl(t);
+      ok = v === null ? !opt.pflicht : !isNaN(v) && (opt.min == null || v >= opt.min) && (opt.max == null || v <= opt.max);
+    } else if (art === "datum") {
+      v = leseDatum(t);
+      ok = t.trim() === "" ? !opt.pflicht : v !== null;
+    }
+    feld.classList.toggle("mk-fehler", !ok);
+    feld.title = ok ? (feld.dataset.hilfe || "") : (opt.meldung || "Eingabe prüfen");
+    return ok ? v : null;
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel, maske, meldungEl, leiste, B = 727, H = 0;
+  function init(o = {}) {
+    document.title = o.titel || document.title;
+    maske = document.querySelector(o.maske || ".mk-maske");
+    if (!maske) throw new Error("Keine .mk-maske gefunden");
+    if (!PRINT) {
+      leiste = el("div", { class: "mk-leiste" }, document.body);
+      el("div", { class: "mk-leiste-titel" }, leiste, o.titel || "");
+    }
+    buehne = el("div", { class: "mk-buehne" }, document.body);
+    rahmen = el("div", { class: "mk-rahmen" }, buehne);
+    seite = el("div", { class: "mk-seite", id: "seite" }, rahmen);
+    seite.appendChild(maske);
+    panel = el("div", { class: "mk-panel" }, document.body);
+    meldungEl = el("div", { class: "mk-meldung", role: "status" }, document.body);
+    // Klappbänder: Klick auf das Band klappt den Abschnitt auf und zu (nur interaktiv)
+    maske.querySelectorAll(".mk-abschnitt > .mk-band").forEach(b => {
+      if (PRINT || b.dataset.klappbar === "nein") return;
+      b.appendChild(pfeil("mk-klapp mk-nur-interaktiv", true));
+      b.setAttribute("role", "button"); b.tabIndex = 0;
+      const klapp = () => { b.parentElement.classList.toggle("zu"); skalieren(); if (MK._ebenenNeu) MK._ebenenNeu(); };
+      b.addEventListener("click", klapp);
+      b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); klapp(); } });
+    });
+    maske.addEventListener("submit", e => e.preventDefault());
+    addEventListener("resize", skalieren);
+    return maske;
+  }
+  function skalieren() {
+    B = maske.offsetWidth; H = maske.offsetHeight;
+    seite.style.width = B + "px"; seite.style.height = H + "px";
+    if (PRINT) { rahmen.style.width = B + "px"; rahmen.style.height = H + "px"; seite.style.transform = ""; return; }
+    const frei = panel.style.display === "block" ? 380 : 0;
+    const s = Math.max(0.4, Math.min(1.6, (innerWidth - frei - 32) / B, (innerHeight - 44 - 32) / H));
+    seite.style.transform = `scale(${s})`;
+    rahmen.style.width = B * s + "px"; rahmen.style.height = H * s + "px";
+    rahmen.style.marginLeft = frei ? "16px" : "auto";
+  }
+  function meldung(text) {
+    meldungEl.textContent = text; meldungEl.style.display = "block";
+    clearTimeout(meldung._t); meldung._t = setTimeout(() => { meldungEl.style.display = "none"; }, 2600);
+  }
+
+  /* ---------------- Druckfassung: Steuerelemente -> statische Elemente ---------------- */
+  let fertigGemeldet = false;
+  function kopieAttribute(von, nach) {
+    ["id", "style", "title"].forEach(a => { if (von.getAttribute(a)) nach.setAttribute(a, von.getAttribute(a)); });
+    Object.entries(von.dataset).forEach(([k, v]) => { nach.dataset[k] = v; });
+  }
+  function druckfassung() {
+    maske.querySelectorAll("input, select, textarea, button").forEach(f => {
+      let d;
+      if (f.matches("input.mk-check")) {
+        d = sv("svg", { width: 14, height: 14, viewBox: "0 0 14 14", class: "mk-check-druck" });
+        if (f.type === "radio") {
+          sv("circle", { cx: 7, cy: 7, r: 6.5, fill: "#FFFFFF", stroke: "#9A9A9A", "stroke-width": 1 }, d);
+          if (f.checked) sv("circle", { cx: 7, cy: 7, r: 3, fill: "#3A3F44" }, d);
+        } else {
+          sv("rect", { x: 0.5, y: 0.5, width: 13, height: 13, rx: 2, fill: f.checked ? "#3A3F44" : "#FFFFFF",
+                       stroke: f.checked ? "#3A3F44" : "#9A9A9A", "stroke-width": 1 }, d);
+          if (f.checked) sv("polyline", { points: "3.5,7.2 6,9.6 10.5,4.4", fill: "none", stroke: "#FFFFFF", "stroke-width": 2 }, d);
+        }
+      } else if (f.tagName === "SELECT") {
+        d = el("div", { class: f.className + " mk-auswahl" });
+        el("span", {}, d, f.selectedIndex >= 0 ? f.options[f.selectedIndex].text : "");
+        d.appendChild(pfeil("mk-pfeil"));
+      } else if (f.tagName === "TEXTAREA") {
+        d = el("div", { class: f.className + " mk-mehrzeilig" }, undefined, f.value);
+      } else if (f.tagName === "BUTTON") {
+        d = el("div", { class: f.className }, undefined, f.textContent);
+      } else if (f.type === "hidden") {
+        return;
+      } else {
+        d = el("div", { class: f.className }, undefined, f.value);
+      }
+      if (!(d instanceof SVGElement)) kopieAttribute(f, d);
+      f.replaceWith(d);
+    });
+  }
+  // Am Ende des Masken-Skripts aufrufen: setzt die Druckfassung und skaliert
+  function fertig() {
+    if (fertigGemeldet) return;
+    fertigGemeldet = true;
+    if (PRINT) druckfassung();
+    skalieren();
+    if (MK._ebenenNeu) MK._ebenenNeu();
+  }
+
+  /* ---------------- Ebenen der Lernplattform: Erläuterungen und Gestaltung ---------------- */
+  function zielElement(z) { return !z ? null : document.getElementById(z) || maske.querySelector(z); }
+  function ebenen(o) {
+    if (PRINT) return;
+    let modus = null;
+    const marken = [], knoepfe = {};
+    const arten = [["erlaeuterungen", "Erläuterungen", ""], ["gestaltung", "Gestaltung", "gestaltung"]].filter(([k]) => o[k]);
+    arten.forEach(([k, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text);
+      b.addEventListener("click", () => umschalten(k));
+      knoepfe[k] = b;
+    });
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; maske.querySelectorAll(".mk-markiert").forEach(e => e.classList.remove("mk-markiert")); }
+    function markeSetzen(eintrag, text, cls) {
+      const z = zielElement(eintrag.ziel);
+      if (!z || !z.offsetParent) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / B;
+      // anker "rechts" (Standard): Marke an der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "mk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text, eintrag));
+      marken.push(m);
+    }
+    function aktiv(text, eintrag) {
+      panel.querySelectorAll(".mk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      maske.querySelectorAll(".mk-markiert").forEach(e => e.classList.remove("mk-markiert"));
+      const z = eintrag && zielElement(eintrag.ziel);
+      if (z) z.classList.add("mk-markiert");
+      const e = panel.querySelector(`.mk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(k) {
+      modus = modus === k ? null : k;
+      Object.entries(knoepfe).forEach(([a, b]) => b.setAttribute("aria-pressed", String(modus === a)));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      skalieren();
+      if (!modus) return;
+      const def = o[modus], cls = modus === "gestaltung" ? "gestaltung" : "";
+      el("h2", {}, panel, def.titel || (modus === "gestaltung" ? "Gestaltung" : "Erläuterungen"));
+      if (def.intro) el("div", { class: "mk-panel-intro" }, panel, def.intro);
+      def.eintraege.forEach(r => {
+        const nr = String(r.nr);
+        const e = el("div", { class: "mk-eintrag", "data-marke": nr }, panel);
+        const kopf = el("div", { class: "mk-eintrag-kopf" }, e);
+        el("span", {}, kopf, modus === "gestaltung" ? nr : nr + "."); el("span", {}, kopf, r.titel);
+        if (r.regel) el("div", { class: "mk-regel" }, e, r.regel);
+        el("div", {}, e, r.text);
+        e.addEventListener("click", () => aktiv(nr, r));
+        markeSetzen(r, nr, cls);
+      });
+    }
+    MK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+    addEventListener("keydown", e => { if (e.key === "Escape" && modus) umschalten(modus); });
+  }
+
+  /* ---------------- Export für PowerPoint (Druckfassung) ---------------- */
+  function farbe(c) {
+    const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/.exec(c || "");
+    if (!m) return null;
+    const a = m[4] === undefined ? 1 : parseFloat(m[4]);
+    const hex = [m[1], m[2], m[3]].map(v => Math.round(+v).toString(16).padStart(2, "0")).join("").toUpperCase();
+    return { hex, a };
+  }
+  function exportieren() {
+    const R = maske.getBoundingClientRect();
+    const formen = [];
+    const name = e => e.id || e.dataset.name || (e.className && typeof e.className === "string" ? e.className.split(" ")[0] : e.tagName);
+    const sichtbar = s => s.w > 0 && s.st !== "none" && s.st !== "hidden" && s.c && s.c.a > 0;
+    function kasten(e, cs) {
+      const r = e.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const bg = farbe(cs.backgroundColor);
+      const seiten = ["Top", "Right", "Bottom", "Left"].map(s => ({ w: parseFloat(cs["border" + s + "Width"]) || 0,
+        c: farbe(cs["border" + s + "Color"]), st: cs["border" + s + "Style"] }));
+      const gleich = seiten.every(s => sichtbar(s) && s.w === seiten[0].w && s.c.hex === seiten[0].c.hex && s.st === seiten[0].st);
+      const x = r.left - R.left, y = r.top - R.top, rad = parseFloat(cs.borderTopLeftRadius) || 0;
+      const fuell = bg && bg.a > 0.01 ? bg.hex : null;
+      if (fuell || gleich) {
+        const lw = gleich ? seiten[0].w : 0;
+        formen.push({ t: "rect", name: name(e), x: x + lw / 2, y: y + lw / 2, w: r.width - lw, h: r.height - lw,
+                      fill: fuell, line: gleich ? seiten[0].c.hex : null, lw, dash: gleich && seiten[0].st === "dashed", r: rad });
+      }
+      if (!gleich) seiten.forEach((s, i) => {
+        if (!sichtbar(s)) return;
+        const h = s.w / 2;
+        const p = [[x, y + h, x + r.width, y + h], [x + r.width - h, y, x + r.width - h, y + r.height],
+                   [x, y + r.height - h, x + r.width, y + r.height - h], [x + h, y, x + h, y + r.height]][i];
+        formen.push({ t: "linie", name: name(e), x1: p[0], y1: p[1], x2: p[2], y2: p[3], farbe: s.c.hex, lw: s.w, dash: s.st === "dashed" });
+      });
+    }
+    function svgFormen(svg) {
+      svg.querySelectorAll("polygon, polyline, rect, circle, line").forEach(k => {
+        const cs = getComputedStyle(k), M = k.getScreenCTM();
+        const pt = (x, y) => { const p = new DOMPoint(x, y).matrixTransform(M); return [p.x - R.left, p.y - R.top]; };
+        const f = farbe(cs.fill), s = farbe(cs.stroke), lw = parseFloat(cs.strokeWidth) || 0;
+        const fill = f && f.a > 0.01 ? f.hex : null, line = s && s.a > 0.01 && lw > 0 ? s.hex : null;
+        const tag = k.tagName.toLowerCase();
+        if (tag === "polygon" || tag === "polyline") {
+          const pts = [...k.points].map(p => pt(p.x, p.y));
+          formen.push({ t: "poly", name: "Form", pts, zu: tag === "polygon", fill: tag === "polygon" ? fill : null, line, lw });
+        } else if (tag === "rect") {
+          const x = +k.getAttribute("x") || 0, y = +k.getAttribute("y") || 0, w = +k.getAttribute("width"), h = +k.getAttribute("height");
+          const a = pt(x, y), b = pt(x + w, y + h);
+          formen.push({ t: "rect", name: "Form", x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1], fill, line, lw, r: +k.getAttribute("rx") || 0 });
+        } else if (tag === "circle") {
+          const cx = +k.getAttribute("cx"), cy = +k.getAttribute("cy"), r = +k.getAttribute("r");
+          const a = pt(cx - r, cy - r), b = pt(cx + r, cy + r);
+          formen.push({ t: "oval", name: "Form", x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1], fill, line, lw });
+        } else if (tag === "line") {
+          const a = pt(+k.getAttribute("x1"), +k.getAttribute("y1")), b = pt(+k.getAttribute("x2"), +k.getAttribute("y2"));
+          formen.push({ t: "linie", name: "Linie", x1: a[0], y1: a[1], x2: b[0], y2: b[1], farbe: line, lw });
+        }
+      });
+    }
+    function text(n) {
+      const t = n.textContent;
+      if (!t.trim()) return;
+      const p = n.parentElement, cs = getComputedStyle(p);
+      const woerter = [], re = /[^\s]+/g;
+      let m;
+      while ((m = re.exec(t))) {
+        const rg = document.createRange();
+        rg.setStart(n, m.index); rg.setEnd(n, m.index + m[0].length);
+        const rs = [...rg.getClientRects()].filter(r => r.width > 0);
+        if (rs.length) woerter.push({ a: m.index, b: m.index + m[0].length, r: rs[0] });
+      }
+      if (!woerter.length) return;
+      const zeilen = [];
+      woerter.forEach(w => {
+        const z = zeilen[zeilen.length - 1];
+        if (z && Math.abs(z.top - w.r.top) < 2) { z.b = w.b; z.right = Math.max(z.right, w.r.right); z.bottom = Math.max(z.bottom, w.r.bottom); }
+        else zeilen.push({ a: w.a, b: w.b, left: w.r.left, right: w.r.right, top: w.r.top, bottom: w.r.bottom });
+      });
+      const gross = cs.textTransform === "uppercase";
+      const unter = (cs.textDecorationLine || cs.textDecoration || "").includes("underline");
+      formen.push({ t: "text", name: name(p), groesse: parseFloat(cs.fontSize), fett: parseInt(cs.fontWeight, 10) >= 600,
+        kursiv: cs.fontStyle === "italic", farbe: (farbe(cs.color) || { hex: "1A1A1A" }).hex, unter,
+        ausr: { right: "r", end: "r", center: "c" }[cs.textAlign] || "l",
+        sperr: parseFloat(cs.letterSpacing) || 0,
+        zeilen: zeilen.map(z => {
+          let s = t.slice(z.a, z.b).replace(/[ \t\n\r]+/g, " ");
+          if (gross) s = s.toUpperCase();
+          return { x: z.left - R.left, y: z.top - R.top, w: z.right - z.left, h: z.bottom - z.top, text: s };
+        }) });
+    }
+    function gehe(n) {
+      if (n.nodeType === 3) { text(n); return; }
+      if (n.nodeType !== 1) return;
+      const cs = getComputedStyle(n);
+      if (cs.display === "none" || cs.visibility === "hidden") return;
+      if (n.tagName.toLowerCase() === "svg") { svgFormen(n); return; }
+      kasten(n, cs);
+      n.childNodes.forEach(gehe);
+    }
+    gehe(maske);
+    return { breite: R.width, hoehe: R.height, formen };
+  }
+
+  /* ---------------- Prüfungen (Druckfassung) ---------------- */
+  function kontrast(a, b) {
+    const lin = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+    const L = h => 0.2126 * lin(parseInt(h.slice(0, 2), 16)) + 0.7152 * lin(parseInt(h.slice(2, 4), 16)) + 0.0722 * lin(parseInt(h.slice(4, 6), 16));
+    const [x, y] = [L(a), L(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05);
+  }
+  function pruefen() {
+    const R = maske.getBoundingClientRect(), probleme = [];
+    const kurz = s => s.trim().replace(/\s+/g, " ").slice(0, 40);
+    maske.querySelectorAll("*").forEach(e => {
+      const cs = getComputedStyle(e);
+      if (cs.display === "none" || e.closest("svg")) return;
+      const r = e.getBoundingClientRect();
+      if (r.width && (r.left < R.left - 0.5 || r.right > R.right + 0.5 || r.bottom > R.bottom + 0.5))
+        probleme.push(`Überlauf aus der Maske: ${e.className || e.tagName} „${kurz(e.textContent)}“`);
+      if (e.textContent.trim() && (cs.overflow === "hidden" || cs.overflowX === "hidden") &&
+          (e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 1))
+        probleme.push(`Text abgeschnitten: „${kurz(e.textContent)}“`);
+    });
+    const tw = document.createTreeWalker(maske, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = tw.nextNode())) {
+      if (!n.textContent.trim()) continue;
+      const p = n.parentElement, cs = getComputedStyle(p);
+      if (cs.display === "none") continue;
+      if (parseFloat(cs.fontSize) < 13.9) probleme.push(`Schrift unter 6 pt (${cs.fontSize}): „${kurz(n.textContent)}“`);
+      let a = p, bg = null;
+      while (a && !bg) { const f = farbe(getComputedStyle(a).backgroundColor); if (f && f.a > 0.5) bg = f.hex; a = a.parentElement; }
+      const fg = farbe(cs.color);
+      if (fg && kontrast(fg.hex, bg || "FFFFFF") < 4.5) probleme.push(`Kontrast < 4,5:1: „${kurz(n.textContent)}“`);
+    }
+    return [...new Set(probleme)];
+  }
+
+  return { PRINT, NBSP, MINUS, el, sv, pfeil, zahl, leseZahl, leseDatum, datum, pruefeFeld, init, fertig, skalieren,
+           meldung, ebenen, exportieren, pruefen, druckfassung };
+})();
+
+</script>
+<script>
+/* Abb. 3.7 „Exemplarische Prämissenplanung“ – Logik der Maske „Planungsbrief“.
+   Der Planungsbrief wird aus den Feldern erzeugt: Budgetjahr, Teilplan, Zeitraum, Variante und Prämissen. */
+(() => {
+  "use strict";
+  const { el, zahl, leseZahl, leseDatum, pruefeFeld } = MK;
+  const NBSP = MK.NBSP, NDASH = String.fromCharCode(0x2013);
+  MK.init({ titel: "Exemplarische Prämissenplanung" });
+
+  /* ---------- Stammdaten ---------- */
+  const PRAEMISSEN = ["Inflationsrate", "Wirtschaftswachstum", "Personalsteigerungsrate", "Umsatzwachstum"];
+  const SAETZE = { "Standard": [1.2, 2.5, 3.5, 4.5], "Variante 1": [null, null, null, null],
+                   "Variante 2": [null, null, null, null], "Variante 3": [null, null, null, null] };
+  const SPALTEN = ["Standard", "Variante 1", "Variante 2"];
+  const BUDGET = { B2027: ["das Budget 2027", "das Planjahr 2027"], F2026: ["den Forecast 2026", "das Planjahr 2026"],
+                   M2028: ["die Mittelfristplanung 2028" + NDASH + "2030", "die Planjahre 2028 bis 2030"] };
+  // Teilplan: Empfänger im Briefkopf und Anrede
+  const TEILPLAENE = [
+    ["Absatzplanung", "Key-Account-Manager", "Sehr geehrte(r) Key-Account-Manager(in),"],
+    ["Produktionsplanung", "Produktionsleitung", "Sehr geehrte Damen und Herren,"],
+    ["Beschaffungsplanung", "Einkauf", "Sehr geehrte Damen und Herren,"],
+    ["Kostenplanung", "Kostenstellenleitung", "Sehr geehrte Damen und Herren,"],
+    ["Personalplanung", "Bereichsleitung", "Sehr geehrte Damen und Herren,"],
+    ["Investitionsplanung", "Bereichsleitung", "Sehr geehrte Damen und Herren,"],
+  ];
+  // Ansprechpartner (fiktiv); Telefonnummern aus dem für Medien reservierten Bereich 030 23125 xxx
+  const NAMEN = [["Frau Wendt", "controlling@example.com", "+49 30 23125-254"],
+                 ["Herr Albers", "controlling@example.com", "+49 30 23125-255"],
+                 ["Frau Kaya", "controlling@example.com", "+49 30 23125-256"]];
+
+  const $ = id => document.getElementById(id);
+  const optionen = (sel, liste, wert) => liste.forEach(([v, t]) => el("option", v === wert ? { value: v, selected: "" } : { value: v }, sel, t));
+
+  /* ---------- Prämissenraster ---------- */
+  const raster = $("praem-raster");
+  [...document.querySelectorAll("select.spalte")].forEach((s, c) => optionen(s, Object.keys(SAETZE).map(k => [k, k]), SPALTEN[c]));
+  const zellen = PRAEMISSEN.map((p, i) => {
+    el("span", { class: "mk-label s1", id: `l-p${i}` }, raster, p);
+    return SPALTEN.map((_, c) => el("input", { class: `mk-feld mk-zahl s${c + 2}`, id: `p${i}-${c}`, inputmode: "decimal",
+      "aria-label": `${p}, Spalte ${c + 1}`, "data-hilfe": "Prozentwert mit Dezimalkomma, z. B. 2,5" }, raster));
+  });
+  function spalteFuellen(c) {
+    const satz = SAETZE[SPALTEN[c]];
+    zellen.forEach((z, i) => { z[c].value = zahl(satz[i], 1); z[c].classList.remove("mk-fehler"); });
+  }
+  SPALTEN.forEach((_, c) => spalteFuellen(c));
+  document.querySelectorAll("select.spalte").forEach(s => s.addEventListener("change", () => {
+    SPALTEN[+s.dataset.spalte] = s.value; SPALTEN.forEach((_, c) => spalteFuellen(c)); brief();
+  }));
+  zellen.forEach((z, i) => z.forEach((f, c) => f.addEventListener("input", () => {
+    const v = pruefeFeld(f, "zahl", { min: -20, max: 50, meldung: "Prozentwert zwischen −20 und 50 mit Dezimalkomma" });
+    if (!f.classList.contains("mk-fehler")) {
+      SAETZE[SPALTEN[c]][i] = v;
+      SPALTEN.forEach((s, c2) => { if (c2 !== c && s === SPALTEN[c]) zellen[i][c2].value = zahl(v, 1); });
+    }
+    brief();
+  })));
+  zellen.forEach(z => z.forEach(f => f.addEventListener("blur", () => {
+    const v = leseZahl(f.value);
+    if (v !== null && !isNaN(v) && !f.classList.contains("mk-fehler")) f.value = zahl(v, 1);
+  })));
+
+  /* ---------- Teilpläne ---------- */
+  optionen($("f-teilplan"), TEILPLAENE.map(t => [t[0], t[0]]), "Absatzplanung");
+  optionen($("f-variante"), Object.keys(SAETZE).map(k => [k, k]), "Standard");
+  optionen($("f-name"), NAMEN.map(n => [n[0], n[0]]), "Frau Wendt");
+  function kontakt() {
+    const n = NAMEN.find(x => x[0] === $("f-name").value);
+    $("f-email").textContent = n[1]; $("f-telefon").textContent = n[2];
+  }
+  function zeitraum() {
+    const von = pruefeFeld($("f-von"), "datum", { pflicht: true, meldung: "Datum im Format TT.MM.JJJJ" });
+    const bis = pruefeFeld($("f-bis"), "datum", { pflicht: true, meldung: "Datum im Format TT.MM.JJJJ" });
+    if (von && bis && von > bis) {
+      ["f-von", "f-bis"].forEach(id => { $(id).classList.add("mk-fehler"); $(id).title = "Der Zeitraum muss vor seinem Ende beginnen"; });
+      return null;
+    }
+    return von && bis ? [$("f-von").value.trim(), $("f-bis").value.trim()] : null;
+  }
+
+  /* ---------- Planungsbrief aus den Feldern ---------- */
+  function brief() {
+    const tp = TEILPLAENE.find(t => t[0] === $("f-teilplan").value);
+    const [periode, planjahr] = BUDGET[$("f-budgetjahr").value];
+    const variante = $("f-variante").value, satz = SAETZE[variante];
+    const zr = zeitraum();
+    $("brief-kopf").textContent = "Planungsbrief für " + tp[1];
+    const b = $("brief");
+    b.textContent = "";
+    el("p", {}, b, tp[2]);
+    el("p", {}, b, `Sie werden gebeten, die ${tp[0]} für ${periode} vorzunehmen. ` +
+      (zr ? `Der Zeitraum für die Planung ist vom ${zr[0]} bis zum ${zr[1]} vorgesehen.` : "Der Zeitraum für die Planung wird noch festgelegt."));
+    el("p", {}, b, `Für ${planjahr} gehen Sie bitte von folgenden Rahmenbedingungen aus` +
+      (variante === "Standard" ? ":" : ` (${variante}):`));
+    const liste = el("p", { class: "brief-liste" }, b);
+    PRAEMISSEN.forEach((p, i) => { el("span", {}, liste, p + ":"); el("span", {}, liste, satz[i] == null ? NDASH : zahl(satz[i], 1) + NBSP + "%"); });
+    el("p", {}, b, "Nutzen Sie den unten stehenden Link, um Zugang zum Planungsformular zu erhalten.");
+    const lp = el("p", {}, b);
+    const a = el("a", { class: "mk-link", "data-dok": "Planungsformular" }, lp, "Planungsformular " + tp[0]);
+    a.addEventListener("click", dokument);
+  }
+  function dokument(e) { MK.meldung(`Beispielmaske: „${e.currentTarget.dataset.dok}“ ist nicht hinterlegt.`); }
+
+  ["f-budgetjahr", "f-teilplan", "f-variante"].forEach(id => $(id).addEventListener("change", brief));
+  ["f-von", "f-bis"].forEach(id => $(id).addEventListener("input", brief));
+  $("f-name").addEventListener("change", kontakt);
+  document.querySelectorAll("#praemissen a.mk-link").forEach(a => a.addEventListener("click", dokument));
+  $("k-veroeffentlichen").addEventListener("click", () => {
+    if (document.querySelector("#praemissen .mk-fehler")) { MK.meldung("Bitte zuerst die rot markierten Eingaben korrigieren."); return; }
+    MK.meldung(`Vorgabewerte veröffentlicht: ${$("f-budgetjahr").selectedOptions[0].text}, ${$("f-teilplan").value}, ${$("f-variante").value}.`);
+  });
+  kontakt();
+  brief();
+
+  /* ---------- Lernplattform: Erläuterungen und Gestaltung ---------- */
+  MK.ebenen({
+    erlaeuterungen: {
+      titel: "Erläuterungen",
+      intro: "Was die Bereiche der Maske in der Prämissenplanung leisten. Die Nummern in der Maske zeigen, wo.",
+      eintraege: [
+        { nr: 1, ziel: "band-allgemein", versatz: [-24, 2], titel: "Allgemeine Planungsprämissen",
+          text: "Gesamtwirtschaftliche und unternehmensweite Annahmen – Inflation, Wirtschaftswachstum, Personalkostensteigerung, Umsatzwachstum – gibt das zentrale Controlling einmal vor. Alle Teilpläne rechnen damit auf derselben Grundlage." },
+        { nr: 2, ziel: "f-budgetjahr", anker: "links", titel: "Planversion",
+          text: "Die Prämissen gelten für eine Planversion, hier das Budget 2027. Für Forecast und Mittelfristplanung werden eigene Prämissen gepflegt." },
+        { nr: 3, ziel: "sp-2", versatz: [-4, -26], titel: "Varianten für Simulationen",
+          text: "Neben dem Standard lassen sich alternative Prämissensätze hinterlegen, etwa eine vorsichtige und eine zuversichtliche Variante. Sie sind die Grundlage für Simulationen und Szenariovergleiche. Die Spaltenköpfe wählen den angezeigten Satz." },
+        { nr: 4, ziel: "f-von", anker: "links", titel: "Teilplan, Zeitraum und Variante",
+          text: "Für jeden Teilplan legt das Controlling fest, bis wann geplant wird und welcher Prämissensatz gilt. Die Termine stammen aus dem Planungskalender." },
+        { nr: 5, ziel: "g-ansprech", titel: "Ansprechpartner",
+          text: "Für Rückfragen nennt die Maske eine Ansprechperson im zentralen Controlling. E-Mail und Telefon kommen aus den Stammdaten." },
+        { nr: 6, ziel: "g-dokumente", titel: "Dokumente",
+          text: "Zugang zum Planungsformular sowie Planungshandbuch und Anwenderleitfaden: einheitliche Regeln und Hilfen für alle, die planen." },
+        { nr: 7, ziel: "g-brief", titel: "Planungsbrief",
+          text: "Der Brief an die Planenden – bei der Absatzplanung die Key-Account-Manager – wird aus den Feldern der Maske erzeugt. Ändern Sie Teilplan, Zeitraum, Variante oder eine Prämisse: Der Brief folgt sofort." },
+        { nr: 8, ziel: "k-veroeffentlichen", versatz: [32, 8], titel: "Vorgabewerte veröffentlichen",
+          text: "Mit der Veröffentlichung gehen die Vorgaben top-down an die dezentral Planenden. Deren Bottom-up-Planung beginnt; im Gegenstromverfahren werden beide Seiten anschließend abgestimmt." },
+      ],
+    },
+    gestaltung: {
+      titel: "Gestaltung",
+      intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
+      eintraege: [
+        { nr: "A", ziel: "kopf", versatz: [-6, 8], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Fenster, kein Logo",
+          text: "Fensterrahmen, Menü- und Symbolleiste, Produktname und Logo, Navigationsleiste, Statusleiste und Bildlaufleisten des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen in der Kopfleiste." },
+        { nr: "B", ziel: "einheit", versatz: [6, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Einheit genannt",
+          text: "Die Prämissen sind Prozentwerte; „in %“ steht jetzt am Raster und im Brief. Das Original nannte keine Einheit." },
+        { nr: "C", ziel: "f-email", anker: "links", versatz: [0, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
+          text: "Eingabefelder sind weiß mit Rahmen, Anzeigefelder grau hinterlegt: E-Mail und Telefon folgen aus dem gewählten Namen, der Brief aus den Feldern. Im Original sahen alle Felder gleich aus." },
+        { nr: "D", ziel: "f-teilplan", versatz: [-26, 2], regel: "ERWARTUNGSKONFORMITÄT", titel: "Gewohnte Bedienelemente",
+          text: "Auswahlfelder tragen den Pfeil rechts, Zahlen stehen rechtsbündig mit Dezimalkomma, Daten im Format TT.MM.JJJJ. Das Original setzte die Pfeile links und zentrierte die Zahlen." },
+        { nr: "E", ziel: "brief", versatz: [-4, 4], regel: "AUFGABENANGEMESSENHEIT", titel: "Brief aus den Feldern",
+          text: "Der Planungsbrief übernimmt Budgetjahr, Teilplan, Zeitraum und Prämissen aus der Maske – nichts wird doppelt erfasst. Im Original nannte der Brief eine Inflationsrate von 1.23 mit Dezimalpunkt, das Feld 1,2." },
+        { nr: "F", ziel: "p0-0", anker: "links", versatz: [0, 2], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Eingaben werden geprüft",
+          text: "Ungültige Zahlen oder Daten werden rot markiert und nicht übernommen; der Zeitraum muss vor seinem Ende beginnen. Veröffentlichen ist erst nach der Korrektur möglich." },
+        { nr: "G", ziel: "band-teilplaene", versatz: [-24, 2], regel: "ERLERNBARKEIT", titel: "Klare Gliederung",
+          text: "Zwei Abschnitte mit Band, Gruppen mit Überschrift, Beschriftungen und Felder auf gemeinsamen Achsen. Die Abschnitte lassen sich wie im Original auf- und zuklappen." },
+        { nr: "H", ziel: "f-name", versatz: [-26, 2], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Keine echten Daten",
+          text: "Name, E-Mail-Adresse, Telefonnummer und Dateipfad des Originals sind durch fiktive Angaben ersetzt; das Budgetjahr 2012 wird zum Budget 2027." },
+      ],
+    },
+  });
+  MK.fertig();
+})();
+
+</script>
+</body>
+</html>

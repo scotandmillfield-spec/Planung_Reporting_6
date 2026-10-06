@@ -9,11 +9,11 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 | Ordner | Inhalt |
 |---|---|
 | `index.html` | Inventur – wird erzeugt, nicht von Hand bearbeiten |
-| `abbildungen/kapN/` | neue Fassungen, benannt nach der Caption (z. B. `ABC-Analyse.png`): `.png` (600 dpi), `.pdf` (Vektor), `.pptx` (editierbar), bei Dashboards `.html` und `_daten.csv` |
+| `abbildungen/kapN/` | neue Fassungen, benannt nach der Caption (z. B. `ABC-Analyse.png`): `.png` (600 dpi), `.pdf` (Vektor), `.pptx` (editierbar), bei Dashboards `.html` und `_daten.csv`, bei Eingabemasken zusätzlich `.html` |
 | `tabellen/` | LaTeX-Code der Tabellen und Listings, benannt nach der Caption (z. B. `Kennzahlenblatt.tex`) |
 | `quellen/kapN/` | Skripte, aus denen die Abbildungen gebaut werden |
 | `vorschau/` | Vorschaubilder (Original zugeschnitten, neue Fassung, gesetzte Tabellen) |
-| `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` und `dashkit/`, Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`) |
+| `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` (Abbildungen), `dashkit/` (Dashboards) und `maskkit/` (Eingabemasken), Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`) |
 
 ## In Overleaf verwenden
 

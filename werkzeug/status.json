@@ -268,6 +268,22 @@
    ],
    "alt": "Dashboard „Strategisches Projektportfolio“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Links ein Portfolio der 19 strategischen Projekte aus strategischem Risiko (Risikoindex 0–100, waagerecht) und strategischer Relevanz (Nutzwert 0–10, senkrecht), die Kreisfläche zeigt die Plan-Kosten; Grenzen bei 50 und 5 teilen es in die Felder umsetzen, absichern, prüfen und nachrangig. 7 Projekte im Feld „absichern“ binden 55 % der Plan-Kosten. Rechts eine nummerierte Tabelle der Projekte nach Feld mit Relevanz, Risiko und Veränderung des Risikos zum Vorquartal: Das Risiko steigt bei 6 Projekten, am stärksten bei der CRM-Einführung (+5).",
    "datei": "Strategisches_Projektportfolio"
+  },
+  "3.7": {
+   "status": "pruefung",
+   "kommentare": [
+    "Softwarescreenshot (Arbeitsblatt „Planungsbrief“ einer Planungssoftware) als softwareneutrale Eingabemaske im Buchstil neu aufgebaut: HTML für die Lernplattform (Felder bedienbar, Brief wird aus den Feldern erzeugt), PNG, PDF (Vektor, 110 mm breit) und PPTX (editierbar)",
+    "Entfallen: Fensterrahmen, Menü- und Symbolleiste, Produktname und Logo, Navigationsleiste (Prozess, Planung, Simulation, Reporting), Statusleiste und Bildlaufleisten; Umfang wie der Bildausschnitt im Buch, also ohne den zugeklappten Abschnitt „Planungsfreigabe und Status“",
+    "Aktualisiert: BUD 2012 → Budget 2027, Planungszeitraum 17.02.–27.02.2011 → 14.09.–25.09.2026; Prämissen 1,2 / 2,5 / 3,5 / 4,5 % unverändert – prüfen, ob der Buchtext Jahr oder Daten nennt",
+    "Ersetzt: Ansprechpartner „Häuptling“ → Frau Wendt (fiktiv), E-Mail-Domain des Softwareherstellers → example.com, Telefonnummer → fiktive Nummer aus dem für Medien reservierten Bereich (030 23125 …), persönlicher Dateipfad im Brief → Link „Planungsformular Absatzplanung“",
+    "Korrigiert: Der Brief nannte die Inflationsrate mit 1.23 (Dezimalpunkt), das Feld mit 1,2 – der Brief übernimmt jetzt die Feldwerte mit Einheit %; Komma in „gebeten, die“; „E-Mail Adresse“ → „E-Mail-Adresse“; „Key Account Manager“ → „Key-Account-Manager“",
+    "Einheit „in %“ ergänzt (Original ohne Einheit); Varianten 1 und 2 wie im Original leer",
+    "Beschriftung „Zugangslink zum Planungsformular“ → „Planungsformular“ mit Link „Zugangslink öffnen“ (passt sonst nicht in die Beschriftungsspalte)",
+    "Schrift 6 pt wie bei den Dashboards (Bildschirmmasken); Hochformat 110 × 110 mm",
+    "Lernplattform: Ebenen „Erläuterungen“ (fachlich, 8 Punkte) und „Gestaltung“ (Änderungen, geordnet nach den Interaktionsprinzipien der DIN EN ISO 9241-110) – fachlich prüfen"
+   ],
+   "alt": "Eingabemaske „Planungsbrief“ für die Prämissenplanung. Im Abschnitt „Allgemeine Planungsprämissen“ sind für das Budget 2027 im Standard eine Inflationsrate von 1,2 %, ein Wirtschaftswachstum von 2,5 %, eine Personalsteigerungsrate von 3,5 % und ein Umsatzwachstum von 4,5 % hinterlegt; zwei weitere Spalten für Varianten sind leer. Im Abschnitt „Planungsprämissen für Teilpläne“ stehen links Teilplan Absatzplanung, Planungszeitraum 14.09.2026 bis 25.09.2026, Variante Standard, die Ansprechperson im zentralen Controlling mit E-Mail und Telefon sowie Links zu Planungsformular und Anwenderleitfaden; rechts der daraus erzeugte Planungsbrief an die Key-Account-Manager mit Zeitraum und Prämissen. Unten der Knopf „Vorgabewerte veröffentlichen“.",
+   "datei": "Exemplarische_Praemissenplanung"
   }
  }
 }

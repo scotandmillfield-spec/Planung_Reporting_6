@@ -1,0 +1,85 @@
+﻿Stand;Projekt_ID;Projekt;Status;Verantwortung;Geschäftsbereich;Funktionsbereich;BSC_Perspektive;Plan_Kosten_TEUR;Nutzwert;Risikoindex;Risiko_dVQ;Feld;Kapitalwert_TEUR
+30.06.2025;1;Übernahme Digitalanbieter;Planung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;8;74;;absichern;2360
+30.09.2025;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;8;76;2;absichern;2360
+31.12.2025;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;8;78;2;absichern;2360
+31.03.2026;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;8;80;2;absichern;2360
+30.06.2026;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;8;82;2;absichern;2360
+30.06.2025;2;Markteintritt Osteuropa;Idee;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;9;75;;absichern;3150
+30.09.2025;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;9;75;0;absichern;3150
+31.12.2025;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;9;75;0;absichern;3150
+31.03.2026;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;9;75;0;absichern;3150
+30.06.2026;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;9;75;0;absichern;3150
+30.06.2025;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;8;56;;absichern;2480
+30.09.2025;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;8;54;-2;absichern;2480
+31.12.2025;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;8;52;-2;absichern;2480
+31.03.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;8;50;-2;absichern;2480
+30.06.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;8;48;-2;umsetzen;2480
+31.12.2025;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;7;35;;umsetzen;1900
+31.03.2026;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;7;35;0;umsetzen;1900
+30.06.2026;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;7;35;0;umsetzen;1900
+30.06.2025;5;Digitales Mahnwesen;Umsetzung;Herr Sieg;Zentral;Finanzen;Prozesse;60;5;15;;umsetzen;
+30.09.2025;5;Digitales Mahnwesen;Umsetzung;Herr Sieg;Zentral;Finanzen;Prozesse;60;5;15;0;umsetzen;
+31.12.2025;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;5;15;0;umsetzen;
+31.03.2026;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;5;15;0;umsetzen;
+30.06.2026;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;5;15;0;umsetzen;
+30.09.2025;6;Online-Akquiseplattform;Idee;Frau Tamm;Service;Vertrieb;Kunden;1030;8;66;;absichern;820
+31.12.2025;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;8;70;4;absichern;820
+31.03.2026;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;8;74;4;absichern;820
+30.06.2026;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;8;78;4;absichern;820
+30.06.2025;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;4,5;48;;nachrangig;900
+30.09.2025;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;4,5;53;5;prüfen;900
+31.12.2025;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;4,5;58;5;prüfen;900
+31.03.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;4,5;63;5;prüfen;900
+30.06.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;4,5;68;5;prüfen;900
+30.06.2025;8;Ersatzteil-Webshop;Idee;Herr Schwerdt;Service;Vertrieb;Kunden;750;6;40;;umsetzen;610
+30.09.2025;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;6;40;0;umsetzen;610
+31.12.2025;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;6;40;0;umsetzen;610
+31.03.2026;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;6;40;0;umsetzen;610
+30.06.2026;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;6;40;0;umsetzen;610
+30.06.2025;9;Produktlinie AT20;Idee;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;7,5;70;;absichern;1400
+30.09.2025;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;7,5;67;-3;absichern;1400
+31.12.2025;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;7,5;64;-3;absichern;1400
+31.03.2026;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;7,5;61;-3;absichern;1400
+30.06.2026;9;Produktlinie AT20;Umsetzung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;7,5;58;-3;absichern;1400
+30.06.2025;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;6,5;64;;absichern;3800
+30.09.2025;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;6,5;66;2;absichern;3800
+31.12.2025;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;6,5;68;2;absichern;3800
+31.03.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;6,5;70;2;absichern;3800
+30.06.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;6,5;72;2;absichern;3800
+30.06.2025;11;Digitaler Serviceprozess;Planung;Frau Schwarz;Service;IT;Prozesse;960;6;63;;absichern;700
+30.09.2025;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;6;61;-2;absichern;700
+31.12.2025;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;6;59;-2;absichern;700
+31.03.2026;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;6;57;-2;absichern;700
+30.06.2026;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;6;55;-2;absichern;700
+30.06.2025;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;5,5;40;;umsetzen;450
+30.09.2025;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;5,5;43;3;umsetzen;450
+31.12.2025;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;5,5;46;3;umsetzen;450
+31.03.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;5,5;49;3;umsetzen;450
+30.06.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;5,5;52;3;absichern;450
+30.06.2025;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;8;16;;umsetzen;2100
+30.09.2025;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;8;15;-1;umsetzen;2100
+31.12.2025;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;8;14;-1;umsetzen;2100
+31.03.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;8;13;-1;umsetzen;2100
+30.06.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;8;12;-1;umsetzen;2100
+30.06.2025;14;Projektmanagement-Office;Planung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;4;52;;prüfen;
+30.09.2025;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;4;55;3;prüfen;
+31.12.2025;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;4;58;3;prüfen;
+31.03.2026;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;4;61;3;prüfen;
+30.06.2026;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;4;64;3;prüfen;
+30.09.2025;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;7;28;;umsetzen;
+31.12.2025;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;7;28;0;umsetzen;
+31.03.2026;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;7;28;0;umsetzen;
+30.06.2026;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;7;28;0;umsetzen;
+30.06.2025;16;Gebäudesanierung Werk 2;Idee;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;3;40;;nachrangig;
+30.09.2025;16;Gebäudesanierung Werk 2;Idee;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;3;40;0;nachrangig;
+31.12.2025;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;3;40;0;nachrangig;
+31.03.2026;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;3;40;0;nachrangig;
+30.06.2026;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;3;40;0;nachrangig;
+31.03.2026;17;Energiesparende Anlagen;Idee;Frau Lotz;Lineartechnik;Produktion;Finanzen;1060;3;30;;nachrangig;900
+30.06.2026;17;Energiesparende Anlagen;Idee;Frau Lotz;Lineartechnik;Produktion;Finanzen;1060;3;30;0;nachrangig;900
+30.06.2025;18;Führungskräfteentwicklung;Idee;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;8;25;;umsetzen;
+30.09.2025;18;Führungskräfteentwicklung;Planung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;8;25;0;umsetzen;
+31.12.2025;18;Führungskräfteentwicklung;Planung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;8;25;0;umsetzen;
+31.03.2026;18;Führungskräfteentwicklung;Umsetzung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;8;25;0;umsetzen;
+30.06.2026;18;Führungskräfteentwicklung;Umsetzung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;8;25;0;umsetzen;
+30.06.2026;19;Produktlinie AT40;Idee;Herr West;Antriebstechnik;F&E;Kunden;2300;3;70;;prüfen;1200

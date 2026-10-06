@@ -251,6 +251,23 @@
    ],
    "alt": "Dashboard „Balanced Chance and Risk Card“ der Unternehmensleitung, Stand 30.06.2026. Links die strategischen Ziele und Kennzahlen in den Perspektiven Finanzen; Markt, Kunde, Produkt; Prozesse; Organisation und Mitarbeiter mit Forecast, Plan und der Abweichung zum Plan als Balken: 15 von 24 Kennzahlen liegen hinter Plan, am weitesten das Umsatzwachstum mit −40 %. Rechts zu jeder Kennzahl die Maßnahme sowie eine Chance oder ein Risiko mit fünfstufiger Eintrittswahrscheinlichkeit und Wert; der Saldo aus Chancen und Risiken beträgt −16,1 Mio. €, größtes Risiko ist der Forderungsausfall mit −15,0 Mio. €.",
    "datei": "Exemplarische_Balanced_Chance_and_Risk_Card"
+  },
+  "3.4": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Als interaktives Dashboard neu aufgebaut (HTML für die Lernplattform, PNG für das Buch), gleicher Datensatz wie Abb. 3.3 und 3.5 – Relevanz, Risiko und Plan-Kosten stimmen mit dem Portfolio der Projektroadmap überein",
+    "19 statt 21 Projekte wie in Abb. 3.3 und 3.5 (Namen angeglichen, z. B. „Zukauf Digital GmbH“ → „Übernahme Digitalanbieter“) – prüfen, ob das zum Buchtext passt",
+    "Stand 06-2025 des Originals → Berichtsstand 30.06.2026 wie Abb. 3.3 und 3.5; Filter „Firma“ entfällt (kein Unternehmen im Buch), „BCR-Felder“ als BSC-Perspektive wie in Abb. 3.5",
+    "Achsen „Strategische Relevanz (Nutzwert)“ und „Strategisches Risiko (Risikoindex)“ verbinden die Begriffe des Originals mit denen der Projektroadmap",
+    "Vier Felder an den Grenzen Relevanz 5 und Risiko 50: umsetzen, absichern, prüfen, nachrangig – Namen sind ein Vorschlag, fachlich prüfen (Original nur „niedrig/hoch“ an den Achsen, Tippfehler „niedrieg“)",
+    "Namensliste des Originals als Tabelle nach Feld; Nummern verbinden Kreise und Zeilen; neu ist die Veränderung des Risikos zum Vorquartal (ΔVQ)",
+    "3D-Kugeln in rund 20 Farben und Legendenrest „Series3“ entfallen: alle Kreise anthrazit, flach, Fläche proportional zu den Plan-Kosten",
+    "Das erledigte Projekt „Digitales Mahnwesen“ bleibt im Portfolio, wie in Abb. 3.5",
+    "Daten erfunden und plausibel; Caption „Strategisches Projektportfolio“ = Berichtstitel"
+   ],
+   "alt": "Dashboard „Strategisches Projektportfolio“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Links ein Portfolio der 19 strategischen Projekte aus strategischem Risiko (Risikoindex 0–100, waagerecht) und strategischer Relevanz (Nutzwert 0–10, senkrecht), die Kreisfläche zeigt die Plan-Kosten; Grenzen bei 50 und 5 teilen es in die Felder umsetzen, absichern, prüfen und nachrangig. 7 Projekte im Feld „absichern“ binden 55 % der Plan-Kosten. Rechts eine nummerierte Tabelle der Projekte nach Feld mit Relevanz, Risiko und Veränderung des Risikos zum Vorquartal: Das Risiko steigt bei 6 Projekten, am stärksten bei der CRM-Einführung (+5).",
+   "datei": "Strategisches_Projektportfolio"
   }
  }
 }

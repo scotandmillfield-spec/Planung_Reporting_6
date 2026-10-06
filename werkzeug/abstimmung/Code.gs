@@ -19,7 +19,7 @@
  */
 
 const PASSWORT = 'bitte-aendern';
-const RUECKMELDUNGEN = 'https://raw.githubusercontent.com/scotandmillfield-spec/planung_reporting_6/main/werkzeug/abstimmung/rueckmeldungen.json';
+const RUECKMELDUNGEN = 'https://raw.githubusercontent.com/scotandmillfield-spec/Planung_Reporting_6/main/werkzeug/abstimmung/rueckmeldungen.json';
 const BLATT = 'Status';
 const STATUSWERTE = ['offen', 'in Arbeit', 'zur Prüfung', 'Revision', 'Nächste Version', 'Änderung nötig', 'Klärung nötig',
                      'freigegeben', 'entfällt'];

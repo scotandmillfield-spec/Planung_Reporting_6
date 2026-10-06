@@ -1,0 +1,51 @@
+<!-- Selbsttest: alle Bausteine von maskkit in einer kleinen Maske (Kostenstellenplanung, Zahlen erfunden). -->
+<style>
+  #bausteine { --sp-label: 150px; --sp-feld: 200px; }
+  #bausteine table.mk-tabelle th.zahl { text-align: right; }
+  #bausteine table.mk-tabelle .mk-feld { width: 96px; }
+  #bausteine table.mk-tabelle td:first-child { width: 220px; }
+  #bausteine .optionen { display: flex; gap: 18px; align-items: center; }
+</style>
+<form class="mk-maske" id="bausteine" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span>Kostenstellenplanung</span><span class="mk-kopf-info">Budget 2027</span></div>
+  <div class="mk-inhalt">
+    <div class="mk-reiter" id="reiter"><span class="aktiv">Erfassung</span><span>Übersicht</span><span>Protokoll</span></div>
+    <section class="mk-abschnitt">
+      <div class="mk-band" id="band-auswahl">Auswahl</div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-kst">Kostenstelle</label>
+        <select class="mk-feld" id="f-kst"><option>4100 Vertrieb Inland</option><option>4200 Vertrieb Export</option></select>
+      </div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-stichtag">Stichtag</label>
+        <input class="mk-feld mk-datum" id="f-stichtag" value="30.09.2026" style="width:96px">
+      </div>
+      <div class="mk-zeile">
+        <span class="mk-label">Darstellung</span>
+        <div class="optionen">
+          <label class="mk-option"><input type="radio" class="mk-check" name="einheit" checked> Tsd. €</label>
+          <label class="mk-option"><input type="radio" class="mk-check" name="einheit"> €</label>
+          <label class="mk-option"><input type="checkbox" class="mk-check" id="f-vj" checked> Vorjahr zeigen</label>
+        </div>
+      </div>
+    </section>
+    <section class="mk-abschnitt">
+      <div class="mk-band" id="band-werte">Planwerte in Tsd. €</div>
+      <table class="mk-tabelle" id="tabelle">
+        <thead><tr><th>Kostenart</th><th class="zahl">Vorjahr</th><th class="zahl">Plan</th><th class="zahl">Abweichung</th></tr></thead>
+        <tbody>
+          <tr><td>Personalkosten</td><td><div class="mk-feld mk-anzeige mk-zahl">1.240,0</div></td><td><input class="mk-feld mk-zahl" value="1.288,0"></td><td><div class="mk-feld mk-anzeige mk-zahl">48,0</div></td></tr>
+          <tr><td>Reisekosten</td><td><div class="mk-feld mk-anzeige mk-zahl">96,5</div></td><td><input class="mk-feld mk-zahl" value="90,0"></td><td><div class="mk-feld mk-anzeige mk-zahl">−6,5</div></td></tr>
+        </tbody>
+      </table>
+      <div class="mk-zeile" style="margin-top:10px; --sp-feld: 512px">
+        <label class="mk-label" for="f-kommentar">Kommentar</label>
+        <textarea class="mk-feld" id="f-kommentar" rows="2">Tariferhöhung ab April berücksichtigt; Messe in Hannover entfällt.</textarea>
+      </div>
+      <div class="mk-knopfleiste">
+        <button type="button" class="mk-knopf" id="k-speichern">Speichern</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-abbrechen">Abbrechen</button>
+      </div>
+    </section>
+  </div>
+</form>

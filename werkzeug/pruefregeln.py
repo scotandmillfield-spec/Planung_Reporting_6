@@ -186,8 +186,8 @@ def pruefe(nr, art, caption):
         if v2 != v:
             kom.append("„eigene Darstellung“ nur in einzelnen Captions – für eigene Abbildungen entfällt die Angabe")
             v = v2
-    # Quellenformel bei Neuzeichnung
-    if art in ("D", "V"):
+    # Quellenformel bei Neuzeichnung (Eingabemasken werden ebenfalls neu gebaut)
+    if art in ("D", "V", "M"):
         v2 = v
         for q in QUELLENFORMELN:
             v2 = re.sub(r"\(" + q, "(In Anlehnung an ", v2)

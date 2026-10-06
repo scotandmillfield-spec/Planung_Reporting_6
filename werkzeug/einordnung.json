@@ -115,14 +115,14 @@
   "folie": 17,
   "nr": "3.7",
   "titel": "Exemplarische Prämissenplanung",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 18,
   "nr": "3.8",
   "titel": "Exemplarische Top-Down-Vorgaben und Abstimmungen",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -150,7 +150,7 @@
   "folie": 22,
   "nr": "3.12",
   "titel": "Reporting- und Planungskalender mit prevero",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -654,14 +654,14 @@
   "folie": 94,
   "nr": "3.179",
   "titel": "Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung mit prevero.",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 95,
   "nr": "3.180",
   "titel": "Integrierte Planungsfunktionen in Power BI mit Power ON von Insightsoftware (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -675,42 +675,42 @@
   "folie": 97,
   "nr": "3.182",
   "titel": "Exemplarische Balanced Scorecard Planung mit SAP NetWeaver-Technologie. (Entnommen aus Schön et al. 2010, S. 25)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 98,
   "nr": "3.183",
   "titel": "Rollierende Absatzplanung mit dem Cubeware-Cockpit",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 99,
   "nr": "3.184",
   "titel": "Selektive Gruppenplanung von Preisveränderungen und Konditionen. (Quelle: Schön",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 100,
   "nr": "3.185",
   "titel": "Detaillierte Umsatzplanung auf Ebene Kunde/Artikel. (Quelle: Schön und Irmer 2010, S. 52. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 101,
   "nr": "3.186",
   "titel": "Exemplarische Zuschläge in der Einkaufspreisplanung. (Quelle: Schön und Irmer 2009, S. 296. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 102,
   "nr": "3.187",
   "titel": "Detail-Planungsmaske für die Einkaufspreisplanung. (Quelle: Schön und Irmer 2010, S. 54. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -724,7 +724,7 @@
   "folie": 104,
   "nr": "3.189",
   "titel": "Planungsformular Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 253. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -738,7 +738,7 @@
   "folie": 106,
   "nr": "3.191",
   "titel": "Planungsformular Kapazitätsbedarf Anlagen. (Quelle: Schön und Irmer 2010, S. 55. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -1473,7 +1473,7 @@
   "folie": 211,
   "nr": "5.72",
   "titel": "Standardbericht SAP ERP CC (Selektionsmaske)",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -1487,7 +1487,7 @@
   "folie": 213,
   "nr": "5.74",
   "titel": "Planungsformular SAP ERP CC",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -1515,7 +1515,7 @@
   "folie": 217,
   "nr": "5.78",
   "titel": "Hyperion Planning: Mehrdimensionale Planungsformulare",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -1536,14 +1536,14 @@
   "folie": 220,
   "nr": "5.81",
   "titel": "Hyperion Planning: Kommentarfunktion",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
   "folie": 221,
   "nr": "5.82",
   "titel": "Hyperion Planning: Workflowkomponente",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  },
  {
@@ -1557,7 +1557,7 @@
   "folie": 223,
   "nr": "6.1",
   "titel": "Werttreiberbasierte Planung mit prevero Planung & Berichtswesen",
-  "art": "S",
+  "art": "M",
   "hinweis": ""
  }
 ]

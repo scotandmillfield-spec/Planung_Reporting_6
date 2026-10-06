@@ -60,8 +60,10 @@ ABSTIMMUNG = OrderedDict([
 # Anfangsstatus aus dem Stand der Umsetzung (gilt, solange die Tabelle nicht erreichbar ist)
 START = {"pruefung": "pruefung", "latex": "pruefung", "freigegeben": "freigegeben", "klaerung": "klaerung",
          "entfaellt": "entfaellt", "hinweis": "hinweis"}
-ART = {"D": "Diagramm", "V": "Dashboard/Visual", "S": "Screenshot", "T": "Tabelle", "DUP": "Duplikat", "X": "Hinweis"}
-WEG = {"D": "neu als PNG + PPTX", "V": "neu als PNG + HTML", "S": "Skill Screenshots", "T": "LaTeX-Tabelle"}
+ART = {"D": "Diagramm", "V": "Dashboard/Visual", "M": "Eingabemaske", "S": "Screenshot", "T": "Tabelle", "DUP": "Duplikat",
+       "X": "Hinweis"}
+WEG = {"D": "neu als PNG + PPTX", "V": "neu als PNG + HTML", "M": "neu als HTML + PNG + PDF + PPTX (Skill Eingabemasken)",
+       "S": "Screenshot – Weg klären", "T": "LaTeX-Tabelle"}
 OFFEN_MUSTER = re.compile(r"prüfen|klären|\?|abgleichen|angleichen|unterscheiden|welche|gleichsetzen|vereinheitlichen")
 
 
@@ -239,7 +241,7 @@ def eintraege():
         if stem and p.get("datei"):
             stem = p["datei"]                            # aktueller Dateiname (Kurzname der Caption)
         cap_alt = caption_aus_notiz(notiz.get(folie, "")) if art != "X" else "Abbildungen zu Kapitel 3.9"
-        if art in ("D", "V", "S", "T"):
+        if art in ("D", "V", "M", "S", "T"):
             cap_neu, cap_kom = pruefe(schluessel if art == "T" else nr, art, cap_alt)
         else:
             cap_neu, cap_kom = cap_alt, []
@@ -383,7 +385,7 @@ def luecken(liste):
     abb = {}
     tab = {}
     for x in liste:
-        if x["art"] in ("D", "V", "S"):
+        if x["art"] in ("D", "V", "M", "S"):
             k, n = x["nr"].split(".")
             abb.setdefault(k, set()).add(int(n))
         elif x["art"] == "T":
@@ -750,7 +752,7 @@ def seite(liste):
         f"<option value='{s}'>{e(t)}</option>" for s, t in ABSTIMMUNG.items())
     arten = Counter(x["art"] for x in liste)
     art_opt = "<option value=''>Alle Arten</option>" + "".join(
-        f"<option value='{a}'>{e(ART[a])} ({arten[a]})</option>" for a in ("D", "V", "S", "T", "DUP", "X") if arten[a])
+        f"<option value='{a}'>{e(ART[a])} ({arten[a]})</option>" for a in ("D", "V", "M", "S", "T", "DUP", "X") if arten[a])
     tabelle = (f" · <a href='{e(konfig['tabelle'])}' target='_blank' rel='noopener'>Tabelle öffnen</a>"
                if konfig.get("tabelle") else "")
     js = JS.replace("__KONFIG__", json.dumps({"webapp": konfig.get("webapp", "")}, ensure_ascii=False)) \
@@ -771,7 +773,9 @@ def seite(liste):
         "<li>„LaTeX kopieren“ legt den Code der Tabelle in die Zwischenablage – direkt in Overleaf einfügen. "
         "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label (aus der Caption gebildet, nicht aus der Nummer); dafür die Datei aus "
         "<code>abbildungen/</code> nach <code>author/content/</code> in Overleaf hochladen. Querformate (Dashboards und "
-        "Abbildungen) werden als PNG um 90° gedreht auf einer Hochformatseite eingebunden. „PNG-Link kopieren“ legt "
+        "Abbildungen) werden als PNG um 90° gedreht auf einer Hochformatseite eingebunden. Eingabemasken (Screenshots aus "
+        "Planungssoftware) werden softwareneutral als HTML5 nachgebaut; HTML, PNG, PDF und PPTX entstehen aus derselben "
+        "Druckfassung, die HTML-Fassung ist bedienbar. „PNG-Link kopieren“ legt "
         f"den Link auf das PNG der Plattform in die Zwischenablage (<code>{PLATTFORM_URL}abbildungen/kapN/….png</code>).</li>"
         "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "
         "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"

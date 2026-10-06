@@ -135,6 +135,7 @@ const MK = (() => {
         d.appendChild(pfeil("mk-pfeil"));
       } else if (f.tagName === "TEXTAREA") {
         d = el("div", { class: f.className + " mk-mehrzeilig" }, undefined, f.value);
+        d.style.height = f.offsetHeight + "px";               // Höhe aus rows übernehmen
       } else if (f.tagName === "BUTTON") {
         d = el("div", { class: f.className }, undefined, f.textContent);
       } else if (f.type === "hidden") {
@@ -142,7 +143,7 @@ const MK = (() => {
       } else {
         d = el("div", { class: f.className }, undefined, f.value);
       }
-      if (!(d instanceof SVGElement)) kopieAttribute(f, d);
+      if (!(d instanceof SVGElement)) { const h = d.style.height; kopieAttribute(f, d); if (h) d.style.height = h; }
       f.replaceWith(d);
     });
   }

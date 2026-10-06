@@ -13,7 +13,7 @@ import sys
 GEOMETRIE = """() => {
   const m = document.querySelector('.mk-maske'), R = m.getBoundingClientRect(), s = R.width / m.offsetWidth;
   return [...m.querySelectorAll('.mk-feld, .mk-knopf, .mk-label, .mk-band, .mk-gruppenkopf, .mk-textbereich, .mk-check, .mk-check-druck')]
-    .filter(e => e.offsetParent).map(e => { const r = e.getBoundingClientRect();
+    .filter(e => e.offsetParent || (e instanceof SVGElement && e.getBoundingClientRect().width)).map(e => { const r = e.getBoundingClientRect();
       return [e.className.baseVal !== undefined ? 'check' : e.className.split(' ')[0], (r.left - R.left) / s, (r.top - R.top) / s, r.width / s, r.height / s]; });
 }"""
 

@@ -134,6 +134,8 @@ def latex_text(s):
 
 # Pfad aller Abbildungen im Overleaf-Projekt des Buchs (author/content/abbildungen/kapN/…)
 OVERLEAF_PFAD = "author/content/"
+# Veröffentlichte Inventur (GitHub Pages) – Grundlage für die Links auf die PNGs der Lernplattform
+PLATTFORM_URL = "https://scotandmillfield-spec.github.io/Planung_Reporting_6/"
 
 
 def quer_latex(nr, caption, datei):
@@ -450,8 +452,8 @@ def karte(x):
         was = "LaTeX kopieren" if x["tex"] else "LaTeX (figure) kopieren"
         knoepfe.append(f"<button class='kn kopie' data-ziel='tex-{x['anker']}'>{was}</button>")
     if "PNG" in x["dateien"]:
-        pfad = OVERLEAF_PFAD + x["dateien"]["PNG"]
-        knoepfe.append(f"<button class='kn kopie' data-text='{e(pfad)}' title='{e(pfad)}'>PNG-Pfad kopieren</button>")
+        link = PLATTFORM_URL + x["dateien"]["PNG"]
+        knoepfe.append(f"<button class='kn kopie' data-text='{e(link)}' title='{e(link)}'>PNG-Link kopieren</button>")
     if knoepfe:
         teile.append("<nav class='dateien'>" + "".join(knoepfe) + "</nav>")
     if x["quellen"]:
@@ -769,8 +771,8 @@ def seite(liste):
         "<li>„LaTeX kopieren“ legt den Code der Tabelle in die Zwischenablage – direkt in Overleaf einfügen. "
         "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label (aus der Caption gebildet, nicht aus der Nummer); dafür die Datei aus "
         "<code>abbildungen/</code> nach <code>author/content/</code> in Overleaf hochladen. Querformate (Dashboards und "
-        "Abbildungen) werden als PNG um 90° gedreht auf einer Hochformatseite eingebunden. „PNG-Pfad kopieren“ legt "
-        "den vollständigen Pfad <code>author/content/abbildungen/kapN/….png</code> in die Zwischenablage.</li>"
+        "Abbildungen) werden als PNG um 90° gedreht auf einer Hochformatseite eingebunden. „PNG-Link kopieren“ legt "
+        f"den Link auf das PNG der Plattform in die Zwischenablage (<code>{PLATTFORM_URL}abbildungen/kapN/….png</code>).</li>"
         "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "
         "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"
         "<li>„Hinweise aus der Umsetzung“ sind die Anmerkungen beim Neuzeichnen; rote Punkte markieren Stellen, "

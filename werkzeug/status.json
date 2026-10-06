@@ -334,6 +334,23 @@
    "alt": "Dashboard „Break-Even-Point-Analyse“ für ein Produkt im Planjahr. Oben die Ausgangsdaten als Datenschnitte: 1.000 Stück Absatz je Monat, Preis 375 € und variable Kosten 250 € je Stück, Fixkosten 1.150 Tsd. € je Jahr. Die Kennzahlenleiste nennt mit Rechenweg den Deckungsbeitrag von 125 € je Stück, die Break-Even-Menge von 9.200 Stück, den Break-Even-Umsatz von 3.450 Tsd. €, das Erreichen im Oktober und ein Jahresergebnis von +350 Tsd. €. Links das Break-Even-Diagramm: Über der kumulierten Absatzmenge von 0 bis 12.000 Stück (darunter die Monate) steigen Umsatz- und Gesamtkostenlinie, die Fixkosten bilden eine waagerechte Linie; bis zum Schnittpunkt bei 9.200 Stück liegt die rote Verlustzone, danach die blaugrüne Gewinnzone. Rechts eine Tabelle mit Absatz, Umsatz, Gesamtkosten und Ergebnis kumuliert je Monat; das Ergebnis steigt von −1.025 Tsd. € im Januar auf +350 Tsd. € im Dezember und wird im Oktober positiv.",
    "caption": "Break-Even-Point-Analyse",
    "datei": "Break-Even-Point-Analyse"
+  },
+  "3.8": {
+   "status": "pruefung",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Eingabemaske neu gebaut (HTML für die Lernplattform, PNG, Vektor-PDF und PPTX für das Buch); 110 mm breit, im LaTeX als PDF ohne Skalierung",
+    "Fensterrahmen, Menü- und Symbolleiste, Produktname, Navigationsleiste (Prozess, Planung, Simulation, Reporting), Klappsymbole und Bildlaufleisten entfallen",
+    "Werte des Originals unverändert, nur in Mio. € mit einer Nachkommastelle (Einheit einmal in der Kopfleiste): Vorgabe 117,0; Gesellschaften 77,0 / 34,0 / 1,0 (Holding 112,0); Maßnahmen 1,7 / 1,4 / 1,5 (4,6); Differenz −0,4; Bereiche 36,0 / 41,0 und 22,0 / 12,0",
+    "Logik nachgebildet: Holding = Summe der Gesellschaften; Differenz = Summe + Maßnahmen − Vorgabe; neu je Gesellschaft der Bereichsebene Vorgabe und Differenz (zweite Abstimmung, im Original nicht sichtbar) und ein Statusfeld „abgestimmt / nicht abgestimmt“ statt roter Fläche",
+    "BUD 2012 → Budget 2027; „Umsatz - Umsatz“ → „Umsatz“; „GB Großkunden“ und „GB Massengeschäft“ ohne Kürzel wie die übrigen Bereiche",
+    "In der Lernplattform zusätzlich die Zielgrößen Deckungsbeitrag und Ergebnis vor Steuern mit erfundenen, stimmigen Werten (Ergebnis ist abgestimmt); Druck zeigt Umsatz wie das Original",
+    "Fachlich prüfen: „Kosteneinsparung“ ist im Original eine Maßnahme zur Erreichung eines Umsatzziels – passt eher zu Deckungsbeitrag oder Ergebnis. Unverändert übernommen",
+    "Hinweis in den Erläuterungen: Summe der Gesellschaften ohne Konsolidierung (Innenumsätze zwischen Produktions- und Vertriebs GmbH wären herauszurechnen)",
+    "Unterhalb von „GB Großkunden“ setzt sich im Original ein Baum fort, der im Buchausschnitt abgeschnitten ist – nicht übernommen"
+   ],
+   "alt": "Eingabemaske „Top-Down-Vorgabe“ für das Budget 2027, Werte in Mio. €. Oben die Auswahl von Periode, Variante und Zielgröße (Umsatz) mit der Vorgabe von 117,0, der Differenz zur Vorgabe von −0,4 und dem Status „nicht abgestimmt, Lücke“; rechts drei Maßnahmen zur Zielerreichung (neuer Vertriebskanal 1,7, Kosteneinsparung 1,4, Effizienzsteigerung 1,5, zusammen 4,6). Darunter ein Organigramm: Die Holding mit 112,0 verteilt sich auf Vertriebs GmbH (77,0), Produktions GmbH (34,0) und Neu GmbH (1,0). Im Abschnitt Bereiche verteilt die Vertriebs GmbH ihre Vorgabe auf Großkunden (36,0) und Massengeschäft (41,0), die Produktions GmbH auf Wintersport (22,0) und Sommersport (12,0); beide Differenzen sind ±0,0.",
+   "caption": "Exemplarische Top-Down-Vorgaben und Abstimmungen",
+   "datei": "Exemplarische_Top-Down-Vorgaben_und_Abstimmungen"
   }
  }
 }

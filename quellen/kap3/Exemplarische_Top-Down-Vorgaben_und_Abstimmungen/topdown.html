@@ -1,0 +1,134 @@
+<!-- Abb. 3.8 „Exemplarische Top-Down-Vorgaben und Abstimmungen“: Maske „Top-Down-Vorgabe“ (softwareneutral nachgebaut).
+     Raster: Maske 727 px = 110 mm; Inhalt 695 px = linke Spalte 360 (Beschriftung 160 · 8 · Feld 192) · 20 · rechte Spalte 315.
+     Organigramme: Knoten 156 px breit, absolut gesetzt; Verbindungslinien als SVG (werden mit exportiert). -->
+<style>
+  #topdown { --sp-label: 160px; --sp-feld: 192px; --sp-links: 360px; --sp-rechts: 315px; }
+  #topdown .mass-zeile { display: grid; grid-template-columns: 225px 82px; column-gap: 8px; align-items: center; }
+  #topdown .mass-zeile + .mass-zeile { margin-top: 4px; }
+  #topdown .mass-summe { margin-top: 4px; }
+  #topdown .mass-summe .mk-label { text-align: right; }
+  #topdown .mass-link { display: block; height: 18px; margin-top: 6px; width: max-content; }
+  #topdown .baum { position: relative; margin-top: 16px; }
+  #topdown .baum > svg { position: absolute; left: 0; top: 0; }
+  #topdown .knoten { position: absolute; width: 156px; border: 1px solid var(--rahmen); border-radius: 2px;
+    padding: 5px 6px 6px; background: #FFFFFF; }
+  #topdown .knoten > .mk-label { display: block; height: 18px; margin-bottom: 4px; font-weight: bold; }
+  #topdown .kz { display: grid; grid-template-columns: 62px 74px; column-gap: 6px; align-items: center; }
+  #topdown .kz + .kz { margin-top: 4px; }
+</style>
+<form class="mk-maske" id="topdown" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span>Top-Down-Vorgabe</span><span class="mk-kopf-info" id="kopf-info">Werte in Mio. €</span></div>
+  <div class="mk-inhalt">
+
+    <section class="mk-abschnitt" id="abschnitt-ges">
+      <div class="mk-band" id="band-ges">Top-Down-Vorgabe – Gesellschaften</div>
+      <div class="mk-spalten">
+        <div class="links">
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-periode">Periode</label>
+            <select class="mk-feld" id="f-periode"><option value="B2027" selected>Budget 2027 – Vorgabe</option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-variante">Variante</label>
+            <select class="mk-feld" id="f-variante"><option value="std" selected>Standard</option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-zielgroesse">Zielgröße</label>
+            <select class="mk-feld" id="f-zielgroesse"></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-vorgabe" id="l-vorgabe">Vorgabe</label>
+            <input class="mk-feld mk-zahl" id="f-vorgabe" inputmode="decimal" data-hilfe="Betrag in Mio. € mit Dezimalkomma, z. B. 117,0">
+          </div>
+          <div class="mk-zeile">
+            <span class="mk-label" id="l-differenz">Differenz zur Vorgabe</span>
+            <div class="mk-feld mk-anzeige mk-zahl" id="f-differenz"></div>
+          </div>
+          <div class="mk-zeile">
+            <span class="mk-label">Status</span>
+            <div class="mk-feld mk-anzeige" id="f-status"></div>
+          </div>
+        </div>
+
+        <div class="mk-gruppe" id="g-massnahmen">
+          <div class="mk-gruppenkopf" id="kopf-massnahmen">Maßnahmen zur Zielerreichung</div>
+          <div id="massnahmen"><!-- Zeilen erzeugt topdown.js --></div>
+          <div class="mass-zeile mass-summe">
+            <span class="mk-label mk-neben">Summe Maßnahmen</span>
+            <div class="mk-feld mk-anzeige mk-zahl" id="f-mass-summe"></div>
+          </div>
+          <a class="mk-link mass-link" id="l-neu">Maßnahme hinzufügen</a>
+        </div>
+      </div>
+
+      <div class="baum" id="baum-ges" style="height:152px">
+        <svg width="695" height="152" viewBox="0 0 695 152" aria-hidden="true">
+          <line x1="348.5" y1="61" x2="348.5" y2="76.5" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="113" y1="76.5" x2="584" y2="76.5" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="113.5" y1="76.5" x2="113.5" y2="91" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="348.5" y1="76.5" x2="348.5" y2="91" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="583.5" y1="76.5" x2="583.5" y2="91" stroke="#3A3F44" stroke-width="1"/>
+        </svg>
+        <div class="knoten" id="k-holding" style="left:270px;top:0">
+          <span class="mk-label">Holding</span>
+          <div class="mk-feld mk-anzeige mk-zahl" id="f-holding"></div>
+        </div>
+        <div class="knoten" id="k-vertrieb" style="left:35px;top:91px">
+          <label class="mk-label" for="g-vertrieb">Vertriebs GmbH</label>
+          <input class="mk-feld mk-zahl" id="g-vertrieb" inputmode="decimal" data-hilfe="Vorgabe für die Gesellschaft in Mio. €">
+        </div>
+        <div class="knoten" id="k-produktion" style="left:270px;top:91px">
+          <label class="mk-label" for="g-produktion">Produktions GmbH</label>
+          <input class="mk-feld mk-zahl" id="g-produktion" inputmode="decimal" data-hilfe="Vorgabe für die Gesellschaft in Mio. €">
+        </div>
+        <div class="knoten" id="k-neu" style="left:505px;top:91px">
+          <label class="mk-label" for="g-neu">Neu GmbH</label>
+          <input class="mk-feld mk-zahl" id="g-neu" inputmode="decimal" data-hilfe="Vorgabe für die Gesellschaft in Mio. €">
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-ber">
+      <div class="mk-band" id="band-ber">Top-Down-Vorgabe – Bereiche</div>
+      <div class="baum" id="baum-ber" style="height:182px;margin-top:0">
+        <svg width="695" height="182" viewBox="0 0 695 182" aria-hidden="true">
+          <line x1="174.5" y1="91" x2="174.5" y2="106.5" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="87" y1="106.5" x2="262" y2="106.5" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="87.5" y1="106.5" x2="87.5" y2="121" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="261.5" y1="106.5" x2="261.5" y2="121" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="521.5" y1="91" x2="521.5" y2="106.5" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="434" y1="106.5" x2="609" y2="106.5" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="434.5" y1="106.5" x2="434.5" y2="121" stroke="#3A3F44" stroke-width="1"/>
+          <line x1="608.5" y1="106.5" x2="608.5" y2="121" stroke="#3A3F44" stroke-width="1"/>
+        </svg>
+        <div class="knoten" id="k2-vertrieb" style="left:96px;top:0">
+          <span class="mk-label">Vertriebs GmbH</span>
+          <div class="kz"><span class="mk-label mk-neben">Vorgabe</span><div class="mk-feld mk-anzeige mk-zahl" id="v-vertrieb"></div></div>
+          <div class="kz"><span class="mk-label mk-neben">Differenz</span><div class="mk-feld mk-anzeige mk-zahl" id="d-vertrieb"></div></div>
+        </div>
+        <div class="knoten" id="k2-produktion" style="left:443px;top:0">
+          <span class="mk-label">Produktions GmbH</span>
+          <div class="kz"><span class="mk-label mk-neben">Vorgabe</span><div class="mk-feld mk-anzeige mk-zahl" id="v-produktion"></div></div>
+          <div class="kz"><span class="mk-label mk-neben">Differenz</span><div class="mk-feld mk-anzeige mk-zahl" id="d-produktion"></div></div>
+        </div>
+        <div class="knoten" id="k-grosskunden" style="left:9px;top:121px">
+          <label class="mk-label" for="b-grosskunden">Großkunden</label>
+          <input class="mk-feld mk-zahl" id="b-grosskunden" inputmode="decimal" data-hilfe="Vorgabe für den Bereich in Mio. €">
+        </div>
+        <div class="knoten" id="k-massen" style="left:183px;top:121px">
+          <label class="mk-label" for="b-massen">Massengeschäft</label>
+          <input class="mk-feld mk-zahl" id="b-massen" inputmode="decimal" data-hilfe="Vorgabe für den Bereich in Mio. €">
+        </div>
+        <div class="knoten" id="k-winter" style="left:356px;top:121px">
+          <label class="mk-label" for="b-winter">Wintersport</label>
+          <input class="mk-feld mk-zahl" id="b-winter" inputmode="decimal" data-hilfe="Vorgabe für den Bereich in Mio. €">
+        </div>
+        <div class="knoten" id="k-sommer" style="left:530px;top:121px">
+          <label class="mk-label" for="b-sommer">Sommersport</label>
+          <input class="mk-feld mk-zahl" id="b-sommer" inputmode="decimal" data-hilfe="Vorgabe für den Bereich in Mio. €">
+        </div>
+      </div>
+    </section>
+
+  </div>
+</form>

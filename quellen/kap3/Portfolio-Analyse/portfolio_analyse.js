@@ -1,0 +1,153 @@
+/* Einzelvisual „Portfolio-Analyse“ (Abb. 3.23).
+   Seite 727 x 604 px = 110 x 91,4 mm. Daten: portfolio_analyse.json – die fünf strategischen Geschäftseinheiten (SGE)
+   mit den Werten des Originals. Relativer Marktanteil = eigener Marktanteil / Marktanteil des stärksten Konkurrenten,
+   Umsatzanteil = Umsatz / Umsatz aller SGE (gleiche Formeln wie daten_portfolio_analyse.py).
+   Oben die Tabelle der Ausgangswerte, unten das Portfolio mit den Trennlinien des Originals (1,5 und 3 %). */
+(() => {
+  "use strict";
+  const { zahl, prozent, NBSP } = DK;
+  const GR = DATA.grenzen;
+  const GES = DATA.sge.reduce((s, z) => s + z[4], 0);
+  const R = DATA.sge.map(([sge, ma, mak, wachstum, umsatz], i) => ({ i, sge, ma, mak, rel: ma / mak, wachstum, umsatz, anteil: umsatz / GES }));
+  const FELDER = [
+    { key: "ol", text: `Wachstum ≥ ${zahl(GR.wachstum, 0)} %, rel. MA < ${zahl(GR.rel_ma, 1)}`, test: r => r.wachstum >= GR.wachstum && r.rel < GR.rel_ma },
+    { key: "or", text: `Wachstum ≥ ${zahl(GR.wachstum, 0)} %, rel. MA ≥ ${zahl(GR.rel_ma, 1)}`, test: r => r.wachstum >= GR.wachstum && r.rel >= GR.rel_ma },
+    { key: "ur", text: `Wachstum < ${zahl(GR.wachstum, 0)} %, rel. MA ≥ ${zahl(GR.rel_ma, 1)}`, test: r => r.wachstum < GR.wachstum && r.rel >= GR.rel_ma },
+    { key: "ul", text: `Wachstum < ${zahl(GR.wachstum, 0)} %, rel. MA < ${zahl(GR.rel_ma, 1)}`, test: r => r.wachstum < GR.wachstum && r.rel < GR.rel_ma },
+  ];
+  const feldVon = r => FELDER.find(f => f.test(r));
+  const und = l => (l.length < 2 ? l.join("") : l.slice(0, -1).join(", ") + " und " + l[l.length - 1]);
+  const pz = (v, nk) => zahl(v, nk) + NBSP + "%";
+
+  /* ---------- Zustand ---------- */
+  const S = { auswahl: null, sort: null };
+  function auswaehlen(k) { S.auswahl = S.auswahl === k ? null : k; zeichnen(); }
+  addEventListener("keydown", e => { if (e.key === "Escape" && S.auswahl != null) { S.auswahl = null; zeichnen(); } });
+
+  /* ---------- Layout ---------- */
+  DK.init({ titel: "Portfolio-Analyse", breite: 727, hoehe: 604 });
+  const bTab = DK.box("v-tabelle", 16, 12, 695, 180);
+  DK.haarlinie(202);
+  const bPort = DK.box("v-portfolio", 16, 212, 695, 380);
+
+  /* ---------- Berechnungen ---------- */
+  const SPALTEN = [
+    { key: "sge", titel: "SGE", breite: 40 },
+    { key: "ma", id: "sp-ma", titel: "Eigener MA", breite: 92, fmt: v => zahl(v, 1) },
+    { key: "mak", titel: "MA stärkster Konkurrent", breite: 180, fmt: v => zahl(v, 1) },
+    { key: "rel", id: "sp-rel", titel: "Relativer MA", breite: 100, fmt: v => zahl(v, 1) },
+    { key: "wachstum", titel: "Marktwachstum", breite: 120, fmt: v => zahl(v, 1) },
+    { key: "umsatz", titel: "Umsatz", breite: 70, fmt: v => zahl(v, 0) },
+    { key: "anteil", id: "sp-anteil", titel: "Umsatzanteil", breite: 93, fmt: v => zahl(v * 100, 1) },
+  ];
+  function tabellenDaten() {
+    const s = S.sort, liste = R.slice();
+    if (s) liste.sort((a, b) => {
+      const c = typeof a[s.key] === "string" ? a[s.key].localeCompare(b[s.key], "de") : a[s.key] - b[s.key];
+      return (s.ab ? -c : c) || a.i - b.i;
+    });
+    return liste.map(r => ({ key: r.sge, label: r.sge, r, werte: r }));
+  }
+  function sortieren(key) {
+    if (S.sort && S.sort.key === key) S.sort = { key, ab: !S.sort.ab };
+    else S.sort = { key, ab: key !== "sge" };
+    zeichnen();
+  }
+  function felderDaten() {
+    return FELDER.map(f => {
+      const rs = R.filter(f.test);
+      return { ...f, sge: rs.map(r => r.sge), umsatz: rs.reduce((s, r) => s + r.umsatz, 0), anteil: rs.reduce((s, r) => s + r.anteil, 0) };
+    });
+  }
+  function tooltipSGE(r) {
+    return [`SGE ${r.sge}`, `Eigener Marktanteil: ${pz(r.ma, 1)}`, `Marktanteil stärkster Konkurrent: ${pz(r.mak, 1)}`,
+      `Relativer Marktanteil: ${zahl(r.rel, 2)}${r.rel > 1 ? " (Marktführer)" : ""}`, `Marktwachstum: ${pz(r.wachstum, 1)}`,
+      `Umsatz: ${zahl(r.umsatz, 0)} Mio. € (${pz(r.anteil * 100, 1)})`, `Feld: ${feldVon(r).text}`, "Klick hebt die SGE hervor"];
+  }
+
+  // Botschaften (aus den Daten berechnet, Kurzfassung, falls die Zeile zu lang wird)
+  function botschaftTabelle(breite) {
+    const fuehrend = R.filter(r => r.rel > 1).map(r => r.sge), top = R.slice().sort((a, b) => b.umsatz - a.umsatz)[0];
+    const kurz = `${und(fuehrend)} ${fuehrend.length === 1 ? "führt seinen" : "führen ihren"} Markt (relativer MA über 1)`;
+    const lang = `${kurz}, ${top.sge} hat den größten Umsatzanteil (${pz(top.anteil * 100, 1)})`;
+    return DK.tw(lang) <= breite ? lang : kurz;
+  }
+  function botschaftPortfolio(breite) {
+    const f = felderDaten()[0];
+    if (!f.sge.length) return `keine SGE mit Marktwachstum ab ${zahl(GR.wachstum, 0)} % und relativem MA unter ${zahl(GR.rel_ma, 1)}`;
+    const kurz = `${und(f.sge)}: Marktwachstum ab ${zahl(GR.wachstum, 0)} %, relativer Marktanteil unter ${zahl(GR.rel_ma, 1)}`;
+    const lang = `${kurz} – zusammen ${prozent(f.anteil, 0)} des Umsatzes`;
+    return DK.tw(lang) <= breite ? lang : kurz;
+  }
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    const sel = S.auswahl;
+    let v = DK.visual(bTab, { titel: "Strategische Geschäftseinheiten", einheit: "Marktanteil (MA) und Wachstum in %, Umsatz in Mio. €",
+      botschaft: botschaftTabelle(bTab.clientWidth || 695) });
+    DK.matrix(v.flaeche, { spalten: SPALTEN, zeilen: tabellenDaten(), sortierung: S.sort, onSort: sortieren,
+      auswahl: sel, onClick: k => auswaehlen(k), tooltip: z => tooltipSGE(z.r) });
+
+    v = DK.visual(bPort, { titel: "Marktwachstum und relativer Marktanteil", einheit: "Kreisfläche = Umsatz",
+      botschaft: botschaftPortfolio(bPort.clientWidth || 695) });
+    DK.streuung(v.flaeche, { breite: v.breite, hoehe: v.hoehe, rMax: 32,
+      punkte: R.map(r => ({ key: r.sge, x: r.rel, y: r.wachstum, g: r.umsatz, r, label: r.sge })),
+      x: { min: 0, max: 3, ticks: [0, 0.5, 1, 1.5, 2, 2.5, 3], titel: "Relativer Marktanteil", fmt: t => zahl(t, 1) },
+      y: { min: 0, max: 6, ticks: [0, 1, 2, 3, 4, 5, 6], titel: "Marktwachstum in %", fmt: t => zahl(t, 0) },
+      linien: { x: GR.rel_ma, y: GR.wachstum },
+      auswahl: sel == null ? null : p => p.key === sel, onClick: k => auswaehlen(k),
+      aria: "Portfolio der fünf SGE aus relativem Marktanteil und Marktwachstum, Kreisfläche nach Umsatz",
+      tooltip: p => tooltipSGE(p.r) });
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
+  DK.ebenen({
+    regeln: [
+      { nr: 1, ziel: "v-tabelle", versatz: [0, 30], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage je Visual",
+        text: "Unter jedem Titel steht in einem Satz, was die Zahlen sagen: welche SGE ihren Markt führen und welche SGE in wachsenden Märkten nur einen geringen relativen Marktanteil haben. Das Original hatte nur den Titel „Portfolio-Analyse“ im Diagramm." },
+      { nr: 2, ziel: "v-portfolio", anker: "links", versatz: [89, 103], regel: "UNIFY – Semantische Notation", titel: "Eine Farbe für alle SGE",
+        text: "Alle Kreise sind anthrazit, denn die SGE unterscheiden sich durch ihre Lage, nicht durch eine Kategorie. Das Original färbte jede SGE anders (Blau, Weinrot, Hellgelb, Hellblau, Violett); die hellen Kreise verschwanden im Graustufendruck fast." },
+      { nr: 3, ziel: "v-portfolio", anker: "links", versatz: [653, 113], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Beschriftung statt Legende",
+        text: "Der Buchstabe steht direkt am Kreis. Die Legende „SGE A … SGE E“ rechts neben dem Diagramm entfällt und mit ihr das Hin- und Herschauen. Rahmen um Diagramm und Zeichenfläche sowie der Diagrammtitel im Bild entfallen ebenfalls." },
+      { nr: 4, ziel: "sp-ma", versatz: [36, 26], anker: "links", regel: "UNIFY – Zahlenformate", titel: "Ein Format je Größe",
+        text: "Alle Anteile und Wachstumsraten haben eine Nachkommastelle, die Einheit steht einmal im Titel. Das Original mischte „3,20%“, „4,2%“ und „23,15%“ und setzte das Prozentzeichen an jede Zahl." },
+      { nr: 5, ziel: "sp-rel", versatz: [36, 26], anker: "links", regel: "CONDENSE – Informationsdichte", titel: "Tabelle und Portfolio als Einheit",
+        text: "Die Tabelle liefert die Ausgangswerte, das Portfolio ihre Lage. Ein Klick auf eine Zeile oder einen Kreis hebt dieselbe SGE in beiden hervor; der Tooltip zeigt alle Werte und das Feld." },
+      { nr: 6, ziel: "v-portfolio", anker: "links", versatz: [471, 271], regel: "CHECK – Visuelle Integrität", titel: "Fläche proportional zum Umsatz",
+        text: "Die Kreisfläche, nicht der Durchmesser, wächst mit dem Umsatz: C (310 Mio. €) ist gut zweieinhalbmal so groß wie B und E (je 120 Mio. €). Beide Achsen beginnen bei null; die Kreise sind leicht transparent, damit Überlagerungen sichtbar bleiben." },
+      { nr: 7, ziel: "v-portfolio", anker: "links", versatz: [381, 77], regel: "EXPRESS – Passende Darstellung", titel: "Trennlinien als Hilfslinien",
+        text: "Die Grenzen bei relativem Marktanteil 1,5 und Marktwachstum 3 % stammen aus dem Original; sie sind gestrichelt, weil sie Bezugslinien und keine Daten sind. In der klassischen BCG-Matrix liegt die Grenze beim relativen Marktanteil bei 1,0 – ab dort führt eine SGE ihren Markt." },
+      { nr: 8, ziel: "sp-anteil", versatz: [36, 26], anker: "links", regel: "STRUCTURE – Inhalte ordnen", titel: "Feste Reihenfolge, sortierbar",
+        text: "Die SGE stehen in der Reihenfolge A bis E. Ein Klick auf einen Spaltenkopf sortiert die Tabelle, z. B. nach Umsatzanteil; ein zweiter Klick kehrt die Richtung um." },
+    ],
+    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 727 × 604 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Das Berichtsdesign (JSON) setzt Farben und Schriften. Datenmodell: eine Tabelle SGE mit den Spalten der CSV-Datei.",
+    nachbau: [
+      { id: "A", ziel: "v-tabelle", versatz: [0, 0], titel: "Strategische Geschäftseinheiten", visual: "Tabelle",
+        felder: "SGE, Eigener MA, MA stärkster Konkurrent, Relativer MA, Marktwachstum, Umsatz, Umsatzanteil (je ein Measure)",
+        format: "Anteile, Wachstum und relativer MA mit 1 Dezimalstelle, Umsatz ohne; Summen aus; Spaltenkopf mit Unterstrich #3A3F44, Zeilenrasterlinien #EFEFEF, sonst keine Rahmen",
+        hinweis: "Relativer MA = DIVIDE([Eigener MA]; [MA stärkster Konkurrent]), Umsatzanteil = DIVIDE([Umsatz]; CALCULATE([Umsatz]; ALL(SGE))) * 100. Beide Measures rechnen aus den Ausgangswerten, so stimmen Tabelle und Portfolio immer überein." },
+      { id: "B", ziel: "v-portfolio", versatz: [0, 120], titel: "Portfolio", visual: "Punktdiagramm",
+        felder: "Werte: SGE; X-Achse: Measure „Relativer MA“; Y-Achse: Marktwachstum; Größe: Umsatz; QuickInfos: Eigener MA, MA stärkster Konkurrent, Umsatzanteil",
+        format: "Achsen fest 0–3 und 0–6; Analysebereich: X-Konstantenlinie 1,5 und Y-Konstantenlinie 3, gestrichelt #9A9A9A; Markierung #3A3F44, 20 % Transparenz; Kategoriebeschriftungen an; Legende, Gitternetz und Rahmen aus",
+        hinweis: "Für die BCG-Grenze bei 1,0 nur den Wert der X-Konstantenlinie ändern." },
+      { id: "C", ziel: "v-tabelle", versatz: [0, 30], titel: "Kernaussagen", visual: "Textfeld mit dynamischem Wert",
+        felder: "Je Visual ein Text-Measure, z. B. CONCATENATEX(FILTER(SGE; [Relativer MA] > 1); SGE[SGE]; \", \") für die Marktführer",
+        format: "10,5 pt, #4D4D4D" },
+    ],
+    theme: DK.thema(),
+    csv: { name: "portfolio_analyse_daten.csv", text: () => {
+      const de = (v, nk) => v.toFixed(nk).replace(".", ",");
+      return ["SGE;Eigener_MA_Prozent;MA_staerkster_Konkurrent_Prozent;Relativer_MA;Marktwachstum_Prozent;Umsatz_Mio_EUR;Umsatzanteil_Prozent",
+        ...R.map(r => [r.sge, de(r.ma, 1), de(r.mak, 1), de(r.rel, 2), de(r.wachstum, 1), r.umsatz, de(r.anteil * 100, 2)].join(";"))].join("\r\n"); } },
+    tabellen: () => [
+      { titel: "Marktanteile in % (Konkurrent = stärkster Konkurrent)", kopf: ["SGE", "Eigener MA", "MA Konkurrent", "Relativer MA"],
+        zeilen: R.map(r => [r.sge, zahl(r.ma, 1), zahl(r.mak, 1), zahl(r.rel, 2)]) },
+      { titel: "Marktwachstum (in %) und Umsatz (Mio. €)", kopf: ["SGE", "Marktwachstum", "Umsatz", "Umsatzanteil"],
+        zeilen: [...R.map(r => [r.sge, zahl(r.wachstum, 1), zahl(r.umsatz, 0), zahl(r.anteil * 100, 1)]), ["Gesamt", "", zahl(GES, 0), zahl(100, 1)]] },
+      { titel: "Felder des Portfolios (Umsatzanteil in %)", kopf: ["Feld", "SGE", "Umsatzanteil"],
+        zeilen: felderDaten().map(f => [f.text, f.sge.join(", ") || "–", zahl(f.anteil * 100, 1)]) },
+    ],
+  });
+  zeichnen();
+})();

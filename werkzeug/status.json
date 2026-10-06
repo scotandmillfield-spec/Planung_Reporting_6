@@ -284,6 +284,21 @@
    ],
    "alt": "Eingabemaske „Planungsbrief“ für die Prämissenplanung. Im Abschnitt „Allgemeine Planungsprämissen“ sind für das Budget 2027 im Standard eine Inflationsrate von 1,2 %, ein Wirtschaftswachstum von 2,5 %, eine Personalsteigerungsrate von 3,5 % und ein Umsatzwachstum von 4,5 % hinterlegt; zwei weitere Spalten für Varianten sind leer. Im Abschnitt „Planungsprämissen für Teilpläne“ stehen links Teilplan Absatzplanung, Planungszeitraum 14.09.2026 bis 25.09.2026, Variante Standard, die Ansprechperson im zentralen Controlling mit E-Mail und Telefon sowie Links zu Planungsformular und Anwenderleitfaden; rechts der daraus erzeugte Planungsbrief an die Key-Account-Manager mit Zeitraum und Prämissen. Unten der Knopf „Vorgabewerte veröffentlichen“.",
    "datei": "Exemplarische_Praemissenplanung"
+  },
+  "3.23": {
+   "status": "pruefung",
+   "kommentare": [
+    "Als Einzelvisual neu aufgebaut (HTML für die Lernplattform, PNG für das Buch, 110 mm breit): Tabelle der fünf SGE und Portfolio in einer Abbildung, Auswahl einer SGE wirkt auf beide",
+    "Werte des Originals unverändert übernommen, weil der Buchtext sie vermutlich erläutert; relativer Marktanteil und Umsatzanteil werden aus den Ausgangswerten berechnet und stimmen mit dem Original überein",
+    "Ein Zahlenformat je Größe (eine Nachkommastelle, Einheit im Titel) statt „3,20%“ neben „4,2%“ und „23,15%“",
+    "Fünf Farben und Legende entfallen: alle Kreise anthrazit, Buchstabe direkt am Kreis; Diagrammtitel im Bild und Rahmen entfallen",
+    "Trennlinien bei relativem Marktanteil 1,5 und Marktwachstum 3 % wie im Original, ohne Feldnamen – fachlich prüfen: In der BCG-Matrix liegt die Grenze beim relativen Marktanteil bei 1,0 (Marktführerschaft); D (1,4) wechselte dann von „Question Marks“ zu „Stars“. Vorschlag: Grenze 1,0 und Feldnamen Stars, Cash Cows, Question Marks, Poor Dogs",
+    "Kernaussagen aus den Daten: B, C und D führen ihren Markt; A und D (49 % des Umsatzes) liegen in Märkten mit Wachstum ab 3 % bei relativem Marktanteil unter 1,5",
+    "Caption „Portfolio-Analyse“ passt; kein Produktbezug"
+   ],
+   "alt": "Tabelle und Portfolio von fünf strategischen Geschäftseinheiten (SGE A bis E). Die Tabelle nennt eigenen Marktanteil, Marktanteil des stärksten Konkurrenten, relativen Marktanteil, Marktwachstum, Umsatz und Umsatzanteil; B, C und D führen ihren Markt (relativer Marktanteil über 1), C hat mit 310 Mio. € den größten Umsatzanteil (28,7 %). Das Portfolio zeigt waagerecht den relativen Marktanteil (0 bis 3), senkrecht das Marktwachstum (0 bis 6 %), die Kreisfläche den Umsatz; gestrichelte Linien bei 1,5 und 3 % teilen es in vier Felder. A und D liegen bei hohem Marktwachstum und relativem Marktanteil unter 1,5, B oben rechts, C unten rechts, E unten links.",
+   "caption": "Portfolio-Analyse",
+   "datei": "Portfolio-Analyse"
   }
  }
 }

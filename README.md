@@ -9,8 +9,8 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 | Ordner | Inhalt |
 |---|---|
 | `index.html` | Inventur – wird erzeugt, nicht von Hand bearbeiten |
-| `abbildungen/kapN/` | neue Fassungen: `abb_X-Y.png` (600 dpi), `.pdf` (Vektor), `.pptx` (editierbar), bei Dashboards `.html` und `_daten.csv` |
-| `tabellen/` | LaTeX-Code der Tabellen (`tab_X-Y.tex`) und Listings (`lst_X-Y.tex`) |
+| `abbildungen/kapN/` | neue Fassungen, benannt nach der Caption (z. B. `ABC-Analyse.png`): `.png` (600 dpi), `.pdf` (Vektor), `.pptx` (editierbar), bei Dashboards `.html` und `_daten.csv` |
+| `tabellen/` | LaTeX-Code der Tabellen und Listings, benannt nach der Caption (z. B. `Kennzahlenblatt.tex`) |
 | `quellen/kapN/` | Skripte, aus denen die Abbildungen gebaut werden |
 | `vorschau/` | Vorschaubilder (Original zugeschnitten, neue Fassung, gesetzte Tabellen) |
 | `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` und `dashkit/`, Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`) |
@@ -19,13 +19,13 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 
 - **Tabellen:** „LaTeX kopieren“ und einfügen. Die erste Kommentarzeile nennt die nötigen Pakete (`booktabs`, `tabularx`, `amsmath`, `listings`).
 - **Abbildungen:** „LaTeX (figure) kopieren“ und den Ordner `abbildungen/` mit gleichem Pfad ins Overleaf-Projekt hochladen. Die PDFs werden ohne Skalierung eingebunden, damit die Schrift bei 7 pt bleibt. Querformate brauchen `\usepackage{rotating}`.
-- **Labels:** Jedes `\label` wird aus der Caption gebildet, nicht aus der Nummer – Wörter mit `_` verbunden, Präfix `fig:` bzw. `tab:`, ohne Quellenangabe am Ende und ohne Kommas, Klammern und Anführungszeichen (z. B. `\label{fig:Exemplarische_Struktur_im_Reporting}`). So bleiben Verweise stabil, wenn sich die Reihenfolge ändert. Ändert sich die Caption, ändert sich das Label mit; gleiche Captions meldet die Inventur.
+- **Dateinamen und Labels:** Beide werden aus der Caption gebildet, nicht aus der Nummer, denn die Reihenfolge ändert sich. Wörter mit `_` verbunden, Quellenangabe am Ende entfällt, Umlaute umschrieben (ä → ae), nur Buchstaben, Ziffern, `-` und `_`. Beispiel: Caption „Exemplarische Struktur im Reporting“ → Datei `Exemplarische_Struktur_im_Reporting.pdf`, Label `\label{fig:Exemplarische_Struktur_im_Reporting}` (Tabellen `tab:`). Ändert sich eine Caption, benennt `werkzeug/inventur.py` beim nächsten Lauf alle Dateien der Abbildung um (Bild, Quellen, Vorschau) – in Overleaf dann die neue Datei hochladen und Verweise auf das alte Label nachziehen. Gleiche Captions meldet die Inventur.
 - **Dashboards im Querformat:** werden um 90° gedreht auf einer Hochformatseite eingebunden, Pfad wie im Overleaf-Projekt (`author/content/abbildungen/…`):
 
   ```latex
   \begin{figure}
       \centering
-      \includegraphics[angle=90, width=\linewidth, height=1\textheight, keepaspectratio]{author/content/abbildungen/kap3/abb_3-22.png}
+      \includegraphics[angle=90, width=\linewidth, height=1\textheight, keepaspectratio]{author/content/abbildungen/kap3/ABC-Analyse.png}
       \caption{ABC-Analyse}
       \label{fig:ABC-Analyse}
   \end{figure}

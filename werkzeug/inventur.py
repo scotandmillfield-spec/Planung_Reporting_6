@@ -12,8 +12,12 @@ Datenquellen (alle in werkzeug/):
   pruefregeln.py   automatische Caption-Prüfung
 
 Dateien der neuen Fassung werden automatisch gefunden:
-  abbildungen/kapN/<stem>.png|.pdf|.pptx|.html|_daten.csv, quellen/kapN/<stem>.py oder quellen/kapN/<stem>/,
-  tabellen/<stem>.tex, vorschau/... (stem z. B. abb_3-5, tab_4-8, lst_5-39)
+  abbildungen/kapN/<name>.png|.pdf|.pptx|.html|_daten.csv, quellen/kapN/<name>.py oder quellen/kapN/<name>/,
+  tabellen/<name>.tex, vorschau/neu/kapN/<name>.jpg bzw. vorschau/neu/tabellen/<name>.jpg
+
+<name> ist der Kurzname der Caption (pruefregeln.kurzname, z. B. „ABC-Analyse“), nicht die Nummer – die Reihenfolge
+ändert sich. Ändert sich eine Caption, benennt dieses Skript alle Dateien der Abbildung um (git mv), passt die
+Verweise in quellen/ an und vermerkt den Namen in status.json („datei“).
 """
 import datetime
 import glob
@@ -29,7 +33,8 @@ from PIL import Image
 HIER = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HIER)
 sys.path.insert(0, HIER)
-from pruefregeln import caption_aus_notiz, label_aus_caption, pruefe  # noqa: E402
+from pruefregeln import caption_aus_notiz, kurzname, label_aus_caption, pruefe  # noqa: E402
+import subprocess  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 STATUS = OrderedDict([
@@ -157,10 +162,58 @@ def figure_latex(nr, caption, datei, breite_mm, quer, vektor):
     return "\n".join(zeilen) + "\n"
 
 
+UMBENANNT = []
+GEAENDERT = []
+
+
+def verschieben(alt, neu):
+    """Datei oder Ordner umbenennen, im Repository mit git mv (Historie bleibt erhalten)."""
+    qa, qn = os.path.join(ROOT, alt), os.path.join(ROOT, neu)
+    if not os.path.exists(qa) or os.path.abspath(qa) == os.path.abspath(qn):
+        return False
+    os.makedirs(os.path.dirname(qn), exist_ok=True)
+    r = subprocess.run(["git", "mv", alt, neu], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
+        os.rename(qa, qn)
+    return True
+
+
+def umbenennen(alt, neu, kap, tabelle):
+    """Alle Dateien einer Abbildung bzw. Tabelle vom Namen alt auf neu umstellen. True, wenn etwas verschoben wurde."""
+    paare = []
+    for f in sorted(glob.glob(os.path.join(ROOT, "abbildungen", f"kap{kap}", alt + ".*"))):
+        paare.append((rel("abbildungen", f"kap{kap}", os.path.basename(f)),
+                      rel("abbildungen", f"kap{kap}", neu + os.path.splitext(f)[1])))
+    paare += [(rel("abbildungen", f"kap{kap}", f"{alt}_daten.csv"), rel("abbildungen", f"kap{kap}", f"{neu}_daten.csv")),
+              (rel("quellen", f"kap{kap}", f"{alt}.py"), rel("quellen", f"kap{kap}", f"{neu}.py")),
+              (rel("quellen", f"kap{kap}", alt), rel("quellen", f"kap{kap}", neu)),
+              (rel("tabellen", f"{alt}.tex"), rel("tabellen", f"{neu}.tex"))]
+    # Vorschauen: alte flache Ablage (vorschau/neu/<alt>.jpg) oder neue Ablage je Kapitel bzw. Tabellen
+    vz = "tabellen" if tabelle else f"kap{kap}"
+    for quelle in (rel("vorschau", "neu", f"{alt}.jpg"), rel("vorschau", "neu", vz, f"{alt}.jpg")):
+        paare.append((quelle, rel("vorschau", "neu", vz, f"{neu}.jpg")))
+    paare.append((rel("vorschau", "neu", "gross", f"{alt}.png"), rel("vorschau", "neu", "gross", f"{neu}.png")))
+    bewegt = [a for a, n in paare if verschieben(a, n)]
+    if not bewegt:
+        return False
+    # Verweise in den Quellen: STEM = "…", Pfade wie "..", "<alt>", "projekte.json" oder …/<alt>/…
+    muster = re.compile(r'(["\'/])' + re.escape(alt) + r'(["\'/])')
+    for f in glob.glob(os.path.join(ROOT, "quellen", "**", "*.*"), recursive=True):
+        if os.path.splitext(f)[1] not in (".py", ".js"):
+            continue
+        t = open(f, encoding="utf-8").read()
+        t2 = muster.sub(lambda m: m.group(1) + neu + m.group(2), t)
+        if t2 != t:
+            open(f, "w", encoding="utf-8").write(t2)
+    UMBENANNT.append(f"{alt} → {neu} ({len(bewegt)} Dateien/Ordner)")
+    return True
+
+
 def eintraege():
     E = lade("einordnung.json")
     notiz = {i["folie"]: i["notiz"] for i in lade("inventar.json")}
-    pflege = lade("status.json")["eintraege"]
+    status_json = lade("status.json")
+    pflege = status_json["eintraege"]
     liste = []
     for x in E:
         art, folie = x["art"], x["folie"]
@@ -182,11 +235,37 @@ def eintraege():
             schluessel, label, stem = nr, f"Abb. {nr}", f"abb_{nr.replace('.', '-')}"
             anker, kap = f"abb-{nr.replace('.', '-')}", nr.split(".")[0]
         p = pflege.get(schluessel, {})
+        if stem and p.get("datei"):
+            stem = p["datei"]                            # aktueller Dateiname (Kurzname der Caption)
         cap_alt = caption_aus_notiz(notiz.get(folie, "")) if art != "X" else "Abbildungen zu Kapitel 3.9"
         if art in ("D", "V", "S", "T"):
             cap_neu, cap_kom = pruefe(schluessel if art == "T" else nr, art, cap_alt)
         else:
             cap_neu, cap_kom = cap_alt, []
+        tex = p.get("latex") or (rel("tabellen", f"{stem}.tex") if stem and art == "T" else None)
+        if tex and da(tex):
+            cap_tex = tex_caption(open(os.path.join(ROOT, tex), encoding="utf-8").read())
+            if cap_tex:
+                cap_neu = cap_tex
+        if p.get("caption"):
+            cap_neu = p["caption"]
+
+        # Dateiname = Kurzname der Caption; bei Abweichung alle Dateien umbenennen
+        if stem:
+            ziel = kurzname(cap_neu)
+            if ziel and ziel != stem:
+                tabelle = art == "T" or bool(p.get("latex"))
+                alt_tex = rel("tabellen", f"{os.path.splitext(os.path.basename(tex))[0]}") if tex else None
+                if alt_tex and os.path.basename(alt_tex) != stem:      # Tabelle mit abweichendem Dateinamen
+                    umbenennen(os.path.basename(alt_tex), ziel, kap, True)
+                if umbenennen(stem, ziel, kap, tabelle) or (alt_tex and not da(tex)):
+                    pflege.setdefault(schluessel, p)
+                    p["datei"] = ziel
+                    if p.get("latex"):
+                        p["latex"] = rel("tabellen", f"{ziel}.tex")
+                    GEAENDERT.append(schluessel)
+                stem = ziel
+        tex = p.get("latex") or (rel("tabellen", f"{stem}.tex") if stem and art == "T" else None)
 
         # Dateien der neuen Fassung
         dateien = OrderedDict()
@@ -206,16 +285,8 @@ def eintraege():
             qd = os.path.join(ROOT, "quellen", f"kap{kap}", stem)
             if os.path.isdir(qd):
                 quellen += [rel("quellen", f"kap{kap}", stem, f) for f in sorted(os.listdir(qd))]
-        tex = p.get("latex") or (rel("tabellen", f"{stem}.tex") if stem and art == "T" else None)
         if tex and not da(tex):
             tex = None
-
-        if tex:
-            cap_tex = tex_caption(open(os.path.join(ROOT, tex), encoding="utf-8").read())
-            if cap_tex:
-                cap_neu = cap_tex
-        if p.get("caption"):
-            cap_neu = p["caption"]
 
         # Status
         if p.get("status"):
@@ -240,10 +311,11 @@ def eintraege():
         orig_g = rel("vorschau", "original", f"folie_{folie:03d}.jpg")
         neu_k = neu_g = None
         tex_stem = os.path.splitext(os.path.basename(tex))[0] if tex else None
-        for s in (stem, tex_stem):
-            if s and da(rel("vorschau", "neu", f"{s}.jpg")):
-                neu_k = rel("vorschau", "neu", f"{s}.jpg")
-                neu_g = dateien.get("PNG") or rel("vorschau", "neu", "gross", f"{s}.png")
+        for k in ([rel("vorschau", "neu", f"kap{kap}", f"{stem}.jpg")] if stem else []) + \
+                 ([rel("vorschau", "neu", "tabellen", f"{tex_stem}.jpg")] if tex_stem else []):
+            if da(k):
+                neu_k = k
+                neu_g = dateien.get("PNG") or rel("vorschau", "neu", "gross", f"{tex_stem or stem}.png")
                 break
 
         groesse = None
@@ -275,6 +347,9 @@ def eintraege():
             neu_k=neu_k, neu_g=neu_g if neu_g and da(neu_g) else None,
             groesse=groesse, quer=quer, vorgehen=vorgehen))
     pruefe_dubletten(liste)
+    if GEAENDERT:                                        # neue Dateinamen in der Pflegeliste vermerken
+        with open(os.path.join(HIER, "status.json"), "w", encoding="utf-8") as fh:
+            json.dump(status_json, fh, ensure_ascii=False, indent=1)
     return liste
 
 
@@ -733,6 +808,10 @@ def seite(liste):
 
 def main():
     liste = eintraege()
+    for u in UMBENANNT:
+        print("umbenannt:", u)
+    if UMBENANNT:
+        print("Hinweis: Vorschauen wurden mitverschoben; neue Vorschauen mit werkzeug/vorschau.py")
     with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(seite(liste))
     c = Counter(START.get(x["status"], "offen") for x in liste)

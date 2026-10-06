@@ -1,7 +1,7 @@
 """Abb. 2.3 – Interdependenzen der betrieblichen Teilpläne (Querformat, ganzseitig)."""
 # Muster: dichtes Netz in Bändern (Querformat, ganzseitig) – Gruppen als Container, Busse, Knotenpunkte, gebündelte Verbindungen.
 # Bauen: python3 scripts/build_figure.py beispiele/abb_2-3.py --out <Zielordner>
-STEM = "abb_2-3"
+STEM = "Interdependenzen_der_betrieblichen_Teilplaene"
 from bookfig import Fig, P, THEMES
 
 W, H = 155, 98
@@ -25,7 +25,7 @@ class B:
 
 
 def build(theme):
-    f = Fig(W, H, theme, "abb_2-3")
+    f = Fig(W, H, theme, "Interdependenzen_der_betrieblichen_Teilplaene")
     f.INS_X, f.INS_Y = 0.6, 0.5
     t = theme
     band_bg = t.role("band").fill or "FFFFFF"

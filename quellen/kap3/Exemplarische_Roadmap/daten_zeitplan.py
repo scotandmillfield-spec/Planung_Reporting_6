@@ -1,6 +1,6 @@
 """Termindaten für Abb. 3.3 „Strategische Projektroadmap – Zeitplan“.
 
-Gleicher Datensatz wie Abb. 3.5 (../abb_3-5/projekte.json, 19 Projekte, fünf Quartalsstände): Status,
+Gleicher Datensatz wie Abb. 3.5 (../Projektroadmap_Uebersicht/projekte.json, 19 Projekte, fünf Quartalsstände): Status,
 Fertigstellung und Terminverzug je Stand werden übernommen, ergänzt um die Plantermine (Beginn, Beginn der
 Umsetzung, Ende) und den Ist-Beginn. Prognose-Ende = Plan-Ende + Terminverzug des jeweiligen Stands;
 bei erledigten Projekten ist es das Ist-Ende.
@@ -13,7 +13,7 @@ import json
 import os
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-P = json.load(open(os.path.join(HIER, "..", "abb_3-5", "projekte.json"), encoding="utf-8"))
+P = json.load(open(os.path.join(HIER, "..", "Projektroadmap_Uebersicht", "projekte.json"), encoding="utf-8"))
 STAND_ISO = ["2025-06-30", "2025-09-30", "2025-12-31", "2026-03-31", "2026-06-30"]
 
 # Plan-Beginn, Plan-Beginn Umsetzung, Plan-Ende, Ist-Beginn (None = Idee, noch nicht terminiert)

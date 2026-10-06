@@ -5,7 +5,7 @@ Forecast und Plan sowie Mittelfristplanung, je Kennzahl eine Maßnahme und eine 
 Eintrittswahrscheinlichkeit (1–5) und Wert. Zahlen der Kennzahlen erfunden und in sich stimmig (Stand 30.06.2026,
 gleiches Unternehmen wie Abb. 3.3 und 3.5); Chancen und Risiken mit den Werten des Originals (dort T€, hier Mio. €
 bei zehnfach größerem Unternehmen). Maßnahmen, die in der Projektroadmap (Abb. 3.3/3.5) als Projekt geführt
-werden, tragen deren Namen; Status und Fertigstellung zum 30.06.2026 kommen aus ../abb_3-5/projekte.json.
+werden, tragen deren Namen; Status und Fertigstellung zum 30.06.2026 kommen aus ../Projektroadmap_Uebersicht/projekte.json.
 Ausgabe: bcr.json (kompakt) und bcr.csv.
 """
 import csv
@@ -13,7 +13,7 @@ import json
 import os
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-PR = json.load(open(os.path.join(HIER, "..", "abb_3-5", "projekte.json"), encoding="utf-8"))
+PR = json.load(open(os.path.join(HIER, "..", "Projektroadmap_Uebersicht", "projekte.json"), encoding="utf-8"))
 PERSPEKTIVEN = ["Finanzen", "Markt, Kunde, Produkt", "Prozesse", "Organisation", "Mitarbeiter"]
 
 # Perspektive, Ziel, Kennzahl, Einheit, Nachkommastellen, Wirkung (+1 Anstieg günstig, -1 ungünstig, 0 neutral),

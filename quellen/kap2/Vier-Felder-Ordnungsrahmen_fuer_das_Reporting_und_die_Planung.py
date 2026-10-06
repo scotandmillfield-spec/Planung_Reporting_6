@@ -1,7 +1,7 @@
 """Abb. 2.7 – Vier-Felder-Ordnungsrahmen für das Reporting und die Planung."""
 # Muster: Raster aus Karten mit Kopfleiste und Aufzählungen (2. Ebene, Erläuterungen in 6 pt).
 # Bauen: python3 scripts/build_figure.py beispiele/abb_2-7.py --out <Zielordner>
-STEM = "abb_2-7"
+STEM = "Vier-Felder-Ordnungsrahmen_fuer_das_Reporting_und_die_Planung"
 from bookfig import Fig, P, THEMES
 
 NB = chr(0xA0)  # geschütztes Leerzeichen
@@ -73,7 +73,7 @@ def build(theme):
     r1 = max(hts["Fachlicher Inhalt"], hts["IT-Unterstützung"])
     r2 = max(hts["Organisation"], hts["Prozesse"])
     H = round(r1 + GAP + r2 + 0.4, 1)
-    f = Fig(W, H, theme, "abb_2-7")
+    f = Fig(W, H, theme, "Vier-Felder-Ordnungsrahmen_fuer_das_Reporting_und_die_Planung")
     pos = {"Fachlicher Inhalt": (0.2, 0.2, r1), "IT-Unterstützung": (0.2 + cw + GAP, 0.2, r1),
            "Organisation": (0.2, 0.2 + r1 + GAP, r2), "Prozesse": (0.2 + cw + GAP, 0.2 + r1 + GAP, r2)}
     for k, (x, y, h) in pos.items():

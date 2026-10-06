@@ -1,7 +1,7 @@
 """Abb. 2.2 – Zeitdimensionen der Unternehmensführung."""
 # Muster: Stapel von Planungsebenen im Rahmen „Unternehmenskultur“, Zeithorizont als rechte Spalte,
 # Vorgaben links als Sammelleitung (top-down), Rückkopplung rechts (bottom-up).
-STEM = "abb_2-2"
+STEM = "Zeitdimensionen_der_Unternehmensfuehrung"
 from bookfig import Fig, P
 
 W = 110

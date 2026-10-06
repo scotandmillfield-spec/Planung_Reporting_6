@@ -1,7 +1,7 @@
 """Abb. 2.5 – Ziele und Aufgaben der Planung."""
 # Muster: Hierarchie von unten nach oben – Ausgangsbox, Verteilerbus auf vier Teilfunktionen,
 # Sammelbus in eine senkrechte Kette von Zielfunktionen.
-STEM = "abb_2-5"
+STEM = "Ziele_und_Aufgaben_der_Planung"
 from bookfig import Fig, P
 
 W = 110

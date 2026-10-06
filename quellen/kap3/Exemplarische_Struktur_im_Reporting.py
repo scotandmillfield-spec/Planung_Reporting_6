@@ -1,6 +1,6 @@
 """Exemplarische Struktur im Reporting: Gesamtunternehmen und drei Analysesichten, je Kennzahlen/BSC und Detailberichte."""
 # Muster: Zeilen mit Boxen + Pfeilen in einer Achse, links ein Baum (Stamm mit Abzweigungen).
-STEM = "abb_3-9"
+STEM = "Exemplarische_Struktur_im_Reporting"
 from bookfig import Fig, P, THEMES
 
 W = 110

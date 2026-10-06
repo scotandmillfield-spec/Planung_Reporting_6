@@ -1,7 +1,7 @@
 """Abb. 2.1 – Planung und Reporting im Management-Regelkreis."""
 # Muster: Kreislauf/Regelkreis – Chevron-Ringsegmente, Kern, Informationsobjekte außen, Prozessklammer.
 # Bauen: python3 scripts/build_figure.py beispiele/abb_2-1.py --out <Zielordner>
-STEM = "abb_2-1"
+STEM = "Planung_und_Reporting_im_Management-Regelkreis"
 import math
 from bookfig import Fig, P, THEMES, arc_pts, polar, text_width_mm
 
@@ -62,7 +62,7 @@ def label_box(f, ang, r, text, **kw):
 
 
 def build(theme):
-    f = Fig(W, H, theme, "abb_2-1")
+    f = Fig(W, H, theme, "Planung_und_Reporting_im_Management-Regelkreis")
     t = theme
     # Ringsegmente
     for ang, txt, plan in SEGMENTS:

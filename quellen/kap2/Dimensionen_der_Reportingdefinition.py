@@ -1,7 +1,7 @@
 """Abb. 2.6 – Dimensionen der Reportingdefinition."""
 # Muster: Koordinatensystem mit drei Dimensionen – Prozesskette als senkrechte Achse (von unten nach oben),
 # Empfänger als waagerechte Achse, Inhalt als Diagonale in die Fläche.
-STEM = "abb_2-6"
+STEM = "Dimensionen_der_Reportingdefinition"
 from bookfig import Fig, P
 
 W = 110

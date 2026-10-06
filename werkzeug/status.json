@@ -15,7 +15,8 @@
     "Kern rot",
     "Phase „Kontrollieren, Vergleichen, Analysieren, Berichten“ heißt jetzt „Analyse und Kontrolle“ (Vorgabe Autor, 06.10.2026)"
    ],
-   "alt": "Kreisförmiger Management-Regelkreis aus fünf Phasen: Ziele setzen, Planen und Gestalten, Entscheiden, Realisieren/Durchführen sowie Analyse und Kontrolle. Die ersten drei Phasen bilden den Planungsprozess. Im Zentrum stehen Information, Kommunikation und Koordination; außen stehen die ausgetauschten Größen Ziel-Größen, Plan-Werte, Ist-Werte und Abweichungen."
+   "alt": "Kreisförmiger Management-Regelkreis aus fünf Phasen: Ziele setzen, Planen und Gestalten, Entscheiden, Realisieren/Durchführen sowie Analyse und Kontrolle. Die ersten drei Phasen bilden den Planungsprozess. Im Zentrum stehen Information, Kommunikation und Koordination; außen stehen die ausgetauschten Größen Ziel-Größen, Plan-Werte, Ist-Werte und Abweichungen.",
+   "datei": "Planung_und_Reporting_im_Management-Regelkreis"
   },
   "2.2": {
    "status": "pruefung",
@@ -26,7 +27,8 @@
     "Rahmen „Unternehmenskultur“ als gestrichelte Gruppe",
     "Vorgaben links als Sammelleitung"
    ],
-   "alt": "Gestapelte Ebenen der Unternehmensführung im Rahmen der Unternehmenskultur: generelle Zielplanung, strategische Planung (z. B. Geschäftsfelder, Regionen; etwa 5 Jahre), Mittelfristplanung (Maßnahmen, Projekte; 2–3 Jahre), operative Planung (Prozesse, Ressourcen; bis 1 Jahr), Steuerung und Kontrolle sowie Durchführung. Die generelle Zielplanung gibt allen Ebenen Vorgaben, jede Ebene meldet an die darüberliegende zurück."
+   "alt": "Gestapelte Ebenen der Unternehmensführung im Rahmen der Unternehmenskultur: generelle Zielplanung, strategische Planung (z. B. Geschäftsfelder, Regionen; etwa 5 Jahre), Mittelfristplanung (Maßnahmen, Projekte; 2–3 Jahre), operative Planung (Prozesse, Ressourcen; bis 1 Jahr), Steuerung und Kontrolle sowie Durchführung. Die generelle Zielplanung gibt allen Ebenen Vorgaben, jede Ebene meldet an die darüberliegende zurück.",
+   "datei": "Zeitdimensionen_der_Unternehmensfuehrung"
   },
   "2.3": {
    "status": "pruefung",
@@ -37,7 +39,8 @@
     "Ebenen als Bänder, Verbindungen gebündelt"
    ],
    "alt": "Ganzseitiges Netz der betrieblichen Teilpläne in drei Ebenen: generelle Zielplanung mit Unternehmensgrundsätzen, strategische Planung mit Erfolgspotenzialplanung und Ableitung strategischer Zielgrößen sowie operative Planung mit Mengen-, Ressourcen- und wertmäßigen Plänen. Pfeile zeigen, wie Absatz-, Produktions- und Beschaffungsplanung über die Ressourcenpläne in Kosten-, Ergebnis-, Finanz- und Bilanzplanung münden.",
-   "quer": true
+   "quer": true,
+   "datei": "Interdependenzen_der_betrieblichen_Teilplaene"
   },
   "2.4": {
    "status": "pruefung",
@@ -49,7 +52,8 @@
     "Informationsflüsse gestrichelt",
     "Caption im Manuskript der 6. Auflage: „(In Anlehnung an: Hahn 1994, S. 42)“ – übernehmen; dort steht noch ein Rest „Abb. 6: Phasen des Entscheidungsprozesses“ in der Grafik"
    ],
-   "alt": "Tabelle der sechs Phasen des Führungsprozesses mit den Tätigkeiten: Problemstellung, Suche und Beurteilung dienen der Entscheidungsvorbereitung, die Entscheidungsphase der Entscheidungsfällung, die Realisationsphase der Festlegung und Veranlassung der Durchführung, die Kontrollphase dem Soll-Ist-Vergleich. Klammern ordnen Planaufstellung, Planverabschiedung, Steuerung und Kontrolle zu; die Phasen 1 bis 4 bilden die Planung im weiteren Sinne. Gestrichelte Pfeile zeigen Zielvorgabe, Vorgabeinformation an die Durchführung und Rückinformation."
+   "alt": "Tabelle der sechs Phasen des Führungsprozesses mit den Tätigkeiten: Problemstellung, Suche und Beurteilung dienen der Entscheidungsvorbereitung, die Entscheidungsphase der Entscheidungsfällung, die Realisationsphase der Festlegung und Veranlassung der Durchführung, die Kontrollphase dem Soll-Ist-Vergleich. Klammern ordnen Planaufstellung, Planverabschiedung, Steuerung und Kontrolle zu; die Phasen 1 bis 4 bilden die Planung im weiteren Sinne. Gestrichelte Pfeile zeigen Zielvorgabe, Vorgabeinformation an die Durchführung und Rückinformation.",
+   "datei": "Phasen_des_Planungs-_und_Steuerungsprozesses"
   },
   "2.5": {
    "status": "pruefung",
@@ -57,7 +61,8 @@
     "„Anreiz-/ und Motivationsfunktion“ → „Anreiz- und Motivationsfunktion“",
     "Verbindungen als Sammelleitungen mit Knotenpunkten"
    ],
-   "alt": "Funktionen der Planung von unten nach oben: Planung/Kontrolle erfüllt vier Teilfunktionen (Information und Dokumentation, Koordination und Integration, Gestaltung und Prognose, Anreiz und Motivation), die gemeinsam in die Zielsetzungsfunktion münden; darüber folgen Steuerungs-, Innovations- und Zielerreichungsfunktion."
+   "alt": "Funktionen der Planung von unten nach oben: Planung/Kontrolle erfüllt vier Teilfunktionen (Information und Dokumentation, Koordination und Integration, Gestaltung und Prognose, Anreiz und Motivation), die gemeinsam in die Zielsetzungsfunktion münden; darüber folgen Steuerungs-, Innovations- und Zielerreichungsfunktion.",
+   "datei": "Ziele_und_Aufgaben_der_Planung"
   },
   "2.6": {
    "status": "pruefung",
@@ -67,7 +72,8 @@
     "Prozessschritte als Kästen mit Pfeilen",
     "Inhaltsfläche grau hinterlegt"
    ],
-   "alt": "Koordinatensystem mit drei Dimensionen des Reportings: senkrecht die Prozesse von der Informationsbedarfsermittlung über Datenbeschaffung, Informationsaufbereitung, Berichtsaufbereitung und Berichtsbereitstellung bis zur Informationsanalyse; waagerecht die Empfänger (interne und externe Adressaten); diagonal der inhaltliche Umfang, also Informationen aus Betrieb und Umwelt."
+   "alt": "Koordinatensystem mit drei Dimensionen des Reportings: senkrecht die Prozesse von der Informationsbedarfsermittlung über Datenbeschaffung, Informationsaufbereitung, Berichtsaufbereitung und Berichtsbereitstellung bis zur Informationsanalyse; waagerecht die Empfänger (interne und externe Adressaten); diagonal der inhaltliche Umfang, also Informationen aus Betrieb und Umwelt.",
+   "datei": "Dimensionen_der_Reportingdefinition"
   },
   "2.7": {
    "status": "pruefung",
@@ -76,7 +82,8 @@
     "„u.a.“ → „u. a.“",
     "Felder als Karten mit Kopfleiste"
    ],
-   "alt": "Vier-Felder-Ordnungsrahmen mit den Feldern fachlicher Inhalt, IT-Unterstützung, Organisation und Prozesse, jeweils mit den Gestaltungsgegenständen für Reporting und Planung."
+   "alt": "Vier-Felder-Ordnungsrahmen mit den Feldern fachlicher Inhalt, IT-Unterstützung, Organisation und Prozesse, jeweils mit den Gestaltungsgegenständen für Reporting und Planung.",
+   "datei": "Vier-Felder-Ordnungsrahmen_fuer_das_Reporting_und_die_Planung"
   },
   "3.5": {
    "status": "pruefung",
@@ -90,7 +97,8 @@
     "Daten erfunden und plausibel, Berichtsstand 30.06.2026",
     "Caption „Projektroadmap Übersicht“ und Berichtstitel „Strategische Projektroadmap“ angleichen"
    ],
-   "alt": "Dashboard „Strategische Projektroadmap“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlenzeile: 19 Projekte, Plan-Kosten 35,3 Mio. €, Kostenabweichung +1,5 Mio. €, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Kapitalwert 22,8 Mio. €, Ø Risikoindex 50. Darunter eine Projekttabelle nach Status mit Plan-Kosten, Abweichung zum Plan bei Kosten und Termin sowie Fertigstellungsgrad als Balken; rechts ein Portfolio aus Risikoindex und Nutzwert (Kreisfläche = Plan-Kosten) und die Plan-Kosten nach Status."
+   "alt": "Dashboard „Strategische Projektroadmap“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlenzeile: 19 Projekte, Plan-Kosten 35,3 Mio. €, Kostenabweichung +1,5 Mio. €, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Kapitalwert 22,8 Mio. €, Ø Risikoindex 50. Darunter eine Projekttabelle nach Status mit Plan-Kosten, Abweichung zum Plan bei Kosten und Termin sowie Fertigstellungsgrad als Balken; rechts ein Portfolio aus Risikoindex und Nutzwert (Kreisfläche = Plan-Kosten) und die Plan-Kosten nach Status.",
+   "datei": "Projektroadmap_Uebersicht"
   },
   "3.6": {
    "status": "pruefung",
@@ -98,7 +106,8 @@
     "Aus der Testphase: Würfel-Icons, 3D-Pfeile und Verlaufsfarben entfernt, Verbindungen als Sammelleitung",
     "Kostenplan fließt nur in den Bilanzplan – fachlich prüfen (nicht auch in den Ergebnisplan?)"
    ],
-   "alt": "Sieben Teilpläne in zwei Spalten: links Absatz-, Umsatz-, Ressourcen-, Personal- und Kostenplan, rechts Ergebnis- und Bilanzplan. Absatz- und Umsatzplan, Ressourcen-, Personal- und Kostenplan sowie Ergebnis- und Bilanzplan stimmen sich wechselseitig ab. Der Absatzplan speist den Ressourcenplan; Umsatz- und Ressourcenplan fließen gemeinsam in Ergebnis- und Bilanzplan, der Kostenplan in den Bilanzplan."
+   "alt": "Sieben Teilpläne in zwei Spalten: links Absatz-, Umsatz-, Ressourcen-, Personal- und Kostenplan, rechts Ergebnis- und Bilanzplan. Absatz- und Umsatzplan, Ressourcen-, Personal- und Kostenplan sowie Ergebnis- und Bilanzplan stimmen sich wechselseitig ab. Der Absatzplan speist den Ressourcenplan; Umsatz- und Ressourcenplan fließen gemeinsam in Ergebnis- und Bilanzplan, der Kostenplan in den Bilanzplan.",
+   "datei": "Interdependenzen_der_betrieblichen_Teilplaene"
   },
   "3.31": {
    "status": "klaerung",
@@ -114,47 +123,53 @@
   },
   "5.39": {
    "status": "latex",
-   "latex": "tabellen/lst_5-39.tex",
+   "latex": "tabellen/Beispiel_zur_freien_Datenrecherche_z_B_SELECT-Anweisung.tex",
    "kommentare": [
     "SQL lag als eingebettetes Word-Objekt vor – als gesetztes Listing (Paket listings) statt Bild",
     "Abfrage zeilenweise eingerückt, Inhalt unverändert; Schriftgrad 7 pt wie die Abbildungstexte",
     "Nummer bleibt Abb. 5.39 (figure-Umgebung um das Listing)"
-   ]
+   ],
+   "datei": "Beispiel_zur_freien_Datenrecherche_z_B_SELECT-Anweisung"
   },
   "Tab. 3.1": {
    "status": "latex",
    "kommentare": [
     "Aus dem eingebetteten Excel-Objekt übernommen, Werte geprüft",
     "Kopfzeile ohne Einheiten – „Preis (€)“ und „Umsatz (€)“ ergänzen?"
-   ]
+   ],
+   "datei": "Flache_Tabelle"
   },
   "Tab. 3.2": {
    "status": "latex",
    "kommentare": [
     "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
     "Eckzelle „Absatz“ ohne Einheit – „Absatz (Stück)“?"
-   ]
+   ],
+   "datei": "Einfache_Kreuztabelle"
   },
   "Tab. 3.3": {
    "status": "latex",
    "kommentare": [
     "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
     "„Zwischensumme“ (Summe je Produkt) und „Summe“ (Summe je Produktgruppe) sind missverständlich benannt – z. B. „Summe Produkt“ und „Summe Produktgruppe“"
-   ]
+   ],
+   "datei": "Erweiterte_Kreuztabelle"
   },
   "Tab. 4.6": {
    "status": "latex",
    "kommentare": [
     "Aus dem eingebetteten Excel-Objekt übernommen",
     "Spaltenbreiten für den Satzspiegel von 110 mm gesetzt; Auslassungszeilen („…“) wie im Original"
-   ]
+   ],
+   "datei": "Beispiel_fuer_eine_Berichts-Organisationsmatrix"
   },
   "Tab. 4.7": {
    "status": "latex",
    "kommentare": [
     "Aus dem eingebetteten Excel-Objekt übernommen; footnotesize nötig, sonst zu breit für 110 mm",
     "Zeile „Produktergebnisplanung“ ohne Durchführung und Genehmigung – wie im Original, prüfen"
-   ]
+   ],
+   "datei": "Beispiel_fuer_eine_Planungs-Organisationsmatrix"
   },
   "Tab. 4.8": {
    "status": "latex",
@@ -163,7 +178,8 @@
     "Begriffe „Anlagendeckung“ und „Deckungsgrad II“ wechseln – einmal gleichsetzen: „Anlagendeckung (Deckungsgrad II)“",
     "Zielgröße 110–150 % und Text „Ziel z. B. 150 %“ abgleichen",
     "Quellenhinweis aus der Notiz in die Caption übernommen (Kurzform im Tabellenverzeichnis)"
-   ]
+   ],
+   "datei": "Kennzahlenblatt"
   },
   "Folie 5": {
    "status": "entfaellt",
@@ -190,7 +206,8 @@
     "Daten erfunden und plausibel, Berichtsstand 30.06.2026 wie Abb. 3.5",
     "Caption „Exemplarische Roadmap“ und Berichtstitel „Strategische Projektroadmap – Zeitplan“ angleichen"
    ],
-   "alt": "Dashboard „Strategische Projektroadmap – Zeitplan“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlen: 19 Projekte, 10 in Umsetzung, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Ø Terminverzug 3,8 Wochen, 7 Projekte enden in den nächsten 12 Monaten. Darunter ein Zeitplan der Projekte, nach Status gruppiert, auf einer Zeitachse von 2025 bis 2028: umrandete Planbalken mit hellgrauer Planungsphase und weißer Umsetzung, ein dunkler Ist-Strich bis zum Stichtag, ein grauer Vorschau-Strich bis zum Prognose-Ende und rote Verlängerungen, wo das Plan-Ende überschritten wird; links Fertigstellung und Terminabweichung in Wochen."
+   "alt": "Dashboard „Strategische Projektroadmap – Zeitplan“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlen: 19 Projekte, 10 in Umsetzung, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Ø Terminverzug 3,8 Wochen, 7 Projekte enden in den nächsten 12 Monaten. Darunter ein Zeitplan der Projekte, nach Status gruppiert, auf einer Zeitachse von 2025 bis 2028: umrandete Planbalken mit hellgrauer Planungsphase und weißer Umsetzung, ein dunkler Ist-Strich bis zum Stichtag, ein grauer Vorschau-Strich bis zum Prognose-Ende und rote Verlängerungen, wo das Plan-Ende überschritten wird; links Fertigstellung und Terminabweichung in Wochen.",
+   "datei": "Exemplarische_Roadmap"
   },
   "3.9": {
    "status": "pruefung",
@@ -200,7 +217,8 @@
     "„BSC“ zu „Balanced Scorecard“ aufgelöst, „Detail-berichte“ ohne Trennung",
     "Abstände und Boxbreiten vereinheitlicht"
    ],
-   "alt": "Hierarchische Berichtsstruktur in vier Zeilen. Oben steht die Gesamtunternehmensanalyse, von der eine Linie zu den drei Analysesichten Geschäftsfelder, Standorte und Funktionsbereiche verzweigt. Jede der vier Ebenen führt zu Kennzahlen bzw. einer Balanced Scorecard, die mit Detailberichten in wechselseitiger Beziehung stehen."
+   "alt": "Hierarchische Berichtsstruktur in vier Zeilen. Oben steht die Gesamtunternehmensanalyse, von der eine Linie zu den drei Analysesichten Geschäftsfelder, Standorte und Funktionsbereiche verzweigt. Jede der vier Ebenen führt zu Kennzahlen bzw. einer Balanced Scorecard, die mit Detailberichten in wechselseitiger Beziehung stehen.",
+   "datei": "Exemplarische_Struktur_im_Reporting"
   },
   "3.22": {
    "status": "pruefung",
@@ -215,7 +233,8 @@
     "Klassenzuordnung wie im Original: A, solange der kumulierte Anteil ≤ Grenze (Rang 12 mit 62,3 % → B)"
    ],
    "alt": "Dashboard „ABC-Analyse Produkte“ für das Jahr 2025, alle Kunden, Kennzahl Absatz in Stück, Klassengrenzen A 60 % und B 20 %. Links die Produkte nach Rang mit Stück, Anteil und kumuliertem Anteil, nach Klassen gegliedert. Rechts oben die ABC-Klassen: 11 A-Produkte (22,4 % der Produkte) bringen 59,8 % des Absatzes, 10 B-Produkte 20,2 % und 28 C-Produkte 20,0 %; darunter die Konzentrationskurve mit den Klassengrenzen bei 22,4 % und 42,9 % der Produkte.",
-   "caption": "ABC-Analyse"
+   "caption": "ABC-Analyse",
+   "datei": "ABC-Analyse"
   },
   "3.2": {
    "status": "pruefung",
@@ -230,7 +249,8 @@
     "Ziel- und Kennzahltexte gekürzt bzw. ausgeschrieben (z. B. „AE Produkte < 2 Y“ → „Neuprodukte“ mit Erläuterung im Tooltip, „Kompetenzen mit Int. E.“ → „Auslandserfahrung“); Tippfehler „Kenzahlen“ entfällt",
     "Zu klären: „Orga/F/S/K“ als „Organisation“ gedeutet; „Beurteilung“ als Eintrittswahrscheinlichkeit gedeutet; Wirkungsrichtung angenommen: Abbau „Umsatz Poor Dogs“ günstig, „Variantenanteil“ neutral"
    ],
-   "alt": "Dashboard „Balanced Chance and Risk Card“ der Unternehmensleitung, Stand 30.06.2026. Links die strategischen Ziele und Kennzahlen in den Perspektiven Finanzen; Markt, Kunde, Produkt; Prozesse; Organisation und Mitarbeiter mit Forecast, Plan und der Abweichung zum Plan als Balken: 15 von 24 Kennzahlen liegen hinter Plan, am weitesten das Umsatzwachstum mit −40 %. Rechts zu jeder Kennzahl die Maßnahme sowie eine Chance oder ein Risiko mit fünfstufiger Eintrittswahrscheinlichkeit und Wert; der Saldo aus Chancen und Risiken beträgt −16,1 Mio. €, größtes Risiko ist der Forderungsausfall mit −15,0 Mio. €."
+   "alt": "Dashboard „Balanced Chance and Risk Card“ der Unternehmensleitung, Stand 30.06.2026. Links die strategischen Ziele und Kennzahlen in den Perspektiven Finanzen; Markt, Kunde, Produkt; Prozesse; Organisation und Mitarbeiter mit Forecast, Plan und der Abweichung zum Plan als Balken: 15 von 24 Kennzahlen liegen hinter Plan, am weitesten das Umsatzwachstum mit −40 %. Rechts zu jeder Kennzahl die Maßnahme sowie eine Chance oder ein Risiko mit fünfstufiger Eintrittswahrscheinlichkeit und Wert; der Saldo aus Chancen und Risiken beträgt −16,1 Mio. €, größtes Risiko ist der Forderungsausfall mit −15,0 Mio. €.",
+   "datei": "Exemplarische_Balanced_Chance_and_Risk_Card"
   }
  }
 }

@@ -1,7 +1,7 @@
 """Abb. 2.4 – Phasen des Planungs- und Steuerungsprozesses."""
 # Muster: Tabelle (Phasen | Tätigkeiten) mit Klammern rechts, Informationsflüsse gestrichelt
 # (Zielvorgabe links, Vorgabeinformation zur Durchführung, Rückinformation als Schleife).
-STEM = "abb_2-4"
+STEM = "Phasen_des_Planungs-_und_Steuerungsprozesses"
 from bookfig import Fig, P
 
 W = 110

@@ -9,6 +9,7 @@ Die Regeln sind bewusst einfach und nachvollziehbar: allgemeine Schreibregeln, Q
 für neu gezeichnete Abbildungen und eine Liste gezielter Korrekturen je Abbildung.
 """
 import re
+import unicodedata
 
 UML = {"¨u": "ü", "¨a": "ä", "¨o": "ö", "¨U": "Ü", "¨A": "Ä", "¨O": "Ö"}
 
@@ -120,13 +121,17 @@ def caption_aus_notiz(notiz):
 
 # Quellenangabe am Ende der Caption (gehört nicht ins Label)
 QUELLE_ANFANG = re.compile(r"(In Anlehnung|[Vv]gl\.|Quelle|Entnommen|Leicht|Eigene|Daten|Mit freundlicher|[Mm]odifiziert|Von |Nach |Aus |Darstellung)")
-LABEL_WEG = re.compile(r"[,;()\[\]{}\"„“”‚‘’'%#&\\~^$®™!?…]")
 
 
-def label_aus_caption(caption, praefix="fig"):
-    """LaTeX-Label aus der Caption: Wörter mit „_“ verbunden, ohne Quellenangabe am Ende und ohne Zeichen,
-    die in Labels stören (Komma trennt bei \\cref mehrere Labels, Klammern, Anführungszeichen, Sonderzeichen).
-    Unabhängig von der Abbildungsnummer, damit Verweise beim Umnummerieren stabil bleiben."""
+UMLAUTE = {"ä": "ae", "ö": "oe", "ü": "ue", "Ä": "Ae", "Ö": "Oe", "Ü": "Ue", "ß": "ss"}
+
+
+def kurzname(caption):
+    """Name aus der Caption – Dateiname der Abbildung und Kern des LaTeX-Labels.
+
+    Wörter mit „_“ verbunden, Quellenangabe am Ende entfällt, Umlaute umschrieben (ä → ae), nur Buchstaben,
+    Ziffern, „-“ und „_“. So ist der Name in LaTeX (\\includegraphics, \\label, \\cref), Overleaf, Git und
+    auf allen Betriebssystemen unkritisch und unabhängig von der Abbildungsnummer."""
     t = caption.replace("\\,", " ").replace("~", " ")
     t = re.sub(r"\\[a-zA-Z]+", "", t).strip()
     if t.endswith(")"):
@@ -141,9 +146,18 @@ def label_aus_caption(caption, praefix="fig"):
         inhalt = t[j + 1:-1]
         if j > 0 and (QUELLE_ANFANG.match(inhalt) or re.search(r"\b(19|20)\d{2}\b", inhalt)):
             t = t[:j]
-    t = LABEL_WEG.sub("", t).strip().rstrip(".")
-    t = re.sub(r"_+", "_", re.sub(r"\s+", "_", t))
-    return f"{praefix}:{t}"
+    for a, b in UMLAUTE.items():
+        t = t.replace(a, b)
+    t = re.sub(r"[–—/]", "-", t)
+    t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
+    t = re.sub(r"[^A-Za-z0-9 _-]", "", t)
+    t = re.sub(r"_+", "_", re.sub(r"\s+", "_", t.strip()))
+    return t.strip("_-")
+
+
+def label_aus_caption(caption, praefix="fig"):
+    """LaTeX-Label = Präfix + Kurzname der Caption (gleich dem Dateinamen der Abbildung)."""
+    return f"{praefix}:{kurzname(caption)}"
 
 
 def pruefe(nr, art, caption):

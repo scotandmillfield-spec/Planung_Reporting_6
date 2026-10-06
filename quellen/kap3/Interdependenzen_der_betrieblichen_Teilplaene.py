@@ -1,6 +1,6 @@
 """Teilpläne und ihre Verknüpfung (Absatz-, Umsatz-, Ressourcen-, Personal-, Kosten-, Ergebnis-, Bilanzplan)."""
 # Muster: Boxen in zwei Spalten mit orthogonalen Pfeilen; Sammelleitung statt gekreuzter Pfeile.
-STEM = "abb_3-6"
+STEM = "Interdependenzen_der_betrieblichen_Teilplaene"
 from bookfig import Fig, P, THEMES
 
 W, H = 110, 65.5

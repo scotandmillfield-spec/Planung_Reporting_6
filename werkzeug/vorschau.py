@@ -11,11 +11,14 @@ Aufruf (im Ordner der Inventur):
 Ergebnis:
   vorschau/original/folie_NNN.jpg        Folie zugeschnitten, groß (Lupe)
   vorschau/original/klein/folie_NNN.jpg  Folie zugeschnitten, klein (Karte)
-  vorschau/neu/<stem>.jpg                neue Fassung, klein (Karte) – aus abbildungen/**/<stem>.png
-  vorschau/neu/gross/<stem>.png          gesetzte LaTeX-Tabelle bzw. Listing (Lupe), aus tabellen/<stem>.tex
+  vorschau/neu/kapN/<name>.jpg           neue Fassung, klein (Karte) – aus abbildungen/kapN/<name>.png
+  vorschau/neu/tabellen/<name>.jpg       gesetzte LaTeX-Tabelle bzw. Listing, klein – aus tabellen/<name>.tex
+  vorschau/neu/gross/<name>.png          gesetzte LaTeX-Tabelle bzw. Listing (Lupe)
+  <name> = Kurzname der Caption (siehe inventur.py); die Nummer für die Tabellenvorschau kommt aus status.json
 """
 import argparse
 import glob
+import json
 import os
 import re
 import shutil
@@ -77,7 +80,8 @@ def neue(alles):
     n = 0
     for png in sorted(glob.glob(p("abbildungen", "*", "*.png"))):
         stem = os.path.splitext(os.path.basename(png))[0]
-        ziel = p("vorschau", "neu", f"{stem}.jpg")
+        ziel = p("vorschau", "neu", os.path.basename(os.path.dirname(png)), f"{stem}.jpg")
+        os.makedirs(os.path.dirname(ziel), exist_ok=True)
         if veraltet(ziel, png, alles):
             jpeg(Image.open(png), ziel, KLEIN, qualitaet=80)
             n += 1
@@ -107,11 +111,18 @@ def tabellen(alles):
         print("pdflatex fehlt – Tabellenvorschauen übersprungen")
         return
     n = 0
+    # Nummer je Datei aus der Pflegeliste („datei“ bzw. „latex“), sonst aus dem alten Namen tab_3-1
+    nummer = {}
+    for schl, e in json.load(open(p("werkzeug", "status.json"), encoding="utf-8"))["eintraege"].items():
+        for name in (e.get("datei"), os.path.splitext(os.path.basename(e.get("latex") or ""))[0]):
+            if name:
+                nummer[name] = re.sub(r"^(Tab\.|Abb\.)\s*", "", schl)
     for tex in sorted(glob.glob(p("tabellen", "*.tex"))):
         stem = os.path.splitext(os.path.basename(tex))[0]
-        nr = re.sub(r"^(tab|lst)_", "", stem).replace("-", ".")
+        nr = nummer.get(stem) or re.sub(r"^(tab|lst)_", "", stem).replace("-", ".")
         gross = p("vorschau", "neu", "gross", f"{stem}.png")
-        klein = p("vorschau", "neu", f"{stem}.jpg")
+        klein = p("vorschau", "neu", "tabellen", f"{stem}.jpg")
+        os.makedirs(os.path.dirname(klein), exist_ok=True)
         if not veraltet(gross, tex, alles):
             continue
         with tempfile.TemporaryDirectory() as tmp:

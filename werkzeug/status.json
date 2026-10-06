@@ -190,6 +190,16 @@
     "Caption „Exemplarische Roadmap“ und Berichtstitel „Strategische Projektroadmap – Zeitplan“ angleichen"
    ],
    "alt": "Dashboard „Strategische Projektroadmap – Zeitplan“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlen: 19 Projekte, 10 in Umsetzung, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Ø Terminverzug 3,8 Wochen, 7 Projekte enden in den nächsten 12 Monaten. Darunter ein Zeitplan der Projekte, nach Status gruppiert, auf einer Zeitachse von 2025 bis 2028: umrandete Planbalken mit hellgrauer Planungsphase und weißer Umsetzung, ein dunkler Ist-Strich bis zum Stichtag, ein grauer Vorschau-Strich bis zum Prognose-Ende und rote Verlängerungen, wo das Plan-Ende überschritten wird; links Fertigstellung und Terminabweichung in Wochen."
+  },
+  "3.9": {
+   "status": "pruefung",
+   "kommentare": [
+    "Linke Verbindungslinie als Baum ab der Unterkante von „Gesamtunternehmensanalyse“ geführt (vorher seitlicher Abgang), Abzweigungen mit Knotenpunkt",
+    "Hervorhebung des Gesamtunternehmens (im Original größere Schrift) auf Grau übertragen; kein Rot, da kein Element als zentral markiert ist",
+    "„BSC“ zu „Balanced Scorecard“ aufgelöst, „Detail-berichte“ ohne Trennung",
+    "Abstände und Boxbreiten vereinheitlicht"
+   ],
+   "alt": "Hierarchische Berichtsstruktur in vier Zeilen. Oben steht die Gesamtunternehmensanalyse, von der eine Linie zu den drei Analysesichten Geschäftsfelder, Standorte und Funktionsbereiche verzweigt. Jede der vier Ebenen führt zu Kennzahlen bzw. einer Balanced Scorecard, die mit Detailberichten in wechselseitiger Beziehung stehen."
   }
  }
 }

@@ -16,7 +16,7 @@ SEGMENTS = [  # (Mittelwinkel, Text, Planungsprozess?)
     (18,   "Planen\nund\nGestalten", True),
     (-54,  "Entscheiden", True),
     (-126, "Realisieren\nDurchführen", False),
-    (162,  "Kontrollieren\nVergleichen\nAnalysieren\nBerichten", False),
+    (162,  "Analyse\nund\nKontrolle", False),
 ]
 # Informationsobjekte außen: (Winkel, Radius, Text)
 DATA = [

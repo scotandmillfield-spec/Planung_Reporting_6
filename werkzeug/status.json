@@ -12,9 +12,10 @@
     "Bildtitel „Management-Regelkreis“ entfernt",
     "blaue Drehpfeile entfernt (der Kreislauf ergibt sich aus der Form)",
     "Planungsphasen grau hinterlegt, Planungsprozess als rote Klammer",
-    "Kern rot"
+    "Kern rot",
+    "Phase „Kontrollieren, Vergleichen, Analysieren, Berichten“ heißt jetzt „Analyse und Kontrolle“ (Vorgabe Autor, 06.10.2026)"
    ],
-   "alt": "Kreisförmiger Management-Regelkreis aus fünf Phasen: Ziele setzen, Planen und Gestalten, Entscheiden, Realisieren/Durchführen sowie Kontrollieren, Vergleichen, Analysieren und Berichten. Die ersten drei Phasen bilden den Planungsprozess. Im Zentrum stehen Information, Kommunikation und Koordination; außen stehen die ausgetauschten Größen Ziel-Größen, Plan-Werte, Ist-Werte und Abweichungen."
+   "alt": "Kreisförmiger Management-Regelkreis aus fünf Phasen: Ziele setzen, Planen und Gestalten, Entscheiden, Realisieren/Durchführen sowie Analyse und Kontrolle. Die ersten drei Phasen bilden den Planungsprozess. Im Zentrum stehen Information, Kommunikation und Koordination; außen stehen die ausgetauschten Größen Ziel-Größen, Plan-Werte, Ist-Werte und Abweichungen."
   },
   "2.2": {
    "status": "pruefung",

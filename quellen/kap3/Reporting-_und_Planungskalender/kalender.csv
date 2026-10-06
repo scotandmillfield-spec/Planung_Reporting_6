@@ -1,0 +1,38 @@
+﻿Prozessart;Prozess;Teilprozess;Schritt;Verantwortlich;Plan_Beginn;Plan_Ende;Ist_Ende;Meilenstein;Status_zum_Stichtag;Verzug_Tage
+Reporting;Jahresabschluss 2025;;;Rechnungswesen;02.02.2026;27.03.2026;27.03.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 01 und 02;;Controlling;02.03.2026;10.03.2026;10.03.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 03;;Controlling;01.04.2026;14.04.2026;14.04.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 04;;Controlling;04.05.2026;12.05.2026;12.05.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 05;;Controlling;01.06.2026;10.06.2026;10.06.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 06;;Controlling;01.07.2026;09.07.2026;09.07.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 07;;Controlling;03.08.2026;11.08.2026;11.08.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 08;;Controlling;01.09.2026;09.09.2026;09.09.2026;nein;erledigt;0
+Reporting;Monatsreporting;Monatsreporting 09;;Controlling;01.10.2026;09.10.2026;;nein;offen;0
+Reporting;Monatsreporting;Monatsreporting 10;;Controlling;02.11.2026;10.11.2026;;nein;offen;0
+Reporting;Monatsreporting;Monatsreporting 11;;Controlling;01.12.2026;09.12.2026;;nein;offen;0
+Reporting;Quartalsabschluss;Quartalsabschluss Q1;;Rechnungswesen;01.04.2026;05.05.2026;05.05.2026;nein;erledigt;0
+Reporting;Quartalsabschluss;Quartalsabschluss Q2;;Rechnungswesen;20.07.2026;11.08.2026;11.08.2026;nein;erledigt;0
+Reporting;Quartalsabschluss;Quartalsabschluss Q3;;Rechnungswesen;12.10.2026;29.10.2026;;nein;offen;0
+Reporting;Forecast;Forecast 2;;Controlling;17.08.2026;03.09.2026;03.09.2026;nein;erledigt;0
+Reporting;Forecast;Forecast 3 (Outlook Year End);;Controlling;09.11.2026;13.11.2026;;nein;offen;0
+Planung;Strategieentwicklung;;;Unternehmensentwicklung;12.01.2026;27.02.2026;27.02.2026;nein;erledigt;0
+Planung;Mittelfristplanung inkl. Forecast 1;;;Controlling;13.04.2026;23.10.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Vorbereitungsarbeiten;;Controlling;17.08.2026;28.08.2026;28.08.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Projekte vorbereiten;Investitionscontrolling;24.08.2026;28.08.2026;28.08.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Sonderprojekte identifizieren;Investitionscontrolling;26.08.2026;28.08.2026;28.08.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Planungsworkshop Projekte;Investitionscontrolling;02.09.2026;03.09.2026;03.09.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Planwerte auf Innenaufträgen;Investitionscontrolling;07.09.2026;16.09.2026;18.09.2026;nein;erledigt;2
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Investitionen und Eigenleistungen;Investitionscontrolling;07.09.2026;16.09.2026;16.09.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Eingabesperre;Investitionscontrolling;17.09.2026;17.09.2026;17.09.2026;ja;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Projektübergreifende Abstimmung;Investitionscontrolling;21.09.2026;23.09.2026;23.09.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Kapazitätsabgleich Einzelprojekte;Investitionscontrolling;22.09.2026;24.09.2026;24.09.2026;nein;erledigt;0
+Planung;Budgetierung 2027;Projekt- und Investitionsplanung;Projektübersicht erstellen;Investitionscontrolling;28.09.2026;02.10.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Absatz-, Erlös- und Beschaffungsplanung;Absatzplanung;Vertriebscontrolling;14.09.2026;25.09.2026;;nein;überfällig;5
+Planung;Budgetierung 2027;Absatz-, Erlös- und Beschaffungsplanung;Erlösplanung;Vertriebscontrolling;21.09.2026;02.10.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Absatz-, Erlös- und Beschaffungsplanung;Beschaffungsplanung;Einkauf;28.09.2026;09.10.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Personalplanung;;Personalcontrolling;17.08.2026;09.10.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Kostenstellenplanung;;Bereichscontrolling;01.09.2026;16.10.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Finanz- und Beteiligungsplanung;;Treasury;05.10.2026;06.11.2026;;nein;offen;0
+Planung;Budgetierung 2027;Zentrale Abstimmung;;Controlling;28.09.2026;20.11.2026;;nein;läuft;0
+Planung;Budgetierung 2027;Abschluss und Freigabe;;Geschäftsführung;23.11.2026;14.12.2026;;nein;offen;0
+Planung;Budgetierung 2027;Export der Planwerte ins ERP;;Controlling;17.12.2026;17.12.2026;;ja;offen;0

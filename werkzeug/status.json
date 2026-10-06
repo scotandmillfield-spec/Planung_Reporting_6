@@ -299,6 +299,24 @@
    "alt": "Tabelle und Portfolio von fünf strategischen Geschäftseinheiten (SGE A bis E). Die Tabelle nennt eigenen Marktanteil, Marktanteil des stärksten Konkurrenten, relativen Marktanteil, Marktwachstum, Umsatz und Umsatzanteil; B, C und D führen ihren Markt (relativer Marktanteil über 1), C hat mit 310 Mio. € den größten Umsatzanteil (28,7 %). Das Portfolio zeigt waagerecht den relativen Marktanteil (0 bis 3), senkrecht das Marktwachstum (0 bis 6 %), die Kreisfläche den Umsatz; gestrichelte Linien bei 1,5 und 3 % teilen es in vier Felder. A und D liegen bei hohem Marktwachstum und relativem Marktanteil unter 1,5, B oben rechts, C unten rechts, E unten links.",
    "caption": "Portfolio-Analyse",
    "datei": "Portfolio-Analyse"
+  },
+  "3.12": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dashboard neu aufgebaut (HTML für die Lernplattform, PNG für das Buch); bewusst ohne KPI-Leiste, die Seite ist ein Kalender",
+    "Caption ohne Produktnamen: „Reporting- und Planungskalender“ statt „… mit prevero“",
+    "Jahr 2010 → 2026 mit der Budgetierung 2027, Stichtag 30.09.2026; Termine auf Arbeitstage gelegt, Abfolge und Dauer wie im Original. Die Absatzplanung (14.09.–25.09.2026) passt zum Planungsbrief in Abb. 3.7",
+    "Personennamen und Spitznamen („Häuptling“, „Indianer“, Namen bekannter Skirennläufer) durch Rollen ersetzt; SAP/CO-Aufträge/prevero neutral: ERP-System, Innenaufträge, „Projektübersicht erstellen“",
+    "Monatsreporting, Quartalsabschluss und Forecast je in einer Zeile mit allen Terminen (aufklappbar); Reporting und Planung getrennt statt chronologisch gemischt",
+    "Ampeln entfallen: Status als Wort, Balken Plan weiß/Ist anthrazit/Verzug rot wie Abb. 3.3 und 3.5; Stichtaglinie neu. Im Druck sind Budgetierung und Absatz-/Erlös-/Beschaffungsplanung aufgeklappt, die Projekt- und Investitionsplanung (9 Schritte) zugeklappt",
+    "Datenschnitte Zeitraum, Verantwortlich, Status ersetzen „Planungsdurchlauf“, „Variante“ und „Monatsebene ausblenden“ – prüfen, ob der Buchtext diese Felder erwähnt",
+    "Spalten „Beginn“, „Ende“ und „Link“ entfallen (Termine im Tooltip und in „Werte als Tabelle“), damit der Kalender die halbe Breite bekommt",
+    "Status zum Stichtag: Absatzplanung 5 Tage überfällig, „Planwerte auf Innenaufträgen“ 2 Tage später erledigt – erfundene, plausible Werte"
+   ],
+   "alt": "Dashboard „Reporting- und Planungskalender“ mit den Berichts- und Planungsprozessen 2026 und der Budgetierung 2027, Stichtag 30.09.2026, Filter für Zeitraum, Verantwortlich und Status. Eine Tabelle nennt je Prozess die verantwortliche Rolle und den Status, rechts daneben zeigt eine Zeitachse von Januar bis Dezember die Plantermine als Balken: weiß umrandet geplant, anthrazit der Ist-Verlauf, rot der Verzug; eine gestrichelte Linie markiert den Stichtag. Oben das Reporting mit Jahresabschluss 2025 sowie Monatsreporting, Quartalsabschluss und Forecast mit je allen Terminen in einer Zeile, darunter die Planung mit Strategieentwicklung, Mittelfristplanung und der Budgetierung 2027 mit ihren Teilplänen von August bis Dezember. Überfällig ist nur die Absatzplanung (Plan-Ende 25.09., 5 Tage), sieben weitere Prozesse laufen im Plan.",
+   "caption": "Reporting- und Planungskalender",
+   "datei": "Reporting-_und_Planungskalender"
   }
  }
 }

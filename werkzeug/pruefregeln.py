@@ -100,8 +100,33 @@ GEZIELT = {
     "5.77": [("mit dem Microsoft Visual Studio", "mit Microsoft Visual Studio", None)],
 }
 
-# Software in der Caption, die in der neu gezeichneten Fassung nicht mehr zu sehen ist
-WERKZEUG_IN_CAPTION = re.compile(r"\((?:Beispiel )?(MS Excel|Cubeware)\)|mit (MS Excel)")
+# Software in der Caption, die in der neu gezeichneten Fassung nicht mehr zu sehen ist.
+# Entscheidung des Autors: keine Produktscreenshots – alles wird softwareneutral nachgebaut.
+PRODUKTE = re.compile(r"\b(prevero|Cubeware|SAP|Hyperion|Cognos|Powerplay|QlikView|Qlik|Power ?BI|Power ON|"
+                      r"Insightsoftware|HEARTBEAT|MS Excel|Excel|MS Access|MS Proje[ck]t|Visual Studio|R-Studio|RStudio|"
+                      r"Arcplan|DynaSight|InSight|Diamant|godmode-trader|ICARIS|NetWeaver|BEx|Fiori|Oberon|Prospero)\b")
+
+
+def produkt_im_text(caption):
+    """Erster Produktname im Text der Caption; eine Quellenklammer am Ende zählt nicht (Quelle darf ein Hersteller sein)."""
+    t = caption.strip()
+    if t.endswith(")"):
+        tiefe, j = 0, len(t) - 1
+        for j in range(len(t) - 1, -1, -1):
+            if t[j] == ")":
+                tiefe += 1
+            elif t[j] == "(":
+                tiefe -= 1
+                if tiefe == 0:
+                    break
+        inhalt = t[j + 1:-1]
+        if j > 0 and (QUELLE_ANFANG_TXT.match(inhalt) or re.search(r"(19|20)\d\d", inhalt)):
+            t = t[:j]
+    m = PRODUKTE.search(t)
+    return m.group(1) if m else None
+
+
+QUELLE_ANFANG_TXT = re.compile(r"(In Anlehnung|[Vv]gl\.|Quelle|Entnommen|Leicht|Eigene|Daten|Mit freundlicher|[Mm]odifiziert)")
 
 
 def _umlaute(s):
@@ -194,9 +219,11 @@ def pruefe(nr, art, caption):
         if v2 != v:
             kom.append("Neu gezeichnet – Quellenformel „In Anlehnung an“ statt „Quelle“/„Entnommen aus“")
             v = v2
-        m = WERKZEUG_IN_CAPTION.search(v)
-        if m:
-            kom.append(f"Caption nennt {m.group(1) or m.group(2)} – die Neuzeichnung ist werkzeugneutral, Caption anpassen")
+        prod = produkt_im_text(v)
+        if prod:
+            kom.append(f"Caption nennt {prod} – die Neufassung ist softwareneutral, Caption ohne Produktnamen fassen")
+        if re.search(r"(Umsetzung mit|wurde mit|erstellt mit|mit .{0,40} erstellt)", v) and PRODUKTE.search(v):
+            kom.append("Satz zur Software in der Klammer („Umsetzung mit …“, „… erstellt“) entfällt bei der softwareneutralen Neufassung")
     for alt, neu, text in GEZIELT.get(nr, []):
         if alt is None:  # Caption vollständig ersetzt – Einzelbefunde davor sind hinfällig
             v = neu

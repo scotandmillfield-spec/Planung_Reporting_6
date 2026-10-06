@@ -63,7 +63,7 @@ START = {"pruefung": "pruefung", "latex": "pruefung", "freigegeben": "freigegebe
 ART = {"D": "Diagramm", "V": "Dashboard/Visual", "M": "Eingabemaske", "S": "Screenshot", "T": "Tabelle", "DUP": "Duplikat",
        "X": "Hinweis"}
 WEG = {"D": "neu als PNG + PPTX", "V": "neu als PNG + HTML", "M": "neu als HTML + PNG + PDF + PPTX (Skill Eingabemasken)",
-       "S": "Screenshot – Weg klären", "T": "LaTeX-Tabelle"}
+       "S": "Sonderfall – Vorgehen klären", "T": "LaTeX-Tabelle"}
 OFFEN_MUSTER = re.compile(r"prüfen|klären|\?|abgleichen|angleichen|unterscheiden|welche|gleichsetzen|vereinheitlichen")
 
 
@@ -298,8 +298,8 @@ def eintraege():
             status = "pruefung"
         elif art == "T" and tex:
             status = "latex"
-        elif art == "S":
-            status = "screenshot"
+        elif art == "S":                                 # keine Produktscreenshots: Sonderfall klären
+            status = "klaerung"
         elif art == "DUP":
             status = "entfaellt"
         elif art == "X":
@@ -775,7 +775,8 @@ def seite(liste):
         "<code>abbildungen/</code> nach <code>author/content/</code> in Overleaf hochladen. Querformate (Dashboards und "
         "Abbildungen) werden als PNG um 90° gedreht auf einer Hochformatseite eingebunden. Eingabemasken (Screenshots aus "
         "Planungssoftware) werden softwareneutral als HTML5 nachgebaut; HTML, PNG, PDF und PPTX entstehen aus derselben "
-        "Druckfassung, die HTML-Fassung ist bedienbar. „PNG-Link kopieren“ legt "
+        "Druckfassung, die HTML-Fassung ist bedienbar. Produktscreenshots bleiben nicht im Buch: Masken, Dashboards und "
+        "Modellansichten werden softwareneutral nachgebaut, Captions ohne Produktnamen gefasst. „PNG-Link kopieren“ legt "
         f"den Link auf das PNG der Plattform in die Zwischenablage (<code>{PLATTFORM_URL}abbildungen/kapN/….png</code>).</li>"
         "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "
         "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"

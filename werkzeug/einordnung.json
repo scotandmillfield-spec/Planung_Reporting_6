@@ -123,7 +123,7 @@
   "nr": "3.8",
   "titel": "Exemplarische Top-Down-Vorgaben und Abstimmungen",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 19,
@@ -143,15 +143,15 @@
   "folie": 21,
   "nr": "3.11",
   "titel": "Exemplarische Startnavigation.",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 22,
   "nr": "3.12",
   "titel": "Reporting- und Planungskalender mit prevero",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 23,
@@ -311,8 +311,8 @@
   "folie": 45,
   "nr": "3.32",
   "titel": "Pivottabelle (MS Excel)",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Pivottabelle mit Feldliste"
  },
  {
   "folie": 46,
@@ -409,8 +409,8 @@
   "folie": 59,
   "nr": "3.46",
   "titel": "Beispiel zu einem Portfolio-/Blasendiagramm. (Bildauszug entnommen aus Schön et al. 2001, S. 386)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 60,
@@ -479,8 +479,8 @@
   "folie": 69,
   "nr": "3.56",
   "titel": "Wasserfalldiagramm mit Cubeware. (Quelle: Cubeware Bildergalerie 2011)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 70,
@@ -549,8 +549,8 @@
   "folie": 79,
   "nr": "3.66",
   "titel": "Geo-Visualisierung. (Quelle: SAP AG 2003)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 80,
@@ -584,8 +584,8 @@
   "folie": 84,
   "nr": "3.71",
   "titel": "Beispiel Chartanalysediagramm. (Quelle: godmode-trader 2011)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 85,
@@ -605,36 +605,36 @@
   "folie": 87,
   "nr": "3.74",
   "titel": "Durch Selektion änderbare dynamische Diagramme – vorher (QlikView). (Quelle:",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 88,
   "nr": "3.75",
   "titel": "Durch Selektion änderbare dynamische Diagramme – nachher (QlikView). (Quelle: QlikView-Demo Market Share 2015)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 89,
   "nr": "3.76",
   "titel": "Dynamische Vollkräfte-Statistik mit HEARTBEAT – vorher. (Quelle: Pradtke GmbH 2021)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 90,
   "nr": "3.77",
   "titel": "Dynamische Vollkräfte-Statistik mit HEARTBEAT – nacher. (Quelle: Pradtke GmbH 2021)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 91,
   "nr": "3.78",
   "titel": "Integrierte Fotos und Logos (Beispiel Cubeware). (Quelle: Cubeware Bildergalerie 2011)",
   "art": "S",
-  "hinweis": ""
+  "hinweis": "Thema sind Fotos und Logos im Dashboard – neutral mit Platzhaltern nachbauen oder streichen? klären"
  },
  {
   "folie": 92,
@@ -655,14 +655,14 @@
   "nr": "3.179",
   "titel": "Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung mit prevero.",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 95,
   "nr": "3.180",
   "titel": "Integrierte Planungsfunktionen in Power BI mit Power ON von Insightsoftware (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 96,
@@ -676,42 +676,42 @@
   "nr": "3.182",
   "titel": "Exemplarische Balanced Scorecard Planung mit SAP NetWeaver-Technologie. (Entnommen aus Schön et al. 2010, S. 25)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 98,
   "nr": "3.183",
   "titel": "Rollierende Absatzplanung mit dem Cubeware-Cockpit",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 99,
   "nr": "3.184",
   "titel": "Selektive Gruppenplanung von Preisveränderungen und Konditionen. (Quelle: Schön",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 100,
   "nr": "3.185",
   "titel": "Detaillierte Umsatzplanung auf Ebene Kunde/Artikel. (Quelle: Schön und Irmer 2010, S. 52. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 101,
   "nr": "3.186",
   "titel": "Exemplarische Zuschläge in der Einkaufspreisplanung. (Quelle: Schön und Irmer 2009, S. 296. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 102,
   "nr": "3.187",
   "titel": "Detail-Planungsmaske für die Einkaufspreisplanung. (Quelle: Schön und Irmer 2010, S. 54. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG.)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 103,
@@ -725,21 +725,21 @@
   "nr": "3.189",
   "titel": "Planungsformular Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 253. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 105,
   "nr": "3.190",
   "titel": "Planungsauswertung Personalkostenplanung. (Quelle: Schön und Irmer 2007, S. 254. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 106,
   "nr": "3.191",
   "titel": "Planungsformular Kapazitätsbedarf Anlagen. (Quelle: Schön und Irmer 2010, S. 55. Hierbei handelt es sich um eine Umsetzung mit dem BEx Web Application Designer von der SAP AG)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 107,
@@ -759,15 +759,15 @@
   "folie": 109,
   "nr": "3.194",
   "titel": "Liniendiagramm mit Prognosewerten sowie Prognoseintervallen mit der SAP Analytic Cloud",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 110,
   "nr": "3.195",
   "titel": "Prognosemodelle mit R-Studio (Quelle: Oehler, K. 2019. Advanced Analytics fur Controller",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Streudiagramm mit Regressionsgerade; R-Code ggf. als Listing"
  },
  {
   "folie": 111,
@@ -871,8 +871,8 @@
   "folie": 125,
   "nr": "4.11",
   "titel": "Planungskalender. (Der Planungskalender wurde mit MS Projekt erstellt.)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Gantt wie Abb. 3.3 (Zeitplan)"
  },
  {
   "folie": 126,
@@ -899,15 +899,15 @@
   "folie": 129,
   "nr": "4.15",
   "titel": "Reportingkalender. (Der Reportingkalender wurde mit MS Projekt erstellt.)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Gantt wie Abb. 3.3 (Zeitplan)"
  },
  {
   "folie": 130,
   "nr": "4.16",
   "titel": "Reportingkalender Monatsabschluss. (Der Reportingkalender (Monatsabschluss) wurde mit MS Projekt erstellt.)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Gantt wie Abb. 3.3 (Zeitplan)"
  },
  {
   "folie": 131,
@@ -920,43 +920,43 @@
   "folie": 132,
   "nr": "4.18",
   "titel": "Hyperion Application Link. (Entnommen aus Schön 2004, S. 323)",
-  "art": "S",
-  "hinweis": ""
+  "art": "D",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Datenfluss als Diagramm"
  },
  {
   "folie": 133,
   "nr": "4.19",
   "titel": "SAP BW-Bericht mit dem Bex-Analyser (MS Excel-Integration). (Quelle: SAP BW-Bericht mit dem Bex-Analyser (MS Excel-Integration) basierend auf Daten eines SAP-IDES-Systems. Entnommen aus Schön 2004, S. 331)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 134,
   "nr": "4.20",
   "titel": "Web-Bericht-Beispiel mit Cognos ReportNet. (Entnommen aus Schön 2004, S. 324)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 135,
   "nr": "4.21",
   "titel": "Forderungs-Cockpit mit Power BI im Webbrowser (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 136,
   "nr": "4.22",
   "titel": "Forderungs-Cockpit mit PowerBI im Kollaborationstool MS Teams (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 137,
   "nr": "4.23",
   "titel": "Multidimensionale Analysen mit Powerplay von Cognos",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 138,
@@ -1088,8 +1088,8 @@
   "folie": 156,
   "nr": "5.17",
   "titel": "Datenbankschema in 3NF (eigene Darstellung)",
-  "art": "S",
-  "hinweis": "Power-BI-Modellansicht"
+  "art": "D",
+  "hinweis": "Power-BI-Modellansicht; Produktscreenshot – softwareneutral nachbauen; Datenmodell als Diagramm"
  },
  {
   "folie": 157,
@@ -1102,29 +1102,29 @@
   "folie": 158,
   "nr": "5.19",
   "titel": "Star-Schema mit Fakten- und Dimensionstabellen",
-  "art": "S",
-  "hinweis": "Power-BI-Modellansicht"
+  "art": "D",
+  "hinweis": "Power-BI-Modellansicht; Produktscreenshot – softwareneutral nachbauen; Datenmodell als Diagramm"
  },
  {
   "folie": 159,
   "nr": "5.20",
   "titel": "Analyse gemäß eines Stern-Schemas in PowerBI",
-  "art": "S",
-  "hinweis": "Power-BI-Modellansicht"
+  "art": "V",
+  "hinweis": "Power-BI-Modellansicht; Produktscreenshot – softwareneutral nachbauen; Filterwirkung im Star-Schema als Einzelvisuals"
  },
  {
   "folie": 160,
   "nr": "5.21",
   "titel": "Galaxy-Schema. (Eigene Darstellung. Vgl. auch Mohr 2006, S. 97)",
-  "art": "S",
-  "hinweis": "Power-BI-Modellansicht"
+  "art": "D",
+  "hinweis": "Power-BI-Modellansicht; Produktscreenshot – softwareneutral nachbauen; Datenmodell als Diagramm"
  },
  {
   "folie": 161,
   "nr": "5.22",
   "titel": "Snowflake-Schema. (Eigene Darstellung. Vgl. auch Mohr 2006, S. 98)",
-  "art": "S",
-  "hinweis": "Power-BI-Modellansicht"
+  "art": "D",
+  "hinweis": "Power-BI-Modellansicht; Produktscreenshot – softwareneutral nachbauen; Datenmodell als Diagramm"
  },
  {
   "folie": 162,
@@ -1243,56 +1243,56 @@
   "nr": "5.39",
   "titel": "Beispiel zur freien Datenrecherche (z.B. Select-Anweisung",
   "art": "S",
-  "hinweis": "SQL-Listing – besser als Code-Listing im LaTeX-Text"
+  "hinweis": "SQL-Text – als Listing (lstlisting) setzen statt als Bild? klären"
  },
  {
   "folie": 179,
   "nr": "5.40",
   "titel": "SQL-Abfragegenerator (MS Access)",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Abfrageentwurf (Tabellen und Raster)"
  },
  {
   "folie": 180,
   "nr": "5.41",
   "titel": "InSight-Reportgenerator mit Drag- und Drop von Arcplan",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 181,
   "nr": "5.42",
   "titel": "Reportinganalyse u.a. mit Ampelsteuerung, Nutzwertanalysen und Portfoliotechnik (mit DynaSight von Arcplan)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 182,
   "nr": "5.43",
   "titel": "Cockpit-/Dash-Board-Beispiel (Diamant®/3 IQ)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 183,
   "nr": "5.44",
   "titel": "Cockpit-/Dash-Board-Beispiel (SAP Analytic Cloud)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 184,
   "nr": "5.45",
   "titel": "Excel-Add-in als Oberfläche (hier SAP BEx Analyser)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 185,
   "nr": "5.46",
   "titel": "What-If-Simulation  (Beispiel QlikView)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 186,
@@ -1305,8 +1305,8 @@
   "folie": 187,
   "nr": "5.48",
   "titel": "Main Dashboard des Qlik View Governance Dashboards",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 188,
@@ -1326,29 +1326,29 @@
   "folie": 190,
   "nr": "5.51",
   "titel": "Scorecard-Analyse mit SAP SEM",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 191,
   "nr": "5.52",
   "titel": "SAP Fiori Launchpad Homepage im Editiermodus; Quelle SAP Fiori (2017a)",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 192,
   "nr": "5.53",
   "titel": "SAP Fiori Responsive Design für verschiedene Endgeräte; Quelle SAP Fiori (2017a)",
-  "art": "S",
-  "hinweis": ""
+  "art": "D",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; schematisch: dieselbe Oberfläche auf Desktop, Tablet und Smartphone"
  },
  {
   "folie": 193,
   "nr": "5.54",
   "titel": "Management-Dashboard mit Diamant/4 (Quelle: Diamant Software 2021)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 194,
@@ -1382,22 +1382,22 @@
   "folie": 198,
   "nr": "5.59",
   "titel": "Mobile Reporting mit einem Smarphone (C8 Cubeware)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 199,
   "nr": "5.60",
   "titel": "Mobile Reporting mit einem Tablet (C8 Cubeware)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 200,
   "nr": "5.61",
   "titel": "Einfache Exemplarische Eingabefunktionen",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 201,
@@ -1432,7 +1432,7 @@
   "nr": "5.66",
   "titel": "Diagramme zur Big-Data-Datenvisualisierung",
   "art": "S",
-  "hinweis": ""
+  "hinweis": "Collage von Diagrammarten – neutral als Übersicht nachbauen oder streichen? klären"
  },
  {
   "folie": 206,
@@ -1452,8 +1452,8 @@
   "folie": 208,
   "nr": "5.69",
   "titel": "Isi: Sprachassistentin in der Diamant-Software Diamant/4 (Quelle: Diamant Software 2021)",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 209,
@@ -1474,77 +1474,77 @@
   "nr": "5.72",
   "titel": "Standardbericht SAP ERP CC (Selektionsmaske)",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 212,
   "nr": "5.73",
   "titel": "Standardbericht SAP ERP CC (Detailbild)",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 213,
   "nr": "5.74",
   "titel": "Planungsformular SAP ERP CC",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 214,
   "nr": "5.75",
   "titel": "Planung eines Projektfertigers mit MS Excel",
-  "art": "S",
-  "hinweis": ""
+  "art": "M",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 215,
   "nr": "5.76",
   "titel": "Reporting mit MS Access",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 216,
   "nr": "5.77",
   "titel": "Star-Schema für den Einkauf mit dem Microsoft Visual Studio",
-  "art": "S",
-  "hinweis": ""
+  "art": "D",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Star-Schema als Diagramm"
  },
  {
   "folie": 217,
   "nr": "5.78",
   "titel": "Hyperion Planning: Mehrdimensionale Planungsformulare",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 218,
   "nr": "5.79",
   "titel": "Hyperion Planning: Individuelle Planungsmodelle (Business Rules)",
-  "art": "S",
-  "hinweis": ""
+  "art": "D",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen; Modellverknüpfungen als Diagramm"
  },
  {
   "folie": 219,
   "nr": "5.80",
   "titel": "Hyperion Planning: Auswertungen",
-  "art": "S",
-  "hinweis": ""
+  "art": "V",
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 220,
   "nr": "5.81",
   "titel": "Hyperion Planning: Kommentarfunktion",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 221,
   "nr": "5.82",
   "titel": "Hyperion Planning: Workflowkomponente",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  },
  {
   "folie": 222,
@@ -1558,6 +1558,6 @@
   "nr": "6.1",
   "titel": "Werttreiberbasierte Planung mit prevero Planung & Berichtswesen",
   "art": "M",
-  "hinweis": ""
+  "hinweis": "Produktscreenshot – softwareneutral nachbauen"
  }
 ]

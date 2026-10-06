@@ -42,6 +42,19 @@ STATUS = OrderedDict([
     ("entfaellt", "Entfällt"),
     ("hinweis", "Hinweis"),
 ])
+# Abstimmungsstatus (Google-Tabelle); Schlüssel für CSS/Filter, Text wie in der Tabelle
+ABSTIMMUNG = OrderedDict([
+    ("offen", "offen"),
+    ("arbeit", "in Arbeit"),
+    ("pruefung", "zur Prüfung"),
+    ("aenderung", "Änderung nötig"),
+    ("klaerung", "Klärung nötig"),
+    ("freigegeben", "freigegeben"),
+    ("entfaellt", "entfällt"),
+])
+# Anfangsstatus aus dem Stand der Umsetzung (gilt, solange die Tabelle nicht erreichbar ist)
+START = {"pruefung": "pruefung", "latex": "pruefung", "freigegeben": "freigegeben", "klaerung": "klaerung",
+         "entfaellt": "entfaellt", "hinweis": "hinweis"}
 ART = {"D": "Diagramm", "V": "Dashboard/Visual", "S": "Screenshot", "T": "Tabelle", "DUP": "Duplikat", "X": "Hinweis"}
 WEG = {"D": "neu als PNG + PPTX", "V": "neu als PNG + HTML", "S": "Skill Screenshots", "T": "LaTeX-Tabelle"}
 OFFEN_MUSTER = re.compile(r"prüfen|klären|\?|abgleichen|angleichen|unterscheiden|welche|gleichsetzen|vereinheitlichen")
@@ -284,16 +297,17 @@ def kommentar_li(t):
 
 
 def karte(x):
-    st = x["status"]
+    st = START.get(x["status"], "offen")
     such = " ".join([x["label"], x["cap_alt"], x["cap_neu"], " ".join(x["kommentare"]), " ".join(x["cap_kom"]),
                      f"folie {x['folie']}"]).lower()
     offen = any(OFFEN_MUSTER.search(k) for k in x["kommentare"] + x["cap_kom"]) or st == "klaerung"
     teile = [f"<article class='karte' id='{x['anker']}' data-kap='{x['kap']}' data-status='{st}' data-art='{x['art']}'"
-             f" data-offen='{1 if offen else 0}' data-suche='{e(such)}'>"]
+             f" data-offen='{1 if offen else 0}' data-offen-fix='{1 if offen else 0}' data-suche='{e(such)}'>"]
     # Kopf
+    text = "Hinweis" if st == "hinweis" else ABSTIMMUNG[st]
     teile.append("<header class='kk'>"
                  f"<a class='nr' href='#{x['anker']}' title='Link auf diese Abbildung'>{e(x['label'])}</a>"
-                 f"<span class='st st-{st}'>{e(STATUS[st])}</span>"
+                 f"<span class='st st-{st}' title='Status der Abstimmung'>{e(text)}</span>"
                  f"<span class='meta'>{e(ART.get(x['art'], ''))} · Folie {x['folie']}</span></header>")
     teile.append(f"<h3 class='cap'>{e(x['cap_neu'])}</h3>")
     if x["cap_neu"] != x["cap_alt"] and x["art"] not in ("X",):
@@ -331,11 +345,22 @@ def karte(x):
     if x["quellen"]:
         teile.append("<p class='quellen'><span>Quelle:</span> " + " · ".join(
             f"<a href='{e(q)}' target='_blank' rel='noopener'>{e(os.path.basename(q))}</a>" for q in x["quellen"]) + "</p>")
-    # Kommentare
+    # Abstimmung (Status und Kommentare aus der Google-Tabelle)
+    if st != "hinweis":
+        optionen = "".join(f"<option value='{k}'{' selected' if k == st else ''}>{e(v)}</option>"
+                           for k, v in ABSTIMMUNG.items())
+        teile.append(f"<section class='abst' aria-label='Abstimmung'><h4>Abstimmung <span class='abst-zuletzt'></span></h4>"
+                     "<ul class='abst-liste'></ul>"
+                     "<div class='abst-form' hidden>"
+                     f"<label>Status <select class='abst-status'>{optionen}</select></label>"
+                     "<textarea class='abst-text' rows='2' placeholder='Kommentar hinzufügen (optional)'></textarea>"
+                     "<div class='abst-zeile'><button type='button' class='kn kopie abst-speichern'>Speichern</button>"
+                     "<span class='abst-meldung' role='status'></span></div></div></section>")
+    # Hinweise aus der Umsetzung
     if x["vorgehen"]:
         teile.append(f"<p class='vorgehen'><span>Vorgehen:</span> {e(x['vorgehen'])}</p>")
     if x["kommentare"]:
-        teile.append("<div class='kom'><h4>Kommentare</h4><ul>" + "".join(kommentar_li(k) for k in x["kommentare"]) + "</ul></div>")
+        teile.append("<div class='kom'><h4>Hinweise aus der Umsetzung</h4><ul>" + "".join(kommentar_li(k) for k in x["kommentare"]) + "</ul></div>")
     if x["cap_kom"]:
         teile.append("<div class='kom'><h4>Caption</h4><ul>" + "".join(kommentar_li(k) for k in x["cap_kom"]) + "</ul></div>")
     if x["alt"]:
@@ -367,6 +392,7 @@ details.info summary{cursor:pointer;color:var(--text)}
 details.info table{border-collapse:collapse;margin:8px 0 4px;font-size:13px}
 details.info th,details.info td{padding:3px 10px 3px 0;border-bottom:1px solid var(--linie);text-align:right}
 details.info th:first-child,details.info td:first-child{text-align:left}
+details.info td.fett{font-weight:bold}
 details.info ul{margin:6px 0;padding-left:18px}
 .leiste{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--linie)}
 .leiste div.in{max-width:1240px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
@@ -389,12 +415,12 @@ h2.kap span{color:var(--muted);font-weight:normal;font-size:15px}
 .nr:hover{text-decoration:underline}
 .meta{color:var(--muted);font-size:13px;margin-left:auto}
 .st{font-size:12px;padding:2px 8px;border-radius:10px;border:1px solid var(--ac);white-space:nowrap}
-.st-freigegeben{background:var(--gut);border-color:var(--gut);color:#fff}
-.st-pruefung{background:var(--ac);color:#fff}
-.st-latex{color:var(--ac)}
-.st-klaerung{background:var(--rot);border-color:var(--rot);color:#fff}
 .st-offen{border-color:#9A9A9A;color:var(--muted)}
-.st-screenshot{background:var(--flaeche);border-color:var(--linie);color:var(--muted)}
+.st-arbeit{color:var(--ac)}
+.st-pruefung{background:var(--ac);color:#fff}
+.st-aenderung{border-color:var(--rot);color:var(--rot);font-weight:bold}
+.st-klaerung{background:var(--rot);border-color:var(--rot);color:#fff}
+.st-freigegeben{background:var(--gut);border-color:var(--gut);color:#fff}
 .st-entfaellt{border-color:var(--linie);color:var(--muted);text-decoration:line-through}
 .st-hinweis{border-color:var(--linie);color:var(--muted);font-style:italic}
 h3.cap{font-size:15px;margin:2px 0 4px;line-height:1.35}
@@ -422,13 +448,38 @@ h3.cap{font-size:15px;margin:2px 0 4px;line-height:1.35}
 .kom li{margin:1px 0}
 .kom li.pk::marker{color:var(--rot)}
 .kom li.pk{color:#000}
+.abst{margin:8px 0 2px;padding:8px 10px;background:var(--flaeche);border-radius:4px}
+.abst h4{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 2px}
+.abst-zuletzt{text-transform:none;letter-spacing:0;font-weight:normal}
+.abst-liste{margin:2px 0 0;padding-left:18px;font-size:13.5px}
+.abst-liste:empty{display:none}
+.abst-liste li{margin:1px 0}
+.abst-liste .wer{color:var(--muted)}
+.abst-form{display:grid;gap:6px;margin-top:6px}
+.abst-form[hidden]{display:none}
+.abst-form label{font-size:13px;display:flex;gap:8px;align-items:center}
+.abst-form select{font-size:13px;padding:3px 6px}
+.abst-form textarea{font:inherit;font-size:13.5px;padding:5px 7px;border:1px solid #9A9A9A;border-radius:4px;resize:vertical;width:100%}
+.abst-zeile{display:flex;gap:10px;align-items:center}
+.abst-meldung{font-size:13px;color:var(--muted)}
+.abst-meldung.fehler{color:var(--rot)}
+.abst-info{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13.5px;color:var(--muted);margin:0 0 12px}
+.abst-info .punkt{display:inline-block;width:8px;height:8px;border-radius:4px;background:#9A9A9A;margin-right:6px}
+.abst-info.verbunden .punkt{background:var(--gut)}
+.abst-info.fehler .punkt{background:var(--rot)}
+#anmelden{padding:18px 20px;max-width:360px;border:1px solid var(--linie);border-radius:6px}
+#anmelden h3{margin:0 0 6px;font-size:16px}
+#anmelden p{display:block;padding:0;margin:0 0 10px;font-size:13px;color:var(--muted)}
+#anmelden label{display:grid;gap:3px;font-size:13px;margin-bottom:10px}
+#anmelden input{font:inherit;font-size:14px;padding:5px 8px;border:1px solid #9A9A9A;border-radius:4px}
+#anmelden .knoepfe{display:flex;gap:8px;justify-content:flex-end}
 details{margin-top:6px;font-size:13.5px}
 details summary{cursor:pointer;color:var(--muted)}
 details p{margin:4px 0}
 pre{margin:6px 0 0;padding:10px;background:var(--flaeche);border:1px solid var(--linie);border-radius:4px;overflow:auto;max-height:340px;font:12px/1.4 Consolas,"DejaVu Sans Mono",monospace}
-dialog{border:none;padding:0;max-width:96vw;max-height:94vh;background:#fff}
-dialog img{display:block;max-width:96vw;max-height:calc(94vh - 34px);object-fit:contain}
-dialog p{margin:0;padding:8px 12px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
+#lupe{border:none;padding:0;max-width:96vw;max-height:94vh;background:#fff}
+#lupe img{display:block;max-width:96vw;max-height:calc(94vh - 34px);object-fit:contain}
+#lupe p{margin:0;padding:8px 12px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
 dialog::backdrop{background:rgba(0,0,0,.65)}
 .leerhinweis{display:none;color:var(--muted);padding:30px 0}
 footer{max-width:1240px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:12px}
@@ -438,13 +489,35 @@ footer{max-width:1240px;margin:0 auto;padding:0 20px 40px;color:var(--muted);fon
 
 JS = r"""
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const KONFIG=__KONFIG__, STATUSTEXT=__STATUS__;
+const TEXT2KEY=Object.fromEntries(Object.entries(STATUSTEXT).map(([k,v])=>[v,k]));
 const karten=$$('.karte'), stand={kap:'alle',status:'',art:'',q:'',offen:false};
+function el(tag,text,cls){const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;}
+// ---------- Kennzahlen und Übersicht aus den aktuellen Status der Karten ----------
+function zaehlen(){
+  const ges={}, kap={};
+  for(const k of karten){const s=k.dataset.status; if(s==='hinweis')continue;
+    ges[s]=(ges[s]||0)+1; const z=kap[k.dataset.kap]||(kap[k.dataset.kap]={}); z[s]=(z[s]||0)+1;}
+  const summe=Object.values(ges).reduce((a,b)=>a+b,0), sts=Object.keys(STATUSTEXT).filter(s=>ges[s]);
+  const z=$('#zahlen'); z.textContent='';
+  const knopf=(s,n,t)=>{const b=el('button'); b.dataset.status=s; b.setAttribute('aria-pressed',String(!!s&&stand.status===s));
+    b.append(el('b',String(n)),el('span',t));
+    b.addEventListener('click',()=>{stand.status=(stand.status===s)?'':s; $('#f-status').value=stand.status; filtern();}); z.appendChild(b);};
+  knopf('',summe,'Einträge'); for(const s of sts) knopf(s,ges[s],STATUSTEXT[s]);
+  const t=el('table'), kopf=el('tr'); kopf.append(el('th','Kapitel'),...sts.map(s=>el('th',STATUSTEXT[s])),el('th','Summe')); t.appendChild(kopf);
+  for(const [k,z2] of Object.entries(kap)){const tr=el('tr'); tr.append(el('td','Kapitel '+k),...sts.map(s=>el('td',z2[s]?String(z2[s]):'–')),
+    el('td',String(Object.values(z2).reduce((a,b)=>a+b,0)))); t.appendChild(tr);}
+  const tr=el('tr'); tr.append(el('td','Gesamt','fett'),...sts.map(s=>el('td',String(ges[s]),'fett')),el('td',String(summe),'fett')); t.appendChild(tr);
+  const ziel=$('#kapiteltabelle'); ziel.textContent=''; ziel.appendChild(t);
+}
+// ---------- Filter ----------
 function filtern(){
   let n=0;
   for(const k of karten){
+    const suche=k.dataset.suche+' '+(k.dataset.sucheAbst||'');
     const ok=(stand.kap==='alle'||k.dataset.kap===stand.kap)&&(!stand.status||k.dataset.status===stand.status)
       &&(!stand.art||k.dataset.art===stand.art)&&(!stand.offen||k.dataset.offen==='1')
-      &&(!stand.q||stand.q.split(/\s+/).every(w=>k.dataset.suche.includes(w)));
+      &&(!stand.q||stand.q.split(/\s+/).every(w=>suche.includes(w)));
     k.hidden=!ok; if(ok)n++;
   }
   for(const s of $$('section.kapitel-block')) s.hidden=!$$('.karte',s).some(k=>!k.hidden);
@@ -458,58 +531,116 @@ $('#f-status').addEventListener('change',ev=>{stand.status=ev.target.value;filte
 $('#f-art').addEventListener('change',ev=>{stand.art=ev.target.value;filtern();});
 $('#f-suche').addEventListener('input',ev=>{stand.q=ev.target.value.trim().toLowerCase();filtern();});
 $('#f-offen').addEventListener('change',ev=>{stand.offen=ev.target.checked;filtern();});
-for(const b of $$('.zahlen button')) b.addEventListener('click',()=>{
-  stand.status=(stand.status===b.dataset.status)?'':b.dataset.status; $('#f-status').value=stand.status; filtern();});
-// Lupe
+// ---------- Lupe ----------
 const d=$('#lupe');
 for(const b of $$('.lupe')) b.addEventListener('click',()=>{
   $('img',d).src=b.dataset.gross; $('img',d).alt=b.dataset.titel; $('#lupe-titel').textContent=b.dataset.titel;
   $('#lupe-link').href=b.dataset.gross; d.showModal();});
 d.addEventListener('click',ev=>{if(ev.target.tagName!=='A')d.close();});
-// Kopieren
+// ---------- Kopieren ----------
 async function kopiere(text){
   try{await navigator.clipboard.writeText(text);return true;}catch(e){
     const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';
     document.body.appendChild(t);t.select();let ok=false;try{ok=document.execCommand('copy');}catch(e2){}
     t.remove();return ok;}
 }
-for(const b of $$('.kopie')) b.addEventListener('click',async()=>{
+for(const b of $$('.kopie[data-ziel]')) b.addEventListener('click',async()=>{
   const ok=await kopiere(document.getElementById(b.dataset.ziel).textContent);
   const alt=b.textContent; b.textContent=ok?'Kopiert ✓':'Kopieren fehlgeschlagen'; b.classList.toggle('ok',ok);
   setTimeout(()=>{b.textContent=alt;b.classList.remove('ok');},1600);});
-// Direktlink #abb-3-5: Filter so setzen, dass die Karte sichtbar ist
+// ---------- Abstimmung über die Google-Tabelle ----------
+const WEBAPP=new URLSearchParams(location.search).get('webapp')||KONFIG.webapp||'';
+const speicher={get:k=>{try{return localStorage.getItem(k)||'';}catch(e){return '';}},
+  set:(k,v)=>{try{v?localStorage.setItem(k,v):localStorage.removeItem(k);}catch(e){}}};
+let nutzer={name:speicher.get('abst-name'),pw:speicher.get('abst-pw')}, zuletztGeladen=0;
+function info(text,klasse){$('#abst-info').className='abst-info '+(klasse||''); $('#abst-stand').textContent=text;}
+function eintragZeigen(id,v){
+  const k=document.getElementById(id); if(!k||k.dataset.status==='hinweis'||!v) return;
+  const key=TEXT2KEY[String(v.status||'').trim()]||k.dataset.status;
+  k.dataset.status=key;
+  const b=$('.st',k); b.className='st st-'+key; b.textContent=STATUSTEXT[key];
+  const sel=$('.abst-status',k); if(sel) sel.value=key;
+  const ul=$('.abst-liste',k); ul.textContent='';
+  for(const zeile of String(v.kommentare||'').split('\n').map(x=>x.trim()).filter(Boolean)){
+    const li=el('li'), m=zeile.match(/^(\d\d\.\d\d\.\d{4} [^:]{1,40}:)\s*(.*)$/);
+    if(m){li.append(el('span',m[1]+' ','wer'),m[2]);} else li.textContent=zeile;
+    ul.appendChild(li);}
+  $('.abst-zuletzt',k).textContent=(v.von||v.am)?'· zuletzt geändert: '+[v.von,v.am].filter(Boolean).join(', '):'';
+  k.dataset.offen=(k.dataset.offenFix==='1'||key==='aenderung'||key==='klaerung')?'1':'0';
+  k.dataset.sucheAbst=String(v.kommentare||'').toLowerCase();
+}
+async function laden(){
+  if(!WEBAPP){info('Abstimmung noch nicht verbunden – angezeigt wird der Stand der Inventur');return;}
+  try{
+    const r=await fetch(WEBAPP,{cache:'no-store'}); const j=await r.json();
+    if(!j.ok) throw new Error(j.fehler||'Fehler');
+    for(const [id,v] of Object.entries(j.eintraege||{})) eintragZeigen(id,v);
+    zuletztGeladen=Date.now(); info('Abstimmung verbunden · Stand '+(j.stand||''),'verbunden'); zaehlen(); filtern();
+  }catch(e){info('Abstimmung nicht erreichbar – angezeigt wird der Stand der Inventur','fehler');}
+}
+async function senden(obj){
+  const r=await fetch(WEBAPP,{method:'POST',body:JSON.stringify(obj),headers:{'Content-Type':'text/plain;charset=utf-8'}});
+  return r.json();
+}
+function bearbeiten(an){
+  for(const f of $$('.abst-form')) f.hidden=!an;
+  $('#abst-login').textContent=an?'Abmelden ('+nutzer.name+')':'Bearbeiten';
+}
+const dlg=$('#anmelden');
+$('#abst-login').addEventListener('click',()=>{
+  if(nutzer.pw){nutzer={name:'',pw:''}; speicher.set('abst-name',''); speicher.set('abst-pw',''); bearbeiten(false); return;}
+  $('#an-name').value=speicher.get('abst-name-zuletzt'); $('#an-pw').value=''; $('#an-meldung').textContent=''; dlg.showModal();});
+$('#an-abbrechen').addEventListener('click',()=>dlg.close());
+$('#anmelden form').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const name=$('#an-name').value.trim(), pw=$('#an-pw').value;
+  if(!name||!pw){$('#an-meldung').textContent='Bitte Name und Passwort eingeben.';return;}
+  $('#an-meldung').textContent='prüfe …';
+  try{const j=await senden({aktion:'pruefen',passwort:pw});
+    if(!j.ok) throw new Error(j.fehler||'Fehler');
+    nutzer={name,pw}; speicher.set('abst-name',name); speicher.set('abst-pw',pw); speicher.set('abst-name-zuletzt',name);
+    dlg.close(); bearbeiten(true);
+  }catch(e){$('#an-meldung').textContent='Anmeldung fehlgeschlagen: '+e.message;}
+});
+for(const btn of $$('.abst-speichern')) btn.addEventListener('click',async()=>{
+  const k=btn.closest('.karte'), m=$('.abst-meldung',k), key=$('.abst-status',k).value, text=$('.abst-text',k).value.trim();
+  m.className='abst-meldung'; m.textContent='speichere …'; btn.disabled=true;
+  try{
+    const j=await senden({aktion:'speichern',schluessel:k.id,status:STATUSTEXT[key],kommentar:text,autor:nutzer.name,passwort:nutzer.pw});
+    if(!j.ok) throw new Error(j.fehler||'Fehler');
+    eintragZeigen(k.id,j.eintrag); $('.abst-text',k).value=''; m.textContent='gespeichert'; zaehlen();
+  }catch(e){m.className='abst-meldung fehler'; m.textContent='nicht gespeichert: '+e.message;}
+  finally{btn.disabled=false;}
+});
+if(!WEBAPP){$('#abst-login').disabled=true; $('#abst-login').title='Die Web-App ist noch nicht eingerichtet';}
+else if(nutzer.pw) bearbeiten(true);
+addEventListener('focus',()=>{if(WEBAPP&&Date.now()-zuletztGeladen>30000) laden();});
+// ---------- Direktlink #abb-3-5: Filter so setzen, dass die Karte sichtbar ist ----------
 function zeigeZiel(){const z=location.hash&&document.getElementById(location.hash.slice(1));
   if(z&&z.hidden){stand.kap='alle';stand.status='';stand.art='';stand.q='';stand.offen=false;
     $('#f-status').value='';$('#f-art').value='';$('#f-suche').value='';$('#f-offen').checked=false;
     for(const x of $$('.kapitel button')) x.setAttribute('aria-pressed',String(x.dataset.kap==='alle')); filtern(); z.scrollIntoView();}}
 addEventListener('hashchange',zeigeZiel);
-filtern(); zeigeZiel();
+zaehlen(); filtern(); zeigeZiel(); laden();
 """
 
 
 def seite(liste):
     heute = datetime.date.today().strftime("%d.%m.%Y")
-    zaehler = Counter(x["status"] for x in liste)
+    konfig = lade("abstimmung.json")
     kapitel = list(OrderedDict.fromkeys(x["kap"] for x in liste))
-    # Übersichtstabelle Kapitel × Status
-    sts = [s for s in STATUS if zaehler[s]]
-    tab = ["<table><tr><th>Kapitel</th>" + "".join(f"<th>{e(STATUS[s])}</th>" for s in sts) + "<th>Summe</th></tr>"]
-    for k in kapitel:
-        c = Counter(x["status"] for x in liste if x["kap"] == k)
-        tab.append(f"<tr><td>Kapitel {k}</td>" + "".join(f"<td>{c[s] or '–'}</td>" for s in sts)
-                   + f"<td>{sum(c.values())}</td></tr>")
-    tab.append("<tr><td><b>Gesamt</b></td>" + "".join(f"<td><b>{zaehler[s]}</b></td>" for s in sts)
-               + f"<td><b>{len(liste)}</b></td></tr></table>")
     befunde = luecken(liste)
-    zahlen = "".join(f"<button data-status='{s}' aria-pressed='false'><b>{zaehler[s]}</b><span>{e(STATUS[s])}</span></button>"
-                     for s in STATUS if zaehler[s] and s != "hinweis")
     kap_kn = "<button data-kap='alle' aria-pressed='true'>Alle</button>" + "".join(
         f"<button data-kap='{k}' aria-pressed='false'><span class='kp'>Kap. </span>{k}</button>" for k in kapitel)
     st_opt = "<option value=''>Alle Status</option>" + "".join(
-        f"<option value='{s}'>{e(STATUS[s])}</option>" for s in STATUS if zaehler[s])
+        f"<option value='{s}'>{e(t)}</option>" for s, t in ABSTIMMUNG.items())
     arten = Counter(x["art"] for x in liste)
     art_opt = "<option value=''>Alle Arten</option>" + "".join(
         f"<option value='{a}'>{e(ART[a])} ({arten[a]})</option>" for a in ("D", "V", "S", "T", "DUP", "X") if arten[a])
+    tabelle = (f" · <a href='{e(konfig['tabelle'])}' target='_blank' rel='noopener'>Tabelle öffnen</a>"
+               if konfig.get("tabelle") else "")
+    js = JS.replace("__KONFIG__", json.dumps({"webapp": konfig.get("webapp", "")}, ensure_ascii=False)) \
+           .replace("__STATUS__", json.dumps(ABSTIMMUNG, ensure_ascii=False))
     teile = [
         "<!DOCTYPE html><html lang='de'><head><meta charset='utf-8'>"
         "<meta name='viewport' content='width=device-width,initial-scale=1'>"
@@ -517,14 +648,19 @@ def seite(liste):
         "<div class='kopf'><h1>Abbildungsinventur 6. Auflage</h1>",
         "<p class='unter'>Planung und Reporting im BI-gestützten Controlling · alle Abbildungen und Tabellen der "
         f"Abbildungssammlung zur 5. Auflage (ohne Kap. 3.9) · Stand {heute}</p>",
-        f"<div class='zahlen'><button data-status='' aria-pressed='false'><b>{len(liste)}</b><span>Einträge</span></button>{zahlen}</div>",
-        "<details class='info'><summary>Übersicht je Kapitel, Nummerierung und Bedienung</summary>" + "".join(tab),
+        "<div class='zahlen' id='zahlen'></div>",
+        f"<p class='abst-info' id='abst-info'><span><span class='punkt'></span><span id='abst-stand'>Abstimmung wird geladen …</span>"
+        f"{tabelle}</span><button type='button' class='kn' id='abst-login'>Bearbeiten</button></p>",
+        "<details class='info'><summary>Übersicht je Kapitel, Nummerierung und Bedienung</summary><div id='kapiteltabelle'></div>",
         ("<ul>" + "".join(f"<li>{e(b)}</li>" for b in befunde) + "</ul>") if befunde else "",
-        "<ul><li>Bild anklicken: große Ansicht. Links neben „5. Auflage“ das Original, rechts die neue Fassung.</li>"
+        "<ul><li>Bild anklicken: große Ansicht. Links das Original der 5. Auflage, rechts die neue Fassung.</li>"
         "<li>„LaTeX kopieren“ legt den Code der Tabelle in die Zwischenablage – direkt in Overleaf einfügen. "
         "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label; dafür die Datei aus "
         "<code>abbildungen/</code> mit gleichem Pfad nach Overleaf hochladen.</li>"
-        "<li>Rote Aufzählungspunkte markieren Kommentare, die eine Entscheidung oder fachliche Prüfung brauchen.</li>"
+        "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "
+        "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"
+        "<li>„Hinweise aus der Umsetzung“ sind die Anmerkungen beim Neuzeichnen; rote Punkte markieren Stellen, "
+        "die eine Entscheidung oder fachliche Prüfung brauchen.</li>"
         "<li>Direktlink auf eine Abbildung: Nummer anklicken, z. B. <code>index.html#abb-3-5</code>.</li></ul></details>",
         "</div>",
         "<div class='leiste'><div class='in'>"
@@ -544,10 +680,18 @@ def seite(liste):
         teile += [karte(x) for x in ks]
         teile.append("</div></section>")
     teile.append("<p class='leerhinweis'>Keine Einträge für diese Auswahl.</p></main>")
-    teile.append(f"<footer>Erzeugt mit werkzeug/inventur.py am {heute}. Pflege: werkzeug/status.json.</footer>")
+    teile.append(f"<footer>Erzeugt mit werkzeug/inventur.py am {heute}. Hinweise aus der Umsetzung: werkzeug/status.json; "
+                 "Abstimmung: Google-Tabelle über werkzeug/abstimmung/Code.gs.</footer>")
     teile.append("<dialog id='lupe'><img alt=''><p><span id='lupe-titel'></span>"
                  "<a id='lupe-link' target='_blank' rel='noopener'>in neuem Tab öffnen</a></p></dialog>")
-    teile.append(f"<script>{JS}</script></body></html>")
+    teile.append("<dialog id='anmelden'><form><h3>Bearbeiten</h3>"
+                 "<p>Name und Passwort werden nur in diesem Browser gespeichert. Der Name steht bei jedem Kommentar.</p>"
+                 "<label>Name oder Kürzel<input id='an-name' autocomplete='name' maxlength='40'></label>"
+                 "<label>Passwort<input id='an-pw' type='password' autocomplete='current-password'></label>"
+                 "<p id='an-meldung' role='status'></p>"
+                 "<div class='knoepfe'><button type='button' class='kn' id='an-abbrechen'>Abbrechen</button>"
+                 "<button type='submit' class='kn kopie'>Anmelden</button></div></form></dialog>")
+    teile.append(f"<script>{js}</script></body></html>")
     return "".join(teile)
 
 
@@ -555,8 +699,9 @@ def main():
     liste = eintraege()
     with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(seite(liste))
-    c = Counter(x["status"] for x in liste)
-    print("index.html geschrieben:", len(liste), "Einträge –", ", ".join(f"{STATUS[s]} {c[s]}" for s in STATUS if c[s]))
+    c = Counter(START.get(x["status"], "offen") for x in liste)
+    print("index.html geschrieben:", len(liste), "Einträge – Anfangsstatus:",
+          ", ".join(f"{ABSTIMMUNG.get(s, s)} {c[s]}" for s in list(ABSTIMMUNG) + ["hinweis"] if c[s]))
     fehlend = [x["label"] for x in liste if not x["orig_k"]]
     if fehlend:
         print("ohne Originalvorschau:", ", ".join(fehlend))

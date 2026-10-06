@@ -13,7 +13,7 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 | `tabellen/` | LaTeX-Code der Tabellen (`tab_X-Y.tex`) und Listings (`lst_X-Y.tex`) |
 | `quellen/kapN/` | Skripte, aus denen die Abbildungen gebaut werden |
 | `vorschau/` | Vorschaubilder (Original zugeschnitten, neue Fassung, gesetzte Tabellen) |
-| `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` und `dashkit/` |
+| `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` und `dashkit/`, Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`) |
 
 ## In Overleaf verwenden
 
@@ -27,7 +27,25 @@ python3 werkzeug/vorschau.py     # neue/geänderte Vorschaubilder
 python3 werkzeug/inventur.py     # index.html neu schreiben
 ```
 
-Status und Kommentare stehen in `werkzeug/status.json` (Schlüssel `"3.5"`, `"Tab. 4.8"` oder `"Folie 5"`). Eine Abbildung freigeben: `"status": "freigegeben"` setzen und `inventur.py` laufen lassen. Ohne Eintrag ergibt sich der Status aus den vorhandenen Dateien.
+Die „Hinweise aus der Umsetzung“ (Anmerkungen beim Neuzeichnen, Alternativtexte) stehen in `werkzeug/status.json` (Schlüssel `"3.5"`, `"Tab. 4.8"` oder `"Folie 5"`). Status und Kommentare der Abstimmung kommen aus der Google-Tabelle (nächster Abschnitt).
+
+## Abstimmung: Status und Kommentare
+
+Status und Kommentare je Abbildung liegen in der Google-Tabelle „Abbildungsinventur 6. Auflage – Status“. Die Inventur liest sie beim Öffnen über eine kleine Web-App (Google Apps Script) und schreibt Änderungen dorthin zurück. Ohne erreichbare Web-App zeigt die Seite den Stand der Inventur.
+
+**Einrichtung (einmalig, durch den Inhaber der Tabelle):**
+
+1. Tabelle öffnen → *Erweiterungen → Apps Script*.
+2. Den vorhandenen Code durch den Inhalt von `werkzeug/abstimmung/Code.gs` ersetzen, oben bei `PASSWORT` ein eigenes Passwort eintragen, speichern.
+3. Oben die Funktion `einrichten` auswählen → *Ausführen*. Beim ersten Mal den Zugriff erlauben (Hinweis „Google hat diese App nicht überprüft“ → *Erweitert* → *Zu … wechseln*). Danach hat die Statusspalte eine Auswahlliste und es gibt ein Blatt „Hinweise“.
+4. *Bereitstellen → Neue Bereitstellung* → Typ *Web-App*, *Ausführen als: Ich*, *Zugriff: Jeder* → *Bereitstellen*, die Web-App-URL (endet auf `/exec`) kopieren.
+5. Die URL in `werkzeug/abstimmung.json` bei `webapp` eintragen und `python3 werkzeug/inventur.py` laufen lassen.
+
+**Bedienung:** *Bearbeiten* oben in der Inventur, Name oder Kürzel und Passwort eingeben (bleibt im Browser gespeichert). An jeder Abbildung Status wählen, optional einen Kommentar schreiben, *Speichern*. Der Kommentar wird mit Datum und Name an die Zelle angehängt. Status und Kommentare lassen sich auch direkt in der Tabelle ändern; Datum und Kennung werden dann automatisch vermerkt.
+
+**Sichtbarkeit:** Lesen geht ohne Passwort, denn die Web-App-URL steht in der öffentlichen Seite. Schreiben nur mit Passwort.
+
+**Code ändern:** Nach einer Änderung an `Code.gs` in Apps Script *Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Version: Neue Version → Bereitstellen*. So bleibt die URL gleich.
 
 ## Auf GitHub Pages veröffentlichen
 

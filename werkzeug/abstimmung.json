@@ -1,5 +1,5 @@
 {
  "_hinweis": "webapp: URL der bereitgestellten Google-Apps-Script-Web-App (endet auf /exec); tabelle: Link zur Google-Tabelle",
- "webapp": "",
+ "webapp": "https://script.google.com/macros/s/AKfycbzUl1LYEIKb75PKeVDOdQVUtM3QilAhSq0FI-hSEL7rGElZw4AWQ_r_N9QvkETwa9LAeQ/exec",
  "tabelle": "https://docs.google.com/spreadsheets/d/1EO9x7mX5hfWnU4760OqhwzuH82uesbD7LPkUpzMcxCg/edit"
 }

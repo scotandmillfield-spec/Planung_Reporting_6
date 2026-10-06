@@ -18,9 +18,9 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 ## In Overleaf verwenden
 
 - **Tabellen:** „LaTeX kopieren“ und einfügen. Die erste Kommentarzeile nennt die nötigen Pakete (`booktabs`, `tabularx`, `amsmath`, `listings`).
-- **Abbildungen:** „LaTeX (figure) kopieren“ und den Ordner `abbildungen/` mit gleichem Pfad ins Overleaf-Projekt hochladen. Die PDFs werden ohne Skalierung eingebunden, damit die Schrift bei 7 pt bleibt. Querformate brauchen `\usepackage{rotating}`.
+- **Abbildungen:** „LaTeX (figure) kopieren“. Alle Abbildungen werden mit dem Pfad des Overleaf-Projekts eingebunden: `author/content/abbildungen/kapN/<Datei>`; den Ordner `abbildungen/` also nach `author/content/` hochladen. Die PDFs werden ohne Skalierung eingebunden, damit die Schrift bei 7 pt bleibt. Querformate brauchen `\usepackage{rotating}`.
 - **Dateinamen und Labels:** Beide werden aus der Caption gebildet, nicht aus der Nummer, denn die Reihenfolge ändert sich. Wörter mit `_` verbunden, Quellenangabe am Ende entfällt, Umlaute umschrieben (ä → ae), nur Buchstaben, Ziffern, `-` und `_`. Beispiel: Caption „Exemplarische Struktur im Reporting“ → Datei `Exemplarische_Struktur_im_Reporting.pdf`, Label `\label{fig:Exemplarische_Struktur_im_Reporting}` (Tabellen `tab:`). Ändert sich eine Caption, benennt `werkzeug/inventur.py` beim nächsten Lauf alle Dateien der Abbildung um (Bild, Quellen, Vorschau) – in Overleaf dann die neue Datei hochladen und Verweise auf das alte Label nachziehen. Gleiche Captions meldet die Inventur.
-- **Dashboards im Querformat:** werden um 90° gedreht auf einer Hochformatseite eingebunden, Pfad wie im Overleaf-Projekt (`author/content/abbildungen/…`):
+- **Dashboards im Querformat:** werden um 90° gedreht auf einer Hochformatseite eingebunden:
 
   ```latex
   \begin{figure}

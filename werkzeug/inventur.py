@@ -132,7 +132,8 @@ def latex_text(s):
     return s
 
 
-# Dashboards (Querformat) stehen gedreht auf einer Hochformatseite; Pfad wie im Overleaf-Projekt des Buchs
+# Pfad aller Abbildungen im Overleaf-Projekt des Buchs (author/content/abbildungen/kapN/…);
+# Dashboards (Querformat) stehen gedreht auf einer Hochformatseite
 OVERLEAF_PFAD = "author/content/"
 
 
@@ -153,10 +154,10 @@ def figure_latex(nr, caption, datei, breite_mm, quer, vektor):
         zeilen.append(r"% benötigt im Präambel: \usepackage{rotating}")
     if vektor:
         zeilen.append(f"% Vektor-PDF in Originalgröße ({breite_mm} mm breit) – nicht skalieren, dann bleibt die Schrift bei 7 pt")
-        gfx = rf"\includegraphics{{{datei}}}"
+        gfx = rf"\includegraphics{{{OVERLEAF_PFAD}{datei}}}"
     else:
         zeilen.append(f"% PNG mit 600 dpi, {breite_mm} mm breit")
-        gfx = rf"\includegraphics[width={breite_mm}mm]{{{datei}}}"
+        gfx = rf"\includegraphics[width={breite_mm}mm]{{{OVERLEAF_PFAD}{datei}}}"
     zeilen += [rf"\begin{{{umg}}}" + ("" if quer else "[htbp]"), r"  \centering", "  " + gfx,
                rf"  \caption{{{latex_text(caption)}}}", rf"  \label{{{label_aus_caption(caption)}}}", rf"\end{{{umg}}}"]
     return "\n".join(zeilen) + "\n"

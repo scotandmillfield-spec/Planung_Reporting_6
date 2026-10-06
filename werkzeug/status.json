@@ -317,6 +317,23 @@
    "alt": "Dashboard „Reporting- und Planungskalender“ mit den Berichts- und Planungsprozessen 2026 und der Budgetierung 2027, Stichtag 30.09.2026, Filter für Zeitraum, Verantwortlich und Status. Eine Tabelle nennt je Prozess die verantwortliche Rolle und den Status, rechts daneben zeigt eine Zeitachse von Januar bis Dezember die Plantermine als Balken: weiß umrandet geplant, anthrazit der Ist-Verlauf, rot der Verzug; eine gestrichelte Linie markiert den Stichtag. Oben das Reporting mit Jahresabschluss 2025 sowie Monatsreporting, Quartalsabschluss und Forecast mit je allen Terminen in einer Zeile, darunter die Planung mit Strategieentwicklung, Mittelfristplanung und der Budgetierung 2027 mit ihren Teilplänen von August bis Dezember. Überfällig ist nur die Absatzplanung (Plan-Ende 25.09., 5 Tage), sieben weitere Prozesse laufen im Plan.",
    "caption": "Reporting- und Planungskalender",
    "datei": "Reporting-_und_Planungskalender"
+  },
+  "3.26": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Als interaktives Dashboard neu aufgebaut (HTML für die Lernplattform, PNG für das Buch): Ausgangsdaten als Was-wäre-wenn-Datenschnitte, KPI-Leiste mit Rechenweg, Break-Even-Diagramm und Monatstabelle",
+    "Werte des Originals unverändert: 1.000 Stück je Monat, 375 und 250 je Stück, Fixkosten 1.150, Break-Even bei 9.200 Stück und 3.450 Umsatz",
+    "Einheit korrigiert – bitte prüfen: Das Original nannte „(in Euro)“, dann brächten 1.000 Stück nur 375 €. Gelesen als Preis 375 € und variable Kosten 250 € je Stück, Beträge in Tsd. € (Fixkosten 1.150 Tsd. €, Break-Even-Umsatz 3.450 Tsd. €); die Zahlen im Buchtext bleiben gültig, nur die Einheit ändert sich",
+    "Neu: Deckungsbeitrag je Stück (125 €), Break-Even-Monat (Oktober, nach 9,2 Monaten) und Jahresergebnis (+350 Tsd. €) – alle aus den Ausgangsdaten abgeleitet",
+    "Die zwölf identischen Monatsspalten des Originals sind zu Datenschnitten verdichtet; die kumulierten Werte stehen als Monatstabelle mit Ergebnis-Abweichungsbalken (rot bis September, blaugrün ab Oktober)",
+    "Diagramm: Kürzel U, Kg, Kv, Kf, p und BEPM durch ausgeschriebene Beschriftungen ersetzt; blaue Kostenflächen entfallen, stattdessen Verlust- und Gewinnzone zwischen Umsatz- und Gesamtkostenlinie; Monate unter der Mengenachse",
+    "„Erlöse“ und „Umsatz“ vereinheitlicht zu Umsatz; Monatskürzel einheitlich (Jan … Dez statt „Jan.“, „Mrz“, „Apr“)",
+    "Schreibweise wie in der Caption „Break-Even-Point“; im Text ggf. auf Duden „Break-even-Point“ vereinheitlichen"
+   ],
+   "alt": "Dashboard „Break-Even-Point-Analyse“ für ein Produkt im Planjahr. Oben die Ausgangsdaten als Datenschnitte: 1.000 Stück Absatz je Monat, Preis 375 € und variable Kosten 250 € je Stück, Fixkosten 1.150 Tsd. € je Jahr. Die Kennzahlenleiste nennt mit Rechenweg den Deckungsbeitrag von 125 € je Stück, die Break-Even-Menge von 9.200 Stück, den Break-Even-Umsatz von 3.450 Tsd. €, das Erreichen im Oktober und ein Jahresergebnis von +350 Tsd. €. Links das Break-Even-Diagramm: Über der kumulierten Absatzmenge von 0 bis 12.000 Stück (darunter die Monate) steigen Umsatz- und Gesamtkostenlinie, die Fixkosten bilden eine waagerechte Linie; bis zum Schnittpunkt bei 9.200 Stück liegt die rote Verlustzone, danach die blaugrüne Gewinnzone. Rechts eine Tabelle mit Absatz, Umsatz, Gesamtkosten und Ergebnis kumuliert je Monat; das Ergebnis steigt von −1.025 Tsd. € im Januar auf +350 Tsd. € im Dezember und wird im Oktober positiv.",
+   "caption": "Break-Even-Point-Analyse",
+   "datei": "Break-Even-Point-Analyse"
   }
  }
 }

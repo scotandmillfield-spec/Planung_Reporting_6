@@ -13,7 +13,7 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 | `tabellen/` | LaTeX-Code der Tabellen und Listings, benannt nach der Caption (z. B. `Kennzahlenblatt.tex`) |
 | `quellen/kapN/` | Skripte, aus denen die Abbildungen gebaut werden |
 | `vorschau/` | Vorschaubilder (Original zugeschnitten, neue Fassung, gesetzte Tabellen) |
-| `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` (Abbildungen), `dashkit/` (Dashboards) und `maskkit/` (Eingabemasken), Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`) |
+| `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` (Abbildungen), `dashkit/` (Dashboards) und `maskkit/` (Eingabemasken), Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`, Rückmeldungen `abstimmung/rueckmeldungen.json`), Neubau einer Abbildung `bauen.py`, Revisionen `revision.py` |
 
 ## In Overleaf verwenden
 
@@ -49,13 +49,22 @@ Status und Kommentare je Abbildung liegen in der Google-Tabelle „Abbildungsinv
 
 1. Tabelle öffnen → *Erweiterungen → Apps Script*.
 2. Den vorhandenen Code durch den Inhalt von `werkzeug/abstimmung/Code.gs` ersetzen, oben bei `PASSWORT` ein eigenes Passwort eintragen, speichern.
-3. Oben die Funktion `einrichten` auswählen → *Ausführen*. Beim ersten Mal den Zugriff erlauben (Hinweis „Google hat diese App nicht überprüft“ → *Erweitert* → *Zu … wechseln*). Danach hat die Statusspalte eine Auswahlliste und es gibt ein Blatt „Hinweise“.
+3. Oben die Funktion `einrichten` auswählen → *Ausführen*. Beim ersten Mal den Zugriff erlauben (Hinweis „Google hat diese App nicht überprüft“ → *Erweitert* → *Zu … wechseln*). Danach hat die Statusspalte eine Auswahlliste, es gibt ein Blatt „Hinweise“, der Zeit-Trigger für die Rückmeldungen läuft, und das Passwort ist in den Skripteigenschaften gespeichert (bei späteren Code-Änderungen kann oben `bitte-aendern` stehen bleiben).
 4. *Bereitstellen → Neue Bereitstellung* → Typ *Web-App*, *Ausführen als: Ich*, *Zugriff: Jeder* → *Bereitstellen*, die Web-App-URL (endet auf `/exec`) kopieren.
 5. Die URL in `werkzeug/abstimmung.json` bei `webapp` eintragen und `python3 werkzeug/inventur.py` laufen lassen.
 
 **Bedienung:** *Bearbeiten* oben in der Inventur, Name oder Kürzel und Passwort eingeben (bleibt im Browser gespeichert). An jeder Abbildung Status wählen, optional einen Kommentar schreiben, *Speichern*. Der Kommentar wird mit Datum und Name an die Zelle angehängt. Status und Kommentare lassen sich auch direkt in der Tabelle ändern; Datum und Kennung werden dann automatisch vermerkt.
 
 **Sichtbarkeit:** Lesen geht ohne Passwort, denn die Web-App-URL steht in der öffentlichen Seite. Schreiben nur mit Passwort.
+
+**Revisionen:** Änderungswunsch als Kommentar schreiben und den Status auf *Revision* setzen. Claude arbeitet die Revisionen mit dem Skill `sechste-auflage-revision` ab:
+
+1. Tabelle über den Google-Drive-Connector als CSV holen, `python3 werkzeug/revision.py lesen` listet die Aufträge (alle Kommentare seit der letzten Rückmeldung von Claude) mit Art, Quelle und zuständigem Skill.
+2. Quelle ändern und `python3 werkzeug/bauen.py <Nr>` – baut nach Art (Diagramm, Dashboard, Maske) in `/tmp/bauen/<Datei>/`, prüft, übernimmt die Lieferdateien nach `abbildungen/kapN/` und erzeugt Vorschau und Inventur neu; dort liegt auch ein Vergleichsblatt vorher/nachher.
+3. `python3 werkzeug/revision.py melden <Nr> --umsetzung "…"` schreibt die Rückmeldung nach `werkzeug/abstimmung/rueckmeldungen.json` und den Vorgang in `status.json` („Revisionen“ in der Inventur). Bei einer Rückfrage `--status "Klärung nötig"`.
+4. Committen und pushen. Ein Zeit-Trigger der Tabelle (`rueckmeldungenUebernehmen`, alle 5 Minuten, eingerichtet von `einrichten`) holt die Datei von GitHub, hängt „TT.MM.JJJJ Claude: …“ an die Kommentare und setzt den Status auf *Nächste Version* – nur wenn er noch auf *Revision* steht.
+
+Die Shell der Claude-Umgebung erreicht Google nicht; deshalb liest Claude über den Connector und schreibt über das Repository zurück. Ein Passwort braucht Claude dafür nicht.
 
 **Code ändern:** Nach einer Änderung an `Code.gs` in Apps Script *Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Version: Neue Version → Bereitstellen*. So bleibt die URL gleich.
 

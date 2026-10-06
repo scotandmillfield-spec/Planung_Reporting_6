@@ -4,17 +4,22 @@
  * Web-App zur Google-Tabelle „Abbildungsinventur 6. Auflage – Status“.
  *   GET   liefert Status und Kommentare aller Abbildungen als JSON (für index.html)
  *   POST  setzt Status, hängt einen Kommentar an und vermerkt Name und Datum (mit Passwort)
+ *   Zeit-Trigger (alle 5 Minuten): übernimmt die Rückmeldungen der Revisionen aus dem Repository
+ *   (werkzeug/abstimmung/rueckmeldungen.json) – Status, Kommentar, „Geändert von: Claude“.
  *
  * Einrichtung (einmalig, Anleitung auch im README des Repositorys):
  *   1. In der Tabelle: Erweiterungen → Apps Script, diesen Code einfügen, PASSWORT unten ändern, speichern.
- *   2. Funktion „einrichten“ auswählen und ausführen (legt Auswahlliste, Format und das Blatt „Hinweise“ an).
+ *   2. Funktion „einrichten“ auswählen und ausführen (legt Auswahlliste, Format, das Blatt „Hinweise“ und den
+ *      Zeit-Trigger an und merkt sich das Passwort in den Skripteigenschaften).
  *   3. Bereitstellen → Neue Bereitstellung → Typ „Web-App“, Ausführen als „Ich“, Zugriff „Jeder“.
  *   4. Die Web-App-URL in werkzeug/abstimmung.json des Repositorys eintragen.
  * Nach Änderungen am Code: Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Version „Neue Version“
- * (so bleibt die URL gleich).
+ * (so bleibt die URL gleich). Das Passwort muss dafür nicht erneut eingetragen werden: Steht unten
+ * 'bitte-aendern', gilt das zuletzt mit „einrichten“ gespeicherte.
  */
 
 const PASSWORT = 'bitte-aendern';
+const RUECKMELDUNGEN = 'https://raw.githubusercontent.com/scotandmillfield-spec/planung_reporting_6/main/werkzeug/abstimmung/rueckmeldungen.json';
 const BLATT = 'Status';
 const STATUSWERTE = ['offen', 'in Arbeit', 'zur Prüfung', 'Revision', 'Nächste Version', 'Änderung nötig', 'Klärung nötig',
                      'freigegeben', 'entfällt'];
@@ -34,7 +39,7 @@ function doPost(e) {
   } catch (err) {
     return antwort_({ ok: false, fehler: 'Ungültige Anfrage' });
   }
-  if (String(d.passwort || '') !== PASSWORT) return antwort_({ ok: false, fehler: 'Passwort falsch' });
+  if (String(d.passwort || '') !== passwort_()) return antwort_({ ok: false, fehler: 'Passwort falsch' });
   if (d.aktion === 'pruefen') return antwort_({ ok: true });
 
   const autor = bereinigen_(d.autor).slice(0, 40);
@@ -85,9 +90,84 @@ function onEdit(e) {
   }
 }
 
+/* ---------------- Rückmeldungen der Revisionen ---------------- */
+
+// Läuft per Zeit-Trigger. Claude legt nach jeder umgesetzten Revision einen Eintrag in
+// werkzeug/abstimmung/rueckmeldungen.json ab; diese Funktion holt die Datei und trägt neue Einträge ein:
+// Kommentar „TT.MM.JJJJ Claude: …“ anhängen, Status setzen (nur wenn er noch auf dem erwarteten Wert steht,
+// damit eine zwischenzeitliche Änderung von Hand nicht überschrieben wird), „Geändert von/am“ vermerken.
+function rueckmeldungenUebernehmen() {
+  let antwort;
+  try {
+    antwort = UrlFetchApp.fetch(RUECKMELDUNGEN + '?t=' + Date.now(), { muteHttpExceptions: true });
+  } catch (err) {
+    return;                                              // GitHub nicht erreichbar: beim nächsten Lauf erneut
+  }
+  if (antwort.getResponseCode() !== 200) return;
+  let liste;
+  try {
+    liste = JSON.parse(antwort.getContentText()).eintraege || [];
+  } catch (err) {
+    return;
+  }
+  const eigenschaften = PropertiesService.getScriptProperties();
+  const erledigt = JSON.parse(eigenschaften.getProperty('rueckmeldungen_erledigt') || '[]');
+  const ids = liste.map(r => r && r.id);
+  const merken = () => eigenschaften.setProperty('rueckmeldungen_erledigt',      // nur Kennungen, die noch in der
+    JSON.stringify(erledigt.filter(id => ids.indexOf(id) >= 0)));               // Datei stehen (hält sie klein)
+  const neu = liste.filter(r => r && r.id && r.schluessel && erledigt.indexOf(r.id) < 0);
+  if (!neu.length) {
+    if (erledigt.some(id => ids.indexOf(id) < 0)) merken();
+    return;
+  }
+
+  const sperre = LockService.getScriptLock();
+  if (!sperre.tryLock(20000)) return;
+  try {
+    const blatt = blatt_();
+    const n = blatt.getLastRow() - 1;
+    const schluessel = n > 0 ? blatt.getRange(2, SP.schluessel, n, 1).getValues().map(z => String(z[0])) : [];
+    const heute = Utilities.formatDate(new Date(), ZONE, 'dd.MM.yyyy');
+    neu.forEach(r => {
+      const i = schluessel.indexOf(String(r.schluessel));
+      if (i >= 0) {
+        const zeile = i + 2;
+        const statusZelle = blatt.getRange(zeile, SP.status);
+        const jetzt = String(statusZelle.getValue() || '');
+        let text = bereinigen_(r.kommentar).replace(/\s+/g, ' ').slice(0, 2000);
+        if (r.status && STATUSWERTE.indexOf(r.status) >= 0) {
+          if (!r.von || jetzt === r.von) statusZelle.setValue(r.status);
+          else text += ' (Status nicht geändert, stand auf „' + jetzt + '“)';
+        }
+        if (text) {
+          const zelle = blatt.getRange(zeile, SP.kommentare);
+          const alt = String(zelle.getValue() || '');
+          const zeileNeu = heute + ' Claude: ' + text;
+          zelle.setValue(alt ? alt + '\n' + zeileNeu : zeileNeu);
+        }
+        blatt.getRange(zeile, SP.von).setValue('Claude');
+        blatt.getRange(zeile, SP.am).setValue(new Date());
+      }
+      erledigt.push(r.id);
+    });
+    SpreadsheetApp.flush();
+  } finally {
+    sperre.releaseLock();
+  }
+  merken();
+}
+
+function automatikEinrichten_() {
+  ScriptApp.getProjectTriggers()
+    .filter(t => t.getHandlerFunction() === 'rueckmeldungenUebernehmen')
+    .forEach(t => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger('rueckmeldungenUebernehmen').timeBased().everyMinutes(5).create();
+}
+
 /* ---------------- Einrichtung ---------------- */
 
 function einrichten() {
+  if (PASSWORT !== 'bitte-aendern') PropertiesService.getScriptProperties().setProperty('PASSWORT', PASSWORT);
   const ss = SpreadsheetApp.getActive();
   const blatt = blatt_();
   if (blatt.getName() !== BLATT) blatt.setName(BLATT);
@@ -114,6 +194,8 @@ function einrichten() {
   if (!blatt.getFilter()) blatt.getRange(1, 1, n + 1, SP.am).createFilter();
 
   hinweiseAnlegen_(ss);
+  automatikEinrichten_();
+  rueckmeldungenUebernehmen();
 }
 
 function hinweiseAnlegen_(ss) {
@@ -134,6 +216,7 @@ function hinweiseAnlegen_(ss) {
     ['', ''],
     ['Kommentare', 'je Hinweis eine neue Zeile in der Zelle, beginnend mit Datum und Kürzel, z. B. „06.10.2026 MD: Achsenbeschriftung kürzen“'],
     ['Schlüssel', 'verbindet die Zeile mit der Abbildung in der Inventur; nicht ändern'],
+    ['Claude', 'Kommentare mit „Claude:“ melden eine umgesetzte Revision (Status dann „Nächste Version“). Weitere Wünsche als neuen Kommentar darunter schreiben und den Status wieder auf „Revision“ setzen'],
   ];
   h.getRange(1, 1, zeilen.length, 2).setValues(zeilen).setFontFamily('Arial').setVerticalAlignment('top');
   h.getRange('A1:A' + zeilen.length).setFontWeight('bold');
@@ -143,6 +226,10 @@ function hinweiseAnlegen_(ss) {
 }
 
 /* ---------------- Hilfsfunktionen ---------------- */
+
+function passwort_() {
+  return PropertiesService.getScriptProperties().getProperty('PASSWORT') || PASSWORT;
+}
 
 function blatt_() {
   const ss = SpreadsheetApp.getActive();

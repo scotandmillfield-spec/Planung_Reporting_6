@@ -119,6 +119,15 @@ def e(s):
     return html.escape(str(s), quote=True)
 
 
+def v(pfad):
+    """Pfad mit Inhaltskennung (?v=…), damit Browser und GitHub Pages nach einer Revision die neue Fassung laden."""
+    if not pfad or not da(pfad):
+        return pfad
+    import hashlib
+    with open(os.path.join(ROOT, pfad), "rb") as fh:
+        return f"{pfad}?v={hashlib.md5(fh.read()).hexdigest()[:8]}"
+
+
 def mm(png):
     with Image.open(os.path.join(ROOT, png)) as im:
         dpi = im.info.get("dpi", (600, 600))[0] or 600
@@ -347,7 +356,8 @@ def eintraege():
         liste.append(dict(
             folie=folie, art=art, kap=kap, nr=nr, schluessel=schluessel, label=label, anker=anker, stem=stem,
             cap_alt=cap_alt, cap_neu=cap_neu, cap_kom=cap_kom, kommentare=list(p.get("kommentare", [])),
-            alt=p.get("alt", ""), status=status, dateien=dateien, quellen=quellen, tex=tex, latex=latex,
+            alt=p.get("alt", ""), revisionen=list(p.get("revisionen", [])),
+            status=status, dateien=dateien, quellen=quellen, tex=tex, latex=latex,
             orig_k=orig_k if da(orig_k) else None, orig_g=orig_g if da(orig_g) else None,
             neu_k=neu_k, neu_g=neu_g if neu_g and da(neu_g) else None,
             groesse=groesse, quer=quer, vorgehen=vorgehen))
@@ -436,8 +446,8 @@ def karte(x):
     if x["neu_k"]:
         fmt = f" · {x['groesse'][0]} × {x['groesse'][1]} mm" if x["groesse"] else ""
         quer = " quer" if x["quer"] else ""
-        teile.append(f"<figure class='neu'><button class='lupe' data-gross='{e(x['neu_g'] or x['neu_k'])}' "
-                     f"data-titel='{e(x['label'])} – 6. Auflage'><img src='{e(x['neu_k'])}' loading='lazy' "
+        teile.append(f"<figure class='neu'><button class='lupe' data-gross='{e(v(x['neu_g'] or x['neu_k']))}' "
+                     f"data-titel='{e(x['label'])} – 6. Auflage'><img src='{e(v(x['neu_k']))}' loading='lazy' "
                      f"alt='{e(x['alt'] or x['label'] + ', neue Fassung')}'></button>"
                      f"<figcaption>6. Auflage{fmt}{quer}</figcaption></figure>")
     elif x["status"] not in ("entfaellt", "hinweis"):
@@ -449,7 +459,7 @@ def karte(x):
     knoepfe = []
     for name, pf in x["dateien"].items():
         dl = " download" if name in ("PPTX", "CSV") else " target='_blank' rel='noopener'"
-        knoepfe.append(f"<a class='kn' href='{e(pf)}'{dl}>{name}</a>")
+        knoepfe.append(f"<a class='kn' href='{e(v(pf))}'{dl}>{name}</a>")
     if x["tex"]:
         knoepfe.append(f"<a class='kn' href='{e(x['tex'])}' target='_blank' rel='noopener'>.tex</a>")
     if x["latex"]:
@@ -474,6 +484,15 @@ def karte(x):
                      "<textarea class='abst-text' rows='2' placeholder='Kommentar hinzufügen (optional)'></textarea>"
                      "<div class='abst-zeile'><button type='button' class='kn kopie abst-speichern'>Speichern</button>"
                      "<span class='abst-meldung' role='status'></span></div></div></section>")
+    # Revisionen (werkzeug/revision.py melden)
+    if x["revisionen"]:
+        li = []
+        for i, r in enumerate(x["revisionen"], 1):
+            wunsch = "".join(f"<li class='wunsch'>{e(w)}</li>" for w in r.get("wunsch", []))
+            klasse = "frage" if r.get("ergebnis") == "Rückfrage" else "umgesetzt"
+            li.append(f"<li><span class='rev-kopf'>Revision {i} · {e(r.get('datum', ''))}</span><ul>{wunsch}"
+                      f"<li class='{klasse}'>{e(r.get('text', ''))}</li></ul></li>")
+        teile.append("<div class='kom rev'><h4>Revisionen</h4><ol>" + "".join(li) + "</ol></div>")
     # Hinweise aus der Umsetzung
     if x["vorgehen"]:
         teile.append(f"<p class='vorgehen'><span>Vorgehen:</span> {e(x['vorgehen'])}</p>")
@@ -568,6 +587,12 @@ h3.cap{font-size:15px;margin:2px 0 4px;line-height:1.35}
 .kom li{margin:1px 0}
 .kom li.pk::marker{color:var(--rot)}
 .kom li.pk{color:#000}
+.rev ol{margin:0;padding-left:0;list-style:none;font-size:13.5px}
+.rev .rev-kopf{font-weight:bold}
+.rev ol ul{margin:2px 0 6px;padding-left:18px}
+.rev li.wunsch{color:var(--muted)}
+.rev li.umgesetzt::marker{content:"✓  ";color:var(--gut)}
+.rev li.frage::marker{content:"?  ";color:var(--rot);font-weight:bold}
 .abst{margin:8px 0 2px;padding:8px 10px;background:var(--flaeche);border-radius:4px}
 .abst h4{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 2px}
 .abst-zuletzt{text-transform:none;letter-spacing:0;font-weight:normal}
@@ -786,6 +811,9 @@ def seite(liste):
         "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"
         "<li>„Hinweise aus der Umsetzung“ sind die Anmerkungen beim Neuzeichnen; rote Punkte markieren Stellen, "
         "die eine Entscheidung oder fachliche Prüfung brauchen.</li>"
+        "<li>Änderungswünsche: Wunsch als Kommentar schreiben und den Status auf „Revision“ setzen. Claude setzt ihn "
+        "um, die neue Fassung erscheint hier mit dem Vorgang unter „Revisionen“, der Status wechselt auf "
+        "„Nächste Version“. Bei einer Rückfrage steht er auf „Klärung nötig“.</li>"
         "<li>Direktlink auf eine Abbildung: Nummer anklicken, z. B. <code>index.html#abb-3-5</code>.</li></ul></details>",
         "</div>",
         "<div class='leiste'><div class='in'>"

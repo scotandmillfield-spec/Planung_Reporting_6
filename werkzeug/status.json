@@ -213,7 +213,8 @@
     "Druck-PNG zeigt Rang 1–23 und fasst die übrigen 26 Produkte zusammen; HTML zeigt alle 49 mit Bildlauf",
     "Klassenzuordnung wie im Original: A, solange der kumulierte Anteil ≤ Grenze (Rang 12 mit 62,3 % → B)"
    ],
-   "alt": "Dashboard „ABC-Analyse Produkte“ für das Jahr 2025, alle Kunden, Kennzahl Absatz in Stück, Klassengrenzen A 60 % und B 20 %. Links die Produkte nach Rang mit Stück, Anteil und kumuliertem Anteil, nach Klassen gegliedert. Rechts oben die ABC-Klassen: 11 A-Produkte (22,4 % der Produkte) bringen 59,8 % des Absatzes, 10 B-Produkte 20,2 % und 28 C-Produkte 20,0 %; darunter die Konzentrationskurve mit den Klassengrenzen bei 22,4 % und 42,9 % der Produkte."
+   "alt": "Dashboard „ABC-Analyse Produkte“ für das Jahr 2025, alle Kunden, Kennzahl Absatz in Stück, Klassengrenzen A 60 % und B 20 %. Links die Produkte nach Rang mit Stück, Anteil und kumuliertem Anteil, nach Klassen gegliedert. Rechts oben die ABC-Klassen: 11 A-Produkte (22,4 % der Produkte) bringen 59,8 % des Absatzes, 10 B-Produkte 20,2 % und 28 C-Produkte 20,0 %; darunter die Konzentrationskurve mit den Klassengrenzen bei 22,4 % und 42,9 % der Produkte.",
+   "caption": "ABC-Analyse"
   },
   "3.2": {
    "status": "pruefung",

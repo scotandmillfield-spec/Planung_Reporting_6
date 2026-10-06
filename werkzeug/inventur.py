@@ -118,6 +118,20 @@ def latex_text(s):
     return s
 
 
+# Dashboards (Querformat) stehen gedreht auf einer Hochformatseite; Pfad wie im Overleaf-Projekt des Buchs
+OVERLEAF_PFAD = "author/content/"
+
+
+def dashboard_latex(nr, caption, datei):
+    return "\n".join([
+        r"\begin{figure}",
+        r"    \centering",
+        rf"    \includegraphics[angle=90, width=\linewidth, height=1\textheight, keepaspectratio]{{{OVERLEAF_PFAD}{datei}}}",
+        rf"    \caption{{{latex_text(caption)}}}",
+        rf"    \label{{fig:{nr.replace('.', '-')}}}",
+        r"\end{figure}"]) + "\n"
+
+
 def figure_latex(nr, caption, datei, breite_mm, quer, vektor):
     umg = "sidewaysfigure" if quer else "figure"
     zeilen = []
@@ -233,6 +247,8 @@ def eintraege():
         if tex:
             with open(os.path.join(ROOT, tex), encoding="utf-8") as fh:
                 latex = fh.read()
+        elif "HTML" in dateien and "PNG" in dateien and quer:
+            latex = dashboard_latex(nr, cap_neu, dateien["PNG"])
         elif "PDF" in dateien or "PNG" in dateien:
             vektor = "PDF" in dateien
             latex = figure_latex(nr, cap_neu, dateien["PDF"] if vektor else dateien["PNG"],
@@ -656,7 +672,8 @@ def seite(liste):
         "<ul><li>Bild anklicken: große Ansicht. Links das Original der 5. Auflage, rechts die neue Fassung.</li>"
         "<li>„LaTeX kopieren“ legt den Code der Tabelle in die Zwischenablage – direkt in Overleaf einfügen. "
         "Bei fertigen Abbildungen kopiert der Knopf die figure-Umgebung mit Caption und Label; dafür die Datei aus "
-        "<code>abbildungen/</code> mit gleichem Pfad nach Overleaf hochladen.</li>"
+        "<code>abbildungen/</code> mit gleichem Pfad nach Overleaf hochladen. Dashboards im Querformat werden um 90° "
+        "gedreht auf einer Hochformatseite eingebunden (Pfad <code>author/content/abbildungen/…</code>).</li>"
         "<li>Status und Kommentare unter „Abstimmung“ kommen aus der gemeinsamen Google-Tabelle. Zum Ändern "
         "„Bearbeiten“ wählen und mit Name und Passwort anmelden; Kommentare werden mit Datum und Name angehängt.</li>"
         "<li>„Hinweise aus der Umsetzung“ sind die Anmerkungen beim Neuzeichnen; rote Punkte markieren Stellen, "

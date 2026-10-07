@@ -391,6 +391,19 @@
    ],
    "alt": "Analysewege im Reporting von oben nach unten: Von den Spitzenkennzahlen führt ein Pfeil zur Reporting-Navigation gemäß Organigramm. Von dort verzweigt eine Leitung zu zwei Detailanalysen, der Bereichsstruktur (z. B. Produktentwicklung) und der Kostenträgerstruktur (z. B. für Key-Account-Manager), zwischen denen in beide Richtungen gewechselt werden kann. Jede Detailanalyse führt zu Kennzahlen und Berichten, die wechselseitig verbunden sind. Rechts stehen Beispiele je Stufe: Management-Cockpit, Umsatzanalyse je Bereich und Deckungsbeitragsanalyse.",
    "datei": "Analysewege_im_Reporting"
+  },
+  "3.13": {
+   "status": "pruefung",
+   "kommentare": [
+    "Schatten entfernt; vier Spalten mit gleichen Breiten und Abständen, Verzweigungen und Zusammenführungen als Leitungen mit Knotenpunkten, wechselseitige Busse (Produktergebnis–Bilanz/Finanzen, Investition–Kapazität–Finanzen) mit Spitzen an allen Enden wie im Original",
+    "Umsatzplanung → Produktergebnisplanung als direkte Verbindung gezeichnet: Im Original verlassen eine Linie aus der Umsatzplanung und ein Pfeil in die Produktergebnisplanung das Bild am linken Rand (Ausschnitt aus einer größeren Grafik?) – bitte prüfen",
+    "Gestrichelte Zuflüsse in Strategischen Plan, Produktergebnis-, Bilanz- und Finanzplanung kommen im Original von außerhalb des Bildes; als gemeinsame gestrichelte Leitung am linken Rand übernommen – Quelle klären (z. B. Prämissen?), dann beschriften",
+    "Strategischer Plan → Absatz- und Investitionsplanung gestrichelt wie im Original",
+    "„G&V“ → „GuV“, „Produktergebnisplanung/ Betriebsergebnisplanung“ ohne Leerzeichen; Silbentrennungen nur noch, wo der Platz nicht reicht",
+    "Kein Rot, da kein Element als zentral markiert ist"
+   ],
+   "alt": "Modell der Teilplanungsgebiete von oben nach unten. Der strategische Plan gibt Vorgaben an die Absatz- und die Investitionsplanung. Die Absatzplanung führt zur Produktions- und zur Umsatzplanung; die Produktionsplanung verzweigt in Einkaufs-, Personal- und Anlagenplanung. Personal- und Anlagenplanung münden in den Kapazitätsabgleich und weiter in die Kostenstellenplanung; Einkaufs- und Kostenstellenplanung führen zur Herstellkostenplanung. Herstellkosten-, Kostenstellen- und Umsatzplanung fließen in die Produktergebnis- bzw. Betriebsergebnisplanung, die mit der Bilanz- und GuV-Planung sowie der Finanzplanung wechselseitig verbunden ist. Rechts verbindet eine Leitung Investitionsplanung, Kapazitätsabgleich und Finanzplanung wechselseitig; links führen gestrichelte Zuflüsse von außen in den strategischen Plan, die Produktergebnis-, die Bilanz- und die Finanzplanung.",
+   "datei": "Modell_der_Teilplanungsgebiete"
   }
  }
 }

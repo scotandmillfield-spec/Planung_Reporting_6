@@ -433,6 +433,21 @@
    ],
    "alt": "Top-Ten-Analyse mit den Datenschnitten Jahr und Vertriebsgebiet. Links die Tabelle „Top-Ten-Kunden 2025“ in Tsd. € mit Rang, Kunde, Umsatz im Vorjahr und im Ist; die zehn Kunden machen 57 % des Umsatzes von 48 Kunden aus, der größte liegt bei 162,4 Tsd. €. Rechts das Balkendiagramm „Umsatz Top-Ten-Kunden“ mit je einem anthrazitfarbenen Ist-Balken und einem schmaleren hellgrauen Vorjahresbalken pro Kunde in derselben Reihenfolge; der zehnte Kunde fällt um 26 % auf 34,4 Tsd. €, der vierte wächst um 22 % auf 74,8 Tsd. €.",
    "datei": "Top-Ten-Analyse"
+  },
+  "3.27": {
+   "status": "pruefung",
+   "caption": "Scoring-Analyse im Produktvergleich",
+   "kommentare": [
+    "Caption „Scoring-Analyse“ war gleich der von Abb. 4.10 (gleiches LaTeX-Label) → „Scoring-Analyse im Produktvergleich“; bitte bestätigen oder anders fassen",
+    "Aufbau wie im Original: links die Tabelle, rechts das Balkendiagramm der gewichteten Punkte – zwei Visuals in derselben Reihenfolge, Zeilen auf gleicher Höhe; Klick hebt das Kriterium in beiden hervor (HTML für die Lernplattform, PNG 110 × 56 mm)",
+    "Kriterien, Gewichtung und Punkte des eigenen Produkts und des Konkurrenzprodukts unverändert (730 zu 810 gewichtete Punkte); das Konkurrenzprodukt heißt jetzt Konkurrenzprodukt A",
+    "Summe der ungewichteten Punkte (35 und 39) entfernt – sie hat keine Aussage, weil die Kriterien unterschiedlich zählen; summiert werden nur die gewichteten Punkte, Maximum 1.000",
+    "Produkte als Spaltengruppen über Punkte und gewichtet wie im Original; „gew. Punkte“ → „gewichtet“, „(0 - 10)“ in den Titel („Punkte 0–10“)",
+    "Farben: eigenes Produkt anthrazit, Konkurrenz mittelgrau statt Blau und Rot; Werte am Balken in Arial (im Original Serifenschrift, über den Balken verrutscht), Rahmen und Gitter entfallen",
+    "Datenschnitte Vergleich mit (Konkurrenz A, B, C) und Gewichtung (Standard, preisorientiert, qualitätsorientiert) – B, C und die beiden zusätzlichen Gewichtungen sind erfunden; mit qualitätsorientierter Gewichtung schrumpft der Abstand zu A auf 10 Punkte"
+   ],
+   "alt": "Scoring-Analyse mit den Datenschnitten „Vergleich mit“ und Gewichtung. Links die Tabelle mit den Kriterien Preis (Gewichtung 30 %), Leistung, Innovation und Qualität (je 20 %) sowie Service (10 %); je Produkt Punkte von 0 bis 10 und gewichtete Punkte. Das eigene Produkt erreicht 730, Konkurrenzprodukt A 810 von 1.000 Punkten. Rechts ein Balkendiagramm der gewichteten Punkte je Kriterium, eigenes Produkt anthrazit, Konkurrenz grau: Das eigene Produkt liegt nur bei Qualität vorn (180 zu 140), bei Preis (240 zu 270), Leistung (140 zu 180), Innovation (120 zu 160) und Service (50 zu 60) dahinter.",
+   "datei": "Scoring-Analyse_im_Produktvergleich"
   }
  }
 }

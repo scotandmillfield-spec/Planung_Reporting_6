@@ -378,6 +378,19 @@
    ],
    "alt": "Ganzseitiges Modell der integrierten Unternehmensplanung und -steuerung mit drei Ebenen: strategische Planung, Verzahnung strategischer und operativ-taktischer Planung sowie simulative Planung. Die strategische Planung, dargestellt als Chancen-Risiken-Portfolio aus Marktattraktivität und relativer Wettbewerbsposition, gibt strategische Projekte an die Roadmap sowie Ziele, Projekte und Kennzahlenvorgaben an die Balanced Chance and Risk Card; diese dient als internes Reporting, ist mit Zielvereinbarungen und dem externen Reporting (Jahresabschluss, Bankenreporting, Rating) verbunden und meldet einen Forecast an die strategische Planung zurück. Die Roadmap lastet die Projekte operativ in die Teilpläne ein (Absatz- und Produktions-, Umsatz-, Ressourcen-, Personal-, Kosten-, Ergebnis- und Bilanzplan); die BCR-Card gibt den Teilplänen Vorgaben, und die Gesamtplanung fließt als BCR-Plan zurück.",
    "datei": "Gesamtmodellueberblick_fuer_die_integrierte_Unternehmensplanung_und_-steuerung"
+  },
+  "3.10": {
+   "status": "pruefung",
+   "kommentare": [
+    "Screenshots (Navigation, Management-Cockpit mit Tachos, Umsatz- und Deckungsbeitragsberichte) entfallen: Die Reporting-Navigation ist als Stufe im Ablauf gezeichnet, die Berichtsbeispiele stehen als gestrichelte Beispielboxen rechts neben ihrer Stufe",
+    "Firmenname im Bildtitel „… Management Cockpit“ entfernt – keine realen Unternehmen in den Abbildungen",
+    "„Umsatzanalyse PE, PF, VW, VT“ → „Umsatzanalyse je Bereich“: PF, VW und VT sind im Buch nicht aufgelöst; damit entfällt auch „(PE)“ hinter „Produktentwicklung“ – bitte prüfen, ob die Bereiche genannt werden sollen",
+    "„Dediziert für Key Account Manager“ → „für Key-Account-Manager“ (Durchkopplung), „z.B.“ → „z. B.“",
+    "Leitungen geordnet: links Sammelleitung von der Navigation zu beiden Detailanalysen, rechts der Wechsel zwischen den Detailanalysen, Kennzahlen und Berichte symmetrisch unter ihrer Analyse",
+    "Kein Rot, da kein Element als zentral markiert ist"
+   ],
+   "alt": "Analysewege im Reporting von oben nach unten: Von den Spitzenkennzahlen führt ein Pfeil zur Reporting-Navigation gemäß Organigramm. Von dort verzweigt eine Leitung zu zwei Detailanalysen, der Bereichsstruktur (z. B. Produktentwicklung) und der Kostenträgerstruktur (z. B. für Key-Account-Manager), zwischen denen in beide Richtungen gewechselt werden kann. Jede Detailanalyse führt zu Kennzahlen und Berichten, die wechselseitig verbunden sind. Rechts stehen Beispiele je Stufe: Management-Cockpit, Umsatzanalyse je Bereich und Deckungsbeitragsanalyse.",
+   "datei": "Analysewege_im_Reporting"
   }
  }
 }

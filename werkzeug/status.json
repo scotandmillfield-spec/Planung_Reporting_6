@@ -404,6 +404,20 @@
    ],
    "alt": "Modell der Teilplanungsgebiete von oben nach unten. Der strategische Plan gibt Vorgaben an die Absatz- und die Investitionsplanung. Die Absatzplanung führt zur Produktions- und zur Umsatzplanung; die Produktionsplanung verzweigt in Einkaufs-, Personal- und Anlagenplanung. Personal- und Anlagenplanung münden in den Kapazitätsabgleich und weiter in die Kostenstellenplanung; Einkaufs- und Kostenstellenplanung führen zur Herstellkostenplanung. Herstellkosten-, Kostenstellen- und Umsatzplanung fließen in die Produktergebnis- bzw. Betriebsergebnisplanung, die mit der Bilanz- und GuV-Planung sowie der Finanzplanung wechselseitig verbunden ist. Rechts verbindet eine Leitung Investitionsplanung, Kapazitätsabgleich und Finanzplanung wechselseitig; links führen gestrichelte Zuflüsse von außen in den strategischen Plan, die Produktergebnis-, die Bilanz- und die Finanzplanung.",
    "datei": "Modell_der_Teilplanungsgebiete"
+  },
+  "3.16": {
+   "status": "pruefung",
+   "kommentare": [
+    "Als Einzelvisual mit Datenschnitten umgesetzt (HTML für die Lernplattform, PNG 110 × 81,7 mm): nur die Tabelle, keine KPI-Leiste und keine weiteren Visuals",
+    "Jahreswerte des Originals unverändert (Summen 222,2 / 221,0 / 219,5); die Einheit fehlte im Original – als Umsatz in Mio. € gelesen, Geschäftsjahr 2025 mit Vorjahr 2024 angenommen, bitte prüfen",
+    "Datenschnitte Zeitraum (Q1–Q4, Jahr) und Region (Nord, Ost, Süd, West): Quartalswerte erfunden, ihre Summe ergibt genau die Jahreswerte; Berlin fällt ab dem dritten Quartal zurück, Niedersachsen liegt ganzjährig unter Plan, Nordrhein-Westfalen gewinnt zunehmend",
+    "Rote Punkte mit Regel: wesentliche Planabweichung, wenn das Ist mehr als 1 % des Plans Deutschland unter Plan liegt – im Jahr wie im Original Berlin und Niedersachsen; prüfen, ob die Regel zum Buchtext passt",
+    "Ampelgrün der Balken → Blaugrün #00806B; die Summenzeile hat keinen Balken mehr (im Original −1,5 im selben Maßstab)",
+    "Zahlenformat vereinheitlicht: echtes Minus, „±0,0“ statt „+0,0“, Prozent mit Leerzeichen; ΔPL-Wert und Balken stehen in einer Spalte (im Original getrennt)",
+    "Szenario-Kennzeichnung unter VJ, PL und IST wie im Original beibehalten (hellgrau, weiß mit Rahmen, anthrazit)"
+   ],
+   "alt": "Tabelle „Umsatz nach Bundesländern, Geschäftsjahr 2025“ in Mio. € mit den Datenschnitten Zeitraum und Region. Für die 16 Bundesländer stehen Vorjahr, Plan und Ist, die Abweichungen zum Vorjahr und zum Plan in Prozent sowie die Planabweichung als Zahl mit Balken an einer Nulllinie, blaugrün über und rot unter Plan. Deutschland liegt mit 219,5 Mio. € um 1,5 Mio. € (−1 %) unter Plan; die größten Lücken haben Niedersachsen (−10,2) und Berlin (−4,9), beide mit rotem Punkt als wesentliche Abweichung markiert, den größten Zuwachs hat Nordrhein-Westfalen (+6,6). Die Spaltenköpfe kennzeichnen Vorjahr hellgrau, Plan weiß mit Rahmen und Ist anthrazit.",
+   "datei": "Grafisch_unterstuetzte_Tabellendarstellung"
   }
  }
 }

@@ -448,6 +448,18 @@
    ],
    "alt": "Scoring-Analyse mit den Datenschnitten „Vergleich mit“ und Gewichtung. Links die Tabelle mit den Kriterien Preis (Gewichtung 30 %), Leistung, Innovation und Qualität (je 20 %) sowie Service (10 %); je Produkt Punkte von 0 bis 10 und gewichtete Punkte. Das eigene Produkt erreicht 730, Konkurrenzprodukt A 810 von 1.000 Punkten. Rechts ein Balkendiagramm der gewichteten Punkte je Kriterium, eigenes Produkt anthrazit, Konkurrenz grau: Das eigene Produkt liegt nur bei Qualität vorn (180 zu 140), bei Preis (240 zu 270), Leistung (140 zu 180), Innovation (120 zu 160) und Service (50 zu 60) dahinter.",
    "datei": "Scoring-Analyse_im_Produktvergleich"
+  },
+  "3.33": {
+   "status": "pruefung",
+   "kommentare": [
+    "Würfel in Schrägprojektion mit durchgehendem Zellraster (vorn 4 Produkte × 5 Zeitpunkte, Tiefe 3 Regionen) statt einzelner Würfelchen mit Lücken; die blauen Seitenflächen entfallen",
+    "Räumliche Wirkung nur aus drei flachen Grautönen (vorn weiß, oben hellgrau, rechts mittelgrau) – keine 3D-Effekte, Verläufe oder Schatten",
+    "Dimensionen wie im Original als Pfeile entlang der Kanten ab der vorderen oberen Ecke; „Kennzahlen“ steht auf der Vorderseite in den Zellen",
+    "Kein Rot, da kein Element als zentral markiert ist",
+    "Der Würfel ist als Funktion angelegt; die Folgeabbildungen (Rotation, Slice, Dice, Drill-Down und Roll-Up) können dieselbe Form verwenden"
+   ],
+   "alt": "Datenwürfel in Schrägansicht mit Zellraster: Die Vorderseite hat vier Spalten und fünf Zeilen, nach hinten folgen drei Ebenen. Von der vorderen oberen rechten Ecke führen drei Pfeile entlang der Kanten: nach links die Dimension Produkt, nach unten die Dimension Zeit und nach hinten rechts die Dimension Region. Auf der Vorderseite steht „Kennzahlen“ – jede Zelle enthält Kennzahlen für eine Kombination aus Produkt, Zeit und Region.",
+   "datei": "Einfacher_Datenwuerfel"
   }
  }
 }

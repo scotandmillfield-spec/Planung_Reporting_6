@@ -538,6 +538,20 @@
     "Rote Spaltenköpfe und gelbe Wertefelder entfallen; 110 mm hochkant (nicht Querformat), „Dimension Produkt“ steht dafür über dem Pfeil"
    ],
    "alt": "Links ein Datenwürfel mit den Dimensionen Region, Produkt und Zeit und einem zusätzlichen roten Pfeil „Dimension Filiale“ von der Oberseite nach links oben. Rechts die Tabelle „Umsatz in €“ für Januar bis März und das 1. Quartal mit den Spalten Summe, Filiale A und Filiale B: Januar 20.000 = 11.000 + 9.000, Februar 15.000 = 6.000 + 9.000, März 22.000 = 10.000 + 12.000, 1. Quartal 57.000 = 27.000 + 30.000. Durchgezogene Pfeile führen von den Filialen zur Summe (Merge), ein gestrichelter Pfeil in der Quartalszeile von der Summe zu den Filialen (Split)."
+  },
+  "3.44": {
+   "status": "pruefung",
+   "datei": "Sunburst-Chart",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu aufgebaut (HTML für die Lernplattform, PNG für das Buch) – nur der Sunburst, keine weiteren Visuals; Datenschnitte Jahr und Region",
+    "Diagrammtyp bleibt: drei Ringe Region → Produktgruppe → Kaufgrund wie im Original (Gebiet → Unterkategorie → Kaufgrund); die Ebene Kategorie mit nur einem Element („Bikes“) entfällt",
+    "Daten erfunden: vier Regionen (Deutschland, Frankreich, Niederlande, Österreich), Produktgruppen wie in den OLAP-Abbildungen 3.37–3.40 (City, Mountain, Racing, Trekking Bike), fünf Kaufgründe, Jahre 2024 und 2025",
+    "Ebenen durch Helligkeit (innen anthrazit, außen hellgrau) statt sieben Farben je Gebiet; Namen waagerecht und nur dort, wo sie ganz ins Segment passen – das Diagramm dreht sich dafür so, dass alle Regionen beschriftet sind; Gesamtumsatz in der Mitte",
+    "Klick auf ein Segment hebt dieses Element in allen Regionen hervor (z. B. Kaufgrund Preis), die Kernaussage passt sich an",
+    "Kein Power-BI-Standardvisual: Die Ebene „Nachbau“ nennt das zertifizierte Visual „Sunburst“ (AppSource) bzw. ein Ringdiagramm mit Drilldown; in Excel gibt es den Diagrammtyp Sunburst",
+    "Caption: Daten und Gestaltung sind neu – „In Anlehnung an Microsoft 2017a“ kann für den Diagrammtyp bleiben oder entfallen"
+   ],
+   "alt": "Sunburst-Diagramm des Umsatzes 2025 von 17,8 Mio. € in drei Ringen. Der innere, dunkle Ring teilt den Umsatz auf die Regionen auf: Deutschland 43 %, Frankreich 27 %, Niederlande 18 %, Österreich 12 %. Der mittlere Ring zeigt je Region die Produktgruppen City, Mountain, Racing und Trekking Bike, der äußere, hellste Ring je Produktgruppe die Kaufgründe Preis, Qualität, Marke, Aktion und Testbericht. Kernaussage: Qualität ist der häufigste Kaufgrund (30 %), bei City Bikes der Preis, bei Racing Bikes die Marke."
   }
  }
 }

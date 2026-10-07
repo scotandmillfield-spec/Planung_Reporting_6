@@ -454,12 +454,90 @@
    "kommentare": [
     "Würfel in Schrägprojektion mit durchgehendem Zellraster (vorn 4 Produkte × 5 Zeitpunkte, Tiefe 3 Regionen) statt einzelner Würfelchen mit Lücken; die blauen Seitenflächen entfallen",
     "Räumliche Wirkung nur aus drei flachen Grautönen (vorn weiß, oben hellgrau, rechts mittelgrau) – keine 3D-Effekte, Verläufe oder Schatten",
-    "Dimensionen wie im Original als Pfeile entlang der Kanten ab der vorderen oberen Ecke; „Kennzahlen“ steht auf der Vorderseite in den Zellen",
+    "Dimensionen wie im Original als Pfeile entlang der Kanten ab der vorderen oberen Ecke; „Dimension Produkt“ steht unter dem Pfeil neben der Vorderseite – so in allen OLAP-Abbildungen 3.33–3.40; „Kennzahlen“ steht auf der Vorderseite in den Zellen",
     "Kein Rot, da kein Element als zentral markiert ist",
-    "Der Würfel ist als Funktion angelegt; die Folgeabbildungen (Rotation, Slice, Dice, Drill-Down und Roll-Up) können dieselbe Form verwenden"
+    "Würfel, Pfeile und Tabellen der Abbildungen 3.33–3.40 kommen aus einem gemeinsamen Baustein (quellen/kap3/_olap.py) und sehen deshalb überall gleich aus"
    ],
    "alt": "Datenwürfel in Schrägansicht mit Zellraster: Die Vorderseite hat vier Spalten und fünf Zeilen, nach hinten folgen drei Ebenen. Von der vorderen oberen rechten Ecke führen drei Pfeile entlang der Kanten: nach links die Dimension Produkt, nach unten die Dimension Zeit und nach hinten rechts die Dimension Region. Auf der Vorderseite steht „Kennzahlen“ – jede Zelle enthält Kennzahlen für eine Kombination aus Produkt, Zeit und Region.",
    "datei": "Einfacher_Datenwuerfel"
+  },
+  "3.34": {
+   "status": "pruefung",
+   "datei": "Rotation_bzw_Pivoting",
+   "kommentare": [
+    "Drei Würfel wie Abb. 3.33 im Dreieck, verbunden durch drei rote Pfeile „Rotation“ im Kreis (unten links → oben → unten rechts → unten links); die gebogenen Pfeile des Originals sind rechtwinklig geführt",
+    "Achsenzuordnung wie im Original: oben Region | Produkt | Zeit, unten rechts Region | Zeit | Produkt, unten links Produkt | Region | Zeit (je links | hinten | unten)",
+    "Angleichung: Jede Dimension behält beim Drehen ihre Zahl an Elementen (Produkt 4, Zeit 5, Region 3 wie in 3.33), deshalb ändern sich die Seitenverhältnisse der Würfel – im Original waren alle drei gleich (4 × 5 × 3). Bitte prüfen",
+    "„Dimension …“ für die Achse nach links steht unter dem Pfeil neben der Vorderseite, damit drei Würfel in 110 mm passen (wie in 3.33–3.40)",
+    "Rot nur für die Rotation (Pfeile und Beschriftung)"
+   ],
+   "alt": "Drei Datenwürfel im Dreieck, jeweils mit „Kennzahlen“ auf der Vorderseite und drei beschrifteten Dimensionspfeilen. Der Würfel unten links zeigt Produkt nach links, Region nach hinten und Zeit nach unten. Ein roter Pfeil „Rotation“ führt zum oberen Würfel mit Region nach links, Produkt nach hinten und Zeit nach unten, von dort ein zweiter zum Würfel unten rechts mit Region nach links, Zeit nach hinten und Produkt nach unten und ein dritter zurück zum ersten Würfel. Alle drei Würfel enthalten dieselben Daten, nur aus einem anderen Blickwinkel."
+  },
+  "3.35": {
+   "status": "pruefung",
+   "datei": "Slice",
+   "kommentare": [
+    "Würfel wie Abb. 3.33; die Scheibe einer Region (mittlere Ebene wie im Original) rot hervorgehoben, sichtbar auf Ober- und Seitenfläche",
+    "„Sicht Regionalleiter Deutschland“ als Kasten mit gestricheltem Pfeil auf die Scheibe",
+    "Einzelne 3D-Würfelchen und blaue Seitenflächen entfallen"
+   ],
+   "alt": "Datenwürfel mit den Dimensionen Produkt (nach links), Zeit (nach unten) und Region (nach hinten). Eine Scheibe des Würfels – alle Produkte und Zeitpunkte einer einzigen Region – ist rot hervorgehoben. Ein gestrichelter Pfeil verbindet sie mit dem Kasten „Sicht Regionalleiter Deutschland“: Der Regionalleiter sieht nur den Ausschnitt seiner Region."
+  },
+  "3.36": {
+   "status": "pruefung",
+   "datei": "Dice",
+   "kommentare": [
+    "Würfel wie Abb. 3.33; der Teilwürfel aus zwei Produkten, zwei Jahren und zwei Regionen rot hervorgehoben (Vorder-, Ober- und Seitenfläche)",
+    "Sicht als Kasten mit gestricheltem Pfeil auf den Teilwürfel: „Sicht Produktmanager – Detailanalyse“ fett, die Erläuterung darunter",
+    "Hinweis: Die Jahre 2010 und 2011 stammen aus dem Original – aktualisieren (z. B. 2024 und 2025)? Dann auch im Buchtext"
+   ],
+   "alt": "Datenwürfel mit den Dimensionen Produkt (nach links), Zeit (nach unten) und Region (nach hinten). Ein kleiner Teilwürfel – zwei Produkte, zwei Jahre und zwei Regionen – ist rot hervorgehoben. Ein gestrichelter Pfeil verbindet ihn mit dem Kasten „Sicht Produktmanager – Detailanalyse: Produktumsatz selektierter Produkte in den Jahren 2010 und 2011 in den Regionen Deutschland und Frankreich“."
+  },
+  "3.37": {
+   "status": "pruefung",
+   "datei": "Drill-Down_und_Roll-Up",
+   "kommentare": [
+    "Querformat wie das Original: Würfel oben links, Umsatz nach Monat und Region oben rechts, Quartalsumsatz je Produkt darunter, Legende unten rechts (bei 110 mm fiele die Schrift unter 6 pt); 3.38 und 3.39 bauen darauf auf",
+    "Gelbe Wertefelder und rote Gitterlinien entfallen; Tabellen im Buchstil ohne senkrechte Linien, Einheit einmal im Kopf („Umsatz in €“) statt an jedem Wert",
+    "Pfeile nach Bedeutung statt nach Richtung: durchgezogen = Aggregation (Roll-Up, zur Summe hin), gestrichelt = Disaggregation (Drill-Down, zu den Details hin). Die Richtungslegende des Originals (← ↑ = Roll-Up, → ↓ = Drill-Down) passte nicht zu den senkrechten Pfeilen – Monate → Quartal zeigt nach unten und ist eine Aggregation",
+    "Tippfehler „Dissaggregation“ korrigiert; Schreibweise „Roll-Up“ und „Drill-Down“ wie in der Caption",
+    "Würfel: rot ist der Ausschnitt, den die Tabelle zeigt (Deutschland und Frankreich, Januar bis März, alle vier Produkte)",
+    "Produkttabelle mit Kopf „Produkt“ statt „Produkt City Bike“ usw.; Vorlagenrest „Bruttoerlös“ entfernt"
+   ],
+   "alt": "Links ein Datenwürfel mit den Dimensionen Region, Produkt und Zeit; rot hervorgehoben sind zwei Regionen, drei Monate und alle Produkte. Rechts die Tabelle „Umsatz in €“ für Januar bis März und das 1. Quartal mit den Spalten Summe, Deutschland und Frankreich: Januar 20.000 = 13.000 + 7.000, Februar 15.000 = 7.000 + 8.000, März 22.000 = 12.000 + 10.000, 1. Quartal 57.000 = 32.000 + 25.000. Durchgezogene Pfeile führen von den Regionen zur Summe und von den Monaten zum Quartal (Aggregation, Roll-Up), gestrichelte Pfeile von den Summen zurück zu den Details (Disaggregation, Drill-Down). Ein gestrichelter Pfeil führt von den 57.000 € zu einer zweiten Tabelle mit dem Umsatz je Produkt: City Bike 20.000, Mountain Bike 7.000, Racing Bike 17.000, Trekking Bike 13.000, Summe 57.000."
+  },
+  "3.38": {
+   "status": "pruefung",
+   "datei": "Drill-Through",
+   "kommentare": [
+    "Aufbau wie Abb. 3.37 (Querformat, gleiche Tabellen und Pfeilarten); statt der Legende die Belege",
+    "Roter Pfeil „Drill-Through“ beginnt am Umsatz des Mountain Bike (7.000 €) – im Original zwischen zwei Zeilen",
+    "Belegliste als kleine Tabelle (Beleg, Kunde, Umsatz in €): sieben Belege zu je 1.000 € = 7.000 € Mountain Bike, Kunden wie im Original"
+   ],
+   "alt": "Wie die vorige Abbildung: Datenwürfel, Umsatz nach Monat und Region mit Roll-Up- und Drill-Down-Pfeilen sowie Quartalsumsatz je Produkt (City Bike 20.000, Mountain Bike 7.000, Racing Bike 17.000, Trekking Bike 13.000, Summe 57.000 €). Von den 7.000 € des Mountain Bike führt ein roter Pfeil „Drill-Through“ zu einer Belegtabelle: Beleg 1 Kunde A, Beleg 2 Kunde B, Beleg 3 Kunde A, Beleg 4 Kunde C, Beleg 5 Kunde D, Beleg 6 Kunde A, Beleg 7 Kunde B, jeweils 1.000 €."
+  },
+  "3.39": {
+   "status": "pruefung",
+   "datei": "Drill-Across",
+   "kommentare": [
+    "Aufbau wie Abb. 3.37 (Querformat); darunter ein zweiter Würfel mit der Dimension Kunde statt Region, roter Pfeil „Drill-Across“ von „Dimension Region“ zu „Dimension Kunde“ (Beschriftung neu, im Original nur der Pfeil)",
+    "Korrektur: Im Original ergab die Zeile Trekking Bike 12.000 € statt 13.000 € und die Kundensummen 56.000 € statt 57.000 €. Geändert: Trekking Bike bei Kunde A 5.000 € statt 4.000 €, Summe Kunde A 20.000 € statt 19.000 € – bitte prüfen, falls der Text Werte nennt",
+    "Kundentabelle rechts neben der Produkttabelle, Zeilen auf gleicher Höhe; gestrichelte Pfeile (Disaggregation wie in 3.37) von den Produktwerten in die Kundenzeilen. Mountain Bike je Kunde passt zu den Belegen in 3.38",
+    "Im Kundenwürfel sind alle vier Kunden hervorgehoben, weil die Tabelle alle vier zeigt (im Original dieselbe Auswahl wie im Regionenwürfel)",
+    "Rote Kundenköpfe entfallen; rot nur Drill-Across, „Dimension Kunde“ und die Auswahl in den Würfeln"
+   ],
+   "alt": "Links zwei Datenwürfel übereinander: oben mit den Dimensionen Region, Produkt und Zeit, unten mit Kunde, Produkt und Zeit; ein roter Pfeil „Drill-Across“ führt von der Dimension Region zur Dimension Kunde. Rechts oben der Umsatz nach Monat und Region wie in der vorigen Abbildung, darunter der Quartalsumsatz je Produkt (Summe 57.000 €) und daneben der Umsatz je Produkt und Kunde A bis D: City Bike 10.000, 0, 5.000, 5.000; Mountain Bike 3.000, 2.000, 1.000, 1.000; Racing Bike 2.000, 3.000, 0, 12.000; Trekking Bike 5.000, 3.000, 2.000, 3.000; Summen 20.000, 8.000, 8.000, 21.000."
+  },
+  "3.40": {
+   "status": "pruefung",
+   "datei": "Split_und_Merge",
+   "kommentare": [
+    "Würfel wie 3.37 mit zusätzlichem rotem Pfeil „Dimension Filiale“; Tabelle Umsatz nach Monat mit Summe, Filiale A und Filiale B (Werte wie im Original, Summen stimmen)",
+    "Pfeile nach Bedeutung wie in 3.37: durchgezogen = Merge (Filialen zur Summe zusammenführen), gestrichelt = Split (Summe auf die Filialen aufteilen); Legende neu",
+    "Die senkrechten Pfeile des Originals (Monate → Quartal) entfallen – sie stammen aus 3.37 und zeigen einen Roll-Up über die Zeit, nicht Split und Merge. Bitte prüfen",
+    "Rote Spaltenköpfe und gelbe Wertefelder entfallen; 110 mm hochkant (nicht Querformat), „Dimension Produkt“ steht dafür über dem Pfeil"
+   ],
+   "alt": "Links ein Datenwürfel mit den Dimensionen Region, Produkt und Zeit und einem zusätzlichen roten Pfeil „Dimension Filiale“ von der Oberseite nach links oben. Rechts die Tabelle „Umsatz in €“ für Januar bis März und das 1. Quartal mit den Spalten Summe, Filiale A und Filiale B: Januar 20.000 = 11.000 + 9.000, Februar 15.000 = 6.000 + 9.000, März 22.000 = 10.000 + 12.000, 1. Quartal 57.000 = 27.000 + 30.000. Durchgezogene Pfeile führen von den Filialen zur Summe (Merge), ein gestrichelter Pfeil in der Quartalszeile von der Summe zu den Filialen (Split)."
   }
  }
 }

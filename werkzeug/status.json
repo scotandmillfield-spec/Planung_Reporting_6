@@ -361,6 +361,23 @@
    "alt": "Eingabemaske „Top-Down-Vorgabe“ für das Budget 2027, Werte in Mio. €. Oben die Auswahl von Periode, Variante und Zielgröße (Umsatz) mit der Vorgabe von 117,0, der Differenz zur Vorgabe von −0,4 und dem Status „nicht abgestimmt, Lücke“; rechts drei Maßnahmen zur Zielerreichung (neuer Vertriebskanal 1,7, Kosteneinsparung 1,4, Effizienzsteigerung 1,5, zusammen 4,6). Darunter ein Organigramm: Die Holding mit 112,0 verteilt sich auf Vertriebs GmbH (77,0), Produktions GmbH (34,0) und Neu GmbH (1,0). Im Abschnitt Bereiche verteilt die Vertriebs GmbH ihre Vorgabe auf Großkunden (36,0) und Massengeschäft (41,0), die Produktions GmbH auf Wintersport (22,0) und Sommersport (12,0); beide Differenzen sind ±0,0.",
    "caption": "Exemplarische Top-Down-Vorgaben und Abstimmungen",
    "datei": "Exemplarische_Top-Down-Vorgaben_und_Abstimmungen"
+  },
+  "3.1": {
+   "status": "pruefung",
+   "quer": true,
+   "kommentare": [
+    "Querformat, ganzseitig (155 × 97 mm): Nur so bleiben die vier Spalten des Originals mit Planmodell und beschrifteten Pfeilen bei mindestens 6 pt nebeneinander",
+    "Screenshots von Roadmap und Balanced Chance and Risk Card durch Karten mit ihrem Inhalt ersetzt (aus den Spaltenköpfen der Screenshots); die ausführlichen Fassungen zeigen die eigenen Abbildungen zur Roadmap und zur BCR-Card – im Text darauf verweisen",
+    "Portfolio schematisch: 3 × 3-Matrix mit Achsen, gestrichelter Diagonale und den Zonen Chancen und Risiken statt roter, grüner und schraffierter Kreise; die grüne Überschrift „Strategische Planung“ ist Kopf der Karte",
+    "„APO“ (vermutlich SAP Advanced Planning and Optimization) softwareneutral als „Absatz- und Produktionsplanung“ bezeichnet – bitte prüfen",
+    "Teilpläne: Würfelsymbole und farbige Blockpfeile entfallen; Umsatz- und Ressourcenplan speisen über eine Sammelleitung Ergebnis- und Bilanzplan (alle vier Verbindungen des Originals), wechselseitige Beziehungen als Doppelpfeile",
+    "Fachlich prüfen: Der Kostenplan führt im Original nur auf den Bilanzplan, nicht auf den Ergebnisplan – unverändert übernommen",
+    "BCR-Vorgabe und Gesamtplanung docken seitlich am Planmodell an; im Original kreuzte die BCR-Vorgabe den Doppelpfeil Roadmap–BCR-Card",
+    "Kopf der BCR-Card rot als zentrales Element (fünf Verbindungen); falls der Text sie nicht als Kern behandelt, wird er anthrazit",
+    "„operativer taktischer Planung“ → „operativ-taktischer Planung“, „Strat. Analyse“ ausgeschrieben, „Balanced Chance and Risk-Card“ → „Balanced Chance and Risk Card“, „etc.“ nach „u. a.“ entfällt, „…“ in der Aufzählung zum externen Reporting entfällt (wie bei Abb. 2.2)"
+   ],
+   "alt": "Ganzseitiges Modell der integrierten Unternehmensplanung und -steuerung mit drei Ebenen: strategische Planung, Verzahnung strategischer und operativ-taktischer Planung sowie simulative Planung. Die strategische Planung, dargestellt als Chancen-Risiken-Portfolio aus Marktattraktivität und relativer Wettbewerbsposition, gibt strategische Projekte an die Roadmap sowie Ziele, Projekte und Kennzahlenvorgaben an die Balanced Chance and Risk Card; diese dient als internes Reporting, ist mit Zielvereinbarungen und dem externen Reporting (Jahresabschluss, Bankenreporting, Rating) verbunden und meldet einen Forecast an die strategische Planung zurück. Die Roadmap lastet die Projekte operativ in die Teilpläne ein (Absatz- und Produktions-, Umsatz-, Ressourcen-, Personal-, Kosten-, Ergebnis- und Bilanzplan); die BCR-Card gibt den Teilplänen Vorgaben, und die Gesamtplanung fließt als BCR-Plan zurück.",
+   "datei": "Gesamtmodellueberblick_fuer_die_integrierte_Unternehmensplanung_und_-steuerung"
   }
  }
 }

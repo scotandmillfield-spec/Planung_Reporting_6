@@ -418,6 +418,22 @@
    ],
    "alt": "Tabelle „Umsatz nach Bundesländern, Geschäftsjahr 2025“ in Mio. € mit den Datenschnitten Zeitraum und Region. Für die 16 Bundesländer stehen Vorjahr, Plan und Ist, die Abweichungen zum Vorjahr und zum Plan in Prozent sowie die Planabweichung als Zahl mit Balken an einer Nulllinie, blaugrün über und rot unter Plan. Deutschland liegt mit 219,5 Mio. € um 1,5 Mio. € (−1 %) unter Plan; die größten Lücken haben Niedersachsen (−10,2) und Berlin (−4,9), beide mit rotem Punkt als wesentliche Abweichung markiert, den größten Zuwachs hat Nordrhein-Westfalen (+6,6). Die Spaltenköpfe kennzeichnen Vorjahr hellgrau, Plan weiß mit Rahmen und Ist anthrazit.",
    "datei": "Grafisch_unterstuetzte_Tabellendarstellung"
+  },
+  "3.20": {
+   "status": "pruefung",
+   "caption": "Top-Ten-Analyse",
+   "kommentare": [
+    "Caption ohne Produktnamen: „Top-Ten-Analyse (Beispiel MS Excel)“ → „Top-Ten-Analyse“; die Neufassung ist softwareneutral",
+    "Als Einzelvisual mit Datenschnitten umgesetzt (HTML für die Lernplattform, PNG 110 × 69,6 mm): eine Rangtabelle ersetzt Tabelle und Balkendiagramm des Originals, die dieselben 20 Zahlen doppelt zeigten; keine weiteren Visuals",
+    "Umsätze der zehn Kunden unverändert (Top 10: 734,3 → 743,5 Tsd. €), jetzt in Tsd. € mit einer Nachkommastelle; gelesen als Geschäftsjahr 2025 mit Vorjahr 2024",
+    "Reale Versicherungsunternehmen (Allianz, R+V, Generali, Zurich, Debeka, Württembergische, Bayern Versicherung, Nürnberger, Hamburg-Mannheimer, AXA) durch erfundene Namen ersetzt; „Würtembergische“ war im Original falsch geschrieben",
+    "Rangfolge nach dem Ist statt nach dem Vorjahr: Im Original standen Zurich vor Debeka, Württembergische vor Bayern Versicherung und Nürnberger vor Hamburg-Mannheimer, obwohl der jeweils zweite im Ist mehr Umsatz hatte",
+    "Neu, aus den Daten abgeleitet: Abweichung zum Vorjahr mit Balken (blaugrün/rot), Anteil am Umsatz mit Balken und die Zeilen Summe Top 10, übrige Kunden und alle Kunden; dafür 38 weitere erfundene Kunden mit kleineren Umsätzen (alle unter dem zehnten Kunden) und das Jahr 2023",
+    "Datenschnitte Jahr (2024, 2025) und Vertriebsgebiet (Nord, Ost, Süd, West); die Rangfolge wird je Auswahl neu berechnet",
+    "Rot für Ist und Blau für Vorjahr im Original entfallen – Rot steht nur noch für Rückgänge"
+   ],
+   "alt": "Rangtabelle „Top-Ten-Kunden nach Umsatz 2025“ in Tsd. € mit den Datenschnitten Jahr und Vertriebsgebiet. Für die zehn größten Kunden stehen Rang, Name, Umsatz im Vorjahr und im Ist, die Abweichung zum Vorjahr als Zahl mit Balken (blaugrün für Zuwachs, rot für Rückgang), die Abweichung in Prozent und der Anteil am Umsatz als Balken. Der größte Kunde hat 162,4 Tsd. € (12 %), der stärkste Zuwachs liegt bei +13,5 Tsd. € (+22 %), der stärkste Rückgang bei −12,2 Tsd. € (−26 %). Darunter: Summe Top 10 mit 743,5 Tsd. € (57 % des Umsatzes), übrige 38 Kunden mit 557,6 Tsd. € (43 %) und alle 48 Kunden mit 1.301,2 Tsd. €.",
+   "datei": "Top-Ten-Analyse"
   }
  }
 }

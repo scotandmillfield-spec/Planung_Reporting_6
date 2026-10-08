@@ -14,28 +14,28 @@ import os
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 P = json.load(open(os.path.join(HIER, "..", "Projektroadmap_Uebersicht", "projekte.json"), encoding="utf-8"))
-STAND_ISO = ["2025-06-30", "2025-09-30", "2025-12-31", "2026-03-31", "2026-06-30"]
+STAND_ISO = ["2026-06-30", "2026-09-30", "2026-12-31", "2027-03-31", "2027-06-30"]
 
 # Plan-Beginn, Plan-Beginn Umsetzung, Plan-Ende, Ist-Beginn (None = Idee, noch nicht terminiert)
 T = {
-    "Übernahme Digitalanbieter": ("2025-04-01", "2025-08-01", "2028-01-31", "2025-04-14"),
-    "Markteintritt Osteuropa": ("2025-08-01", "2026-09-01", "2028-06-30", "2025-08-18"),
-    "Vertriebsausbau DACH": ("2025-01-06", "2025-03-01", "2026-11-30", "2025-01-06"),
+    "Übernahme Digitalanbieter": ("2026-04-01", "2026-08-01", "2029-01-31", "2026-04-14"),
+    "Markteintritt Osteuropa": ("2026-08-01", "2027-09-01", "2029-06-30", "2026-08-18"),
+    "Vertriebsausbau DACH": ("2026-01-06", "2026-03-01", "2027-11-30", "2026-01-06"),
     "Rationalisierung Montage": None,
-    "Digitales Mahnwesen": ("2025-02-01", "2025-03-15", "2025-10-31", "2025-02-03"),
-    "Online-Akquiseplattform": ("2025-11-01", "2026-06-01", "2027-09-30", "2025-11-17"),
-    "CRM-Einführung": ("2025-01-02", "2025-02-03", "2027-05-14", "2025-01-02"),
-    "Ersatzteil-Webshop": ("2025-09-01", "2026-10-01", "2027-06-30", "2025-09-01"),
-    "Produktlinie AT20": ("2025-07-15", "2026-04-01", "2027-03-31", "2025-07-21"),
-    "Modularisierung GT1": ("2024-07-01", "2024-11-01", "2027-02-12", "2024-07-01"),
-    "Digitaler Serviceprozess": ("2025-03-01", "2025-08-01", "2026-11-30", "2025-03-03"),
-    "Prozessstandardisierung": ("2024-11-01", "2025-01-01", "2028-06-30", "2024-11-04"),
-    "Fixkosten Altanlagen": ("2024-07-01", "2024-10-01", "2026-09-04", "2024-07-01"),
-    "Projektmanagement-Office": ("2025-04-01", "2025-07-01", "2027-01-29", "2025-04-07"),
-    "Recruiting Fachkräfte": ("2025-09-15", "2026-09-01", "2027-08-31", "2025-09-15"),
-    "Gebäudesanierung Werk 2": ("2025-12-01", "2026-07-01", "2027-12-31", "2025-12-15"),
+    "Digitales Mahnwesen": ("2026-02-01", "2026-03-15", "2026-10-31", "2026-02-03"),
+    "Online-Akquiseplattform": ("2026-11-01", "2027-06-01", "2028-09-30", "2026-11-17"),
+    "CRM-Einführung": ("2026-01-02", "2026-02-03", "2028-05-14", "2026-01-02"),
+    "Ersatzteil-Webshop": ("2026-09-01", "2027-10-01", "2028-06-30", "2026-09-01"),
+    "Produktlinie AT20": ("2026-07-15", "2027-04-01", "2028-03-31", "2026-07-21"),
+    "Modularisierung GT1": ("2025-07-01", "2025-11-01", "2028-02-12", "2025-07-01"),
+    "Digitaler Serviceprozess": ("2026-03-01", "2026-08-01", "2027-11-30", "2026-03-03"),
+    "Prozessstandardisierung": ("2025-11-01", "2026-01-01", "2029-06-30", "2025-11-04"),
+    "Fixkosten Altanlagen": ("2025-07-01", "2025-10-01", "2027-09-04", "2025-07-01"),
+    "Projektmanagement-Office": ("2026-04-01", "2026-07-01", "2028-01-29", "2026-04-07"),
+    "Recruiting Fachkräfte": ("2026-09-15", "2027-09-01", "2028-08-31", "2026-09-15"),
+    "Gebäudesanierung Werk 2": ("2026-12-01", "2027-07-01", "2028-12-31", "2026-12-15"),
     "Energiesparende Anlagen": None,
-    "Führungskräfteentwicklung": ("2025-09-01", "2026-02-01", "2027-12-17", "2025-09-01"),
+    "Führungskräfteentwicklung": ("2026-09-01", "2027-02-01", "2028-12-17", "2026-09-01"),
     "Produktlinie AT40": None,
 }
 d = dt.date.fromisoformat
@@ -100,7 +100,7 @@ for q, stand in enumerate(P["staende"]):
     zs = [z for z in P["zeilen"] if z[0] == q]
     offen = [z for z in zs if P["status"][z[2]] in ("Planung", "Umsetzung")]
     verzug = [z for z in offen if z[5] > 0]
-    s12 = d(STAND_ISO[q]) + dt.timedelta(days=365)
+    s12 = d(STAND_ISO[q]).replace(year=d(STAND_ISO[q]).year + 1)   # + 12 Monate, kalendergenau
     ab12 = sum(1 for z in offen if d(T[P["projekte"][z[1]][0]][2]) + woche(z[5]) <= s12)
     print(stand, "Projekte", len(zs), "Umsetzung", sum(P["status"][z[2]] == "Umsetzung" for z in zs),
           "terminiert", len(offen), "Verzug", len(verzug), "Ø Verzug %.1f Wo." % (sum(z[5] for z in offen) / len(offen)),

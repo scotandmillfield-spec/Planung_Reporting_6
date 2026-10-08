@@ -1,14 +1,14 @@
 """Synthetische Daten für das Test-Dashboard „Strategische Projektroadmap“.
 
 Ein erfundenes Industrieunternehmen (ohne Namen) mit 19 strategischen Projekten.
-Fünf Quartalsstände 30.06.2025 bis 30.06.2026; der älteste dient nur als Vergleich (ΔVQ).
+Fünf Quartalsstände 30.06.2026 bis 30.06.2027; der älteste dient nur als Vergleich (ΔVQ).
 Je Stand: Status, Fertigstellungsgrad, Kostenabweichung (Prognose minus Plan), Terminverzug, Risikoindex.
 Ausgabe: projekte.json (kompakt) und projekte.csv.
 """
 import csv
 import json
 
-STAENDE = ["30.06.2025", "30.09.2025", "31.12.2025", "31.03.2026", "30.06.2026"]
+STAENDE = ["30.06.2026", "30.09.2026", "31.12.2026", "31.03.2027", "30.06.2027"]
 STATUS = {"U": "Umsetzung", "P": "Planung", "I": "Idee", "E": "erledigt"}
 STATUS_FOLGE = ["U", "P", "I", "E"]          # laufend, geplant, Idee, abgeschlossen
 GB = ["Antriebstechnik", "Lineartechnik", "Service", "Zentral"]
@@ -17,7 +17,7 @@ BSC = ["Finanzen", "Kunden", "Prozesse", "Lernen und Entwicklung"]
 
 # Name, GB, FB, BSC, Verantwortung, Plan-Kosten (Tsd. €; bei Ideen Grobschätzung), Nutzwert (1–10),
 # Kapitalwert (Tsd. €, None = nicht finanziell bewertet), Statusverlauf je Stand (- = noch nicht im Portfolio),
-# Endwerte zum 30.06.2026: Fertigstellung %, Kostenabweichung Tsd. €, Terminverzug Wochen, Risikoindex,
+# Endwerte zum 30.06.2027: Fertigstellung %, Kostenabweichung Tsd. €, Terminverzug Wochen, Risikoindex,
 # Fortschritt je Quartal (%-Pkt.), Risikoanstieg je Quartal
 P = [
     ("Übernahme Digitalanbieter", "Zentral", "Finanzen", "Finanzen", "Frau Brandt", 4720, 8.0, 2360, "PUUUU", 34, 236, 6, 82, 9, 2),

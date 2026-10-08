@@ -15,7 +15,7 @@
     return { q: z[0], p: z[1], st: z[2], risk: z[6], dvq: vq == null ? null : z[6] - vq, ...PJ[z[1]], feld: feld(PJ[z[1]].nw, z[6]) };
   });
   const IDEE = 2;
-  const STAND_KNOEPFE = [[1, "Q3/25"], [2, "Q4/25"], [3, "Q1/26"], [4, "Q2/26"]];
+  const STAND_KNOEPFE = [[1, "Q3/26"], [2, "Q4/26"], [3, "Q1/27"], [4, "Q2/27"]];
 
   /* ---------- Zustand ---------- */
   const S = { stand: 4, gb: "alle", fb: "alle", bsc: "alle", auswahl: null, sort: null };
@@ -36,7 +36,7 @@
   const bTab = DK.box("projekte", 496, 138, 512, 504);
 
   /* ---------- Datenschnitte ---------- */
-  DK.schnitt(bFilter, "Berichtsstand", "knoepfe", { optionen: STAND_KNOEPFE, wert: S.stand,
+  DK.schnitt(bFilter, "Stand", "knoepfe", { optionen: STAND_KNOEPFE, wert: S.stand,
     onChange: v => { S.stand = v; S.auswahl = null; zeichnen(); } });
   const dd = (label, key, liste, breite) => DK.schnitt(bFilter, label, "dropdown", { breite,
     optionen: [["alle", "Alle"], ...liste.map((t, i) => [String(i), t])], wert: "alle",
@@ -117,8 +117,8 @@
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     DK.kopf(bKopf, { titel: "Strategisches Projektportfolio",
-      untertitel: `Strategische Projekte · Berichtsstand ${STAENDE[S.stand]} · Abweichung zum Vorquartal (ΔVQ)`,
-      quelle: `Quelle: Projektcontrolling · Stand ${STAENDE[4]}`,
+      untertitel: `Strategische Projekte · Stand ${STAENDE[S.stand]} · Abweichung zum Vorquartal (ΔVQ)`,
+      quelle: DK.NBSP,   // keine Quellenzeile (Revision DS); Platzhalter hält die Legende in der zweiten Zeile
       legende: [[FARBE.ist, "Ist"], [FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
 
     const rows = projekte();
@@ -168,10 +168,10 @@
     nachbauIntro: "Alle Elemente sind Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt, Berichtstitel 16,5 pt. Das Berichtsdesign (JSON) setzt Farben und Schriften.",
     nachbau: [
       { id: "A", ziel: "kopf-titel", versatz: [60, 0], titel: "Kopfzeile und Legende", visual: "Textfeld; Formen (Rechteck)",
-        felder: "Untertitel mit dynamischem Wert: Measure „Berichtsstand Text“",
+        felder: "Untertitel mit dynamischem Wert: Measure „Stand Text“",
         format: "Titel 16,5 pt fett; Legende: Rechtecke 9 × 9 px in #3A3F44, #00806B, #C62828" },
       { id: "B", ziel: "filter", versatz: [-28, 0], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln bzw. Dropdown)",
-        felder: "Berichtsstand (Quartal), Geschäftsbereich, Funktionsbereich, BSC-Perspektive",
+        felder: "Stand (Quartal), Geschäftsbereich, Funktionsbereich, BSC-Perspektive",
         format: "Ausgewählt: Füllung #3A3F44, Schrift weiß; nicht ausgewählt: weiß, Rahmen #9A9A9A" },
       { id: "C", ziel: "v-portfolio", versatz: [0, 120], titel: "Portfolio", visual: "Punktdiagramm",
         felder: "Werte: Nr.; X-Achse: Risikoindex; Y-Achse: Nutzwert; Größe: Plan-Kosten; QuickInfos: Projekt, Status, Verantwortung, Kapitalwert",

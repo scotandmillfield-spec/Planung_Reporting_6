@@ -61,6 +61,5 @@ def build(theme):
     top, last = links[0], links[-1]
     A([(X_STAMM, top.b), (X_STAMM, last.cy), (last.x, last.cy)], name="Stamm")
     for L in links[1:-1]:
-        A([(X_STAMM, L.cy), (L.x, L.cy)], name=f"Abzweig {L.cy:.1f}")
-        dot(X_STAMM, L.cy)
+        A([(X_STAMM, L.cy), (L.x, L.cy)], name=f"Abzweig {L.cy:.1f}")   # ohne Knotenpunkt (Revision DS 07.10.2026)
     return f

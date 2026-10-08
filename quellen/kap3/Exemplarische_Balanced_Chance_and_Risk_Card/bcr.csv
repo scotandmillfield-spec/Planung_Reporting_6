@@ -1,25 +1,97 @@
-﻿Perspektive;Strategisches_Ziel;Kennzahl;Einheit;Wirkung;VJ_2025;FC_2026;PL_2026;PL_2027;PL_2028;PL_2029;Maßnahme;Roadmap_Status;Chance_Risiko;Art;Eintritt_1_5;Wert_MioEUR
-Finanzen;Wachstum 5 % p. a.;Nettoumsatz;Mio. €;Anstieg günstig;236,8;243,9;248,6;261,0;274,1;287,8;Übernahme Digitalanbieter;Umsetzung;Positive Konjunktur;Chance;2;20,0
-Finanzen;Wachstum 5 % p. a.;Umsatzwachstum;%;Anstieg günstig;2,4;3,0;5,0;5,0;5,0;5,0;Vertriebsausbau DACH;Umsetzung;Stärkerer Wettbewerb;Risiko;2;-1,0
-Finanzen;Rendite steigern;ROI;%;Anstieg günstig;9,4;10,1;12,0;13,0;14,0;15,0;Rationalisierung Montage;Idee;Gemeinkostensteigerung;Risiko;1;-0,5
-Finanzen;Rendite steigern;Umsatzrentabilität;%;Anstieg günstig;6,2;7,2;7,0;7,5;8,0;8,5;;;Tarifsteigerung;Risiko;2;-0,1
-Finanzen;Liquidität sichern;Cashflow;Mio. €;Anstieg günstig;21,4;18,9;22,5;24,0;26,0;28,0;Digitales Mahnwesen;erledigt;Anzahlungsrisiko;Risiko;4;-10,0
-Finanzen;Liquidität sichern;Debitorenziel;Tage;Anstieg ungünstig;38;46;35;33;32;30;;;Forderungsausfall;Risiko;4;-15,0
-Markt, Kunde, Produkt;Marktanteil online steigern;Marktanteil;%;Anstieg günstig;10,0;12,3;12,0;13,0;14,0;15,0;Online-Akquiseplattform;Planung;A-Kundenabhängigkeit;Risiko;2;-8,0
-Markt, Kunde, Produkt;Marktanteil online steigern;Auftragsbestand;Mio. €;Anstieg günstig;96,0;94,8;100,0;105,0;110,0;115,0;;;Öko-Sensibilität;Risiko;3;-4,0
-Markt, Kunde, Produkt;Fremdleistung 50 %;Fremdleistungsanteil;%;Anstieg günstig;38,0;46,0;50,0;50,0;50,0;50,0;Subunternehmer steuern;;Abstimmungsprobleme;Risiko;2;-1,5
-Markt, Kunde, Produkt;Marktbearbeitung stärken;Hitrate;%;Anstieg günstig;35,0;41,0;40,0;42,0;44,0;45,0;CRM-Einführung;Umsetzung;CRM-Defizite Wettbewerb;Chance;3;5,5
-Markt, Kunde, Produkt;Marktbearbeitung stärken;Umsatz/Verkäufer;Tsd. €;Anstieg günstig;2145;2250;2200;2300;2400;2500;Strategische Allianzen;;Höhere Kaufkraft;Chance;3;11,5
-Markt, Kunde, Produkt;Technologie ausbauen;Neuprodukte;Mio. €;Anstieg günstig;18,0;17,6;20,0;24,0;28,0;32,0;Produktlinie AT20;Umsetzung;Substitutionsprodukte;Risiko;2;-3,0
-Markt, Kunde, Produkt;Sortiment optimieren;Variantenanteil;%;neutral;12,0;15,0;15,0;15,0;15,0;15,0;Modularisierung GT1;Umsetzung;Neue Kundenwünsche;Chance;3;11,5
-Markt, Kunde, Produkt;Sortiment optimieren;Umsatz Poor Dogs;Mio. €;Anstieg ungünstig;48,9;42,4;40,0;32,0;25,0;20,0;;;Start-up-Wettbewerb;Risiko;2;-2,0
-Prozesse;Service verbessern;Ø Servicezeit;Std.;Anstieg ungünstig;78;82;60;48;36;24;Digitaler Serviceprozess;Umsetzung;Softwareabhängigkeit;Risiko;4;-10,0
-Prozesse;Fertigung modernisieren;Anteil neuer Anlagen;%;Anstieg günstig;22,0;26,0;30,0;36,0;42,0;48,0;Energiesparende Anlagen;Idee;Technologiewechsel;Risiko;1;-0,5
-Prozesse;Liefertreue auf 98 %;Liefertreue;%;Anstieg günstig;93,0;95,6;95,0;96,0;97,0;98,0;Prozessstandardisierung;Umsetzung;Schnittstellenkoordination;Risiko;2;-1,0
-Prozesse;Auslastung erhöhen;Kapazitätsauslastung;%;Anstieg günstig;80,0;78,0;85,0;88,0;90,0;92,0;Fixkosten Altanlagen;Umsetzung;Kostenremanenz;Risiko;3;-5,0
-Organisation;Projektgruppen etablieren;Übergreifende Projekte;;Anstieg günstig;7;6;9;10;11;12;Projektmanagement-Office;Umsetzung;Überlastung, Koordination;Risiko;3;-1,0
-Organisation;Nachwuchskräfte fördern;Führungsnachwuchs;;Anstieg günstig;4;6;6;8;10;12;Führungskräfteentwicklung;Umsetzung;Fachkräftemangel;Risiko;3;-6,0
-Organisation;Internationalisierung;Auslandserfahrung;%;Anstieg günstig;12,0;14,0;18,0;22,0;26,0;30,0;Recruiting Fachkräfte;Planung;;;;
-Mitarbeiter;Motivation stärken;Krankenquote;%;Anstieg ungünstig;7,0;6,5;6,8;6,5;6,2;6,0;Arbeitszeitstudie;;Überlastung, Burn-out;Risiko;3;-1,0
-Mitarbeiter;Motivation stärken;DB je Kopf;Tsd. €;Anstieg günstig;108;95;112;116;120;125;;;;;;
-Mitarbeiter;Wissenstransfer stärken;Weiterbildung;Tage/Kopf;Anstieg günstig;2,0;3,2;3,0;3,5;4,0;4,0;Weiterbildungsprogramm;;Kreativität Mitarbeitende;Chance;2;5,0
+﻿Geschäftsbereich;Perspektive;Strategisches_Ziel;Kennzahl;Einheit;Wirkung;VJ_2026;FC_2027;PL_2027;PL_2028;PL_2029;PL_2030;Maßnahme;Roadmap_Status;Chance_Risiko;Art;Eintritt_1_5;Wert_MioEUR
+Alle;Finanzen;Wachstum 5 % p. a.;Nettoumsatz;Mio. €;Anstieg günstig;236,8;243,9;248,6;261,0;274,1;287,8;Übernahme Digitalanbieter;Umsetzung;Positive Konjunktur;Chance;2;20,0
+Alle;Finanzen;Wachstum 5 % p. a.;Umsatzwachstum;%;Anstieg günstig;2,4;3,0;5,0;5,0;5,0;5,0;Vertriebsausbau DACH;Umsetzung;Stärkerer Wettbewerb;Risiko;2;-1,0
+Alle;Finanzen;Rendite steigern;ROI;%;Anstieg günstig;9,4;10,1;12,0;13,0;14,0;15,0;Rationalisierung Montage;Idee;Gemeinkostensteigerung;Risiko;1;-0,5
+Alle;Finanzen;Rendite steigern;Umsatzrentabilität;%;Anstieg günstig;6,2;7,2;7,0;7,5;8,0;8,5;;;Tarifsteigerung;Risiko;2;-0,1
+Alle;Finanzen;Liquidität sichern;Cashflow;Mio. €;Anstieg günstig;21,4;18,9;22,5;24,0;26,0;28,0;Digitales Mahnwesen;erledigt;Anzahlungsrisiko;Risiko;4;-10,0
+Alle;Finanzen;Liquidität sichern;Debitorenziel;Tage;Anstieg ungünstig;38;46;35;33;32;30;;;Forderungsausfall;Risiko;4;-15,0
+Alle;Markt, Kunde, Produkt;Marktanteil online steigern;Marktanteil;%;Anstieg günstig;10,0;12,3;12,0;13,0;14,0;15,0;Online-Akquiseplattform;Planung;A-Kundenabhängigkeit;Risiko;2;-8,0
+Alle;Markt, Kunde, Produkt;Marktanteil online steigern;Auftragsbestand;Mio. €;Anstieg günstig;96,0;94,8;100,0;105,0;110,0;115,0;;;Öko-Sensibilität;Risiko;3;-4,0
+Alle;Markt, Kunde, Produkt;Fremdleistung 50 %;Fremdleistungsanteil;%;Anstieg günstig;38,0;46,0;50,0;50,0;50,0;50,0;Subunternehmer steuern;;Abstimmungsprobleme;Risiko;2;-1,5
+Alle;Markt, Kunde, Produkt;Marktbearbeitung stärken;Hitrate;%;Anstieg günstig;35,0;41,0;40,0;42,0;44,0;45,0;CRM-Einführung;Umsetzung;CRM-Defizite Wettbewerb;Chance;3;5,5
+Alle;Markt, Kunde, Produkt;Marktbearbeitung stärken;Umsatz/Verkäufer;Tsd. €;Anstieg günstig;2145;2250;2200;2300;2400;2500;Strategische Allianzen;;Höhere Kaufkraft;Chance;3;11,5
+Alle;Markt, Kunde, Produkt;Technologie ausbauen;Neuprodukte;Mio. €;Anstieg günstig;18,0;17,6;20,0;24,0;28,0;32,0;Produktlinie AT20;Umsetzung;Substitutionsprodukte;Risiko;2;-3,0
+Alle;Markt, Kunde, Produkt;Sortiment optimieren;Variantenanteil;%;neutral;12,0;15,0;15,0;15,0;15,0;15,0;Modularisierung GT1;Umsetzung;Neue Kundenwünsche;Chance;3;11,5
+Alle;Markt, Kunde, Produkt;Sortiment optimieren;Umsatz Poor Dogs;Mio. €;Anstieg ungünstig;48,9;42,4;40,0;32,0;25,0;20,0;;;Start-up-Wettbewerb;Risiko;2;-2,0
+Alle;Prozesse;Service verbessern;Ø Servicezeit;Std.;Anstieg ungünstig;78;82;60;48;36;24;Digitaler Serviceprozess;Umsetzung;Softwareabhängigkeit;Risiko;4;-10,0
+Alle;Prozesse;Fertigung modernisieren;Anteil neuer Anlagen;%;Anstieg günstig;22,0;26,0;30,0;36,0;42,0;48,0;Energiesparende Anlagen;Idee;Technologiewechsel;Risiko;1;-0,5
+Alle;Prozesse;Liefertreue auf 98 %;Liefertreue;%;Anstieg günstig;93,0;95,6;95,0;96,0;97,0;98,0;Prozessstandardisierung;Umsetzung;Schnittstellenkoordination;Risiko;2;-1,0
+Alle;Prozesse;Auslastung erhöhen;Kapazitätsauslastung;%;Anstieg günstig;80,0;78,0;85,0;88,0;90,0;92,0;Fixkosten Altanlagen;Umsetzung;Kostenremanenz;Risiko;3;-5,0
+Alle;Organisation;Projektgruppen etablieren;Übergreifende Projekte;;Anstieg günstig;7;6;9;10;11;12;Projektmanagement-Office;Umsetzung;Überlastung, Koordination;Risiko;3;-1,0
+Alle;Organisation;Nachwuchskräfte fördern;Führungsnachwuchs;;Anstieg günstig;4;6;6;8;10;12;Führungskräfteentwicklung;Umsetzung;Fachkräftemangel;Risiko;3;-6,0
+Alle;Organisation;Internationalisierung;Auslandserfahrung;%;Anstieg günstig;12,0;14,0;18,0;22,0;26,0;30,0;Recruiting Fachkräfte;Planung;;;;
+Alle;Mitarbeiter;Motivation stärken;Krankenquote;%;Anstieg ungünstig;7,0;6,5;6,8;6,5;6,2;6,0;Arbeitszeitstudie;;Überlastung, Burn-out;Risiko;3;-1,0
+Alle;Mitarbeiter;Motivation stärken;DB je Kopf;Tsd. €;Anstieg günstig;108;95;112;116;120;125;;;;;;
+Alle;Mitarbeiter;Wissenstransfer stärken;Weiterbildung;Tage/Kopf;Anstieg günstig;2,0;3,2;3,0;3,5;4,0;4,0;Weiterbildungsprogramm;;Kreativität Mitarbeitende;Chance;2;5,0
+Antriebstechnik;Finanzen;Wachstum 5 % p. a.;Nettoumsatz;Mio. €;Anstieg günstig;118,3;122,4;124,3;129,9;135,9;142,2;Übernahme Digitalanbieter;Umsetzung;Positive Konjunktur;Chance;2;9,3
+Antriebstechnik;Finanzen;Wachstum 5 % p. a.;Umsatzwachstum;%;Anstieg günstig;2,4;3,0;4,9;4,9;4,9;4,9;Vertriebsausbau DACH;Umsetzung;Stärkerer Wettbewerb;Risiko;2;-0,5
+Antriebstechnik;Finanzen;Rendite steigern;ROI;%;Anstieg günstig;9,3;10,0;11,8;12,8;13,8;14,8;;;;;;
+Antriebstechnik;Finanzen;Rendite steigern;Umsatzrentabilität;%;Anstieg günstig;6,4;7,4;7,2;7,7;8,2;8,7;;;Tarifsteigerung;Risiko;2;-0,1
+Antriebstechnik;Finanzen;Liquidität sichern;Cashflow;Mio. €;Anstieg günstig;12,0;10,6;12,6;13,4;14,4;15,4;Digitales Mahnwesen;erledigt;Anzahlungsrisiko;Risiko;4;-5,4
+Antriebstechnik;Finanzen;Liquidität sichern;Debitorenziel;Tage;Anstieg ungünstig;38;46;35;33;32;30;;;Forderungsausfall;Risiko;4;-7,6
+Antriebstechnik;Markt, Kunde, Produkt;Marktanteil online steigern;Marktanteil;%;Anstieg günstig;10,0;12,4;12,1;13,1;14,1;15,1;;;A-Kundenabhängigkeit;Risiko;2;-3,7
+Antriebstechnik;Markt, Kunde, Produkt;Marktanteil online steigern;Auftragsbestand;Mio. €;Anstieg günstig;49,7;49,8;52,0;54,5;57,1;59,6;;;Öko-Sensibilität;Risiko;3;-2,1
+Antriebstechnik;Markt, Kunde, Produkt;Fremdleistung 50 %;Fremdleistungsanteil;%;Anstieg günstig;39,7;48,3;52,3;52,3;52,3;52,3;;;Abstimmungsprobleme;Risiko;2;-0,8
+Antriebstechnik;Markt, Kunde, Produkt;Marktbearbeitung stärken;Hitrate;%;Anstieg günstig;34,5;40,6;39,4;41,3;43,3;44,3;CRM-Einführung;Umsetzung;CRM-Defizite Wettbewerb;Chance;3;2,7
+Antriebstechnik;Markt, Kunde, Produkt;Marktbearbeitung stärken;Umsatz/Verkäufer;Tsd. €;Anstieg günstig;2138;2254;2193;2292;2392;2492;Strategische Allianzen;;Höhere Kaufkraft;Chance;3;5,6
+Antriebstechnik;Markt, Kunde, Produkt;Technologie ausbauen;Neuprodukte;Mio. €;Anstieg günstig;10,3;10,3;11,6;13,9;16,3;18,5;Produktlinie AT20;Umsetzung;Substitutionsprodukte;Risiko;2;-1,6
+Antriebstechnik;Markt, Kunde, Produkt;Sortiment optimieren;Variantenanteil;%;neutral;11,9;14,8;14,8;14,8;14,8;14,8;;;Neue Kundenwünsche;Chance;3;6,5
+Antriebstechnik;Markt, Kunde, Produkt;Sortiment optimieren;Umsatz Poor Dogs;Mio. €;Anstieg ungünstig;18,3;15,7;15,2;12,2;9,6;7,7;;;Start-up-Wettbewerb;Risiko;2;-0,6
+Antriebstechnik;Prozesse;Service verbessern;Ø Servicezeit;Std.;Anstieg ungünstig;77;81;60;48;36;24;;;Softwareabhängigkeit;Risiko;4;-4,7
+Antriebstechnik;Prozesse;Fertigung modernisieren;Anteil neuer Anlagen;%;Anstieg günstig;21,7;25,8;29,6;35,5;41,4;47,3;;;;;;
+Antriebstechnik;Prozesse;Liefertreue auf 98 %;Liefertreue;%;Anstieg günstig;92,0;94,8;94,0;95,0;96,0;97,0;Prozessstandardisierung;Umsetzung;Schnittstellenkoordination;Risiko;2;-0,6
+Antriebstechnik;Prozesse;Auslastung erhöhen;Kapazitätsauslastung;%;Anstieg günstig;79,8;77,9;84,8;87,7;89,7;91,7;;;Kostenremanenz;Risiko;3;-2,8
+Antriebstechnik;Organisation;Projektgruppen etablieren;Übergreifende Projekte;;Anstieg günstig;3;3;4;5;5;5;Projektmanagement-Office;Umsetzung;Überlastung, Koordination;Risiko;3;-0,5
+Antriebstechnik;Organisation;Nachwuchskräfte fördern;Führungsnachwuchs;;Anstieg günstig;2;3;3;3;5;5;Führungskräfteentwicklung;Umsetzung;Fachkräftemangel;Risiko;3;-3,0
+Antriebstechnik;Organisation;Internationalisierung;Auslandserfahrung;%;Anstieg günstig;12,5;14,6;18,7;22,9;27,1;31,2;Recruiting Fachkräfte;Planung;;;;
+Antriebstechnik;Mitarbeiter;Motivation stärken;Krankenquote;%;Anstieg ungünstig;6,8;6,3;6,6;6,4;6,1;5,9;Arbeitszeitstudie;;Überlastung, Burn-out;Risiko;3;-0,5
+Antriebstechnik;Mitarbeiter;Motivation stärken;DB je Kopf;Tsd. €;Anstieg günstig;110;97;114;118;122;127;;;;;;
+Antriebstechnik;Mitarbeiter;Wissenstransfer stärken;Weiterbildung;Tage/Kopf;Anstieg günstig;2,0;3,3;3,1;3,6;4,1;4,1;Weiterbildungsprogramm;;Kreativität Mitarbeitende;Chance;2;2,5
+Lineartechnik;Finanzen;Wachstum 5 % p. a.;Nettoumsatz;Mio. €;Anstieg günstig;78,0;74,4;79,6;82,4;85,3;88,3;Übernahme Digitalanbieter;Umsetzung;Positive Konjunktur;Chance;2;7,6
+Lineartechnik;Finanzen;Wachstum 5 % p. a.;Umsatzwachstum;%;Anstieg günstig;2,4;2,8;5,0;5,0;5,0;5,0;;;Stärkerer Wettbewerb;Risiko;2;-0,3
+Lineartechnik;Finanzen;Rendite steigern;ROI;%;Anstieg günstig;9,8;10,1;12,5;13,6;14,6;15,7;Rationalisierung Montage;Idee;Gemeinkostensteigerung;Risiko;1;-0,5
+Lineartechnik;Finanzen;Rendite steigern;Umsatzrentabilität;%;Anstieg günstig;6,1;6,7;6,8;7,3;7,8;8,3;;;;;;
+Lineartechnik;Finanzen;Liquidität sichern;Cashflow;Mio. €;Anstieg günstig;5,7;4,7;5,9;6,1;6,6;7,0;Digitales Mahnwesen;erledigt;Anzahlungsrisiko;Risiko;4;-2,8
+Lineartechnik;Finanzen;Liquidität sichern;Debitorenziel;Tage;Anstieg ungünstig;37;47;34;32;31;29;;;Forderungsausfall;Risiko;4;-4,9
+Lineartechnik;Markt, Kunde, Produkt;Marktanteil online steigern;Marktanteil;%;Anstieg günstig;9,6;11,3;11,6;12,5;13,5;14,5;;;A-Kundenabhängigkeit;Risiko;2;-3,0
+Lineartechnik;Markt, Kunde, Produkt;Marktanteil online steigern;Auftragsbestand;Mio. €;Anstieg günstig;35,4;32,7;36,0;37,4;38,7;40,0;;;Öko-Sensibilität;Risiko;3;-1,4
+Lineartechnik;Markt, Kunde, Produkt;Fremdleistung 50 %;Fremdleistungsanteil;%;Anstieg günstig;35,5;40,9;46,7;46,7;46,7;46,7;Subunternehmer steuern;;Abstimmungsprobleme;Risiko;2;-0,4
+Lineartechnik;Markt, Kunde, Produkt;Marktbearbeitung stärken;Hitrate;%;Anstieg günstig;35,2;39,4;40,2;42,2;44,3;45,3;CRM-Einführung;Umsetzung;CRM-Defizite Wettbewerb;Chance;3;1,5
+Lineartechnik;Markt, Kunde, Produkt;Marktbearbeitung stärken;Umsatz/Verkäufer;Tsd. €;Anstieg günstig;2179;2184;2234;2336;2438;2539;;;Höhere Kaufkraft;Chance;3;4,0
+Lineartechnik;Markt, Kunde, Produkt;Technologie ausbauen;Neuprodukte;Mio. €;Anstieg günstig;6,3;5,8;6,8;8,1;9,3;10,6;;;Substitutionsprodukte;Risiko;2;-1,1
+Lineartechnik;Markt, Kunde, Produkt;Sortiment optimieren;Variantenanteil;%;neutral;11,8;14,7;14,7;14,7;14,7;14,7;Modularisierung GT1;Umsetzung;Neue Kundenwünsche;Chance;3;3,5
+Lineartechnik;Markt, Kunde, Produkt;Sortiment optimieren;Umsatz Poor Dogs;Mio. €;Anstieg ungünstig;28,3;24,8;22,8;18,1;14,0;11,2;;;Start-up-Wettbewerb;Risiko;2;-1,3
+Lineartechnik;Prozesse;Service verbessern;Ø Servicezeit;Std.;Anstieg ungünstig;77;85;59;48;36;24;;;Softwareabhängigkeit;Risiko;4;-3,7
+Lineartechnik;Prozesse;Fertigung modernisieren;Anteil neuer Anlagen;%;Anstieg günstig;22,6;25,5;30,8;37,0;43,1;49,3;Energiesparende Anlagen;Idee;Technologiewechsel;Risiko;1;-0,5
+Lineartechnik;Prozesse;Liefertreue auf 98 %;Liefertreue;%;Anstieg günstig;94,6;95,5;96,6;97,6;98,6;99,6;Prozessstandardisierung;Umsetzung;Schnittstellenkoordination;Risiko;2;-0,3
+Lineartechnik;Prozesse;Auslastung erhöhen;Kapazitätsauslastung;%;Anstieg günstig;80,7;77,3;85,8;88,8;90,8;92,8;Fixkosten Altanlagen;Umsetzung;Kostenremanenz;Risiko;3;-1,4
+Lineartechnik;Organisation;Projektgruppen etablieren;Übergreifende Projekte;;Anstieg günstig;3;2;3;3;4;4;Projektmanagement-Office;Umsetzung;Überlastung, Koordination;Risiko;3;-0,3
+Lineartechnik;Organisation;Nachwuchskräfte fördern;Führungsnachwuchs;;Anstieg günstig;1;2;2;3;3;4;Führungskräfteentwicklung;Umsetzung;Fachkräftemangel;Risiko;3;-2,0
+Lineartechnik;Organisation;Internationalisierung;Auslandserfahrung;%;Anstieg günstig;11,3;12,6;17,0;20,7;24,5;28,3;Recruiting Fachkräfte;Planung;;;;
+Lineartechnik;Mitarbeiter;Motivation stärken;Krankenquote;%;Anstieg ungünstig;7,1;6,9;6,9;6,6;6,3;6,1;Arbeitszeitstudie;;Überlastung, Burn-out;Risiko;3;-0,3
+Lineartechnik;Mitarbeiter;Motivation stärken;DB je Kopf;Tsd. €;Anstieg günstig;110;93;114;118;122;127;;;;;;
+Lineartechnik;Mitarbeiter;Wissenstransfer stärken;Weiterbildung;Tage/Kopf;Anstieg günstig;1,9;3,0;2,9;3,4;3,9;3,9;Weiterbildungsprogramm;;Kreativität Mitarbeitende;Chance;2;1,7
+Service;Finanzen;Wachstum 5 % p. a.;Nettoumsatz;Mio. €;Anstieg günstig;40,5;47,1;44,7;48,7;52,9;57,3;Übernahme Digitalanbieter;Umsetzung;Positive Konjunktur;Chance;2;3,1
+Service;Finanzen;Wachstum 5 % p. a.;Umsatzwachstum;%;Anstieg günstig;2,6;3,4;5,3;5,3;5,3;5,3;;;Stärkerer Wettbewerb;Risiko;2;-0,2
+Service;Finanzen;Rendite steigern;ROI;%;Anstieg günstig;9,0;10,3;11,5;12,5;13,4;14,4;;;;;;
+Service;Finanzen;Rendite steigern;Umsatzrentabilität;%;Anstieg günstig;6,0;7,4;6,8;7,3;7,8;8,2;;;;;;
+Service;Finanzen;Liquidität sichern;Cashflow;Mio. €;Anstieg günstig;3,7;3,6;4,0;4,5;5,0;5,6;Digitales Mahnwesen;erledigt;Anzahlungsrisiko;Risiko;4;-1,8
+Service;Finanzen;Liquidität sichern;Debitorenziel;Tage;Anstieg ungünstig;40;45;37;34;33;31;;;Forderungsausfall;Risiko;4;-2,5
+Service;Markt, Kunde, Produkt;Marktanteil online steigern;Marktanteil;%;Anstieg günstig;10,5;13,7;12,6;13,7;14,7;15,8;Online-Akquiseplattform;Planung;A-Kundenabhängigkeit;Risiko;2;-1,3
+Service;Markt, Kunde, Produkt;Marktanteil online steigern;Auftragsbestand;Mio. €;Anstieg günstig;10,9;12,3;12,0;13,1;14,2;15,4;;;Öko-Sensibilität;Risiko;3;-0,5
+Service;Markt, Kunde, Produkt;Fremdleistung 50 %;Fremdleistungsanteil;%;Anstieg günstig;37,7;48,6;49,6;49,6;49,6;49,6;Subunternehmer steuern;;Abstimmungsprobleme;Risiko;2;-0,3
+Service;Markt, Kunde, Produkt;Marktbearbeitung stärken;Hitrate;%;Anstieg günstig;36,1;45,0;41,3;43,4;45,4;46,5;CRM-Einführung;Umsetzung;CRM-Defizite Wettbewerb;Chance;3;1,3
+Service;Markt, Kunde, Produkt;Marktbearbeitung stärken;Umsatz/Verkäufer;Tsd. €;Anstieg günstig;2105;2355;2159;2257;2355;2453;;;Höhere Kaufkraft;Chance;3;1,9
+Service;Markt, Kunde, Produkt;Technologie ausbauen;Neuprodukte;Mio. €;Anstieg günstig;1,4;1,5;1,6;2,0;2,4;2,9;;;Substitutionsprodukte;Risiko;2;-0,3
+Service;Markt, Kunde, Produkt;Sortiment optimieren;Variantenanteil;%;neutral;12,8;16,0;16,0;16,0;16,0;16,0;;;Neue Kundenwünsche;Chance;3;1,5
+Service;Markt, Kunde, Produkt;Sortiment optimieren;Umsatz Poor Dogs;Mio. €;Anstieg ungünstig;2,3;1,9;2,0;1,7;1,4;1,1;;;Start-up-Wettbewerb;Risiko;2;-0,1
+Service;Prozesse;Service verbessern;Ø Servicezeit;Std.;Anstieg ungünstig;81;80;62;50;37;25;Digitaler Serviceprozess;Umsetzung;Softwareabhängigkeit;Risiko;4;-1,6
+Service;Prozesse;Fertigung modernisieren;Anteil neuer Anlagen;%;Anstieg günstig;21,9;27,5;29,8;35,8;41,7;47,7;;;;;;
+Service;Prozesse;Liefertreue auf 98 %;Liefertreue;%;Anstieg günstig;92,9;98,0;94,9;95,9;96,9;97,9;Prozessstandardisierung;Umsetzung;Schnittstellenkoordination;Risiko;2;-0,1
+Service;Prozesse;Auslastung erhöhen;Kapazitätsauslastung;%;Anstieg günstig;79,4;79,4;84,3;87,3;89,3;91,3;;;Kostenremanenz;Risiko;3;-0,8
+Service;Organisation;Projektgruppen etablieren;Übergreifende Projekte;;Anstieg günstig;1;1;2;2;2;3;Projektmanagement-Office;Umsetzung;Überlastung, Koordination;Risiko;3;-0,2
+Service;Organisation;Nachwuchskräfte fördern;Führungsnachwuchs;;Anstieg günstig;1;1;1;2;2;3;Führungskräfteentwicklung;Umsetzung;Fachkräftemangel;Risiko;3;-1,0
+Service;Organisation;Internationalisierung;Auslandserfahrung;%;Anstieg günstig;11,9;14,8;17,8;21,8;25,7;29,7;Recruiting Fachkräfte;Planung;;;;
+Service;Mitarbeiter;Motivation stärken;Krankenquote;%;Anstieg ungünstig;7,3;6,3;7,1;6,8;6,5;6,2;Arbeitszeitstudie;;Überlastung, Burn-out;Risiko;3;-0,2
+Service;Mitarbeiter;Motivation stärken;DB je Kopf;Tsd. €;Anstieg günstig;99;94;103;107;110;115;;;;;;
+Service;Mitarbeiter;Wissenstransfer stärken;Weiterbildung;Tage/Kopf;Anstieg günstig;2,0;3,4;3,0;3,5;4,0;4,0;Weiterbildungsprogramm;;Kreativität Mitarbeitende;Chance;2;0,8

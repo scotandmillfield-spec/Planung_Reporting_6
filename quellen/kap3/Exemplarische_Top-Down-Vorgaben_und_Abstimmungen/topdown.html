@@ -1,5 +1,6 @@
 <!-- Abb. 3.8 „Exemplarische Top-Down-Vorgaben und Abstimmungen“: Maske „Top-Down-Vorgabe“ (softwareneutral nachgebaut).
      Raster: Maske 727 px = 110 mm; Inhalt 695 px = linke Spalte 360 (Beschriftung 160 · 8 · Feld 192) · 20 · rechte Spalte 315.
+     Titelzeile wie Abb. 3.5 (Projektroadmap): Titel fett ohne Balken, Untertitel mit Stand, Haarlinie.
      Organigramme: Knoten 156 px breit, absolut gesetzt; Verbindungslinien als SVG (werden mit exportiert). -->
 <style>
   #topdown { --sp-label: 160px; --sp-feld: 192px; --sp-links: 360px; --sp-rechts: 315px; }
@@ -15,9 +16,15 @@
   #topdown .knoten > .mk-label { display: block; height: 18px; margin-bottom: 4px; font-weight: bold; }
   #topdown .kz { display: grid; grid-template-columns: 62px 74px; column-gap: 6px; align-items: center; }
   #topdown .kz + .kz { margin-top: 4px; }
+  /* Titelzeile wie in Abb. 3.5: kein Balken, Titel fett, Untertitel grau, Haarlinie darunter */
+  #topdown .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #topdown .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #topdown .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #topdown .mk-kopf .mk-kopf-info { font-size: 14px; color: var(--muted); }
 </style>
 <form class="mk-maske" id="topdown" autocomplete="off" novalidate>
-  <div class="mk-kopf" id="kopf"><span>Top-Down-Vorgabe</span><span class="mk-kopf-info" id="kopf-info">Werte in Mio. €</span></div>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Top-Down-Vorgabe</span><span class="kopf-unter" id="kopf-unter">Budget 2028 – Vorgabe · Stand 30.06.2027 · <span class="mk-kopf-info" id="kopf-info">Werte in Mio. €</span></span></div>
   <div class="mk-inhalt">
 
     <section class="mk-abschnitt" id="abschnitt-ges">
@@ -26,11 +33,11 @@
         <div class="links">
           <div class="mk-zeile">
             <label class="mk-label" for="f-periode">Periode</label>
-            <select class="mk-feld" id="f-periode"><option value="B2027" selected>Budget 2027 – Vorgabe</option></select>
+            <select class="mk-feld" id="f-periode"><option value="B2028" selected>Budget 2028 – Vorgabe</option></select>
           </div>
           <div class="mk-zeile">
             <label class="mk-label" for="f-variante">Variante</label>
-            <select class="mk-feld" id="f-variante"><option value="std" selected>Standard</option></select>
+            <select class="mk-feld" id="f-variante"><option value="std" selected>Standard</option><option value="best">Best Case</option><option value="worst">Worst Case</option></select>
           </div>
           <div class="mk-zeile">
             <label class="mk-label" for="f-zielgroesse">Zielgröße</label>

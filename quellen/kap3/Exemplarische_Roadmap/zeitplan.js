@@ -9,6 +9,7 @@
   const datum = t => { const d = new Date(t * 864e5);
     return String(d.getUTCDate()).padStart(2, "0") + "." + String(d.getUTCMonth() + 1).padStart(2, "0") + "." + d.getUTCFullYear(); };
   const STAND_TAG = DATA.stand_iso.map(tag);
+  const STAND_PLUS12 = DATA.stand_iso.map(iso => tag((+iso.slice(0, 4) + 1) + iso.slice(4)));   // Stichtag + 12 Monate (kalendergenau)
   const PJ = DATA.projekte.map((p, i) => {
     const t = DATA.termine[i];
     return { name: p[0], gb: p[1], fb: p[2], bsc: p[3], verantw: p[4], plan: p[5],
@@ -19,8 +20,8 @@
   const offen = r => r.st === UMSETZUNG || r.st === PLANUNG;
   const terminiert = r => r.st !== IDEE && r.beginn != null;
   const endeEff = r => r.ende + 7 * (r.verz || 0);            // Prognose-Ende bzw. Ist-Ende (erledigt)
-  const STAND_KNOEPFE = [[1, "Q3/25"], [2, "Q4/25"], [3, "Q1/26"], [4, "Q2/26"]];
-  const T0 = tag("2025-01-01"), T1 = tag("2029-01-01"), JAHRE = [2025, 2026, 2027, 2028];
+  const STAND_KNOEPFE = [[1, "Q3/26"], [2, "Q4/26"], [3, "Q1/27"], [4, "Q2/27"]];
+  const T0 = tag("2026-01-01"), T1 = tag("2030-01-01"), JAHRE = [2026, 2027, 2028, 2029];
   const PLANUNGSPHASE = "#D4D4D4";
 
   /* ---------- Zustand ---------- */
@@ -63,7 +64,7 @@
   }
 
   /* ---------- Datenschnitte ---------- */
-  DK.schnitt(bFilter, "Berichtsstand", "knoepfe", { optionen: STAND_KNOEPFE, wert: S.stand,
+  DK.schnitt(bFilter, "Stand", "knoepfe", { optionen: STAND_KNOEPFE, wert: S.stand,
     onChange: v => { S.stand = v; zeichnen(); } });
   const dd = (label, key, liste, breite) => DK.schnitt(bFilter, label, "dropdown", { breite,
     optionen: [["alle", "Alle"], ...liste.map((t, i) => [String(i), t])], wert: "alle",
@@ -80,7 +81,7 @@
              fert: pu ? summe(u, r => r.plan * r.fert) / pu * 100 : null,
              verz: o.filter(r => r.verz > 0).length,
              dverz: o.length ? summe(o, r => r.verz) / o.length : null,
-             ab12: o.filter(r => endeEff(r) <= STAND_TAG[q] + 365).length };
+             ab12: o.filter(r => endeEff(r) <= STAND_PLUS12[q]).length };
   }
   function kpiDaten() {
     const ist = kennzahlen(zeilen(S.stand), S.stand), vq = kennzahlen(zeilen(S.stand - 1), S.stand - 1);
@@ -157,7 +158,7 @@
       if (!terminiert(r)) {
         sv("text", { x: x0 + 6, y: cy, dy: "0.35em", class: "muted" }, g, "nicht terminiert");
       } else {
-        // Plan: Planungsphase hellgrau, Umsetzung weiß, gemeinsame Kontur; links offen, wenn vor 2025 begonnen
+        // Plan: Planungsphase hellgrau, Umsetzung weiß, gemeinsame Kontur; links offen, wenn vor 2026 begonnen
         const xb = X(r.beginn), xu = X(r.umsetzung), xe = X(r.ende), oben = y + 3, unten = y + ZH - 3;
         if (xu > xb) sv("rect", { x: xb, y: oben, width: xu - xb, height: unten - oben, fill: PLANUNGSPHASE }, g);
         sv("rect", { x: xu, y: oben, width: Math.max(0, xe - xu), height: unten - oben, fill: "#FFFFFF" }, g);
@@ -205,8 +206,8 @@
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     DK.kopf(bKopf, { titel: "Strategische Projektroadmap – Zeitplan",
-      untertitel: `Berichtsstand ${STAENDE[S.stand]} · Plan, Ist und Vorschau je Projekt`,
-      quelle: `Quelle: Projektcontrolling · Stand ${STAENDE[4]}`,
+      untertitel: `Stand ${STAENDE[S.stand]} · Plan, Ist und Vorschau je Projekt`,
+      quelle: DK.NBSP,   // keine Quellenzeile (Revision DS); Platzhalter hält die Legende in der zweiten Zeile
       legende: [[PLANUNGSPHASE, "Planungsphase (PL)", "#3A3F44"], ["#FFFFFF", "Umsetzung (PL)", "#3A3F44"], [FARBE.ist, "Ist"],
                 [FARBE.fc, "Vorschau"], [FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
     DK.kpis(bKpi, kpiDaten());
@@ -216,7 +217,7 @@
       : !o.length ? "keine laufenden Projekte in dieser Auswahl"
       : spaet.length ? `${spaet.length} von ${o.length} laufenden Projekten enden später als geplant, größter Verzug: ${max.name} (${delta(max.verz, 0)} Wo.)`
       : "alle laufenden Projekte enden planmäßig oder früher";
-    const v = DK.visual(bZeit, { titel: "Zeitplan", einheit: "Quartale 2025–2028, ΔPL Termin in Wochen", botschaft });
+    const v = DK.visual(bZeit, { titel: "Zeitplan", einheit: "Quartale 2026–2029, ΔPL Termin in Wochen", botschaft });
     zeitplan(v.flaeche, v.breite, rows);
     if (DK._ebenenNeu) DK._ebenenNeu();
   }
@@ -229,13 +230,13 @@
       { nr: 2, ziel: "kopf-legende", anker: "links", regel: "UNIFY – Semantische Notation", titel: "Plan umrandet, Ist dunkel, Vorschau grau",
         text: "Plantermine sind umrandete Balken (Planungsphase hellgrau, Umsetzung weiß), der Ist-Verlauf ist ein dunkler, die Vorschau ein grauer Strich. Die Überschreitung des Plan-Endes ist rot. Das Original nutzte Gelb und Grün für Phasen und Schwarz für die Durchführung – Farben ohne Bezug zu Plan und Ist." },
       { nr: 3, ziel: "zp-stichtag", anker: "links", versatz: [0, -2], regel: "UNIFY – Zeitbezug", titel: "Benannter Stichtag",
-        text: "Der Stichtag ist eine beschriftete Linie und folgt dem Datenschnitt „Berichtsstand“. Im Original markierte eine unbeschriftete dünne Linie den Stichtag, der Kopf nannte nur „06-2025“." },
+        text: "Der Stichtag ist eine beschriftete Linie und folgt dem Datenschnitt „Stand“. Im Original markierte eine unbeschriftete dünne Linie den Stichtag, der Kopf nannte nur „06-2025“." },
       { nr: 4, ziel: "sp-termin", versatz: [26, -2], regel: "CONDENSE – Informationsdichte", titel: "Zahlen neben den Balken",
         text: "Fertigstellung und Terminabweichung stehen als Zahlen in der Tabelle, die KPI-Leiste verdichtet den Stand des Portfolios. So beantwortet die Seite „wann“, „wie weit“ und „wie spät“ zugleich." },
       { nr: 5, ziel: "zp-achse", versatz: [-10, -6], regel: "CHECK – Visuelle Integrität", titel: "Tagesgenaue, lineare Zeitachse",
-        text: "Balken beginnen und enden am Datum, nicht am Quartalsraster; jedes Jahr ist gleich breit. Die Achse endet 2028, weil kein Projekt später endet – das Original zeigte ein leeres Jahr 2029 und brauchte Bildlaufleisten." },
+        text: "Balken beginnen und enden am Datum, nicht am Quartalsraster; jedes Jahr ist gleich breit. Die Achse endet 2029, weil kein Projekt später endet – das Original zeigte ein leeres Folgejahr und brauchte Bildlaufleisten." },
       { nr: 6, ziel: "v-zeitplan", versatz: [-28, 0], regel: "EXPRESS – Passende Darstellung", titel: "Zeit waagerecht",
-        text: "Termine stehen auf einer waagerechten Zeitachse. Projekte vor 2025 sind links offen gezeichnet; die genauen Daten stehen im Tooltip." },
+        text: "Termine stehen auf einer waagerechten Zeitachse. Projekte mit Beginn vor 2026 sind links offen gezeichnet; die genauen Daten stehen im Tooltip." },
       { nr: 7, ziel: "kopf-titel", versatz: [26, 0], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Kein Logo, keine Navigationsknöpfe",
         text: "Logo, Info-Symbol, Farbverlauf im Kopf, hinterlegte Filterkästen und Navigationsknöpfe entfallen. Abkürzungen wie „Fixkostenmanagem.“ oder „m. Sub“ sind ausgeschrieben; „BCR-Felder“ heißt jetzt „BSC-Perspektive“." },
       { nr: 8, ziel: "zp-status", versatz: [26, -2], regel: "STRUCTURE – Inhalte ordnen", titel: "Gruppen nach Status, dann nach Beginn",
@@ -244,10 +245,10 @@
     nachbauIntro: "Alle Elemente sind Standard-Visuals von Power BI Desktop. Ein Gantt-Diagramm ist kein Standard-Visual; es entsteht hier aus zwei deckungsgleichen gestapelten Balkendiagrammen. Seitengröße benutzerdefiniert 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt, Kennzahlen 19,5 pt.",
     nachbau: [
       { id: "A", ziel: "kopf-titel", versatz: [26, 0], titel: "Kopfzeile und Legende", visual: "Textfeld; Formen (Rechteck)",
-        felder: "Untertitel mit dynamischem Wert: Measure „Berichtsstand Text“",
+        felder: "Untertitel mit dynamischem Wert: Measure „Stand Text“",
         format: "Titel 16,5 pt fett; Legende: Rechtecke 9 × 9 px (Planungsphase #D4D4D4, Umsetzung weiß, beide mit Rahmen #3A3F44)" },
       { id: "B", ziel: "filter", titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln bzw. Dropdown)",
-        felder: "Berichtsstand (Quartal), Geschäftsbereich, Funktionsbereich, BSC-Perspektive",
+        felder: "Stand (Quartal), Geschäftsbereich, Funktionsbereich, BSC-Perspektive",
         format: "Ausgewählt: Füllung #3A3F44, Schrift weiß; nicht ausgewählt: weiß, Rahmen #9A9A9A",
         hinweis: "Gleiche Datenschnitte wie die Übersicht (Abb. 3.5); mit „Datenschnitte synchronisieren“ wirken sie auf beiden Seiten." },
       { id: "C", ziel: "kpis", versatz: [0, 50], titel: "KPI-Leiste", visual: "Karte (neu) mit 6 Measures",
@@ -258,13 +259,13 @@
         format: "Schriftfarbe Terminverzug bedingt: > 0 #C62828, < 0 #00806B; Zeilenhöhe wie die Balken im Zeitplan (kompakt, 10,5 pt); Status als Sortierspalte, dann Plan-Beginn",
         hinweis: "Tabelle und Balkendiagramme müssen dieselbe Sortierung und Zeilenzahl haben, damit die Zeilen fluchten." },
       { id: "E", ziel: "zp-achse", versatz: [-10, -6], titel: "Zeitplan – Plan", visual: "Gestapeltes Balkendiagramm",
-        felder: "Y-Achse: Projekt (Achse ausgeblendet); X-Achse: Tage ab 01.01.2025; Werte: Offset Plan, Planungsphase, Umsetzung",
-        format: "Offset ohne Füllung; Planungsphase #D4D4D4, Umsetzung #FFFFFF, beide Rahmen #3A3F44 1 px; X-Achse fest 0 bis 1461 (bis 31.12.2028), vertikale Gitternetzlinien je Jahr #D9D9D9",
-        hinweis: "Offset Plan = DATEDIFF(DATE(2025;1;1); MIN(Termine[Plan_Beginn]); DAY), Planungsphase = DATEDIFF(Plan_Beginn; Plan_Beginn_Umsetzung; DAY), Umsetzung = DATEDIFF(Plan_Beginn_Umsetzung; Plan_Ende; DAY)." },
+        felder: "Y-Achse: Projekt (Achse ausgeblendet); X-Achse: Tage ab 01.01.2026; Werte: Offset Plan, Planungsphase, Umsetzung",
+        format: "Offset ohne Füllung; Planungsphase #D4D4D4, Umsetzung #FFFFFF, beide Rahmen #3A3F44 1 px; X-Achse fest 0 bis 1461 (bis 31.12.2029), vertikale Gitternetzlinien je Jahr #D9D9D9",
+        hinweis: "Offset Plan = DATEDIFF(DATE(2026;1;1); MIN(Termine[Plan_Beginn]); DAY), Planungsphase = DATEDIFF(Plan_Beginn; Plan_Beginn_Umsetzung; DAY), Umsetzung = DATEDIFF(Plan_Beginn_Umsetzung; Plan_Ende; DAY)." },
       { id: "F", ziel: "zp-stichtag", anker: "links", versatz: [0, -2], titel: "Zeitplan – Ist und Vorschau", visual: "Zweites gestapeltes Balkendiagramm, deckungsgleich darüber",
         felder: "Werte: Offset Ist, Ist (Ist-Beginn bis Stichtag), Vorschau (Stichtag bis Prognose-Ende, ohne Überschreitung), Verzug (Plan-Ende bis Prognose-Ende)",
         format: "Hintergrund transparent, innerer Abstand ca. 75 % (dünne Balken); Offset ohne Füllung, Ist #3A3F44, Vorschau #8F8F8F, Verzug #C62828; X-Achse fest wie E; X-Konstantenlinie „Stichtag“ gestrichelt #1A1A1A",
-        hinweis: "Prognose-Ende = Plan-Ende + Terminverzug × 7 Tage; der Stichtag kommt aus dem Datenschnitt Berichtsstand (SELECTEDVALUE)." },
+        hinweis: "Prognose-Ende = Plan-Ende + Terminverzug × 7 Tage; der Stichtag kommt aus dem Datenschnitt Stand (SELECTEDVALUE)." },
       { id: "G", ziel: "v-zeitplan", versatz: [-28, 0], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure aus „Im Terminverzug“, Anzahl laufender Projekte und TOPN(1; Projekte; [Terminverzug])",
         format: "10,5 pt, #4D4D4D" },

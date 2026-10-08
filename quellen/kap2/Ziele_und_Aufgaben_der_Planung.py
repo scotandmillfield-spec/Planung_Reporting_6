@@ -46,9 +46,5 @@ def build(theme):
     f.line([(fx[0], ybus2), (fx[-1], ybus2)], color=t.arrow, lw=t.arrow_lw)
     for x in fx:
         f.arrow([(x, ybus2), (x, yf + fh)])
-    for x in (fx[1], fx[2]):
-        f.ellipse(x - 0.45, ybus1 - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
-        f.ellipse(x - 0.45, ybus2 - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
-    f.ellipse(cx - 0.45, ybus2 - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
-    f.ellipse(cx - 0.45, ybus1 - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
+    # Abzweige ohne Knotenpunkte (Revision DS 07.10.2026)
     return f

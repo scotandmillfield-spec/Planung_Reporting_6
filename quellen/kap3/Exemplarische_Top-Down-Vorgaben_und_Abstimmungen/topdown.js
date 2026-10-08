@@ -91,6 +91,23 @@
   $("f-zielgroesse").addEventListener("change", laden);
   laden();
 
+  /* ---------- Klappen ohne Maßstabssprung ----------
+     Beim Zuklappen wird die Maske kürzer; maskkit skaliert sie dann neu, und der Pfeil springt weg.
+     Hier bleibt der Maßstab beim Klappen erhalten, nur der Rahmen folgt der neuen Höhe. */
+  if (!document.body.classList.contains("print")) {
+    const maske = $("topdown"), seite = $("seite"), rahmen = seite.parentElement;
+    let alt = null;
+    const merken = e => { if (e.target.closest && e.target.closest(".mk-band")) alt = seite.style.transform; };
+    const halten = e => {
+      if (alt === null || !(e.target.closest && e.target.closest(".mk-band"))) return;
+      const s = parseFloat((/scale\(([\d.]+)\)/.exec(alt) || [0, 1])[1]);
+      seite.style.transform = alt; alt = null;
+      rahmen.style.width = maske.offsetWidth * s + "px"; rahmen.style.height = maske.offsetHeight * s + "px";
+      if (MK._ebenenNeu) MK._ebenenNeu();
+    };
+    ["click", "keydown"].forEach(t => { maske.addEventListener(t, merken, true); maske.addEventListener(t, halten); });
+  }
+
   /* ---------- Lernplattform: Erläuterungen und Gestaltung ---------- */
   MK.ebenen({
     erlaeuterungen: {
@@ -119,10 +136,10 @@
       titel: "Gestaltung",
       intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
       eintraege: [
-        { nr: "A", ziel: "kopf", versatz: [-480, 4], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Fenster, kein Logo",
-          text: "Fensterrahmen, Menü- und Symbolleiste, Produktname, Navigationsleiste (Prozess, Planung, Simulation, Reporting), Klappsymbole und Bildlaufleisten des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen in der Kopfleiste." },
-        { nr: "B", ziel: "kopf-info", anker: "links", versatz: [0, 4], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Einheit einmal genannt",
-          text: "Alle Beträge in Mio. € mit einer Nachkommastelle; die Einheit steht einmal in der Kopfleiste. Das Original schrieb ausgeschriebene Beträge wie „117.000.000 €“ und setzte „€“ teils neben, teils in das Feld." },
+        { nr: "A", ziel: "kopf", versatz: [-6, 8], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Fenster, kein Logo",
+          text: "Fensterrahmen, Menü- und Symbolleiste, Produktname, Navigationsleiste (Prozess, Planung, Simulation, Reporting), Klappsymbole und Bildlaufleisten des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen als Titel; die Titelzeile ist gestaltet wie bei den Dashboards." },
+        { nr: "B", ziel: "kopf-info", versatz: [30, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Einheit einmal genannt",
+          text: "Alle Beträge in Mio. € mit einer Nachkommastelle; die Einheit steht einmal in der Titelzeile. Das Original schrieb ausgeschriebene Beträge wie „117.000.000 €“ und setzte „€“ teils neben, teils in das Feld." },
         { nr: "C", ziel: "f-status", anker: "links", versatz: [0, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Status in Worten statt roter Fläche",
           text: "Die Differenz ist ein berechnetes, graues Anzeigefeld mit Vorzeichen; darunter steht der Status in Worten. Das Original färbte das Feld rot – im Graustufendruck nicht zu erkennen und leicht mit einem Eingabefehler zu verwechseln." },
         { nr: "D", ziel: "f-holding", anker: "links", versatz: [0, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
@@ -132,7 +149,7 @@
         { nr: "F", ziel: "d-vertrieb", versatz: [32, 2], regel: "AUFGABENANGEMESSENHEIT", titel: "Zweite Abstimmung sichtbar",
           text: "Die Knoten der Bereichsebene zeigen Vorgabe und Differenz der Gesellschaft. Im Original musste man die Summe der Bereiche selbst mit der Vorgabe vergleichen." },
         { nr: "G", ziel: "k-grosskunden", versatz: [-4, 6], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Einheitliche Namen, aktuelles Jahr",
-          text: "„GB Großkunden“ und „GB Massengeschäft“ heißen wie die übrigen Bereiche ohne Kürzel. Die Periode „BUD 2012 Vorgabe“ wird zu „Budget 2027 – Vorgabe“." },
+          text: "„GB Großkunden“ und „GB Massengeschäft“ heißen wie die übrigen Bereiche ohne Kürzel. Die Periode „BUD 2012 Vorgabe“ wird zu „Budget 2028 – Vorgabe“ mit Stand 30.06.2027." },
         { nr: "H", ziel: "g-vertrieb", anker: "links", versatz: [-4, 2], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Eingaben werden geprüft",
           text: "Ungültige Beträge werden rot markiert und nicht in Summen und Differenzen übernommen; gültige Eingaben rechnen sofort durch beide Abstimmungsebenen." },
       ],

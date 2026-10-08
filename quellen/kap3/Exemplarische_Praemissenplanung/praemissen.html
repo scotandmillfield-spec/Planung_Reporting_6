@@ -1,4 +1,5 @@
-<!-- Abb. 3.7 „Exemplarische Prämissenplanung“: Maske „Planungsbrief“ (softwareneutral nachgebaut).
+<!-- Abb. 3.7 „Exemplarische Prämissenplanung“: Maske „Planungsvorgaben“ (softwareneutral nachgebaut).
+     Titelzeile wie Abb. 3.5 (Projektroadmap): Titel fett ohne Balken, Untertitel mit Stand, Haarlinie.
      Raster: Maske 727 px = 110 mm; Inhalt 695 px = Beschriftung 160 · Feld 192 · Abstand 20 · rechte Spalte 315. -->
 <style>
   #praemissen { --sp-label: 160px; --sp-feld: 192px; --sp-links: 360px; --sp-rechts: 315px; }
@@ -14,9 +15,16 @@
   #praemissen .brief-liste { display: grid; grid-template-columns: 172px 48px; }
   #praemissen .brief-liste span:nth-child(2n) { text-align: right; }
   #praemissen .mk-spalten { align-items: stretch; }
+  /* Titelzeile wie in Abb. 3.5: kein Balken, Titel fett, Untertitel grau, Haarlinie darunter */
+  #praemissen .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #praemissen .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #praemissen .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  /* Klappen: das id-Raster (display:grid) darf das Zuklappen nicht überstimmen */
+  #praemissen .mk-abschnitt.zu > :not(.mk-band) { display: none; }
 </style>
 <form class="mk-maske" id="praemissen" autocomplete="off" novalidate>
-  <div class="mk-kopf" id="kopf"><span>Planungsbrief</span></div>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Planungsvorgaben</span><span class="kopf-unter" id="kopf-unter">Budget 2028 · Stand 30.06.2027</span></div>
   <div class="mk-inhalt">
 
     <section class="mk-abschnitt" id="abschnitt-allgemein">
@@ -24,9 +32,9 @@
       <div class="praem" id="praem-raster">
         <label class="mk-label s1" for="f-budgetjahr">Aktuelles Budgetjahr</label>
         <select class="mk-feld s2" id="f-budgetjahr">
-          <option value="B2027" selected>Budget 2027</option>
-          <option value="F2026">Forecast 2026</option>
-          <option value="M2028">Mittelfristplanung 2028–2030</option>
+          <option value="B2028" selected>Budget 2028</option>
+          <option value="F2027">Forecast 2027</option>
+          <option value="M2029">Mittelfristplanung 2029–2031</option>
         </select>
         <div class="abstand"></div>
         <span class="mk-label mk-neben s1" id="einheit">Prämisse in %</span>
@@ -48,9 +56,9 @@
           <div class="mk-zeile" id="z-zeitraum">
             <label class="mk-label" for="f-von">Planungszeitraum</label>
             <div class="mk-feldgruppe">
-              <input class="mk-feld mk-datum" id="f-von" value="14.09.2026" inputmode="numeric" aria-label="Planungszeitraum von" data-hilfe="Datum TT.MM.JJJJ">
+              <input class="mk-feld mk-datum" id="f-von" value="14.09.2027" inputmode="numeric" aria-label="Planungszeitraum von" data-hilfe="Datum TT.MM.JJJJ">
               <span class="mk-zwischen">bis</span>
-              <input class="mk-feld mk-datum" id="f-bis" value="25.09.2026" inputmode="numeric" aria-label="Planungszeitraum bis" data-hilfe="Datum TT.MM.JJJJ">
+              <input class="mk-feld mk-datum" id="f-bis" value="25.09.2027" inputmode="numeric" aria-label="Planungszeitraum bis" data-hilfe="Datum TT.MM.JJJJ">
             </div>
           </div>
           <div class="mk-zeile" id="z-variante">
@@ -82,7 +90,7 @@
             </div>
             <div class="mk-zeile">
               <span class="mk-label">Planungshandbuch</span>
-              <div class="mk-feld mk-anzeige" id="f-handbuch"></div>
+              <div class="mk-feld mk-anzeige" id="f-handbuch"><a class="mk-link" data-dok="Planungshandbuch">Zugangslink öffnen</a></div>
             </div>
             <div class="mk-zeile">
               <span class="mk-label">Anwenderleitfaden</span>

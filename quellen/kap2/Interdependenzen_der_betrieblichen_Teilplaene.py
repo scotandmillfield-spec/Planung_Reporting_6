@@ -116,7 +116,8 @@ def build(theme):
     y = PP.y
     chain = []
     for c, h in zip(chain_txt, hs):
-        chain.append(box(cx0, y, cww, c, h=h))
+        strong = c == "Absatzplanung"           # Revision DS 07.10.2026: Absatzplanung rot
+        chain.append(box(cx0, y, cww, [P(c, size=S, bold=strong)], role="box_strong" if strong else "box", h=h))
         y += h + gap
     for a, b_ in zip(chain, chain[1:]):
         A([(a.cx, a.b), (b_.cx, b_.y)])
@@ -152,7 +153,8 @@ def build(theme):
         for ci, txt in enumerate(row):
             if txt is None:
                 continue
-            strong = txt.startswith("Kosten")
+            # Revision DS 07.10.2026: Kostenplanung grau wie Umsatzplanung, dafür Betriebsergebnisplanung rot
+            strong = txt.startswith("Betriebs")
             M[(ri, ci)] = box(kx[ci], y, kw, [P(txt, size=S, bold=strong)],
                               role="box_strong" if strong else "box_hi", h=rowh[ri])
         y += rowh[ri] + rgap_m
@@ -160,11 +162,12 @@ def build(theme):
     # ------------------------------------------------------------ Verbindungen
     A([(fx + fw / 2, grund_bottom), (fx + fw / 2, ep.y)])               # Grundsätze -> Erfolgspotenzial
     A([(ep.r, G.cy), (zg.x, G.cy)])                                      # -> Ableitung Zielgrößen
-    A([(U.cx, U.b), (U.cx, INV.y)])                                      # Unternehmensgrößen -> Investitionen
-    A([(43.0, G.b), (43.0, FE.y)])                                       # Geschäftsfeld -> F&E
-    A([(27.5, G.b), (27.5, g1.y)])                                       # Geschäftsfeld -> operative Mengenpläne
+    # Revision DS 07.10.2026: Pfeile gehen von der gestrichelten Umrandung der Erfolgspotenzialplanung aus;
+    # der Pfeil von Organisations-/Führungskräfteplanung in die operative Planung entfällt.
+    A([(U.cx, ep.b), (U.cx, INV.y)])                                     # Erfolgspotenzial -> Investitionen
+    A([(43.0, ep.b), (43.0, FE.y)])                                      # Erfolgspotenzial -> F&E
+    A([(27.5, ep.b), (27.5, g1.y)])                                      # Erfolgspotenzial -> operative Mengenpläne
     L([(FE.cx, FE.b), (FE.cx, g1.y)])                                    # F&E -- Mengen-/Prozesspläne
-    A([(93.4, O.b), (93.4, yO0)])                                        # Organisation -> operative Planung
     ax = zg.cx
     A([(ax, zg.b), (ax, yO0)], head=True)                                # Abgleich
     f.text(ax + 1.2, 43.4, 14, 3.0, [P("Abgleich", size=S, italic=True)], align="l", anchor="m", bg=band_bg)
@@ -195,11 +198,9 @@ def build(theme):
     # Investitionen -> Einzahlung, Auszahlung, Planbilanz
     yI = INV.y + INV.h * 0.28
     L([(INV.r, yI), (ch2, yI)])
-    A([(EZ.cx, yI), (EZ.cx, EZ.y)])
-    dot(EZ.cx, yI)
+    A([(EZ.cx, yI), (EZ.cx, EZ.y)])                                      # ohne Knotenpunkt (Revision DS 07.10.2026)
     A([(ch2, yI), (ch2, PB.y + PB.h * 0.72), (PB.r, PB.y + PB.h * 0.72)])
-    A([(ch2, AZ.cy), (AZ.r, AZ.cy)])
-    dot(ch2, AZ.cy)
+    A([(ch2, AZ.cy), (AZ.r, AZ.cy)])                                     # ohne Knotenpunkt (Revision DS 07.10.2026)
     # Rückkopplung Betriebsergebnis -> Mengen-/Prozesspläne
     A([(BE.x, BE.cy), (92.6, BE.cy), (92.6, g1.b - 2.6), (g1.r, g1.b - 2.6)])
     return f

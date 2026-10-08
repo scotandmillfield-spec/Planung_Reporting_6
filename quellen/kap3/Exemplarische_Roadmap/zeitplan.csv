@@ -1,85 +1,85 @@
 ﻿Stand;Projekt_ID;Projekt;Status;Verantwortung;Geschäftsbereich;Funktionsbereich;BSC_Perspektive;Plan_Kosten_TEUR;Plan_Beginn;Plan_Beginn_Umsetzung;Plan_Ende;Ist_Beginn;Ende_Prognose_bzw_Ist;Terminverzug_Wochen;Fertigstellung_Prozent
-30.06.2025;1;Übernahme Digitalanbieter;Planung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2025;01.08.2025;31.01.2028;14.04.2025;14.02.2028;2;2
-30.09.2025;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2025;01.08.2025;31.01.2028;14.04.2025;21.02.2028;3;7
-31.12.2025;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2025;01.08.2025;31.01.2028;14.04.2025;28.02.2028;4;16
-31.03.2026;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2025;01.08.2025;31.01.2028;14.04.2025;06.03.2028;5;25
-30.06.2026;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2025;01.08.2025;31.01.2028;14.04.2025;13.03.2028;6;34
-30.06.2025;2;Markteintritt Osteuropa;Idee;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;;;;;;;
-30.09.2025;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2025;01.09.2026;30.06.2028;18.08.2025;07.07.2028;1;3
-31.12.2025;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2025;01.09.2026;30.06.2028;18.08.2025;14.07.2028;2;6
-31.03.2026;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2025;01.09.2026;30.06.2028;18.08.2025;21.07.2028;3;9
-30.06.2026;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2025;01.09.2026;30.06.2028;18.08.2025;28.07.2028;4;12
-30.06.2025;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2025;01.03.2025;30.11.2026;06.01.2025;23.11.2026;-1;26
-30.09.2025;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2025;01.03.2025;30.11.2026;06.01.2025;23.11.2026;-1;40
-31.12.2025;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2025;01.03.2025;30.11.2026;06.01.2025;23.11.2026;-1;54
-31.03.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2025;01.03.2025;30.11.2026;06.01.2025;16.11.2026;-2;68
-30.06.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2025;01.03.2025;30.11.2026;06.01.2025;16.11.2026;-2;82
-31.12.2025;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;;;;;;;
-31.03.2026;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;;;;;;;
-30.06.2026;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;;;;;;;
-30.06.2025;5;Digitales Mahnwesen;Umsetzung;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2025;15.03.2025;31.10.2025;03.02.2025;07.11.2025;1;50
-30.09.2025;5;Digitales Mahnwesen;Umsetzung;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2025;15.03.2025;31.10.2025;03.02.2025;07.11.2025;1;75
-31.12.2025;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2025;15.03.2025;31.10.2025;03.02.2025;14.11.2025;2;100
-31.03.2026;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2025;15.03.2025;31.10.2025;03.02.2025;14.11.2025;2;100
-30.06.2026;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2025;15.03.2025;31.10.2025;03.02.2025;14.11.2025;2;100
-30.09.2025;6;Online-Akquiseplattform;Idee;Frau Tamm;Service;Vertrieb;Kunden;1030;;;;;;;
-31.12.2025;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;01.11.2025;01.06.2026;30.09.2027;17.11.2025;28.10.2027;4;2
-31.03.2026;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;01.11.2025;01.06.2026;30.09.2027;17.11.2025;18.11.2027;7;4
-30.06.2026;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;01.11.2025;01.06.2026;30.09.2027;17.11.2025;02.12.2027;9;8
-30.06.2025;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2025;03.02.2025;14.05.2027;02.01.2025;28.05.2027;2;18
-30.09.2025;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2025;03.02.2025;14.05.2027;02.01.2025;11.06.2027;4;27
-31.12.2025;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2025;03.02.2025;14.05.2027;02.01.2025;18.06.2027;5;36
-31.03.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2025;03.02.2025;14.05.2027;02.01.2025;02.07.2027;7;45
-30.06.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2025;03.02.2025;14.05.2027;02.01.2025;09.07.2027;8;54
-30.06.2025;8;Ersatzteil-Webshop;Idee;Herr Schwerdt;Service;Vertrieb;Kunden;750;;;;;;;
-30.09.2025;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2025;01.10.2026;30.06.2027;01.09.2025;30.06.2027;0;2
-31.12.2025;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2025;01.10.2026;30.06.2027;01.09.2025;30.06.2027;0;2
-31.03.2026;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2025;01.10.2026;30.06.2027;01.09.2025;30.06.2027;0;4
-30.06.2026;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2025;01.10.2026;30.06.2027;01.09.2025;30.06.2027;0;6
-30.06.2025;9;Produktlinie AT20;Idee;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;;;;;;;
-30.09.2025;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2025;01.04.2026;31.03.2027;21.07.2025;07.04.2027;1;2
-31.12.2025;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2025;01.04.2026;31.03.2027;21.07.2025;14.04.2027;2;6
-31.03.2026;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2025;01.04.2026;31.03.2027;21.07.2025;14.04.2027;2;14
-30.06.2026;9;Produktlinie AT20;Umsetzung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2025;01.04.2026;31.03.2027;21.07.2025;21.04.2027;3;22
-30.06.2025;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2024;01.11.2024;12.02.2027;01.07.2024;26.02.2027;2;20
-30.09.2025;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2024;01.11.2024;12.02.2027;01.07.2024;05.03.2027;3;31
-31.12.2025;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2024;01.11.2024;12.02.2027;01.07.2024;19.03.2027;5;42
-31.03.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2024;01.11.2024;12.02.2027;01.07.2024;26.03.2027;6;53
-30.06.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2024;01.11.2024;12.02.2027;01.07.2024;02.04.2027;7;64
-30.06.2025;11;Digitaler Serviceprozess;Planung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2025;01.08.2025;30.11.2026;03.03.2025;30.11.2026;0;11
-30.09.2025;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2025;01.08.2025;30.11.2026;03.03.2025;30.11.2026;0;27
-31.12.2025;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2025;01.08.2025;30.11.2026;03.03.2025;23.11.2026;-1;43
-31.03.2026;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2025;01.08.2025;30.11.2026;03.03.2025;23.11.2026;-1;59
-30.06.2026;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2025;01.08.2025;30.11.2026;03.03.2025;23.11.2026;-1;75
-30.06.2025;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2024;01.01.2025;30.06.2028;04.11.2024;07.07.2028;1;14
-30.09.2025;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2024;01.01.2025;30.06.2028;04.11.2024;14.07.2028;2;21
-31.12.2025;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2024;01.01.2025;30.06.2028;04.11.2024;21.07.2028;3;28
-31.03.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2024;01.01.2025;30.06.2028;04.11.2024;28.07.2028;4;35
-30.06.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2024;01.01.2025;30.06.2028;04.11.2024;04.08.2028;5;42
-30.06.2025;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2024;01.10.2024;04.09.2026;01.07.2024;04.09.2026;0;39
-30.09.2025;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2024;01.10.2024;04.09.2026;01.07.2024;04.09.2026;0;52
-31.12.2025;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2024;01.10.2024;04.09.2026;01.07.2024;28.08.2026;-1;65
-31.03.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2024;01.10.2024;04.09.2026;01.07.2024;28.08.2026;-1;78
-30.06.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2024;01.10.2024;04.09.2026;01.07.2024;28.08.2026;-1;91
-30.06.2025;14;Projektmanagement-Office;Planung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2025;01.07.2025;29.01.2027;07.04.2025;26.02.2027;4;15
-30.09.2025;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2025;01.07.2025;29.01.2027;07.04.2025;19.03.2027;7;29
-31.12.2025;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2025;01.07.2025;29.01.2027;07.04.2025;02.04.2027;9;41
-31.03.2026;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2025;01.07.2025;29.01.2027;07.04.2025;23.04.2027;12;53
-30.06.2026;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2025;01.07.2025;29.01.2027;07.04.2025;07.05.2027;14;65
-30.09.2025;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2025;01.09.2026;31.08.2027;15.09.2025;31.08.2027;0;2
-31.12.2025;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2025;01.09.2026;31.08.2027;15.09.2025;31.08.2027;0;4
-31.03.2026;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2025;01.09.2026;31.08.2027;15.09.2025;31.08.2027;0;7
-30.06.2026;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2025;01.09.2026;31.08.2027;15.09.2025;31.08.2027;0;10
-30.06.2025;16;Gebäudesanierung Werk 2;Idee;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;;;;;;;
-30.09.2025;16;Gebäudesanierung Werk 2;Idee;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;;;;;;;
-31.12.2025;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;01.12.2025;01.07.2026;31.12.2027;15.12.2025;14.01.2028;2;2
-31.03.2026;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;01.12.2025;01.07.2026;31.12.2027;15.12.2025;28.01.2028;4;3
-30.06.2026;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;01.12.2025;01.07.2026;31.12.2027;15.12.2025;11.02.2028;6;5
-31.03.2026;17;Energiesparende Anlagen;Idee;Frau Lotz;Lineartechnik;Produktion;Finanzen;1060;;;;;;;
-30.06.2026;17;Energiesparende Anlagen;Idee;Frau Lotz;Lineartechnik;Produktion;Finanzen;1060;;;;;;;
-30.06.2025;18;Führungskräfteentwicklung;Idee;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;;;;;;;
-30.09.2025;18;Führungskräfteentwicklung;Planung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2025;01.02.2026;17.12.2027;01.09.2025;17.12.2027;0;2
-31.12.2025;18;Führungskräfteentwicklung;Planung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2025;01.02.2026;17.12.2027;01.09.2025;10.12.2027;-1;2
-31.03.2026;18;Führungskräfteentwicklung;Umsetzung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2025;01.02.2026;17.12.2027;01.09.2025;10.12.2027;-1;7
-30.06.2026;18;Führungskräfteentwicklung;Umsetzung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2025;01.02.2026;17.12.2027;01.09.2025;10.12.2027;-1;15
-30.06.2026;19;Produktlinie AT40;Idee;Herr West;Antriebstechnik;F&E;Kunden;2300;;;;;;;
+30.06.2026;1;Übernahme Digitalanbieter;Planung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2026;01.08.2026;31.01.2029;14.04.2026;14.02.2029;2;2
+30.09.2026;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2026;01.08.2026;31.01.2029;14.04.2026;21.02.2029;3;7
+31.12.2026;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2026;01.08.2026;31.01.2029;14.04.2026;28.02.2029;4;16
+31.03.2027;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2026;01.08.2026;31.01.2029;14.04.2026;07.03.2029;5;25
+30.06.2027;1;Übernahme Digitalanbieter;Umsetzung;Frau Brandt;Zentral;Finanzen;Finanzen;4720;01.04.2026;01.08.2026;31.01.2029;14.04.2026;14.03.2029;6;34
+30.06.2026;2;Markteintritt Osteuropa;Idee;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;;;;;;;
+30.09.2026;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2026;01.09.2027;30.06.2029;18.08.2026;07.07.2029;1;3
+31.12.2026;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2026;01.09.2027;30.06.2029;18.08.2026;14.07.2029;2;6
+31.03.2027;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2026;01.09.2027;30.06.2029;18.08.2026;21.07.2029;3;9
+30.06.2027;2;Markteintritt Osteuropa;Planung;Herr Lange;Antriebstechnik;Vertrieb;Kunden;5340;01.08.2026;01.09.2027;30.06.2029;18.08.2026;28.07.2029;4;12
+30.06.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2026;01.03.2026;30.11.2027;06.01.2026;23.11.2027;-1;26
+30.09.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2026;01.03.2026;30.11.2027;06.01.2026;23.11.2027;-1;40
+31.12.2026;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2026;01.03.2026;30.11.2027;06.01.2026;23.11.2027;-1;54
+31.03.2027;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2026;01.03.2026;30.11.2027;06.01.2026;16.11.2027;-2;68
+30.06.2027;3;Vertriebsausbau DACH;Umsetzung;Herr Yilmaz;Antriebstechnik;Vertrieb;Kunden;3430;06.01.2026;01.03.2026;30.11.2027;06.01.2026;16.11.2027;-2;82
+31.12.2026;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;;;;;;;
+31.03.2027;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;;;;;;;
+30.06.2027;4;Rationalisierung Montage;Idee;Frau Dehmel;Lineartechnik;Produktion;Prozesse;2300;;;;;;;
+30.06.2026;5;Digitales Mahnwesen;Umsetzung;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2026;15.03.2026;31.10.2026;03.02.2026;07.11.2026;1;50
+30.09.2026;5;Digitales Mahnwesen;Umsetzung;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2026;15.03.2026;31.10.2026;03.02.2026;07.11.2026;1;75
+31.12.2026;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2026;15.03.2026;31.10.2026;03.02.2026;14.11.2026;2;100
+31.03.2027;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2026;15.03.2026;31.10.2026;03.02.2026;14.11.2026;2;100
+30.06.2027;5;Digitales Mahnwesen;erledigt;Herr Sieg;Zentral;Finanzen;Prozesse;60;01.02.2026;15.03.2026;31.10.2026;03.02.2026;14.11.2026;2;100
+30.09.2026;6;Online-Akquiseplattform;Idee;Frau Tamm;Service;Vertrieb;Kunden;1030;;;;;;;
+31.12.2026;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;01.11.2026;01.06.2027;30.09.2028;17.11.2026;28.10.2028;4;2
+31.03.2027;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;01.11.2026;01.06.2027;30.09.2028;17.11.2026;18.11.2028;7;4
+30.06.2027;6;Online-Akquiseplattform;Planung;Frau Tamm;Service;Vertrieb;Kunden;1030;01.11.2026;01.06.2027;30.09.2028;17.11.2026;02.12.2028;9;8
+30.06.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2026;03.02.2026;14.05.2028;02.01.2026;28.05.2028;2;18
+30.09.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2026;03.02.2026;14.05.2028;02.01.2026;11.06.2028;4;27
+31.12.2026;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2026;03.02.2026;14.05.2028;02.01.2026;18.06.2028;5;36
+31.03.2027;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2026;03.02.2026;14.05.2028;02.01.2026;02.07.2028;7;45
+30.06.2027;7;CRM-Einführung;Umsetzung;Frau Konrad;Zentral;Vertrieb;Kunden;3600;02.01.2026;03.02.2026;14.05.2028;02.01.2026;09.07.2028;8;54
+30.06.2026;8;Ersatzteil-Webshop;Idee;Herr Schwerdt;Service;Vertrieb;Kunden;750;;;;;;;
+30.09.2026;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2026;01.10.2027;30.06.2028;01.09.2026;30.06.2028;0;2
+31.12.2026;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2026;01.10.2027;30.06.2028;01.09.2026;30.06.2028;0;2
+31.03.2027;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2026;01.10.2027;30.06.2028;01.09.2026;30.06.2028;0;4
+30.06.2027;8;Ersatzteil-Webshop;Planung;Herr Schwerdt;Service;Vertrieb;Kunden;750;01.09.2026;01.10.2027;30.06.2028;01.09.2026;30.06.2028;0;6
+30.06.2026;9;Produktlinie AT20;Idee;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;;;;;;;
+30.09.2026;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2026;01.04.2027;31.03.2028;21.07.2026;07.04.2028;1;2
+31.12.2026;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2026;01.04.2027;31.03.2028;21.07.2026;14.04.2028;2;6
+31.03.2027;9;Produktlinie AT20;Planung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2026;01.04.2027;31.03.2028;21.07.2026;14.04.2028;2;14
+30.06.2027;9;Produktlinie AT20;Umsetzung;Frau Leicht;Antriebstechnik;F&E;Kunden;1150;15.07.2026;01.04.2027;31.03.2028;21.07.2026;21.04.2028;3;22
+30.06.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2025;01.11.2025;12.02.2028;01.07.2025;26.02.2028;2;20
+30.09.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2025;01.11.2025;12.02.2028;01.07.2025;04.03.2028;3;31
+31.12.2026;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2025;01.11.2025;12.02.2028;01.07.2025;18.03.2028;5;42
+31.03.2027;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2025;01.11.2025;12.02.2028;01.07.2025;25.03.2028;6;53
+30.06.2027;10;Modularisierung GT1;Umsetzung;Herr Tal;Lineartechnik;F&E;Prozesse;5400;01.07.2025;01.11.2025;12.02.2028;01.07.2025;01.04.2028;7;64
+30.06.2026;11;Digitaler Serviceprozess;Planung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2026;01.08.2026;30.11.2027;03.03.2026;30.11.2027;0;11
+30.09.2026;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2026;01.08.2026;30.11.2027;03.03.2026;30.11.2027;0;27
+31.12.2026;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2026;01.08.2026;30.11.2027;03.03.2026;23.11.2027;-1;43
+31.03.2027;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2026;01.08.2026;30.11.2027;03.03.2026;23.11.2027;-1;59
+30.06.2027;11;Digitaler Serviceprozess;Umsetzung;Frau Schwarz;Service;IT;Prozesse;960;01.03.2026;01.08.2026;30.11.2027;03.03.2026;23.11.2027;-1;75
+30.06.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2025;01.01.2026;30.06.2029;04.11.2025;07.07.2029;1;14
+30.09.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2025;01.01.2026;30.06.2029;04.11.2025;14.07.2029;2;21
+31.12.2026;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2025;01.01.2026;30.06.2029;04.11.2025;21.07.2029;3;28
+31.03.2027;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2025;01.01.2026;30.06.2029;04.11.2025;28.07.2029;4;35
+30.06.2027;12;Prozessstandardisierung;Umsetzung;Herr Schön;Zentral;IT;Prozesse;800;01.11.2025;01.01.2026;30.06.2029;04.11.2025;04.08.2029;5;42
+30.06.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2025;01.10.2025;04.09.2027;01.07.2025;04.09.2027;0;39
+30.09.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2025;01.10.2025;04.09.2027;01.07.2025;04.09.2027;0;52
+31.12.2026;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2025;01.10.2025;04.09.2027;01.07.2025;28.08.2027;-1;65
+31.03.2027;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2025;01.10.2025;04.09.2027;01.07.2025;28.08.2027;-1;78
+30.06.2027;13;Fixkosten Altanlagen;Umsetzung;Frau Zepper;Lineartechnik;Produktion;Finanzen;1600;01.07.2025;01.10.2025;04.09.2027;01.07.2025;28.08.2027;-1;91
+30.06.2026;14;Projektmanagement-Office;Planung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2026;01.07.2026;29.01.2028;07.04.2026;26.02.2028;4;15
+30.09.2026;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2026;01.07.2026;29.01.2028;07.04.2026;18.03.2028;7;29
+31.12.2026;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2026;01.07.2026;29.01.2028;07.04.2026;01.04.2028;9;41
+31.03.2027;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2026;01.07.2026;29.01.2028;07.04.2026;22.04.2028;12;53
+30.06.2027;14;Projektmanagement-Office;Umsetzung;Herr Schröder;Zentral;Finanzen;Lernen und Entwicklung;120;01.04.2026;01.07.2026;29.01.2028;07.04.2026;06.05.2028;14;65
+30.09.2026;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2026;01.09.2027;31.08.2028;15.09.2026;31.08.2028;0;2
+31.12.2026;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2026;01.09.2027;31.08.2028;15.09.2026;31.08.2028;0;4
+31.03.2027;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2026;01.09.2027;31.08.2028;15.09.2026;31.08.2028;0;7
+30.06.2027;15;Recruiting Fachkräfte;Planung;Frau Koslowski;Zentral;Personal;Lernen und Entwicklung;80;15.09.2026;01.09.2027;31.08.2028;15.09.2026;31.08.2028;0;10
+30.06.2026;16;Gebäudesanierung Werk 2;Idee;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;;;;;;;
+30.09.2026;16;Gebäudesanierung Werk 2;Idee;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;;;;;;;
+31.12.2026;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;01.12.2026;01.07.2027;31.12.2028;15.12.2026;14.01.2029;2;2
+31.03.2027;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;01.12.2026;01.07.2027;31.12.2028;15.12.2026;28.01.2029;4;3
+30.06.2027;16;Gebäudesanierung Werk 2;Planung;Herr Schubert;Lineartechnik;Produktion;Finanzen;360;01.12.2026;01.07.2027;31.12.2028;15.12.2026;11.02.2029;6;5
+31.03.2027;17;Energiesparende Anlagen;Idee;Frau Lotz;Lineartechnik;Produktion;Finanzen;1060;;;;;;;
+30.06.2027;17;Energiesparende Anlagen;Idee;Frau Lotz;Lineartechnik;Produktion;Finanzen;1060;;;;;;;
+30.06.2026;18;Führungskräfteentwicklung;Idee;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;;;;;;;
+30.09.2026;18;Führungskräfteentwicklung;Planung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2026;01.02.2027;17.12.2028;01.09.2026;17.12.2028;0;2
+31.12.2026;18;Führungskräfteentwicklung;Planung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2026;01.02.2027;17.12.2028;01.09.2026;10.12.2028;-1;2
+31.03.2027;18;Führungskräfteentwicklung;Umsetzung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2026;01.02.2027;17.12.2028;01.09.2026;10.12.2028;-1;7
+30.06.2027;18;Führungskräfteentwicklung;Umsetzung;Frau Morgen;Zentral;Personal;Lernen und Entwicklung;263;01.09.2026;01.02.2027;17.12.2028;01.09.2026;10.12.2028;-1;15
+30.06.2027;19;Produktlinie AT40;Idee;Herr West;Antriebstechnik;F&E;Kunden;2300;;;;;;;

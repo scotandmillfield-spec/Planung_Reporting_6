@@ -1,13 +1,15 @@
 """Teilpläne und ihre Verknüpfung (Absatz-, Umsatz-, Ressourcen-, Personal-, Kosten-, Ergebnis-, Bilanzplan)."""
-# Muster: Boxen in zwei Spalten mit orthogonalen Pfeilen; Sammelleitung statt gekreuzter Pfeile.
+# Muster: linke Spalte mit fünf Teilplänen, Ergebnisplan in der Mitte, Bilanzplan rechts; orthogonale Pfeile ohne Knotenpunkte.
 STEM = "Interdependenzen_der_betrieblichen_Teilplaene"
 from bookfig import Fig, P, THEMES
 
 W, H = 110, 65.5
-BW, BH = 34, 7          # Boxbreite/-höhe
-XL, XR = 7, 74          # linke / rechte Spalte
-XBUS = 57.5             # Sammelleitung in der Mitte
+BW, BH = 28, 7          # Boxbreite/-höhe
+XL = 6                  # linke Spalte (Absatz- bis Kostenplan)
+XE = 43                 # Ergebnisplan (Mitte, auf Höhe des Umsatzplans)
+XB = 79                 # Bilanzplan (rechts, auf Höhe des Ressourcenplans)
 XLANE = 2.5             # Leitung links (Absatz -> Ressourcen)
+DY = 1.75               # Versatz der zwei Pfeile, die den Ressourcenplan rechts verlassen
 
 
 class B:
@@ -31,32 +33,29 @@ def build(theme):
         f.box(x, y, BW, BH, [P(txt, bold=True)], role="box", name=txt)
         return B(x, y, BW, BH)
 
-    def dot(x, y):
-        f.ellipse(x - 0.45, y - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
-
     # linke Spalte
     ABS = box(XL, 1.0, "Absatzplan")
     UMS = box(XL, 14.0, "Umsatzplan")
     RES = box(XL, 31.5, "Ressourcenplan")
     PER = box(XL, 44.5, "Personalplan")
     KOS = box(XL, 57.5, "Kostenplan")
-    # rechte Spalte, auf Höhe von Umsatz- und Ressourcenplan
-    ERG = box(XR, UMS.y, "Ergebnisplan")
-    BIL = box(XR, RES.y, "Bilanzplan")
+    # Revision DS 07.10.2026: Ergebnisplan in der Mitte, Bilanzplan weiter rechts; keine Knotenpunkte
+    ERG = box(XE, UMS.y, "Ergebnisplan")
+    BIL = box(XB, RES.y + DY, "Bilanzplan")
 
     A = f.arrow
     # wechselseitige Beziehungen
     for a, b_ in ((ABS, UMS), (RES, PER), (PER, KOS)):
         A([(a.cx, a.b), (b_.cx, b_.y)], head=True, tail=True, name=f"{a.cx}")
-    A([(ERG.cx, ERG.b), (BIL.cx, BIL.y)], head=True, tail=True, name="Ergebnis-Bilanz")
     # Absatzplan -> Ressourcenplan (linke Leitung)
     A([(ABS.x, ABS.cy), (XLANE, ABS.cy), (XLANE, RES.cy), (RES.x, RES.cy)], name="Absatz-Ressourcen")
-    # Umsatz- und Ressourcenplan -> Ergebnis- und Bilanzplan (Sammelleitung)
+    # Umsatzplan -> Ergebnisplan (kein Pfeil mehr in den Bilanzplan)
     A([(UMS.r, UMS.cy), (ERG.x, ERG.cy)], name="Umsatz-Ergebnis")
-    A([(RES.r, RES.cy), (BIL.x, BIL.cy)], name="Ressourcen-Bilanz")
-    f.line([(XBUS, UMS.cy), (XBUS, RES.cy)], color=t.arrow, lw=t.arrow_lw, name="Sammelleitung")
-    dot(XBUS, UMS.cy)
-    dot(XBUS, RES.cy)
-    # Kostenplan -> Bilanzplan
-    A([(KOS.r, KOS.cy), (BIL.cx, KOS.cy), (BIL.cx, BIL.b)], name="Kosten-Bilanz")
+    # Ressourcenplan -> Ergebnisplan und -> Bilanzplan (zwei getrennte Pfeile)
+    A([(RES.r, RES.cy - DY), (ERG.cx - 5, RES.cy - DY), (ERG.cx - 5, ERG.b)], name="Ressourcen-Ergebnis")
+    A([(RES.r, RES.cy + DY), (BIL.x, BIL.cy)], name="Ressourcen-Bilanz")
+    # Kostenplan -> Ergebnisplan (nur noch in den Ergebnisplan)
+    A([(KOS.r, KOS.cy), (ERG.cx + 5, KOS.cy), (ERG.cx + 5, ERG.b)], name="Kosten-Ergebnis")
+    # Ergebnisplan -> Bilanzplan (nur in diese Richtung)
+    A([(ERG.r, ERG.cy), (BIL.cx, ERG.cy), (BIL.cx, BIL.y)], name="Ergebnis-Bilanz")
     return f

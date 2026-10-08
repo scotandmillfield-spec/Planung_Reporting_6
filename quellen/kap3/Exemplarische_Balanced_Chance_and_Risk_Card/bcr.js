@@ -1,11 +1,12 @@
 /* Abb. 3.2 „Balanced Chance and Risk Card“ (6. Auflage) – Neuaufbau der BCR-Card der 5. Auflage.
    Struktur wie im Original: Perspektiven, strategische Ziele, Kennzahlen (Vorjahr, Forecast, Plan, Mittelfristplanung),
-   Maßnahmen, Chancen und Risiken mit Eintrittswahrscheinlichkeit und Wert. Daten: daten_bcr.py (Stand 30.06.2026,
-   Maßnahmen = Projekte der Roadmap aus Abb. 3.3/3.5). Zwei Tabellen mit gemeinsamem Zeilenraster. */
+   Maßnahmen, Chancen und Risiken mit Eintrittswahrscheinlichkeit und Wert. Daten: daten_bcr.py (Stand 30.06.2027,
+   Maßnahmen = Projekte der Roadmap aus Abb. 3.3/3.5). Zwei Tabellen mit gemeinsamem Zeilenraster.
+   Datenschnitt Geschäftsbereich (Standard „Alle“): setzt die Werte der Zeilen auf den gewählten Bereich. */
 (() => {
   "use strict";
   const { zahl, delta, prozent, wirkung, FARBE, sv, tw, NBSP } = DK;
-  const PERSP = DATA.perspektiven, STAND = DATA.stand;
+  const PERSP = DATA.perspektiven, STAND = DATA.stand, GB = DATA.bereiche;
   let zielAkt = "";
   const Z = DATA.zeilen.map((z, i) => {
     if (z[1]) zielAkt = z[1];
@@ -17,7 +18,20 @@
   const GUT = "#00806B", SCHLECHT = "#C62828";
 
   /* ---------- Zustand ---------- */
-  const S = { vgl: "pl", auswahl: null };
+  const S = { vgl: "pl", gb: "alle", auswahl: null };
+  /* Geschäftsbereich: Werte der Zeilen in place setzen (REIHEN behält die Objekte) */
+  function bereichAnwenden() {
+    Z.forEach(z => {
+      const roh = DATA.zeilen[z.i];
+      if (S.gb === "alle") {
+        Object.assign(z, { vj: roh[6], fc: roh[7], pl: roh[8], mf: roh[9], mn: roh[10], proj: roh[11], art: roh[12], wert: roh[15] });
+        return;
+      }
+      const b = roh[17][+S.gb];
+      Object.assign(z, { vj: b[0], fc: b[1], pl: b[2], mf: b[3], mn: b[5] ? roh[10] : "", proj: b[5] ? roh[11] : null,
+                         art: b[4] != null ? roh[12] : "", wert: b[4] });
+    });
+  }
   const refWert = z => (S.vgl === "pl" ? z.pl : z.vj);
   const dProz = (z, ref = refWert(z)) => (z.fc - ref) / Math.abs(ref) * 100;
   const fw = (z, v) => zahl(v, z.nk);
@@ -33,6 +47,14 @@
   DK.init({ titel: "Balanced Chance and Risk Card" });
   const bKopf = DK.box("kopf", 16, 10, 992, 46);
   DK.haarlinie(62);
+  // Datenschnitt rechts oben im Kopf (die Tabellen brauchen die volle Höhe, daher keine eigene Filterzeile)
+  const bFilter = DK.box("filter", 708, 8, 300, 28, "dk-filter");
+  bFilter.style.justifyContent = "flex-end";
+  const sel = DK.schnitt(bFilter, "Geschäftsbereich", "dropdown", { breite: 170,
+    optionen: [["alle", "Alle"], ...GB.map((g, i) => [String(i), g])], wert: S.gb,
+    onChange: w => { S.gb = w; bereichAnwenden(); zeichnen(); } });
+  sel.style.height = "26px";
+  Object.assign(sel.parentNode.style, { flexDirection: "row", alignItems: "center", gap: "8px" });
   const bZiele = DK.box("v-ziele", 16, 70, 532, 572);
   const bCR = DK.box("v-cr", 568, 70, 440, 572);
 
@@ -67,17 +89,17 @@
     return { c, r, s: c + r };
   };
   const tipKennzahl = z => [z.kz, `${PERSP[z.p]} · ${z.ziel}`, z.erkl,
-    `VJ 2025: ${fw(z, z.vj)} · FC 2026: ${fw(z, z.fc)} · PL 2026: ${fw(z, z.pl)} ${z.einh}`,
+    `VJ 2026: ${fw(z, z.vj)} · FC 2027: ${fw(z, z.fc)} · PL 2027: ${fw(z, z.pl)} ${z.einh}`,
     `ΔPL: ${delta(dProz(z, z.pl), 1, NBSP + "%")} · ΔVJ: ${delta(dProz(z, z.vj), 1, NBSP + "%")}` +
       (z.wirk ? "" : " (ohne Wertung)"),
-    `Plan 2027–2029: ${z.mf.map(v => fw(z, v)).join(" / ")} ${z.einh}`,
+    `Plan 2028–2030: ${z.mf.map(v => fw(z, v)).join(" / ")} ${z.einh}`,
     z.mn ? `Maßnahme: ${z.mn}` + (z.proj ? ` (Roadmap: ${z.proj[0]}${z.proj[1] != null ? ", " + z.proj[1] + NBSP + "% fertig" : ""})` : "") : "",
     z.art ? `${ART[z.art]}: ${z.cr}, Eintritt ${EIN[z.ein]}, ${delta(z.wert, 1)} Mio. €` : "",
     "Klick hebt hervor"];
   const tipGruppe = p => {
     const zs = Z.filter(z => z.p === p), sd = saldo(zs);
     const hinter = zs.filter(z => wirkung(dProz(z), z.wirk, 1) === "schlecht").length;
-    return [PERSP[p], `${zs.length} Kennzahlen, ${hinter} hinter ${S.vgl === "pl" ? "Plan" : "Vorjahr"}`,
+    return [PERSP[p] + (S.gb === "alle" ? "" : " · " + GB[+S.gb]), `${zs.length} Kennzahlen, ${hinter} hinter ${S.vgl === "pl" ? "Plan" : "Vorjahr"}`,
       `Chancen ${delta(sd.c, 1)} · Risiken ${delta(sd.r, 1)} · Saldo ${delta(sd.s, 1)} Mio. €`, "Klick hebt die Perspektive hervor"];
   };
 
@@ -167,10 +189,11 @@
   function zeichnen() {
     const vgl = S.vgl === "pl";
     DK.kopf(bKopf, { titel: "Balanced Chance and Risk Card",
-      untertitel: "Unternehmensleitung · Forecast (FC) und Plan (PL) 2026, Vorjahr (VJ) 2025",
-      quelle: `Quelle: Controlling, Projektroadmap · Stand ${STAND}`,
+      untertitel: `Stand: ${STAND} · Forecast (FC) und Plan (PL) 2027, Vorjahr (VJ) 2026`,
+      quelle: "",
       legende: [[GUT, "günstig bzw. Chance"], [SCHLECHT, "ungünstig bzw. Risiko"]] });
     const lg = document.getElementById("kopf-legende");
+    lg.style.marginTop = "29px";              // unter dem Datenschnitt
     const sp = DK.el("span", { id: "legende-eintritt" }, lg);
     const s = sv("svg", { width: 38, height: 10, style: "overflow:visible" }, sp);
     for (let i = 0; i < 5; i++) sv("circle", { cx: 3.5 + i * 7.5, cy: 5, r: 3, fill: i < 3 ? "#3A3F44" : "#FFFFFF", stroke: "#3A3F44", "stroke-width": 1 }, s);
@@ -193,7 +216,7 @@
     const chance = zs.filter(z => z.art === "C").sort((a, b) => b.wert - a.wert)[0];
     const top = risk || chance;
     v = DK.visual(bCR, { titel: "Maßnahmen, Chancen und Risiken", einheit: "Wert in Mio. €",
-      botschaft: vor + `Saldo ${delta(sd.s, 1)} Mio. €` + (top ? `, größtes ${risk ? "Risiko" : "Chance"}: ${top.cr} (${delta(top.wert, 1)})` : "") });
+      botschaft: vor + `${pSel == null ? "Gesamtsaldo" : "Saldo"} ${delta(sd.s, 1)} Mio. €` + (top ? `, größtes ${risk ? "Risiko" : "Chance"}: ${top.cr} (${delta(top.wert, 1)})` : "") });
     tabelleCR(v);
     // Titelzeilen beider Visuals gleich hoch (links mit Schalter), damit die Botschaften auf einer Linie stehen
     const tz = [bZiele, bCR].map(b => b.querySelector(".dk-titelzeile"));
@@ -212,7 +235,7 @@
       { nr: 3, ziel: "sp-eintritt", anker: "links", regel: "UNIFY – Semantische Notation", titel: "Chance blaugrün, Risiko rot",
         text: "Chancen sind mögliche günstige, Risiken mögliche ungünstige Abweichungen. Sie tragen dieselben Farben wie die Abweichungen und zusätzlich ein Vorzeichen, damit sie auch in Graustufen unterscheidbar sind. Das Original nutzte Blau und Rot." },
       { nr: 4, ziel: "v-cr", regel: "CONDENSE – Informationsdichte", titel: "Saldo je Perspektive",
-        text: "Die Gruppenzeile jeder Perspektive zeigt den Saldo aus Chancen und Risiken. Die Mittelfristplanung 2027–2029 steht im Tooltip statt in schwarzen Mini-Säulen ohne Werte; Vorjahr und Plan teilen sich eine Spalte (Schalter ΔPL/ΔVJ)." },
+        text: "Die Gruppenzeile jeder Perspektive zeigt den Saldo aus Chancen und Risiken. Die Mittelfristplanung 2028–2030 steht im Tooltip statt in schwarzen Mini-Säulen ohne Werte; Vorjahr und Plan teilen sich eine Spalte (Schalter ΔPL/ΔVJ)." },
       { nr: 5, ziel: "v-ziele", versatz: [-178, 0], regel: "CHECK – Visuelle Integrität", titel: "Eine Zahlenbasis, sichtbare Nulllinie",
         text: "Alle Werte kommen aus einem Datensatz, jede Kennzahl hat ihre Einheit. Im Original wich der ROI im Balken oben (10,5 %) von der Tabelle (10,1 %) ab, Einheiten waren abgeschnitten („[T€“), einzelne Werte unplausibel (Umsatz je Verkäufer −91 %)." },
       { nr: 6, ziel: "kopf-legende", anker: "links", regel: "EXPRESS – Passende Darstellung", titel: "Balken statt eingefärbter Zellen",
@@ -225,10 +248,10 @@
     nachbauIntro: "Alle Elemente sind Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Beide Tabellen haben dieselben Zeilen (Perspektive > Ziel > Kennzahl) und dieselbe Sortierung, damit sie nebeneinander zeilengleich stehen.",
     nachbau: [
       { id: "A", ziel: "kopf-titel", versatz: [26, 0], titel: "Kopfzeile und Legende", visual: "Textfeld; Formen",
-        felder: "Untertitel und Quelle als Text; Legende aus zwei Rechtecken 9 × 9 px und einem Textfeld mit ●●●○○",
+        felder: "Titel und Untertitel (mit Stand) als Text; Legende aus zwei Rechtecken 9 × 9 px und einem Textfeld mit ●●●○○",
         format: "Titel 16,5 pt fett, Untertitel 10,5 pt #4D4D4D" },
       { id: "B", ziel: "v-ziele", versatz: [-150, 0], titel: "Ziele und Kennzahlen", visual: "Matrix (Layout tabellarisch, Zwischensummen aus)",
-        felder: "Zeilen: Perspektive, Ziel, Kennzahl; Werte: FC 2026, Vergleichswert, Δ %; QuickInfos: VJ, PL, PL 2027–2029, Erläuterung",
+        felder: "Zeilen: Perspektive, Ziel, Kennzahl; Werte: FC 2027, Vergleichswert, Δ %; QuickInfos: VJ, PL, PL 2028–2030, Erläuterung",
         format: "Perspektive als Zeilenkopf mit Hintergrund #F6F6F6; Zahlenformat je Kennzahl über dynamische Formatzeichenfolge",
         hinweis: "Δ % = (FC − Vergleich) / |Vergleich|. Farbe nach Wirkung: zwei Measures „Δ günstig“ und „Δ ungünstig“ (Wert nur bei passender Wirkung, sonst BLANK()) als Datenbalken in #00806B bzw. #C62828 mit gleicher Achse." },
       { id: "C", ziel: "sp-delta", versatz: [26, -4], titel: "Schalter ΔPL/ΔVJ", visual: "Datenschnitt (Kacheln) auf einem Feldparameter",
@@ -241,19 +264,31 @@
       { id: "E", ziel: "v-cr", versatz: [0, 26], titel: "Kernaussagen", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measures: Anzahl Kennzahlen hinter Plan, größte Lücke (TOPN), Saldo und größtes Risiko",
         format: "10,5 pt, #4D4D4D" },
+      { id: "F", ziel: "filter", anker: "links", titel: "Datenschnitt Geschäftsbereich", visual: "Datenschnitt (Dropdown, Einfachauswahl)",
+        felder: "Geschäftsbereich (Werte Alle, Antriebstechnik, Lineartechnik, Service); Standardwert Alle",
+        format: "Kopfzeile des Datenschnitts links neben dem Feld, 10,5 pt",
+        hinweis: "Die Daten enthalten je Kennzahl eine Zeile „Alle“, weil sich Quoten nicht über die Bereiche summieren; Mengen, Chancen und Risiken der Bereiche ergeben in Summe den Wert „Alle“." },
     ],
     theme: DK.thema(),
     csv: { name: "bcr_card_beispieldaten.csv", text: () => {
       const d = v => (v == null ? "" : String(v).replace(".", ","));
-      const kopf = "Perspektive;Strategisches_Ziel;Kennzahl;Einheit;Wirkung;VJ_2025;FC_2026;PL_2026;PL_2027;PL_2028;PL_2029;Maßnahme;Roadmap_Status;Chance_Risiko;Art;Eintritt_1_5;Wert_MioEUR";
-      return [kopf, ...Z.map(z => [PERSP[z.p], z.ziel, z.kz, z.einh, { 1: "Anstieg günstig", "-1": "Anstieg ungünstig", 0: "neutral" }[z.wirk],
-        d(z.vj), d(z.fc), d(z.pl), ...z.mf.map(d), z.mn, z.proj ? z.proj[0] : "", z.cr, ART[z.art] || "", z.ein || "", d(z.wert)].join(";"))].join("\r\n"); } },
+      const kopf = "Geschäftsbereich;Perspektive;Strategisches_Ziel;Kennzahl;Einheit;Wirkung;VJ_2026;FC_2027;PL_2027;PL_2028;PL_2029;PL_2030;Maßnahme;Roadmap_Status;Chance_Risiko;Art;Eintritt_1_5;Wert_MioEUR";
+      const zeilen = [];
+      [["Alle", null], ...GB.map((g, i) => [g, i])].forEach(([name, gi]) => DATA.zeilen.forEach((roh, k) => {
+        const b = gi == null ? [roh[6], roh[7], roh[8], roh[9], roh[15], 1] : roh[17][gi];
+        const mn = b[5] ? roh[10] : "", cr = b[4] != null;
+        zeilen.push([name, PERSP[roh[0]], Z[k].ziel, roh[2], roh[3], { 1: "Anstieg günstig", "-1": "Anstieg ungünstig", 0: "neutral" }[roh[5]],
+          d(b[0]), d(b[1]), d(b[2]), ...b[3].map(d), mn, mn && roh[11] ? roh[11][0] : "", cr ? roh[13] : "",
+          cr ? ART[roh[12]] || "" : "", cr ? roh[14] || "" : "", d(b[4])].join(";"));
+      }));
+      return [kopf, ...zeilen].join("\r\n"); } },
     tabellen: () => [
-      { titel: "Ziele und Kennzahlen", kopf: ["Perspektive", "Kennzahl", "Einheit", "VJ 2025", "FC 2026", "PL 2026", "ΔPL %", "ΔVJ %", "PL 2027", "PL 2028", "PL 2029"],
+      { titel: "Ziele und Kennzahlen" + (S.gb === "alle" ? "" : " – " + GB[+S.gb]), kopf: ["Perspektive", "Kennzahl", "Einheit", "VJ 2026", "FC 2027", "PL 2027", "ΔPL %", "ΔVJ %", "PL 2028", "PL 2029", "PL 2030"],
         zeilen: Z.map(z => [PERSP[z.p], z.kz, z.einh, fw(z, z.vj), fw(z, z.fc), fw(z, z.pl), delta(dProz(z, z.pl), 1), delta(dProz(z, z.vj), 1), ...z.mf.map(v => fw(z, v))]) },
-      { titel: "Maßnahmen, Chancen und Risiken (Mio. €)", kopf: ["Perspektive", "Maßnahme", "Chance/Risiko", "Art", "Eintritt", "Wert"],
+      { titel: "Maßnahmen, Chancen und Risiken (Mio. €)" + (S.gb === "alle" ? "" : " – " + GB[+S.gb]), kopf: ["Perspektive", "Maßnahme", "Chance/Risiko", "Art", "Eintritt", "Wert"],
         zeilen: Z.filter(z => z.mn || z.art).map(z => [PERSP[z.p], z.mn || "–", z.cr || "–", ART[z.art] || "–", z.ein ? EIN[z.ein] : "–", z.art ? delta(z.wert, 1) : "–"])
-          .concat(PERSP.map((n, p) => ["Saldo " + n, "", "", "", "", delta(saldo(Z.filter(z => z.p === p)).s, 1)])) },
+          .concat(PERSP.map((n, p) => ["Saldo " + n, "", "", "", "", delta(saldo(Z.filter(z => z.p === p)).s, 1)]))
+          .concat([["Gesamtsaldo", "", "", "", "", delta(saldo(Z).s, 1)]]) },
     ],
   });
   zeichnen();

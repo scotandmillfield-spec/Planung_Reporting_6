@@ -1,4 +1,4 @@
-/* Abb. 3.7 „Exemplarische Prämissenplanung“ – Logik der Maske „Planungsbrief“.
+/* Abb. 3.7 „Exemplarische Prämissenplanung“ – Logik der Maske „Planungsvorgaben“.
    Der Planungsbrief wird aus den Feldern erzeugt: Budgetjahr, Teilplan, Zeitraum, Variante und Prämissen. */
 (() => {
   "use strict";
@@ -8,11 +8,13 @@
 
   /* ---------- Stammdaten ---------- */
   const PRAEMISSEN = ["Inflationsrate", "Wirtschaftswachstum", "Personalsteigerungsrate", "Umsatzwachstum"];
-  const SAETZE = { "Standard": [1.2, 2.5, 3.5, 4.5], "Variante 1": [null, null, null, null],
-                   "Variante 2": [null, null, null, null], "Variante 3": [null, null, null, null] };
-  const SPALTEN = ["Standard", "Variante 1", "Variante 2"];
-  const BUDGET = { B2027: ["das Budget 2027", "das Planjahr 2027"], F2026: ["den Forecast 2026", "das Planjahr 2026"],
-                   M2028: ["die Mittelfristplanung 2028" + NDASH + "2030", "die Planjahre 2028 bis 2030"] };
+  const SAETZE = { "Standard": [1.2, 2.5, 3.5, 4.5], "Best Case": [null, null, null, null],
+                   "Worst Case": [null, null, null, null] };
+  const SPALTEN = ["Standard", "Best Case", "Worst Case"];
+  const BUDGET = { B2028: ["das Budget 2028", "das Planjahr 2028", "Budget 2028"],
+                   F2027: ["den Forecast 2027", "das Planjahr 2027", "Forecast 2027"],
+                   M2029: ["die Mittelfristplanung 2029" + NDASH + "2031", "die Planjahre 2029 bis 2031", "Mittelfristplanung 2029" + NDASH + "2031"] };
+  const STAND = "30.06.2027";
   // Teilplan: Empfänger im Briefkopf und Anrede
   const TEILPLAENE = [
     ["Absatzplanung", "Key-Account-Manager", "Sehr geehrte(r) Key-Account-Manager(in),"],
@@ -80,7 +82,8 @@
   /* ---------- Planungsbrief aus den Feldern ---------- */
   function brief() {
     const tp = TEILPLAENE.find(t => t[0] === $("f-teilplan").value);
-    const [periode, planjahr] = BUDGET[$("f-budgetjahr").value];
+    const [periode, planjahr, kurz] = BUDGET[$("f-budgetjahr").value];
+    $("kopf-unter").textContent = `${kurz} · Stand ${STAND}`;
     const variante = $("f-variante").value, satz = SAETZE[variante];
     const zr = zeitraum();
     $("brief-kopf").textContent = "Planungsbrief für " + tp[1];
@@ -111,6 +114,23 @@
   kontakt();
   brief();
 
+  /* ---------- Klappen ohne Maßstabssprung ----------
+     Beim Zuklappen wird die Maske kürzer; maskkit skaliert sie dann neu, und der Pfeil springt weg.
+     Hier bleibt der Maßstab beim Klappen erhalten, nur der Rahmen folgt der neuen Höhe. */
+  if (!document.body.classList.contains("print")) {
+    const maske = $("praemissen"), seite = $("seite"), rahmen = seite.parentElement;
+    let alt = null;
+    const merken = e => { if (e.target.closest && e.target.closest(".mk-band")) alt = seite.style.transform; };
+    const halten = e => {
+      if (alt === null || !(e.target.closest && e.target.closest(".mk-band"))) return;
+      const s = parseFloat((/scale\(([\d.]+)\)/.exec(alt) || [0, 1])[1]);
+      seite.style.transform = alt; alt = null;
+      rahmen.style.width = maske.offsetWidth * s + "px"; rahmen.style.height = maske.offsetHeight * s + "px";
+      if (MK._ebenenNeu) MK._ebenenNeu();
+    };
+    ["click", "keydown"].forEach(t => { maske.addEventListener(t, merken, true); maske.addEventListener(t, halten); });
+  }
+
   /* ---------- Lernplattform: Erläuterungen und Gestaltung ---------- */
   MK.ebenen({
     erlaeuterungen: {
@@ -120,9 +140,9 @@
         { nr: 1, ziel: "band-allgemein", versatz: [-24, 2], titel: "Allgemeine Planungsprämissen",
           text: "Gesamtwirtschaftliche und unternehmensweite Annahmen – Inflation, Wirtschaftswachstum, Personalkostensteigerung, Umsatzwachstum – gibt das zentrale Controlling einmal vor. Alle Teilpläne rechnen damit auf derselben Grundlage." },
         { nr: 2, ziel: "f-budgetjahr", anker: "links", titel: "Planversion",
-          text: "Die Prämissen gelten für eine Planversion, hier das Budget 2027. Für Forecast und Mittelfristplanung werden eigene Prämissen gepflegt." },
+          text: "Die Prämissen gelten für eine Planversion, hier das Budget 2028. Für Forecast und Mittelfristplanung werden eigene Prämissen gepflegt." },
         { nr: 3, ziel: "sp-2", versatz: [-4, -26], titel: "Varianten für Simulationen",
-          text: "Neben dem Standard lassen sich alternative Prämissensätze hinterlegen, etwa eine vorsichtige und eine zuversichtliche Variante. Sie sind die Grundlage für Simulationen und Szenariovergleiche. Die Spaltenköpfe wählen den angezeigten Satz." },
+          text: "Neben dem Standard lassen sich alternative Prämissensätze hinterlegen, hier ein Best Case und ein Worst Case. Sie sind die Grundlage für Simulationen und Szenariovergleiche. Die Spaltenköpfe wählen den angezeigten Satz." },
         { nr: 4, ziel: "f-von", anker: "links", titel: "Teilplan, Zeitraum und Variante",
           text: "Für jeden Teilplan legt das Controlling fest, bis wann geplant wird und welcher Prämissensatz gilt. Die Termine stammen aus dem Planungskalender." },
         { nr: 5, ziel: "g-ansprech", titel: "Ansprechpartner",
@@ -140,7 +160,7 @@
       intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
       eintraege: [
         { nr: "A", ziel: "kopf", versatz: [-6, 8], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Fenster, kein Logo",
-          text: "Fensterrahmen, Menü- und Symbolleiste, Produktname und Logo, Navigationsleiste, Statusleiste und Bildlaufleisten des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen in der Kopfleiste." },
+          text: "Fensterrahmen, Menü- und Symbolleiste, Produktname und Logo, Navigationsleiste, Statusleiste und Bildlaufleisten des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen als Titel; die Titelzeile ist gestaltet wie bei den Dashboards." },
         { nr: "B", ziel: "einheit", versatz: [6, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Einheit genannt",
           text: "Die Prämissen sind Prozentwerte; „in %“ steht jetzt am Raster und im Brief. Das Original nannte keine Einheit." },
         { nr: "C", ziel: "f-email", anker: "links", versatz: [0, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
@@ -154,7 +174,7 @@
         { nr: "G", ziel: "band-teilplaene", versatz: [-24, 2], regel: "ERLERNBARKEIT", titel: "Klare Gliederung",
           text: "Zwei Abschnitte mit Band, Gruppen mit Überschrift, Beschriftungen und Felder auf gemeinsamen Achsen. Die Abschnitte lassen sich wie im Original auf- und zuklappen." },
         { nr: "H", ziel: "f-name", versatz: [-26, 2], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Keine echten Daten",
-          text: "Name, E-Mail-Adresse, Telefonnummer und Dateipfad des Originals sind durch fiktive Angaben ersetzt; das Budgetjahr 2012 wird zum Budget 2027." },
+          text: "Name, E-Mail-Adresse, Telefonnummer und Dateipfad des Originals sind durch fiktive Angaben ersetzt; das Budgetjahr 2012 wird zum Budget 2028, Stand 30.06.2027." },
       ],
     },
   });

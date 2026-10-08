@@ -14,7 +14,7 @@
  *      eintragen, speichern.
  *   2. Funktion „einrichten“ auswählen und ausführen (legt Auswahlliste, Format, das Blatt „Hinweise“ und den
  *      Zeit-Trigger an und merkt sich Passwort und Mailempfänger in den Skripteigenschaften). Mit „testmail“
- *      lässt sich die Benachrichtigung prüfen.
+ *      lässt sich die Benachrichtigung prüfen, „mailJetztSenden“ schickt anstehende Meldungen sofort.
  *   3. Bereitstellen → Neue Bereitstellung → Typ „Web-App“, Ausführen als „Ich“, Zugriff „Jeder“.
  *   4. Die Web-App-URL in werkzeug/abstimmung.json des Repositorys eintragen.
  * Nach Änderungen am Code: Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Version „Neue Version“
@@ -242,6 +242,12 @@ function benachrichtigen_(sofort) {
       '<p style="color:#5A5F64;font-size:13px">' + esc(fuss) + '</p></div>',
   });
   eigenschaften.deleteProperty('mail_warteschlange');
+}
+
+// Gesammelte Benachrichtigung sofort schicken, ohne die Ruhezeit abzuwarten (Funktion auswählen und ausführen).
+function mailJetztSenden() {
+  rueckmeldungenUebernehmen();
+  benachrichtigen_(true);
 }
 
 // Zum Ausprobieren: schickt eine Beispielmail an MAIL_AN (Funktion auswählen und ausführen).

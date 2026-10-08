@@ -1,6 +1,6 @@
 """Abb. 2.2 – Zeitdimensionen der Unternehmensführung."""
 # Muster: Stapel von Planungsebenen im Rahmen „Unternehmenskultur“, Zeithorizont als rechte Spalte,
-# Vorgaben links als Sammelleitung (top-down), Rückkopplung rechts (bottom-up).
+# Vorgaben links als Sammelleitung ohne Knotenpunkte (top-down), Rückkopplung rechts (bottom-up).
 STEM = "Zeitdimensionen_der_Unternehmensfuehrung"
 from bookfig import Fig, P
 
@@ -68,7 +68,5 @@ def build(theme):
     g = ys[0]
     f.line([(g.x, g.cy), (xl, g.cy), (xl, ys[4].cy)], color=t.arrow, lw=t.arrow_lw)
     for b in ys[1:5]:
-        f.arrow([(xl, b.cy), (b.x, b.cy)])
-        if b is not ys[4]:
-            f.ellipse(xl - 0.45, b.cy - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
+        f.arrow([(xl, b.cy), (b.x, b.cy)])       # Abzweige ohne Knotenpunkte (Revision DS 07.10.2026)
     return f

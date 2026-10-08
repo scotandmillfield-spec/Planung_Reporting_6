@@ -5,20 +5,31 @@
  *   GET   liefert Status und Kommentare aller Abbildungen als JSON (für index.html)
  *   POST  setzt Status, hängt einen Kommentar an und vermerkt Name und Datum (mit Passwort)
  *   Zeit-Trigger (alle 5 Minuten): übernimmt die Rückmeldungen der Revisionen aus dem Repository
- *   (werkzeug/abstimmung/rueckmeldungen.json) – Status, Kommentar, „Geändert von: Claude“.
+ *   (werkzeug/abstimmung/rueckmeldungen.json) – Status, Kommentar, „Geändert von: Claude“ – und verschickt
+ *   die Benachrichtigung per Mail, wenn eine Abbildung auf „zur Prüfung“ oder „Nächste Version“ gesetzt wurde
+ *   (gesammelt: eine Mail, sobald 15 Minuten lang nichts Neues dazugekommen ist).
  *
  * Einrichtung (einmalig, Anleitung auch im README des Repositorys):
- *   1. In der Tabelle: Erweiterungen → Apps Script, diesen Code einfügen, PASSWORT unten ändern, speichern.
+ *   1. In der Tabelle: Erweiterungen → Apps Script, diesen Code einfügen, PASSWORT und MAIL_AN unten
+ *      eintragen, speichern.
  *   2. Funktion „einrichten“ auswählen und ausführen (legt Auswahlliste, Format, das Blatt „Hinweise“ und den
- *      Zeit-Trigger an und merkt sich das Passwort in den Skripteigenschaften).
+ *      Zeit-Trigger an und merkt sich Passwort und Mailempfänger in den Skripteigenschaften). Mit „testmail“
+ *      lässt sich die Benachrichtigung prüfen.
  *   3. Bereitstellen → Neue Bereitstellung → Typ „Web-App“, Ausführen als „Ich“, Zugriff „Jeder“.
  *   4. Die Web-App-URL in werkzeug/abstimmung.json des Repositorys eintragen.
  * Nach Änderungen am Code: Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Version „Neue Version“
- * (so bleibt die URL gleich). Das Passwort muss dafür nicht erneut eingetragen werden: Steht unten
- * 'bitte-aendern', gilt das zuletzt mit „einrichten“ gespeicherte.
+ * (so bleibt die URL gleich). Passwort und Mailempfänger müssen dafür nicht erneut eingetragen werden: Steht
+ * unten 'bitte-aendern' bzw. '', gilt das zuletzt mit „einrichten“ gespeicherte.
  */
 
 const PASSWORT = 'bitte-aendern';
+// Benachrichtigung bei neuer Fassung („zur Prüfung“, „Nächste Version“): Empfänger, mehrere durch Komma getrennt.
+// Leer lassen = keine Mails. Wird mit „einrichten“ gespeichert; zum Abschalten MAIL_AUS = true setzen und einrichten.
+const MAIL_AN = '';
+const MAIL_AUS = false;
+const MAIL_STATUS = ['zur Prüfung', 'Nächste Version'];
+const MAIL_RUHE_MIN = 15;                 // Minuten ohne neue Fassung, bevor die gesammelte Mail rausgeht
+const INVENTUR = 'https://scotandmillfield-spec.github.io/Planung_Reporting_6/';
 const RUECKMELDUNGEN = 'https://raw.githubusercontent.com/scotandmillfield-spec/Planung_Reporting_6/main/werkzeug/abstimmung/rueckmeldungen.json';
 const BLATT = 'Status';
 const STATUSWERTE = ['offen', 'zur Prüfung', 'Revision', 'Nächste Version', 'Klärung nötig', 'freigegeben',
@@ -57,8 +68,10 @@ function doPost(e) {
     const i = schluessel.indexOf(String(d.schluessel));
     if (i < 0) return antwort_({ ok: false, fehler: 'Abbildung nicht in der Tabelle' });
     const zeile = i + 2;
+    const vorher = String(blatt.getRange(zeile, SP.status).getValue() || '');
     if (d.status) blatt.getRange(zeile, SP.status).setValue(d.status);
     const text = bereinigen_(d.kommentar).replace(/\s+/g, ' ').slice(0, 2000);
+    if (d.status && d.status !== vorher) vormerken_(blatt, zeile, d.status, text, autor);
     if (text) {
       const zelle = blatt.getRange(zeile, SP.kommentare);
       const alt = String(zelle.getValue() || '');
@@ -138,8 +151,10 @@ function rueckmeldungenUebernehmen() {
         const jetzt = String(statusZelle.getValue() || '');
         let text = bereinigen_(r.kommentar).replace(/\s+/g, ' ').slice(0, 2000);
         if (r.status && STATUSWERTE.indexOf(r.status) >= 0) {
-          if (!r.von || jetzt === r.von) statusZelle.setValue(r.status);
-          else text += ' (Status nicht geändert, stand auf „' + jetzt + '“)';
+          if (!r.von || jetzt === r.von) {
+            statusZelle.setValue(r.status);
+            if (r.status !== jetzt) vormerken_(blatt, zeile, r.status, text, 'Claude');
+          } else text += ' (Status nicht geändert, stand auf „' + jetzt + '“)';
         }
         if (text) {
           const zelle = blatt.getRange(zeile, SP.kommentare);
@@ -159,17 +174,91 @@ function rueckmeldungenUebernehmen() {
   merken();
 }
 
+// Zeit-Trigger alle 5 Minuten: erst Rückmeldungen übernehmen, dann gesammelte Benachrichtigung verschicken
+function regelmaessig() {
+  try { rueckmeldungenUebernehmen(); } catch (err) { console.error(err); }
+  try { benachrichtigen_(false); } catch (err) { console.error(err); }
+}
+
 function automatikEinrichten_() {
   ScriptApp.getProjectTriggers()
-    .filter(t => t.getHandlerFunction() === 'rueckmeldungenUebernehmen')
+    .filter(t => ['rueckmeldungenUebernehmen', 'regelmaessig'].indexOf(t.getHandlerFunction()) >= 0)
     .forEach(t => ScriptApp.deleteTrigger(t));
-  ScriptApp.newTrigger('rueckmeldungenUebernehmen').timeBased().everyMinutes(5).create();
+  ScriptApp.newTrigger('regelmaessig').timeBased().everyMinutes(5).create();
+}
+
+/* ---------------- Benachrichtigung per Mail ---------------- */
+
+function mailAn_() {
+  if (MAIL_AUS) return '';
+  return (MAIL_AN || PropertiesService.getScriptProperties().getProperty('MAIL_AN') || '').trim();
+}
+
+// Neue Fassung in die Warteschlange (Skripteigenschaft) legen; je Abbildung zählt der letzte Stand.
+function vormerken_(blatt, zeile, status, text, wer) {
+  if (MAIL_STATUS.indexOf(status) < 0 || !mailAn_()) return;
+  const kopf = blatt.getRange(1, 1, 1, blatt.getLastColumn()).getValues()[0].map(String);
+  const werte = blatt.getRange(zeile, 1, 1, blatt.getLastColumn()).getValues()[0];
+  const feld = name => { const i = kopf.indexOf(name); return i >= 0 ? String(werte[i] || '') : ''; };
+  const eigenschaften = PropertiesService.getScriptProperties();
+  const liste = JSON.parse(eigenschaften.getProperty('mail_warteschlange') || '[]')
+    .filter(x => x.schluessel !== String(werte[SP.schluessel - 1]));
+  liste.push({ schluessel: String(werte[SP.schluessel - 1]), abbildung: feld('Abbildung'), titel: feld('Titel'),
+               status: status, text: String(text || '').slice(0, 600), wer: wer, zeit: Date.now() });
+  eigenschaften.setProperty('mail_warteschlange', JSON.stringify(liste.slice(-60)));
+}
+
+// Gesammelte Mail verschicken, sobald MAIL_RUHE_MIN Minuten lang nichts Neues dazugekommen ist (sofort = true: gleich).
+function benachrichtigen_(sofort) {
+  const an = mailAn_();
+  const eigenschaften = PropertiesService.getScriptProperties();
+  const liste = JSON.parse(eigenschaften.getProperty('mail_warteschlange') || '[]');
+  if (!liste.length) return;
+  if (!an) { eigenschaften.deleteProperty('mail_warteschlange'); return; }
+  const juengste = Math.max.apply(null, liste.map(x => x.zeit || 0));
+  if (!sofort && Date.now() - juengste < MAIL_RUHE_MIN * 60000) return;
+  if (MailApp.getRemainingDailyQuota() < 1) return;
+
+  const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  liste.sort((a, b) => String(a.abbildung).localeCompare(String(b.abbildung), 'de', { numeric: true }));
+  const betreff = liste.length === 1
+    ? `${liste[0].abbildung || liste[0].schluessel}: ${liste[0].status === 'Nächste Version' ? 'überarbeitete' : 'neue'} Fassung zur Durchsicht`
+    : `${liste.length} Abbildungen zur Durchsicht`;
+  const zeilenText = liste.map(x => `- ${x.abbildung || x.schluessel} ${x.titel} – ${x.status}` +
+    (x.text ? `\n  ${x.wer}: ${x.text}` : '') + `\n  ${INVENTUR}#${x.schluessel}`);
+  const zeilenHtml = liste.map(x => `<li style="margin:0 0 10px"><a href="${INVENTUR}#${encodeURIComponent(x.schluessel)}">` +
+    `<b>${esc(x.abbildung || x.schluessel)}</b> ${esc(x.titel)}</a> – ${esc(x.status)}` +
+    (x.text ? `<br><span style="color:#5A5F64">${esc(x.wer)}: ${esc(x.text)}</span>` : '') + '</li>');
+  const fuss = 'Durchsicht und Kommentare in der Inventur (Bearbeiten) oder in der Tabelle. ' +
+    'Änderungswünsche als Kommentar schreiben und den Status auf „Revision“ setzen.';
+  MailApp.sendEmail({
+    to: an,
+    subject: '[Abbildungsinventur 6. Auflage] ' + betreff,
+    name: 'Abbildungsinventur 6. Auflage',
+    body: 'Neue Fassungen in der Abbildungsinventur:\n\n' + zeilenText.join('\n\n') + '\n\n' + fuss + '\n' + INVENTUR,
+    htmlBody: '<div style="font-family:Arial,sans-serif;font-size:14px;color:#1A1A1A">' +
+      '<p>Neue Fassungen in der <a href="' + INVENTUR + '">Abbildungsinventur der 6. Auflage</a>:</p>' +
+      '<ul style="padding-left:18px">' + zeilenHtml.join('') + '</ul>' +
+      '<p style="color:#5A5F64;font-size:13px">' + esc(fuss) + '</p></div>',
+  });
+  eigenschaften.deleteProperty('mail_warteschlange');
+}
+
+// Zum Ausprobieren: schickt eine Beispielmail an MAIL_AN (Funktion auswählen und ausführen).
+function testmail() {
+  const an = mailAn_();
+  if (!an) throw new Error('MAIL_AN ist leer – Empfänger oben eintragen und „einrichten“ ausführen.');
+  MailApp.sendEmail({ to: an, subject: '[Abbildungsinventur 6. Auflage] Test der Benachrichtigung',
+    name: 'Abbildungsinventur 6. Auflage',
+    body: 'Die Benachrichtigung ist eingerichtet. Neue Fassungen kommen gesammelt, sobald ' + MAIL_RUHE_MIN +
+          ' Minuten lang nichts Neues dazugekommen ist.\n' + INVENTUR });
 }
 
 /* ---------------- Einrichtung ---------------- */
 
 function einrichten() {
   if (PASSWORT !== 'bitte-aendern') PropertiesService.getScriptProperties().setProperty('PASSWORT', PASSWORT);
+  if (MAIL_AN) PropertiesService.getScriptProperties().setProperty('MAIL_AN', MAIL_AN.trim());
   const ss = SpreadsheetApp.getActive();
   const blatt = blatt_();
   if (blatt.getName() !== BLATT) blatt.setName(BLATT);
@@ -203,7 +292,7 @@ function einrichten() {
 
   hinweiseAnlegen_(ss);
   automatikEinrichten_();
-  rueckmeldungenUebernehmen();
+  regelmaessig();
 }
 
 function hinweiseAnlegen_(ss) {
@@ -220,6 +309,8 @@ function hinweiseAnlegen_(ss) {
     ['freigegeben', 'fertig für das Manuskript, noch nicht im LaTeX-Dokument'],
     ['Overleaf überführt', 'produktiv im LaTeX-Dokument in Overleaf eingebunden – Endzustand'],
     ['entfällt', 'wird in der 6. Auflage nicht mehr verwendet'],
+    ['', ''],
+    ['Benachrichtigung', 'Wechselt eine Abbildung auf „zur Prüfung“ oder „Nächste Version“ (über die Inventur oder durch Claude), geht eine gesammelte Mail an die in Apps Script eingetragenen Empfänger – sobald 15 Minuten lang nichts Neues dazugekommen ist. Änderungen direkt in der Tabelle lösen keine Mail aus.'],
     ['', ''],
     ['Kommentare', 'je Hinweis eine neue Zeile in der Zelle, beginnend mit Datum und Kürzel, z. B. „06.10.2026 MD: Achsenbeschriftung kürzen“'],
     ['Schlüssel', 'verbindet die Zeile mit der Abbildung in der Inventur; nicht ändern'],

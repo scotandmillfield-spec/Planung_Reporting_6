@@ -519,6 +519,19 @@ a{color:inherit}
 .kopf{max-width:1240px;margin:0 auto;padding:26px 20px 6px}
 h1{font-size:25px;margin:0 0 2px}
 .unter{color:var(--muted);margin:0 0 16px}
+.fortschritt{margin:4px 0 14px}
+.balken{display:flex;height:26px;border-radius:4px;overflow:hidden;background:var(--flaeche)}
+.balken button{appearance:none;border:0;padding:0;margin:0;font:inherit;box-sizing:border-box;cursor:pointer;height:100%;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:bold;white-space:nowrap;overflow:hidden;border-right:1px solid #fff}
+.balken button:last-child{border-right:none}
+.balken button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--text)}
+.balken-legende{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:6px;font-size:13px;color:var(--muted)}
+.balken-legende i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.balken-legende b{color:var(--text);font-weight:normal}
+.balken-legende .summe{margin-left:auto;color:var(--text);font-weight:bold}
+.bf-overleaf{background:#00806B;color:#fff}.bf-freigegeben{background:#7FBFB5;color:#1A1A1A}
+.bf-version{background:#6E747A;color:#fff}.bf-pruefung{background:#3A3F44;color:#fff}
+.bf-revision{background:#C62828;color:#fff}.bf-klaerung{background:#EBA7A7;color:#1A1A1A}
+.bf-offen{background:#E3E3E3;color:#1A1A1A}
 .zahlen{display:flex;flex-wrap:wrap;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);margin:0 0 14px}
 .zahlen button{all:unset;cursor:pointer;flex:1 1 120px;padding:10px 14px;border-left:1px solid var(--linie)}
 .zahlen button:first-child{border-left:none;padding-left:0}
@@ -654,6 +667,23 @@ function zaehlen(){
     el('td',String(Object.values(z2).reduce((a,b)=>a+b,0)))); t.appendChild(tr);}
   const tr=el('tr'); tr.append(el('td','Gesamt','fett'),...sts.map(s=>el('td',String(ges[s]),'fett')),el('td',String(summe),'fett')); t.appendChild(tr);
   const ziel=$('#kapiteltabelle'); ziel.textContent=''; ziel.appendChild(t);
+  balken(ges);
+}
+// ---------- Gestapelter Statusbalken (0–100 %, ohne „entfällt“ und Hinweise) ----------
+const BALKEN=['overleaf','freigegeben','version','pruefung','revision','klaerung','offen'];
+const prozent=p=>String(p>=10||p===0?Math.round(p):Math.round(p*10)/10).replace('.',',');
+function balken(ges){
+  const basis=BALKEN.reduce((a,s)=>a+(ges[s]||0),0), bal=$('#statusbalken'), leg=$('#balken-legende');
+  bal.textContent=''; leg.textContent=''; if(!basis) return;
+  for(const s of BALKEN){const n=ges[s]||0; if(!n) continue; const p=n/basis*100;
+    const b=el('button',p>=6?prozent(p)+' %':'','bf-'+s); b.style.width=p+'%'; b.dataset.status=s;
+    b.title=STATUSTEXT[s]+': '+n+' von '+basis+' ('+prozent(p)+' %)'; b.setAttribute('aria-label',b.title);
+    b.setAttribute('aria-pressed',String(stand.status===s));
+    b.addEventListener('click',()=>{stand.status=(stand.status===s)?'':s; $('#f-status').value=stand.status; filtern();});
+    bal.appendChild(b);
+    const it=el('span'); it.append(el('i',null,'bf-'+s),el('b',STATUSTEXT[s]),' '+n+' · '+prozent(p)+' %'); leg.appendChild(it);}
+  const fertig=(ges.overleaf||0)+(ges.freigegeben||0);
+  leg.appendChild(el('span','fertig '+prozent(fertig/basis*100)+' %'+(ges.entfaellt?' · ohne '+ges.entfaellt+' entfällt':''),'summe'));
 }
 // ---------- Filter ----------
 function filtern(){
@@ -668,7 +698,7 @@ function filtern(){
   for(const s of $$('section.kapitel-block')) s.hidden=!$$('.karte',s).some(k=>!k.hidden);
   $('#anzahl').textContent=n+' von '+karten.length+' angezeigt';
   $('.leerhinweis').style.display=n?'none':'block';
-  for(const b of $$('.zahlen button')) b.setAttribute('aria-pressed',String(b.dataset.status===stand.status&&!!stand.status));
+  for(const b of $$('.zahlen button, .balken button')) b.setAttribute('aria-pressed',String(b.dataset.status===stand.status&&!!stand.status));
 }
 for(const b of $$('.kapitel button')) b.addEventListener('click',()=>{
   stand.kap=b.dataset.kap; for(const x of $$('.kapitel button')) x.setAttribute('aria-pressed',String(x===b)); filtern();});
@@ -794,6 +824,8 @@ def seite(liste):
         "<div class='kopf'><h1>Abbildungsinventur 6. Auflage</h1>",
         "<p class='unter'>Planung und Reporting im BI-gestützten Controlling · alle Abbildungen und Tabellen der "
         f"Abbildungssammlung zur 5. Auflage (ohne Kap. 3.9) · Stand {heute}</p>",
+        "<div class='fortschritt'><div class='balken' id='statusbalken' role='group' aria-label='Anteile je Status'></div>"
+        "<div class='balken-legende' id='balken-legende'></div></div>",
         "<div class='zahlen' id='zahlen'></div>",
         f"<p class='abst-info' id='abst-info'><span><span class='punkt'></span><span id='abst-stand'>Abstimmung wird geladen …</span>"
         f"{tabelle}</span><button type='button' class='kn' id='abst-login'>Bearbeiten</button></p>",

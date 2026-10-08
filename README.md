@@ -59,12 +59,14 @@ Status und Kommentare je Abbildung liegen in der Google-Tabelle „Abbildungsinv
 
 **Status:** *offen* → *zur Prüfung* → bei Änderungswünschen *Revision* → *Nächste Version* (beliebig oft) → *freigegeben* (fertig für das Manuskript) → *Overleaf überführt* (produktiv im LaTeX-Dokument eingebunden, Endzustand). Daneben *Klärung nötig* (inhaltliche Frage offen; Antwort als Kommentar, dann wieder *Revision*) und *entfällt*. Die früheren Werte *in Arbeit* und *Änderung nötig* stellt `einrichten` auf *offen* bzw. *Revision* um.
 
+**Benachrichtigung per Mail:** Wechselt eine Abbildung über die Inventur oder durch eine Rückmeldung von Claude auf *zur Prüfung* oder *Nächste Version*, verschickt die Tabelle eine gesammelte Mail mit Links auf die Abbildungen in der Inventur – sobald 15 Minuten lang nichts Neues dazugekommen ist. Empfänger in `Code.gs` unter `MAIL_AN` eintragen (mehrere durch Komma) und `einrichten` ausführen; die Adresse wird in den Skripteigenschaften gespeichert und steht nicht im Repository. `testmail` schickt eine Probe. Änderungen direkt in der Tabelle lösen keine Mail aus.
+
 **Revisionen:** Änderungswunsch als Kommentar schreiben und den Status auf *Revision* setzen. Claude arbeitet die Revisionen mit dem Skill `sechste-auflage-revision` ab:
 
 1. Tabelle über den Google-Drive-Connector als CSV holen, `python3 werkzeug/revision.py lesen` listet die Aufträge (alle Kommentare seit der letzten Rückmeldung von Claude) mit Art, Quelle und zuständigem Skill.
 2. Quelle ändern und `python3 werkzeug/bauen.py <Nr>` – baut nach Art (Diagramm, Dashboard, Maske) in `/tmp/bauen/<Datei>/`, prüft, übernimmt die Lieferdateien nach `abbildungen/kapN/` und erzeugt Vorschau und Inventur neu; dort liegt auch ein Vergleichsblatt vorher/nachher.
 3. `python3 werkzeug/revision.py melden <Nr> --umsetzung "…"` schreibt die Rückmeldung nach `werkzeug/abstimmung/rueckmeldungen.json` und den Vorgang in `status.json` („Revisionen“ in der Inventur). Bei einer Rückfrage `--status "Klärung nötig"`.
-4. Committen und pushen. Ein Zeit-Trigger der Tabelle (`rueckmeldungenUebernehmen`, alle 5 Minuten, eingerichtet von `einrichten`) holt die Datei von GitHub, hängt „TT.MM.JJJJ Claude: …“ an die Kommentare und setzt den Status auf *Nächste Version* – nur wenn er noch auf *Revision* steht.
+4. Committen und pushen. Ein Zeit-Trigger der Tabelle (`regelmaessig` → `rueckmeldungenUebernehmen`, alle 5 Minuten, eingerichtet von `einrichten`) holt die Datei von GitHub, hängt „TT.MM.JJJJ Claude: …“ an die Kommentare und setzt den Status auf *Nächste Version* – nur wenn er noch auf *Revision* steht.
 
 Die Shell der Claude-Umgebung erreicht Google nicht; deshalb liest Claude über den Connector und schreibt über das Repository zurück. Ein Passwort braucht Claude dafür nicht.
 

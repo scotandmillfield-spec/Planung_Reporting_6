@@ -23,7 +23,7 @@
  */
 
 const PASSWORT = 'bitte-aendern';
-// Benachrichtigung bei neuer Fassung („zur Prüfung“, „Nächste Version“): Empfänger, mehrere durch Komma getrennt.
+// Benachrichtigung bei neuer Fassung („zur Prüfung“, „Nächste Version“): Empfänger, mehrere durch Komma oder Semikolon.
 // Leer lassen = keine Mails. Wird mit „einrichten“ gespeichert; zum Abschalten MAIL_AUS = true setzen und einrichten.
 const MAIL_AN = '';
 const MAIL_AUS = false;
@@ -189,9 +189,14 @@ function automatikEinrichten_() {
 
 /* ---------------- Benachrichtigung per Mail ---------------- */
 
+// Empfängerliste: Komma oder Semikolon als Trenner, Leerzeichen egal
+function mailListe_(s) {
+  return String(s || '').split(/[;,]/).map(x => x.trim()).filter(Boolean).join(',');
+}
+
 function mailAn_() {
   if (MAIL_AUS) return '';
-  return (MAIL_AN || PropertiesService.getScriptProperties().getProperty('MAIL_AN') || '').trim();
+  return mailListe_(MAIL_AN || PropertiesService.getScriptProperties().getProperty('MAIL_AN'));
 }
 
 // Neue Fassung in die Warteschlange (Skripteigenschaft) legen; je Abbildung zählt der letzte Stand.
@@ -264,7 +269,7 @@ function testmail() {
 
 function einrichten() {
   if (PASSWORT !== 'bitte-aendern') PropertiesService.getScriptProperties().setProperty('PASSWORT', PASSWORT);
-  if (MAIL_AN) PropertiesService.getScriptProperties().setProperty('MAIL_AN', MAIL_AN.trim());
+  if (MAIL_AN) PropertiesService.getScriptProperties().setProperty('MAIL_AN', mailListe_(MAIL_AN));
   const ss = SpreadsheetApp.getActive();
   const blatt = blatt_();
   if (blatt.getName() !== BLATT) blatt.setName(BLATT);

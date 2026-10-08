@@ -227,7 +227,7 @@ def befehl_melden(a):
     r = next((x for x in daten["auftraege"] if a.schluessel in (x["schluessel"], x.get("nr"), x["abbildung"])), None)
     if not r:
         sys.exit(f"{a.schluessel} steht nicht in {AUFTRAEGE} – zuerst „revision.py lesen“.")
-    if a.status not in ("Nächste Version", "Klärung nötig", "zur Prüfung", "in Arbeit"):
+    if a.status not in ("Nächste Version", "Klärung nötig", "zur Prüfung"):
         sys.exit(f"Status „{a.status}“ ist für eine Rückmeldung nicht vorgesehen.")
     heute = datetime.date.today()
     text = " ".join(a.umsetzung.split())

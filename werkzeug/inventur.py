@@ -50,15 +50,16 @@ STATUS = OrderedDict([
 # Abstimmungsstatus (Google-Tabelle); Schlüssel für CSS/Filter, Text wie in der Tabelle
 ABSTIMMUNG = OrderedDict([
     ("offen", "offen"),
-    ("arbeit", "in Arbeit"),
     ("pruefung", "zur Prüfung"),
     ("revision", "Revision"),
     ("version", "Nächste Version"),
-    ("aenderung", "Änderung nötig"),
     ("klaerung", "Klärung nötig"),
     ("freigegeben", "freigegeben"),
+    ("overleaf", "Overleaf überführt"),
     ("entfaellt", "entfällt"),
 ])
+# frühere Statuswerte der Tabelle (bis zur Umstellung durch einrichten() in Code.gs)
+ABSTIMMUNG_ALT = {"in Arbeit": "offen", "Änderung nötig": "revision"}
 # Anfangsstatus aus dem Stand der Umsetzung (gilt, solange die Tabelle nicht erreichbar ist)
 START = {"pruefung": "pruefung", "latex": "pruefung", "freigegeben": "freigegeben", "klaerung": "klaerung",
          "entfaellt": "entfaellt", "hinweis": "hinweis"}
@@ -553,13 +554,12 @@ h2.kap span{color:var(--muted);font-weight:normal;font-size:15px}
 .meta{color:var(--muted);font-size:13px;margin-left:auto}
 .st{font-size:12px;padding:2px 8px;border-radius:10px;border:1px solid var(--ac);white-space:nowrap}
 .st-offen{border-color:#9A9A9A;color:var(--muted)}
-.st-arbeit{color:var(--ac)}
 .st-pruefung{background:var(--ac);color:#fff}
 .st-revision{border-color:var(--rot);color:var(--rot);font-weight:bold}
 .st-version{background:#5E646A;border-color:#5E646A;color:#fff}
-.st-aenderung{border-color:var(--rot);color:var(--rot);font-weight:bold}
 .st-klaerung{background:var(--rot);border-color:var(--rot);color:#fff}
-.st-freigegeben{background:var(--gut);border-color:var(--gut);color:#fff}
+.st-freigegeben{border-color:var(--gut);color:var(--gut);font-weight:bold}
+.st-overleaf{background:var(--gut);border-color:var(--gut);color:#fff}
 .st-entfaellt{border-color:var(--linie);color:var(--muted);text-decoration:line-through}
 .st-hinweis{border-color:var(--linie);color:var(--muted);font-style:italic}
 h3.cap{font-size:15px;margin:2px 0 4px;line-height:1.35}
@@ -635,7 +635,7 @@ footer{max-width:1240px;margin:0 auto;padding:0 20px 40px;color:var(--muted);fon
 JS = r"""
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const KONFIG=__KONFIG__, STATUSTEXT=__STATUS__;
-const TEXT2KEY=Object.fromEntries(Object.entries(STATUSTEXT).map(([k,v])=>[v,k]));
+const TEXT2KEY=Object.assign(Object.fromEntries(Object.entries(STATUSTEXT).map(([k,v])=>[v,k])),__STATUS_ALT__);
 const karten=$$('.karte'), stand={kap:'alle',status:'',art:'',q:'',offen:false};
 function el(tag,text,cls){const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;}
 // ---------- Kennzahlen und Übersicht aus den aktuellen Status der Karten ----------
@@ -711,7 +711,7 @@ function eintragZeigen(id,v){
     if(m){li.append(el('span',m[1]+' ','wer'),m[2]);} else li.textContent=zeile;
     ul.appendChild(li);}
   $('.abst-zuletzt',k).textContent=(v.von||v.am)?'· zuletzt geändert: '+[v.von,v.am].filter(Boolean).join(', '):'';
-  k.dataset.offen=(k.dataset.offenFix==='1'||key==='aenderung'||key==='revision'||key==='klaerung')?'1':'0';
+  k.dataset.offen=(k.dataset.offenFix==='1'||key==='revision'||key==='klaerung')?'1':'0';
   k.dataset.sucheAbst=String(v.kommentare||'').toLowerCase();
 }
 async function laden(){
@@ -785,6 +785,7 @@ def seite(liste):
     tabelle = (f" · <a href='{e(konfig['tabelle'])}' target='_blank' rel='noopener'>Tabelle öffnen</a>"
                if konfig.get("tabelle") else "")
     js = JS.replace("__KONFIG__", json.dumps({"webapp": konfig.get("webapp", "")}, ensure_ascii=False)) \
+           .replace("__STATUS_ALT__", json.dumps(ABSTIMMUNG_ALT, ensure_ascii=False)) \
            .replace("__STATUS__", json.dumps(ABSTIMMUNG, ensure_ascii=False))
     teile = [
         "<!DOCTYPE html><html lang='de'><head><meta charset='utf-8'>"
@@ -814,6 +815,8 @@ def seite(liste):
         "<li>Änderungswünsche: Wunsch als Kommentar schreiben und den Status auf „Revision“ setzen. Claude setzt ihn "
         "um, die neue Fassung erscheint hier mit dem Vorgang unter „Revisionen“, der Status wechselt auf "
         "„Nächste Version“. Bei einer Rückfrage steht er auf „Klärung nötig“.</li>"
+        "<li>„freigegeben“ heißt fertig für das Manuskript, „Overleaf überführt“ heißt produktiv im LaTeX-Dokument "
+        "eingebunden – das ist der Endzustand.</li>"
         "<li>Direktlink auf eine Abbildung: Nummer anklicken, z. B. <code>index.html#abb-3-5</code>.</li></ul></details>",
         "</div>",
         "<div class='leiste'><div class='in'>"

@@ -21,8 +21,10 @@
 const PASSWORT = 'bitte-aendern';
 const RUECKMELDUNGEN = 'https://raw.githubusercontent.com/scotandmillfield-spec/Planung_Reporting_6/main/werkzeug/abstimmung/rueckmeldungen.json';
 const BLATT = 'Status';
-const STATUSWERTE = ['offen', 'in Arbeit', 'zur Prüfung', 'Revision', 'Nächste Version', 'Änderung nötig', 'Klärung nötig',
-                     'freigegeben', 'entfällt'];
+const STATUSWERTE = ['offen', 'zur Prüfung', 'Revision', 'Nächste Version', 'Klärung nötig', 'freigegeben',
+                     'Overleaf überführt', 'entfällt'];
+// frühere Statuswerte → neue (einrichten() stellt vorhandene Zeilen um)
+const UMSTELLUNG = { 'in Arbeit': 'offen', 'Änderung nötig': 'Revision' };
 const SP = { schluessel: 1, status: 6, kommentare: 7, von: 8, am: 9 };   // Spalten, 1-basiert
 const ZONE = 'Europe/Berlin';
 
@@ -173,6 +175,12 @@ function einrichten() {
   if (blatt.getName() !== BLATT) blatt.setName(BLATT);
   const n = Math.max(1, blatt.getLastRow() - 1);
 
+  // frühere Statuswerte umstellen, bevor die Auswahlliste sie sperrt
+  const stWerte = blatt.getRange(2, SP.status, n, 1).getValues();
+  let umgestellt = false;
+  stWerte.forEach(z => { const neu = UMSTELLUNG[String(z[0]).trim()]; if (neu) { z[0] = neu; umgestellt = true; } });
+  if (umgestellt) blatt.getRange(2, SP.status, n, 1).setValues(stWerte);
+
   blatt.setFrozenRows(1);
   blatt.setFrozenColumns(3);
   blatt.getRange(1, 1, n + 1, SP.am).setFontFamily('Arial').setVerticalAlignment('top');
@@ -189,7 +197,7 @@ function einrichten() {
   const regel = (text, farbe) => SpreadsheetApp.newConditionalFormatRule()
     .whenTextEqualTo(text).setFontColor(farbe).setBold(true).setRanges([statusBereich]).build();
   blatt.setConditionalFormatRules([
-    regel('freigegeben', '#00806B'), regel('Revision', '#C62828'), regel('Änderung nötig', '#C62828'),
+    regel('freigegeben', '#00806B'), regel('Overleaf überführt', '#00806B'), regel('Revision', '#C62828'),
     regel('Klärung nötig', '#C62828')]);
   if (!blatt.getFilter()) blatt.getRange(1, 1, n + 1, SP.am).createFilter();
 
@@ -204,14 +212,13 @@ function hinweiseAnlegen_(ss) {
   h.clear();
   const zeilen = [
     ['Statuswerte', ''],
-    ['offen', 'noch nicht bearbeitet'],
-    ['in Arbeit', 'wird gerade neu gezeichnet oder gesetzt'],
-    ['zur Prüfung', 'neue Fassung liegt vor und wartet auf Durchsicht'],
-    ['Revision', 'Änderungswunsch steht im Kommentar und wird in die nächste Fassung eingearbeitet'],
-    ['Nächste Version', 'überarbeitete Fassung nach einer Revision liegt vor und wartet auf Durchsicht'],
-    ['Änderung nötig', 'Durchsicht abgeschlossen, Kommentare umsetzen'],
-    ['Klärung nötig', 'inhaltliche Frage offen, vor der Umsetzung klären'],
-    ['freigegeben', 'fertig für das Manuskript'],
+    ['offen', 'noch nicht bearbeitet (dran: Claude)'],
+    ['zur Prüfung', 'neue Fassung liegt vor und wartet auf Durchsicht (dran: Durchsicht)'],
+    ['Revision', 'Änderungswunsch steht im Kommentar und wird in die nächste Fassung eingearbeitet (dran: Claude)'],
+    ['Nächste Version', 'überarbeitete Fassung nach einer Revision liegt vor und wartet auf Durchsicht (dran: Durchsicht)'],
+    ['Klärung nötig', 'inhaltliche Frage offen: Antwort als Kommentar, dann Status wieder auf „Revision“ (dran: Autor)'],
+    ['freigegeben', 'fertig für das Manuskript, noch nicht im LaTeX-Dokument'],
+    ['Overleaf überführt', 'produktiv im LaTeX-Dokument in Overleaf eingebunden – Endzustand'],
     ['entfällt', 'wird in der 6. Auflage nicht mehr verwendet'],
     ['', ''],
     ['Kommentare', 'je Hinweis eine neue Zeile in der Zelle, beginnend mit Datum und Kürzel, z. B. „06.10.2026 MD: Achsenbeschriftung kürzen“'],

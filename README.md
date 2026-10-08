@@ -57,6 +57,8 @@ Status und Kommentare je Abbildung liegen in der Google-Tabelle „Abbildungsinv
 
 **Sichtbarkeit:** Lesen geht ohne Passwort, denn die Web-App-URL steht in der öffentlichen Seite. Schreiben nur mit Passwort.
 
+**Status:** *offen* → *zur Prüfung* → bei Änderungswünschen *Revision* → *Nächste Version* (beliebig oft) → *freigegeben* (fertig für das Manuskript) → *Overleaf überführt* (produktiv im LaTeX-Dokument eingebunden, Endzustand). Daneben *Klärung nötig* (inhaltliche Frage offen; Antwort als Kommentar, dann wieder *Revision*) und *entfällt*. Die früheren Werte *in Arbeit* und *Änderung nötig* stellt `einrichten` auf *offen* bzw. *Revision* um.
+
 **Revisionen:** Änderungswunsch als Kommentar schreiben und den Status auf *Revision* setzen. Claude arbeitet die Revisionen mit dem Skill `sechste-auflage-revision` ab:
 
 1. Tabelle über den Google-Drive-Connector als CSV holen, `python3 werkzeug/revision.py lesen` listet die Aufträge (alle Kommentare seit der letzten Rückmeldung von Claude) mit Art, Quelle und zuständigem Skill.

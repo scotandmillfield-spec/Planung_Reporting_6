@@ -552,6 +552,19 @@
     "Caption: Daten und Gestaltung sind neu – „In Anlehnung an Microsoft 2017a“ kann für den Diagrammtyp bleiben oder entfallen"
    ],
    "alt": "Sunburst-Diagramm des Umsatzes 2025 von 17,8 Mio. € in drei Ringen. Der innere, dunkle Ring teilt den Umsatz auf die Regionen auf: Deutschland 43 %, Frankreich 27 %, Niederlande 18 %, Österreich 12 %. Der mittlere Ring zeigt je Region die Produktgruppen City, Mountain, Racing und Trekking Bike, der äußere, hellste Ring je Produktgruppe die Kaufgründe Preis, Qualität, Marke, Aktion und Testbericht. Kernaussage: Qualität ist der häufigste Kaufgrund (30 %), bei City Bikes der Preis, bei Racing Bikes die Marke."
+  },
+  "3.28": {
+   "status": "pruefung",
+   "datei": "Exemplarisches_Grundraster_eines_Berichtes",
+   "kommentare": [
+    "Raster als Kästen und Karten: Berichtskopf in drei Zeilen (Navigationsmenü, generelle Berichtsinformationen mit Corporate Identity, Selektionskriterien und Funktionen), darunter vier Auswertungsbereiche im 2 × 2-Raster",
+    "Die kräftige Trennlinie zwischen Kopf und Auswertung ist als größerer Abstand umgesetzt; Linienraster und Außenrahmen entfallen",
+    "„Tabellen/Grafiken“ und „Kommentare“ als weiße Platzhalter in jedem Auswertungsbereich – so wird die Aufteilung sichtbar, die Abb. 3.29 variiert",
+    "Abkürzung „CI“ aufgelöst zu „Corporate Identity“; „generelle“ großgeschrieben",
+    "Hinweis: Die neu gestalteten Dashboards im Buch kommen ohne Logo und Firmennamen aus – ggf. im Text sagen, dass der Bereich Corporate Identity (Name, Farben, Logo) entfallen kann",
+    "Kein Rot, da kein Element als zentral markiert ist"
+   ],
+   "alt": "Schema eines Berichtsaufbaus von oben nach unten: eine Zeile Navigationsmenü über die ganze Breite, darunter links die generellen Berichtsinformationen und rechts ein kleiner Bereich für die Corporate Identity, darunter nebeneinander Selektionskriterien und Funktionen. Den Hauptteil bilden vier gleich große Auswertungsbereiche in zwei Reihen; jeder enthält Platz für Tabellen bzw. Grafiken und darunter für Kommentare."
   }
  }
 }

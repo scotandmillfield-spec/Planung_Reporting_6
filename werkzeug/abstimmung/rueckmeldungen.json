@@ -9,6 +9,123 @@
    "kommentar": "Die drei Knotenpunkte an den Pfeilen links entfernt (DS); die Auslassungspunkte „…“ in Strategischer, Mittelfrist- und Operativer Planung waren schon entfernt (MD). Neue Fassung in der Inventur.",
    "auftrag": "9910bf80486b",
    "zeit": "2026-10-08T12:04"
+  },
+  {
+   "id": "2026-10-08-abb-2-3-1",
+   "schluessel": "abb-2-3",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Kostenplanung ist jetzt grau wie die Umsatzplanung, Absatzplanung und Betriebsergebnisplanung sind rot hervorgehoben. Die Pfeile der Erfolgspotenzialplanung gehen von der gestrichelten Umrandung aus, der Pfeil von der Organisations- und Kommunikationsplanung ist entfallen, und die beiden Knotenpunkte unten rechts sind entfernt.",
+   "auftrag": "6a03e3965e67",
+   "zeit": "2026-10-08T11:21"
+  },
+  {
+   "id": "2026-10-08-abb-2-4-1",
+   "schluessel": "abb-2-4",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Spaltenköpfe stehen als kursiver Text ohne Kasten etwas höher über den beiden Spalten, die Phasen 1.–6. sind hängend eingerückt, und der Kasten Durchführung sitzt mittig auf Höhe der Phasen 4 und 5. Zielvorgabe und Pfeil beginnen jetzt an der gestrichelten Linie, die zu den Phasen hinunterführt; falls eine andere Anordnung gemeint war, bitte kurz beschreiben.",
+   "auftrag": "84ac1ba4e148",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-2-5-1",
+   "schluessel": "abb-2-5",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die sechs Knotenpunkte an den Pfeilen im unteren Bereich sind entfernt.",
+   "auftrag": "d16c9ec6313e",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-1-1",
+   "schluessel": "abb-3-1",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Strategische Planung steht oben links in der Ecke, Roadmap und Balanced Chance and Risk Card stehen mit rotem Kopf auf Höhe der Verzahnung und tragen die neuen Texte; der Text zum internen Reporting und der Kasten Externes Reporting sind entfernt, die Zielvereinbarungen stehen tiefer. Der gestrichelte Kasten zeigt jetzt die überarbeiteten Teilpläne aus Abb. 3.6. Die Überschrift „Strategischem Ziel je Perspektive:“ ist wörtlich übernommen – bitte die Formulierung bestätigen.",
+   "auftrag": "ad60a541ff13",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-2-1",
+   "schluessel": "abb-3-2",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Quellenangabe ist entfallen, unter dem Titel steht „Stand: 30.06.2027“, die Jahre lauten Plan 2027 und Vorjahr 2026, und die Kernaussage nennt den „Gesamtsaldo −16,1 Mio. €“. Neu ist der Filter Geschäftsbereich (Standard „Alle“) oben rechts; in der Online-Fassung zeigt er stimmige Werte für Antriebstechnik, Lineartechnik und Service, die sich zum Gesamtwert addieren.",
+   "auftrag": "c59f8bfc19a8",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-3-1",
+   "schluessel": "abb-3-3",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Termine, Meilensteine und die Zeitachse sind um ein Jahr verschoben, Stichtag ist der 30.06.2027. Die doppelte Quellen- und Standangabe entfällt, und es heißt durchgängig „Stand“ statt „Berichtsstand“.",
+   "auftrag": "16aef6d4fe82",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-4-1",
+   "schluessel": "abb-3-4",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Daten sind um ein Jahr verschoben, Stand ist der 30.06.2027 (Auswahl Q3/26 bis Q2/27). Die doppelte Quellen- und Standangabe entfällt, und es heißt „Stand“ statt „Berichtsstand“.",
+   "auftrag": "17decb38de73",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-5-1",
+   "schluessel": "abb-3-5",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Daten sind um ein Jahr verschoben (Stand 30.06.2027), die doppelte Quellenangabe entfällt, und es heißt „Stand“. Das Diagramm Plan-Kosten nach Status ist entfallen; das Portfolio ist dafür höher, zeigt an der Y-Achse die strategische Relevanz und benennt die Felder oben rechts mit „absichern“ und unten rechts mit „nachrangig“. Hinweis: Abb. 3.4 nennt das Feld unten rechts noch „prüfen“ und unten links „nachrangig“ – soll 3.4 angeglichen werden?",
+   "auftrag": "dfdd134ed04f",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-6-1",
+   "schluessel": "abb-3-6",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Kostenplan führt nur noch in den Ergebnisplan, der Pfeil vom Umsatzplan in den Bilanzplan ist entfernt, der Ergebnisplan zeigt nur in Richtung Bilanzplan, und der Bilanzplan steht weiter rechts; Knotenpunkte gibt es keine mehr. Da der Ressourcenplan weiterhin in Ergebnis- und Bilanzplan einfließt, kreuzen sich zwei Pfeile an einer Stelle ohne Verbindung.",
+   "auftrag": "8fe7fbc7c449",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-7-1",
+   "schluessel": "abb-3-7",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Titel „Planungsvorgaben“ fett ohne schwarzen Balken wie in Abb. 3.5 mit Stand 30.06.2027; alle Daten sind um ein Jahr verschoben (Budget 2028, Planungszeitraum 14.–25.09.2027). Die Varianten heißen Best Case und Worst Case, das Planungshandbuch hat den Link „Zugangslink öffnen“, und das Auf- und Zuklappen der Abschnitte funktioniert in der Online-Fassung wieder.",
+   "auftrag": "1da936948a56",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-8-1",
+   "schluessel": "abb-3-8",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Titel „Top-Down-Vorgabe“ fett ohne schwarzen Balken wie in Abb. 3.5 mit Stand 30.06.2027, Periode Budget 2028; unter Variante stehen Standard, Best Case und Worst Case zur Auswahl. Die Werte ändern sich beim Wechsel der Variante nicht, da keine Szenariowerte vorgegeben sind.",
+   "auftrag": "a201a81d903c",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-9-1",
+   "schluessel": "abb-3-9",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Knotenpunkte an den Pfeilen links sind entfernt.",
+   "auftrag": "71b6d414982c",
+   "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-08-abb-3-10-1",
+   "schluessel": "abb-3-10",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der obere Kasten lautet jetzt „Navigation gemäß Startcockpit (z. B. nach Bereichen und Spitzenkennzahlen)“; der Kasten Reporting-Navigation gemäß Organigramm und die drei gestrichelten Kästen rechts sind entfallen. Bei der Bereichsstruktur steht „z. B. Management, Vertrieb und Produktion“, bei der Kostenträgerstruktur „z. B. dezidiert für Key-Account-Manager“.",
+   "auftrag": "0b67bb68666e",
+   "zeit": "2026-10-08T11:22"
   }
  ]
 }

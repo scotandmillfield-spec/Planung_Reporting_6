@@ -60,7 +60,18 @@
    ],
    "alt": "Ganzseitiges Netz der betrieblichen Teilpläne in drei Ebenen: generelle Zielplanung mit Unternehmensgrundsätzen, strategische Planung mit Erfolgspotenzialplanung und Ableitung strategischer Zielgrößen sowie operative Planung mit Mengen-, Ressourcen- und wertmäßigen Plänen. Pfeile zeigen, wie Absatz-, Produktions- und Beschaffungsplanung über die Ressourcenpläne in Kosten-, Ergebnis-, Finanz- und Bilanzplanung münden.",
    "quer": true,
-   "datei": "Interdependenzen_der_betrieblichen_Teilplaene"
+   "datei": "Interdependenzen_der_betrieblichen_Teilplaene",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Bitte das Kästchen Kostenplanung in der Graufarbe darstellen wie Umsatzplanung. Dafür die Absatzplanung und die Betriebsergebnisplanung rot darstellen. Die Pfeile von der ERfolgspotenzialplanung gehen von der gestrichelten Umrandung aus und nicht von den einzelnen Kästchen. Der vierte Pfeil von dem Kästchen Organisations- und Kommunikationsplanung, Führungskräfteplanung kann gelöscht werden. Die 2 Knotenpunkte bei den Pfeilen im unteren rechten Abbildungsbereich können gelöscht werden.",
+      "07.10.2026 DS: Bitte das Kästchen Kostenplanung in der Graufarbe darstellen wie Umsatzplanung. Dafür die Absatzplanung und die Betriebsergebnisplanung rot darstellen. Die Pfeile von der ERfolgspotenzialplanung gehen von der gestrichelten Umrandung aus und nicht von den einzelnen Kästchen. Der vierte Pfeil von dem Kästchen Organisations- und Kommunikationsplanung, Führungskräfteplanung kann gelöscht werden. Die 2 Knotenpunkte bei den Pfeilen im unteren rechten Abbildungsbereich können gelöscht werden."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Kostenplanung ist jetzt grau wie die Umsatzplanung, Absatzplanung und Betriebsergebnisplanung sind rot hervorgehoben. Die Pfeile der Erfolgspotenzialplanung gehen von der gestrichelten Umrandung aus, der Pfeil von der Organisations- und Kommunikationsplanung ist entfallen, und die beiden Knotenpunkte unten rechts sind entfernt."
+    }
+   ]
   },
   "2.4": {
    "status": "pruefung",
@@ -73,7 +84,17 @@
     "Caption im Manuskript der 6. Auflage: „(In Anlehnung an: Hahn 1994, S. 42)“ – übernehmen; dort steht noch ein Rest „Abb. 6: Phasen des Entscheidungsprozesses“ in der Grafik"
    ],
    "alt": "Tabelle der sechs Phasen des Führungsprozesses mit den Tätigkeiten: Problemstellung, Suche und Beurteilung dienen der Entscheidungsvorbereitung, die Entscheidungsphase der Entscheidungsfällung, die Realisationsphase der Festlegung und Veranlassung der Durchführung, die Kontrollphase dem Soll-Ist-Vergleich. Klammern ordnen Planaufstellung, Planverabschiedung, Steuerung und Kontrolle zu; die Phasen 1 bis 4 bilden die Planung im weiteren Sinne. Gestrichelte Pfeile zeigen Zielvorgabe, Vorgabeinformation an die Durchführung und Rückinformation.",
-   "datei": "Phasen_des_Planungs-_und_Steuerungsprozesses"
+   "datei": "Phasen_des_Planungs-_und_Steuerungsprozesses",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Die schwarzen Spaltenköpfe bitte nur als kursiven Text ohne Kästchen und Farbe über die 2 Spalten etwas höher darstellen. Das Wort Zielvorgabe und die entsprechenden Pfeile über der Phase 1. Problemstellungsphase mit Beginn an den gestrichelten Pfeilen , die runter gehen beginnen lassen. Die Phasenbeschreibungen 1.-6 bitte hängend eingerückt formatieren. Das Kästchen Durchführung mittig in der Höhe der Phase 4. und 5 platzieren."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Spaltenköpfe stehen als kursiver Text ohne Kasten etwas höher über den beiden Spalten, die Phasen 1.–6. sind hängend eingerückt, und der Kasten Durchführung sitzt mittig auf Höhe der Phasen 4 und 5. Zielvorgabe und Pfeil beginnen jetzt an der gestrichelten Linie, die zu den Phasen hinunterführt; falls eine andere Anordnung gemeint war, bitte kurz beschreiben."
+    }
+   ]
   },
   "2.5": {
    "status": "pruefung",
@@ -82,7 +103,18 @@
     "Verbindungen als Sammelleitungen mit Knotenpunkten"
    ],
    "alt": "Funktionen der Planung von unten nach oben: Planung/Kontrolle erfüllt vier Teilfunktionen (Information und Dokumentation, Koordination und Integration, Gestaltung und Prognose, Anreiz und Motivation), die gemeinsam in die Zielsetzungsfunktion münden; darüber folgen Steuerungs-, Innovations- und Zielerreichungsfunktion.",
-   "datei": "Ziele_und_Aufgaben_der_Planung"
+   "datei": "Ziele_und_Aufgaben_der_Planung",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Die 6 Knotenpunkte bei den Pfeilen unten weglassen.",
+      "07.10.2026 DS: Die 6 Knotenpunkte unten bei den Pfeilen weglassen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die sechs Knotenpunkte an den Pfeilen im unteren Bereich sind entfernt."
+    }
+   ]
   },
   "2.6": {
    "status": "pruefung",
@@ -118,7 +150,17 @@
     "Caption „Projektroadmap Übersicht“ und Berichtstitel „Strategische Projektroadmap“ angleichen"
    ],
    "alt": "Dashboard „Strategische Projektroadmap“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlenzeile: 19 Projekte, Plan-Kosten 35,3 Mio. €, Kostenabweichung +1,5 Mio. €, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Kapitalwert 22,8 Mio. €, Ø Risikoindex 50. Darunter eine Projekttabelle nach Status mit Plan-Kosten, Abweichung zum Plan bei Kosten und Termin sowie Fertigstellungsgrad als Balken; rechts ein Portfolio aus Risikoindex und Nutzwert (Kreisfläche = Plan-Kosten) und die Plan-Kosten nach Status.",
-   "datei": "Projektroadmap_Uebersicht"
+   "datei": "Projektroadmap_Uebersicht",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.06.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Quelle: Projektcontrolling - Stand 30.06.2026 weggelassen werden (Stand doppelt genannt). Stand statt Berichtsstand. Abbildung untern rechts Plan-Kosten nach Status weglassen. Dafür Portfolio größer bei Y-Achse darstellen. Im Portfolio statt Nutzwert \"Strategische Relevanz\" an der Y-Achse. Den Nutzwert als Wert der Strategischen Relevanz interpretieren. Im Portfolio den oberen rechten Quadrant mit absichern bezeichnen und unten rechts nachrangig."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Daten sind um ein Jahr verschoben (Stand 30.06.2027), die doppelte Quellenangabe entfällt, und es heißt „Stand“. Das Diagramm Plan-Kosten nach Status ist entfallen; das Portfolio ist dafür höher, zeigt an der Y-Achse die strategische Relevanz und benennt die Felder oben rechts mit „absichern“ und unten rechts mit „nachrangig“. Hinweis: Abb. 3.4 nennt das Feld unten rechts noch „prüfen“ und unten links „nachrangig“ – soll 3.4 angeglichen werden?"
+    }
+   ]
   },
   "3.6": {
    "status": "pruefung",
@@ -127,7 +169,17 @@
     "Kostenplan fließt nur in den Bilanzplan – fachlich prüfen (nicht auch in den Ergebnisplan?)"
    ],
    "alt": "Sieben Teilpläne in zwei Spalten: links Absatz-, Umsatz-, Ressourcen-, Personal- und Kostenplan, rechts Ergebnis- und Bilanzplan. Absatz- und Umsatzplan, Ressourcen-, Personal- und Kostenplan sowie Ergebnis- und Bilanzplan stimmen sich wechselseitig ab. Der Absatzplan speist den Ressourcenplan; Umsatz- und Ressourcenplan fließen gemeinsam in Ergebnis- und Bilanzplan, der Kostenplan in den Bilanzplan.",
-   "datei": "Interdependenzen_der_betrieblichen_Teilplaene"
+   "datei": "Interdependenzen_der_betrieblichen_Teilplaene",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Pfeil Kostenplan nur in den Ergebnisplan. Bilanzplan anders platzieren, z. B. weiter rechts. Pfeil von Umsatzplan in Bilanzplan löschen. Pfeil vom Ergebnisplan geht nur in Richtung Bilanzplan. Keine Knotenpunkte bei den Pfeilen verwenden."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Kostenplan führt nur noch in den Ergebnisplan, der Pfeil vom Umsatzplan in den Bilanzplan ist entfernt, der Ergebnisplan zeigt nur in Richtung Bilanzplan, und der Bilanzplan steht weiter rechts; Knotenpunkte gibt es keine mehr. Da der Ressourcenplan weiterhin in Ergebnis- und Bilanzplan einfließt, kreuzen sich zwei Pfeile an einer Stelle ohne Verbindung."
+    }
+   ]
   },
   "3.31": {
    "status": "klaerung",
@@ -227,7 +279,17 @@
     "Caption „Exemplarische Roadmap“ und Berichtstitel „Strategische Projektroadmap – Zeitplan“ angleichen"
    ],
    "alt": "Dashboard „Strategische Projektroadmap – Zeitplan“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Kennzahlen: 19 Projekte, 10 in Umsetzung, Ø Fertigstellung 58 %, 9 Projekte im Terminverzug, Ø Terminverzug 3,8 Wochen, 7 Projekte enden in den nächsten 12 Monaten. Darunter ein Zeitplan der Projekte, nach Status gruppiert, auf einer Zeitachse von 2025 bis 2028: umrandete Planbalken mit hellgrauer Planungsphase und weißer Umsetzung, ein dunkler Ist-Strich bis zum Stichtag, ein grauer Vorschau-Strich bis zum Prognose-Ende und rote Verlängerungen, wo das Plan-Ende überschritten wird; links Fertigstellung und Terminabweichung in Wochen.",
-   "datei": "Exemplarische_Roadmap"
+   "datei": "Exemplarische_Roadmap",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.06.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Quelle: Projektcontrolling - Stand 30.06.2026 weggelassen werden (Stand doppelt genannt). Stand statt Berichtsstand."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Termine, Meilensteine und die Zeitachse sind um ein Jahr verschoben, Stichtag ist der 30.06.2027. Die doppelte Quellen- und Standangabe entfällt, und es heißt durchgängig „Stand“ statt „Berichtsstand“."
+    }
+   ]
   },
   "3.9": {
    "status": "pruefung",
@@ -238,7 +300,17 @@
     "Abstände und Boxbreiten vereinheitlicht"
    ],
    "alt": "Hierarchische Berichtsstruktur in vier Zeilen. Oben steht die Gesamtunternehmensanalyse, von der eine Linie zu den drei Analysesichten Geschäftsfelder, Standorte und Funktionsbereiche verzweigt. Jede der vier Ebenen führt zu Kennzahlen bzw. einer Balanced Scorecard, die mit Detailberichten in wechselseitiger Beziehung stehen.",
-   "datei": "Exemplarische_Struktur_im_Reporting"
+   "datei": "Exemplarische_Struktur_im_Reporting",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Knotenpunkte bei Pfeilen links weglassen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Knotenpunkte an den Pfeilen links sind entfernt."
+    }
+   ]
   },
   "3.22": {
    "status": "pruefung",
@@ -270,7 +342,17 @@
     "Zu klären: „Orga/F/S/K“ als „Organisation“ gedeutet; „Beurteilung“ als Eintrittswahrscheinlichkeit gedeutet; Wirkungsrichtung angenommen: Abbau „Umsatz Poor Dogs“ günstig, „Variantenanteil“ neutral"
    ],
    "alt": "Dashboard „Balanced Chance and Risk Card“ der Unternehmensleitung, Stand 30.06.2026. Links die strategischen Ziele und Kennzahlen in den Perspektiven Finanzen; Markt, Kunde, Produkt; Prozesse; Organisation und Mitarbeiter mit Forecast, Plan und der Abweichung zum Plan als Balken: 15 von 24 Kennzahlen liegen hinter Plan, am weitesten das Umsatzwachstum mit −40 %. Rechts zu jeder Kennzahl die Maßnahme sowie eine Chance oder ein Risiko mit fünfstufiger Eintrittswahrscheinlichkeit und Wert; der Saldo aus Chancen und Risiken beträgt −16,1 Mio. €, größtes Risiko ist der Forderungsausfall mit −15,0 Mio. €.",
-   "datei": "Exemplarische_Balanced_Chance_and_Risk_Card"
+   "datei": "Exemplarische_Balanced_Chance_and_Risk_Card",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Quelle: Controlling, Projektroadmap löschen. Stand: 30.06.2027 unter Berichtstitel statt Unternehmensleitung einfügen. Anpassung der Jahre auf 2027 PL und 2026 VJFilter für Geschäftsbereich einfügen und alternative Daten entwickeln für HTML-Version. Defaultwert Alle.Statt Saldo -16,1 Mio. € Gesamtsaldo -16,1 Mio. € schreiben."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Quellenangabe ist entfallen, unter dem Titel steht „Stand: 30.06.2027“, die Jahre lauten Plan 2027 und Vorjahr 2026, und die Kernaussage nennt den „Gesamtsaldo −16,1 Mio. €“. Neu ist der Filter Geschäftsbereich (Standard „Alle“) oben rechts; in der Online-Fassung zeigt er stimmige Werte für Antriebstechnik, Lineartechnik und Service, die sich zum Gesamtwert addieren."
+    }
+   ]
   },
   "3.4": {
    "status": "pruefung",
@@ -287,7 +369,18 @@
     "Daten erfunden und plausibel; Caption „Strategisches Projektportfolio“ = Berichtstitel"
    ],
    "alt": "Dashboard „Strategisches Projektportfolio“, Berichtsstand 30.06.2026, mit Filtern für Quartal, Geschäftsbereich, Funktionsbereich und BSC-Perspektive. Links ein Portfolio der 19 strategischen Projekte aus strategischem Risiko (Risikoindex 0–100, waagerecht) und strategischer Relevanz (Nutzwert 0–10, senkrecht), die Kreisfläche zeigt die Plan-Kosten; Grenzen bei 50 und 5 teilen es in die Felder umsetzen, absichern, prüfen und nachrangig. 7 Projekte im Feld „absichern“ binden 55 % der Plan-Kosten. Rechts eine nummerierte Tabelle der Projekte nach Feld mit Relevanz, Risiko und Veränderung des Risikos zum Vorquartal: Das Risiko steigt bei 6 Projekten, am stärksten bei der CRM-Einführung (+5).",
-   "datei": "Strategisches_Projektportfolio"
+   "datei": "Strategisches_Projektportfolio",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.06.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Quelle: Projektcontrolling - Stand 30.06.2026 weggelassen werden (Stand doppelt genannt). Stand statt Berichtsstand.",
+      "07.10.2026 DS: Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.06.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Quelle: Projektcontrolling - Stand 30.06.2026 weggelassen werden (Stand doppelt genannt). Stand statt Berichtsstand."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Daten sind um ein Jahr verschoben, Stand ist der 30.06.2027 (Auswahl Q3/26 bis Q2/27). Die doppelte Quellen- und Standangabe entfällt, und es heißt „Stand“ statt „Berichtsstand“."
+    }
+   ]
   },
   "3.7": {
    "status": "pruefung",
@@ -303,7 +396,18 @@
     "Lernplattform: Ebenen „Erläuterungen“ (fachlich, 8 Punkte) und „Gestaltung“ (Änderungen, geordnet nach den Interaktionsprinzipien der DIN EN ISO 9241-110) – fachlich prüfen"
    ],
    "alt": "Eingabemaske „Planungsbrief“ für die Prämissenplanung. Im Abschnitt „Allgemeine Planungsprämissen“ sind für das Budget 2027 im Standard eine Inflationsrate von 1,2 %, ein Wirtschaftswachstum von 2,5 %, eine Personalsteigerungsrate von 3,5 % und ein Umsatzwachstum von 4,5 % hinterlegt; zwei weitere Spalten für Varianten sind leer. Im Abschnitt „Planungsprämissen für Teilpläne“ stehen links Teilplan Absatzplanung, Planungszeitraum 14.09.2026 bis 25.09.2026, Variante Standard, die Ansprechperson im zentralen Controlling mit E-Mail und Telefon sowie Links zu Planungsformular und Anwenderleitfaden; rechts der daraus erzeugte Planungsbrief an die Key-Account-Manager mit Zeitraum und Prämissen. Unten der Knopf „Vorgabewerte veröffentlichen“.",
-   "datei": "Exemplarische_Praemissenplanung"
+   "datei": "Exemplarische_Praemissenplanung",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Layout bitte wie Abb. 3.5. Der Titel Planungsvorgaben statt Planungsbrief nicht mit schwarzem Hintergrund sondern Fett wie in Layout 3.5. Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.06.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Budgetjahr 2028. Pfeilauswahl bei Allgemeine Planungsprämissen funktioniert nicht (zu- und aufklappen). Auch das Planungshandbuch bekommt den Text Zugangslink öffnen.",
+      "07.10.2026 DS: Bei Varianten: Statt 1 und 2 die Varianten Best Case und und Worst Case nennen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Titel „Planungsvorgaben“ fett ohne schwarzen Balken wie in Abb. 3.5 mit Stand 30.06.2027; alle Daten sind um ein Jahr verschoben (Budget 2028, Planungszeitraum 14.–25.09.2027). Die Varianten heißen Best Case und Worst Case, das Planungshandbuch hat den Link „Zugangslink öffnen“, und das Auf- und Zuklappen der Abschnitte funktioniert in der Online-Fassung wieder."
+    }
+   ]
   },
   "3.23": {
    "status": "pruefung",
@@ -370,7 +474,17 @@
    ],
    "alt": "Eingabemaske „Top-Down-Vorgabe“ für das Budget 2027, Werte in Mio. €. Oben die Auswahl von Periode, Variante und Zielgröße (Umsatz) mit der Vorgabe von 117,0, der Differenz zur Vorgabe von −0,4 und dem Status „nicht abgestimmt, Lücke“; rechts drei Maßnahmen zur Zielerreichung (neuer Vertriebskanal 1,7, Kosteneinsparung 1,4, Effizienzsteigerung 1,5, zusammen 4,6). Darunter ein Organigramm: Die Holding mit 112,0 verteilt sich auf Vertriebs GmbH (77,0), Produktions GmbH (34,0) und Neu GmbH (1,0). Im Abschnitt Bereiche verteilt die Vertriebs GmbH ihre Vorgabe auf Großkunden (36,0) und Massengeschäft (41,0), die Produktions GmbH auf Wintersport (22,0) und Sommersport (12,0); beide Differenzen sind ±0,0.",
    "caption": "Exemplarische Top-Down-Vorgaben und Abstimmungen",
-   "datei": "Exemplarische_Top-Down-Vorgaben_und_Abstimmungen"
+   "datei": "Exemplarische_Top-Down-Vorgaben_und_Abstimmungen",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Layout bitte wie Abb. 3.5. Der Titel Top-Down-Vorgabe nicht mit schwarzem Hintergrund sondern Fett wie in Layout 3.5. Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.06.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Budgetjahr 2028. Bei Variant Auswahl auf die Varianten Standard und Best Case und Worst Case erweitern."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Titel „Top-Down-Vorgabe“ fett ohne schwarzen Balken wie in Abb. 3.5 mit Stand 30.06.2027, Periode Budget 2028; unter Variante stehen Standard, Best Case und Worst Case zur Auswahl. Die Werte ändern sich beim Wechsel der Variante nicht, da keine Szenariowerte vorgegeben sind."
+    }
+   ]
   },
   "3.1": {
    "status": "pruefung",
@@ -387,7 +501,17 @@
     "„operativer taktischer Planung“ → „operativ-taktischer Planung“, „Strat. Analyse“ ausgeschrieben, „Balanced Chance and Risk-Card“ → „Balanced Chance and Risk Card“, „etc.“ nach „u. a.“ entfällt, „…“ in der Aufzählung zum externen Reporting entfällt (wie bei Abb. 2.2)"
    ],
    "alt": "Ganzseitiges Modell der integrierten Unternehmensplanung und -steuerung mit drei Ebenen: strategische Planung, Verzahnung strategischer und operativ-taktischer Planung sowie simulative Planung. Die strategische Planung, dargestellt als Chancen-Risiken-Portfolio aus Marktattraktivität und relativer Wettbewerbsposition, gibt strategische Projekte an die Roadmap sowie Ziele, Projekte und Kennzahlenvorgaben an die Balanced Chance and Risk Card; diese dient als internes Reporting, ist mit Zielvereinbarungen und dem externen Reporting (Jahresabschluss, Bankenreporting, Rating) verbunden und meldet einen Forecast an die strategische Planung zurück. Die Roadmap lastet die Projekte operativ in die Teilpläne ein (Absatz- und Produktions-, Umsatz-, Ressourcen-, Personal-, Kosten-, Ergebnis- und Bilanzplan); die BCR-Card gibt den Teilplänen Vorgaben, und die Gesamtplanung fließt als BCR-Plan zurück.",
-   "datei": "Gesamtmodellueberblick_fuer_die_integrierte_Unternehmensplanung_und_-steuerung"
+   "datei": "Gesamtmodellueberblick_fuer_die_integrierte_Unternehmensplanung_und_-steuerung",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Den Kasten Strategische Planung oben Links in der Ecke der Abbildung platzieren. In der Höhe des Kasten \"Verzahnung strategischer ....\" bitte den Kasten Roadmap und Balanced Chance and Risk Card platzieren und rot darstellen. Den Text unter Roadmap bitte ändern: Strategische Projekte mit - Status - Zeitplan - Kennzahlen. Den Text unter Balanced Chance and Risk Card ändern: Strategischem Ziel je Perspektive: Kennzahlen - Strategische Projekte - Chancen - Risiken. Test Internes Reporting (Kennzahlen und Berichte) etc. löschen. Kasten Externes Reporting komplett löschen. Kasten Zielvereinbarung etwas niedriger platzieren. gestrichelter Kasten unten austauschen gegen neue Abbildung 3.6"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Strategische Planung steht oben links in der Ecke, Roadmap und Balanced Chance and Risk Card stehen mit rotem Kopf auf Höhe der Verzahnung und tragen die neuen Texte; der Text zum internen Reporting und der Kasten Externes Reporting sind entfernt, die Zielvereinbarungen stehen tiefer. Der gestrichelte Kasten zeigt jetzt die überarbeiteten Teilpläne aus Abb. 3.6. Die Überschrift „Strategischem Ziel je Perspektive:“ ist wörtlich übernommen – bitte die Formulierung bestätigen."
+    }
+   ]
   },
   "3.10": {
    "status": "pruefung",
@@ -400,7 +524,17 @@
     "Kein Rot, da kein Element als zentral markiert ist"
    ],
    "alt": "Analysewege im Reporting von oben nach unten: Von den Spitzenkennzahlen führt ein Pfeil zur Reporting-Navigation gemäß Organigramm. Von dort verzweigt eine Leitung zu zwei Detailanalysen, der Bereichsstruktur (z. B. Produktentwicklung) und der Kostenträgerstruktur (z. B. für Key-Account-Manager), zwischen denen in beide Richtungen gewechselt werden kann. Jede Detailanalyse führt zu Kennzahlen und Berichten, die wechselseitig verbunden sind. Rechts stehen Beispiele je Stufe: Management-Cockpit, Umsatzanalyse je Bereich und Deckungsbeitragsanalyse.",
-   "datei": "Analysewege_im_Reporting"
+   "datei": "Analysewege_im_Reporting",
+   "revisionen": [
+    {
+     "datum": "08.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Kasten Spitzenkennzahlen abändern in: Navigation gemäß Startcockpit (z.B. nach Bereichen und Spitzenkennzahlen) Kasten Reporting-Navigation gemäß Organigramm löschen. 3 gestrichelte Kästen auf der rechten Seite alle löschen. Produktentwicklung (PE) löschen, dafür \"z. B. Management, Vertrieb und Produktion\" aufführen. Z. B. dezidiert (dezidiert klein schreiben)."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der obere Kasten lautet jetzt „Navigation gemäß Startcockpit (z. B. nach Bereichen und Spitzenkennzahlen)“; der Kasten Reporting-Navigation gemäß Organigramm und die drei gestrichelten Kästen rechts sind entfallen. Bei der Bereichsstruktur steht „z. B. Management, Vertrieb und Produktion“, bei der Kostenträgerstruktur „z. B. dezidiert für Key-Account-Manager“."
+    }
+   ]
   },
   "3.13": {
    "status": "pruefung",

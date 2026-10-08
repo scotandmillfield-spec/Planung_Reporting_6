@@ -563,6 +563,19 @@
    "alt": "Tabelle „Umsatz nach Bundesländern, Geschäftsjahr 2025“ in Mio. € mit den Datenschnitten Zeitraum und Region. Für die 16 Bundesländer stehen Vorjahr, Plan und Ist, die Abweichungen zum Vorjahr und zum Plan in Prozent sowie die Planabweichung als Zahl mit Balken an einer Nulllinie, blaugrün über und rot unter Plan. Deutschland liegt mit 219,5 Mio. € um 1,5 Mio. € (−1 %) unter Plan; die größten Lücken haben Niedersachsen (−10,2) und Berlin (−4,9), beide mit rotem Punkt als wesentliche Abweichung markiert, den größten Zuwachs hat Nordrhein-Westfalen (+6,6). Die Spaltenköpfe kennzeichnen Vorjahr hellgrau, Plan weiß mit Rahmen und Ist anthrazit.",
    "datei": "Grafisch_unterstuetzte_Tabellendarstellung"
   },
+  "3.19": {
+   "caption": "Zeitreihenanalysen",
+   "kommentare": [
+    "Aufbau wie im Original: oben die Zeitreihe, unten die Absatztabelle nach Produkten und Monaten – zwei Visuals; die Säulen stehen genau über den Monatsspalten der Tabelle (HTML für die Lernplattform, PNG 110 × 70,8 mm)",
+    "Zeitreihe nach SUCCESS als Säulen statt Linie (Monatsmengen sind abgegrenzte Perioden), Ist anthrazit, Werte an den Säulen; Werteachse, Achsentitel, Gitternetz, Rahmen und Legende entfallen; Monatsdurchschnitt als gestrichelte Referenzlinie",
+    "Ohne Auswahl zeigt die Zeitreihe die Summe aller Produkte (das Original zeigte nur Rahmen/Gabel); Klick auf eine Tabellenzeile zeigt die Zeitreihe dieses Produkts, Esc hebt auf",
+    "Monatswerte unverändert; die Summen des Originals passten nicht zu den angezeigten Werten (Laufräder h. 7.413 statt 7.412, Lenker 5.895 statt 5.893, Apr, Mai, Aug, Nov und Dez je um 1 daneben, Gesamt 32.661 statt 32.659) – jetzt aus den Monatswerten gerechnet",
+    "Überschrift „Absatzzahlen“ ersetzt durch Visualtitel mit Einheit und Kernaussage; ohne Jahresangabe wie im Original; „Mrz“ → „Mär“",
+    "Bitte prüfen: Nennt der Buchtext die Liniendarstellung, Rahmen/Gabel oder die alten Summen, muss er angepasst werden"
+   ],
+   "alt": "Zwei Visuals zum Absatz von fünf Fahrradkomponenten in Stück. Oben ein Säulendiagramm „Absatz je Monat, alle Produkte“ von Januar bis Dezember mit Werten über den Säulen und gestrichelter Linie für den Monatsdurchschnitt von 2.722 Stück; der höchste Absatz liegt im Juli (3.620), der niedrigste im Mai (1.297). Darunter die Tabelle „Absatz nach Produkten und Monaten“ mit Rahmen/Gabel, Laufrädern hinten und vorn, Tretlager und Lenker, Monatsspalten, fetter Summenspalte und Summenzeile (gesamt 32.659 Stück); Laufräder hinten haben mit 7.412 Stück den höchsten Absatz. Die Säulen stehen jeweils über ihrer Monatsspalte.",
+   "datei": "Zeitreihenanalysen"
+  },
   "3.20": {
    "status": "pruefung",
    "caption": "Top-Ten-Analyse",

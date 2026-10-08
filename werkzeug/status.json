@@ -722,6 +722,18 @@
     "Kein Rot, da kein Element als zentral markiert ist"
    ],
    "alt": "Schema eines Berichtsaufbaus von oben nach unten: eine Zeile Navigationsmenü über die ganze Breite, darunter links die generellen Berichtsinformationen und rechts ein kleiner Bereich für die Corporate Identity, darunter nebeneinander Selektionskriterien und Funktionen. Den Hauptteil bilden vier gleich große Auswertungsbereiche in zwei Reihen; jeder enthält Platz für Tabellen bzw. Grafiken und darunter für Kommentare."
+  },
+  "3.29": {
+   "status": "pruefung",
+   "datei": "Exemplarische_Aufteilungsmoeglichkeiten_des_Auswertungsbereiches",
+   "kommentare": [
+    "Gestaltet wie Abb. 3.28: jede Variante als Karte „Auswertungsbereich“ mit Kopfleiste, Tabelle, Grafik und Kommentare als weiße Platzhalter – so ist sichtbar, dass es um die Aufteilung der Auswertungsbereiche aus Abb. 3.28 geht",
+    "Vier Varianten im 2 × 2-Raster wie im Original, Reihenfolge und Zellaufteilung unverändert (zusammengefasste Zellen laufen über zwei Zeilen bzw. Spalten)",
+    "Schwarzes Linienraster des Originals durch Platzhalter mit Abstand ersetzt",
+    "Kein Rot, da kein Element als zentral markiert ist",
+    "Hinweis: Abb. 3.28 nennt die Platzhalter „Tabellen/Grafiken“ und „Kommentare“, Abb. 3.29 einzeln „Tabelle“, „Grafik“, „Kommentare“ – Begriffe aus dem Original übernommen"
+   ],
+   "alt": "Vier Beispiele, wie ein Auswertungsbereich eines Berichts in zwei Spalten und zwei Zeilen aufgeteilt werden kann: erstens eine Tabelle links über die ganze Höhe, rechts eine Grafik und darunter Kommentare; zweitens Tabelle und Grafik oben, Kommentare und eine zweite Grafik unten; drittens zwei Grafiken oben, Tabelle und Kommentare unten; viertens zwei Grafiken oben und eine Tabelle über die ganze Breite darunter."
   }
  }
 }

@@ -1,5 +1,5 @@
 /* Dashboard „Reporting- und Planungskalender“ (Abb. 3.12).
-   Daten: kalender.json (daten_kalender.py) – Berichts- und Planungsprozesse 2026 mit der Budgetierung 2027 als Baum
+   Daten: kalender.json (daten_kalender.py) – Berichts- und Planungsprozesse 2027 mit der Budgetierung 2028 als Baum
    (Prozessart › Prozess › Teilprozess › Schritt). Status je Termin aus Plan-Ende, Ist-Ende und Stichtag (gleiche Regel wie
    der Generator). Bewusst ohne KPI-Leiste: Die Seite ist ein Kalender. */
 (() => {
@@ -227,7 +227,7 @@
   function zeichnen() {
     DK.kopf(bKopf, { titel: "Reporting- und Planungskalender",
       untertitel: `Berichts- und Planungsprozesse ${JAHR} mit der Budgetierung ${JAHR + 1} · Stichtag ${dmy(STICH)}`,
-      quelle: `Quelle: Controlling · Stand ${dmy(STICH)}`,
+      quelle: "",
       legende: [["#FFFFFF", "Plan", PLAN_RAND], [FARBE.ist, "Ist"], [FARBE.schlecht, "Verzug"]] });
     const v = DK.visual(bKal, { titel: "Termine", einheit: `Plan ${JAHR}, Status zum Stichtag`, botschaft: botschaft() });
     kalender(v.flaeche, v.breite, v.hoehe, zeilen());

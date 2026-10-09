@@ -34,8 +34,8 @@ def build(theme):
     tmp = Fig(W, 30, theme)
     detail = lambda titel, bsp: [P(titel, bold=True), P(f"{ZB} {bsp}", size=6.5)]
     hD = max(tmp.measure(detail("Detailanalyse: Kostenträgerstruktur", "dezidiert für Key-Account-Manager"), X1 - X0), 8.0)
-    start = [P("Navigation gemäß Startcockpit", bold=True),
-             P(f"({ZB} nach Bereichen und Spitzenkennzahlen)", size=6.5)]
+    start = [P("Navigation im Startcockpit", bold=True),
+             P(f"{ZB} nach Bereichen und Spitzenkennzahlen", size=6.5)]
     hS, hK = max(tmp.measure(start, X1 - X0), 8.0), 5.6
 
     y = 0.3

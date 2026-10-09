@@ -1,7 +1,7 @@
 """Synthetische Absatzdaten für Abb. 3.22 „ABC-Analyse Produkte“ (Neuaufbau des Cubeware-Beispiels).
 
-Ein namenloser Hersteller von Antriebs- und Lineartechnik, 49 Produkte, vier Kundengruppen, Jahre 2024 und 2025.
-Der Absatz 2025 über alle Kunden entspricht Stück für Stück dem Original (Ränge 1–29 abgelesen, 30–49 ergänzt),
+Ein namenloser Hersteller von Antriebs- und Lineartechnik, 49 Produkte, vier Kundengruppen, Jahre 2026 und 2027.
+Der Absatz 2027 über alle Kunden entspricht Stück für Stück dem Original (Ränge 1–29 abgelesen, 30–49 ergänzt),
 damit die Klassenwerte des Buchtextes gelten: A 11 Produkte / 59,81 %, B 10 / 20,16 %, C 28 / 20,03 %.
 Umsatz und Wareneinsatz je Produkt sind erfunden (Listenpreis je Produkt, Rabatt je Kundengruppe).
 Ausgabe: abc.json (kompakt) und abc.csv (Einzelsätze, Semikolon, Dezimalkomma).
@@ -12,7 +12,7 @@ import random
 
 rng = random.Random(20261006)
 
-# Absatz 2025, alle Kunden, in Rangfolge (Original, Ränge 1–29)
+# Absatz 2027, alle Kunden, in Rangfolge (Original, Ränge 1–29)
 OBEN = [732, 591, 417, 311, 242, 212, 185, 167, 157, 149, 139,          # A
         137, 132, 122, 115, 113, 106, 100, 98, 95, 95,                   # B
         95, 93, 88, 71, 69, 61, 58, 56]                                  # C (sichtbar)
@@ -21,8 +21,8 @@ roh = [54 * 0.912 ** i for i in range(20)]
 f = REST / sum(roh)
 UNTEN = [round(v * f) for v in roh]
 UNTEN[-1] += REST - sum(UNTEN)
-STUECK_2025 = OBEN + UNTEN
-assert sum(STUECK_2025) == 5521 and all(a >= b for a, b in zip(STUECK_2025, STUECK_2025[1:])), STUECK_2025
+STUECK_2027 = OBEN + UNTEN
+assert sum(STUECK_2027) == 5521 and all(a >= b for a, b in zip(STUECK_2027, STUECK_2027[1:])), STUECK_2027
 
 FAMILIEN = [("Kupplung", "KU", 70), ("Kugelgewindetrieb", "KG", 240), ("Getriebemotor", "GM", 420),
             ("Frequenzumrichter", "FU", 380), ("Planetengetriebe", "PG", 560), ("Servomotor", "SM", 690),
@@ -30,7 +30,7 @@ FAMILIEN = [("Kupplung", "KU", 70), ("Kugelgewindetrieb", "KG", 240), ("Getriebe
 GROESSEN = [10, 20, 30, 40, 50, 63, 80]
 KUNDEN = ["Maschinenbau", "Fördertechnik", "Fahrzeugbau", "Handel"]
 RABATT = [0.00, 0.03, 0.06, 0.12]
-JAHRE = [2024, 2025]
+JAHRE = [2026, 2027]
 
 # Produkte: Absatzstarke Ränge eher kleine Baugrößen und günstige Familien (realistisch, und Umsatz-ABC weicht ab)
 kandidaten = [(fam, kz, preis, g) for fam, kz, preis in FAMILIEN for g in GROESSEN]
@@ -59,12 +59,12 @@ zeilen = []
 for pid, p in enumerate(produkte):
     basis = [rng.uniform(0.5, 1.5) * w for w in (0.38, 0.22, 0.24, 0.16)]
     for jahr in JAHRE:
-        st = STUECK_2025[pid] if jahr == 2025 else max(1, round(STUECK_2025[pid] * rng.uniform(0.78, 1.18)))
+        st = STUECK_2027[pid] if jahr == 2027 else max(1, round(STUECK_2027[pid] * rng.uniform(0.78, 1.18)))
         gew = [b * rng.uniform(0.85, 1.15) for b in basis]
         for k, n in enumerate(aufteilen(st, gew)):
-            preis = p["preis"] * (1 - RABATT[k]) * (0.97 if jahr == 2024 else 1.0)
+            preis = p["preis"] * (1 - RABATT[k]) * (0.97 if jahr == 2026 else 1.0)
             umsatz = round(n * preis)
-            we = round(n * p["preis"] * p["we"] * (0.98 if jahr == 2024 else 1.0))
+            we = round(n * p["preis"] * p["we"] * (0.98 if jahr == 2026 else 1.0))
             zeilen.append([jahr - 2000, pid, k, n, umsatz, we])
 
 json.dump({"jahre": JAHRE, "kunden": KUNDEN, "produkte": [p["name"] for p in produkte],

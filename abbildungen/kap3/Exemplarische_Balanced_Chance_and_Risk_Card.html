@@ -682,14 +682,17 @@ const DK = (() => {
   DK.init({ titel: "Balanced Chance and Risk Card" });
   const bKopf = DK.box("kopf", 16, 10, 992, 46);
   DK.haarlinie(62);
-  // Datenschnitt rechts oben im Kopf (die Tabellen brauchen die volle Höhe, daher keine eigene Filterzeile)
-  const bFilter = DK.box("filter", 708, 8, 300, 28, "dk-filter");
-  bFilter.style.justifyContent = "flex-end";
-  const sel = DK.schnitt(bFilter, "Geschäftsbereich", "dropdown", { breite: 170,
+  // Datenschnitt in der Titelzeile des linken Visuals, rechts neben „Δ in %“ (Revision DS 08.10.2026)
+  const bFilter = DK.box("filter", 252, 70, 200, 26, "dk-filter");
+  bFilter.style.justifyContent = "flex-start";
+  bFilter.style.zIndex = 5;
+  const sel = DK.schnitt(bFilter, "Geschäftsbereich", "dropdown", { breite: 104,
     optionen: [["alle", "Alle"], ...GB.map((g, i) => [String(i), g])], wert: S.gb,
     onChange: w => { S.gb = w; bereichAnwenden(); zeichnen(); } });
-  sel.style.height = "26px";
-  Object.assign(sel.parentNode.style, { flexDirection: "row", alignItems: "center", gap: "8px" });
+  sel.style.height = "24px";
+  sel.style.fontSize = "12px";
+  Object.assign(sel.parentNode.style, { flexDirection: "row", alignItems: "center", gap: "6px" });
+  sel.parentNode.querySelector("label").style.fontSize = "12px";
   const bZiele = DK.box("v-ziele", 16, 70, 532, 572);
   const bCR = DK.box("v-cr", 568, 70, 440, 572);
 
@@ -828,7 +831,6 @@ const DK = (() => {
       quelle: "",
       legende: [[GUT, "günstig bzw. Chance"], [SCHLECHT, "ungünstig bzw. Risiko"]] });
     const lg = document.getElementById("kopf-legende");
-    lg.style.marginTop = "29px";              // unter dem Datenschnitt
     const sp = DK.el("span", { id: "legende-eintritt" }, lg);
     const s = sv("svg", { width: 38, height: 10, style: "overflow:visible" }, sp);
     for (let i = 0; i < 5; i++) sv("circle", { cx: 3.5 + i * 7.5, cy: 5, r: 3, fill: i < 3 ? "#3A3F44" : "#FFFFFF", stroke: "#3A3F44", "stroke-width": 1 }, s);

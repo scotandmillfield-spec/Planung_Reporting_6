@@ -191,7 +191,6 @@
     const r = rechnen();
     DK.kopf(bKopf, { titel: "Break-Even-Point-Analyse",
       untertitel: "Absatz, Umsatz und Kosten eines Produkts im Planjahr, kumuliert · Ausgangsdaten in den Datenschnitten",
-      quelle: "Quelle: Absatz- und Kostenplanung",
       legende: [[TINT.gut, "Gewinn"], [TINT.schlecht, "Verlust"]] });
     DK.kpis(bKpi, kpiDaten(r));
 

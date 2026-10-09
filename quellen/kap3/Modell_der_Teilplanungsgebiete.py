@@ -46,7 +46,7 @@ def build(theme):
     L = lambda pts, name: f.line(pts, color=t.arrow, lw=t.arrow_lw, name=name)
 
     def dot(x, y):
-        f.ellipse(x - 0.45, y - 0.45, 0.9, 0.9, fill=t.arrow, line="none", name="Knoten")
+        pass                                                 # Revision DS 08.10.2026: Knotenpunkte entfallen
 
     def box(b, text, name=None):
         f.box(b.x, b.y, b.w, b.h, [P(text)], name=name or text.replace(SHY, ""))

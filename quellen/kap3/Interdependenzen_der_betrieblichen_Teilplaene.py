@@ -1,13 +1,14 @@
 """Teilpläne und ihre Verknüpfung (Absatz-, Umsatz-, Ressourcen-, Personal-, Kosten-, Ergebnis-, Bilanzplan)."""
 # Muster: linke Spalte mit fünf Teilplänen, Ergebnisplan in der Mitte, Bilanzplan rechts; orthogonale Pfeile ohne Knotenpunkte.
+# Revision DS 08.10.2026: Pfeile in den Ergebnisplan und der Bilanzplan weiter nach links.
 STEM = "Interdependenzen_der_betrieblichen_Teilplaene"
 from bookfig import Fig, P, THEMES
 
-W, H = 110, 65.5
+W, H = 106, 65.5
 BW, BH = 28, 7          # Boxbreite/-höhe
 XL = 6                  # linke Spalte (Absatz- bis Kostenplan)
 XE = 43                 # Ergebnisplan (Mitte, auf Höhe des Umsatzplans)
-XB = 79                 # Bilanzplan (rechts, auf Höhe des Ressourcenplans)
+XB = 72                 # Bilanzplan (rechts, auf Höhe des Ressourcenplans)
 XLANE = 2.5             # Leitung links (Absatz -> Ressourcen)
 DY = 1.75               # Versatz der zwei Pfeile, die den Ressourcenplan rechts verlassen
 
@@ -52,10 +53,10 @@ def build(theme):
     # Umsatzplan -> Ergebnisplan (kein Pfeil mehr in den Bilanzplan)
     A([(UMS.r, UMS.cy), (ERG.x, ERG.cy)], name="Umsatz-Ergebnis")
     # Ressourcenplan -> Ergebnisplan und -> Bilanzplan (zwei getrennte Pfeile)
-    A([(RES.r, RES.cy - DY), (ERG.cx - 5, RES.cy - DY), (ERG.cx - 5, ERG.b)], name="Ressourcen-Ergebnis")
+    A([(RES.r, RES.cy - DY), (ERG.x + 5, RES.cy - DY), (ERG.x + 5, ERG.b)], name="Ressourcen-Ergebnis")
     A([(RES.r, RES.cy + DY), (BIL.x, BIL.cy)], name="Ressourcen-Bilanz")
     # Kostenplan -> Ergebnisplan (nur noch in den Ergebnisplan)
-    A([(KOS.r, KOS.cy), (ERG.cx + 5, KOS.cy), (ERG.cx + 5, ERG.b)], name="Kosten-Ergebnis")
+    A([(KOS.r, KOS.cy), (ERG.x + 11, KOS.cy), (ERG.x + 11, ERG.b)], name="Kosten-Ergebnis")
     # Ergebnisplan -> Bilanzplan (nur in diese Richtung)
     A([(ERG.r, ERG.cy), (BIL.cx, ERG.cy), (BIL.cx, BIL.y)], name="Ergebnis-Bilanz")
     return f

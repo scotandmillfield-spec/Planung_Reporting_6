@@ -93,6 +93,17 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Spaltenköpfe stehen als kursiver Text ohne Kasten etwas höher über den beiden Spalten, die Phasen 1.–6. sind hängend eingerückt, und der Kasten Durchführung sitzt mittig auf Höhe der Phasen 4 und 5. Zielvorgabe und Pfeil beginnen jetzt an der gestrichelten Linie, die zu den Phasen hinunterführt; falls eine andere Anordnung gemeint war, bitte kurz beschreiben."
+    },
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Das Wort Zielvorgabe und die gestrichelten Linien bitte unterhalb von Phasen des Führungsprozesses platzieren. Die Spaltenkopfbeschreibungen also höher platzieren. Zudem den Kasten Durchführung weiter runter schieben in die Mitte. Zudem die Worte Tätigkeiten der Unternehmensführung ebenfalls in 2 Zeilen darstellen.",
+      "08.10.2026 DS: Das Wort Zielvorgabe und die gestrichelten Linien bitte unterhalb von Phasen des Führungsprozesses platzieren. Die Spaltenkopfbeschreibungen also höher platzieren. Zudem den Kasten Durchführung weiter runter schieben in die Mitte. Zudem die Worte Tätigkeiten der Unternehmensführung ebenfalls in 2 Zeilen darstellen.",
+      "08.10.2026 DS: Das Wort Zielvorgabe und die gestrichelten Linien bitte unterhalb von Phasen des Führungsprozesses platzieren. Die Spaltenkopfbeschreibungen also höher platzieren. Zudem den Kasten Durchführung weiter runter schieben in die Mitte. Zudem die Worte Tätigkeiten der Unternehmensführung ebenfalls in 2 Zeilen darstellen.",
+      "08.10.2026 DS: Das Wort Zielvorgabe und die gestrichelten Linien bitte unterhalb von Phasen des Führungsprozesses platzieren. Die Spaltenkopfbeschreibungen also höher platzieren. Zudem den Kasten Durchführung weiter runter schieben in die Mitte. Zudem die Worte Tätigkeiten der Unternehmensführung ebenfalls in 2 Zeilen darstellen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Spaltenköpfe stehen jetzt ganz oben, beide zweizeilig („Phasen des / Führungsprozesses“, „Tätigkeiten der / Unternehmungsführung“). Das Wort Zielvorgabe und die gestrichelte Linie beginnen darunter, unmittelbar über der Tabelle; der Kasten Durchführung sitzt weiter unten, mittig auf Höhe der Realisationsphase (Phase 5)."
     }
    ]
   },
@@ -159,6 +170,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Alle Daten sind um ein Jahr verschoben (Stand 30.06.2027), die doppelte Quellenangabe entfällt, und es heißt „Stand“. Das Diagramm Plan-Kosten nach Status ist entfallen; das Portfolio ist dafür höher, zeigt an der Y-Achse die strategische Relevanz und benennt die Felder oben rechts mit „absichern“ und unten rechts mit „nachrangig“. Hinweis: Abb. 3.4 nennt das Feld unten rechts noch „prüfen“ und unten links „nachrangig“ – soll 3.4 angeglichen werden?"
+    },
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Portfolio untern rechts prüfen, unten links nachrangig wie in Abb. 3.4."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Im Portfolio heißt das Feld unten rechts jetzt „prüfen“ und das Feld unten links „nachrangig“, wie in Abb. 3.4; die Aussage über dem Portfolio zählt die Projekte im Feld „nachrangig“ entsprechend neu."
     }
    ]
   },
@@ -178,19 +197,49 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Der Kostenplan führt nur noch in den Ergebnisplan, der Pfeil vom Umsatzplan in den Bilanzplan ist entfernt, der Ergebnisplan zeigt nur in Richtung Bilanzplan, und der Bilanzplan steht weiter rechts; Knotenpunkte gibt es keine mehr. Da der Ressourcenplan weiterhin in Ergebnis- und Bilanzplan einfließt, kreuzen sich zwei Pfeile an einer Stelle ohne Verbindung."
+    },
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Kann man die Pfeile zum Ergebnisplan weiter nach links rücken und dann den Bilanzplan ebenfalls weiter nach links verschieben."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die beiden Pfeile in den Ergebnisplan sind weiter nach links gerückt, der Bilanzplan steht ebenfalls weiter links; die Abbildung ist dadurch etwas schmaler geworden."
     }
    ]
   },
   "3.31": {
-   "status": "klaerung",
+   "status": "screenshot",
+   "caption": "Geo-Visualisierung eines Stadions mit Tabelle (Quelle: Cubeware Bildergalerie 2011)",
    "kommentare": [
-    "Notiz „3.31 Tabelle mit einer oben dargestellten Summe“ passt nicht zum Bild (Cubeware-Auslastungsanalyse) – welches ist die richtige Abbildung?"
+    "Revision DS 08.10.2026: Abbildung bleibt als Screenshot aus der 5. Auflage; neue Abbildungsunterschrift „Geo-Visualisierung eines Stadions mit Tabelle (Quelle: Cubeware Bildergalerie 2011)“ (Schreibweise „Visualiserung“ der Vorgabe als „Visualisierung“ übernommen)"
+   ],
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Abbildungsunterschrift ist falsch, bitte folgende Abbildungsunterschrift verwenden: Geo-Visualiserung eines Stadions mit Tabelle (Quelle: Cubeware Bildergalerie 2011)",
+      "08.10.2026 DS: Abbildung als Screenshot so lassen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abbildung bleibt als Screenshot der 5. Auflage. Neue Abbildungsunterschrift: „Geo-Visualisierung eines Stadions mit Tabelle (Quelle: Cubeware Bildergalerie 2011)“ – die Schreibweise „Visualiserung“ aus der Vorgabe habe ich zu „Visualisierung“ korrigiert."
+    }
    ]
   },
   "3.193": {
    "status": "klaerung",
    "kommentare": [
     "Montage aus Diagramm und Screenshots (Monte-Carlo-Simulation) – als Diagramm neu zeichnen oder als Screenshot behalten?"
+   ],
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Die Abbildung von Gleißner neu zeichnen wäre besser! Die Abbildungsunterschrift könnte kürzer lauten: Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: Geißner 2016, S. 16–23) In das Literaturverzeichnis ist dann die Quelle aufzunehmen: Geißner, W. 2016. Bandbreitenplanung, Planungssicherheit und Monte-Carlo-Simulation mehrerer Planjahre. In Controller Magazin. Juli/August 2016. S. 16 –23"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Soll die Abbildung nach der Vorlage von Gleißner (Controller Magazin 7/8 2016, S. 16–23) vollständig neu gezeichnet werden (Plan-G&V mit Risikoliste, Verteilung der Simulationsergebnisse, Finanzrating, Ratingtabelle, Cashflow-Prognose)? Falls ja: als Neuzeichnung „in Anlehnung an“ oder mit der Quelle wie bisher? Und lautet der Name Gleißner (so im Literaturverzeichnis) oder Geißner (so in der bisherigen Unterschrift)? Die Unterschrift „Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: …, 2016, S. 16–23)“ übernehme ich dann; der Eintrag im Literaturverzeichnis gehört in das Overleaf-Projekt."
+    }
    ]
   },
   "5.39": {
@@ -201,7 +250,17 @@
     "Abfrage zeilenweise eingerückt, Inhalt unverändert; Schriftgrad 7 pt wie die Abbildungstexte",
     "Nummer bleibt Abb. 5.39 (figure-Umgebung um das Listing)"
    ],
-   "datei": "Beispiel_zur_freien_Datenrecherche_z_B_SELECT-Anweisung"
+   "datei": "Beispiel_zur_freien_Datenrecherche_z_B_SELECT-Anweisung",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Letzte Zeile gehört nicht mehr zur Abbildung sondern ist die Abbildungsüberschrift (löschen: Abb. 5.39 Beispiel ....)"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Das Listing selbst endet mit der GROUP-BY-Zeile; „Abb. 5.39 Beispiel zur freien Datenrecherche …“ ist bereits die Abbildungsunterschrift, die LaTeX automatisch unter das Listing setzt und die nur in der Vorschau mit zu sehen ist. Soll die Unterschrift aus der Abbildung entfallen (dann entfiele auch die automatische Nummer), oder genügt es, dass sie im Text nicht doppelt steht?"
+    }
+   ]
   },
   "Tab. 3.1": {
    "status": "latex",
@@ -251,7 +310,17 @@
     "Zielgröße 110–150 % und Text „Ziel z. B. 150 %“ abgleichen",
     "Quellenhinweis aus der Notiz in die Caption übernommen (Kurzform im Tabellenverzeichnis)"
    ],
-   "datei": "Kennzahlenblatt"
+   "datei": "Kennzahlenblatt",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Kennzahl nach Doppelpunkt Linksbündig über Text einrücken. Zudem hinter allen Begriffen in der linken Spalte ein Doppelpunkt."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Kennzahlname „Anlagendeckung (%)“ steht jetzt in der rechten Spalte linksbündig über dem Text, „Kennzahl:“ in der linken Spalte. Hinter allen Begriffen der linken Spalte steht ein Doppelpunkt. Die Vorschau wird erst bei der nächsten LaTeX-Übersetzung aktualisiert."
+    }
+   ]
   },
   "Folie 5": {
    "status": "entfaellt",
@@ -319,14 +388,24 @@
     "Cubeware-Screenshot (Browserfenster der Online-Demo) als Dashboard im Buchstil neu aufgebaut: HTML für die Lernplattform, PNG für das Buch",
     "Nur die Inhalte des Originals: Kennzahlwahl (Stück, Umsatz, Wareneinsatz, DB), Jahr, Kunden, Klassengrenzen A/B, Klassenübersicht, Produktrangliste, Konzentrationskurve",
     "Automarken als „Produkte“ (reale Marken) durch erfundene Produkte der Antriebs- und Lineartechnik ersetzt",
-    "Absatz 2025 über alle Kunden = Stückzahlen des Originals (Ränge 1–29 abgelesen, 30–49 ergänzt): A 11 Produkte/59,8 %, B 10/20,2 %, C 28/20,0 % wie bisher; Jahr 2009 → 2025",
-    "Umsatz, Wareneinsatz, DB, Kundengruppen und Vorjahr 2024 erfunden",
+    "Absatz 2027 über alle Kunden = Stückzahlen des Originals (Ränge 1–29 abgelesen, 30–49 ergänzt); Jahr 2009 → 2027 (Revision DS), Standardgrenzen A bis 80 % und B weitere 10 %: A 21 Produkte/80,0 %, B 7/9,7 %, C 21/10,3 %",
+    "Umsatz, Wareneinsatz, DB, Kundengruppen und Vorjahr 2026 erfunden",
     "Druck-PNG zeigt Rang 1–23 und fasst die übrigen 26 Produkte zusammen; HTML zeigt alle 49 mit Bildlauf",
     "Klassenzuordnung wie im Original: A, solange der kumulierte Anteil ≤ Grenze (Rang 12 mit 62,3 % → B)"
    ],
-   "alt": "Dashboard „ABC-Analyse Produkte“ für das Jahr 2025, alle Kunden, Kennzahl Absatz in Stück, Klassengrenzen A 60 % und B 20 %. Links die Produkte nach Rang mit Stück, Anteil und kumuliertem Anteil, nach Klassen gegliedert. Rechts oben die ABC-Klassen: 11 A-Produkte (22,4 % der Produkte) bringen 59,8 % des Absatzes, 10 B-Produkte 20,2 % und 28 C-Produkte 20,0 %; darunter die Konzentrationskurve mit den Klassengrenzen bei 22,4 % und 42,9 % der Produkte.",
+   "alt": "Dashboard „ABC-Analyse Produkte“ für das Jahr 2027, Stand 31.12.2027, alle Kunden, Kennzahl Absatz in Stück, Klassengrenzen A 80 % und B 10 %. Links die Produkte nach Rang mit Stück, Anteil und kumuliertem Anteil, nach Klassen gegliedert. Rechts oben die ABC-Klassen: 21 A-Produkte (42,9 % der Produkte) bringen 80,0 % des Absatzes, 7 B-Produkte 9,7 % und 21 C-Produkte 10,3 %; darunter die Konzentrationskurve mit den Klassengrenzen bei 42,9 % und 57,1 % der Produkte.",
    "caption": "ABC-Analyse",
-   "datei": "ABC-Analyse"
+   "datei": "ABC-Analyse",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stand hier 31.12.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Quelle: Absatzstatistik - Stand 31.12.2025 rechts löschen, Jahr 2027 Vorjahr dann 2026. Dafaulteinstellung Klasse A bis 80% und Klasse B bis weitere 10%."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Daten sind um ein Jahr verschoben (Jahr 2027, Vorjahr 2026, Stand 31.12.2027 im Untertitel); die Quellenangabe rechts ist gelöscht. Voreinstellung der Klassengrenzen: Klasse A bis 80 %, Klasse B weitere 10 % (damit 21 A-, 7 B- und 21 C-Produkte)."
+    }
+   ]
   },
   "3.2": {
    "status": "pruefung",
@@ -351,6 +430,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Quellenangabe ist entfallen, unter dem Titel steht „Stand: 30.06.2027“, die Jahre lauten Plan 2027 und Vorjahr 2026, und die Kernaussage nennt den „Gesamtsaldo −16,1 Mio. €“. Neu ist der Filter Geschäftsbereich (Standard „Alle“) oben rechts; in der Online-Fassung zeigt er stimmige Werte für Antriebstechnik, Lineartechnik und Service, die sich zum Gesamtwert addieren."
+    },
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Geschäftsbereichsfilter und Auswahl neben in % platzieren."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Filter Geschäftsbereich mit seiner Auswahl steht jetzt in der Titelzeile von „Ziele und Kennzahlen“ direkt neben „Δ in %“ und links vom Schalter ΔPL/ΔVJ; rechts oben bleibt nur die Legende."
     }
    ]
   },
@@ -418,11 +505,22 @@
     "Fünf Farben und Legende entfallen: alle Kreise anthrazit, Buchstabe direkt am Kreis; Diagrammtitel im Bild und Rahmen entfallen",
     "Trennlinien bei relativem Marktanteil 1,5 und Marktwachstum 3 % wie im Original, ohne Feldnamen – fachlich prüfen: In der BCG-Matrix liegt die Grenze beim relativen Marktanteil bei 1,0 (Marktführerschaft); D (1,4) wechselte dann von „Question Marks“ zu „Stars“. Vorschlag: Grenze 1,0 und Feldnamen Stars, Cash Cows, Question Marks, Poor Dogs",
     "Kernaussagen aus den Daten: B, C und D führen ihren Markt; A und D (49 % des Umsatzes) liegen in Märkten mit Wachstum ab 3 % bei relativem Marktanteil unter 1,5",
-    "Caption „Portfolio-Analyse“ passt; kein Produktbezug"
+    "Caption „Portfolio-Analyse“ passt; kein Produktbezug",
+    "Revision DS: Layout wie Abb. 3.5 (Kopf, Datenschnitt Jahr für 2025–2027, Kennzahlenleiste, Tabellen links, Portfolio rechts); die Werte des Originals gelten als Ist 2027, 2025 und 2026 sind erfunden; Feldnamen nach der Normstrategie des Boston-Consulting-Portfolios (Grenzen bei 1,5 und 3 % wie im Original)"
    ],
-   "alt": "Tabelle und Portfolio von fünf strategischen Geschäftseinheiten (SGE A bis E). Die Tabelle nennt eigenen Marktanteil, Marktanteil des stärksten Konkurrenten, relativen Marktanteil, Marktwachstum, Umsatz und Umsatzanteil; B, C und D führen ihren Markt (relativer Marktanteil über 1), C hat mit 310 Mio. € den größten Umsatzanteil (28,7 %). Das Portfolio zeigt waagerecht den relativen Marktanteil (0 bis 3), senkrecht das Marktwachstum (0 bis 6 %), die Kreisfläche den Umsatz; gestrichelte Linien bei 1,5 und 3 % teilen es in vier Felder. A und D liegen bei hohem Marktwachstum und relativem Marktanteil unter 1,5, B oben rechts, C unten rechts, E unten links.",
+   "alt": "Dashboard „Portfolio-Analyse“ der fünf strategischen Geschäftseinheiten (SGE A bis E), Ist 2027, mit dem Datenschnitt Jahr (2025 bis 2027) und einer Kennzahlenleiste (Umsatz 1.080 Mio. €, Ø Marktwachstum 3,5 %, drei SGE mit führender Position, Umsatzanteil Stars 11,1 %, Cash Cows 28,7 %). Links die Tabelle mit eigenem Marktanteil, Marktanteil des stärksten Konkurrenten, relativem Marktanteil, Marktwachstum, Umsatz und Umsatzanteil sowie eine Tabelle der vier Felder mit Normstrategie. Rechts das Portfolio mit dem relativen Marktanteil waagerecht (0 bis 3), dem Marktwachstum senkrecht (0 bis 6 %) und der Kreisfläche als Umsatz; gestrichelte Linien bei 1,5 und 3 % teilen es in die Felder Question Marks (A und D, oben links), Stars (B, oben rechts), Cash Cows (C, unten rechts) und Poor Dogs (E, unten links).",
    "caption": "Portfolio-Analyse",
-   "datei": "Portfolio-Analyse"
+   "datei": "Portfolio-Analyse",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Layout bitte wie Abb. 3.5. Alle Daten beziehen sich auf das Jahr 2027 im Ist. Filter Jahr für die letzten drei Jahre einbauen. Poor Dogs, Questionsmarks, Stars und Cash Cows in die vier Felder als Normstrategie des bosten-Consulting-Portfolios eintragen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Layout wie Abb. 3.5: Kopf mit Titel, Filter Jahr (2025, 2026, 2027; voreingestellt 2027, alle Werte als Ist 2027), Kennzahlenleiste, links die Tabellen, rechts das Portfolio. In den vier Feldern stehen die Normstrategien des Boston-Consulting-Portfolios: Question Marks (oben links), Stars (oben rechts), Poor Dogs (unten links), Cash Cows (unten rechts). Neu ist eine kleine Tabelle der Felder mit den üblichen Normstrategien (Selektieren, Investieren, Desinvestieren, Abschöpfen); die Werte für 2025 und 2026 sind erfunden."
+    }
+   ]
   },
   "3.12": {
    "status": "pruefung",
@@ -430,17 +528,27 @@
    "kommentare": [
     "Produktscreenshot softwareneutral als Dashboard neu aufgebaut (HTML für die Lernplattform, PNG für das Buch); bewusst ohne KPI-Leiste, die Seite ist ein Kalender",
     "Caption ohne Produktnamen: „Reporting- und Planungskalender“ statt „… mit prevero“",
-    "Jahr 2010 → 2026 mit der Budgetierung 2027, Stichtag 30.09.2026; Termine auf Arbeitstage gelegt, Abfolge und Dauer wie im Original. Die Absatzplanung (14.09.–25.09.2026) passt zum Planungsbrief in Abb. 3.7",
+    "Jahr 2010 → 2027 mit der Budgetierung 2028, Stichtag 30.09.2027 (Revision DS: alle Termine um ein Jahr verschoben); Abfolge und Dauer wie im Original. Die Absatzplanung (13.09.–24.09.2027) passt zum Planungsbrief in Abb. 3.7",
     "Personennamen und Spitznamen („Häuptling“, „Indianer“, Namen bekannter Skirennläufer) durch Rollen ersetzt; SAP/CO-Aufträge/prevero neutral: ERP-System, Innenaufträge, „Projektübersicht erstellen“",
     "Monatsreporting, Quartalsabschluss und Forecast je in einer Zeile mit allen Terminen (aufklappbar); Reporting und Planung getrennt statt chronologisch gemischt",
     "Ampeln entfallen: Status als Wort, Balken Plan weiß/Ist anthrazit/Verzug rot wie Abb. 3.3 und 3.5; Stichtaglinie neu. Im Druck sind Budgetierung und Absatz-/Erlös-/Beschaffungsplanung aufgeklappt, die Projekt- und Investitionsplanung (9 Schritte) zugeklappt",
     "Datenschnitte Zeitraum, Verantwortlich, Status ersetzen „Planungsdurchlauf“, „Variante“ und „Monatsebene ausblenden“ – prüfen, ob der Buchtext diese Felder erwähnt",
     "Spalten „Beginn“, „Ende“ und „Link“ entfallen (Termine im Tooltip und in „Werte als Tabelle“), damit der Kalender die halbe Breite bekommt",
-    "Status zum Stichtag: Absatzplanung 5 Tage überfällig, „Planwerte auf Innenaufträgen“ 2 Tage später erledigt – erfundene, plausible Werte"
+    "Status zum Stichtag: Absatzplanung 6 Tage überfällig, „Planwerte auf Innenaufträgen“ 2 Tage später erledigt – erfundene, plausible Werte"
    ],
-   "alt": "Dashboard „Reporting- und Planungskalender“ mit den Berichts- und Planungsprozessen 2026 und der Budgetierung 2027, Stichtag 30.09.2026, Filter für Zeitraum, Verantwortlich und Status. Eine Tabelle nennt je Prozess die verantwortliche Rolle und den Status, rechts daneben zeigt eine Zeitachse von Januar bis Dezember die Plantermine als Balken: weiß umrandet geplant, anthrazit der Ist-Verlauf, rot der Verzug; eine gestrichelte Linie markiert den Stichtag. Oben das Reporting mit Jahresabschluss 2025 sowie Monatsreporting, Quartalsabschluss und Forecast mit je allen Terminen in einer Zeile, darunter die Planung mit Strategieentwicklung, Mittelfristplanung und der Budgetierung 2027 mit ihren Teilplänen von August bis Dezember. Überfällig ist nur die Absatzplanung (Plan-Ende 25.09., 5 Tage), sieben weitere Prozesse laufen im Plan.",
+   "alt": "Dashboard „Reporting- und Planungskalender“ mit den Berichts- und Planungsprozessen 2026 und der Budgetierung 2027, Stichtag 30.09.2026, Filter für Zeitraum, Verantwortlich und Status. Eine Tabelle nennt je Prozess die verantwortliche Rolle und den Status, rechts daneben zeigt eine Zeitachse von Januar bis Dezember die Plantermine als Balken: weiß umrandet geplant, anthrazit der Ist-Verlauf, rot der Verzug; eine gestrichelte Linie markiert den Stichtag. Oben das Reporting mit Jahresabschluss 2026 sowie Monatsreporting, Quartalsabschluss und Forecast mit je allen Terminen in einer Zeile, darunter die Planung mit Strategieentwicklung, Mittelfristplanung und der Budgetierung 2028 mit ihren Teilplänen von August bis Dezember. Überfällig ist nur die Absatzplanung (Plan-Ende 24.09., 6 Tage), acht weitere Prozesse laufen im Plan.",
    "caption": "Reporting- und Planungskalender",
-   "datei": "Reporting-_und_Planungskalender"
+   "datei": "Reporting-_und_Planungskalender",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Alle Daten zeitlich um 1 Jahr verschieben (Neuer Stichtag 30.09.2027) Bitte auch alle Bewegungsdaten um ein Jahr schieben. Budgetierung 2028. Quelle: Projektcontrolling - Stand 30.06.2026 weggelassen werden (Stichtag 30.09.2027)."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Termine sind um ein Jahr verschoben (Stichtag 30.09.2027, Berichts- und Planungsprozesse 2027, Budgetierung 2028, Jahresabschluss 2026), dabei auf Arbeitstage gelegt. Die Quellenangabe entfällt; der Stichtag steht weiter im Untertitel. Absatzplanung ist nun 6 Tage überfällig."
+    }
+   ]
   },
   "3.26": {
    "status": "pruefung",
@@ -457,7 +565,17 @@
    ],
    "alt": "Dashboard „Break-Even-Point-Analyse“ für ein Produkt im Planjahr. Oben die Ausgangsdaten als Datenschnitte: 1.000 Stück Absatz je Monat, Preis 375 € und variable Kosten 250 € je Stück, Fixkosten 1.150 Tsd. € je Jahr. Die Kennzahlenleiste nennt mit Rechenweg den Deckungsbeitrag von 125 € je Stück, die Break-Even-Menge von 9.200 Stück, den Break-Even-Umsatz von 3.450 Tsd. €, das Erreichen im Oktober und ein Jahresergebnis von +350 Tsd. €. Links das Break-Even-Diagramm: Über der kumulierten Absatzmenge von 0 bis 12.000 Stück (darunter die Monate) steigen Umsatz- und Gesamtkostenlinie, die Fixkosten bilden eine waagerechte Linie; bis zum Schnittpunkt bei 9.200 Stück liegt die rote Verlustzone, danach die blaugrüne Gewinnzone. Rechts eine Tabelle mit Absatz, Umsatz, Gesamtkosten und Ergebnis kumuliert je Monat; das Ergebnis steigt von −1.025 Tsd. € im Januar auf +350 Tsd. € im Dezember und wird im Oktober positiv.",
    "caption": "Break-Even-Point-Analyse",
-   "datei": "Break-Even-Point-Analyse"
+   "datei": "Break-Even-Point-Analyse",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "07.10.2026 DS: Quelle: Absatz- und Kostenplanung löschen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Quellenangabe „Absatz- und Kostenplanung“ ist gelöscht."
+    }
+   ]
   },
   "3.8": {
    "status": "pruefung",
@@ -510,6 +628,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Strategische Planung steht oben links in der Ecke, Roadmap und Balanced Chance and Risk Card stehen mit rotem Kopf auf Höhe der Verzahnung und tragen die neuen Texte; der Text zum internen Reporting und der Kasten Externes Reporting sind entfernt, die Zielvereinbarungen stehen tiefer. Der gestrichelte Kasten zeigt jetzt die überarbeiteten Teilpläne aus Abb. 3.6. Die Überschrift „Strategischem Ziel je Perspektive:“ ist wörtlich übernommen – bitte die Formulierung bestätigen."
+    },
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Den Kasten Strategisch Planung oben Links länger darstellen. Strategisches Ziel je Perspektive: sowie die Spiegelstriche in einer kleineren Schriftart darstellen, so das Perspektive nicht in die zweite Zeile rutscht. Die gleiche Schriftart bei der Roadmap unten nutzen. Zudem einen Spiegelstrich ergänzen: - Zielerreichung. Den Kasten Simultane Planung länger nach unten darstellen. Oben Instrumente und zweite Zeile mittiger darstellen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Kasten Strategische Planung oben links ist länger, ebenso der Kasten Simulative Planung unten. Die Texte der Karten Roadmap und Balanced Chance and Risk Card stehen in einer kleineren, gleichen Schrift, sodass „Perspektive:“ nicht mehr in die zweite Zeile rutscht; bei der Roadmap ist der Spiegelstrich „Zielerreichung“ ergänzt (falls er zur Balanced Chance and Risk Card gehören sollte, bitte kurz Bescheid geben). Die Zeilen „Instrumente u. a.“ stehen mittiger über der Abbildung."
     }
    ]
   },
@@ -533,6 +659,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Der obere Kasten lautet jetzt „Navigation gemäß Startcockpit (z. B. nach Bereichen und Spitzenkennzahlen)“; der Kasten Reporting-Navigation gemäß Organigramm und die drei gestrichelten Kästen rechts sind entfallen. Bei der Bereichsstruktur steht „z. B. Management, Vertrieb und Produktion“, bei der Kostenträgerstruktur „z. B. dezidiert für Key-Account-Manager“."
+    },
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Navigation im Startcockpit statt gemäß. die nächste Zeile ohne Klammern."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der obere Kasten lautet jetzt „Navigation im Startcockpit“, die zweite Zeile „z. B. nach Bereichen und Spitzenkennzahlen“ steht ohne Klammern."
     }
    ]
   },
@@ -547,21 +681,42 @@
     "Kein Rot, da kein Element als zentral markiert ist"
    ],
    "alt": "Modell der Teilplanungsgebiete von oben nach unten. Der strategische Plan gibt Vorgaben an die Absatz- und die Investitionsplanung. Die Absatzplanung führt zur Produktions- und zur Umsatzplanung; die Produktionsplanung verzweigt in Einkaufs-, Personal- und Anlagenplanung. Personal- und Anlagenplanung münden in den Kapazitätsabgleich und weiter in die Kostenstellenplanung; Einkaufs- und Kostenstellenplanung führen zur Herstellkostenplanung. Herstellkosten-, Kostenstellen- und Umsatzplanung fließen in die Produktergebnis- bzw. Betriebsergebnisplanung, die mit der Bilanz- und GuV-Planung sowie der Finanzplanung wechselseitig verbunden ist. Rechts verbindet eine Leitung Investitionsplanung, Kapazitätsabgleich und Finanzplanung wechselseitig; links führen gestrichelte Zuflüsse von außen in den strategischen Plan, die Produktergebnis-, die Bilanz- und die Finanzplanung.",
-   "datei": "Modell_der_Teilplanungsgebiete"
+   "datei": "Modell_der_Teilplanungsgebiete",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Knotenpunkte weglassen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Knotenpunkte an den Verzweigungen sind entfernt."
+    }
+   ]
   },
   "3.16": {
    "status": "pruefung",
    "kommentare": [
     "Als Einzelvisual mit Datenschnitten umgesetzt (HTML für die Lernplattform, PNG 110 × 81,7 mm): nur die Tabelle, keine KPI-Leiste und keine weiteren Visuals",
-    "Jahreswerte des Originals unverändert (Summen 222,2 / 221,0 / 219,5); die Einheit fehlte im Original – als Umsatz in Mio. € gelesen, Geschäftsjahr 2025 mit Vorjahr 2024 angenommen, bitte prüfen",
+    "Jahreswerte des Originals unverändert (Summen 222,2 / 221,0 / 219,5); die Einheit fehlte im Original – als Umsatz in Mio. € gelesen, Geschäftsjahr 2027 mit Vorjahr 2026 (Revision DS)",
     "Datenschnitte Zeitraum (Q1–Q4, Jahr) und Region (Nord, Ost, Süd, West): Quartalswerte erfunden, ihre Summe ergibt genau die Jahreswerte; Berlin fällt ab dem dritten Quartal zurück, Niedersachsen liegt ganzjährig unter Plan, Nordrhein-Westfalen gewinnt zunehmend",
     "Rote Punkte mit Regel: wesentliche Planabweichung, wenn das Ist mehr als 1 % des Plans Deutschland unter Plan liegt – im Jahr wie im Original Berlin und Niedersachsen; prüfen, ob die Regel zum Buchtext passt",
     "Ampelgrün der Balken → Blaugrün #00806B; die Summenzeile hat keinen Balken mehr (im Original −1,5 im selben Maßstab)",
     "Zahlenformat vereinheitlicht: echtes Minus, „±0,0“ statt „+0,0“, Prozent mit Leerzeichen; ΔPL-Wert und Balken stehen in einer Spalte (im Original getrennt)",
     "Szenario-Kennzeichnung unter VJ, PL und IST wie im Original beibehalten (hellgrau, weiß mit Rahmen, anthrazit)"
    ],
-   "alt": "Tabelle „Umsatz nach Bundesländern, Geschäftsjahr 2025“ in Mio. € mit den Datenschnitten Zeitraum und Region. Für die 16 Bundesländer stehen Vorjahr, Plan und Ist, die Abweichungen zum Vorjahr und zum Plan in Prozent sowie die Planabweichung als Zahl mit Balken an einer Nulllinie, blaugrün über und rot unter Plan. Deutschland liegt mit 219,5 Mio. € um 1,5 Mio. € (−1 %) unter Plan; die größten Lücken haben Niedersachsen (−10,2) und Berlin (−4,9), beide mit rotem Punkt als wesentliche Abweichung markiert, den größten Zuwachs hat Nordrhein-Westfalen (+6,6). Die Spaltenköpfe kennzeichnen Vorjahr hellgrau, Plan weiß mit Rahmen und Ist anthrazit.",
-   "datei": "Grafisch_unterstuetzte_Tabellendarstellung"
+   "alt": "Tabelle „Umsatz nach Bundesländern, Geschäftsjahr 2027“ in Mio. € mit den Datenschnitten Zeitraum und Region unter dem Titel. Für die 16 Bundesländer stehen Vorjahr, Plan und Ist, die Abweichungen zum Vorjahr und zum Plan in Prozent sowie die Planabweichung als Zahl mit Balken an einer Nulllinie, blaugrün über und rot unter Plan. Deutschland liegt mit 219,5 Mio. € um 1,5 Mio. € (−1 %) unter Plan; die größten Lücken haben Niedersachsen (−10,2) und Berlin (−4,9), beide mit rotem Punkt als wesentliche Abweichung markiert, den größten Zuwachs hat Nordrhein-Westfalen (+6,6). Die Spaltenköpfe kennzeichnen Vorjahr hellgrau, Plan weiß mit Rahmen und Ist anthrazit.",
+   "datei": "Grafisch_unterstuetzte_Tabellendarstellung",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 MD: Für DS zur Prüfung",
+      "08.10.2026 DS: Alle Jahresziffern auf das Jahr 2027 stellen. Filter Zeitraum und Region unter dem Berichtsnamen einfügen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Jahresangaben stehen auf 2027 (Titel „Geschäftsjahr 2027“, Schaltfläche „Jahr 2027“). Die Filter Zeitraum und Region stehen jetzt unter dem Berichtsnamen (Titel und Aussage), über der Tabelle."
+    }
+   ]
   },
   "3.19": {
    "caption": "Zeitreihenanalysen",
@@ -582,14 +737,24 @@
    "kommentare": [
     "Caption ohne Produktnamen: „Top-Ten-Analyse (Beispiel MS Excel)“ → „Top-Ten-Analyse“; die Neufassung ist softwareneutral",
     "Aufbau wie im Original: links die Tabelle, rechts das Balkendiagramm Ist gegen Vorjahr – zwei Visuals in derselben Reihenfolge, die Zeilen liegen auf gleicher Höhe; Klick auf Zeile oder Balken hebt den Kunden in beiden hervor (HTML für die Lernplattform, PNG 110 × 63,6 mm)",
-    "Umsätze der zehn Kunden unverändert, jetzt in Tsd. € mit einer Nachkommastelle; gelesen als Geschäftsjahr 2025 mit Vorjahr 2024",
+    "Umsätze der zehn Kunden unverändert, jetzt in Tsd. € mit einer Nachkommastelle; gelesen als Geschäftsjahr 2027 mit Vorjahr 2026",
     "Reale Versicherungsunternehmen (Allianz, R+V, Generali, Zurich, Debeka, Württembergische, Bayern Versicherung, Nürnberger, Hamburg-Mannheimer, AXA) durch erfundene Namen ersetzt; „Würtembergische“ war im Original falsch geschrieben",
     "Rangfolge nach dem Ist statt nach dem Vorjahr: Im Original standen Zurich vor Debeka, Württembergische vor Bayern Versicherung und Nürnberger vor Hamburg-Mannheimer, obwohl der jeweils zweite im Ist mehr Umsatz hatte",
     "Farben: Ist anthrazit, Vorjahr hellgrau statt Rot und Blau; Ist-Wert am Balken, Achse, Gitternetz und Legende rechts unten entfallen, abgeschnittene Namen („Hamburg-…“, „Bayern…“) vollständig",
-    "Datenschnitte Jahr (2024, 2025) und Vertriebsgebiet (Nord, Ost, Süd, West); die Top Ten werden je Auswahl neu ermittelt – dafür 38 weitere erfundene Kunden mit kleineren Umsätzen (alle unter dem zehnten Kunden) und das Jahr 2023"
+    "Datenschnitte Jahr (2026, 2027) und Vertriebsgebiet (Nord, Ost, Süd, West); die Top Ten werden je Auswahl neu ermittelt – dafür 38 weitere erfundene Kunden mit kleineren Umsätzen (alle unter dem zehnten Kunden) und das Jahr 2025"
    ],
-   "alt": "Top-Ten-Analyse mit den Datenschnitten Jahr und Vertriebsgebiet. Links die Tabelle „Top-Ten-Kunden 2025“ in Tsd. € mit Rang, Kunde, Umsatz im Vorjahr und im Ist; die zehn Kunden machen 57 % des Umsatzes von 48 Kunden aus, der größte liegt bei 162,4 Tsd. €. Rechts das Balkendiagramm „Umsatz Top-Ten-Kunden“ mit je einem anthrazitfarbenen Ist-Balken und einem schmaleren hellgrauen Vorjahresbalken pro Kunde in derselben Reihenfolge; der zehnte Kunde fällt um 26 % auf 34,4 Tsd. €, der vierte wächst um 22 % auf 74,8 Tsd. €.",
-   "datei": "Top-Ten-Analyse"
+   "alt": "Top-Ten-Analyse, Geschäftsjahr 2027 im Vergleich zum Vorjahr 2026, mit den Datenschnitten Jahr und Vertriebsgebiet unter dem Berichtsnamen. Links die Tabelle „Top-Ten-Kunden 2027“ in Tsd. € mit Rang, Kunde, Umsatz im Vorjahr und im Ist; die zehn Kunden machen 57 % des Umsatzes von 48 Kunden aus, der größte liegt bei 162,4 Tsd. €. Rechts das Balkendiagramm „Umsatz Top-Ten-Kunden“ mit je einem anthrazitfarbenen Ist-Balken und einem schmaleren hellgrauen Vorjahresbalken pro Kunde in derselben Reihenfolge; der zehnte Kunde fällt um 26 % auf 34,4 Tsd. €, der vierte wächst um 22 % auf 74,8 Tsd. €.",
+   "datei": "Top-Ten-Analyse",
+   "revisionen": [
+    {
+     "datum": "09.10.2026",
+     "wunsch": [
+      "08.10.2026 DS: Jahreswerte auf 2027 stellen, VJ 2026. Filter unter Berichtsname Top-Ten .... einfügen"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Jahreswerte auf 2027, Vorjahr 2026 (Datenschnitt Jahr: 2026 und 2027). Über den Filtern steht neu der Berichtsname „Top-Ten-Analyse“ mit Untertitel; die Filter Jahr und Vertriebsgebiet stehen darunter. Die Werte der zehn Kunden sind unverändert, nur das Jahr ist verschoben."
+    }
+   ]
   },
   "3.27": {
    "status": "pruefung",

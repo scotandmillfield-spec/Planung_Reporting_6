@@ -1,6 +1,6 @@
 /* Einzelvisual „Top-Ten-Analyse“ (Abb. 3.20): Tabelle und Balkendiagramm der zehn umsatzstärksten Kunden.
    Seite 727 x 420 px = 110 x 63,6 mm. Daten: topten.json (daten_topten.py) – 48 Kunden mit Vertriebsgebiet und Umsatz
-   2023–2025 in €; die zehn größten Kunden 2025 sind die des Originals (Namen erfunden). Wie im Original links die
+   2025–2027 in €; die zehn größten Kunden 2027 sind die des Originals (Namen erfunden). Wie im Original links die
    Tabelle, rechts das Balkendiagramm Ist gegen Vorjahr – zwei getrennte Visuals in derselben Reihenfolge, deren Zeilen
    auf gleicher Höhe liegen. Datenschnitte Jahr und Vertriebsgebiet; Klick auf Zeile oder Balken hebt den Kunden in
    beiden Visuals hervor. */
@@ -20,11 +20,14 @@
   addEventListener("keydown", e => { if (e.key === "Escape" && S.auswahl != null) { S.auswahl = null; zeichnen(); } });
 
   /* ---------- Layout ---------- */
-  DK.init({ titel: "Top-Ten-Analyse", breite: 727, hoehe: 420 });
-  const bFilter = DK.box("filter", 16, 8, 695, 50, "dk-filter");
-  DK.haarlinie(66);
-  const bTab = DK.box("v-tabelle", 16, 76, 322, 334);
-  const bDia = DK.box("v-diagramm", 358, 76, 353, 334);
+  // Revision DS 08.10.2026: Berichtsname oben, die Datenschnitte darunter
+  DK.init({ titel: "Top-Ten-Analyse", breite: 727, hoehe: 468 });
+  const bKopf = DK.box("kopf", 16, 10, 695, 40);
+  DK.haarlinie(56);
+  const bFilter = DK.box("filter", 16, 64, 695, 50, "dk-filter");
+  DK.haarlinie(122);
+  const bTab = DK.box("v-tabelle", 16, 132, 322, 334);
+  const bDia = DK.box("v-diagramm", 358, 132, 353, 334);
   DK.el("style", {}, document.head, `
     #v-tabelle .dk-matrix th { vertical-align: bottom; height: ${KOPF - 5}px; }
     #v-tabelle .dk-matrix td:nth-child(2), #v-tabelle .dk-matrix th:nth-child(2) { text-align: left; }`);
@@ -141,6 +144,9 @@
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     const d = daten();
+    DK.kopf(bKopf, { titel: "Top-Ten-Analyse",
+      untertitel: `Umsatz der zehn größten Kunden · Geschäftsjahr ${S.jahr} im Vergleich zum Vorjahr ${S.jahr - 1}`,
+      quelle: "", legende: [] });
     let v = DK.visual(bTab, { titel: `Top-Ten-Kunden ${S.jahr}`, einheit: "Tsd. €", botschaft: botschaftTabelle(d, bTab.clientWidth || 322) });
     const t = DK.matrix(v.flaeche, { spalten: SPALTEN, zeilenhoehe: ZH, sortierung: S.sort, onSort: sortieren, auswahl: S.auswahl,
       zeilen: d.top.map(r => ({ key: r.k.name, label: String(r.rang), r, werte: { kunde: r.k.name, vj: r.vj, ist: r.ist } })),

@@ -144,7 +144,7 @@ table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
 </style>
 </head>
 <body>
-<script>const DATA = {"jahr":2025,"einheit":"Mio. €","laender":[["Baden-Württemberg","Süd"],["Bayern","Süd"],["Berlin","Ost"],["Brandenburg","Ost"],["Bremen","Nord"],["Hamburg","Nord"],["Hessen","West"],["Mecklenburg-Vorpommern","Ost"],["Niedersachsen","Nord"],["Nordrhein-Westfalen","West"],["Rheinland-Pfalz","West"],["Saarland","West"],["Sachsen","Ost"],["Sachsen-Anhalt","Ost"],["Schleswig-Holstein","Nord"],["Thüringen","Ost"]],"werte":[[[11,12,11,12],[12,12,11,13],[13,13,12,15]],[[14,14,14,14],[14,15,14,16],[12,14,13,15]],[[43,45,46,50],[44,46,46,48],[43,42,26,24]],[[25,26,26,28],[28,29,28,30],[31,31,31,33]],[[62,60,58,71],[60,63,64,67],[60,63,64,67]],[[21,20,20,23],[19,19,18,21],[24,24,23,28]],[[34,37,37,42],[33,33,33,35],[36,38,36,41]],[[8,8,8,8],[4,4,4,5],[6,7,7,8]],[[201,212,195,232],[220,231,220,246],[198,196,195,226]],[[51,52,52,57],[43,47,44,48],[50,60,64,74]],[[6,7,6,7],[6,6,6,6],[7,7,7,7]],[[3,3,3,3],[4,5,4,5],[4,4,3,5]],[[16,16,15,17],[14,14,13,14],[14,15,13,15]],[[13,14,13,15],[12,13,12,14],[12,12,12,13]],[[15,14,14,15],[7,7,7,7],[8,8,8,8]],[[12,11,12,12],[11,12,11,13],[12,12,12,14]]]};</script>
+<script>const DATA = {"jahr":2027,"einheit":"Mio. €","laender":[["Baden-Württemberg","Süd"],["Bayern","Süd"],["Berlin","Ost"],["Brandenburg","Ost"],["Bremen","Nord"],["Hamburg","Nord"],["Hessen","West"],["Mecklenburg-Vorpommern","Ost"],["Niedersachsen","Nord"],["Nordrhein-Westfalen","West"],["Rheinland-Pfalz","West"],["Saarland","West"],["Sachsen","Ost"],["Sachsen-Anhalt","Ost"],["Schleswig-Holstein","Nord"],["Thüringen","Ost"]],"werte":[[[11,12,11,12],[12,12,11,13],[13,13,12,15]],[[14,14,14,14],[14,15,14,16],[12,14,13,15]],[[43,45,46,50],[44,46,46,48],[43,42,26,24]],[[25,26,26,28],[28,29,28,30],[31,31,31,33]],[[62,60,58,71],[60,63,64,67],[60,63,64,67]],[[21,20,20,23],[19,19,18,21],[24,24,23,28]],[[34,37,37,42],[33,33,33,35],[36,38,36,41]],[[8,8,8,8],[4,4,4,5],[6,7,7,8]],[[201,212,195,232],[220,231,220,246],[198,196,195,226]],[[51,52,52,57],[43,47,44,48],[50,60,64,74]],[[6,7,6,7],[6,6,6,6],[7,7,7,7]],[[3,3,3,3],[4,5,4,5],[4,4,3,5]],[[16,16,15,17],[14,14,13,14],[14,15,13,15]],[[13,14,13,15],[12,13,12,14],[12,12,12,13]],[[15,14,14,15],[7,7,7,7],[8,8,8,8]],[[12,11,12,12],[11,12,11,13],[12,12,12,14]]]};</script>
 <script>
 /* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
    Jeder Baustein entspricht einem Standard-Visual von Power BI.
@@ -654,9 +654,11 @@ const DK = (() => {
 
   /* ---------- Layout ---------- */
   DK.init({ titel: "Grafisch unterstützte Tabellendarstellung", breite: 727, hoehe: 540 });
-  const bFilter = DK.box("filter", 16, 8, 695, 50, "dk-filter");
-  DK.haarlinie(66);
-  const bTab = DK.box("v-tabelle", 16, 76, 695, 452);
+  // Revision DS 08.10.2026: Datenschnitte unter dem Berichtsnamen (Titel und Aussage), darunter die Tabelle
+  const bTitel = DK.box("v-titel", 16, 8, 695, 46);
+  const bFilter = DK.box("filter", 16, 60, 695, 50, "dk-filter");
+  DK.haarlinie(116);
+  const bTab = DK.box("v-tabelle", 16, 124, 695, 404);
   // Szenario-Kennzeichnung unter den Spaltenköpfen (IBCS): Vorjahr hellgrau, Plan weiß mit Rahmen, Ist anthrazit
   DK.el("style", {}, document.head, `
     #v-tabelle .dk-matrix th { vertical-align: bottom; padding-bottom: 11px; }
@@ -752,8 +754,11 @@ const DK = (() => {
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     const d = daten();
-    const v = DK.visual(bTab, { titel: `Umsatz nach Bundesländern, ${ZEITRAUM[S.zeitraum]}`, einheit: EINHEIT,
-      botschaft: botschaft(d, bTab.clientWidth || 695) });
+    DK.visual(bTitel, { titel: `Umsatz nach Bundesländern, ${ZEITRAUM[S.zeitraum]}`, einheit: EINHEIT,
+      botschaft: botschaft(d, bTitel.clientWidth || 695) });
+    bTab.textContent = "";
+    bTab.style.position = "absolute";
+    const v = { flaeche: DK.el("div", { style: "position:absolute;left:0;top:0;right:0;bottom:0" }, bTab) };
     DK.matrix(v.flaeche, { spalten: SPALTEN, zeilen: tabellenZeilen(d), zeilenhoehe: 22,
       sortierung: S.sort, onSort: sortieren, auswahl: S.auswahl,
       onClick: k => { S.auswahl = S.auswahl === k ? null : k; zeichnen(); },

@@ -4,6 +4,8 @@
 # Balanced Chance and Risk Card. Die Screenshots des Originals (Roadmap, BCR-Card) sind als Karten mit ihrem
 # Inhalt ersetzt, das Portfolio als schematische Matrix.
 # Revision DS 07.10.2026: Strategische Planung oben links; Roadmap und BCR-Card auf Höhe der Verzahnung, beide rot;
+# Revision DS 08.10.2026: Strategische Planung (links) länger, Kartentexte kleiner (5,4 pt), Spiegelstrich Zielerreichung
+# (Roadmap), Simulative Planung länger, Instrumente mittiger.
 # neue Kartentexte; externes Reporting entfällt; Zielvereinbarungen tiefer; Teilpläne wie Abb. 3.6 (ohne Knotenpunkte).
 STEM = "Gesamtmodellueberblick_fuer_die_integrierte_Unternehmensplanung_und_-steuerung"
 from bookfig import Fig, P, Para, MM, MSO_SHAPE, Emu
@@ -73,25 +75,26 @@ def build(theme):
         return B(XA, y, WA, h)
 
     # Kartentexte (Revision DS 07.10.2026), Höhe der mittleren Reihe aus dem Inhalt
-    RM_inhalt = [P("Strategische Projekte mit", size=6.5),
-                 P("Status", size=6.5, bullet="–"), P("Zeitplan", size=6.5, bullet="–"),
-                 P("Kennzahlen", size=6.5, bullet="–")]
-    BCR_inhalt = [P("Strategischem Ziel je Perspektive:", size=6.5),
-                  P("Kennzahlen", size=6.5, bullet="–"), P("Strategische Projekte", size=6.5, bullet="–"),
-                  P("Chancen", size=6.5, bullet="–"), P("Risiken", size=6.5, bullet="–")]
+    KS = 5.4                                                 # Schrift der Kartentexte (Revision DS 08.10.2026)
+    RM_inhalt = [P("Strategische Projekte mit", size=KS),
+                 P("Status", size=KS, bullet="–"), P("Zeitplan", size=KS, bullet="–"),
+                 P("Kennzahlen", size=KS, bullet="–"), P("Zielerreichung", size=KS, bullet="–")]
+    BCR_inhalt = [P("Strategischem Ziel je Perspektive:", size=KS),
+                  P("Kennzahlen", size=KS, bullet="–"), P("Strategische Projekte", size=KS, bullet="–"),
+                  P("Chancen", size=KS, bullet="–"), P("Risiken", size=KS, bullet="–")]
     YV = 28.0                                                # mittlere Reihe: Verzahnung, Roadmap, BCR-Card
     kh_bcr = max(5.0, f.measure([Para("Balanced Chance and Risk Card", size="head", bold=True)], WD,
                                 ins=(1.6, 0.5)))
     HV = max(22.0, kh_bcr + f.measure(BCR_inhalt, WD, ins=(1.6, 1.0)) + 0.4)
 
-    L1 = ebene(0.3, 16.0, "Strategische Planung", f"(Vision, strategische Analyse, Grund{SHY}strategien u.{NB}a.)")
+    L1 = ebene(0.3, 22.0, "Strategische Planung", f"(Vision, strategische Analyse, Grund{SHY}strategien u.{NB}a.)")
     L2 = ebene(YV, HV, f"Verzahnung strategischer und operativ-taktischer Planung")
-    L3 = ebene(64.0, 20.0, "Simulative Planung", "(operative, taktische und Forecast-Planung)")
+    L3 = ebene(64.0, 32.7, "Simulative Planung", "(operative, taktische und Forecast-Planung)")
     for o, u in ((L1, L2), (L2, L3)):
         A([(o.cx, o.b), (o.cx, u.y)], head=True, tail=True, name="Ebenen wechselseitig")
 
     # ------------------------------------------------------------ Instrumente (oben)
-    f.text(XB, 0.3, XD - 3.0 - XB, 6.4,
+    f.text(W / 2 - 45.0, 0.3, 90.0, 6.4,
            [P("Instrumente u." + NB + "a.", size=6.5, bold=True),
             P(f"Umwelt-, Umfeld-, Markt- und Wettbewerbs{SHY}analysen, SWOT, Portfolioanalyse", size=6.5)],
            align="c", anchor="t", name="Instrumente")

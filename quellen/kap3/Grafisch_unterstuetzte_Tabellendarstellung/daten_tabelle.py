@@ -15,7 +15,7 @@ import os
 import random
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-JAHR = 2025
+JAHR = 2027
 # Bundesland, Region, Vorjahr, Plan, Ist (Mio. €, Jahr) – Werte des Originals
 LAENDER = [
     ("Baden-Württemberg", "Süd", 4.6, 4.8, 5.3),

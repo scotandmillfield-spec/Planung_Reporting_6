@@ -28,8 +28,10 @@ def build(theme):
                 P("Veranlassung der Durchführung", bullet="–", align="l", space_before=1)],
             5: [P(f"Vergleich der Durchführungs- und Entscheidungs{SHY}resultate (Soll/Ist)", align="l")]}
     # Revision DS 07.10.2026: Spaltenköpfe als kursiver Text ohne Kasten, etwas oberhalb der Tabelle
-    kopf = [P("Phasen des Führungsprozesses", italic=True), P(f"Tätigkeiten der Unternehmungs{SHY}führung", italic=True)]
-    hk = max(tmp.measure([kopf[0]], CW, ins=(0.9, 0)), tmp.measure([kopf[1]], CW, ins=(0.9, 0)))
+    # Revision DS 08.10.2026: „Tätigkeiten der Unternehmungsführung“ ebenfalls zweizeilig
+    kopf = [[P("Phasen des", italic=True), P("Führungsprozesses", italic=True)],
+            [P("Tätigkeiten der", italic=True), P("Unternehmungsführung", italic=True)]]
+    hk = max(tmp.measure(kopf[0], CW, ins=(0.9, 0)), tmp.measure(kopf[1], CW + 2.0, ins=(0.9, 0)))
     ph_w = CW - 2 * tmp.INS_X - NUM_W
     ph_h = [tmp.measure([P(ph, align="l")], ph_w, ins=(0, 0)) for ph in PHASEN]
     hs = []
@@ -38,8 +40,10 @@ def build(theme):
         if i in taet:
             h = max(h, tmp.measure(taet[i], CW))
         hs.append(max(7.0, h + 1.0))
-    y0 = 5.0                 # Oberkante der Spaltenköpfe (unter „Zielvorgabe“)
-    ys = [y0 + hk + 1.6]
+    # Revision DS 08.10.2026: Spaltenköpfe ganz oben, „Zielvorgabe“ darunter, direkt über der Tabelle
+    y0 = 0.4                 # Oberkante der Spaltenköpfe
+    yz = y0 + hk + 0.6       # Oberkante „Zielvorgabe“
+    ys = [yz + 3.6 + 0.8]
     for h in hs:
         ys.append(ys[-1] + h)
     yend = ys[-1] + 3.2
@@ -47,8 +51,8 @@ def build(theme):
     f = Fig(W, H, theme, STEM)
 
     # Kopf und Tabelle
-    f.text(X0, y0, CW, hk, [kopf[0]], align="c", anchor="b", ins=(0.9, 0), name="Kopf Phasen")
-    f.text(X1, y0, CW, hk, [kopf[1]], align="c", anchor="b", ins=(0.9, 0), name="Kopf Tätigkeiten")
+    f.text(X0, y0, CW, hk, kopf[0], align="c", anchor="b", ins=(0.9, 0), name="Kopf Phasen")
+    f.text(X1 - 1.0, y0, CW + 2.0, hk, kopf[1], align="c", anchor="b", ins=(0.9, 0), name="Kopf Tätigkeiten")
     bgp = t.role("box").fill
     for i, ph in enumerate(PHASEN):
         f.box(X0, ys[i], CW, hs[i], None, role="box", rounded=False, name=f"Phase {i + 1}")
@@ -81,19 +85,19 @@ def build(theme):
     # Durchführung und Informationsflüsse
     # Revision DS 07.10.2026: Durchführung mittig auf der Höhe von Phase 4 und 5
     dx, dw, dh = 90.2, 19.0, 4.6
-    dy = (ys[3] + ys[5]) / 2 - dh / 2
+    dy = (ys[4] + ys[5]) / 2 - dh / 2   # Revision DS 08.10.2026: weiter nach unten, mittig auf Phase 5
     f.box(dx, dy, dw, dh, [P("Durchführung", bold=True)], role="box", name="Durchführung", ins=(0.6, 0.5))
     dcx = dx + dw / 2
     f.arrow([(X2, ys[4]), (dcx, ys[4]), (dcx, dy)], role="info", dash="sysDash")
     vg = [P(f"Vorgabe{SHY}information (Soll)", size=6.5, italic=True)]
     f.text(XI + 3.4, ys[4] + 0.7, dx - 0.5 - (XI + 3.4), 6.2, vg, align="l", anchor="t", name="Vorgabeinformation")
-    f.arrow([(dcx, dy + dh), (dcx, yend), (3.0, yend), (3.0, 2.0), (XF - 0.5, 2.0)], role="info", dash="sysDash")
+    f.arrow([(dcx, dy + dh), (dcx, yend), (3.0, yend), (3.0, yz + 1.8), (XF - 0.5, yz + 1.8)], role="info", dash="sysDash")
     f.text(78.0, yend + 0.6, 30.8, 3.6, [P("Rückinformation (Ist)", size=6.5, italic=True)],
            align="r", anchor="t", name="Rückinformation")
     # Revision DS 07.10.2026: „Zielvorgabe“ und ihr Pfeil beginnen an der gestrichelten Linie nach unten
     xf = XF
-    f.text(xf - 0.2, 0.2, 30, 3.6, [P("Zielvorgabe", italic=True)], align="l", anchor="m", name="Zielvorgabe")
-    f.line([(xf, 3.9), (xf, ys[4] + hs[4] / 2)], color=t.info, lw=0.6, dash="sysDash")
+    f.text(xf - 0.2, yz, 30, 3.6, [P("Zielvorgabe", italic=True)], align="l", anchor="m", name="Zielvorgabe")
+    f.line([(xf, yz + 3.7), (xf, ys[4] + hs[4] / 2)], color=t.info, lw=0.6, dash="sysDash")
     for i in range(5):
         cy = ys[i] + hs[i] / 2
         f.arrow([(xf, cy), (X0, cy)], role="info", dash="sysDash", size="sm")

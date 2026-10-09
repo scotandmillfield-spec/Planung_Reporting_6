@@ -1,6 +1,6 @@
 /* Abb. 3.22 „ABC-Analyse Produkte“ (6. Auflage) – Neuaufbau des Cubeware-Beispiels der 5. Auflage.
    Inhalt wie im Original: Kennzahlwahl, Jahr, Kunden, Klassengrenzen; ABC-Klassen, Produktrangliste, Konzentrationskurve.
-   Daten: daten_abc.py (Absatz 2025 über alle Kunden = Werte des Originals). Alle Werte werden hier aus den Einzelsätzen berechnet. */
+   Daten: daten_abc.py (Absatz 2027 über alle Kunden = Werte des Originals). Alle Werte werden hier aus den Einzelsätzen berechnet. */
 (() => {
   "use strict";
   const { zahl, prozent, sv, tw, NBSP } = DK;
@@ -16,7 +16,7 @@
   const pz = v => zahl(v * 100, 1);                       // Anteil ohne Prozentzeichen (Einheit im Spaltenkopf)
 
   /* ---------- Zustand ---------- */
-  const S = { kz: "stueck", jahr: 2025, kunde: "alle", a: 60, b: 20, auswahl: null };
+  const S = { kz: "stueck", jahr: 2027, kunde: "alle", a: 80, b: 10, auswahl: null };
   const K = () => KZ[S.kz];
   const fw = v => zahl(K().f(v), K().nk);
   function auswaehlen(typ, wert) {
@@ -121,8 +121,8 @@
     const d = abc(), k = K();
     const kundeText = S.kunde === "alle" ? "alle Kunden" : "Kundengruppe " + KUNDEN[+S.kunde];
     DK.kopf(bKopf, { titel: "ABC-Analyse Produkte",
-      untertitel: `${k.name} in ${k.einheit} · Jahr ${S.jahr} · ${kundeText} · Klassengrenzen A ${S.a}${NBSP}%, B ${S.b}${NBSP}%`,
-      quelle: "Quelle: Absatzstatistik · Stand 31.12.2025", legende: [] });
+      untertitel: `${k.name} in ${k.einheit} · Jahr ${S.jahr} · ${kundeText} · Klassengrenzen A ${S.a}${NBSP}%, B ${S.b}${NBSP}% · Stand 31.12.2027`,
+      quelle: "", legende: [] });
     bKopf.querySelector(".dk-quelle").id = "kopf-quelle";
 
     const selKlasse = !S.auswahl ? null : S.auswahl.typ === "klasse" ? S.auswahl.wert : klasseVon(d, S.auswahl.wert);

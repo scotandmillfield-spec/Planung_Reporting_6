@@ -126,6 +126,159 @@
    "kommentar": "Der obere Kasten lautet jetzt „Navigation gemäß Startcockpit (z. B. nach Bereichen und Spitzenkennzahlen)“; der Kasten Reporting-Navigation gemäß Organigramm und die drei gestrichelten Kästen rechts sind entfallen. Bei der Bereichsstruktur steht „z. B. Management, Vertrieb und Produktion“, bei der Kostenträgerstruktur „z. B. dezidiert für Key-Account-Manager“.",
    "auftrag": "0b67bb68666e",
    "zeit": "2026-10-08T11:22"
+  },
+  {
+   "id": "2026-10-09-abb-2-4-1",
+   "schluessel": "abb-2-4",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Spaltenköpfe stehen jetzt ganz oben, beide zweizeilig („Phasen des / Führungsprozesses“, „Tätigkeiten der / Unternehmungsführung“). Das Wort Zielvorgabe und die gestrichelte Linie beginnen darunter, unmittelbar über der Tabelle; der Kasten Durchführung sitzt weiter unten, mittig auf Höhe der Realisationsphase (Phase 5).",
+   "auftrag": "ec7433281a2a",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-1-1",
+   "schluessel": "abb-3-1",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Kasten Strategische Planung oben links ist länger, ebenso der Kasten Simulative Planung unten. Die Texte der Karten Roadmap und Balanced Chance and Risk Card stehen in einer kleineren, gleichen Schrift, sodass „Perspektive:“ nicht mehr in die zweite Zeile rutscht; bei der Roadmap ist der Spiegelstrich „Zielerreichung“ ergänzt (falls er zur Balanced Chance and Risk Card gehören sollte, bitte kurz Bescheid geben). Die Zeilen „Instrumente u. a.“ stehen mittiger über der Abbildung.",
+   "auftrag": "dc79b14a1d22",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-2-1",
+   "schluessel": "abb-3-2",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Filter Geschäftsbereich mit seiner Auswahl steht jetzt in der Titelzeile von „Ziele und Kennzahlen“ direkt neben „Δ in %“ und links vom Schalter ΔPL/ΔVJ; rechts oben bleibt nur die Legende.",
+   "auftrag": "b19ffa4d2236",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-5-1",
+   "schluessel": "abb-3-5",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Im Portfolio heißt das Feld unten rechts jetzt „prüfen“ und das Feld unten links „nachrangig“, wie in Abb. 3.4; die Aussage über dem Portfolio zählt die Projekte im Feld „nachrangig“ entsprechend neu.",
+   "auftrag": "16c21b0bce93",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-6-1",
+   "schluessel": "abb-3-6",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die beiden Pfeile in den Ergebnisplan sind weiter nach links gerückt, der Bilanzplan steht ebenfalls weiter links; die Abbildung ist dadurch etwas schmaler geworden.",
+   "auftrag": "0a3a1e1dd419",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-10-1",
+   "schluessel": "abb-3-10",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der obere Kasten lautet jetzt „Navigation im Startcockpit“, die zweite Zeile „z. B. nach Bereichen und Spitzenkennzahlen“ steht ohne Klammern.",
+   "auftrag": "26370de7b770",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-12-1",
+   "schluessel": "abb-3-12",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Termine sind um ein Jahr verschoben (Stichtag 30.09.2027, Berichts- und Planungsprozesse 2027, Budgetierung 2028, Jahresabschluss 2026), dabei auf Arbeitstage gelegt. Die Quellenangabe entfällt; der Stichtag steht weiter im Untertitel. Absatzplanung ist nun 6 Tage überfällig.",
+   "auftrag": "78d9c64d2ac7",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-13-1",
+   "schluessel": "abb-3-13",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Knotenpunkte an den Verzweigungen sind entfernt.",
+   "auftrag": "71bc81ea7aaf",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-16-1",
+   "schluessel": "abb-3-16",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Jahresangaben stehen auf 2027 (Titel „Geschäftsjahr 2027“, Schaltfläche „Jahr 2027“). Die Filter Zeitraum und Region stehen jetzt unter dem Berichtsnamen (Titel und Aussage), über der Tabelle.",
+   "auftrag": "ae6749623b18",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-20-1",
+   "schluessel": "abb-3-20",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Jahreswerte auf 2027, Vorjahr 2026 (Datenschnitt Jahr: 2026 und 2027). Über den Filtern steht neu der Berichtsname „Top-Ten-Analyse“ mit Untertitel; die Filter Jahr und Vertriebsgebiet stehen darunter. Die Werte der zehn Kunden sind unverändert, nur das Jahr ist verschoben.",
+   "auftrag": "e4aa4d5db905",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-22-1",
+   "schluessel": "abb-3-22",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Daten sind um ein Jahr verschoben (Jahr 2027, Vorjahr 2026, Stand 31.12.2027 im Untertitel); die Quellenangabe rechts ist gelöscht. Voreinstellung der Klassengrenzen: Klasse A bis 80 %, Klasse B weitere 10 % (damit 21 A-, 7 B- und 21 C-Produkte).",
+   "auftrag": "1ea25d51284f",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-23-1",
+   "schluessel": "abb-3-23",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Layout wie Abb. 3.5: Kopf mit Titel, Filter Jahr (2025, 2026, 2027; voreingestellt 2027, alle Werte als Ist 2027), Kennzahlenleiste, links die Tabellen, rechts das Portfolio. In den vier Feldern stehen die Normstrategien des Boston-Consulting-Portfolios: Question Marks (oben links), Stars (oben rechts), Poor Dogs (unten links), Cash Cows (unten rechts). Neu ist eine kleine Tabelle der Felder mit den üblichen Normstrategien (Selektieren, Investieren, Desinvestieren, Abschöpfen); die Werte für 2025 und 2026 sind erfunden.",
+   "auftrag": "2391f15bfe6a",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-26-1",
+   "schluessel": "abb-3-26",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Quellenangabe „Absatz- und Kostenplanung“ ist gelöscht.",
+   "auftrag": "96ee237033ba",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-31-1",
+   "schluessel": "abb-3-31",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Abbildung bleibt als Screenshot der 5. Auflage. Neue Abbildungsunterschrift: „Geo-Visualisierung eines Stadions mit Tabelle (Quelle: Cubeware Bildergalerie 2011)“ – die Schreibweise „Visualiserung“ aus der Vorgabe habe ich zu „Visualisierung“ korrigiert.",
+   "auftrag": "adc2b7afbc21",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-tab-4-8-1",
+   "schluessel": "tab-4-8",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Kennzahlname „Anlagendeckung (%)“ steht jetzt in der rechten Spalte linksbündig über dem Text, „Kennzahl:“ in der linken Spalte. Hinter allen Begriffen der linken Spalte steht ein Doppelpunkt. Die Vorschau wird erst bei der nächsten LaTeX-Übersetzung aktualisiert.",
+   "auftrag": "3c683f6f36d5",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-3-193-1",
+   "schluessel": "abb-3-193",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Soll die Abbildung nach der Vorlage von Gleißner (Controller Magazin 7/8 2016, S. 16–23) vollständig neu gezeichnet werden (Plan-G&V mit Risikoliste, Verteilung der Simulationsergebnisse, Finanzrating, Ratingtabelle, Cashflow-Prognose)? Falls ja: als Neuzeichnung „in Anlehnung an“ oder mit der Quelle wie bisher? Und lautet der Name Gleißner (so im Literaturverzeichnis) oder Geißner (so in der bisherigen Unterschrift)? Die Unterschrift „Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: …, 2016, S. 16–23)“ übernehme ich dann; der Eintrag im Literaturverzeichnis gehört in das Overleaf-Projekt.",
+   "auftrag": "bd1ab63504d9",
+   "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-09-abb-5-39-1",
+   "schluessel": "abb-5-39",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Das Listing selbst endet mit der GROUP-BY-Zeile; „Abb. 5.39 Beispiel zur freien Datenrecherche …“ ist bereits die Abbildungsunterschrift, die LaTeX automatisch unter das Listing setzt und die nur in der Vorschau mit zu sehen ist. Soll die Unterschrift aus der Abbildung entfallen (dann entfiele auch die automatische Nummer), oder genügt es, dass sie im Text nicht doppelt steht?",
+   "auftrag": "2873ee164441",
+   "zeit": "2026-10-09T08:39"
   }
  ]
 }

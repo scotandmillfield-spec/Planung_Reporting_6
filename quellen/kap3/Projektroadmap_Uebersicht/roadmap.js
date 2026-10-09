@@ -111,7 +111,7 @@
   function portfolioDaten() {
     return zeilen(S.stand, "alle").map(r => ({ key: r.p, x: r.risk, y: r.nw, g: r.plan, r }));
   }
-  const nachrangig = r => r.risk >= 50 && r.nw < 5;      // Feld unten rechts
+  const nachrangig = r => r.risk < 50 && r.nw < 5;       // Feld unten links (unten rechts: prüfen)
   function tooltipProjekt(r) {
     return [r.name, `${ST[r.st]} · ${r.verantw}`, `${GB[r.gb]} · ${FB[r.fb]}`, `BSC-Perspektive: ${BSC[r.bsc]}`,
       `Plan-Kosten: ${zahl(r.plan, 0)} Tsd. €${r.st === IDEE ? " (Grobschätzung)" : ""}`,
@@ -154,7 +154,7 @@
       x: { min: 0, max: 100, ticks: [0, 50, 100], titel: "Risikoindex" },
       y: { min: 0, max: 10, ticks: [0, 5, 10], titel: "Strategische Relevanz" },
       linien: { x: 50, y: 5 },
-      felder: [{ ecke: "ol", text: "umsetzen" }, { ecke: "or", text: "absichern" }, { ecke: "ur", text: "nachrangig" }],
+      felder: [{ ecke: "ol", text: "umsetzen" }, { ecke: "or", text: "absichern" }, { ecke: "ul", text: "nachrangig" }, { ecke: "ur", text: "prüfen" }],
       auswahl: S.auswahl ? p => passt(p.r) : null, onClick: k => auswaehlen("projekt", k),
       aria: "Portfolio aus strategischer Relevanz und Risikoindex", tooltip: p => tooltipProjekt(p.r) });
     if (DK._ebenenNeu) DK._ebenenNeu();
@@ -174,7 +174,7 @@
       { nr: 5, ziel: "sp-abw", versatz: [4, -2], regel: "CHECK – Visuelle Integrität", titel: "Sichtbare Nulllinie, Zahl neben dem Balken",
         text: "Abweichungsbalken gehen von einer sichtbaren Nulllinie aus, ein Maßstab je Spalte. Die Zahl steht links daneben; im Original verdeckten die Balken die Zahlen." },
       { nr: 6, ziel: "v-portfolio", versatz: [0, 52], regel: "EXPRESS – Passende Darstellung", titel: "Benannte Felder im Portfolio",
-        text: "Die Grenzen bei Relevanz 5 und Risiko 50 teilen das Portfolio; die Felder tragen eine Handlungsempfehlung: umsetzen, absichern, nachrangig. Klick auf einen Kreis filtert Tabelle und Kennzahlen." },
+        text: "Die Grenzen bei Relevanz 5 und Risiko 50 teilen das Portfolio; die Felder tragen eine Handlungsempfehlung: umsetzen, absichern, prüfen, nachrangig. Klick auf einen Kreis filtert Tabelle und Kennzahlen." },
       { nr: 7, ziel: "kpis", regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Keine Farbskalen, kein Logo, keine Kästen",
         text: "Farbskalen, Farbverläufe, Logo und hinterlegte Filterkästen entfallen. Verantwortung, Bereich, strategische Relevanz, Risikoindex und Kapitalwert stehen im Tooltip jeder Zeile." },
       { nr: 8, ziel: "projekte", versatz: [-28, 0], regel: "STRUCTURE – Inhalte ordnen", titel: "Feste Statusfolge, sortierbar",
@@ -200,7 +200,7 @@
       { id: "E", ziel: "v-portfolio", versatz: [0, 26], titel: "Portfolio", visual: "Punktdiagramm",
         felder: "Werte: Projekt; X-Achse: Risikoindex; Y-Achse: Nutzwert, Achsentitel „Strategische Relevanz“; Größe: Plan-Kosten",
         format: "Achsen fest 0–100 und 0–10; Analysebereich: X- und Y-Konstantenlinie bei 50 und 5, gestrichelt #9A9A9A; Markierung #3A3F44, 20 % Transparenz",
-        hinweis: "Die Feldnamen „umsetzen“, „absichern“ und „nachrangig“ sind Textfelder über dem Visual." },
+        hinweis: "Die Feldnamen „umsetzen“, „absichern“, „prüfen“ und „nachrangig“ sind Textfelder über dem Visual." },
       { id: "F", ziel: "projekte", versatz: [-56, 0], titel: "Kernaussagen", visual: "Textfeld mit dynamischem Wert",
         felder: "Je Visual ein Text-Measure, z. B. TOPN(1; Projekte; [Kostenabweichung]) für die größten Mehrkosten",
         format: "10,5 pt, #4D4D4D" },

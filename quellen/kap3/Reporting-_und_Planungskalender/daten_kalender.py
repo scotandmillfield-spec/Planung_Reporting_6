@@ -1,9 +1,10 @@
 """Daten für Abb. 3.12 „Reporting- und Planungskalender“.
 
-Kalender der Berichts- und Planungsprozesse eines Jahres (2026) mit der Budgetierung 2027, Stichtag 30.09.2026.
-Aufbau und Abfolge folgen dem Original (5. Auflage, Jahr 2010), die Termine sind auf Arbeitstage 2026 gelegt.
+Kalender der Berichts- und Planungsprozesse eines Jahres (2027) mit der Budgetierung 2028, Stichtag 30.09.2027.
+Aufbau und Abfolge folgen dem Original (5. Auflage, Jahr 2010). Revision DS 07.10.2026: alle Termine um ein Jahr
+verschoben (52 Wochen, damit sie Arbeitstage bleiben); in der Tabelle unten stehen noch die Tagesangaben des Vorjahres.
 Personennamen des Originals sind durch Rollen ersetzt, Softwarebezüge (SAP, CO-Aufträge, prevero) neutralisiert.
-Die Absatzplanung (14.09.–25.09.2026) stimmt mit dem Planungsbrief in Abb. 3.7 überein.
+Die Absatzplanung (13.09.–24.09.2027) stimmt mit dem Planungsbrief in Abb. 3.7 überein.
 
 Je Knoten: id, übergeordneter Knoten, Name, Verantwortlich, Plan-Beginn, Plan-Ende, Ist-Ende (None = nicht erledigt),
 Serie (nur Gruppen: wiederkehrende Termine, die zugeklappt in einer Zeile stehen). Gruppen haben keine eigenen Termine.
@@ -17,19 +18,24 @@ import json
 import os
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-JAHR = 2026
+JAHR = 2027
 STICHTAG = "30.09."
+VERSCHIEBUNG = dt.timedelta(days=364)        # 52 Wochen: Wochentage und Abfolge bleiben erhalten
 
 
 def iso(t):
-    return None if t is None else f"{JAHR}-{t[3:5]}-{t[0:2]}"
+    if t is None:
+        return None
+    if t == STICHTAG:
+        return f"{JAHR}-09-30"
+    return (dt.date(JAHR - 1, int(t[3:5]), int(t[0:2])) + VERSCHIEBUNG).isoformat()
 
 
 G = None  # Gruppe: keine eigenen Termine
 # id, parent, Name, Verantwortlich, Beginn, Ende, Ist-Ende, Serie
 K = [
     ("rep", None, "Reporting", "", G, G, G, False),
-    ("ja", "rep", "Jahresabschluss 2025", "Rechnungswesen", "02.02.", "27.03.", "27.03.", False),
+    ("ja", "rep", "Jahresabschluss 2026", "Rechnungswesen", "02.02.", "27.03.", "27.03.", False),
     ("mr", "rep", "Monatsreporting", "Controlling", G, G, G, True),
     ("mr01", "mr", "Monatsreporting 01 und 02", "Controlling", "02.03.", "10.03.", "10.03.", False),
     ("mr03", "mr", "Monatsreporting 03", "Controlling", "01.04.", "14.04.", "14.04.", False),
@@ -51,7 +57,7 @@ K = [
     ("pla", None, "Planung", "", G, G, G, False),
     ("str", "pla", "Strategieentwicklung", "Unternehmensentwicklung", "12.01.", "27.02.", "27.02.", False),
     ("mfp", "pla", "Mittelfristplanung inkl. Forecast 1", "Controlling", "13.04.", "23.10.", None, False),
-    ("bud", "pla", "Budgetierung 2027", "Controlling", G, G, G, False),
+    ("bud", "pla", "Budgetierung 2028", "Controlling", G, G, G, False),
     ("vor", "bud", "Vorbereitungsarbeiten", "Controlling", "17.08.", "28.08.", "28.08.", False),
     ("pip", "bud", "Projekt- und Investitionsplanung", "Investitionscontrolling", G, G, G, False),
     ("pip1", "pip", "Projekte vorbereiten", "Investitionscontrolling", "24.08.", "28.08.", "28.08.", False),
@@ -116,7 +122,10 @@ def pfad(kid):
 
 
 def d(t):
-    return "" if t is None else f"{t}{JAHR}"
+    if t is None:
+        return ""
+    x = dt.date.fromisoformat(iso(t))
+    return f"{x.day:02d}.{x.month:02d}.{x.year}"
 
 
 with open(os.path.join(HIER, "kalender.csv"), "w", newline="", encoding="utf-8-sig") as fh:

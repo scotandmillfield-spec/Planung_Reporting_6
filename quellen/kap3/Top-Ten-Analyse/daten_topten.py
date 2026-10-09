@@ -1,10 +1,10 @@
 """Daten für Abb. 3.20 „Top-Ten-Analyse“.
 
 Die zehn Kunden des Originals (5. Auflage) mit ihren Umsätzen Vorjahr und Ist – Werte unverändert, Namen
-erfunden (das Original nannte reale Versicherungsunternehmen). Gelesen als Geschäftsjahr 2025 mit Vorjahr 2024.
+erfunden (das Original nannte reale Versicherungsunternehmen). Gelesen als Geschäftsjahr 2027 mit Vorjahr 2026 (Revision DS 08.10.2026).
 Damit Datenschnitte (Jahr, Vertriebsgebiet) eine echte Rangfolge ergeben, kommen 38 weitere erfundene Kunden mit
 kleineren Umsätzen hinzu (alle unter dem zehnten Kunden, damit die Top Ten des Originals erhalten bleiben) und ein
-Jahr 2023 für den Vorjahresvergleich 2024.
+Jahr 2025 für den Vorjahresvergleich 2026.
 Ausgabe: topten.json (Kunden, Gebiete, Umsätze 2023–2025 in €) und topten.csv (Einzelsätze Kunde × Jahr).
 """
 import csv
@@ -13,8 +13,8 @@ import os
 import random
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-JAHRE = [2023, 2024, 2025]
-# Kunde, Vertriebsgebiet, Umsatz 2024 (VJ), Umsatz 2025 (Ist) – Werte des Originals, Namen erfunden
+JAHRE = [2025, 2026, 2027]
+# Kunde, Vertriebsgebiet, Umsatz 2026 (VJ), Umsatz 2027 (Ist) – Werte des Originals, Namen erfunden
 TOP = [
     ("Altmoor Versicherung", "Süd", 164674, 162357),
     ("Brenkhof Versicherung", "West", 95212, 99516),
@@ -55,8 +55,8 @@ for i, (name, gebiet) in enumerate(WEITERE):
     u23 = round(u24 / rnd.uniform(0.9, 1.1))
     kunden.append([name, gebiet]); werte.append([u23, u24, u25])
 
-# Prüfungen: Top Ten 2025 und 2024 wie im Original
-for j, nr in ((2, 2025), (1, 2024)):
+# Prüfungen: Top Ten 2027 und 2026 wie im Original
+for j, nr in ((2, 2027), (1, 2026)):
     rang = sorted(range(len(kunden)), key=lambda i: -werte[i][j])[:10]
     assert set(rang) == set(range(10)), f"Top Ten {nr} weichen vom Original ab"
 assert all(len([k for k in kunden if k[1] == g]) >= 10 for g in ("Nord", "Ost", "Süd", "West"))
@@ -77,4 +77,4 @@ for j, jahr in enumerate(JAHRE):
     print(f"{jahr}: Gesamt {ges:9,d} €  Top 10 {sum(top):9,d} € ({sum(top) / ges:.1%})")
 for g in ("Nord", "Ost", "Süd", "West"):
     n = sum(1 for k in kunden if k[1] == g)
-    print(f"{g}: {n} Kunden, Umsatz 2025 {sum(u[2] for k, u in zip(kunden, werte) if k[1] == g):,d} €")
+    print(f"{g}: {n} Kunden, Umsatz 2027 {sum(u[2] for k, u in zip(kunden, werte) if k[1] == g):,d} €")

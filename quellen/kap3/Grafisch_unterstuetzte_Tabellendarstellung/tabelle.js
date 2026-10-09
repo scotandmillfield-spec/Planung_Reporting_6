@@ -19,9 +19,11 @@
 
   /* ---------- Layout ---------- */
   DK.init({ titel: "Grafisch unterstützte Tabellendarstellung", breite: 727, hoehe: 540 });
-  const bFilter = DK.box("filter", 16, 8, 695, 50, "dk-filter");
-  DK.haarlinie(66);
-  const bTab = DK.box("v-tabelle", 16, 76, 695, 452);
+  // Revision DS 08.10.2026: Datenschnitte unter dem Berichtsnamen (Titel und Aussage), darunter die Tabelle
+  const bTitel = DK.box("v-titel", 16, 8, 695, 46);
+  const bFilter = DK.box("filter", 16, 60, 695, 50, "dk-filter");
+  DK.haarlinie(116);
+  const bTab = DK.box("v-tabelle", 16, 124, 695, 404);
   // Szenario-Kennzeichnung unter den Spaltenköpfen (IBCS): Vorjahr hellgrau, Plan weiß mit Rahmen, Ist anthrazit
   DK.el("style", {}, document.head, `
     #v-tabelle .dk-matrix th { vertical-align: bottom; padding-bottom: 11px; }
@@ -117,8 +119,11 @@
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     const d = daten();
-    const v = DK.visual(bTab, { titel: `Umsatz nach Bundesländern, ${ZEITRAUM[S.zeitraum]}`, einheit: EINHEIT,
-      botschaft: botschaft(d, bTab.clientWidth || 695) });
+    DK.visual(bTitel, { titel: `Umsatz nach Bundesländern, ${ZEITRAUM[S.zeitraum]}`, einheit: EINHEIT,
+      botschaft: botschaft(d, bTitel.clientWidth || 695) });
+    bTab.textContent = "";
+    bTab.style.position = "absolute";
+    const v = { flaeche: DK.el("div", { style: "position:absolute;left:0;top:0;right:0;bottom:0" }, bTab) };
     DK.matrix(v.flaeche, { spalten: SPALTEN, zeilen: tabellenZeilen(d), zeilenhoehe: 22,
       sortierung: S.sort, onSort: sortieren, auswahl: S.auswahl,
       onClick: k => { S.auswahl = S.auswahl === k ? null : k; zeichnen(); },

@@ -279,6 +279,15 @@
    "kommentar": "Rückfrage: Das Listing selbst endet mit der GROUP-BY-Zeile; „Abb. 5.39 Beispiel zur freien Datenrecherche …“ ist bereits die Abbildungsunterschrift, die LaTeX automatisch unter das Listing setzt und die nur in der Vorschau mit zu sehen ist. Soll die Unterschrift aus der Abbildung entfallen (dann entfiele auch die automatische Nummer), oder genügt es, dass sie im Text nicht doppelt steht?",
    "auftrag": "2873ee164441",
    "zeit": "2026-10-09T08:39"
+  },
+  {
+   "id": "2026-10-10-abb-3-44-1",
+   "schluessel": "abb-3-44",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Im äußeren Ring sind jetzt deutlich mehr Kaufgründe beschriftet (Preis, Qualität, Marke, Aktion, Testbericht) statt nur der Preis; schmale Segmente tragen den Namen entlang des Radius. Die Ringe sind neu proportioniert, die Produktgruppen im mittleren Ring teils abgekürzt (z. B. Trek., Mount.), und die Kaufgründe werden in der Beschriftung auch gekürzt (Qual., Test), wenn der volle Name nicht passt.",
+   "auftrag": "2aca559a225d",
+   "zeit": "2026-10-10T09:59"
   }
  ]
 }

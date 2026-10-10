@@ -788,8 +788,9 @@ const DK = (() => {
   }
   function etikett(k, d) {
     if (k.ebene === 0) return [[k.name, pz(k.wert / d.ges)], [k.name]];
-    if (k.ebene === 1) return [[k.name.replace(/ Bike$/, "")]];        // Produktgruppen kurz: City, Mountain …
-    return [[k.name]];
+    const kurz = { Mountain: "Mount.", Trekking: "Trek.", "Qualität": "Qual.", Testbericht: "Test" };
+    const n = k.ebene === 1 ? k.name.replace(/ Bike$/, "") : k.name;          // Produktgruppen kurz: City, Mountain …
+    return kurz[n] ? [[n], [kurz[n]]] : [[n]];                               // sonst gekürzt, wenn der lange Name nicht passt
   }
   // Segmente mit Winkeln; start = Drehung des Diagramms (0 = Beginn bei 12 Uhr)
   function segmente(d, start) {
@@ -813,6 +814,15 @@ const DK = (() => {
         const m = lage(cx, cy, RAD[s.k.ebene], RAD[s.k.ebene + 1], s.a0, s.a1, w, h);
         if (m) return { zeilen, m };
       }
+      if (s.k.ebene === 2) {                      // schmale Kaufgrund-Segmente: Name entlang des Radius, nie getrennt
+        const am = (s.a0 + s.a1) / 2, rm = (RAD[2] + RAD[3]) / 2, laenge = RAD[3] - RAD[2] - 8;
+        for (const zeilen of etikett(s.k, d)) {
+          if (DK.tw(zeilen[0]) <= laenge && (s.a1 - s.a0) * rm >= 13) {
+            const gr = (am % TAU) * 180 / Math.PI, rechts = Math.sin(am) > 0;
+            return { zeilen, m: P(cx, cy, rm, am), rot: rechts ? gr - 90 : gr + 90 };
+          }
+        }
+      }
       return null;
     });
   }
@@ -821,12 +831,12 @@ const DK = (() => {
     const svg = sv("svg", { width: breite, height: hoehe, role: "img",
       "aria-label": `Sunburst: Umsatz ${S.jahr} nach Region, Produktgruppe und Kaufgrund` }, ziel);
     const R3 = Math.min(hoehe / 2 - 4, 232), cx = breite / 2, cy = hoehe / 2;
-    const RAD = [R3 * 0.20, R3 * 0.54, R3 * 0.77, R3];
+    const RAD = [R3 * 0.19, R3 * 0.52, R3 * 0.74, R3];
     // Drehung so wählen, dass möglichst viele Namen waagerecht passen (Regionen zuerst); bei Gleichstand 12 Uhr
     let best = null;
     for (let grad = 0; grad < 360; grad += 15) {
       const segs = segmente(d, grad * Math.PI / 180), lab = beschriften(segs, cx, cy, RAD, d);
-      const wert = lab.reduce((s, l, i) => s + (l ? [1000, 30, 1][segs[i].k.ebene] + (l.zeilen.length > 1 ? 300 : 0) : 0), 0);
+      const wert = lab.reduce((s, l, i) => s + (l ? [1000, 30, 4][segs[i].k.ebene] + (l.zeilen.length > 1 ? 300 : 0) : 0), 0);
       if (!best || wert > best.wert) best = { wert, segs, lab };
     }
     const a = S.auswahl;
@@ -850,7 +860,8 @@ const DK = (() => {
       const l = best.lab[i];
       if (l) {
         const t = sv("text", { x: l.m[0], y: l.m[1] - (l.zeilen.length - 1) * 8, "text-anchor": "middle", dy: "0.35em",
-          class: blass(k) ? "dk-blass" : "", style: `fill:${SCHRIFT[k.ebene]};pointer-events:none` }, texte);
+          class: blass(k) ? "dk-blass" : "", style: `fill:${SCHRIFT[k.ebene]};pointer-events:none`,
+          ...(l.rot !== undefined ? { transform: `rotate(${l.rot} ${l.m[0]} ${l.m[1]})` } : {}) }, texte);
         l.zeilen.forEach((z, j) => sv("tspan", { x: l.m[0], dy: j ? 16 : 0 }, t, z));
       }
     });
@@ -895,7 +906,7 @@ const DK = (() => {
       { nr: 4, ziel: "sb-ringe", anker: "links", versatz: [40, 50], regel: "STRUCTURE – Inhalte ordnen", titel: "Gleiche Reihenfolge in jeder Region",
         text: "Die Regionen folgen im Uhrzeigersinn ihrem Umsatz; Produktgruppen und Kaufgründe stehen in jeder Region in derselben Reihenfolge. So lassen sich Muster vergleichen, etwa der hohe Anteil der City Bikes in den Niederlanden." },
       { nr: 5, ziel: "sb-texte", anker: "links", versatz: [10, 330], regel: "EXPRESS – Lesbar beschriften", titel: "Waagerecht und ungetrennt",
-        text: "Namen stehen waagerecht und nur dort, wo sie ganz ins Segment passen. Das Original drehte die Beschriftung und trennte mitten im Wort („Manuf acturer“, „Mountai n Bikes“). Kleine Segmente nennen ihre Werte im Tooltip." },
+        text: "Namen stehen waagerecht, wo sie ganz ins Segment passen; in den schmalen Segmenten des äußeren Rings laufen die Kaufgründe entlang des Radius. Das Original drehte die Beschriftung und trennte mitten im Wort („Manuf acturer“, „Mountai n Bikes“). Kleine Segmente nennen ihre Werte im Tooltip." },
       { nr: 6, ziel: "sb-mitte", versatz: [-40, 40], regel: "CONDENSE – Mitte nutzen", titel: "Gesamtumsatz in der Mitte",
         text: "Die leere Mitte des Originals zeigt jetzt den Umsatz, auf den sich alle Anteile beziehen. Die Anteile der Regionen stehen im inneren Ring." },
       { nr: 7, ziel: "sb-ringe", anker: "links", versatz: [440, 370], regel: "CHECK – Visuelle Integrität", titel: "Winkel lesen ist ungenau",

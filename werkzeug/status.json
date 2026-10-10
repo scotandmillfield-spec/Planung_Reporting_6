@@ -873,7 +873,17 @@
     "Kein Power-BI-Standardvisual: Die Ebene „Nachbau“ nennt das zertifizierte Visual „Sunburst“ (AppSource) bzw. ein Ringdiagramm mit Drilldown; in Excel gibt es den Diagrammtyp Sunburst",
     "Caption: Daten und Gestaltung sind neu – „In Anlehnung an Microsoft 2017a“ kann für den Diagrammtyp bleiben oder entfallen"
    ],
-   "alt": "Sunburst-Diagramm des Umsatzes 2025 von 17,8 Mio. € in drei Ringen. Der innere, dunkle Ring teilt den Umsatz auf die Regionen auf: Deutschland 43 %, Frankreich 27 %, Niederlande 18 %, Österreich 12 %. Der mittlere Ring zeigt je Region die Produktgruppen City, Mountain, Racing und Trekking Bike, der äußere, hellste Ring je Produktgruppe die Kaufgründe Preis, Qualität, Marke, Aktion und Testbericht. Kernaussage: Qualität ist der häufigste Kaufgrund (30 %), bei City Bikes der Preis, bei Racing Bikes die Marke."
+   "alt": "Sunburst-Diagramm des Umsatzes 2025 von 17,8 Mio. € in drei Ringen. Der innere, dunkle Ring teilt den Umsatz auf die Regionen auf: Deutschland 43 %, Frankreich 27 %, Niederlande 18 %, Österreich 12 %. Der mittlere Ring zeigt je Region die Produktgruppen City, Mountain, Racing und Trekking Bike, der äußere, hellste Ring je Produktgruppe die Kaufgründe Preis, Qualität, Marke, Aktion und Testbericht. Kernaussage: Qualität ist der häufigste Kaufgrund (30 %), bei City Bikes der Preis, bei Racing Bikes die Marke.",
+   "revisionen": [
+    {
+     "datum": "10.10.2026",
+     "wunsch": [
+      "10.10.2026 MD: Wir brauchen in den einzelnen Elementen wenige mehr Beispiele. Hier stets den Preis zu nennen, ist vielleicht richtig, aber ausschließlich nur den preis zu nennen verkennt die Möglichkeiten dieses Diagramms."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Im äußeren Ring sind jetzt deutlich mehr Kaufgründe beschriftet (Preis, Qualität, Marke, Aktion, Testbericht) statt nur der Preis; schmale Segmente tragen den Namen entlang des Radius. Die Ringe sind neu proportioniert, die Produktgruppen im mittleren Ring teils abgekürzt (z. B. Trek., Mount.), und die Kaufgründe werden in der Beschriftung auch gekürzt (Qual., Test), wenn der volle Name nicht passt."
+    }
+   ]
   },
   "3.28": {
    "status": "pruefung",

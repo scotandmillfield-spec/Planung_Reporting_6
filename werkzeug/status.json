@@ -239,8 +239,18 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Soll die Abbildung nach der Vorlage von Gleißner (Controller Magazin 7/8 2016, S. 16–23) vollständig neu gezeichnet werden (Plan-G&V mit Risikoliste, Verteilung der Simulationsergebnisse, Finanzrating, Ratingtabelle, Cashflow-Prognose)? Falls ja: als Neuzeichnung „in Anlehnung an“ oder mit der Quelle wie bisher? Und lautet der Name Gleißner (so im Literaturverzeichnis) oder Geißner (so in der bisherigen Unterschrift)? Die Unterschrift „Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: …, 2016, S. 16–23)“ übernehme ich dann; der Eintrag im Literaturverzeichnis gehört in das Overleaf-Projekt."
+    },
+    {
+     "datum": "13.10.2026",
+     "wunsch": [
+      "13.10.2026 DS: Antwort auf Rückfrage: Soll die Abbildung nach der Vorlage von Gleißner (Controller Magazin 7/8 2016, S. 16–23) vollständig neu gezeichnet werden (Plan-G&V mit Risikoliste, Verteilung der Simulationsergebnisse, Finanzrating, Ratingtabelle, Cashflow-Prognose)? Ja gerne. Falls ja: bitte als Neuzeichnung „in Anlehnung an“ die Quelle: Gleißner (in Kurzform mit angeben, Langform in das Quellenverzeichnis)"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abbildung ist nach der Vorlage von Gleißner neu gezeichnet: Plan-GuV mit den Risiken R1–R6, Histogramm der Simulationsergebnisse mit Zielniveau, EKB/DVaR und Eigenkapital, Schätzung der Ausfallwahrscheinlichkeit, Ratingnote, Finanzrating und Cashflow-Prognose. Die Unterschrift lautet jetzt „… (in Anlehnung an Gleißner 2016, S. 16–23)“; die Langform (Gleißner, W. 2016. Bandbreitenplanung, Planungssicherheit und Monte-Carlo-Simulation mehrerer Planjahre. Controller Magazin, Juli/August, S. 16–23) gehört ins Literaturverzeichnis. Die Ratingtabelle ist auf sechs Hauptklassen gekürzt, die Kurven sind schematisch."
     }
-   ]
+   ],
+   "caption": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (in Anlehnung an Gleißner 2016, S. 16–23)",
+   "datei": "Risiko-_und_Bandbreitenplanung_mit_der_Monte-Carlo-Simulation"
   },
   "5.39": {
    "status": "latex",
@@ -259,6 +269,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Das Listing selbst endet mit der GROUP-BY-Zeile; „Abb. 5.39 Beispiel zur freien Datenrecherche …“ ist bereits die Abbildungsunterschrift, die LaTeX automatisch unter das Listing setzt und die nur in der Vorschau mit zu sehen ist. Soll die Unterschrift aus der Abbildung entfallen (dann entfiele auch die automatische Nummer), oder genügt es, dass sie im Text nicht doppelt steht?"
+    },
+    {
+     "datum": "13.10.2026",
+     "wunsch": [
+      "13.10.2026 DS: Die Rückfrage verstehe ich nicht richtig. Eine Abbildungsunterschrift kann ruhig bleiben aber in der Abbildung hat sie nichts zu suchen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das Listing enthält nur die SELECT-Anweisung bis zur GROUP-BY-Zeile; die Überschrift „Abb. 5.39 …“ steht nicht in der Abbildung selbst, sondern wird im Buchsatz als Abbildungsunterschrift unter das Listing gesetzt und erscheint nur in der Vorschau mit. Es war daher keine Änderung nötig."
     }
    ]
   },

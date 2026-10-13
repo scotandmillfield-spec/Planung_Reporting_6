@@ -751,9 +751,9 @@
  {
   "folie": 108,
   "nr": "3.193",
-  "titel": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (Quelle: Geißner, W. 2016. Bandbreitenplanung, Planungssicherheit und Monte-Carlo-Simulation mehrerer Planjahre. In Controller Magazin. Juli/August 2016. S. 16 –23",
-  "art": "S",
-  "hinweis": "Montage aus Diagramm und Screenshots (Monte-Carlo) – klären"
+  "titel": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (in Anlehnung an Gleißner 2016, S. 16–23)",
+  "art": "D",
+  "hinweis": "Neuzeichnung nach Gleißner (Controller Magazin 7/8 2016, S. 16–23) – Revision DS"
  },
  {
   "folie": 109,

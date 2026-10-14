@@ -14,13 +14,13 @@ import os
 import random
 
 HIER = os.path.dirname(os.path.abspath(__file__))
-JAHRE = [2024, 2025]
+JAHRE = [2026, 2027]
 REGIONEN = ["Deutschland", "Frankreich", "Niederlande", "Österreich"]
 PRODUKTE = ["City Bike", "Mountain Bike", "Racing Bike", "Trekking Bike"]
 GRUENDE = ["Preis", "Qualität", "Marke", "Aktion", "Testbericht"]
 
-UMSATZ_2025 = {"Deutschland": 7.62e6, "Frankreich": 4.91e6, "Niederlande": 3.28e6, "Österreich": 2.19e6}
-WACHSTUM = {"Deutschland": 0.04, "Frankreich": 0.09, "Niederlande": -0.03, "Österreich": 0.12}   # 2025 zu 2024
+UMSATZ_2027 = {"Deutschland": 7.62e6, "Frankreich": 4.91e6, "Niederlande": 3.28e6, "Österreich": 2.19e6}
+WACHSTUM = {"Deutschland": 0.04, "Frankreich": 0.09, "Niederlande": -0.03, "Österreich": 0.12}   # 2027 zu 2026
 MIX = {  # Anteil der Produktgruppen je Region
     "Deutschland": [0.30, 0.22, 0.18, 0.30],
     "Frankreich":  [0.20, 0.20, 0.38, 0.22],
@@ -35,13 +35,13 @@ GRUND = {  # Anteil der Kaufgründe je Produktgruppe
 }
 
 rnd = random.Random(344)
-zeilen = []          # [region, produkt, grund, [u2024, u2025]]
+zeilen = []          # [region, produkt, grund, [u2026, u2027]]
 for r in REGIONEN:
     for p, mp in zip(PRODUKTE, MIX[r]):
         for g, mg in zip(GRUENDE, GRUND[p]):
-            u25 = UMSATZ_2025[r] * mp * mg * rnd.uniform(0.85, 1.15)
-            u24 = u25 / (1 + WACHSTUM[r] + rnd.uniform(-0.06, 0.06))
-            zeilen.append([REGIONEN.index(r), PRODUKTE.index(p), GRUENDE.index(g), [round(u24, -2), round(u25, -2)]])
+            u27 = UMSATZ_2027[r] * mp * mg * rnd.uniform(0.85, 1.15)
+            u26 = u27 / (1 + WACHSTUM[r] + rnd.uniform(-0.06, 0.06))
+            zeilen.append([REGIONEN.index(r), PRODUKTE.index(p), GRUENDE.index(g), [round(u26, -2), round(u27, -2)]])
 
 json.dump({"jahre": JAHRE, "regionen": REGIONEN, "produkte": PRODUKTE, "gruende": GRUENDE,
            "zeilen": [[a, b, c, [int(u) for u in us]] for a, b, c, us in zeilen]},

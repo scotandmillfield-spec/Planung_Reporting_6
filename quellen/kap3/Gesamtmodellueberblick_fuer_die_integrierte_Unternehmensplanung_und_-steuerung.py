@@ -6,6 +6,7 @@
 # Revision DS 07.10.2026: Strategische Planung oben links; Roadmap und BCR-Card auf Höhe der Verzahnung, beide rot;
 # Revision DS 08.10.2026: Strategische Planung (links) länger, Kartentexte kleiner (5,4 pt), Spiegelstrich Zielerreichung
 # (Roadmap), Simulative Planung länger, Instrumente mittiger.
+# Revision DS 13.10.2026: "Strategische Ziele je Perspektive", Teilpläne bündig mit Simulativer Planung unten.
 # neue Kartentexte; externes Reporting entfällt; Zielvereinbarungen tiefer; Teilpläne wie Abb. 3.6 (ohne Knotenpunkte).
 STEM = "Gesamtmodellueberblick_fuer_die_integrierte_Unternehmensplanung_und_-steuerung"
 from bookfig import Fig, P, Para, MM, MSO_SHAPE, Emu
@@ -79,7 +80,7 @@ def build(theme):
     RM_inhalt = [P("Strategische Projekte mit", size=KS),
                  P("Status", size=KS, bullet="–"), P("Zeitplan", size=KS, bullet="–"),
                  P("Kennzahlen", size=KS, bullet="–"), P("Zielerreichung", size=KS, bullet="–")]
-    BCR_inhalt = [P("Strategischem Ziel je Perspektive:", size=KS),
+    BCR_inhalt = [P("Strategische Ziele je Perspektive:", size=KS),
                   P("Kennzahlen", size=KS, bullet="–"), P("Strategische Projekte", size=KS, bullet="–"),
                   P("Chancen", size=KS, bullet="–"), P("Risiken", size=KS, bullet="–")]
     YV = 28.0                                                # mittlere Reihe: Verzahnung, Roadmap, BCR-Card
@@ -143,7 +144,9 @@ def build(theme):
     WE, WBI = 14.6, 12.4
     xe_ = xl + BW + 3.5
     xb_ = xe_ + WE + 2.5
-    MD = B(XC, RM.b + 3.0, xb_ + WBI + 1.5 - XC, 2.0 + 5 * BH + 4 * GAP + 2.0)
+    # Revision DS 13.10.2026: unterer Rand auf Höhe der Simulativen Planung
+    MDH = 2.0 + 5 * BH + 4 * GAP + 2.0
+    MD = B(XC, L3.b - MDH, xb_ + WBI + 1.5 - XC, MDH)
     f.box(MD.x, MD.y, MD.w, MD.h, None, role="container", name="Teilpläne")
     links = {}
     y = MD.y + 2.0

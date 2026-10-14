@@ -174,7 +174,7 @@
       { nr: 5, ziel: "sp-rel", versatz: [36, 26], anker: "links", regel: "CONDENSE – Informationsdichte", titel: "Tabelle und Portfolio als Einheit",
         text: "Die Tabelle liefert die Ausgangswerte, das Portfolio ihre Lage. Ein Klick auf eine Zeile oder einen Kreis hebt dieselbe SGE in beiden hervor; der Tooltip zeigt alle Werte und das Feld." },
       { nr: 6, ziel: "v-portfolio", anker: "links", versatz: [250, 265], regel: "CHECK – Visuelle Integrität", titel: "Fläche proportional zum Umsatz",
-        text: "Die Kreisfläche, nicht der Durchmesser, wächst mit dem Umsatz: C (310 Mio. €) ist gut zweieinhalbmal so groß wie B und E (je 120 Mio. €). Beide Achsen beginnen bei null; die Kreise sind leicht transparent, damit Überlagerungen sichtbar bleiben." },
+        text: "Die Kreisfläche, nicht der Durchmesser, wächst mit dem Umsatz: C (620 Mio. €) ist gut fünfmal so groß wie B und E (je 120 Mio. €). Beide Achsen beginnen bei null; die Kreise sind leicht transparent, damit Überlagerungen sichtbar bleiben." },
       { nr: 7, ziel: "v-portfolio", anker: "links", versatz: [213, 100], regel: "EXPRESS – Passende Darstellung", titel: "Trennlinien als Hilfslinien",
         text: "Die Grenzen bei relativem Marktanteil 1,5 und Marktwachstum 3 % stammen aus dem Original; sie sind gestrichelt, weil sie Bezugslinien und keine Daten sind. In der klassischen BCG-Matrix liegt die Grenze beim relativen Marktanteil bei 1,0 – ab dort führt eine SGE ihren Markt." },
       { nr: 8, ziel: "sp-anteil", versatz: [36, 26], anker: "links", regel: "STRUCTURE – Inhalte ordnen", titel: "Feste Reihenfolge, sortierbar",

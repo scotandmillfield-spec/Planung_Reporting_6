@@ -537,6 +537,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Layout wie Abb. 3.5: Kopf mit Titel, Filter Jahr (2025, 2026, 2027; voreingestellt 2027, alle Werte als Ist 2027), Kennzahlenleiste, links die Tabellen, rechts das Portfolio. In den vier Feldern stehen die Normstrategien des Boston-Consulting-Portfolios: Question Marks (oben links), Stars (oben rechts), Poor Dogs (unten links), Cash Cows (unten rechts). Neu ist eine kleine Tabelle der Felder mit den üblichen Normstrategien (Selektieren, Investieren, Desinvestieren, Abschöpfen); die Werte für 2025 und 2026 sind erfunden."
+    },
+    {
+     "datum": "14.10.2026",
+     "wunsch": [
+      "13.10.2026 DS: Bitte den Umsatz der SGE C (Cash Cow) verdoppelt und alle anderen Relationen (Werte) entsprechend anpassen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Umsatz der SGE C (Cash Cow) ist verdoppelt (2027: 620 statt 310 Mio. €, ebenso in den Vorjahren 2025 und 2026). Kreisgröße, Umsatzanteile (C jetzt 44,6 %), Gesamtumsatz, Kennzahlenleiste und Aussagetexte sind entsprechend angepasst; Marktanteile und Wachstum bleiben unverändert."
     }
    ]
   },
@@ -654,6 +662,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Der Kasten Strategische Planung oben links ist länger, ebenso der Kasten Simulative Planung unten. Die Texte der Karten Roadmap und Balanced Chance and Risk Card stehen in einer kleineren, gleichen Schrift, sodass „Perspektive:“ nicht mehr in die zweite Zeile rutscht; bei der Roadmap ist der Spiegelstrich „Zielerreichung“ ergänzt (falls er zur Balanced Chance and Risk Card gehören sollte, bitte kurz Bescheid geben). Die Zeilen „Instrumente u. a.“ stehen mittiger über der Abbildung."
+    },
+    {
+     "datum": "14.10.2026",
+     "wunsch": [
+      "13.10.2026 DS: Bitte Strategischem Ziel je Perspektive durch Strategische Ziele je Perspektive austauschen. Den gestrichelten Rahmen inklusive Inhalt mit Absatzplanung usw. bitte weiter nach unten schieben bis auf die untere Höhe des Kasten Simulative Planung. Die Texte ebenfalls verschieben."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Überschrift der Balanced Chance and Risk Card lautet jetzt „Strategische Ziele je Perspektive:“. Der gestrichelte Rahmen mit Absatzplan usw. samt Inhalt und Beschriftungen ist nach unten verschoben und schließt auf Höhe des Kastens Simulative Planung ab."
     }
    ]
   },
@@ -900,6 +916,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Im äußeren Ring sind jetzt deutlich mehr Kaufgründe beschriftet (Preis, Qualität, Marke, Aktion, Testbericht) statt nur der Preis; schmale Segmente tragen den Namen entlang des Radius. Die Ringe sind neu proportioniert, die Produktgruppen im mittleren Ring teils abgekürzt (z. B. Trek., Mount.), und die Kaufgründe werden in der Beschriftung auch gekürzt (Qual., Test), wenn der volle Name nicht passt."
+    },
+    {
+     "datum": "14.10.2026",
+     "wunsch": [
+      "13.10.2026 DS: Filter Jahr und Region bitte unter der Berichtsbezeichnung und Kommentierung eintragen, wie bei vielen anderen Abbildungen vorher bereits. Jahr für Umsatz auf 2027 und VJ 2026 umstellen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Filter Jahr und Region stehen jetzt unter Titel und Kommentierung. Der Umsatz zeigt 2027 mit Vorjahr 2026 (Filter Jahr: 2026 und 2027)."
     }
    ]
   },

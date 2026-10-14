@@ -25,9 +25,11 @@
 
   /* ---------- Layout ---------- */
   DK.init({ titel: "Sunburst-Chart", breite: 727, hoehe: 600 });
-  const bFilter = DK.box("filter", 16, 8, 695, 50, "dk-filter");
-  DK.haarlinie(66);
-  const bVis = DK.box("v-sunburst", 16, 76, 695, 516);
+  const bKopf = DK.box("kopf", 16, 8, 695, 46);
+  DK.haarlinie(58);
+  const bFilter = DK.box("filter", 16, 64, 695, 50, "dk-filter");
+  DK.haarlinie(120);
+  const bVis = DK.box("v-sunburst", 16, 128, 695, 464);
 
   /* ---------- Berechnungen ---------- */
   function daten(jahr = S.jahr) {
@@ -253,16 +255,19 @@
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     const d = daten();
-    const v = DK.visual(bVis, { titel: `Umsatz ${S.jahr} nach Region, Produktgruppe und Kaufgrund`, einheit: "Mio. €",
-      botschaft: botschaft(d, bVis.clientWidth || 695) });
-    sunburst(v.flaeche, d, v.breite, v.hoehe);
+    const vj = S.jahr > JAHRE[0] ? `, VJ ${S.jahr - 1}` : "";
+    DK.kopf(bKopf, { titel: "Umsatz nach Region, Produktgruppe, Kaufgrund",
+      untertitel: `Ist ${S.jahr}${vj}, Mio. € · ` + botschaft(d, 695 - 150),
+      quelle: "", legende: [] });
+    bVis.textContent = "";
+    sunburst(bVis, d, bVis.clientWidth, bVis.clientHeight);
     if (DK._ebenenNeu) DK._ebenenNeu();
   }
 
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "v-sunburst", anker: "links", versatz: [552, 1], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage unter dem Titel",
+      { nr: 1, ziel: "kopf", anker: "links", versatz: [552, 1], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage unter dem Titel",
         text: "Unter dem Titel steht in einem Satz, was das Diagramm zeigt – den häufigsten Kaufgrund und wo andere Gründe überwiegen; nach einem Klick die Aussage zum gewählten Element. Das Original hatte nur die Überschrift „Categorized Sales by Territory, with sales reason“." },
       { nr: 2, ziel: "sb-legende", anker: "links", versatz: [-30, 4], regel: "UNIFY – Semantische Notation", titel: "Helligkeit je Ebene statt Farbe je Gebiet",
         text: "Die Ringe sind von innen nach außen von Anthrazit nach Hellgrau abgestuft; die Ebene erkennt man an der Helligkeit, das Element an der Beschriftung. Das Original färbte jedes Gebiet anders (sieben Blau-, Gelb- und Rottöne) – Farben, die im Buch für Szenarien und Abweichungen reserviert sind." },
@@ -290,7 +295,7 @@
       { id: "C", ziel: "filter", anker: "links", versatz: [124, -2], titel: "Datenschnitte", visual: "Datenschnitt (2×)",
         felder: "Jahr als Kacheln (Einzelauswahl), Region als Dropdown",
         format: "Ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A" },
-      { id: "D", ziel: "v-sunburst", anker: "links", versatz: [552, 1], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
+      { id: "D", ziel: "kopf", anker: "links", versatz: [552, 1], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure mit TOPN(1; VALUES(Umsatz[Kaufgrund]); [Umsatz]) und DIVIDE für den Anteil", format: "10,5 pt, #4D4D4D" },
     ],
     theme: DK.thema(),

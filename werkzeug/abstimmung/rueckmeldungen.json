@@ -306,6 +306,33 @@
    "kommentar": "Das Listing enthält nur die SELECT-Anweisung bis zur GROUP-BY-Zeile; die Überschrift „Abb. 5.39 …“ steht nicht in der Abbildung selbst, sondern wird im Buchsatz als Abbildungsunterschrift unter das Listing gesetzt und erscheint nur in der Vorschau mit. Es war daher keine Änderung nötig.",
    "auftrag": "3ea61f74a5ce",
    "zeit": "2026-10-13T11:00"
+  },
+  {
+   "id": "2026-10-14-abb-3-1-1",
+   "schluessel": "abb-3-1",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Überschrift der Balanced Chance and Risk Card lautet jetzt „Strategische Ziele je Perspektive:“. Der gestrichelte Rahmen mit Absatzplan usw. samt Inhalt und Beschriftungen ist nach unten verschoben und schließt auf Höhe des Kastens Simulative Planung ab.",
+   "auftrag": "d54d71aa9e08",
+   "zeit": "2026-10-14T11:00"
+  },
+  {
+   "id": "2026-10-14-abb-3-23-1",
+   "schluessel": "abb-3-23",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Umsatz der SGE C (Cash Cow) ist verdoppelt (2027: 620 statt 310 Mio. €, ebenso in den Vorjahren 2025 und 2026). Kreisgröße, Umsatzanteile (C jetzt 44,6 %), Gesamtumsatz, Kennzahlenleiste und Aussagetexte sind entsprechend angepasst; Marktanteile und Wachstum bleiben unverändert.",
+   "auftrag": "6997fb307c4a",
+   "zeit": "2026-10-14T11:00"
+  },
+  {
+   "id": "2026-10-14-abb-3-44-1",
+   "schluessel": "abb-3-44",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Filter Jahr und Region stehen jetzt unter Titel und Kommentierung. Der Umsatz zeigt 2027 mit Vorjahr 2026 (Filter Jahr: 2026 und 2027).",
+   "auftrag": "f532a39e55e4",
+   "zeit": "2026-10-14T11:00"
   }
  ]
 }

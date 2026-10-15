@@ -894,6 +894,9 @@ const DK = (() => {
     DK.kopf(bKopf, { titel: "Umsatz nach Region, Produktgruppe, Kaufgrund",
       untertitel: `Ist ${S.jahr}${vj}, Mio. € · ` + botschaft(d, 695 - 150),
       quelle: "", legende: [] });
+    const ut = bKopf.querySelector(".dk-untertitel");           // Zeile unter dem Titel: bei langer Aussage kleiner setzen, nie umbrechen
+    ut.style.whiteSpace = "nowrap";
+    for (let px = 14; px > 9 && ut.getBoundingClientRect().width > bKopf.clientWidth; px -= 0.5) ut.style.fontSize = px + "px";
     bVis.textContent = "";
     sunburst(bVis, d, bVis.clientWidth, bVis.clientHeight);
     if (DK._ebenenNeu) DK._ebenenNeu();

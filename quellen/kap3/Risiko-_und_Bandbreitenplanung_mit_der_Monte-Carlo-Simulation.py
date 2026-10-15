@@ -95,8 +95,8 @@ def build(theme):
     f.box(xe - 3.4, hy + 14.8, 6.8, 4.6, [P("EK", size="body", bold=True, italic=True)], role="box_hi", name="EK")
 
     # Zielniveau-Hinweis mit Marke
-    f.text(hx, 0.5, hw, 6.6, [P("Zielniveau (hier 1 %) ist ratingabhängig.", size="small", italic=True)],
-           align="r", anchor="t", bg="FFFFFF", name="Zielniveau")
+    f.text(hx, 3.4, hw, 3.9, [P("Zielniveau (hier 1 %) ist ratingabhängig.", size="small", italic=True)],
+           align="r", anchor="b", bg="FFFFFF", name="Zielniveau")
     f.poly([(xv - 2.0, 7.6), (xv + 2.0, 7.6), (xv, hy + 0.3)], fill=t.accent, name="Marke Zielniveau")
 
     # ---------------- Untere Reihe ----------------
@@ -113,31 +113,39 @@ def build(theme):
         ax, ay, aw, ah = x + 6.0, y + 7.6, w - 11.0, h - 14.0
         f.line([(ax, ay), (ax, ay + ah), (ax + aw, ay + ah)], color=DARK, lw=0.5, name=f"Achsen {title}")
         for yy, lab in ylab:
-            f.text(x + 0.3, ay + yy * ah - 1.3, 5.4, 2.6, [P(lab, size="small", nowrap=True)], align="r",
+            f.text(x + 0.1, ay + yy * ah - 1.3, 5.8, 2.6, [P(lab, size="small", nowrap=True)], align="r",
                    anchor="m", bg="FFFFFF", name=f"y {lab}")
         for k, yr in enumerate(("2008", "2012", "2016", "2020")):
             xx = ax + k / 3 * aw
             f.text(xx - 4.0, ay + ah + 0.8, 8.0, 2.8, [P(yr, size="small", nowrap=True)], align="c",
                    bg="FFFFFF", name=f"Jahr {yr}")
         N = 13
-        i0 = 3
+        i0 = 2                                    # 2010: Bandbreite öffnet sich (Prognosebeginn)
         xs = [ax + i / (N - 1) * aw for i in range(N)]
-        Y = lambda v: ay + (1 - v) * ah
+        Y = lambda v: ay + min(1.0, max(0.0, v)) * ah
         f.poly([(xs[i], Y(f_hi(i))) for i in range(i0, N)] + [(xs[i], Y(f_lo(i))) for i in range(N - 1, i0 - 1, -1)],
-               fill="DADADA", name=f"Fächer außen {title}")
+               fill="DADADA", name=f"Bandbreite außen {title}")
         f.poly([(xs[i], Y(f_hi2(i))) for i in range(i0, N)] + [(xs[i], Y(f_lo2(i))) for i in range(N - 1, i0 - 1, -1)],
-               fill="B5B5B5", name=f"Fächer innen {title}")
+               fill="B5B5B5", name=f"Bandbreite innen {title}")
         f.line([(xs[i], Y(f_mid(i))) for i in range(N)], color=DARK, lw=0.9, name=f"Verlauf {title}")
 
-    g = lambda i: max(0, i - 3)
-    fan(FR[0], yb, FR[1], hb, "Finanzrating", [(0.0, "6"), (0.5, "3"), (1.0, "0")],
-        lambda i: 0.50 - 0.045 * g(i) if i >= 3 else 0.5, lambda i: 0.50 + 0.03 * g(i),
-        lambda i: 0.50 - 0.01 * g(i) + (0.12 if i < 3 else 0.0) * (3 - i) / 3,
-        lambda i: 0.50 - 0.03 * g(i), lambda i: 0.50 + 0.015 * g(i))
-    fan(CF[0], yb, CF[1], hb, "Freier Cashflow nach Steuern", [(0.0, "+"), (0.5, "0"), (1.0, "–")],
-        lambda i: 0.50 - 0.035 * g(i), lambda i: 0.50 + 0.045 * g(i),
-        lambda i: 0.50 + 0.02 * g(i) - 0.15 * math.exp(-g(i) / 1.5),
-        lambda i: 0.50 - 0.02 * g(i), lambda i: 0.50 + 0.03 * g(i))
+    # Finanzrating (Skala 0–6, oben = 6): Verlauf 2008–2010, danach breite Bandbreite um eine nahezu flache Mitte
+    q = lambda t: 1 - t / 6.0
+    fm = lambda i: q([2.5, 4.0, 3.3][i] if i < 3 else 2.8 + 0.5 * math.exp(-(i - 2) / 1.5))
+    fg = lambda i: 1 - math.exp(-(max(i, 2) - 2) / 4.0)
+    fan(FR[0], yb, FR[1], hb, "Finanzrating", [(0.0, "6"), (1 / 3, "4"), (2 / 3, "2"), (1.0, "0")],
+        lambda i: fm(i) + (0.6 + 1.2 * fg(i)) / 6, lambda i: fm(i) - (0.5 + 2.0 * fg(i)) / 6,
+        fm, lambda i: fm(i) + (0.4 + 0.4 * fg(i)) / 6, lambda i: fm(i) - (0.4 + 0.5 * fg(i)) / 6)
+
+    # Freier Cashflow (Skala –400 bis 400, oben = 400): Einbruch 2010, danach schnell öffnende Bandbreite
+    c = lambda v: 0.5 - v / 800.0
+    ce = lambda i: math.exp(-(max(i, 2) - 2) / 1.2)
+    cm = lambda i: c([100, 40, -200][i] if i < 3 else 20 * (1 - ce(i)) - 200 * ce(i))
+    cg = lambda i: 1 - math.exp(-(max(i, 2) - 2) / 2.0)
+    fan(CF[0], yb, CF[1], hb, "Freier Cashflow nach Steuern",
+        [(0.0, "400"), (0.25, "200"), (0.5, "0"), (0.75, "–200"), (1.0, "–400")],
+        lambda i: cm(i) - (60 + 270 * cg(i)) / 800, lambda i: cm(i) + (70 + 80 * cg(i)) / 800,
+        cm, lambda i: cm(i) - (30 + 90 * cg(i)) / 800, lambda i: cm(i) + (30 + 70 * cg(i)) / 800)
 
     # Ratingtabelle
     f.box(RT[0], yb, RT[1], hb, None, role="box_plain", name="Ratingtabelle")

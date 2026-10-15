@@ -333,6 +333,24 @@
    "kommentar": "Die Filter Jahr und Region stehen jetzt unter Titel und Kommentierung. Der Umsatz zeigt 2027 mit Vorjahr 2026 (Filter Jahr: 2026 und 2027).",
    "auftrag": "f532a39e55e4",
    "zeit": "2026-10-14T11:00"
+  },
+  {
+   "id": "2026-10-15-abb-3-44-1",
+   "schluessel": "abb-3-44",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Zeile unter der Berichtsbezeichnung bleibt bei der Auswahl von Segmenten einzeilig: Ist die Aussage zu lang, wird die Schrift automatisch verkleinert, statt in eine zweite Zeile umzubrechen.",
+   "auftrag": "34b074ac75ee",
+   "zeit": "2026-10-15T10:58"
+  },
+  {
+   "id": "2026-10-15-abb-3-193-1",
+   "schluessel": "abb-3-193",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Zeile „Zielniveau …“ sitzt jetzt direkt über dem roten Pfeil. Die Y-Achse des freien Cashflows trägt Zahlen (400 bis –400) statt + und –. Die Bandbreiten bei Finanzrating und freiem Cashflow sind dem Original angenähert: Verlauf 2008–2010 mit Einbruch, ab 2010 sich öffnende äußere und innere Bandbreite; die Kurven bleiben schematisch.",
+   "auftrag": "53ee6bf539c1",
+   "zeit": "2026-10-15T10:59"
   }
  ]
 }

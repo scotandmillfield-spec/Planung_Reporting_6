@@ -247,6 +247,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Abbildung ist nach der Vorlage von Gleißner neu gezeichnet: Plan-GuV mit den Risiken R1–R6, Histogramm der Simulationsergebnisse mit Zielniveau, EKB/DVaR und Eigenkapital, Schätzung der Ausfallwahrscheinlichkeit, Ratingnote, Finanzrating und Cashflow-Prognose. Die Unterschrift lautet jetzt „… (in Anlehnung an Gleißner 2016, S. 16–23)“; die Langform (Gleißner, W. 2016. Bandbreitenplanung, Planungssicherheit und Monte-Carlo-Simulation mehrerer Planjahre. Controller Magazin, Juli/August, S. 16–23) gehört ins Literaturverzeichnis. Die Ratingtabelle ist auf sechs Hauptklassen gekürzt, die Kurven sind schematisch."
+    },
+    {
+     "datum": "15.10.2026",
+     "wunsch": [
+      "14.10.2026 DS: Die Zeile Zielniveau ... bitte näher an den roten Pfeil hinunter schieben. Legende Freier Cashflow ... bitte mit Zahlen nicht + - bei der Y-Achse. Finanzrating und Freier Cashflow Bandbreitenzeichnung bitte ähnlicher zum Original."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Zeile „Zielniveau …“ sitzt jetzt direkt über dem roten Pfeil. Die Y-Achse des freien Cashflows trägt Zahlen (400 bis –400) statt + und –. Die Bandbreiten bei Finanzrating und freiem Cashflow sind dem Original angenähert: Verlauf 2008–2010 mit Einbruch, ab 2010 sich öffnende äußere und innere Bandbreite; die Kurven bleiben schematisch."
     }
    ],
    "caption": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (in Anlehnung an Gleißner 2016, S. 16–23)",
@@ -924,6 +932,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Filter Jahr und Region stehen jetzt unter Titel und Kommentierung. Der Umsatz zeigt 2027 mit Vorjahr 2026 (Filter Jahr: 2026 und 2027)."
+    },
+    {
+     "datum": "15.10.2026",
+     "wunsch": [
+      "14.10.2026 DS: Bei der Auswahl von Segmenten wird die Zeile unter der Berichtsbezeichnung zu lang und rutscht in eine weitere Zeile. Bitte durch kleinere Schriftart vermeiden."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Zeile unter der Berichtsbezeichnung bleibt bei der Auswahl von Segmenten einzeilig: Ist die Aussage zu lang, wird die Schrift automatisch verkleinert, statt in eine zweite Zeile umzubrechen."
     }
    ]
   },

@@ -1064,6 +1064,17 @@
    ],
    "alt": "Gestapeltes Säulendiagramm des Umsatzes Ist 2027 je Quartal in Mio. €, unten Region Süd (anthrazit), oben Region Nord (grau): Q1 60 + 60 = 120, Q2 80 + 50 = 130, Q3 50 + 50 = 100, Q4 80 + 30 = 110. Kernaussage: Region Süd trägt 270 von 460 Mio. € (59 %), Region Nord fällt im vierten Quartal auf 30 Mio. €."
   },
+  "3.52": {
+   "status": "pruefung",
+   "datei": "Prozentual_gewichtete_Stapelsaeulen",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), gleiche Daten und Gestaltung wie Abb. 3.51",
+    "Diagrammtyp bleibt: 100-%-Stapelsäulen je Quartal; Segmente zeigen jetzt Anteile in % (50/50, 62/38, 50/50, 73/27)",
+    "Fehler im Original korrigiert: Achsentitel „Mio. €“ und absolute Werte in den Segmenten, obwohl die Säulen Anteile zeigen – Einheit jetzt „in % des Quartalsumsatzes“ im Titel",
+    "Region Süd anthrazit, Nord grau statt Grün und Orange; Regionen rechts benannt statt Legende; Achse und Gitternetz entfallen"
+   ],
+   "alt": "Gestapelte 100-%-Säulen der Umsatzanteile Ist 2027 je Quartal nach Region: Region Süd (anthrazit, unten) 50 %, 62 %, 50 % und 73 %, Region Nord (grau, oben) 50 %, 38 %, 50 % und 27 %. Kernaussage: Der Anteil der Region Süd steigt von 50 % im ersten auf 73 % im vierten Quartal."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

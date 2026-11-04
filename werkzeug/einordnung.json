@@ -1130,7 +1130,7 @@
   "folie": 162,
   "nr": "5.23",
   "titel": "Kennzahlenmodell",
-  "art": "D",
+  "art": "V",
   "hinweis": "Datentabelle als Abbildung (Beispieldaten)"
  },
  {
@@ -1144,21 +1144,21 @@
   "folie": 164,
   "nr": "5.25",
   "titel": "Kontenmodell mit Parent-Child-Hierarchie",
-  "art": "D",
+  "art": "V",
   "hinweis": "Datentabelle als Abbildung (Beispieldaten)"
  },
  {
   "folie": 165,
   "nr": "5.26",
   "titel": "Kontenmodell ohne Parent-Child-Hierarchie",
-  "art": "D",
+  "art": "V",
   "hinweis": "Datentabelle als Abbildung (Beispieldaten)"
  },
  {
   "folie": 166,
   "nr": "5.27",
   "titel": "Hierarchieaufbau ohne Parent-Child-Hierarchie",
-  "art": "D",
+  "art": "V",
   "hinweis": "Datentabelle als Abbildung (Beispieldaten)"
  },
  {

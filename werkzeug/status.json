@@ -454,6 +454,19 @@
     }
    ]
   },
+  "5.62": {
+   "status": "latex",
+   "latex": "tabellen/Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart.tex",
+   "datei": "Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart",
+   "kommentare": [
+    "Reine Metadatenbeschreibung ohne Werte → LaTeX-Tabellen (booktabs, figure-Umgebung hält die Abbildungsnummer), mit pdflatex bei 110 mm Satzbreite geprüft",
+    "Oben die Kennzahlen der Faktentabelle Sales je Dimension (× und – statt x und Leerfeld), unten Eigenschaften und Hierarchien der drei Dimensionen in drei Spalten wie im Original",
+    "Hellblaue Kopfzeile, graue und rote Balken entfallen; Gruppenzeilen „Eigenschaften“ und „Hierarchien“ kursiv; Hierarchien mit Halbgeviertstrich, lange Pfade mit Einzug umbrochen",
+    "Caption: Speaker Notes sagen „Sternschema“, Inventur „Star-Schema“ – einheitlich wählen",
+    "„DreamCard“ aus dem Original übernommen – falls Markenname, durch „Kundenkarte“ ersetzen?"
+   ],
+   "alt": "Metadatenbeschreibung eines Sales Data Mart im Star-Schema. Eine Matrix zeigt, nach welchen Dimensionen die Kennzahlen der Faktentabelle Sales auswertbar sind: Umsatz und Menge nach Kunden, Datum und Produkten, Bonuspunkte nur nach Kunden und Datum. Darunter stehen die Eigenschaften der Dimensionen Kunde, Datum und Produkte sowie ihre Hierarchien, etwa Jahr – Quartal – Monat – Tag und Produktlinie – Produktgruppe."
+  },
   "3.32": {
    "status": "pruefung",
    "datei": "Pivottabelle_MS_Excel",
@@ -949,6 +962,68 @@
     "Frage: Kunde.PLZ verweist auf Postleitzahlen.PLZID – Feldnamen wie im Original unterschiedlich; vereinheitlichen (z. B. beide „PLZID“)?"
    ],
    "alt": "Snowflake-Schema auf Basis des Galaxy-Schemas: Die Faktentabellen Verkäufe und DreamCardNutzung mit den Dimensionen Datum, Produkt, Kunde und Verkaufsort; die Dimension Kunde ist normalisiert und verweist über den Fremdschlüssel PLZ auf die hervorgehobene Tabelle Postleitzahlen (PLZID, Stadt, Stadtteil, Einwohnerzahl). Alle Beziehungen sind 1:n."
+  },
+  "5.23": {
+   "status": "pruefung",
+   "datei": "Kennzahlenmodell",
+   "kommentare": [
+    "Datentabelle mit Beispieldaten als interaktives Einzelvisual 727 × 394 px (HTML, PNG) statt Bild: Dimensionstabellen oben nebeneinander, Faktentabelle darunter; Werte und Stammdaten exakt aus dem Original, alle vier Zeilen rechnen richtig",
+    "Kopf: eine Rollenzeile Dim.-ID / Kennzahl / berechnet statt zweizeiliger „Berechnete Kennzahl“; „NettoNetto-Umsatz“ einzeilig; Schlüssel wie im Original unterstrichen; Excel-Gitter und Rahmen entfallen, echtes Minus, Tausenderpunkt",
+    "Neu: Summenzeile (4.000 − 210 = 3.790; − 76 = 3.714) und Rechenregeln unter der Tabelle; Klick auf eine Dimensionszeile filtert, Tooltip rechnet jede Zeile vor",
+    "Gleicher Datensatz wie die Serie Abb. 5.25–5.27 (dort als zwölf Buchungen auf drei Konten)",
+    "Annahme: Werte in € (Original ohne Einheit)",
+    "Kundennamen „MTS GmbH“ und „SOT AG“ aus dem Original übernommen – falls reale Firmen gemeint, neutral ersetzen?"
+   ],
+   "alt": "Kennzahlenmodell mit drei Dimensionstabellen (Produkt 3312 Ring und 4512 Kette, Kunde 471 MTS GmbH und 236 SOT AG, Zeit 2018 und 2019) und einer Faktentabelle mit vier Zeilen, in der jede Kennzahl eine eigene Spalte hat. Bruttoumsatz, Rabatte und Skonti sind gespeichert, Nettoumsatz und NettoNetto-Umsatz werden je Zeile berechnet. In Summe ergeben 4.000 € Bruttoumsatz nach 210 € Rabatten und 76 € Skonti 3.714 € NettoNetto-Umsatz."
+  },
+  "5.24": {
+   "status": "latex",
+   "latex": "tabellen/Kennzahlenzuordnung_zu_Berichtszeilen.tex",
+   "datei": "Kennzahlenzuordnung_zu_Berichtszeilen",
+   "kommentare": [
+    "Reine Text-Zuordnungstabelle ohne Werte → LaTeX-Tabelle (booktabs, figure-Umgebung hält die Abbildungsnummer), mit pdflatex bei 110 mm Satzbreite geprüft",
+    "Die zwei Teiltabellen mit denselben Berichtszeilen zu einer Tabelle zusammengefasst: Berichtszeile | eine Kennzahl je Zeile | Summe mehrerer Kennzahlen – die Varianten stehen zeilengleich nebeneinander",
+    "Summe ausgeschrieben: „+“ vor Aktions- und Sonderrabatte statt eines „+“ vor Kundenrabatte",
+    "Kopfzeilen „eine Kennzahl je Zeile“ / „Summe mehrerer Kennzahlen“ neu – passt die Wortwahl zum Buchtext?",
+    "Fett wie im Original: Umsatzstufen Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz"
+   ],
+   "alt": "Tabelle mit den Berichtszeilen Bruttoumsatz, Rabatte, Nettoumsatz, Skonti und NettoNetto-Umsatz und zwei Varianten der Kennzahlenzuordnung. In der ersten Variante gehört zu jeder Berichtszeile genau eine Kennzahl; in der zweiten ergibt sich die Berichtszeile Rabatte als Summe der Kennzahlen Kundenrabatte, Aktionsrabatte und Sonderrabatte."
+  },
+  "5.25": {
+   "status": "pruefung",
+   "datei": "Kontenmodell_mit_Parent-Child-Hierarchie",
+   "kommentare": [
+    "Datentabellen mit Beispieldaten als interaktives Einzelvisual 727 × 596 px (HTML, PNG); Serie mit Abb. 5.26 und 5.27 aus einem Kontenplan: gleiche Konten, Buchungen und gleiches Raster, Schalter für die drei Ansichten, jede Abbildung startet in ihrer",
+    "Werte exakt aus dem Original (Dimensionstabellen, zwölf Buchungen, Kontendimension); korrigiert: Konto 8050 „Rabatt“ → „Rabatte“ wie in Abb. 5.23, 5.24, 5.26 und 5.27",
+    "Neu: daneben die aus Vorgänger und Sortiercode entstehende Hierarchie als Baum mit Beträgen (3.714 € NettoNetto-Umsatz = Summe der Buchungen, wie Abb. 5.23); Klick auf ein Konto zeigt Vorgänger, Kinder und Buchungen, Klick auf eine Dimensionszeile filtert",
+    "Rollenzeile „Dim.-ID / Kennzahl“ einmal über der Faktentabelle statt über jeder Spalte; Schlüssel unterstrichen, Gitter entfällt, echtes Minus und Tausenderpunkt",
+    "Annahme: Betrag in €; „NULL“ als Vorgänger des obersten Knotens beibehalten; Kundennamen siehe Abb. 5.23"
+   ],
+   "alt": "Kontenmodell mit Parent-Child-Hierarchie: Dimensionstabellen Produkt, Kunde und Zeit, eine Faktentabelle mit zwölf Buchungen (Produkt, Kunde, Zeit, Konto, Betrag) auf den Konten 8000 Bruttoumsatz, 8050 Rabatte und 8090 Skonti sowie die Kontendimension mit Konten-ID, Bezeichnung, Vorgänger und Sortiercode. Daneben die daraus entstehende Hierarchie: Der NettoNetto-Umsatz (3.714 €) enthält Skonti (−76 €) direkt und den Nettoumsatz (3.790 €), der sich aus Rabatten (−210 €) und Bruttoumsatz (4.000 €) zusammensetzt."
+  },
+  "5.26": {
+   "status": "pruefung",
+   "datei": "Kontenmodell_ohne_Parent-Child-Hierarchie",
+   "kommentare": [
+    "Interaktives Einzelvisual 727 × 596 px (HTML, PNG), Serie mit Abb. 5.25 und 5.27: gleicher Datensatz und gleiches Raster, startet in der Ansicht „ohne Parent-Child-Hierarchie“",
+    "Werte exakt aus dem Original; Spaltenkopf „Ebene  2“ (doppeltes Leerzeichen) korrigiert, Umbruch „NettoNetto-/Umsatz“ entfällt, Kontendimension einzeilig über die volle Breite",
+    "Neu: Wiederholung „Skonti“ in Ebene 2 rot gestrichelt markiert (Konto ohne Zwischenebene) – leitet zu Abb. 5.27 über; Sortiercodes rechtsbündig, Schlüssel unterstrichen",
+    "Klick auf ein Konto hebt seine Buchungen hervor, Tooltip nennt Pfad und Sortiercodes; Spaltenköpfe sortieren",
+    "Bitte prüfen: Rot für die Wiederholung gewünscht (im Original keine Markierung)?"
+   ],
+   "alt": "Kontenmodell ohne Parent-Child-Hierarchie: dieselben Dimensionstabellen und dieselbe Faktentabelle wie mit Parent-Child-Hierarchie, darunter die Kontendimension mit einer Zeile je bebuchtem Konto und den Spalten Werte, Ebene 2 und Ebene 1 mit je einem Sortiercode. Rabatte und Bruttoumsatz gehören zur Ebene 2 Nettoumsatz; Skonti hat keine Zwischenebene, deshalb wiederholt Ebene 2 den Wert Skonti, was markiert ist."
+  },
+  "5.27": {
+   "status": "pruefung",
+   "datei": "Hierarchieaufbau_ohne_Parent-Child-Hierarchie",
+   "kommentare": [
+    "Interaktives Einzelvisual 727 × 596 px (HTML, PNG), Serie mit Abb. 5.25 und 5.26: Hierarchieaufbau links oben, Faktentabelle rechts, Kontendimension ohne Parent-Child-Hierarchie darunter als Quelle der Ebenen",
+    "Ebenen und Reihenfolge exakt wie im Original (aus den Sortiercodes nachgerechnet); eingerückt mit Verbindungslinien, Summen fett; neu: Beträge je Knoten aus den Buchungen",
+    "Gelb hinterlegte Zeile „Werte Skonti“ → rot gestrichelt unterstrichen (graustufentauglich), ebenso der Ursprung in Ebene 2 der Kontendimension",
+    "Klick auf einen Knoten zeigt ihn mit Knoten darüber und darunter samt Buchungen; Tooltip erklärt den Füllknoten",
+    "Abbildung deutlich größer als das Original (Kontext aus Abb. 5.26 wiederholt) – falls nur der Hierarchieaufbau gezeigt werden soll, bitte Rückmeldung"
+   ],
+   "alt": "Hierarchieaufbau aus der Kontendimension ohne Parent-Child-Hierarchie: Ebene 1 NettoNetto-Umsatz (3.714 €) mit den Knoten der Ebene 2 Skonti (−76 €) und Nettoumsatz (3.790 €); unter Nettoumsatz stehen die Werte Rabatte (−210 €) und Bruttoumsatz (4.000 €). Unter dem Knoten Skonti steht der Wert Skonti noch einmal mit demselben Betrag, weil die feste Ebenenstruktur eine Zwischenebene verlangt; diese Wiederholung ist markiert. Daneben stehen Faktentabelle und Kontendimension als Quelle."
   },
   "5.28": {
    "status": "pruefung",

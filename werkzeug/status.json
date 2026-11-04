@@ -903,6 +903,20 @@
    ],
    "alt": "Links ein Datenwürfel mit den Dimensionen Region, Produkt und Zeit und einem zusätzlichen roten Pfeil „Dimension Filiale“ von der Oberseite nach links oben. Rechts die Tabelle „Umsatz in €“ für Januar bis März und das 1. Quartal mit den Spalten Summe, Filiale A und Filiale B: Januar 20.000 = 11.000 + 9.000, Februar 15.000 = 6.000 + 9.000, März 22.000 = 10.000 + 12.000, 1. Quartal 57.000 = 27.000 + 30.000. Durchgezogene Pfeile führen von den Filialen zur Summe (Merge), ein gestrichelter Pfeil in der Quartalszeile von der Summe zu den Filialen (Split)."
   },
+  "3.42": {
+   "status": "pruefung",
+   "datei": "Kreis-_bzw_Kuchendiagramme",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu aufgebaut (HTML für die Lernplattform, PNG für das Buch), Format wie Abb. 3.44/3.45: Titel, Kernaussage, darunter der Filter Jahr",
+    "Werte 2027 aus dem Original übernommen (SGE A 510, B 420, C 110, D 40 Mio. €, zusammen 1.080 Mio. €); Vorjahr 2026 ergänzt (erfunden), damit Tooltip und Kernaussage eine Veränderung nennen können",
+    "Fehler im Original korrigiert: Die Legende nannte die dritte und vierte Einheit noch einmal „SGE A“ und „SGE B“ (auch in der eingebetteten Excel-Tabelle) – jetzt SGE C und SGE D. Bitte prüfen, ob der Buchtext die Einheiten nennt",
+    "Diagrammtyp bleibt: Kreis, Beginn bei 12 Uhr, Segmente absteigend im Uhrzeigersinn wie im Original",
+    "Grautöne nach Größe statt Violett, Bordeaux, Gelb und Türkis; Legende entfällt, Name, Wert und Anteil stehen außen am Segment",
+    "Titel ausgeschrieben: „Umsatz nach strategischen Geschäftseinheiten (SGE)“ statt „Umsatz (Mio €)“; Einheit in der Zeile darunter",
+    "Kreisdiagramm ist in Power BI ein Standardvisual – Nachbau in der Ebene „Nachbau“"
+   ],
+   "alt": "Kreisdiagramm des Umsatzes 2027 von 1.080 Mio. € nach vier strategischen Geschäftseinheiten, beginnend bei 12 Uhr im Uhrzeigersinn: SGE A 510 Mio. € (47 %), SGE B 420 Mio. € (39 %), SGE C 110 Mio. € (10 %) und SGE D 40 Mio. € (4 %). Die Segmente sind nach Größe von dunkel- nach hellgrau abgestuft und außen beschriftet. Kernaussage: SGE A und B erwirtschaften 86 % des Umsatzes, am stärksten wächst SGE C (+14,6 %)."
+  },
   "3.44": {
    "status": "pruefung",
    "datei": "Sunburst-Chart",

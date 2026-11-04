@@ -873,6 +873,71 @@
    ],
    "alt": "Planungsmaske „Balanced-Scorecard-Planung“ für 2028 bis 2030 mit den Perspektiven Finanzen, Kunden, Prozesse und Potenziale. Je Perspektive stehen strategische Ziele mit ihren Kennzahlen, Ist 2026 und Ist 2027, eine Tendenz in Worten, Plan 2027 mit dem Status der Zielerreichung sowie die Planwerte 2028 bis 2030; im Band jeder Perspektive die zugehörigen Maßnahmen. Kritisch sind die persönlichen Kundenkontakte (350 statt 400) und die neuen Produkte (3 statt 4), übertroffen sind unter anderem Cashflow und Anzahl Neukunden."
   },
+  "3.183": {
+   "status": "pruefung",
+   "datei": "Rollierende_Absatzplanung_mit_dem_Cubeware-Cockpit",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Planungsmaske neu gebaut (Querformat 1024 px = 155 × 104 mm, im LaTeX gedreht): HTML bedienbar mit echter Rechnung (Summe = Ist/Plan + Aktionen + Listung, „Alle Kunden“ = Summe der Kunden, Ø 12/6/3 Monate und Trend aus derselben Ist-Historie), „Monat weiterrollen“ zeigt das Rollieren, „Kunde/Produkt tauschen“ die zweite Hierarchie",
+    "Entfallen: Logo, farbiger Titelbalken, Benutzername „PHOBOS\\…“, Filtersymbole, Bildlaufleiste, Navigationsknöpfe „Start-Cockpit“ und „Zurück zur Vertrieb“; gelbe Summenzeilen, türkis/grün/violette Köpfe und dunkle Trennbalken → Summen fett grau, Trennlinien; Mini-Balken „Trend“ als graue Balken „Verlauf“",
+    "Umfang wie Bildausschnitt, auf einen Produktblock gekürzt (Alle Kunden + zwei Kunden, je sechs Zeilen); Werte der Kundenblöcke aus dem Original (Ebene „All Products“), Planteil von „Alle Kunden“ identisch mit dem Original (7/6/11/10 … Summe 12/9/17/14); Ist und Ø von „Alle Kunden“ jetzt Summe der gezeigten Kunden (Original enthielt weitere Kunden, z. B. Ø 122,00)",
+    "Ersetzt: Audi A3/A4 → „Kompakt 2.0“/„Kombi 2.0“, Kunden „Professionals, Inc. – USA – Berkeley“/„Maintenance, Group – USA – Olympia“ → „15548 Autohaus Kiel“/„15561 Service Lübeck“, United States → Region Nord, Bearbeiterin fiktiv; Datum 12 Okt 2015 bei Monaten 9/2011–1/2013 (widersprüchlich) → Stand 12.10.2027, Ist Mai–Sep 2027, Plan Okt 2027–Sep 2028",
+    "Stückzahlen ganzzahlig statt „7,00“, Ø mit einer Nachkommastelle; Zeile „Trend“ → „Trend (Vorjahr)“, da sie den Vorjahresmonat enthält – fachlich prüfen",
+    "Caption ohne Produktnamen? z. B. „Rollierende Absatzplanung (Planungsmaske, softwareneutral nachgebaut)“"
+   ],
+   "alt": "Planungsmaske „Absatzplanung Produkt/Kunde“ mit Absatzmengen in Stück für das Produkt Kompakt 2.0 in der Region Nord. Je Block (Alle Kunden, zwei Kunden) stehen sechs Zeilen – Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant und Summe – mit dem Durchschnitt des Ist der letzten 12, 6 und 3 Monate, dem Ist Mai bis September 2027 und dem rollierenden Plan Oktober 2027 bis September 2028. Geplant sind bisher die ersten vier Monate; die Summe aller Kunden steigt im Dezember auf 17 Stück."
+  },
+  "3.184": {
+   "status": "pruefung",
+   "datei": "Selektive_Gruppenplanung_von_Preisveraenderungen_und_Konditionen",
+   "kommentare": [
+    "Zwei Produktscreenshots („Detail Absatz-/Umsatzplanung: Savings“ und „…: Rabatte“) zu einer softwareneutralen Maske mit zwei Abschnitten zusammengeführt (110 mm, PDF ohne Skalierung); HTML rechnet: Erlöswirkung = Planabsatz × Vk-Preis × Saving je Materialgruppe bzw. × Nettopreis × (Rabatt + Skonto) je Kundengruppe, Spalten „Artikel“, „Kunden“ und „Erlöswirkung“ ergänzt",
+    "Gemeinsame Stammdaten mit Abb. 3.185: Materialgruppe S01 „Fahrersitze“ mit den Sitzen aus 3.185, Kundengruppe 008 (statt 034 wie im Original), damit die Gruppenwerte dort als Vorschlag je Artikel erscheinen; 034 als zweite Kundengruppe auswählbar",
+    "Werte: im Original alle Prozente 0,000 – Beispielwerte gesetzt (S01/L22 Saving 2,0 % beeinflussbar + 1,0 % nicht beeinflussbar, Kundengruppe 008 Rabatt 2,0 %, Skonto 2,0 %); eine statt drei Nachkommastellen, „in %“ einmal am Spaltenkopf. Bitte prüfen, ob Beispielwerte erwünscht sind",
+    "Entfallen: Browserfenster mit Server-URL (Firmenname), Menü-, Symbol- und Taskleiste, Blätterleiste „Zeile 1 bis 1 / 1“, Suchhilfesymbole, Knöpfe „Beenden“ und „Zurück“; „Meldungsprotokoll“ zeigt jetzt die letzte Meldung",
+    "Ersetzt: geschwärzte Kundengruppe („Muster“) → „008 Landtechnik“, „S-Fahrersitz“ → „Fahrersitze“, MG3 „L22“ mit Bezeichnung „Baureihe 44“ (fiktiv)",
+    "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2010, S. 52)“ ohne den Zusatz zum BEx Web Application Designer"
+   ],
+   "alt": "Eingabemaske „Detail Absatz-/Umsatzplanung“ für das Budget 2028 mit zwei Abschnitten. Oben werden Savings für die Materialgruppe S01 Fahrersitze, Baureihe 44 geplant – 2,0 % beeinflussbar und 1,0 % nicht beeinflussbar; sie gelten für sechs Artikel und mindern den Umsatz um 2.270 €. Darunter Rabatt und Skonto von je 2,0 % für die Kundengruppe 008 Landtechnik mit einer Erlöswirkung von −4.331 €, unten Meldungsprotokoll sowie die Knöpfe Sichern und Aktualisieren."
+  },
+  "3.185": {
+   "status": "pruefung",
+   "datei": "Detaillierte_Umsatzplanung_auf_Ebene_Kunde-Artikel",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Planungsmaske neu gebaut (Querformat 1024 px = 155 × 94 mm, im LaTeX gedreht); HTML rechnet: Nettopreis nach Saving = Vk-Preis × (1 − Savings), Planumsatz = Planabsatz × Nettopreis × (1 − Rabatt), Summenzeile (1.250 Stück, 106.121 €)",
+    "Alle 14 Artikel mit Planabsatz und Vk-Preis wie im Original; Savings und Rabatt als Vorschlag aus der Gruppenplanung Abb. 3.184 (S01/L22 2,0 + 1,0 %, Rabatt 2,0 %, im Original 0,000) – Beispielwerte bitte prüfen",
+    "Sprechblasen („Planung auf Kunden-/Artikelebene“, „Periodische Bearbeitung“, „Übernehmen von Preisinformationen aus dem ERP-System …“, „Manuelle Planung“) als Einträge 1, 4, 5 und 7 in die Ebene Erläuterungen übernommen; im Buchbild entfallen sie – bitte bestätigen",
+    "Entfallen: Browserfenster mit Server-URL (Firmenname), Menü-/Symbol-/Taskleiste, Bildlauf- und Blätterleiste „Zeile 1 bis 14 / 499“, Knöpfe „Beenden“/„Zurück“, Spalten „Basis-ME“ und „Währung“ (Einheiten im Untertitel und an den Spalten) sowie die rechts abgeschnittenen Spalten ab „Logistikerlös“; ergänzt: Planumsatz je Artikel und Summe",
+    "Ersetzt: Kunde/Kundengruppe „John Deere“ (im Buch „Muster“) → „11002 Agrarwerk Mitte“, „008 Landtechnik“; reale Sitztypen DS44/MSG83/MSG85 → FS44/FS83/FS85; „MUSTERSITZ (TBS)“ → „Mustersitz“; Materialtexte ausgeschrieben („POLSTER F.R_STOFF“ → „Rückenpolster Stoff“); Mengen ganzzahlig statt „138,000“",
+    "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2010, S. 52)“ ohne den Zusatz zum BEx Web Application Designer"
+   ],
+   "alt": "Planungsmaske „Übersicht Absatz-/Umsatzplanung“ für den Kunden 11002 der Kundengruppe 008 Landtechnik mit 14 Artikeln – Fahrersitze, Sitzschalen, Konsolen und Polster. Je Artikel stehen Planabsatz in Stück, Verkaufspreis, Saving beeinflussbar und nicht beeinflussbar, Nettopreis nach Saving, Rabatt und Planumsatz; für die Sitze der Baureihe 44 gelten 3 % Savings, für alle Artikel 2 % Rabatt. Die Summenzeile zeigt 1.250 Stück und einen Planumsatz von 106.121 €."
+  },
+  "3.186": {
+   "status": "pruefung",
+   "datei": "Exemplarische_Zuschlaege_in_der_Einkaufspreisplanung",
+   "kommentare": [
+    "Zwei Produktscreenshots (Reiter „Lieferantenkonditionen“ und „MatPreisPlanung Umwertung“) als eine softwareneutrale Maske „Materialpreisplanung“, Reiter „Zuschläge“, gebaut (110 mm, PDF ohne Skalierung); gleiche Kopfzeile, Reiter, Rasterzellen und Daten wie Abb. 3.187 (Reiter „Preisplanung“)",
+    "Logik: Zuschlag Brutto = Planpreisfaktor des Lieferanten × (1 + Veränderung der Warengruppe im Werk); neuer Abschnitt „Ergebnis für die Preisplanung“ zeigt für Lieferant 55654, Warengruppe 3, Werk 1010 den Zuschlag 1,020, Planvolumen 2.047.078 € und Abweichung −88.411 € – identisch mit der Summenzeile von Abb. 3.187",
+    "Werte: Lieferantenfaktoren 0,969/1,040/0,969/1,114/1,000/1,015 und MTZ 1,000 sowie Umwertung 6/7010 +10,00 % wie im Original; ergänzt Lieferant 55654 (Faktor 1,000) und Umwertung 3/1010 +2,00 %, damit der Zuschlag 1,020 aus Abb. 3.187 entsteht – Kombination multiplikativ angenommen, fachlich prüfen",
+    "Klartext statt SAP-Kürzel: „PP3 Faktor“ → „Planpreisfaktor“, „PP3 Faktor MTZ“ → „MTZ-Faktor“, „Commodity“ → „Warengruppe“, „Plan MatPreis (%)“ → „Veränderung in %“, „Übernahme Konditionen“ → „Konditionen übernehmen“; Werkfeld leer → „Alle“",
+    "Entfallen: Browserfenster mit Server-URL (Firmenname) und Fenstertitel, Menü-/Symbol-/Status-/Taskleiste, Blätter- und Bildlaufleiste, Knopf „Beenden“; Lieferantennamen (reale Unternehmen, im Buch geschwärzt) → fiktiv; Geschäfts-/Planjahr 2009 → 2028",
+    "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2009, S. 296)“ ohne den Zusatz zum BEx Web Application Designer"
+   ],
+   "alt": "Eingabemaske „Materialpreisplanung“, Reiter „Zuschläge“, für Geschäfts- und Planjahr 2028. Oben stehen Planpreis- und MTZ-Faktoren für sieben Lieferanten (zum Beispiel 0,969 oder 1,114), darunter die Umwertung je Warengruppe und Werk mit +2,00 % für Polster im Werk 1010 und +10,00 % für Bezüge im Werk 7010. Das Ergebnis zeigt für den Lieferanten 55654 einen Zuschlag von 1,020, ein Planvolumen von 2.047.078 € und eine Abweichung zum Durchschnittspreis von −88.411 €."
+  },
+  "3.187": {
+   "status": "pruefung",
+   "datei": "Detail-Planungsmaske_fuer_die_Einkaufspreisplanung",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Planungsmaske neu gebaut (Querformat 1024 px = 155 × 99 mm, im LaTeX gedreht); gleiche Kopfzeile, Reiter, Zellen und Daten wie Abb. 3.186; HTML rechnet: Planpreis = Brutto × Zuschlag + MTZ × Zuschlag MTZ (überschreibbar), Volumen, Abweichung zum Ø-Preis absolut und in %, Summenzeile ergänzt (131.458 Stück, 2.047.078 €, −88.411 €, −4,32 %)",
+    "Umfang wie Bildausschnitt: die ersten 14 Materialien; alle Werte (Mengen, Konditionen, Zuschläge 1,020/1,000, DSP, PP3, Volumen, Abweichungen) unverändert aus dem Original und nachgerechnet; Vorzeichen wie im Original (Ø-Preis − Planpreis, negativ = Planpreis höher)",
+    "Gleichbleibende Spalten (Lieferant, Werk, Commodity, NB-Kennzeichen, Kond. gültig, Basis-ME, Preiseinheit) als Auswahl bzw. Kopfdaten über dem Raster; Klartext statt SAP-Kürzel: PB00 → Brutto, PP3 → Planpreis, DSP LFJ → Ø-Preis lfd. Jahr, Commodity → Warengruppe; Mengen ganzzahlig statt „9.484,000“, Preise ausdrücklich je 100 Stück",
+    "Sprechblasen („Planung der Materialpreise nach Warengruppe, Lieferant oder Material“, „Übernehmen von Preisinformationen aus dem Einkaufsinformationssystem …“, „Manuelle Planung“) als Erläuterungen 1, 3 und 5; im Buchbild entfallen sie – bitte bestätigen",
+    "Entfallen: Browserfenster mit Server-URL (Firmenname) und Fenstertitel, Menü-/Symbol-/Status-/Taskleiste, Bildlaufleiste, Knopf „Beenden“; Lieferant „GUMOTEX A.S.“ (reales Unternehmen, im Buch geschwärzt) → „55654 Polsterwerk Ost“; Materialtexte ausgeschrieben („POLSTER F.R.KSTL.KPL.“ → „Rückenpolster Kunstleder“); Filter Material 1175221 (nicht in der Liste) → „Alle“",
+    "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2010, S. 54)“ ohne den Zusatz zum BEx Web Application Designer"
+   ],
+   "alt": "Planungsmaske „Materialpreisplanung“, Reiter „Preisplanung“, für den Lieferanten 55654 und die Warengruppe 3 Polster im Werk 1010. Für 14 Polster stehen Menge, Brutto- und MTZ-Kondition je 100 Stück, die Zuschläge 1,020 und 1,000, der Durchschnittspreis des laufenden Jahres, der vorgeschlagene Planpreis sowie Volumen und Abweichung. In Summe ergibt sich ein Einkaufsvolumen von 2.047.078 € und eine Abweichung von −88.411 € (−4,32 %), weil die Planpreise über den aktuellen Durchschnittspreisen liegen."
+  },
   "3.188": {
    "status": "pruefung",
    "datei": "Abstimmung_der_Personalplanung",

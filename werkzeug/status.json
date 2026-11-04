@@ -1277,6 +1277,71 @@
    ],
    "alt": "Wasserfalldiagramm des Monatsumsatzes in Mio. €: Startsäule Dezember 2026 mit 110, danach schwebende Säulen für die Veränderungen Januar +70, Februar +20, März −10, April −60, Mai +10 und Juni +60 (Zuwächse blaugrün, Rückgänge rot), Endsäule Juni 2027 mit 200. Kernaussage: Der Umsatz steigt von 110 auf 200 Mio. €, der stärkste Rückgang liegt im April."
   },
+  "3.56": {
+   "status": "pruefung",
+   "datei": "Wasserfalldiagramm_mit_Cubeware",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Einzelvisual nachgebaut (110 × 85 mm): Ergebnisüberleitung als Wasserfall, darunter die Detailanalyse; Logo, Firmen- und Gesellschaftsnamen, Fensterrahmen und Navigationsknöpfe entfernt",
+    "Werte des Originals übernommen (Ergebnis −1.611 → 1.175 → 4.819; Rohertrag +3.080/+4.257, sonst. betr. Aufwand −82/−311, Raumkosten −6/−55, Personalkosten −206/−247; alle Rohertragskonten; Rohertrag der sichtbaren Gesellschaften); Jahre 2008–2010 → 2025–2027. Werte intern mit einer Nachkommastelle, damit jede Summe aufgeht und alle Anzeigen dem Original entsprechen (Rundungsdifferenzen wie 12.302 + 3.080 = 15.381 bleiben)",
+    "Wasserfall waagerecht statt senkrecht (Positionen ausgeschrieben statt „Sonst.betr.Aufw.“, „Raumko.“; hebt sich zugleich von Abb. 3.55 ab); Grün/Rot → Blaugrün/Rot nach Wirkung",
+    "Zwei Detailtabellen mit Ampelfähnchen → eine Tabelle mit Abweichungsbalken nach Wirkung; Aufwand einheitlich negativ (Original: links positiv, rechts negativ); Zwischensummen unter ihren Konten, Ebenen „Verkaufserlöse“ und „Einkauf Fahrzeuge“ zusammengefasst",
+    "Online: Klick auf eine Position im Wasserfall wählt die Tabelle (statt Kontrollkästchen und „Select Position“), Umschalter Konten/Gesellschaften ersetzt die zweite Tabelle; Auswahl Plan/Ist, Gesellschaft und Währung entfallen (nur Ist sichtbar)",
+    "Erfunden: Unterkonten von Personal-, Raum- und sonstigen Kosten, die nicht sichtbaren Gesellschaften und alle Gesellschaftsnamen (Autohaus Sydney … Wien)",
+    "Caption ohne Produktnamen? z. B. „Wasserfalldiagramm in einem BI-Werkzeug (in Anlehnung an Cubeware 2011)“ – Dateiname enthält „Cubeware“"
+   ],
+   "alt": "Waagerechter Wasserfall der Ergebnisüberleitung 2025 bis 2027 in Tsd. €: vom Ergebnis 2025 (−1.611) über Rohertrag +3.080, sonstigen betrieblichen Aufwand −82, Raumkosten −6 und Personalkosten −206 zum Ergebnis 2026 (1.175) und über +4.257, −311, −55 und −247 zum Ergebnis 2027 (4.819); Ergebnisse anthrazit, Verbesserungen blaugrün, Belastungen rot. Darunter eine Tabelle des Rohertrags nach Konten mit Jahreswerten und Veränderungen als Abweichungsbalken: Umsatzerlöse steigen von 130.101 auf 195.220, Materialaufwand von −117.030 auf −174.477, Rohertrag von 12.302 auf 19.638. Kernaussage: Das Ergebnis steigt um 6.430 Tsd. €, getragen vom Rohertrag (+7.337) bei Kostensteigerungen von 907 Tsd. €."
+  },
+  "3.57": {
+   "status": "pruefung",
+   "datei": "Histogramm_und_Box-Plot_In_Anlehnung_an_a_XLSTAT_2017_b_Sullivan_und_LaMorte_2017",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit); beide Teile wie im Original nebeneinander, mit a) und b) passend zu den Quellen der Caption",
+    "a) Klassenhäufigkeiten aus dem Original abgelesen (237 Personen, 49 Klassen à 1,16 cm), Einzelwerte daraus erzeugt (Ø 159,5 cm, Std.-Abw. 10,3 cm wie „Normal(159,548;10,258)“); Druck mit 2,5-cm-Klassen statt 1,16 cm, online umschaltbar (1,16 | 2,5 | 5 cm)",
+    "a) Dichte → Personen je Klasse; Normalverteilungskurve und gestrichelter Mittelwert benannt; Hellgrün/Rot → Grau/Anthrazit; englische Achsentitel übersetzt",
+    "b) Kennwerte des Originals übernommen (Minimum 62, 1. Quartil 64, Median 71, 3. Quartil 77, Maximum 81 mmHg); zehn passende Einzelwerte erfunden (nur Tooltip/CSV); Cyan → Hellgrau, Pfeile → Hinweislinien mit Werten, roter Punkt im Median entfallen (Bedeutung unklar), Klammer „mittlere 50 %“ ergänzt",
+    "Bitte prüfen: Soll Teil b) „diastolischer Blutdruck“ heißen? Titel aus Platzgründen „Blutdruck in mmHg“, „diastolisch“ steht im Alternativtext und in der CSV",
+    "Caption: Dateiname enthält die Quellenangabe (Stem „…_In_Anlehnung_an_a_XLSTAT_2017_b_Sullivan_und_LaMorte_2017“) – Caption-Format prüfen"
+   ],
+   "alt": "Zwei Diagramme nebeneinander. a) Histogramm der Körpergröße von 237 Personen in 2,5-cm-Klassen von 130 bis 190 cm mit grauen Säulen, einer Normalverteilungskurve und einer gestrichelten Linie beim Mittelwert 159,5 cm; die höchste Klasse 157,5 bis 160 cm umfasst 30 Personen, 65 % liegen zwischen 149 und 170 cm. b) Box-Plot des diastolischen Blutdrucks in mmHg mit hellgrauem Kasten vom 1. Quartil (64) bis zum 3. Quartil (77), Medianlinie bei 71 und Antennen bis Minimum 62 und Maximum 81; eine Klammer kennzeichnet den Kasten als mittlere 50 % der Werte."
+  },
+  "3.58": {
+   "status": "pruefung",
+   "datei": "Trichter-_bzw_Funnel-Chart",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48 ff.; Titel und Kernaussage ergänzt",
+    "Werte des Originals übernommen, Stufen übersetzt: Website-Besuche 300, Downloads 123, Preisanfragen 98, Kontaktaufnahmen 72, Käufe 35, Supportanfragen 25, Folgekäufe 18",
+    "Diagrammtyp bleibt: zentrierte Balken, jetzt Breite proportional zur Anzahl bei gleicher Höhe (im Original bestimmte die Segmenthöhe den Wert, ab „Requested prices“ waren alle Stufen gleich breit); hellgraue Verbinder zeigen den Schwund",
+    "Sieben bedeutungslose Farben → einheitlich Anthrazit; Hinweislinien entfallen, Namen links; neu: Anzahl, Quote zur Vorstufe und vom Start als Spalten",
+    "Bitte prüfen: „Asked for support“ ist keine echte Trichterstufe (Teilmenge der Käufer) – Stufe beibehalten, in den Designregeln angemerkt",
+    "Caption: Daten aus amCharts, Gestaltung neu – „In Anlehnung an Online Chart Makers – amCharts 2017a“ kann bleiben"
+   ],
+   "alt": "Trichterdiagramm mit sieben untereinander zentrierten Balken, deren Breite der Anzahl entspricht: Website-Besuche 300, Downloads 123, Preisanfragen 98, Kontaktaufnahmen 72, Käufe 35, Supportanfragen 25, Folgekäufe 18; hellgraue Verbinder zeigen den Schwund zwischen den Stufen. Rechts stehen Anzahl, Quote zur Vorstufe (z. B. Downloads 41,0 %) und Anteil vom Start (Käufe 11,7 %). Kernaussage: Von 300 Besuchen führen 35 zum Kauf, der größte Schwund liegt vor den Downloads (−59 %)."
+  },
+  "3.59": {
+   "status": "pruefung",
+   "datei": "Normales_Kurven-_bzw_Liniendiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau und Werte wie Abb. 3.48 (Plan 100/120/90/130, Ist 120/130/100/110 Mio. €, aus der eingebetteten Excel-Tabelle), Jahr 2027 ergänzt",
+    "Diagrammtyp bleibt: zwei Linien über die Quartale; Ist kräftig mit gefüllten Punkten, Plan dünn mit hohlen Punkten statt Magenta/Dunkelblau mit Quadraten und Rauten",
+    "Legende unter dem Diagramm entfällt, „Ist“ und „Plan“ stehen am Linienende; Größenachse und Gitternetz entfallen, Skala beginnt wie im Original bei 0",
+    "Neu: Abweichung Ist − Plan je Quartal unter der Achse, farbig nach Wirkung (wie Abb. 3.48)",
+    "Titel ergänzt um Jahr und Einheit: „Umsatz SGE A 2027 je Quartal, Mio. €“; Designregeln erklären, wann Linie und wann Säule passt"
+   ],
+   "alt": "Liniendiagramm des Umsatzes der SGE A 2027 je Quartal in Mio. €: kräftige Ist-Linie mit gefüllten Punkten (120, 130, 100, 110) und dünne Plan-Linie mit hohlen Punkten (100, 120, 90, 130), die sich zwischen dem dritten und vierten Quartal kreuzen. Darunter die Abweichungen +20, +10, +10 (blaugrün) und −20 (rot). Kernaussage: Ist liegt in Q1 bis Q3 über Plan, Q4 20 Mio. € darunter; im Jahr +20 Mio. € (+4,5 %)."
+  },
+  "3.60": {
+   "status": "pruefung",
+   "datei": "Verzerrte_Vergleiche_bei_Preisentwicklungen",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.53: beide Teile wie im Original nebeneinander, jetzt mit a) lineare und b) logarithmische Skala gekennzeichnet",
+    "Negativbeispiel bleibt sichtbar: in a) wirkt Segment A wie zehnmal so stark wachsend wie C, b) zeigt gleich steile Linien; Aussagen unter den Titeln stellen Eindruck und Tatsache gegenüber",
+    "Werte aus dem Original abgelesen (Pixelauswertung) und so gesetzt, dass sich jeder Preis wie in der Legende („+100 %“) genau verdoppelt (A 31,8 → 63,6 €, B 8,5 → 17,0 €, C 3,1 → 6,2 €); Jahre 1991–2007 auf 2011–2027 verschoben",
+    "Rot/Gelb/Oliv → alle Linien anthrazit, Legende durch Beschriftung am Linienende ersetzt: links absoluter Anstieg in €, rechts relativer in %; Rahmen entfallen, lineare Achse 0–80 statt 0–100",
+    "Logarithmische Achse mit Teilstrichen 1, 2, 5, 10, 20, 50, 100 statt nur 1, 10, 100; Designregeln nennen den Index (2011 = 100) als leichter lesbare Alternative",
+    "Hinweis für Caption/Text: ggf. „a) lineare, b) logarithmische Skala“ ergänzen"
+   ],
+   "alt": "Zwei Liniendiagramme mit denselben Preisreihen dreier Segmente von 2011 bis 2027 in Euro. a) Lineare Skala von 0 bis 80: Segment A steigt von 31,8 auf 63,6 € (+31,8 €) und wirkt steil, B (+8,5 €) und C (+3,1 €) verlaufen fast flach – A scheint zehnmal so stark zu steigen wie C. b) Logarithmische Skala von 1 bis 100: Die drei Linien steigen gleich stark an, jede ist mit +100 % beschriftet – tatsächlich verdoppeln sich alle drei Preise."
+  },
   "3.61": {
    "status": "pruefung",
    "datei": "Punktdiagramm",

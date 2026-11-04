@@ -943,6 +943,21 @@
     }
    ]
   },
+  "3.45": {
+   "status": "pruefung",
+   "datei": "Treemap-Chart",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu aufgebaut (HTML für die Lernplattform, PNG für das Buch), Format wie Abb. 3.44: Titel, Kernaussage, darunter die Filter Jahr und Region",
+    "Dieselben Daten wie der Sunburst in Abb. 3.44 (Region → Produktgruppe → Kaufgrund, Ist 2027, VJ 2026) – so lassen sich beide Diagrammtypen an denselben Zahlen vergleichen",
+    "Diagrammtyp bleibt: drei Ebenen ineinander wie im Original (Gebiet → Unterkategorie → Produkt); Ebenen durch Helligkeit wie im Sunburst (Region anthrazitfarbene Kopfzeile, Produktgruppe graue Kopfzeile, Kaufgründe hellgrau) statt neun Farben je Gebiet",
+    "Felder je Ebene nach Umsatz geordnet (größte oben links); Kopfzeilen sind aus den Flächen herausgerechnet, jede hellgraue Fläche ist maßstabsgetreu zum Umsatz",
+    "Name und Umsatz direkt im Feld, wo sie waagerecht passen; Farblegende der Gebiete entfällt, stattdessen Legende der Ebenen und Gesamtumsatz rechts über dem Diagramm",
+    "Klick auf ein Feld hebt dieses Element in allen Regionen hervor, Region im Filter füllt die ganze Fläche (Drilldown)",
+    "Treemap ist in Power BI ein Standardvisual (Kategorie/Details), allerdings ohne Kopfzeilen je Ebene – in der Ebene „Nachbau“ beschrieben",
+    "Caption: Daten und Gestaltung sind neu – „In Anlehnung an Microsoft 2017b“ kann für den Diagrammtyp bleiben oder entfallen"
+   ],
+   "alt": "Treemap des Umsatzes 2027 von 17,8 Mio. €, gegliedert in vier Regionen mit dunkler Kopfzeile: Deutschland 7,7 Mio. € (43 %), Frankreich 4,8 Mio. € (27 %), Niederlande 18 % und Österreich 2,1 Mio. € (12 %). Jede Region ist in Produktgruppen mit grauer Kopfzeile unterteilt (City, Mountain, Racing, Trekking Bike), diese wiederum in hellgraue Felder je Kaufgrund. Die Fläche entspricht dem Umsatz; größtes Feld sind City Bikes in Deutschland mit 2,34 Mio. €. Kernaussage: City Bikes prägen die Niederlande (51 %), Mountain Bikes Österreich (46 %)."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

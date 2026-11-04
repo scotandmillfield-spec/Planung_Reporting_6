@@ -1538,6 +1538,72 @@
    ],
    "alt": "Drei Kennzahlen für Juni 2027 nebeneinander, jeweils mit grauen Bewertungsbereichen (dunkel schlecht, hell gut) und schwarzer Zielmarke. Links ein Tacho: Auftragseingang 5.348 Tsd. € auf einer Skala bis 9.000, Ziel 5.000 (+348). Mitte ein Ring: Kapazitätsauslastung 85 % bei Ziel 90 % (−5 %-Punkte). Rechts ein Thermometer: Budgetausschöpfung im 1. Halbjahr 51 % bei Ziel höchstens 50 % (+1 %-Punkt, ungünstig). Kernaussage: Der Auftragseingang liegt über dem Ziel, Auslastung und Budgetausschöpfung verfehlen es knapp."
   },
+  "3.66": {
+   "status": "pruefung",
+   "datei": "Geo-Visualisierung",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Einzelvisual nachgebaut (110 × 78,7 mm): Fensterrahmen, Bedienleiste „Map Design“, Werkzeugsymbole und Schaltflächen entfernt; Register „States/Sales Region“ → Schalter Vertriebsregion (Lernplattform)",
+    "US-Bundesstaaten → 16 Bundesländer als schematische Kachelkarte (eigene SVG-Kacheln, keine Kartenkacheln/Bibliotheken); Daten erfunden (Marktpotenzial, Quartalsumsätze, 12 Vertriebsbüros), englische Begriffe übersetzt",
+    "Flächenfärbung: zwölf Blautöne → fünf Graustufen-Klassen mit verdoppelnden Grenzen (200/400/800/1.600 Mio. €), Wert zusätzlich in der Kachel",
+    "Mini-Säulen „Change Q3 vs Q2 / Q4 vs Q3“ in Rot/Gelb/Grün-Klassen ohne Werte → Säulen nach Wirkung (Blaugrün/Rot) mit Zahl; Vertriebsbüros als Kreise (Anzahl je Land, Orte im Tooltip) statt orangefarbener Punkte",
+    "Neu: Kernaussage und Summenfeld Deutschland bzw. gewählte Region; Designregeln nennen die Grenzen von Karten (Flächenwirkung, Lage nur grob) und das sortierte Balkendiagramm als Alternative",
+    "Caption ohne Firmennamen? Daten, Karte und Gestaltung sind neu – z. B. „Geo-Visualisierung als Kachelkarte (eigene Darstellung)“ oder Quellenangabe als „in Anlehnung an“ beibehalten"
+   ],
+   "alt": "Kachelkarte der 16 Bundesländer: Jedes Land ist eine gleich große Kachel in grober geografischer Lage, deren Grauton das Marktpotenzial 2027 in fünf Klassen zeigt (dunkel: Nordrhein-Westfalen 1.920 und Bayern 1.760 Mio. €); Kreise markieren Vertriebsbüros. In jeder Kachel zeigen zwei Mini-Säulen mit Zahlen die Umsatzveränderung zum Vorquartal für Q3 und Q4, Zuwächse blaugrün, Rückgänge rot. Kernaussage: NW, BY und BW bündeln 52 % des Potenzials; der Umsatz im vierten Quartal sinkt in sechs Ländern, am stärksten in Baden-Württemberg (−3,4 %)."
+  },
+  "3.67": {
+   "status": "pruefung",
+   "datei": "Lieferantenvergleich_mit_Schwellenwert",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48 ff.: Titel mit Einheit, Kernaussage, Diagramm",
+    "Diagrammtyp bleibt: waagerechtes Profil je Lieferant über sechs Kriterien mit senkrechter Schwellenwertlinie; Werte aus dem Original abgelesen und auf eine Nachkommastelle gerundet (A 4,5/6,7/5,0/5,7/4,0/3,5; B 3,7/4,5/3,7/4,7/5,5/4,3), Schwellenwert 4, Jahr 2027 ergänzt",
+    "Lieferant A anthrazit mit Quadraten, B hellgrau mit Dreiecken statt Rot/Grün; Bereich unter dem Schwellenwert grau hinterlegt, Linie beschriftet; Unterschreitungen rot markiert (Marker-Kontur und Wert)",
+    "Neu: Punktwerte rechts mit Mittelwert und Zahl der verfehlten Kriterien; Legende entfällt (Beschriftung an der Linie), Gitternetz auf gepunktete Zeilenlinien reduziert; Schalter Schwellenwert 3/4/5 in der Lernplattform",
+    "Annahme: Skala 0–10, höher = besser für alle Kriterien (auch Preis: hohe Punktzahl = günstiger Preis) – bitte prüfen",
+    "Titel „Lieferantenanalyse“ → „Lieferantenbewertung 2027 je Kriterium, Punkte 0–10“; Caption kann bleiben"
+   ],
+   "alt": "Profildiagramm der Lieferantenbewertung 2027 in sechs Kriterien auf einer Skala von 0 bis 10 Punkten mit senkrechter Schwellenwertlinie bei 4 Punkten; der Bereich darunter ist grau hinterlegt. Lieferant A (dunkle Linie, Quadrate) liegt nur bei Kapazität (3,5) unter dem Schwellenwert, Lieferant B (helle Linie, Dreiecke) bei Qualität und Liefergenauigkeit (je 3,7); rechts stehen die Punktwerte mit Mittelwerten 4,9 und 4,4. Kernaussage: Kein Lieferant erfüllt alle Kriterien."
+  },
+  "3.68": {
+   "status": "pruefung",
+   "datei": "Spinnen-Netzdiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 × 84,7 mm); Diagrammtyp bleibt: Netzdiagramm mit 23 Kennzahlen in fünf Perspektiven, Achsenreihenfolge wie im Original",
+    "Vier Reihen wie im Original (Ist 2009, Plan 2010, Ist 2010, Plan 2011 → Ist 2025, Plan 2026, Ist 2026, Plan 2027); Werte aus dem Original abgelesen und gerundet bzw. in dessen Größenordnung ergänzt",
+    "Notation: Ist kräftig anthrazit, Plan dünn, Vorjahr hellgrau, Folgeplan gestrichelt (Original: Pläne durchgezogen, Ist gestrichelt); Legende klickbar",
+    "Annahme: Skala 0–160 als Index (Basisjahr 2024 = 100) gedeutet, Kennzahlen mit sinkendem Zielwert umgekehrt („außen = günstiger“); Titel „Balanced Scorecard REM“ → „Balanced Scorecard Immobilienmanagement“ (REM als Real Estate Management gedeutet) – bitte prüfen",
+    "Pastellfarbene Perspektiven → helle Grautöne mit Trennlinien, Namen außen; Ringe auf 50, 100 (Basis, gestrichelt) und 150 reduziert; „d. Assets“ → „Assets“, „Durchschnittl.“ ausgeschrieben",
+    "Designregeln nennen die Grenzen (Fläche wächst quadratisch, Form hängt von der Achsenreihenfolge ab, zu viele Achsen/Reihen); Schalter „Punkte“ zeigt in der Lernplattform die Alternative als Punktdiagramm mit Plan-Ist-Linie nach Wirkung",
+    "Caption kann bleiben („Eigene Darstellung in Anlehnung an Gehringer und Michel 2000, S. 28“)"
+   ],
+   "alt": "Netzdiagramm einer Balanced Scorecard mit 23 Kennzahlen, deren Achsen nach den Perspektiven Finanzen, Prozesse, Assets, Mitarbeiter und Kunden in grau getönten Sektoren gruppiert sind; die Werte sind als Index (2024 = 100, außen günstiger) dargestellt. Vier Linien zeigen Ist 2025, Plan 2026, Ist 2026 und Plan 2027; die kräftige Ist-2026-Linie liegt fast überall innerhalb des Plans und hat eine tiefe Delle bei den Mitarbeiterkennzahlen Verbesserungsvorschlagsquote (48) und MA-Zufriedenheit (62). Kernaussage: Ist 2026 unter Plan bei 22 von 23 Kennzahlen, größte Lücken in der Perspektive Mitarbeiter."
+  },
+  "3.69": {
+   "status": "pruefung",
+   "datei": "Sparkline-Beispiel",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit); Diagrammtyp bleibt: Sparklines in drei Tabellenblöcken (Aufträge, Materialverfügbarkeit, Produktion) neben dem aktuellen Wert",
+    "Stichtagswerte des Originals übernommen (u. a. 23.817/24.526/5.334 Stück, +178/+14/−53 %, Lager −10.813/18.524/5.330, Durchlaufzeit 5,30/3,24/4,55 Std., 100/156/40 PPM); Tagesverläufe (20 Arbeitstage bis 15.10.2027) erfunden",
+    "Orangefarbene Zellhinterlegung (zwei Stufen ohne erkennbare Regel) → Farbe nach Wirkung: Änderung zum Vortag als Abweichungsbalken blaugrün/rot, Mindermengen rote Säulen unter der Nulllinie, Werte über Ziel rot",
+    "Annahme: Ziele Durchlaufzeit ≤ 4,0 Std. und Qualität ≤ 80 PPM (im Original nicht genannt) – im Spaltenkopf und als gestrichelte Linie in der Sparkline; bitte prüfen",
+    "Spalten über alle Blöcke ausgerichtet, gemeinsamer Maßstab je Spalte, letzter Tag dunkel; Zellrahmen entfallen; „Produktfamilie1“ → „Produktfamilie 1“; Produktionsmengen der Familien 2 und 3 sind im Original identisch mit den Auftragsmengen – übernommen (Kopierfehler im Original?)",
+    "Caption: „entnommen von den Internetpräsentationsseiten der Bissantz & Company GmbH 2011“ → „In Anlehnung an …“, da Daten und Gestaltung neu sind?"
+   ],
+   "alt": "Drei untereinanderstehende Tabellen für drei Produktfamilien mit Sparklines der letzten 20 Arbeitstage bis 15.10.2027 neben dem aktuellen Wert: bestellte Stückzahl mit Änderung zum Vortag (+178 %, +14 %, −53 %), Lagermenge mit Änderung zum Vortag (Familie 1 rutscht in eine Mindermenge von 10.813 Stück, rote Säulen unter der Nulllinie) sowie Produktionsmenge, Durchlaufzeit und Produktqualität mit gestrichelten Ziellinien. Kernaussage: Die Aufträge von Familie 1 haben sich fast verdreifacht, die von Familie 3 mehr als halbiert, und für Familie 1 fehlt Material."
+  },
+  "3.70": {
+   "status": "pruefung",
+   "datei": "Beispiel_Kursdiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit); Diagrammtyp bleibt: Kursdiagramm mit Volumen, jetzt als Kerzen (Eröffnung, Hoch, Tief, Schluss) statt Hoch-Tief-Schluss-Strichen",
+    "Werte des Originals übernommen (Hoch, Tief, Schluss, Volumen aus der Excel-Datentabelle); Eröffnungskurse ergänzt (erfunden, jeweils zwischen Tief und Hoch), weil Kerzen sie benötigen",
+    "Kerzen: steigend hohl mit blaugrüner Kontur, fallend rot gefüllt – Unterscheidung über Füllung und Farbe, nicht über Rot/Grün allein",
+    "Doppelachse aufgelöst: Kurs oben, Volumen unten auf gemeinsamer Zeitachse; Volumensäulen ab null (Original: Achse ab 80.000 €, Unterschiede stark überzeichnet); Veränderung zum Vortag dazwischen; Datentabelle, hellblaue Säulen und Rahmen entfallen",
+    "Datum: Original 01.–05.09.2011 einschließlich Wochenende; jetzt Handelstage Mo–Fr 06.–10.09.2027",
+    "Bitte prüfen: Volumen in € aus dem Original übernommen (Kursdiagramme zeigen das Volumen oft in Stück)"
+   ],
+   "alt": "Kerzendiagramm des Aktienkurses vom 06. bis 10.09.2027 in Euro mit Handelsvolumen darunter. Montag bis Mittwoch steigen die Kurse (hohle Kerzen, Schluss 44,56, 45,73 und 47,91 €), Donnerstag und Freitag fallen sie (rot gefüllte Kerzen, Schluss 45,89 und 43,76 €); dazwischen die Veränderung zum Vortag von +2,6 % bis −4,6 %. Die Volumensäulen ab null sind fast gleich hoch (87.520 bis 95.820 €)."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

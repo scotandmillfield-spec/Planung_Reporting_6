@@ -735,7 +735,7 @@ const DK = (() => {
       sv("text", { x: x0 + 8, y: y0 + 14, dy: "0.35em", style: `font-weight:bold;fill:${farbe}` }, g, y.k);
       sv("text", { x: x0 + tw - 8, y: y0 + 14, dy: "0.35em", "text-anchor": "end", style: `fill:${farbe}` }, g, zahl(y.pot));
       const gb = sv("g", { id: `geo-${y.k}-bueros` }, g);
-      y.bueros.forEach((o, i) => sv("circle", { cx: x0 + 14 + DK.tw(y.k, 14, true) + i * 12, cy: y0 + 14, r: 4.5,
+      y.bueros.forEach((o, i) => sv("circle", { cx: x0 + 19 + DK.tw(y.k, 14, true) + i * 13, cy: y0 + 14, r: 4.5,
         fill: "#FFFFFF", stroke: "#1A1A1A", "stroke-width": 1.3 }, gb));
       // Einsatz mit Mini-Säulen
       const ix = x0 + 6, iy = y0 + 30, iw = tw - 12, ih = th - 36, mitte = iy + ih / 2;
@@ -770,7 +770,7 @@ const DK = (() => {
   }
 
   function zeichnen() {
-    const v = DK.visual(bVis, { titel: `Marktpotenzial und Umsatzentwicklung ${J}`, einheit: "Mio. €, %", botschaft: botschaft(695),
+    const v = DK.visual(bVis, { titel: `Marktpotenzial und Umsatz ${J}`, einheit: "Mio. €, %", botschaft: botschaft(695),
       schalter: { optionen: [["", "Alle"], ...RG.map((r, i) => [String(i), r])], wert: S.region === null ? "" : String(S.region),
         onChange: w => { S.region = w === "" ? null : Number(w); S.auswahl = null; zeichnen(); } } });
     bVis.querySelector(".dk-titelzeile .dk-knoepfe").id = "geo-region";
@@ -780,21 +780,21 @@ const DK = (() => {
 
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "v-geo", anker: "links", versatz: [690, 26], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage unter dem Titel",
+      { nr: 1, ziel: "v-geo", anker: "links", versatz: [358, 0], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage unter dem Titel",
         text: "Unter dem Titel steht, wo das Potenzial liegt und wo der Umsatz zuletzt gesunken ist – je nach Auswahl für Deutschland, eine Vertriebsregion oder ein Land. Das Original trug nur den englischen Titel „Market Potential vs. Change in Sales“." },
       { nr: 2, ziel: "geo-region", anker: "links", versatz: [-4, -2], regel: "SIMPLIFY – Software entfernen", titel: "Ohne Bedienoberfläche",
         text: "Fensterrahmen, die Bedienleiste „Map Design“, Werkzeugsymbole und Schaltflächen des Kartenwerkzeugs entfallen; sie gehören nicht zur Aussage. Die Register „States“ und „Sales Region“ des Originals werden zum Schalter Vertriebsregion." },
       { nr: 3, ziel: "geo-karte", anker: "links", versatz: [30, 2], regel: "STRUCTURE – Kachelkarte", titel: "Gleich große Kacheln statt Umrisse",
         text: "Jedes Bundesland ist eine gleich große Kachel in grober geografischer Lage. Stadtstaaten und das Saarland bleiben so lesbar, und die Mini-Diagramme haben Platz. Im Original lagen die Säulen über Staatsgrenzen hinweg, kleine Staaten im Nordosten waren kaum zu erkennen." },
-      { nr: 4, ziel: "geo-legende", anker: "links", versatz: [-4, -6], regel: "EXPRESS – Klassen statt Farbverlauf", titel: "Fünf Graustufen, verdoppelnde Grenzen",
+      { nr: 4, ziel: "geo-legende", versatz: [28, -2], regel: "EXPRESS – Klassen statt Farbverlauf", titel: "Fünf Graustufen, verdoppelnde Grenzen",
         text: "Das Marktpotenzial ist in fünf Graustufen eingeteilt; jede Klassengrenze verdoppelt die vorige (200, 400, 800, 1.600 Mio. €), der Wert steht zusätzlich in der Kachel. Das Original nutzte zwölf kaum unterscheidbare Blautöne mit gleich breiten Klassen." },
-      { nr: 5, ziel: "geo-BW-saeulen", anker: "links", versatz: [-2, -4], regel: "UNIFY – Abweichung nach Wirkung", titel: "Mini-Säulen mit Zahl",
+      { nr: 5, ziel: "geo-legende2", versatz: [28, -2], regel: "UNIFY – Abweichung nach Wirkung", titel: "Mini-Säulen mit Zahl",
         text: "Je Land zeigen zwei Mini-Säulen die Umsatzveränderung zum Vorquartal (links Q3, rechts Q4): blaugrün nach oben bei Zuwachs, rot nach unten bei Rückgang, mit Zahl. Das Original färbte die Säulen in drei Ampelklassen „Bad/Average/Good“ ohne Werte; Gelb ist im Druck kaum sichtbar." },
-      { nr: 6, ziel: "geo-NW-bueros", anker: "links", versatz: [-2, -12], regel: "UNIFY – Symbole", titel: "Vertriebsbüros als Kreise",
+      { nr: 6, ziel: "geo-NW-bueros", anker: "links", versatz: [26, -26], regel: "UNIFY – Symbole", titel: "Vertriebsbüros als Kreise",
         text: "Jeder Kreis ist ein Vertriebsbüro; die Orte nennt der Tooltip. Im Original standen orangefarbene Punkte an der Lage der Büros – in einer Kachelkarte zählt die Anzahl je Land." },
-      { nr: 7, ziel: "geo-SL", anker: "links", versatz: [40, 46], regel: "CHECK – Grenzen der Karte", titel: "Raumbezug nur, wenn er etwas sagt",
+      { nr: 7, ziel: "geo-SN", versatz: [40, 20], regel: "CHECK – Grenzen der Karte", titel: "Raumbezug nur, wenn er etwas sagt",
         text: "Echte Umrisse lassen große Flächenländer wichtiger wirken, als ihre Werte sind; Kacheln geben jedem Land gleiches Gewicht, zeigen die Lage aber nur grob. Ist die Lage für die Aussage unerheblich, ist ein nach Potenzial sortiertes Balkendiagramm mit Abweichungsspalten genauer." },
-      { nr: 8, ziel: "geo-summe", anker: "links", versatz: [-2, -4], regel: "CONDENSE – Interaktion", titel: "Region, Klick und Summe",
+      { nr: 8, ziel: "geo-summe", versatz: [0, 4], regel: "CONDENSE – Interaktion", titel: "Region, Klick und Summe",
         text: "Der Schalter hebt eine Vertriebsregion hervor, ein Klick ein einzelnes Land; Aussage und Summenfeld folgen der Auswahl, der Tooltip nennt Quartalsumsätze und Büros. Esc hebt die Auswahl eines Landes auf." },
     ],
     nachbauIntro: "Seitengröße benutzerdefiniert 727 × 520 px. Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt. Datenmodell: Tabelle Länder (Kürzel, Bundesland, Region, Marktpotenzial, Umsatz Q2–Q4) und Tabelle Vertriebsbüros (Ort, Bundesland) wie in der CSV-Datei.",
@@ -803,9 +803,9 @@ const DK = (() => {
         felder: "Ort: Bundesland (Datenkategorie „Bundesland oder Kanton“, Land Deutschland); Farbsättigung bzw. Tooltip: Marktpotenzial",
         format: "Füllfarben › fx › Regeln: < 200 #EFEFEF, < 400 #D4D4D4, < 800 #A9A9A9, < 1.600 #6E747A, sonst #3A3F44; Kartenstil Graustufen; Beschriftungen aus",
         hinweis: "Das Standardvisual zeichnet echte Landesgrenzen; Stadtstaaten werden dann winzig. Eine Kachelkarte wie hier geht nur über die Formenzuordnung (Vorschaufunktion) mit eigener TopoJSON-Datei." },
-      { id: "B", ziel: "geo-NW-bueros", anker: "links", versatz: [-2, -12], titel: "Vertriebsbüros", visual: "Karte (Standardvisual) bzw. Blasenebene im Azure-Maps-Visual",
+      { id: "B", ziel: "geo-NW-bueros", anker: "links", versatz: [26, -26], titel: "Vertriebsbüros", visual: "Karte (Standardvisual) bzw. Blasenebene im Azure-Maps-Visual",
         felder: "Ort: Ort des Vertriebsbüros (Datenkategorie „Ort“); Blasengröße fest", format: "Blasen weiß mit Rahmen #1A1A1A, kleine feste Größe" },
-      { id: "C", ziel: "geo-BW-saeulen", anker: "links", versatz: [-2, -4], titel: "Umsatz zum Vorquartal", visual: "Matrix neben der Karte (Diagramme in Kartenflächen bietet kein Standardvisual)",
+      { id: "C", ziel: "geo-legende2", versatz: [28, -2], titel: "Umsatz zum Vorquartal", visual: "Matrix neben der Karte (Diagramme in Kartenflächen bietet kein Standardvisual)",
         felder: "Zeilen: Bundesland; Werte: ΔVQ Q3 % = DIVIDE([Umsatz Q3], [Umsatz Q2]) − 1, ΔVQ Q4 % = DIVIDE([Umsatz Q4], [Umsatz Q3]) − 1",
         format: "Bedingte Formatierung › Datenbalken: positiv #00806B, negativ #C62828; Interaktionen: Karte filtert Matrix und umgekehrt",
         hinweis: "Die Karte kann je Ort Kreisdiagramme zeigen (Feld Legende) – für Veränderungen mit Vorzeichen ungeeignet." },

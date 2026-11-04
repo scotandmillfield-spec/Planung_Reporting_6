@@ -655,7 +655,7 @@ const DK = (() => {
     { id: "m", titel: `${MON} ${JAHR}`, lang: `im ${MON}`, ref: "VJ_M", ist: "IST_M" },
     { id: "k", titel: `Januar–${MON} ${JAHR}`, lang: `Januar–${MON}`, ref: "VJ_K", ist: "IST_K" },
   ];
-  const REF = { kurz: "VJ", lang: `Vorjahr ${JAHR - 1}`, sz: "vj" }, IST = { kurz: "IST", lang: "Ist", sz: "ist" };
+  const REF = { kurz: "VJ", lang: "Vorjahr", sz: "vj" }, IST = { kurz: "IST", lang: "Ist", sz: "ist" };
   const DK_ = "ΔVJ";
 
   /* ---------- Zustand ---------- */
@@ -758,7 +758,7 @@ const DK = (() => {
     else if (z.name === "Erfolg") t.push(`Gesamtleistung − Gesamtkosten; Umsatzrendite ${BLOECKE[BLOECKE.length - 1].lang}: ${zahl(z.v[kb] / d.L[0].v[kb] * 100, 1)}${NBSP}%`);
     else {
       const ges = z.gruppe === "L" ? d.gl : d.gk;
-      t.push(`Anteil an der ${z.gruppe === "L" ? "Gesamtleistung" : "Gesamtkosten"} ${BLOECKE[BLOECKE.length - 1].lang}: ${zahl(z.v[kb] / ges.v[kb] * 100, 1)}${NBSP}%`);
+      t.push(`Anteil ${z.gruppe === "L" ? "an der Gesamtleistung" : "an den Gesamtkosten"} ${BLOECKE[BLOECKE.length - 1].lang}: ${zahl(z.v[kb] / ges.v[kb] * 100, 1)}${NBSP}%`);
     }
     if (z.r < 0 && !z.summe) t.push("Kosten: Anstieg ungünstig, Rückgang günstig");
     t.push(z.summe ? "Summenzeile – bleibt beim Sortieren stehen" : "Klick hebt die Zeile hervor, Spaltenkopf sortiert");

@@ -1,0 +1,28 @@
+﻿Kennzahl;Abschnitt;Einheit;Art;Richtung;Szenario;Jahr;Wert
+Betriebsertrag;Geschäftszahlen;Mio. €;fluss;1;Plan p. a.;2027;8980
+Betriebsertrag;Geschäftszahlen;Mio. €;fluss;1;Ist kumuliert;2027;8709
+Betriebsertrag;Geschäftszahlen;Mio. €;fluss;1;Ist Vorjahr p. a.;2026;8688
+Betriebsaufwand;Geschäftszahlen;Mio. €;fluss;-1;Plan p. a.;2027;8168
+Betriebsaufwand;Geschäftszahlen;Mio. €;fluss;-1;Ist kumuliert;2027;7988
+Betriebsaufwand;Geschäftszahlen;Mio. €;fluss;-1;Ist Vorjahr p. a.;2026;7953
+Investitionen;Geschäftszahlen;Mio. €;fluss;0;Plan p. a.;2027;516
+Investitionen;Geschäftszahlen;Mio. €;fluss;0;Ist kumuliert;2027;431
+Investitionen;Geschäftszahlen;Mio. €;fluss;0;Ist Vorjahr p. a.;2026;415
+Free Cashflow;Geschäftszahlen;Mio. €;fluss;1;Plan p. a.;2027;684
+Free Cashflow;Geschäftszahlen;Mio. €;fluss;1;Ist kumuliert;2027;595
+Free Cashflow;Geschäftszahlen;Mio. €;fluss;1;Ist Vorjahr p. a.;2026;576
+Bilanzsumme;Geschäftszahlen;Mio. €;bestand;0;Plan p. a.;2027;71603
+Bilanzsumme;Geschäftszahlen;Mio. €;bestand;0;Ist kumuliert;2027;84676
+Bilanzsumme;Geschäftszahlen;Mio. €;bestand;0;Ist Vorjahr p. a.;2026;82659
+Eigenkapital;Geschäftszahlen;Mio. €;bestand;1;Plan p. a.;2027;2857
+Eigenkapital;Geschäftszahlen;Mio. €;bestand;1;Ist kumuliert;2027;3534
+Eigenkapital;Geschäftszahlen;Mio. €;bestand;1;Ist Vorjahr p. a.;2026;2745
+Konzern;Personalbestand;FTE;bestand;0;Plan p. a.;2027;44178
+Konzern;Personalbestand;FTE;bestand;0;Ist kumuliert;2027;44803
+Konzern;Personalbestand;FTE;bestand;0;Ist Vorjahr p. a.;2026;44698
+Stammhaus;Personalbestand;FTE;bestand;0;Plan p. a.;2027;32919
+Stammhaus;Personalbestand;FTE;bestand;0;Ist kumuliert;2027;30863
+Stammhaus;Personalbestand;FTE;bestand;0;Ist Vorjahr p. a.;2026;30699
+Leihpersonal;Personalbestand;FTE;bestand;0;Plan p. a.;2027;1571
+Leihpersonal;Personalbestand;FTE;bestand;0;Ist kumuliert;2027;1690
+Leihpersonal;Personalbestand;FTE;bestand;0;Ist Vorjahr p. a.;2026;1602

@@ -813,6 +813,31 @@
     }
    ]
   },
+  "3.14": {
+   "status": "pruefung",
+   "datei": "Ist-Ist-Vergleiche",
+   "kommentare": [
+    "Als Einzelvisual umgesetzt (HTML für die Lernplattform, PNG 110 × 54,5 mm): eine Tabelle, Berichtszeile links, Spaltengruppen „August 2027“ und „Januar–August 2027“ (Original: Berichtszeile in der Mitte, kumuliert links, ohne Zeitraum)",
+    "Gemeinsamer Datensatz und gleiches Layout wie Abb. 3.15 und 3.17 (gleiche Zeilen und Istwerte); Einheit fehlte im Original – als Mio. € gelesen (wie Abb. 3.16), Berichtsmonat August 2027, Vorjahr 2026 angenommen",
+    "Zeilenwerte unverändert; Summen, Abweichungen und Prozente aus den Zeilen gerechnet – im Monat rechnete das Original mit verdeckten Nachkommastellen (Gesamtkosten 117 statt 118, Vorjahr 128 statt 127, Erfolg VJ 34 statt 35; ΔVJ Fremdleistungen −9 statt −8, Sonstige Kosten −3 statt −2)",
+    "Rot nach Vorzeichen → Farbe nach Wirkung (Kosten: Anstieg ungünstig): gesunkene Material- und Fremdleistungskosten jetzt blaugrün, gestiegene Personalkosten und Abschreibungen rot",
+    "Szenario-Marken unter den Spaltenköpfen (VJ hellgrau, IST anthrazit) wie Abb. 3.16; bewusst ohne Abweichungsbalken, damit Abb. 3.16 den Unterschied zeigt",
+    "„sonstige Einnahmen“ → „Sonstige Erträge“ (Erfolgsrechnung, Einnahmen sind eine Zahlungsgröße) – bitte bestätigen; Buchtext prüfen, falls er Monatswerte des Originals zitiert"
+   ],
+   "alt": "Tabelle „Erfolgsrechnung im Vorjahresvergleich“ in Mio. € mit acht Berichtszeilen, den Summen Gesamtleistung, Gesamtkosten und Erfolg sowie zwei Spaltengruppen für August 2027 und Januar–August 2027, jeweils mit Vorjahr (hellgrau markiert), Ist (anthrazit markiert), absoluter und prozentualer Abweichung. Der Erfolg liegt im August mit 70 um 36 und kumuliert mit 200 um 150 Mio. € über dem Vorjahr; größte Belastung sind die Personalkosten (+100 kumuliert). Abweichungen sind nach Wirkung gefärbt: günstige blaugrün, ungünstige rot, bei Kosten ist ein Anstieg ungünstig."
+  },
+  "3.15": {
+   "status": "pruefung",
+   "datei": "Soll-Ist-_bzw_Plan-Ist-Vergleiche",
+   "kommentare": [
+    "Als Einzelvisual umgesetzt (PNG 110 × 54,5 mm), gleicher Datensatz und gleiches Layout wie Abb. 3.14 – nur das Vergleichsszenario wechselt vom Vorjahr zum Plan (Soll = Plan, Kürzel PL); Berichtszeile links statt in der Mitte, Spaltengruppen mit Zeitraum",
+    "Zeilenwerte unverändert; Monatssummen aus den Zeilen gerechnet: Gesamtleistung Plan 170 statt 171, Gesamtkosten Plan 111 statt 110, Erfolg Plan 59 statt 60 und ΔPL +11 statt +9 (im Original 70 − 60 = 9); ΔPL Personalkosten +12 statt +13, Fremdleistungen −5 statt −4",
+    "Farbe nach Wirkung statt Vorzeichen: Personalkosten (+150) und Gesamtkosten (+100) über Plan jetzt rot (Original schwarz), eingesparte Fremdleistungen (−50) blaugrün (Original rot)",
+    "Plan weiß mit Rahmen, Ist anthrazit als Marken unter den Spaltenköpfen; Einheit als Mio. € ergänzt, Berichtsmonat August 2027 angenommen",
+    "„sonstige Einnahmen“ → „Sonstige Erträge“ wie in Abb. 3.14 – bitte bestätigen"
+   ],
+   "alt": "Tabelle „Erfolgsrechnung im Planvergleich“ in Mio. € mit demselben Aufbau wie Abb. 3.14: acht Berichtszeilen mit den Summen Gesamtleistung, Gesamtkosten und Erfolg, Spaltengruppen August 2027 und Januar–August 2027 mit Plan (weiß mit Rahmen markiert), Ist (anthrazit markiert), ΔPL und ΔPL %. Im August liegt der Erfolg mit 70 um 11 über Plan, kumuliert mit 200 um 150 Mio. € (−42,9 %) darunter, vor allem wegen der Personalkosten (+150 über Plan). Günstige Abweichungen sind blaugrün, ungünstige rot."
+  },
   "3.16": {
    "status": "pruefung",
    "kommentare": [
@@ -837,6 +862,31 @@
      "text": "Alle Jahresangaben stehen auf 2027 (Titel „Geschäftsjahr 2027“, Schaltfläche „Jahr 2027“). Die Filter Zeitraum und Region stehen jetzt unter dem Berichtsnamen (Titel und Aussage), über der Tabelle."
     }
    ]
+  },
+  "3.17": {
+   "status": "pruefung",
+   "datei": "Plan-Wird-Vergleich_Forecast",
+   "kommentare": [
+    "Als Einzelvisual umgesetzt (PNG 110 × 54,5 mm), gleicher Datensatz und gleiches Layout wie Abb. 3.14 und 3.15: Spaltengruppen „Januar–August 2027“ (PL, IST) und „Gesamtjahr 2027“ (PL, FC); „Forecast“/„Plan ges.“ → FC (grau markiert)/PL",
+    "Korrektur: Plan kumuliert bei Umsatzerlösen und Gesamtleistung im Original 900 bzw. 1.550 (= Vorjahreswerte aus Abb. 3.14) → 1.000 bzw. 1.650 wie Abb. 3.15; dadurch ΔPL Umsatzerlöse ±0 statt +100, Gesamtleistung −50 statt +50, Erfolg −150 (Plan 350) statt −50 (Plan 250) – bitte bestätigen",
+    "Forecast und Plan Gesamtjahr unverändert (Erfolg 250 statt 280, −30); Tooltip zerlegt den Forecast in Ist Januar–August und Erwartung September–Dezember. Hinweis: Plan kumuliert 350 über Plan Gesamtjahr 280 bedeutet einen Planverlust von 70 für September–Dezember (schon im Original zwischen Abb. 3.15 und 3.17 so)",
+    "Farbe nach Wirkung statt Vorzeichen: Personal-, Material- und Gesamtkosten über Plan rot, eingesparte Fremdleistungen blaugrün",
+    "Einheit als Mio. € ergänzt; „sonstige Einnahmen“ → „Sonstige Erträge“ wie Abb. 3.14"
+   ],
+   "alt": "Tabelle „Erfolgsrechnung: Ist und Forecast im Planvergleich“ in Mio. € mit acht Berichtszeilen und den Summen Gesamtleistung, Gesamtkosten und Erfolg; links Plan und Ist für Januar–August 2027, rechts Plan und Forecast (grau markiert) für das Gesamtjahr 2027, jeweils mit ΔPL und ΔPL %. Bis August liegt der Erfolg 150 unter Plan (200 statt 350), für das Gesamtjahr erwartet der Forecast 250 statt 280 Mio. € (−30), weil die Gesamtkosten (+180) stärker steigen als die Gesamtleistung (+150). Günstige Abweichungen sind blaugrün, ungünstige rot."
+  },
+  "3.18": {
+   "status": "pruefung",
+   "datei": "Zielerreichungsbericht",
+   "kommentare": [
+    "Als Einzelvisual umgesetzt (PNG 110 × 61,8 mm); alle Werte des Originals unverändert, Quoten und Abweichungen nachgerechnet (stimmen); Gewinn und Umsatzrendite aus Betriebsertrag und -aufwand gerechnet",
+    "Gelesen als Geschäftsjahr 2027 (Ist kum. Januar–Dezember, Vorjahr 2026), weil das kumulierte Ist bereits auf Höhe von Plan p. a. und Vorjahr p. a. liegt – bei unterjährigem Stand wäre Rot für jede Quote unter 100 % irreführend; bitte prüfen",
+    "Rot für jede Quote unter 100 % → Farbe nach Wirkung: Betriebsaufwand unter Plan jetzt blaugrün, über Vorjahr rot; Investitionen, Bilanzsumme und Personalbestände ohne Wertung (Original: Investitionen und Stammhaus rot) – Wertung bitte bestätigen",
+    "„offen“ → ΔPL bzw. ΔVJ (Notation wie Abb. 3.14–3.17); Abweichung der Umsatzrendite in %-Pkt. statt „%“",
+    "Abschnitte „Geschäftszahlen, Mio. €“ und „Personalbestand, FTE (Konzern und Stammhaus ohne Leihpersonal)“ – „ohne Leihpersonal“ aus den Zeilen in die Überschrift; Spaltengruppen „Plan 2027“ und „Vorjahr 2026“ mit Szenario-Marken",
+    "Eigener Datensatz (Konzernebene in Mio. € und FTE): passt in Größenordnung und Kennzahlen nicht zur Erfolgsrechnung von Abb. 3.14–3.17 und bleibt deshalb getrennt"
+   ],
+   "alt": "Tabelle „Zielerreichung im Geschäftsjahr 2027“ mit den Abschnitten Geschäftszahlen in Mio. € (Betriebsertrag, Betriebsaufwand, Gewinn, Umsatzrendite, Investitionen, Free Cashflow, Bilanzsumme, Eigenkapital) und Personalbestand in FTE (Konzern, Stammhaus, Leihpersonal). Je Zeile stehen Plan p. a., Ist kumuliert, Quote und Abweichung zum Plan sowie Ist Vorjahr, Quote und Abweichung zum Vorjahr. Das Gewinnziel ist zu 88,8 % erreicht (−91 Mio. €), unter Plan liegen auch Free Cashflow, Umsatzrendite und Betriebsertrag; günstige Abweichungen sind blaugrün, ungünstige rot, Investitionen, Bilanzsumme und Personalbestände stehen ohne Wertung."
   },
   "3.19": {
    "caption": "Zeitreihenanalysen",

@@ -1,0 +1,78 @@
+<!-- Abb. 5.40 „SQL-Abfragegenerator“: Abfrageentwurf einer Datenbank (softwareneutral nachgebaut).
+     Querformat 1024 px = 155 mm (breites Entwurfsraster); Inhalt 992 px.
+     Oben die vier Tabellen der Abfrage aus Abb. 5.39 mit Feldlisten und Verknüpfungen (Kunden 140 · Auftrag 160 ·
+     Artikel 140 · Farbe 140, Abstände 120), unten das Entwurfsraster: Beschriftung 75 + 7 Spalten zu 131 px = 992 px.
+     Feldlisten, Raster und Linien erzeugt abfrage.js. Titelzeile wie Abb. 3.7/3.179. -->
+<style>
+  #abfrage { width: 1024px; }
+  #abfrage .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #abfrage .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #abfrage .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #abfrage .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  /* Tabellen und Beziehungen */
+  #abfrage .flaeche { position: relative; height: 300px; }
+  #abfrage .bez { position: absolute; left: 0; top: 0; width: 992px; height: 300px; overflow: visible; pointer-events: none; }
+  #abfrage .tb { position: absolute; top: 0; background: #FFFFFF; border: 1px solid var(--rahmen); border-radius: 2px; }
+  #abfrage .tb-kopf { height: 25px; line-height: 24px; padding: 0 8px; background: var(--band); color: var(--ac);
+    font-weight: bold; border-bottom: 1px solid var(--rahmen); white-space: nowrap; overflow: hidden; }
+  #abfrage .tb-feld { height: 16px; line-height: 16px; padding: 0 8px; white-space: nowrap; overflow: hidden; }
+  #abfrage .tb-feld.schluessel { font-weight: bold; }
+  body:not(.print) #abfrage .tb-feld { cursor: grab; user-select: none; touch-action: none; }
+  body:not(.print) #abfrage .tb-feld:hover, #abfrage .tb-feld:focus { background: var(--anzeige); outline: none; }
+  #abfrage .kard { position: absolute; font-weight: bold; line-height: 18px; color: var(--ac); }
+  /* Entwurfsraster */
+  #abfrage .qbe { position: relative; display: grid; grid-template-columns: 75px repeat(7, 131px);
+    border-top: 1px solid #D4D4D4; border-right: 1px solid #D4D4D4; }
+  #abfrage .qbe-l { height: 25px; line-height: 24px; padding: 0 0 0 4px; border-bottom: 1px solid #D4D4D4;
+    white-space: nowrap; overflow: hidden; }
+  #abfrage .qbe .mk-feld { height: 25px; line-height: 24px; padding: 0 2px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background-color: #FFFFFF; }
+  #abfrage .qbe .mk-feld.mk-anzeige { background-color: var(--anzeige); }
+  #abfrage .qbe .mk-feld.mk-fehler { box-shadow: inset 0 0 0 2px var(--schlecht); }
+  /* Pfeil nur in der aktiven Zelle (wie im Original), das Raster bleibt ruhig */
+  #abfrage .qbe select.mk-feld { background-image: none; padding-right: 2px; }
+  #abfrage .qbe select.mk-feld.aktiv, #abfrage .qbe select.mk-feld:focus { padding-right: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><polygon points='0,0 8,0 4,5' fill='%233A3F44'/></svg>");
+    background-repeat: no-repeat; background-position: right 5px center; background-size: 8px 5px; }
+  #abfrage .qbe select.mk-feld:focus { box-shadow: inset 0 0 0 1px var(--ac); }
+  #abfrage .qbe div.mk-feld.aktiv { padding-right: 18px; }
+  #abfrage .qbe .mk-pfeil { display: none; }
+  #abfrage .qbe .aktiv .mk-pfeil { display: block; right: 5px; top: 10px; }
+  #abfrage .qbe .ck { display: flex; align-items: center; justify-content: center; }
+  #abfrage .einfuegen { position: absolute; top: -3px; bottom: -3px; width: 3px; margin-left: -2px; background: var(--ac); display: none; }
+  #abfrage .qbe-fuss { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  #abfrage .qbe-fuss .seiten { margin-right: 4px; }
+  #abfrage .qbe-fuss .luecke { flex: 1 1 auto; }
+  #abfrage .sql-bereich { margin-top: 12px; }
+  #abfrage .sql-bereich pre { margin: 0; padding: 8px 10px; background: var(--band); font-family: "Liberation Mono", "Courier New", monospace;
+    font-size: 14px; line-height: 18px; white-space: pre; overflow-x: auto; }
+  .zieh-geist { position: fixed; z-index: 50; pointer-events: none; background: #FFFFFF; border: 1px dashed var(--ac);
+    padding: 2px 8px; font: 14px/18px Arial, "Liberation Sans", sans-serif; color: var(--text); }
+</style>
+<form class="mk-maske" id="abfrage" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Abfrageentwurf</span><span class="kopf-unter" id="kopf-unter">Verdichtete Summenwerte · Auswahlabfrage mit Summenfunktion · Auftragsdatenbank</span></div>
+  <div class="mk-inhalt">
+    <section class="mk-abschnitt" id="abschnitt-tabellen">
+      <div class="mk-band" id="band-tabellen">Tabellen und Beziehungen</div>
+      <div class="flaeche" id="flaeche">
+        <svg class="bez" id="bez" width="992" height="300" viewBox="0 0 992 300" aria-hidden="true"></svg>
+        <!-- Tabellen, Feldlisten und Kardinalitäten erzeugt abfrage.js -->
+      </div>
+    </section>
+    <section class="mk-abschnitt" id="abschnitt-raster">
+      <div class="mk-band" id="band-raster">Entwurfsraster</div>
+      <div class="qbe" id="qbe" role="grid" aria-label="Entwurfsraster der Abfrage"><!-- Zeilen erzeugt abfrage.js --></div>
+      <div class="qbe-fuss" id="fuss">
+        <span class="mk-neben seiten" id="seiten"></span>
+        <button type="button" class="mk-knopf mk-zweit" id="k-zurueck">Vorherige Spalten</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-weiter">Weitere Spalten</button>
+        <span class="luecke"></span>
+        <button type="button" class="mk-knopf" id="k-sql">SQL-Anweisung anzeigen</button>
+      </div>
+      <div class="sql-bereich mk-nur-interaktiv" id="sql-bereich" style="display:none">
+        <pre id="sql" aria-live="polite"></pre>
+      </div>
+    </section>
+  </div>
+</form>

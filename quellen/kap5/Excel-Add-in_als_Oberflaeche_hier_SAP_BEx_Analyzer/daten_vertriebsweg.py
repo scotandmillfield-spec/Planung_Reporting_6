@@ -66,10 +66,10 @@ for w, (absatz, umsatz) in ERGEBNIS.items():
 assert sum(s[3] for s in saetze) == GESAMT[0] and sum(s[4] for s in saetze) == GESAMT[1]
 
 INFO = [
-    ["Autor", "Frau Brandt"], ["Aktueller Benutzer", "Herr Tal"], ["Zuletzt geändert von", "Frau Brandt"],
-    ["Geändert am", "17.07.2026, 15:24"], ["Datenquelle", "Vertrieb (Absatz und Umsatz)"],
-    ["Abfrage", "Absatz und Umsatz nach Vertriebsweg"], ["Datenstand", "24.06.2026, 14:47"],
-    ["Stichtag", "17.07.2026"], ["Zuletzt aktualisiert", "17.07.2026, 15:35"],
+    ["Autor", "Frau Brandt"], ["Aktueller Benutzer", "Herr Tal"],
+    ["Zuletzt geändert von", "Frau Brandt"], ["Geändert am", "17.07.2026, 15:24"],
+    ["Datenquelle", "Datenwürfel Vertrieb"], ["Stichtag", "17.07.2026"],
+    ["Datenstand", "24.06.2026, 14:47"], ["Zuletzt aktualisiert", "17.07.2026, 15:35"],
 ]
 
 daten = {"vertriebswege": VW, "vos": VO, "monate": MONATE, "info": INFO, "saetze": saetze}

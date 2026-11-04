@@ -51,7 +51,7 @@
     .bw th.bw-gruppe-kopf { text-align: center; border-bottom: 1px solid #BDBDBD; height: 20px; }
     .bw td.bw-lab { text-align: left; }
     .bw tr.bw-erg td { font-weight: bold; }
-    .bw tr.dk-summe td { border-top: 1px solid var(--ac); }
+    .bw tr.ea-vorsumme td { border-bottom: 1px solid var(--ac); }
     .bw .bw-pfeil { display: inline-block; width: 14px; color: var(--muted); cursor: pointer; }
     .bw td.bw-leer { color: var(--muted); }
     #v-tabelle { margin-bottom: 16px; }
@@ -241,6 +241,7 @@
       // Trennlinie vor einer neuen Gruppe an der Vorzeile (im border-collapse gewinnt die obere Zelle)
       if (zi > 0 && z.typ !== "gesamt" && z.labels[0] && z.labels[0].pfad && dims.length > 1 && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
       if (z.typ !== "gesamt" && S.sel !== null && !unter(z.pfad, S.sel)) cls.push("dk-blass");
+      if (z.typ === "gesamt" && tb.lastChild) tb.lastChild.classList.add("ea-vorsumme");
       const tr = el("tr", { class: cls.join(" ") }, tb);
       z.labels.forEach((l, i) => {
         const td = el("td", { class: "bw-lab", "data-ebene": i }, tr);
@@ -251,7 +252,7 @@
         }
         td.appendChild(document.createTextNode(l.text));
         if (z.typ === "gesamt") td.style.overflow = "visible";
-        if (l.pfad) td.style.fontWeight = "bold";
+        if (l.pfad && (l.klapp || z.typ !== "zeile")) td.style.fontWeight = "bold";   // Gruppen fett, unterste Ebene normal
       });
       z.werte.forEach((v, j) => el("td", { "data-j": j, class: v === null ? "bw-leer" : "" }, tr, fmtWert(z, j, sp)));
       if (z.typ !== "gesamt") tr.addEventListener("click", ev => {
@@ -347,9 +348,9 @@
         text: "Wie im Original steht neben dem Bericht ein Navigationsbereich: je Merkmal zeigt der gedrückte Knopf, ob es im Aufriss steht, die Auswahlliste filtert. Probieren Sie Kalenderjahr → „Spalten“ oder Kalendermonat → „Zeilen“ – das Add-in fragt die Daten im Data Warehouse neu ab. Gestaltung wie in Abb. 4.19." },
       { nr: 2, ziel: "v-titel", anker: "links", versatz: [600, 22], regel: "SAY – Botschaft vermitteln", titel: "Aussage über der Tabelle",
         text: "Über der Tabelle steht, was der Bericht zeigt: Internet und Großhandel sind fast gleich groß, Süd ist die größte Verkaufsorganisation. Der Satz rechnet bei jedem Aufriss, Filter und jeder hervorgehobenen Gruppe neu. Das Original hatte nur den Berichtsnamen „… Sales – Case 1“." },
-      { nr: 3, ziel: "bw-kopf-u", versatz: [0, -4], regel: "SIMPLIFY – Einheit einmal", titel: "Einheiten im Titel statt an jeder Zahl",
+      { nr: 3, ziel: "bw-kopf-u", anker: "links", versatz: [44, 0], regel: "SIMPLIFY – Einheit einmal", titel: "Einheiten im Titel statt an jeder Zahl",
         text: "Das Original schrieb „IT“ und „AUD“ hinter jede Zahl und den Umsatz mit Cent (147.685.911,83). Jetzt stehen die Einheiten einmal im Titel, der Umsatz in Tsd. € mit einer Nachkommastelle; die genauen Werte und der Ø Preis je Stück stehen im Tooltip." },
-      { nr: 4, ziel: "bw-kopf-0", anker: "links", versatz: [-4, -4], regel: "UNIFY – Begriffe statt Schlüssel", titel: "Text statt Schlüssel und Text",
+      { nr: 4, ziel: "bw-kopf-0", anker: "links", versatz: [128, 0], regel: "UNIFY – Begriffe statt Schlüssel", titel: "Text statt Schlüssel und Text",
         text: "Das Original zeigte jedes Merkmal doppelt – Schlüssel und Text („IN Internet“, „AUS1 AUS1“) – und englische Feldnamen. Hier steht nur der Text, Spaltenköpfe sind deutsch und ausgeschrieben; Schlüssel braucht nur, wer Daten weiterverarbeitet (CSV)." },
       { nr: 5, ziel: "v-tabelle", anker: "links", versatz: [76, 100], regel: "EXPRESS – Hervorheben ohne Farbflächen", titel: "Ergebnisse fett statt gelb",
         text: "Ergebniszeilen sind fett, das Gesamtergebnis steht über einer dunklen Linie. Das Original hob Ergebnisse mit gelben Flächen hervor und rahmte Kopf und Blöcke blau. Gruppen lassen sich mit ▾/▸ zu- und aufklappen." },
@@ -357,7 +358,7 @@
         text: "Autor, Änderung, Datenquelle, Datenstand und Stichtag stehen in einem Block in zwei Spalten. Das Original zeigte elf Zeilen, darunter technische Namen der Abfrage und des Datenwürfels sowie Datenstand und Datenaktualität doppelt. Der Block lässt sich über „Information“ ausblenden." },
       { nr: 7, ziel: "v-diagramm", anker: "links", versatz: [600, -4], regel: "CHECK – Ergebnisse aus den Zeilen", titel: "Summen stimmen, Diagramm aus der Tabelle",
         text: "Absatz und Umsatz je Vertriebsweg und Verkaufsorganisation sind die Werte des Originals; Ergebnisse und Gesamtergebnis werden aus den Zeilen gerechnet und stimmen mit dem Original überein. Das Diagramm (im Original die Schaltfläche „Chart“) zeigt dieselben Zeilen als Balken mit einem Maßstab." },
-      { nr: 8, ziel: "nv-anzeige", anker: "links", versatz: [196, -4], regel: "SIMPLIFY – Softwareneutral", titel: "Ohne Programmrahmen",
+      { nr: 8, ziel: "nv-anzeige", anker: "links", versatz: [224, 4], regel: "SIMPLIFY – Softwareneutral", titel: "Ohne Programmrahmen",
         text: "Spaltenbuchstaben, Zeilennummern und Gitternetz der Tabellenkalkulation, Sortierpfeile in jedem Kopf und die blaue Farbgebung des Add-ins entfallen. Die Schaltflächen „Information“ und „Diagramm“ stehen im Navigationsbereich; Kunden- und Personennamen sind neutral." },
     ],
     nachbauIntro: "Seitengröße benutzerdefiniert 1024 × 646 px, Schrift Arial: Tabelle 10,5 pt, Titel 12 pt. Datenmodell: Faktentabelle Vertrieb (Monat, Vertriebsweg, Verkaufsorganisation, Absatz, Umsatz) mit Datumstabelle (Kalenderjahr, Kalendermonat) wie in der CSV-Datei. " +

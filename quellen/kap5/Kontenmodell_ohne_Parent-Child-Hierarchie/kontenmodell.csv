@@ -1,0 +1,13 @@
+﻿Produkt-ID;Produkt-Bez.;Kunde-ID;Kunde-Bez.;Jahr;Konten-ID;Konto;Vorgänger;Ebene 2;Ebene 1;Betrag (€)
+3312;Ring;471;MTS GmbH;2018;8000;Bruttoumsatz;200;Nettoumsatz;NettoNetto-Umsatz;1000
+4512;Kette;236;SOT AG;2018;8000;Bruttoumsatz;200;Nettoumsatz;NettoNetto-Umsatz;800
+3312;Ring;471;MTS GmbH;2019;8000;Bruttoumsatz;200;Nettoumsatz;NettoNetto-Umsatz;950
+4512;Kette;471;MTS GmbH;2018;8000;Bruttoumsatz;200;Nettoumsatz;NettoNetto-Umsatz;1250
+3312;Ring;471;MTS GmbH;2018;8050;Rabatte;200;Nettoumsatz;NettoNetto-Umsatz;-100
+4512;Kette;236;SOT AG;2018;8050;Rabatte;200;Nettoumsatz;NettoNetto-Umsatz;-60
+3312;Ring;471;MTS GmbH;2019;8050;Rabatte;200;Nettoumsatz;NettoNetto-Umsatz;-50
+4512;Kette;471;MTS GmbH;2018;8050;Rabatte;200;Nettoumsatz;NettoNetto-Umsatz;0
+3312;Ring;471;MTS GmbH;2018;8090;Skonti;100;Skonti;NettoNetto-Umsatz;-18
+4512;Kette;236;SOT AG;2018;8090;Skonti;100;Skonti;NettoNetto-Umsatz;-15
+3312;Ring;471;MTS GmbH;2019;8090;Skonti;100;Skonti;NettoNetto-Umsatz;-18
+4512;Kette;471;MTS GmbH;2018;8090;Skonti;100;Skonti;NettoNetto-Umsatz;-25

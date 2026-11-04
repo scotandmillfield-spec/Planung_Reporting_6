@@ -40,7 +40,7 @@ XBR = 58.2                       # Abzweig ETL-Sammelleitung → Data Mart
 XDIV = 60.2                      # Trennlinie Traditionelle | Explorative BI
 DL = (62.2, 42.6)                # Data Lake
 XS = 106.6                       # Streaming
-XETL = 26.35                     # ETL-Zuleitung
+XETL = 51.8                      # ETL-Zuleitung (rechts vom Bandtitel 1)
 IQ = (XA, XDIV - 1.2 - XA)       # interne Quellsysteme
 EQ = (XDIV + 1.2, XR - XDIV - 1.2)
 
@@ -118,7 +118,7 @@ def zeichne(theme, variante="traditionell"):
 
     # ------------------------------------------------------------ Ebene 2: Container
     f.box(XC0, yk, XC1 - XC0, kb - yk, None, role="container", name="Daten-Virtualisierung")
-    f.text(XI, yk + 0.5, MARTS[0] - 0.2 - XI, 3.2, [P("Daten-Virtualisierung", size=6.5, bold=True)],
+    f.text(XI - 0.2, yk + 0.5, MARTS[0] - XI, 3.2, [P("Daten-Virtualisierung", size=6.5, bold=True)],
            align="l", anchor="t", bg=t.role("band").fill, name="Titel Daten-Virtualisierung")
 
     C = B(CORE[0], yB, CORE[1], bh)
@@ -160,11 +160,11 @@ def zeichne(theme, variante="traditionell"):
 
     # ---------------- Kästen
     f.box(C.x, C.y, C.w, C.h, [P("Core Data"), P("Warehouse")], role="box_hi", name="Core Data Warehouse")
-    f.box(O.x, O.y, O.w, O.h, [P("ODS")], role="box_hi", name="ODS")
+    f.box(O.x, O.y, O.w, O.h, [P("ODS")], role="box_hi", ins=(0.5, 0.6), name="ODS")
     f.box(CM.x, CM.y, CM.w, CM.h, [P("CMS/"), P("DMS")], role="box_hi", name="CMS/DMS")
     for i, m in enumerate(M):
         if sb and i == 0:
-            f.box(m.x, m.y, m.w, m.h, sand_p, role="box_strong", name="Sandboxing Data Warehouse")
+            f.box(m.x, m.y, m.w, m.h, sand_p, role="box_strong", ins=(0.5, 0.6), name="Sandboxing Data Warehouse")
         else:
             f.box(m.x, m.y, m.w, m.h, mart_p, role="box_hi", name=f"Data Mart {i + 1}")
 
@@ -175,8 +175,8 @@ def zeichne(theme, variante="traditionell"):
     ih = 7.0
     iy = D.b - ip - ih
     if sb:
-        SB = B(D.r - ip - 15.0, D.y + ip, 15.0, iy - 1.0 - (D.y + ip))
-        f.text(D.x + ip, D.y + 0.6, SB.x - 1.0 - (D.x + ip), SB.h + 0.6, [P("Data Lake", italic=True, bold=True)],
+        SB = B(D.r - ip - 16.4, iy - 1.2 - 6.0, 16.4, 6.0)
+        f.text(D.x + ip, SB.y, SB.x - 1.0 - (D.x + ip), SB.h, [P("Data Lake", italic=True, bold=True)],
                align="l", anchor="m", name="Titel Data Lake")
     else:
         f.text(D.x + ip, D.y + 0.6, D.w - 2 * ip, iy - 0.4 - (D.y + 0.6), [P("Data Lake", italic=True, bold=True)],
@@ -188,13 +188,14 @@ def zeichne(theme, variante="traditionell"):
 
     # ------------------------------------------------------------ Abb. 5.38: Sandboxing und Cloud
     if sb:
-        f.box(SB.x, SB.y, SB.w, SB.h, [P("Sandboxing", bold=True)], role="box_strong", name="Sandboxing Data Lake")
+        f.box(SB.x, SB.y, SB.w, SB.h, [P("Sandboxing", bold=True)], role="box_strong", ins=(0.5, 0.6),
+              name="Sandboxing Data Lake")
         CL2 = B(SB.x + 2.0, yk + 0.9, SB.w - 4.0, 4.0)
         f.arrow([(CL2.cx, CL2.b), (CL2.cx, SB.y)], role="info", tail=False, dash="sysDash",
                 name="Cloud ↔ Sandboxing Data Lake")
         f.box(CL2.x, CL2.y, CL2.w, CL2.h, [P("Cloud")], role="box", name="Cloud Data Lake")
         m = M[0]
-        CL1 = B(m.x - 1.6 - 10.0, m.y + 1.5, 10.0, 4.0)
+        CL1 = B(m.x - 1.6 - 10.0, m.b - 4.0, 10.0, 4.0)
         f.arrow([(CL1.r, CL1.cy), (m.x, CL1.cy)], role="info", tail=False, dash="sysDash",
                 name="Cloud ↔ Sandboxing Data Warehouse")
         f.box(CL1.x, CL1.y, CL1.w, CL1.h, [P("Cloud")], role="box", name="Cloud Data Warehouse")
@@ -210,7 +211,7 @@ def zeichne(theme, variante="traditionell"):
         pad, gap = 1.0, 1.0
         qw = (G.w - 2 * pad - 2 * gap) / 3
         for i, q in enumerate(quellen):
-            f.box(G.x + pad + i * (qw + gap), qy, qw, qh, [P(q)], role="box", ins=(0.5, 0.6),
+            f.box(G.x + pad + i * (qw + gap), qy, qw, qh, [P(q)], role="box", ins=(0.4, 0.6),
                   name=f"Quelle {q.replace(SHY, '')}")
 
     # ------------------------------------------------------------ Spalten Traditionelle | Explorative BI

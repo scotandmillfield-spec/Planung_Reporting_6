@@ -790,6 +790,48 @@
    ],
    "alt": "Ablauf der Abstimmung der Personalplanung: Aus der Absatzplanung ergibt sich die benötigte Leistungsmenge in Stunden je Kostenstelle und Leistungsart; davon geht die Rationalisierungsvorgabe ab, Aufschläge für technisches Risiko/Ausschuss (Maßnahmen) und Mehrbedarf für Neuanläufe (Projekte) kommen hinzu. Im Kapazitätsabgleich je Kostenstelle und Monat wird dieser Bedarf in einem Kreislauf mit der möglichen Stundenleistung aus Mitarbeiterstammdaten und Prämissen abgestimmt; angepasst wird über NN plus oder minus bzw. Mitarbeiter- oder KST-Prämissen."
   },
+  "3.189": {
+   "status": "pruefung",
+   "datei": "Planungsformular_Personalkostenplanung",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Eingabemaske im Querformat (1024 px = 155 mm) nachgebaut; Browserrahmen, Adressleiste mit Server, „Page1“ und gelbe Knöpfe entfernt; Sichern/Beenden/Aktualisieren unten rechts",
+    "Aufbau wie im Original: Auswahl (Planjahr, Planversion, Version, Geschäftsjahr, Buchungskreis, Kostenstelle), Reiter, Referenzplanstelle + „Planstelle generieren“, Planstellenraster, „Neue Zeilen … Hinzufügen“; Geschäftsjahr und Version jetzt abgeleitete Anzeigen",
+    "Neu und echt gerechnet: Monate (tagesgenau) und Personalkosten je Planstelle, Summe, Gruppen „Prämissen in %“ (Zulagen 20, Urlaubsgeld Juli 25, Weihnachtsgeld Nov. 100, Sozialabgaben 26 – angenommen, im Original im Reiter Prämissen) und „Ergebnis 2027“: 789.449 € = 567.072 € Anwesenheitslohn + 222.377 €, 11,0 FTE",
+    "Planstellen, Köpfe und Gültigkeiten unverändert; Planjahr 2007 → 2027, Entgelte ×1,6 fortgeschrieben (2.248 → 3.600 € usw., 2007er Werte lägen unter dem Mindestlohn); IDs 50032712–50032721 erfunden (im Original geschwärzt)",
+    "Begriffe: Team Speaker/Order Picker/Material handler → Teamleitung/Kommissionierung/Materialbereitstellung, I-LO → Intralogistik, Mitarbeiterkreis 10 → Gewerblich, „Zähler Köpfe“ → FTE, „Entgeldgröße“ (Tippfehler) → Monatsentgelt; Annahme: Vertragsart BCI → unbefristet, Sammelplanstelle 5 FTE ab Juli → befristet – bitte prüfen",
+    "Gemeinsamer Datensatz mit Abb. 3.190: Block PLAN in personalkosten.js ist die einzige Quelle, daten_personalkosten.py der Auswertung liest ihn und rechnet mit denselben Regeln",
+    "Caption ohne Produktnamen? z. B. „Planungsformular Personalkostenplanung (In Anlehnung an Schön und Irmer 2007, S. 253)“ – Zusatz „Umsetzung mit dem BEx Web Application Designer von der SAP AG“ streichen"
+   ],
+   "alt": "Querformatiges Planungsformular „Personalkostenplanung“ für die Kostenstelle 6-1110 Intralogistik im Planjahr 2027. Oben stehen Auswahlfelder, die Prämissen in Prozent (Zulagen, Urlaubs- und Weihnachtsgeld, Sozialabgaben) und das Ergebnis von 789.449 € Personalkosten bei 11,0 FTE im Jahresmittel; darunter folgen Reiter und ein Raster mit zehn Planstellen, in dem FTE, Monatsentgelt und Gültigkeit erfasst und Monate sowie Personalkosten je Planstelle berechnet werden. Eine Sammelplanstelle mit 5 FTE Teamleitung ab Juli trägt mit 212.940 € den größten Anteil."
+  },
+  "3.190": {
+   "status": "pruefung",
+   "datei": "Planungsauswertung_Personalkostenplanung",
+   "kommentare": [
+    "Produktscreenshot (Reiter „Reporting“ der Planungsanwendung) softwareneutral als Dashboard 1024 × 646 nachgebaut; Browserrahmen, Reiter Datenanalyse/Grafische Darstellung/Information, Knopfleiste (View sichern, Bookmark, Variablenbild, Exceptions, Export …) und Navigationsblock Zeilen/Spalten/Freie Merkmale entfernt",
+    "Zahlen aus denselben Planstellen wie Abb. 3.189 gerechnet (ein Datensatz): 789.449 € Personalkosten, 567.072 € Anwesenheitslohn, 222.377 € Lohnnebenkosten (Original 501.503,21 / 353.010,60 / 148.492,61 € auf 2007er Entgelten); Monatsprofil wie im Original: Jan–Jun 47, Jul 87, Nov 132 Tsd. €",
+    "Kostenarten-Hierarchie Personalkosten → Lohnkosten → Anwesenheitslohn/Lohnnebenkosten verdichtet: Lohnkosten (gleicher Wert wie Personalkosten) entfällt, drei Werte in der KPI-Leiste, Bausteine Grundentgelt/Zulagen/Sonderzahlungen/Sozialabgaben als Balken",
+    "Gelbe Säulen mit Legende → Planwerte weiß mit Kontur, Lohnnebenkosten hellgrau, Legende einmal im Kopf; Werte direkt beschriftet statt Achse 0 … 80000",
+    "Freie Merkmale → Datenschnitte Stellenbezeichnung und Vertragsart plus Planstellentabelle mit Anteilsbalken; Klick auf Planstelle, Monat oder Kostenart filtert, Esc hebt auf, Tabelle sortierbar",
+    "„Stand 15.10.2026“ angenommen (Original: Datenaktualität 29.01.2007)",
+    "Caption ohne Produktnamen? z. B. „Planungsauswertung Personalkostenplanung (In Anlehnung an Schön und Irmer 2007, S. 254)“"
+   ],
+   "alt": "Dashboard „Planungsauswertung Personalkosten“ der Kostenstelle 6-1110 Intralogistik für den Plan 2027. Die KPI-Leiste nennt 789.449 € Personalkosten, davon 567.072 € Anwesenheitslohn und 222.377 € Lohnnebenkosten (39,2 % des Anwesenheitslohns), 11,0 FTE im Jahresmittel und 71.768 € je FTE. Darunter zeigen eine Tabelle die Kosten der zehn Planstellen mit Anteilsbalken, gestapelte Plansäulen den Monatsverlauf mit dem Sprung ab Juli (13 statt 9 FTE) und den Spitzen durch Sonderzahlungen im Juli und November sowie Balken die vier Kostenarten."
+  },
+  "3.191": {
+   "status": "pruefung",
+   "datei": "Planungsformular_Kapazitaetsbedarf_Anlagen",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Eingabemaske im Hochformat (110 mm) nachgebaut; Werthilfe-Symbole, gelbe Ergebniszeile und Knopfleiste oben entfernt; Sichern/Beenden/Aktualisieren unten rechts",
+    "Kostenstelle, Arbeitsplatz und Leistungsart (im Original vier Spalten inkl. Profit-Center „#“, nur in der ersten Zeile gefüllt) als Gruppenkopf; Mengeneinheit STD je Zeile → „Werte in Std.“ im Kopf; Monatsnamen zu den Perioden",
+    "Bedarfswerte der Perioden 2–12 unverändert (Summe 1.323,523 Std.), Anzeige mit einer statt drei Nachkommastellen; Spaltenköpfe ausgeschrieben (Korr. % → Korrektur in %, n.R.u.M. → nach Korrektur und Mehrbedarf, gedeutet als „nach Rationalisierung und Mehrbedarf“ wie in Abb. 3.188)",
+    "Rechnung echt: Bedarf × (1 + Korrektur) + Mehrbedarf; Ergebniszeile mit gewichteter Korrektur statt Summe der Prozente",
+    "Beispielwerte statt 0: Korrektur −3,0 % (Rationalisierungsvorgabe), Mehrbedarf Okt–Dez 24/32/16 Std. (Neuanlauf) → 1.355,7 Std. – Frage: zurück auf 0 wie im Original?",
+    "Frage: Periode 1 fehlt wie im Original – beabsichtigt (Planung ab Periode 2) oder Januar ergänzen? Geschäftsjahr 2027 ergänzt (Original ohne Jahr); „MOST Zuschneiden“/„PKW STANZEN MOST“ → Zuschneiden/Pkw-Stanzen, Leistungsart 130 als Maschinenstunden gedeutet",
+    "Caption ohne Produktnamen? z. B. „Planungsformular Kapazitätsbedarf Anlagen (In Anlehnung an Schön und Irmer 2010, S. 55)“"
+   ],
+   "alt": "Planungsformular „Kapazitätsplanung“ mit dem aktiven Reiter „Kapazitätsbedarf Anlagen“ für Werk 4010 und Kostenstelle 4-4651 Zuschneiden, Arbeitsplatz Pkw-Stanzen, im Geschäftsjahr 2027. Ein Raster zeigt je Periode von Februar bis Dezember den Kapazitätsbedarf aus der Absatzplanung, eine Korrektur in Prozent und einen Mehrbedarf für Neuanläufe als Eingaben sowie den daraus berechneten Bedarf. In Summe werden aus 1.323,5 Stunden nach einer Rationalisierungsvorgabe von 3 % und 72 Stunden Mehrbedarf 1.355,7 Stunden."
+  },
   "3.192": {
    "status": "pruefung",
    "datei": "Stufen_der_Absatz--Umsatzplanung",

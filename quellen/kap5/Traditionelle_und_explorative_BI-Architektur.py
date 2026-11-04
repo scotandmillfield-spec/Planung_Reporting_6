@@ -27,19 +27,20 @@ GAPB = 1.2                       # Abstand der Bänder
 XSS, WSS = 0.3, 5.0              # Querschnittsspalte Self-Service BI
 XB0, XB1 = 6.5, 109.7            # Bänder
 XC0, XC1 = 7.3, 108.9            # Container Daten-Virtualisierung
-XA = 8.5                         # linker Inhaltsrand
-XR = 108.1                       # rechter Inhaltsrand
+XA = 7.7                         # Rand der Kästen in Ebene 1 und 3
+XR = 108.5
+XI = 8.5                         # linker Inhaltsrand im Container
 CORE = (8.5, 16.6)               # x, Breite
-ODS = (28.4, 8.0)
-CMS = (38.8, 8.0)
+ODS = (27.6, 7.6)
+CMS = (37.4, 9.0)
 MW = 10.0                        # Data Mart / Sandboxing
-MARTS = [33.4, 45.6]
-XCOL = 58.0                      # Sammelleitung ODS, CMS/DMS → Analyse
-XBR = 60.2                       # Abzweig ETL-Sammelleitung → Data Mart
-XDIV = 62.4                      # Trennlinie Traditionelle | Explorative BI
-DL = (64.4, 40.6)                # Data Lake
+MARTS = [32.6, 44.2]
+XCOL = 56.2                      # Sammelleitung ODS, CMS/DMS → Analyse
+XBR = 58.2                       # Abzweig ETL-Sammelleitung → Data Mart
+XDIV = 60.2                      # Trennlinie Traditionelle | Explorative BI
+DL = (62.2, 42.6)                # Data Lake
 XS = 106.6                       # Streaming
-XETL = 26.6                      # ETL-Zuleitung
+XETL = 26.35                     # ETL-Zuleitung
 IQ = (XA, XDIV - 1.2 - XA)       # interne Quellsysteme
 EQ = (XDIV + 1.2, XR - XDIV - 1.2)
 
@@ -95,13 +96,13 @@ def zeichne(theme, variante="traditionell"):
     ybd = ycol + 6.4                            # Pfeil Big Data
     H = round(ybd + 2.0, 1)
 
-    f = Fig(W, H, theme, "fig")
+    f = Fig(W, H, theme, STEM if not sb else "Explorative_BI_Cloud_Computing_Sandboxing_und_Self-Service_BI")
     A = f.arrow
 
     # ------------------------------------------------------------ Bänder
     f.band(XB0, y3, XB1 - XB0, h3, "3. Datenauswertung und -nutzung")
     f.box(XB0, y2, XB1 - XB0, h2, None, role="band", name="Band 2. Datenverwaltung und -distribution")
-    f.text(XB0 + 1.6, y2 + 0.9, MARTS[0] - 1.0 - (XB0 + 1.6), 5.4,
+    f.text(XB0 + 1.6, y2 + 0.9, 27.0, 5.6,
            [P("2. DATENVERWALTUNG", size="band", bold=True, color=t.band_label),
             P("UND -DISTRIBUTION", size="band", bold=True, color=t.band_label)],
            bg=t.role("band").fill, name="Bandtitel 2. Datenverwaltung und -distribution")
@@ -117,7 +118,7 @@ def zeichne(theme, variante="traditionell"):
 
     # ------------------------------------------------------------ Ebene 2: Container
     f.box(XC0, yk, XC1 - XC0, kb - yk, None, role="container", name="Daten-Virtualisierung")
-    f.text(XA + 0.2, yk + 0.5, MARTS[0] - 1.0 - XA, 3.2, [P("Daten-Virtualisierung", size=6.5, bold=True)],
+    f.text(XI, yk + 0.5, MARTS[0] - 0.2 - XI, 3.2, [P("Daten-Virtualisierung", size=6.5, bold=True)],
            align="l", anchor="t", bg=t.role("band").fill, name="Titel Daten-Virtualisierung")
 
     C = B(CORE[0], yB, CORE[1], bh)
@@ -170,7 +171,7 @@ def zeichne(theme, variante="traditionell"):
     # Data Lake
     f.box(D.x, D.y, D.w, D.h, None, role="box_plain", name="Data Lake")
     ig, ip = 1.0, 1.2
-    iw = [15.2, 10.8, 10.4]
+    iw = [15.0, 11.6, 11.6]
     ih = 7.0
     iy = D.b - ip - ih
     if sb:
@@ -206,10 +207,11 @@ def zeichne(theme, variante="traditionell"):
         f.text(G.x + 1.0, G.y + 0.5, G.w - 2.0, th, titel, align="c", anchor="t", bg=t.role("band").fill,
                name=f"Titel {nm}")
         qy = G.y + 0.5 + th + 0.9
-        pad, gap = 1.6, 1.6
+        pad, gap = 1.0, 1.0
         qw = (G.w - 2 * pad - 2 * gap) / 3
         for i, q in enumerate(quellen):
-            f.box(G.x + pad + i * (qw + gap), qy, qw, qh, [P(q)], role="box", name=f"Quelle {q.replace(SHY, '')}")
+            f.box(G.x + pad + i * (qw + gap), qy, qw, qh, [P(q)], role="box", ins=(0.5, 0.6),
+                  name=f"Quelle {q.replace(SHY, '')}")
 
     # ------------------------------------------------------------ Spalten Traditionelle | Explorative BI
     f.line([(XDIV, y2), (XDIV, ycol + 3.8)], color=t.arrow, lw=0.75, dash="dash", name="Trennlinie")

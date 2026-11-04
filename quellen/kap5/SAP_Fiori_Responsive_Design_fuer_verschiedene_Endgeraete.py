@@ -72,7 +72,7 @@ def build(theme):
         pts = [(x, unten)] + top + [(x + w, unten)]
         f.poly(pts, closed=True, fill=t.role("box").fill, line=None, name=f"Karte {titel} (angeschnitten)")
         f.poly(pts, closed=False, fill=None, line=LINE, lw=0.5, name=f"Rand {titel}")
-        f.text(x, y, w, min(h, unten - y), p, ins=(0.9, 0.7), bg=t.role("box").fill, name=f"Titel {titel}")
+        f.text(x + 0.2, y, w - 0.2, min(h, unten - y), p, ins=(0.9, 0.7), bg=t.role("box").fill, name=f"Titel {titel}")
 
     for name, spalten_txt, gx, gy, gw, gh, spalten, filt in geraete:
         # Gehäuse und Bildschirm
@@ -106,7 +106,7 @@ def build(theme):
         rest = f"{MID} {spalten_txt}"
         nb = text_width_mm(name, 7.0, bold=True)
         nr = text_width_mm(rest, 7.0)
-        lx = gx + gw / 2 - (nb + 1.0 + nr) / 2
+        lx = gx + gw / 2 - (nb + 0.6 + nr) / 2
         f.text(lx, ly, nb + 0.9, LAB, [P(name, size=7.0, bold=True)], name=f"Beschriftung {name}")
-        f.text(lx + nb + 1.0, ly, nr + 0.9, LAB, [P(rest, size=7.0)], name=f"Spalten {name}")
+        f.text(lx + nb + 0.6, ly, nr + 0.9, LAB, [P(rest, size=7.0)], name=f"Spalten {name}")
     return f

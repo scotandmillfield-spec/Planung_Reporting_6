@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planungsauswertung Personalkostenplanung</title>
+<style>
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }
+
+</style>
+</head>
+<body>
+<script>const DATA = {"jahr":2027,"planversion":"0","version":"Plan/Ist","kostenstelle":["6-1110","Intralogistik"],"praemissen":{"zulagen":20.0,"urlaubsgeld":25.0,"urlaubsgeld_monat":7,"weihnachtsgeld":100.0,"weihnachtsgeld_monat":11,"sozialabgaben":26.0},"monate":["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"],"kostenarten":[["Grundentgelt","Anwesenheitslohn"],["Zulagen","Anwesenheitslohn"],["Sonderzahlungen","Lohnnebenkosten"],["Sozialabgaben","Lohnnebenkosten"]],"stellen":[["50032712","Teamleitung","unbefristet",1.0,3600,"01.01.2027","30.06.2027"],["50032713","Teamleitung","unbefristet",1.0,3600,"01.01.2027","31.12.2027"],["50032714","Teamleitung","unbefristet",1.0,3600,"01.01.2027","31.12.2027"],["50032715","Teamleitung","unbefristet",1.0,3360,"01.01.2027","31.12.2027"],["50032716","Kommissionierung","unbefristet",1.0,3360,"01.01.2027","31.12.2027"],["50032717","Materialbereitstellung","unbefristet",1.0,3520,"01.01.2027","31.12.2027"],["50032718","Materialbereitstellung","unbefristet",1.0,3360,"01.01.2027","31.12.2027"],["50032719","Materialbereitstellung","unbefristet",1.0,3390,"01.01.2027","31.12.2027"],["50032720","Materialbereitstellung","unbefristet",1.0,3390,"01.01.2027","31.12.2027"],["50032721","Teamleitung","befristet",5.0,4000,"01.07.2027","31.12.2027"]],"fte":[[1000,1000,1000,1000,1000,1000,0,0,0,0,0,0],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],[0,0,0,0,0,0,5000,5000,5000,5000,5000,5000]],"werte":[[0,0,0,360000],[0,0,1,72000],[0,0,3,112320],[0,1,0,360000],[0,1,1,72000],[0,1,3,112320],[0,2,0,360000],[0,2,1,72000],[0,2,3,112320],[0,3,0,360000],[0,3,1,72000],[0,3,3,112320],[0,4,0,360000],[0,4,1,72000],[0,4,3,112320],[0,5,0,360000],[0,5,1,72000],[0,5,3,112320],[1,0,0,360000],[1,0,1,72000],[1,0,3,112320],[1,1,0,360000],[1,1,1,72000],[1,1,3,112320],[1,2,0,360000],[1,2,1,72000],[1,2,3,112320],[1,3,0,360000],[1,3,1,72000],[1,3,3,112320],[1,4,0,360000],[1,4,1,72000],[1,4,3,112320],[1,5,0,360000],[1,5,1,72000],[1,5,3,112320],[1,6,0,360000],[1,6,1,72000],[1,6,2,90000],[1,6,3,135720],[1,7,0,360000],[1,7,1,72000],[1,7,3,112320],[1,8,0,360000],[1,8,1,72000],[1,8,3,112320],[1,9,0,360000],[1,9,1,72000],[1,9,3,112320],[1,10,0,360000],[1,10,1,72000],[1,10,2,360000],[1,10,3,205920],[1,11,0,360000],[1,11,1,72000],[1,11,3,112320],[2,0,0,360000],[2,0,1,72000],[2,0,3,112320],[2,1,0,360000],[2,1,1,72000],[2,1,3,112320],[2,2,0,360000],[2,2,1,72000],[2,2,3,112320],[2,3,0,360000],[2,3,1,72000],[2,3,3,112320],[2,4,0,360000],[2,4,1,72000],[2,4,3,112320],[2,5,0,360000],[2,5,1,72000],[2,5,3,112320],[2,6,0,360000],[2,6,1,72000],[2,6,2,90000],[2,6,3,135720],[2,7,0,360000],[2,7,1,72000],[2,7,3,112320],[2,8,0,360000],[2,8,1,72000],[2,8,3,112320],[2,9,0,360000],[2,9,1,72000],[2,9,3,112320],[2,10,0,360000],[2,10,1,72000],[2,10,2,360000],[2,10,3,205920],[2,11,0,360000],[2,11,1,72000],[2,11,3,112320],[3,0,0,336000],[3,0,1,67200],[3,0,3,104832],[3,1,0,336000],[3,1,1,67200],[3,1,3,104832],[3,2,0,336000],[3,2,1,67200],[3,2,3,104832],[3,3,0,336000],[3,3,1,67200],[3,3,3,104832],[3,4,0,336000],[3,4,1,67200],[3,4,3,104832],[3,5,0,336000],[3,5,1,67200],[3,5,3,104832],[3,6,0,336000],[3,6,1,67200],[3,6,2,84000],[3,6,3,126672],[3,7,0,336000],[3,7,1,67200],[3,7,3,104832],[3,8,0,336000],[3,8,1,67200],[3,8,3,104832],[3,9,0,336000],[3,9,1,67200],[3,9,3,104832],[3,10,0,336000],[3,10,1,67200],[3,10,2,336000],[3,10,3,192192],[3,11,0,336000],[3,11,1,67200],[3,11,3,104832],[4,0,0,336000],[4,0,1,67200],[4,0,3,104832],[4,1,0,336000],[4,1,1,67200],[4,1,3,104832],[4,2,0,336000],[4,2,1,67200],[4,2,3,104832],[4,3,0,336000],[4,3,1,67200],[4,3,3,104832],[4,4,0,336000],[4,4,1,67200],[4,4,3,104832],[4,5,0,336000],[4,5,1,67200],[4,5,3,104832],[4,6,0,336000],[4,6,1,67200],[4,6,2,84000],[4,6,3,126672],[4,7,0,336000],[4,7,1,67200],[4,7,3,104832],[4,8,0,336000],[4,8,1,67200],[4,8,3,104832],[4,9,0,336000],[4,9,1,67200],[4,9,3,104832],[4,10,0,336000],[4,10,1,67200],[4,10,2,336000],[4,10,3,192192],[4,11,0,336000],[4,11,1,67200],[4,11,3,104832],[5,0,0,352000],[5,0,1,70400],[5,0,3,109824],[5,1,0,352000],[5,1,1,70400],[5,1,3,109824],[5,2,0,352000],[5,2,1,70400],[5,2,3,109824],[5,3,0,352000],[5,3,1,70400],[5,3,3,109824],[5,4,0,352000],[5,4,1,70400],[5,4,3,109824],[5,5,0,352000],[5,5,1,70400],[5,5,3,109824],[5,6,0,352000],[5,6,1,70400],[5,6,2,88000],[5,6,3,132704],[5,7,0,352000],[5,7,1,70400],[5,7,3,109824],[5,8,0,352000],[5,8,1,70400],[5,8,3,109824],[5,9,0,352000],[5,9,1,70400],[5,9,3,109824],[5,10,0,352000],[5,10,1,70400],[5,10,2,352000],[5,10,3,201344],[5,11,0,352000],[5,11,1,70400],[5,11,3,109824],[6,0,0,336000],[6,0,1,67200],[6,0,3,104832],[6,1,0,336000],[6,1,1,67200],[6,1,3,104832],[6,2,0,336000],[6,2,1,67200],[6,2,3,104832],[6,3,0,336000],[6,3,1,67200],[6,3,3,104832],[6,4,0,336000],[6,4,1,67200],[6,4,3,104832],[6,5,0,336000],[6,5,1,67200],[6,5,3,104832],[6,6,0,336000],[6,6,1,67200],[6,6,2,84000],[6,6,3,126672],[6,7,0,336000],[6,7,1,67200],[6,7,3,104832],[6,8,0,336000],[6,8,1,67200],[6,8,3,104832],[6,9,0,336000],[6,9,1,67200],[6,9,3,104832],[6,10,0,336000],[6,10,1,67200],[6,10,2,336000],[6,10,3,192192],[6,11,0,336000],[6,11,1,67200],[6,11,3,104832],[7,0,0,339000],[7,0,1,67800],[7,0,3,105768],[7,1,0,339000],[7,1,1,67800],[7,1,3,105768],[7,2,0,339000],[7,2,1,67800],[7,2,3,105768],[7,3,0,339000],[7,3,1,67800],[7,3,3,105768],[7,4,0,339000],[7,4,1,67800],[7,4,3,105768],[7,5,0,339000],[7,5,1,67800],[7,5,3,105768],[7,6,0,339000],[7,6,1,67800],[7,6,2,84750],[7,6,3,127803],[7,7,0,339000],[7,7,1,67800],[7,7,3,105768],[7,8,0,339000],[7,8,1,67800],[7,8,3,105768],[7,9,0,339000],[7,9,1,67800],[7,9,3,105768],[7,10,0,339000],[7,10,1,67800],[7,10,2,339000],[7,10,3,193908],[7,11,0,339000],[7,11,1,67800],[7,11,3,105768],[8,0,0,339000],[8,0,1,67800],[8,0,3,105768],[8,1,0,339000],[8,1,1,67800],[8,1,3,105768],[8,2,0,339000],[8,2,1,67800],[8,2,3,105768],[8,3,0,339000],[8,3,1,67800],[8,3,3,105768],[8,4,0,339000],[8,4,1,67800],[8,4,3,105768],[8,5,0,339000],[8,5,1,67800],[8,5,3,105768],[8,6,0,339000],[8,6,1,67800],[8,6,2,84750],[8,6,3,127803],[8,7,0,339000],[8,7,1,67800],[8,7,3,105768],[8,8,0,339000],[8,8,1,67800],[8,8,3,105768],[8,9,0,339000],[8,9,1,67800],[8,9,3,105768],[8,10,0,339000],[8,10,1,67800],[8,10,2,339000],[8,10,3,193908],[8,11,0,339000],[8,11,1,67800],[8,11,3,105768],[9,6,0,2000000],[9,6,1,400000],[9,6,2,500000],[9,6,3,754000],[9,7,0,2000000],[9,7,1,400000],[9,7,3,624000],[9,8,0,2000000],[9,8,1,400000],[9,8,3,624000],[9,9,0,2000000],[9,9,1,400000],[9,9,3,624000],[9,10,0,2000000],[9,10,1,400000],[9,10,2,2000000],[9,10,3,1144000],[9,11,0,2000000],[9,11,1,400000],[9,11,3,624000]]};</script>
+<script>
+/* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
+   Jeder Baustein entspricht einem Standard-Visual von Power BI.
+   Seite: 1024 x 646 px. Parameter: ?print (Druckansicht ohne Leiste), ?gut=gruen (Farbvariante). */
+const DK = (() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  let SEITE_B = 1024, SEITE_H = 646;          // Dashboard; Einzelvisual: init({breite: 727, hoehe: …})
+  if (Q.get("gut") === "gruen") document.body.dataset.gut = "gruen";
+  if (PRINT) document.body.classList.add("print");
+
+  /* ---------------- Format ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  const MINUS = "−", NBSP = String.fromCharCode(0xA0);
+  function zahl(v, nk = 0) { return (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function delta(v, nk = 0, einheit = "") {
+    const r = Number(v.toFixed(nk));
+    const vz = r > 0 ? "+" : r < 0 ? MINUS : "±";
+    return vz + nf(nk).format(Math.abs(r)) + einheit;
+  }
+  function prozent(v, nk = 1) { return zahl(v * 100, nk) + NBSP + "%"; }
+  /* Wirkung: richtung +1 = Anstieg günstig, -1 = Anstieg ungünstig, 0 = neutral */
+  function wirkung(d, richtung, nk = 1) {
+    if (!richtung || Number(d.toFixed(nk)) === 0) return "neutral";
+    return d * richtung > 0 ? "gut" : "schlecht";
+  }
+  const FARBE = { gut: "var(--gut)", schlecht: "var(--schlecht)", neutral: "var(--ac)",
+                  ist: "var(--ac)", fc: "var(--fc)", vj: "var(--py)" };
+
+  /* ---------------- Textmessung ---------------- */
+  const ctx = document.createElement("canvas").getContext("2d");
+  function tw(t, px = 14, bold = false) {
+    ctx.font = (bold ? "bold " : "") + px + "px Arial, 'Liberation Sans', Helvetica, sans-serif";
+    return ctx.measureText(String(t)).width;
+  }
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------------- Tooltip ---------------- */
+  let tip;
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      const zeilen = zeilenFn();
+      tip.textContent = "";
+      zeilen.forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel;
+  function init(o) {
+    document.title = o.titel;
+    if (o.breite) SEITE_B = o.breite;
+    if (o.hoehe) SEITE_H = o.hoehe;
+    if (!PRINT) {
+      const leiste = el("div", { class: "dk-leiste" }, document.body);
+      el("div", { class: "dk-leiste-titel" }, leiste, o.titel);
+      o.knoepfe = leiste;
+    }
+    buehne = el("div", { class: "dk-buehne" }, document.body);
+    rahmen = el("div", { class: "dk-rahmen" }, buehne);
+    seite = el("div", { class: "dk-seite", id: "seite", style: `width:${SEITE_B}px;height:${SEITE_H}px` }, rahmen);
+    panel = el("div", { class: "dk-panel" }, document.body);
+    tip = el("div", { class: "dk-tooltip" }, document.body);
+    const skalieren = () => {
+      if (PRINT) { rahmen.style.width = SEITE_B + "px"; rahmen.style.height = SEITE_H + "px"; return; }
+      const frei = panel.style.display === "block" ? 380 : 0;
+      const s = Math.max(0.4, Math.min((innerWidth - frei - 32) / SEITE_B, (innerHeight - 44 - 32) / SEITE_H));
+      seite.style.transform = `scale(${s})`;
+      rahmen.style.width = SEITE_B * s + "px"; rahmen.style.height = SEITE_H * s + "px";
+      rahmen.style.marginLeft = frei ? "16px" : "auto";
+    };
+    addEventListener("resize", skalieren);
+    DK._skalieren = skalieren;
+    skalieren();
+    return seite;
+  }
+  function box(id, x, y, w, h, cls = "") {
+    return el("div", { id, class: "dk-abs " + cls, style: `left:${x}px;top:${y}px;width:${w}px;height:${h}px` }, seite);
+  }
+  function haarlinie(y, links = 16, rechts = 16) {
+    el("div", { class: "dk-haar", style: `top:${y}px;left:${links}px;right:${rechts}px` }, seite);
+  }
+
+  /* ---------------- Kopf ---------------- */
+  function kopf(ziel, o) {
+    ziel.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0" }, ziel);
+    el("div", { class: "dk-titel" }, l, o.titel);
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, o.untertitel);
+    const r = el("div", { style: "position:absolute;right:0;top:2px;text-align:right" }, ziel);
+    el("div", { class: "dk-quelle" }, r, o.quelle);
+    const lg = el("div", { id: "kopf-legende", class: "dk-legende", style: "margin-top:8px" }, r);
+    o.legende.forEach(([farbe, text, rahmenFarbe]) => {
+      const s = el("span", {}, lg);
+      el("i", { style: `background:${farbe};${rahmenFarbe ? "outline:1px solid " + rahmenFarbe + ";outline-offset:-1px" : ""}` }, s);
+      s.appendChild(document.createTextNode(text));
+    });
+  }
+
+  /* ---------------- Datenschnitte (Slicer) ---------------- */
+  function knoepfe(ziel, o) {
+    const g = el("div", { class: "dk-knoepfe", role: "group" }, ziel);
+    const bs = o.optionen.map(([wert, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(wert === o.wert) }, g, text);
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); o.onChange(wert); });
+      return b;
+    });
+    return g;
+  }
+  function schnitt(ziel, label, typ, o) {
+    const s = el("div", { class: "dk-schnitt" }, ziel);
+    el("label", {}, s, label);
+    if (typ === "knoepfe") return knoepfe(s, o);
+    const sel = el("select", { "aria-label": label, style: o.breite ? `width:${o.breite}px` : "" }, s);
+    o.optionen.forEach(([wert, text]) => { const op = el("option", { value: wert }, sel, text); if (wert === o.wert) op.selected = true; });
+    sel.addEventListener("change", () => o.onChange(sel.value));
+    return sel;
+  }
+
+  /* ---------------- KPI-Leiste (Karte mit Referenzbeschriftung) ---------------- */
+  function kpis(ziel, items) {
+    ziel.textContent = "";
+    const w = el("div", { class: "dk-kpis" }, ziel);
+    items.forEach(k => {
+      const c = el("div", { class: "dk-kpi" }, w);
+      el("div", { class: "dk-kpi-label" }, c, k.label);
+      const wz = el("div", { class: "dk-kpi-wert" + (k.wertKlasse ? " " + k.wertKlasse : "") }, c, k.wert);
+      if (k.einheit) el("span", { class: "dk-kpi-einheit" }, wz, k.einheit);
+      const d = el("div", { class: "dk-kpi-delta" }, c, (k.bezug ?? "ΔVJ") + " ");
+      el("b", { class: k.klasse }, d, k.delta);
+    });
+  }
+
+  /* ---------------- Visual-Rahmen: Titel + Botschaft ---------------- */
+  function visual(ziel, o) {
+    ziel.textContent = "";
+    ziel.classList.add("dk-visual");
+    const tz = el("div", { class: "dk-titelzeile" }, ziel);
+    const t = el("div", { class: "dk-visual-titel" }, tz, o.titel);
+    if (o.einheit) { t.appendChild(document.createTextNode(", ")); el("span", { class: "dk-einheit" }, t, o.einheit); }
+    if (o.schalter) knoepfe(tz, o.schalter);
+    if (o.botschaft !== undefined) el("div", { class: "dk-botschaft", title: o.botschaft }, ziel, o.botschaft);
+    const top = (o.botschaft !== undefined ? 42 : 24) + (o.abstand || 6);
+    return { flaeche: el("div", { style: `position:absolute;left:0;top:${top}px;right:0;bottom:0` }, ziel),
+             breite: ziel.clientWidth, hoehe: ziel.clientHeight - top };
+  }
+
+  /* ---------------- Balkendiagramm (gruppiertes Balkendiagramm) ---------------- */
+  function balken(ziel, o) {
+    const W = o.breite, n = o.zeilen.length;
+    const rh = o.zeilenhoehe || Math.floor(o.hoehe / n), bh = Math.round(rh * 0.7);
+    const H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = o.labelBreite || Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9);
+    const pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bw = Math.max(z.wert > 0 ? 1 : 0, z.wert / max * pw);
+      if (z.kontur) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: Math.max(0, bw - 1), height: bh - 1,
+                                 fill: "#FFFFFF", stroke: z.kontur, "stroke-width": 1 }, g);
+      else sv("rect", { x: lw, y: y + (rh - bh) / 2, width: bw, height: bh, fill: z.farbe || FARBE.ist }, g);
+      sv("text", { x: lw + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    return svg;
+  }
+
+  /* ---------------- Bevölkerungspyramide (gestapeltes Balkendiagramm, Männer negativ) ---------------- */
+  function pyramide(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, kopfH = 18;
+    const rh = o.zeilenhoehe || Math.floor((o.hoehe - kopfH) / n), bh = Math.round(rh * 0.72);
+    const H = kopfH + rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vl = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.m))))) + 7;
+    const vr = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.w))))) + 7;
+    const maxM = Math.max(...o.zeilen.map(z => z.m), 1e-9), maxW = Math.max(...o.zeilen.map(z => z.w), 1e-9);
+    const k = (W - lw - vl - vr - 2) / (maxM + maxW);      // ein Maßstab für beide Seiten
+    const x0 = lw + vl + maxM * k + 1;
+    sv("text", { x: x0 - 6, y: 12, "text-anchor": "end", class: "muted" }, svg, o.kopf[0]);
+    sv("text", { x: x0 + 6, y: 12, class: "muted" }, svg, o.kopf[1]);
+    o.zeilen.forEach((z, i) => {
+      const y = kopfH + i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, z.label);
+      const bm = z.m * k, bw = z.w * k;
+      sv("rect", { x: x0 - 1 - bm, y: y + (rh - bh) / 2, width: bm, height: bh, fill: FARBE.ist }, g);
+      sv("rect", { x: x0 + 1, y: y + (rh - bh) / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: x0 - 1 - bm - 5, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, o.fmt(z.m));
+      sv("text", { x: x0 + 1 + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.w));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: x0, x2: x0, y1: kopfH - 2, y2: H, stroke: "#FFFFFF", "stroke-width": 2 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Gestapeltes Säulendiagramm ---------------- */
+  function saeulen(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.segNamen.map(t => tw(t)))) + 10;
+    const oben = 20, unten = 20, PH = H - oben - unten;
+    const slot = (W - lw) / n, bw = Math.min(26, slot * 0.72);
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9);
+    const k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = lw + slot * i + slot / 2, x = cx - bw / 2;
+      const g = sv("g", {}, svg);
+      let y = basis, summe = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        sv("rect", { x, y: y - h, width: bw, height: Math.max(0, h - (j < s.segs.length - 1 ? 0 : 0)),
+                     fill: FARBE[s.szenario] }, g);
+        if (j > 0) sv("line", { x1: x - 1, x2: x + bw + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, g);
+        if (i === 0 && h >= 15) sv("text", { x: lw - 10, y: y - h / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, o.segNamen[j]);
+        y -= h; summe += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(summe));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: lw + slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      if (o.tooltip) tooltip(hit, () => o.tooltip(s, summe));
+    });
+    sv("line", { x1: lw - 2, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Matrix / Tabelle mit Datenbalken ----------------
+     Spaltentypen: (leer) Zahl rechtsbündig über s.fmt · "text" linksbündig · "delta" Abweichung mit Balken
+     an einer Mittellinie, gefärbt nach Wirkung (s.richtung) · "anteil" Fortschritt 0..1 als Balken ab Null.
+     null-Werte erscheinen als „–“ ohne Balken. o.zeilenhoehe (Standard 21), o.onSort(key) macht Köpfe klickbar. */
+  function matrix(ziel, o) {
+    ziel.textContent = "";
+    const zh = o.zeilenhoehe || 21, H = zh - 3;
+    const t = el("table", { class: "dk-matrix" }, ziel);
+    const kopf = el("tr", {}, el("thead", {}, t));
+    o.spalten.forEach(s => {
+      const st = (s.breite ? `width:${s.breite}px;` : "") + (s.typ === "delta" || s.typ === "anteil" ? "text-align:center;" : "") +
+                 (s.typ === "text" ? "text-align:left;" : "");
+      const th = el("th", s.id ? { style: st, id: s.id } : { style: st }, kopf, s.titel);
+      if (o.onSort && !PRINT) {
+        th.classList.add("dk-sortierbar");
+        th.title = "Klick sortiert";
+        th.addEventListener("click", () => o.onSort(s.key));
+        if (o.sortierung && o.sortierung.key === s.key) th.appendChild(document.createTextNode(o.sortierung.ab ? " ▾" : " ▴"));
+      }
+    });
+    const tb = el("tbody", {}, t);
+    // Achse der Abweichungsbalken proportional (wie „Achse: automatisch“ bei Datenbalken in Power BI)
+    const spanne = {};
+    o.spalten.filter(s => s.typ === "delta").forEach(s => {
+      const w = o.zeilen.filter(z => !z.summe && z.werte[s.key] != null).map(z => z.werte[s.key]);
+      spanne[s.key] = { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) };
+    });
+    const hoehe = o.zeilenhoehe ? `height:${zh}px` : "";
+    o.zeilen.forEach(z => {
+      const blass = !z.summe && o.auswahl != null && o.auswahl !== z.key;
+      // Trennlinie über einer neuen Gruppe: an der Vorzeile setzen (im border-collapse gewinnt die obere Zelle)
+      if (z.trenner && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
+      const tr = el("tr", { class: (z.summe ? "dk-summe" : "dk-zeile") + (blass ? " dk-blass" : "") }, tb);
+      o.spalten.forEach((s, j) => {
+        if (j === 0) { el("td", { style: hoehe }, tr, z.label); return; }
+        const v = z.werte[s.key];
+        if (s.typ === "text") { el("td", { style: "text-align:left;" + hoehe }, tr, v); return; }
+        if (s.typ !== "delta" && s.typ !== "anteil") { el("td", { style: hoehe }, tr, v == null ? "–" : s.fmt(v)); return; }
+        const td = el("td", { class: "dk-dbalken", style: hoehe }, tr);
+        const W = s.breite - 8, svg = sv("svg", { width: W, height: H, style: "display:block" }, td);
+        if (s.typ === "anteil") {
+          const txtW = s.textBreite || 48, pw = W - txtW - 2;
+          sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end", style: "font-size:14px" }, svg,
+             v == null ? "–" : zahl(v * 100, 0) + NBSP + "%");
+          if (v != null) sv("rect", { x: txtW, y: (H - 10) / 2, width: Math.max(v > 0 ? 1 : 0, Math.min(1, v) * pw), height: 10, fill: FARBE.ist }, svg);
+          sv("line", { x1: txtW, x2: txtW, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+          return;
+        }
+        const txtW = s.textBreite || 50, sp = spanne[s.key];
+        const k = (W - txtW - 4) / Math.max(sp.neg + sp.pos, 1e-9), mitte = txtW + 2 + sp.neg * k;
+        const kl = v == null ? "neutral" : wirkung(v, s.richtung, s.nk ?? 1);
+        sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end",
+                     style: `font-size:14px;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};font-weight:${z.summe ? "bold" : "normal"}` },
+           svg, v == null ? "–" : delta(v, s.nk ?? 1));
+        if (!z.summe && v != null) {
+          const bwid = Math.abs(v) * k;
+          sv("rect", { x: v >= 0 ? mitte : mitte - bwid, y: (H - 10) / 2, width: bwid, height: 10, fill: FARBE[kl] }, svg);
+        }
+        sv("line", { x1: mitte, x2: mitte, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+      });
+      if (!z.summe && o.onClick) tr.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip && !z.summe) tooltip(tr, () => o.tooltip(z));
+    });
+    return t;
+  }
+
+  /* ---------------- Streudiagramm (Punktdiagramm mit Größe) ----------------
+     o.punkte: [{key, x, y, g}] – g bestimmt die Kreisfläche. o.x / o.y: {min, max, ticks, titel, fmt}.
+     o.linien: {x, y} Konstantenlinien; o.felder: [{ecke: "ol"|"or"|"ul"|"ur", text}] Beschriftung der Quadranten. */
+  function streuung(ziel, o) {
+    const W = o.breite, H = o.hoehe;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const fx = o.x.fmt || String, fy = o.y.fmt || String;
+    const links = Math.ceil(Math.max(...o.y.ticks.map(t => tw(fy(t))))) + 8;
+    const rechts = Math.ceil(tw(fx(o.x.ticks[o.x.ticks.length - 1])) / 2) + 2;
+    const oben = 22, unten = 38, PW = W - links - rechts, PH = H - oben - unten;
+    const sx = v => links + (v - o.x.min) / (o.x.max - o.x.min) * PW;
+    const sy = v => oben + PH - (v - o.y.min) / (o.y.max - o.y.min) * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, o.y.titel);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, o.x.titel);
+    o.y.ticks.forEach(t => sv("text", { x: links - 6, y: sy(t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, fy(t)));
+    o.x.ticks.forEach(t => sv("text", { x: sx(t), y: oben + PH + 16, "text-anchor": "middle", class: "muted" }, svg, fx(t)));
+    if (o.linien) {
+      const st = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+      if (o.linien.x != null) sv("line", { x1: sx(o.linien.x), x2: sx(o.linien.x), y1: oben, y2: oben + PH, ...st }, svg);
+      if (o.linien.y != null) sv("line", { x1: links, x2: links + PW, y1: sy(o.linien.y), y2: sy(o.linien.y), ...st }, svg);
+    }
+    (o.felder || []).forEach(f => {
+      const l = f.ecke[1] === "l", ob = f.ecke[0] === "o";
+      sv("text", { x: l ? links + 6 : links + PW - 6, y: ob ? oben + 13 : oben + PH - 6, "text-anchor": l ? "start" : "end",
+                   class: "muted" }, svg, f.text);
+    });
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    const gMax = Math.max(...o.punkte.map(p => p.g || 0), 1e-9), rMax = o.rMax || 13, rMin = o.rMin || 3;
+    const kreise = o.punkte.slice().sort((a, b) => (b.g || 0) - (a.g || 0))
+      .map(p => ({ p, cx: sx(p.x), cy: sy(p.y), r: Math.max(rMin, Math.sqrt((p.g || 0) / gMax) * rMax) }));
+    const gruppen = new Map();
+    kreise.forEach(({ p, cx, cy, r }) => {
+      const blass = o.auswahl && !o.auswahl(p);
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("circle", { cx, cy, r, fill: p.farbe || FARBE.ist, "fill-opacity": 0.8, stroke: "#FFFFFF", "stroke-width": 1 }, g);
+      const hit = sv("circle", { cx, cy, r: Math.max(r, 6), fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(p.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(p));
+      gruppen.set(p, g);
+    });
+    // Beschriftungen nach allen Kreisen: rechts, links, oben, unten – erste Lage ohne Überdeckung
+    const belegt = [];
+    const schneidetKreis = (b, k) => {
+      const nx = Math.max(b.x, Math.min(k.cx, b.x + b.w)), ny = Math.max(b.y, Math.min(k.cy, b.y + b.h));
+      return (nx - k.cx) ** 2 + (ny - k.cy) ** 2 < (k.r + 1) ** 2;
+    };
+    const schneidet = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    kreise.filter(k => k.p.label).forEach(k => {
+      const w = tw(k.p.label), h = 16, { cx, cy, r } = k;
+      const lagen = [[cx + r + 4, cy - h / 2], [cx - r - 4 - w, cy - h / 2], [cx - w / 2, cy - r - 2 - h], [cx - w / 2, cy + r + 2]];
+      const frei = b => b.x >= links && b.x + b.w <= links + PW && b.y >= oben && b.y + b.h <= oben + PH &&
+        !kreise.some(a => a !== k && schneidetKreis(b, a)) && !belegt.some(c => schneidet(b, c));
+      const b = lagen.map(([x, y]) => ({ x, y, w, h })).find(frei) || { x: lagen[0][0], y: lagen[0][1], w, h };
+      belegt.push(b);
+      sv("text", { x: b.x, y: b.y + h / 2, dy: "0.35em" }, gruppen.get(k.p), k.p.label);
+    });
+    return svg;
+  }
+
+  /* ---------------- Berichtsdesign für Power BI (Theme-JSON) ---------------- */
+  function thema() {
+    const GUT = getComputedStyle(document.body).getPropertyValue("--gut").trim() || "#00806B";
+    return { name: "6. Auflage – Buchstil", dataColors: ["#3A3F44", "#8F8F8F", "#C9C9C9", GUT, "#C62828"],
+      background: "#FFFFFF", foreground: "#1A1A1A", tableAccent: "#3A3F44", good: GUT, neutral: "#8F8F8F", bad: "#C62828",
+      maximum: "#3A3F44", center: "#C9C9C9", minimum: "#F6F6F6",
+      textClasses: { callout: { fontSize: 19.5, fontFace: "Arial", color: "#1A1A1A" },
+                     title: { fontSize: 12, fontFace: "Arial", color: "#1A1A1A" },
+                     header: { fontSize: 10.5, fontFace: "Arial", color: "#4D4D4D" },
+                     label: { fontSize: 10.5, fontFace: "Arial", color: "#1A1A1A" } },
+      visualStyles: { "*": { "*": { border: [{ show: false }], dropShadow: [{ show: false }], background: [{ show: false }] } } } };
+  }
+
+  /* ---------------- Ebenen der Lernplattform ---------------- */
+  function download(name, inhalt, typ = "text/csv;charset=utf-8") {
+    const blob = new Blob([String.fromCharCode(0xFEFF) + inhalt], { type: typ });
+    const a = el("a", { href: URL.createObjectURL(blob), download: name }, document.body);
+    a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function ebenen(o) {
+    if (PRINT) return;
+    const leiste = document.querySelector(".dk-leiste");
+    let modus = null;
+    const marken = [];
+    const knopf = (text, fn) => { const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text); b.addEventListener("click", fn); return b; };
+    const kRegeln = knopf("Designregeln", () => umschalten("regeln"));
+    const kNachbau = knopf("Nachbau in Power BI", () => umschalten("nachbau"));
+    const kTab = knopf("Werte als Tabelle", () => umschalten("tabelle"));
+    knopf("Daten (CSV)", () => download(o.csv.name, o.csv.text()));
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; }
+    function markeSetzen(eintrag, text, cls) {
+      const z = document.getElementById(eintrag.ziel);
+      if (!z) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / SEITE_B;
+      // anker "rechts" (Standard): Marke auf der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "dk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text));
+      marken.push(m);
+    }
+    function aktiv(text) {
+      panel.querySelectorAll(".dk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      const e = panel.querySelector(`.dk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(m) {
+      modus = modus === m ? null : m;
+      [kRegeln, kNachbau, kTab].forEach((b, i) => b.setAttribute("aria-pressed", String(modus === ["regeln", "nachbau", "tabelle"][i])));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      DK._skalieren();
+      if (modus === "regeln") {
+        el("h2", {}, panel, "Designregeln (SUCCESS)");
+        el("div", { class: "dk-panel-intro" }, panel, "SUCCESS-Formel nach Hichert/Faisst (IBCS): Say, Unify, Condense, Check, Express, Simplify, Structure. Die Nummern im Dashboard zeigen, wo eine Regel angewendet ist.");
+        o.regeln.forEach(r => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": String(r.nr) }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, r.nr + "."); el("span", {}, k, r.titel);
+          el("div", { class: "dk-regel" }, e, r.regel);
+          el("div", {}, e, r.text);
+          markeSetzen(r, String(r.nr), "");
+        });
+      } else if (modus === "nachbau") {
+        el("h2", {}, panel, "Nachbau in Power BI");
+        el("div", { class: "dk-panel-intro" }, panel, o.nachbauIntro);
+        if (o.theme) { const b = el("button", { type: "button", style: "margin-bottom:10px;font:inherit;padding:5px 10px;border:1px solid #9A9A9A;background:#fff;border-radius:3px;cursor:pointer" }, panel, "Berichtsdesign (JSON) herunterladen");
+          b.addEventListener("click", () => download("berichtsdesign.json", JSON.stringify(o.theme, null, 2), "application/json")); }
+        o.nachbau.forEach(n => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": n.id }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, n.id); el("span", {}, k, n.titel);
+          const dl = el("dl", {}, e);
+          [["Visual", n.visual], ["Felder", n.felder], ["Format", n.format], ["Hinweis", n.hinweis]].forEach(([a, b]) => {
+            if (!b) return; el("dt", {}, dl, a); el("dd", {}, dl, b);
+          });
+          markeSetzen(n, n.id, "nachbau");
+        });
+      } else if (modus === "tabelle") {
+        el("h2", {}, panel, "Werte als Tabelle");
+        el("div", { class: "dk-panel-intro" }, panel, "Alle Werte der Visuals in der aktuellen Filterung (entspricht „Als Tabelle anzeigen“ in Power BI).");
+        o.tabellen().forEach(tab => {
+          el("div", { style: "font-weight:bold;margin:12px 0 4px" }, panel, tab.titel);
+          const t = el("table", { class: "dk-matrix" }, panel);
+          const hr = el("tr", {}, el("thead", {}, t));
+          tab.kopf.forEach(h => el("th", {}, hr, h));
+          const tb = el("tbody", {}, t);
+          tab.zeilen.forEach(z => { const tr = el("tr", {}, tb); z.forEach(c => el("td", {}, tr, c)); });
+        });
+      }
+    }
+    DK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+  }
+
+  return { PRINT, NBSP, zahl, delta, prozent, wirkung, FARBE, tw, el, sv, init, box, haarlinie, kopf, schnitt, knoepfe,
+           kpis, visual, balken, pyramide, saeulen, matrix, streuung, thema, ebenen, download };
+})();
+
+</script>
+<script>
+/* Dashboard „Planungsauswertung Personalkostenplanung“ (Abb. 3.190). Seite 1024 x 646 px.
+   Daten: personalkosten.json (daten_personalkosten.py) – dieselben Planstellen, FTE, Entgelte und Prämissen wie im
+   Planungsformular (Abb. 3.189), je Planstelle, Monat und Kostenart in Cent; dazu FTE je Planstelle und Monat.
+   Aufbau wie im Original (Reiter „Reporting“ der Planungsanwendung): Kostenarten-Hierarchie Personalkosten →
+   Anwesenheitslohn / Lohnnebenkosten (hier KPI-Leiste und Kostenartendiagramm) und Monatsverlauf als Säulen;
+   die „freien Merkmale“ des Originals (Planstelle, Vertragsart …) sind Datenschnitte bzw. die Planstellentabelle.
+   Szenario Plan: weiß mit Kontur; Lohnnebenkosten hellgrau gefüllt. Klick auf Planstelle, Monat oder Kostenart
+   filtert die übrigen Visuals und die KPI-Leiste, das angeklickte Visual hebt hervor; Esc hebt auf. */
+(() => {
+  "use strict";
+  const { zahl, NBSP, sv, el } = DK;
+  const ST = DATA.stellen.map(([ps, bez, vertrag, fte, entgelt, von, bis], i) => ({ i, ps, bez, vertrag, fte, entgelt, von, bis }));
+  const KA = DATA.kostenarten.map(([name, gruppe], i) => ({ i, name, gruppe, lnk: gruppe === "Lohnnebenkosten" }));
+  const MK = DATA.monate, JAHR = DATA.jahr, P = DATA.praemissen;
+  const MNAME = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const BEZ = [...new Set(ST.map(s => s.bez))], VERTRAG = [...new Set(ST.map(s => s.vertrag))];
+  const KST = DATA.kostenstelle.join(" ");
+  const F_AL = "#FFFFFF", F_LNK = "#D4D4D4", KONTUR = "#3A3F44";
+  const eur = c => zahl(c / 100, 0);
+  const tsd = (c, nk = 0) => zahl(c / 1e5, nk);
+  const pz = (a, nk = 1) => zahl(a * 100, nk) + NBSP + "%";
+  const fteTxt = v => zahl(v, 1);
+  const monatVon = t => Number(t.slice(3, 5)) - 1;
+  const zeitraum = s => { const a = monatVon(s.von), b = monatVon(s.bis); return a === 0 && b === 11 ? "ganzjährig" : `${MK[a]}–${MK[b]}`; };
+
+  /* ---------- Zustand ---------- */
+  const S = { bez: null, vertrag: null, ps: null, monat: null, ka: null, sort: { key: "ps", ab: false } };
+  addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    if (S.ka !== null) S.ka = null; else if (S.monat !== null) S.monat = null; else if (S.ps !== null) S.ps = null; else return;
+    zeichnen();
+  });
+
+  /* ---------- Layout (Seite 1024 x 646) ---------- */
+  DK.init({ titel: "Planungsauswertung Personalkostenplanung" });
+  const bKopf = DK.box("kopf", 16, 10, 992, 46);
+  DK.haarlinie(62);
+  const bFilter = DK.box("filter", 16, 68, 992, 50, "dk-filter");
+  const bKpi = DK.box("kpis", 16, 128, 992, 68);
+  DK.haarlinie(206);
+  const bStellen = DK.box("v-stellen", 16, 216, 560, 426);
+  const bMonat = DK.box("v-monat", 596, 216, 412, 228);
+  DK.haarlinie(454, 596, 16);
+  const bKart = DK.box("v-kostenart", 596, 464, 412, 178);
+
+  /* ---------- Filter und Berechnungen ---------- */
+  const stelleOk = s => (S.bez === null || s.bez === S.bez) && (S.vertrag === null || s.vertrag === S.vertrag);
+  // Einzelsätze nach Datenschnitten und Auswahl; „ohne“ nennt die Auswahl, die für das jeweilige Visual nicht filtert
+  function werte(ohne = "") {
+    return DATA.werte.filter(([si, mi, ki]) => stelleOk(ST[si]) &&
+      (ohne === "ps" || S.ps === null || si === S.ps) && (ohne === "monat" || S.monat === null || mi === S.monat) &&
+      (ohne === "ka" || S.ka === null || ki === S.ka));
+  }
+  const summe = (z, f = () => true) => z.reduce((s, x) => s + (f(x) ? x[3] : 0), 0);
+  // FTE je Monat (DATA.fte in Tausendstel) für die gefilterten Planstellen
+  function fteMonat(ohne = "") {
+    return MK.map((_, mi) => DATA.fte.reduce((s, f, si) => s + (stelleOk(ST[si]) && (ohne === "ps" || S.ps === null || si === S.ps) ? f[mi] : 0), 0) / 1000);
+  }
+  function kennzahlen() {
+    const z = werte(), fm = fteMonat();
+    const al = summe(z, x => !KA[x[2]].lnk), lnk = summe(z, x => KA[x[2]].lnk);
+    const fte = S.monat === null ? fm.reduce((a, b) => a + b, 0) / 12 : fm[S.monat];
+    return { pk: al + lnk, al, lnk, fte, fm };
+  }
+  // Personalkosten je FTE und Monat im Jahresdurchschnitt (Auswahl ohne Monat)
+  function jahrJeFte(k) {
+    const pk = summe(werte("monat")), fte = fteMonat().reduce((a, b) => a + b, 0) / 12;
+    return fte && k.fte ? eur(pk / fte / 12) + NBSP + "€" : "–";
+  }
+  function stellenDaten() {
+    const z = werte("ps");
+    const ges = summe(z);
+    return ST.filter(stelleOk).map(s => {
+      const pk = summe(z, x => x[0] === s.i);
+      return { s, pk, al: summe(z, x => x[0] === s.i && !KA[x[2]].lnk), lnk: summe(z, x => x[0] === s.i && KA[x[2]].lnk), anteil: ges ? pk / ges : 0 };
+    });
+  }
+  function monatsDaten() {
+    const z = werte("monat"), fm = fteMonat();
+    return MK.map((name, mi) => ({ mi, name, al: summe(z, x => x[1] === mi && !KA[x[2]].lnk), lnk: summe(z, x => x[1] === mi && KA[x[2]].lnk),
+      sonder: summe(z, x => x[1] === mi && x[2] === 2), fte: fm[mi] }));
+  }
+  function kostenartDaten() {
+    const z = werte("ka"), ges = summe(z);
+    return KA.map(k => ({ k, wert: summe(z, x => x[2] === k.i), anteil: ges ? summe(z, x => x[2] === k.i) / ges : 0 }));
+  }
+
+  /* ---------- Tooltip ---------- */
+  const tip = document.querySelector(".dk-tooltip");
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      tip.textContent = "";
+      zeilenFn().forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------- Gestapelte Plansäulen (weiß mit Kontur, Lohnnebenkosten hellgrau) ---------- */
+  function saeulenPlan(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria }, ziel);
+    const oben = 20, unten = 20, PH = H - oben - unten, slot = W / n, bw = Math.min(24, Math.floor(slot * 0.66));
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9), k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = slot * i + slot / 2, x = Math.round(cx - bw / 2);
+      const g = sv("g", { class: "dk-klick" + (o.auswahl !== null && o.auswahl !== s.key ? " dk-blass" : "") }, svg);
+      let y = basis, ges = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        // oberes Segment teilt sich die Trennlinie mit dem unteren (keine doppelte Kontur)
+        if (h > 0.5) sv("rect", { x: x + 0.5, y: y - h + 0.5, width: bw - 1, height: Math.max(0, j && ges > 0 ? h : h - 1), fill: o.fuellung[j], stroke: KONTUR, "stroke-width": 1 }, g);
+        y -= h; ges += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(ges));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      hit.addEventListener("click", () => o.onClick(s.key));
+      tooltip(hit, () => o.tooltip(s, ges));
+    });
+    sv("line", { x1: 0, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------- Planbalken (weiß mit Kontur bzw. hellgrau mit Kontur) ---------- */
+  function balkenPlan(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, rh = o.zeilenhoehe, bh = Math.round(rh * 0.62), H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => DK.tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => DK.tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9), pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, g = sv("g", { class: "dk-klick" + (o.auswahl !== null && o.auswahl !== z.key ? " dk-blass" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bwid = z.wert > 0 ? Math.max(2, z.wert / max * pw) : 0;
+      if (bwid) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: bwid - 1, height: bh - 1, fill: z.fuellung, stroke: KONTUR, "stroke-width": 1 }, g);
+      sv("text", { x: lw + bwid + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      hit.addEventListener("click", () => o.onClick(z.key));
+      tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: lw + 0.5, x2: lw + 0.5, y1: 0, y2: H, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------- Botschaften ---------- */
+  const passt = (k, breite) => k.find(t => DK.tw(t) <= breite) || k[k.length - 1];
+  const liste = a => a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " und " + a[a.length - 1];
+  function botschaftStellen(d) {
+    if (!d.length) return "Keine Planstellen in der Auswahl";
+    if (S.ps !== null) {
+      const x = d.find(r => r.s.i === S.ps) || d[0];
+      return passt([`${x.s.ps} ${x.s.bez}: ${eur(x.pk)} € Personalkosten, ${pz(x.anteil, 0)} der Auswahl`, `${x.s.ps}: ${pz(x.anteil, 0)} der Personalkosten`], 556);
+    }
+    const top = d.slice().sort((a, b) => b.pk - a.pk)[0];
+    return passt([`${top.s.ps} ${top.s.bez} (${zahl(top.s.fte, 2)} FTE, ${zeitraum(top.s)}): ${pz(top.anteil, 0)} der Personalkosten`,
+      `${top.s.ps} ${top.s.bez}: ${pz(top.anteil, 0)} der Personalkosten`], 556);
+  }
+  function botschaftMonat(d) {
+    const teile = [];
+    const wechsel = d.findIndex((m, i) => i > 0 && Math.abs(m.fte - d[i - 1].fte) > 1e-6);
+    if (wechsel > 0) teile.push(`ab ${MNAME[wechsel]} ${fteTxt(d[wechsel].fte)} statt ${fteTxt(d[wechsel - 1].fte)} FTE`);
+    const sz = d.filter(m => m.sonder > 0).map(m => MNAME[m.mi]);
+    const max = d.slice().sort((a, b) => b.al + b.lnk - a.al - a.lnk)[0];
+    const kand = [], gross = t => t.charAt(0).toUpperCase() + t.slice(1);
+    if (sz.length && (S.ka === null || S.ka === 2)) {
+      kand.push(gross([...teile, `Sonderzahlungen im ${liste(sz)}`].join(", ")), gross([...teile, `Sonderzahlungen ${liste(sz)}`].join(", ")));
+      if (!teile.length) teile.push(`Sonderzahlungen im ${liste(sz)}`);
+    }
+    if (teile.length) kand.push(gross(teile[0]));
+    kand.push(`${MNAME[max.mi]} am höchsten: ${tsd(max.al + max.lnk)} Tsd. €`);
+    return passt(kand, 408);
+  }
+  function botschaftKostenart(d) {
+    const al = d.filter(x => !x.k.lnk).reduce((s, x) => s + x.wert, 0), lnk = d.filter(x => x.k.lnk).reduce((s, x) => s + x.wert, 0);
+    if (al > 0 && lnk > 0) return passt([`Lohnnebenkosten betragen ${pz(lnk / al)} des Anwesenheitslohns`, `Lohnnebenkosten ${pz(lnk / al)} des Anwesenheitslohns`], 408);
+    const top = d.slice().sort((a, b) => b.wert - a.wert)[0];
+    return top.wert ? `${top.k.name} größte Kostenart (${pz(top.anteil, 0)})` : "Keine Kosten in der Auswahl";
+  }
+
+  /* ---------- Datenschnitte ---------- */
+  const schnittBez = DK.schnitt(bFilter, "Stellenbezeichnung", "knoepfe", {
+    optionen: [["alle", "Alle"], ...BEZ.map(b => [b, b])], wert: "alle",
+    onChange: v => { S.bez = v === "alle" ? null : v; if (S.ps !== null && !stelleOk(ST[S.ps])) S.ps = null; zeichnen(); } });
+  const schnittVertrag = DK.schnitt(bFilter, "Vertragsart", "knoepfe", {
+    optionen: [["alle", "Alle"], ...VERTRAG.map(b => [b, b])], wert: "alle",
+    onChange: v => { S.vertrag = v === "alle" ? null : v; if (S.ps !== null && !stelleOk(ST[S.ps])) S.ps = null; zeichnen(); } });
+  const setze = (k, v) => { S[k] = S[k] === v ? null : v; zeichnen(); };
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    [...schnittBez.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0 ? S.bez === null : S.bez === BEZ[i - 1])));
+    [...schnittVertrag.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0 ? S.vertrag === null : S.vertrag === VERTRAG[i - 1])));
+    const auswahl = [S.ps !== null ? "Planstelle " + ST[S.ps].ps : null, S.monat !== null ? MNAME[S.monat] : null, S.ka !== null ? KA[S.ka].name : null].filter(Boolean);
+    DK.kopf(bKopf, { titel: "Planungsauswertung Personalkosten",
+      untertitel: `Kostenstelle ${KST} · Plan ${JAHR}, Planversion ${DATA.planversion} · ${auswahl.length ? auswahl.join(", ") : "ganzes Jahr"}`,
+      quelle: "Quelle: Personalkostenplanung (Planstellen) · Stand 15.10.2026",
+      legende: [[F_AL, "Anwesenheitslohn", KONTUR], [F_LNK, "Lohnnebenkosten", KONTUR]] });
+
+    // KPI-Leiste
+    const k = kennzahlen();
+    const imJahr = S.monat === null;
+    const h1 = k.fm.slice(0, 6).reduce((a, b) => a + b, 0) / 6, h2 = k.fm.slice(6).reduce((a, b) => a + b, 0) / 6;
+    DK.kpis(bKpi, [
+      { label: imJahr ? "Personalkosten" : `Personalkosten ${MNAME[S.monat]}`, wert: eur(k.pk), einheit: "€",
+        bezug: imJahr ? "Ø je Monat" : "Anteil am Jahr", delta: imJahr ? eur(k.pk / 12) + NBSP + "€" : pz(k.pk / Math.max(1, summe(werte("monat"))), 1), klasse: "neutral" },
+      { label: "Anwesenheitslohn", wert: eur(k.al), einheit: "€", bezug: "Anteil", delta: k.pk ? pz(k.al / k.pk) : "–", klasse: "neutral" },
+      { label: "Lohnnebenkosten", wert: eur(k.lnk), einheit: "€", bezug: "auf Anwesenheitslohn", delta: k.al ? pz(k.lnk / k.al) : "–", klasse: "neutral" },
+      { label: imJahr ? "FTE im Jahresmittel" : `FTE ${MNAME[S.monat]}`, wert: fteTxt(k.fte),
+        bezug: imJahr ? "1. Hj. | 2. Hj." : "Jahresmittel", delta: imJahr ? `${fteTxt(h1)} | ${fteTxt(h2)}` : fteTxt(k.fm.reduce((a, b) => a + b, 0) / 12), klasse: "neutral" },
+      { label: "Personalkosten je FTE", wert: k.fte ? eur(k.pk / k.fte) : "–", einheit: "€",
+        bezug: imJahr ? "je Monat" : "Ø Jahr je Monat", delta: jahrJeFte(k), klasse: "neutral" },
+    ]);
+
+    // Planstellen (Matrix)
+    const ds = stellenDaten();
+    const sk = S.sort.key, ab = S.sort.ab ? -1 : 1;
+    const wertFuer = { ps: r => r.s.ps, bez: r => r.s.bez, fte: r => r.s.fte, zeit: r => monatVon(r.s.von) * 12 + monatVon(r.s.bis), pk: r => r.pk, anteil: r => r.anteil };
+    ds.sort((a, b) => { const x = wertFuer[sk](a), y = wertFuer[sk](b); return (x < y ? -1 : x > y ? 1 : a.s.i - b.s.i) * ab; });
+    let f = DK.visual(bStellen, { titel: "Personalkosten nach Planstelle", einheit: "€", botschaft: botschaftStellen(ds) });
+    const t = DK.matrix(f.flaeche, {
+      spalten: [
+        { key: "ps", titel: "Planstelle", breite: 74, id: "m-ps" },
+        { key: "bez", titel: "Bezeichnung", breite: 150, typ: "text", id: "m-bez" },
+        { key: "fte", titel: "FTE", breite: 48, fmt: v => zahl(v, 2), id: "m-fte" },
+        { key: "zeit", titel: "Zeitraum", breite: 80, typ: "text", id: "m-zeit" },
+        { key: "pk", titel: "Personalkosten", breite: 100, fmt: v => eur(v), id: "m-pk" },
+        { key: "anteil", titel: "Anteil", breite: 108, typ: "anteil", textBreite: 48, id: "m-anteil" },
+      ],
+      zeilen: ds.map(r => ({ key: r.s.i, label: r.s.ps, werte: { bez: r.s.bez, fte: r.s.fte, zeit: zeitraum(r.s), pk: r.pk, anteil: r.anteil }, r })),
+      zeilenhoehe: 32, auswahl: S.ps, onClick: v => setze("ps", v),
+      sortierung: S.sort, onSort: key => { S.sort = { key, ab: S.sort.key === key ? !S.sort.ab : !["ps", "bez", "zeit"].includes(key) }; zeichnen(); },
+      tooltip: z => { const r = z.r, s = r.s; return [`${s.ps} ${s.bez}`, `${zahl(s.fte, 2)} FTE · ${s.vertrag} · ${s.von}–${s.bis}`,
+        `Monatsentgelt ${zahl(s.entgelt, 0)} € je FTE`, `Anwesenheitslohn ${eur(r.al)} € · Lohnnebenkosten ${eur(r.lnk)} €`,
+        `Personalkosten ${eur(r.pk)} € · ${pz(r.anteil)}`, "Klick filtert das Dashboard"]; },
+    });
+    // Anteilsbalken als Planwert: weiß mit Kontur statt gefüllt, Maßstab = größter Anteil (wie „Max automatisch“)
+    const maxAnteil = Math.max(...ds.map(r => r.anteil), 1e-9);
+    t.querySelectorAll("td.dk-dbalken svg rect").forEach(r => {
+      const w = parseFloat(r.getAttribute("width")) / maxAnteil;
+      r.setAttribute("x", parseFloat(r.getAttribute("x")) + 0.5); r.setAttribute("y", parseFloat(r.getAttribute("y")) + 0.5);
+      r.setAttribute("width", Math.max(0, w - 1)); r.setAttribute("height", 9);
+      r.setAttribute("fill", "#FFFFFF"); r.setAttribute("stroke", KONTUR); r.setAttribute("stroke-width", 1);
+    });
+
+    // Monatsverlauf
+    const dm = monatsDaten();
+    f = DK.visual(bMonat, { titel: "Personalkosten nach Monat", einheit: "Tsd. €", botschaft: botschaftMonat(dm) });
+    saeulenPlan(f.flaeche, { breite: f.breite, hoehe: f.hoehe, aria: "Personalkosten je Monat, Plan " + JAHR,
+      spalten: dm.map(m => ({ key: m.mi, label: m.name, segs: [m.al, m.lnk], m })), fuellung: [F_AL, F_LNK],
+      fmt: c => tsd(c), auswahl: S.monat, onClick: v => setze("monat", v),
+      tooltip: (s, ges) => { const m = s.m; return [`${MNAME[m.mi]} ${JAHR}`, `Personalkosten ${eur(ges)} €`,
+        `Anwesenheitslohn ${eur(m.al)} € · Lohnnebenkosten ${eur(m.lnk)} €`,
+        ...(m.sonder ? [`darin Sonderzahlungen ${eur(m.sonder)} € (${m.mi + 1 === P.urlaubsgeld_monat ? "Urlaubsgeld" : "Weihnachtsgeld"})`] : []),
+        `FTE ${fteTxt(m.fte)}`, "Klick filtert das Dashboard"]; } });
+    f.flaeche.firstChild.id = "svg-monat";
+
+    // Kostenarten
+    const dk = kostenartDaten();
+    f = DK.visual(bKart, { titel: "Personalkosten nach Kostenart", einheit: "Tsd. €", botschaft: botschaftKostenart(dk) });
+    balkenPlan(f.flaeche, { breite: f.breite, zeilenhoehe: 31, aria: "Personalkosten nach Kostenart",
+      zeilen: dk.map(x => ({ key: x.k.i, label: x.k.name, wert: x.wert, fuellung: x.k.lnk ? F_LNK : F_AL, x })),
+      fmt: c => tsd(c, 1), auswahl: S.ka, onClick: v => setze("ka", v),
+      tooltip: z => { const x = z.x; const satz = [`Satz ${zahl(P.zulagen, 1)} % des Grundentgelts`, `Satz ${zahl(P.zulagen, 1)} % des Grundentgelts`,
+        `Urlaubsgeld ${zahl(P.urlaubsgeld, 0)} % (Juli), Weihnachtsgeld ${zahl(P.weihnachtsgeld, 0)} % (Nov.)`, `Satz ${zahl(P.sozialabgaben, 1)} % auf Anwesenheitslohn und Sonderzahlungen`];
+        return [`${x.k.name} (${x.k.gruppe})`, `${eur(x.wert)} € · ${pz(x.anteil)} der Personalkosten`,
+          x.k.i === 0 ? "FTE × Monatsentgelt × Monate" : satz[x.k.i], "Klick filtert das Dashboard"]; } });
+    f.flaeche.firstChild.id = "svg-kostenart";
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
+  DK.ebenen({
+    regeln: [
+      { nr: 1, ziel: "v-monat", anker: "links", versatz: [392, 4], regel: "SAY – Botschaft vermitteln", titel: "Eine Aussage je Visual",
+        text: "Unter jedem Titel steht ein Satz aus den Daten – etwa, dass ab Juli 13 statt 9 FTE geplant sind und Juli und November Sonderzahlungen tragen. Das Original überschrieb die Seite nur mit „BEx Adhoc Analyse“ und „IP-HR Kostenstellenplanung periodisch“." },
+      { nr: 2, ziel: "kopf-legende", anker: "links", versatz: [-4, -2], regel: "UNIFY – Semantische Notation", titel: "Plan als Umriss",
+        text: "Alle Werte sind Planwerte und deshalb weiß mit dunkler Kontur gezeichnet; der Anteil der Lohnnebenkosten ist hellgrau gefüllt – in Säulen und Kostenartenbalken gleich, erklärt einmal im Kopf. Das Original zeigte gelbe Säulen mit der Legende „BAB Personalkosten“." },
+      { nr: 3, ziel: "kpis", anker: "links", versatz: [366, 4], regel: "CONDENSE – Verdichten", titel: "Kostenarten-Hierarchie in der KPI-Leiste",
+        text: "Personalkosten, Anwesenheitslohn und Lohnnebenkosten stehen als Kennzahlen oben, ergänzt um FTE und Kosten je FTE. Das Original zeigte Personalkosten und Lohnkosten mit demselben Wert (alle Planstellen sind gewerblich) – die Zwischenstufe Lohnkosten entfällt." },
+      { nr: 4, ziel: "svg-monat", anker: "links", versatz: [34, 70], regel: "CHECK – Korrekte Skalen", titel: "Werte statt Achse",
+        text: "Säulen beginnen bei null und tragen ihren Wert in Tsd. €. Das Original hatte eine Achse 0 … 80000 ohne Tausenderpunkt, Monatsnamen und Legende in sehr kleiner Schrift." },
+      { nr: 5, ziel: "m-anteil", versatz: [0, -2], regel: "EXPRESS – Passende Darstellung", titel: "Planstellen mit Anteilsbalken",
+        text: "Die Planstellen des Formulars erscheinen mit FTE, Zeitraum, Personalkosten und Anteil; der Balken zeigt sofort, dass die Sammelplanstelle mit 5 FTE ab Juli gut ein Viertel der Kosten trägt. Im Original war die Planstelle nur ein „freies Merkmal“ im Navigationsblock." },
+      { nr: 6, ziel: "filter", anker: "links", versatz: [752, 28], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Navigationsblock und Knopfleiste",
+        text: "Browserrahmen, Reiter (Datenanalyse, Grafische Darstellung, Information …), die Knöpfe View sichern, Bookmark, Variablenbild, Exceptions, Notizen und Export sowie der Navigationsblock Zeilen/Spalten/Freie Merkmale entfallen. Die freien Merkmale werden zu Datenschnitten, der Export zur Ebene „Daten (CSV)“." },
+      { nr: 7, ziel: "svg-kostenart", anker: "links", versatz: [262, 39], regel: "STRUCTURE – Inhalte ordnen", titel: "Natürliche Reihenfolge",
+        text: "Planstellen in der Folge des Formulars, Monate von Januar bis Dezember, Kostenarten in der Reihenfolge der Rechnung: Grundentgelt, Zulagen, Sonderzahlungen, Sozialabgaben. Anwesenheitslohn und Lohnnebenkosten sind über die Füllung gruppiert." },
+      { nr: 8, ziel: "v-stellen", anker: "links", versatz: [482, 400], regel: "CHECK – Stimmige Zahlen", titel: "Dieselben Zahlen wie das Formular",
+        text: "Die Auswertung rechnet aus den Planstellen des Planungsformulars (Abb. „Planungsformular Personalkostenplanung“): 789.449 € Personalkosten, 567.072 € Anwesenheitslohn, 222.377 € Lohnnebenkosten, 11,0 FTE im Jahresmittel. Jede Zahl lässt sich dort je Zeile nachvollziehen." },
+    ],
+    nachbauIntro: "Seitengröße 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt, KPI-Werte 19,5 pt. Datenmodell: Faktentabelle Personalkosten (Planstelle, Monat, Kostenart, Betrag) mit den Dimensionen Planstelle (Bezeichnung, Vertragsart, FTE, Monatsentgelt, gültig von/bis), Kalender (Monat) und Kostenart (Kostenart, Kostenartengruppe, Sortierung); FTE je Planstelle und Monat als zweite Faktentabelle.",
+    nachbau: [
+      { id: "A", ziel: "kpis", anker: "links", versatz: [140, 4], titel: "Kennzahlen", visual: "Karte (neu) mit Referenzbeschriftung",
+        felder: "Personalkosten = SUM(Personalkosten[Betrag]); Anwesenheitslohn = CALCULATE([Personalkosten]; Kostenart[Gruppe] = \"Anwesenheitslohn\"); Lohnnebenkosten analog; FTE = DIVIDE(SUM(FTE[FTE]); DISTINCTCOUNT(Kalender[Monat])); Personalkosten je FTE = DIVIDE([Personalkosten]; [FTE])",
+        format: "Wert 19,5 pt fett, Referenzbeschriftung 10,5 pt #4D4D4D (Anteil, Zuschlag, Halbjahre)" },
+      { id: "B", ziel: "v-stellen", versatz: [0, 0], titel: "Personalkosten nach Planstelle", visual: "Tabelle",
+        felder: "Planstelle, Bezeichnung, FTE, Zeitraum (berechnete Spalte aus gültig von/bis), Personalkosten, Anteil = DIVIDE([Personalkosten]; CALCULATE([Personalkosten]; ALLSELECTED(Planstelle)))",
+        format: "Datenbalken auf Anteil: Min 0, Max automatisch (größter Anteil), positive Balken #FFFFFF mit Rahmen #3A3F44 (Rahmen über bedingte Formatierung); Zeilenabstand vergrößert, Gitternetz horizontal #EFEFEF",
+        hinweis: "Sortierung per Spaltenkopf ist Standard; die Ausgangssortierung nach Planstelle entspricht dem Planungsformular." },
+      { id: "C", ziel: "v-monat", versatz: [0, 0], titel: "Personalkosten nach Monat", visual: "Gestapeltes Säulendiagramm",
+        felder: "X-Achse: Kalender[Monat]; Y-Achse: Personalkosten; Legende: Kostenart[Gruppe]",
+        format: "Farben Anwesenheitslohn #FFFFFF, Lohnnebenkosten #D4D4D4, Rahmen #3A3F44 (Spaltenrahmen ein); Gesamtsummenbeschriftung ein, Anzeigeeinheit Tausend, 0 Dezimalstellen; Y-Achse und Gitternetz aus" },
+      { id: "D", ziel: "v-kostenart", versatz: [0, 0], titel: "Personalkosten nach Kostenart", visual: "Gruppiertes Balkendiagramm",
+        felder: "Y-Achse: Kostenart (sortiert nach Sortierspalte); X-Achse: Personalkosten",
+        format: "Farbe je Kostenart über bedingte Formatierung (Gruppe Anwesenheitslohn #FFFFFF, Lohnnebenkosten #D4D4D4), Rahmen #3A3F44; Datenbeschriftung in Tausend mit 1 Dezimalstelle; X-Achse aus" },
+      { id: "E", ziel: "filter", anker: "links", versatz: [162, -2], titel: "Datenschnitte", visual: "Datenschnitt (2×)",
+        felder: "Planstelle[Bezeichnung] und Planstelle[Vertragsart] als Kacheln, Einzelauswahl mit „Alle“",
+        format: "Ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A",
+        hinweis: "Kreuzfilterung zwischen Tabelle, Säulen und Balken: Standardinteraktion „Filtern“ statt „Hervorheben“ für die jeweils anderen Visuals." },
+    ],
+    theme: DK.thema(),
+    csv: { name: "personalkostenplanung_daten.csv", text: () => {
+      const k = ["Planjahr;Kostenstelle;Planstelle;Bezeichnung;Vertragsart;FTE;Monatsentgelt_EUR;Gueltig_von;Gueltig_bis;Monat;Kostenartengruppe;Kostenart;Betrag_EUR"];
+      DATA.werte.forEach(([si, mi, ki, c]) => { const s = ST[si];
+        k.push([JAHR, KST, s.ps, s.bez, s.vertrag, zahl(s.fte, 2), s.entgelt, s.von, s.bis, `${JAHR}-${String(mi + 1).padStart(2, "0")}`,
+          KA[ki].gruppe, KA[ki].name, zahl(c / 100, 2).replace(/\./g, "")].join(";")); });
+      return k.join("\r\n"); } },
+    tabellen: () => {
+      const ds = stellenDaten(), dm = monatsDaten(), dk = kostenartDaten();
+      return [
+        { titel: "Personalkosten nach Planstelle in €", kopf: ["Planstelle", "Bezeichnung", "Vertragsart", "FTE", "Zeitraum", "Anwesenheitslohn", "Lohnnebenkosten", "Personalkosten", "Anteil"],
+          zeilen: ds.map(r => [r.s.ps, r.s.bez, r.s.vertrag, zahl(r.s.fte, 2), zeitraum(r.s), eur(r.al), eur(r.lnk), eur(r.pk), pz(r.anteil)]) },
+        { titel: "Personalkosten nach Monat in €", kopf: ["Monat", "Anwesenheitslohn", "Lohnnebenkosten", "darin Sonderzahlungen", "Personalkosten", "FTE"],
+          zeilen: dm.map(m => [MNAME[m.mi], eur(m.al), eur(m.lnk), eur(m.sonder), eur(m.al + m.lnk), fteTxt(m.fte)]) },
+        { titel: "Personalkosten nach Kostenart in €", kopf: ["Kostenart", "Gruppe", "Personalkosten", "Anteil"],
+          zeilen: dk.map(x => [x.k.name, x.k.gruppe, eur(x.wert), pz(x.anteil)]) },
+      ];
+    },
+  });
+  zeichnen();
+})();
+
+</script>
+</body>
+</html>

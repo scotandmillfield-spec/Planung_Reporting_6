@@ -1,0 +1,105 @@
+<!-- Abb. 3.191 „Planungsformular Kapazitätsbedarf Anlagen“: Reiter „Kapazitätsbedarf Anlagen“ einer Kapazitätsplanung
+     (softwareneutral nachgebaut). Hochformat 727 px = 110 mm; Inhalt 695 px.
+     Auswahl: linke Spalte 340 (100 · 8 · 232) · 20 · rechte Spalte 335 (92 · 8 · 235).
+     Raster: Periode 130 · Kapazitätsbedarf 130 · Korrektur 100 · Mehrbedarf 120 · Kapazitätsbedarf korrigiert 215 = 695 px.
+     Kostenstelle, Arbeitsplatz und Leistungsart (im Original drei Spalten, nur in der ersten Zeile gefüllt) als Gruppenkopf.
+     Zeilen erzeugt kapazitaet.js. -->
+<style>
+  #kapa { --sp-label: 100px; --sp-feld: 232px; --sp-links: 340px; --sp-rechts: 335px; }
+  #kapa .rechts { --sp-label: 92px; --sp-feld: 235px; }
+  /* Titelzeile wie Abb. 3.5/3.7 */
+  #kapa .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #kapa .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #kapa .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #kapa .reiter { margin-bottom: 14px; }
+  body:not(.print) #kapa .reiter > span { cursor: pointer; }
+  #kapa .g-auswahl { margin-bottom: 16px; }
+  /* Raster */
+  #kapa .mx { display: grid; grid-template-columns: 130px 130px 100px 120px 215px; }
+  #kapa .mx-zeile { display: contents; }
+  #kapa .mx-k { height: 20px; line-height: 20px; padding: 0 4px; color: var(--muted); text-align: right; white-space: nowrap; overflow: hidden; }
+  #kapa .mx-k.links { text-align: left; padding-left: 0; }
+  #kapa .k2 > .mx-k { height: 22px; line-height: 18px; border-bottom: 1px solid var(--ac); }
+  #kapa .gruppe { grid-column: 1 / -1; display: flex; gap: 16px; height: 26px; line-height: 26px; padding: 0 6px;
+    background: var(--band); border-bottom: 1px solid #D4D4D4; white-space: nowrap; overflow: hidden; }
+  #kapa .gruppe .mk-neben { margin-right: 4px; }
+  #kapa .mx-l { height: 24px; line-height: 23px; padding: 0 4px 0 0; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #kapa .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 6px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #kapa .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #kapa .mx .mk-feld.trenn { border-left: 1px solid var(--rahmen); }
+  #kapa .mx .mk-feld.mk-fehler { border-color: var(--schlecht); }
+  #kapa .ergebnis > .mx-l, #kapa .ergebnis > .mk-feld { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: 1px solid var(--ac); }
+  #kapa .ergebnis > .mk-feld.mk-anzeige { border-bottom-color: var(--ac); border-left-color: #FFFFFF; }
+  #kapa .ergebnis > .leer { background: #FFFFFF; }
+  #kapa .mk-knopfleiste { justify-content: flex-end; margin-top: 14px; }
+  #kapa .mk-knopfleiste .mk-knopf { width: 112px; height: 26px; line-height: 24px; padding: 0 10px; text-align: center; }
+</style>
+<form class="mk-maske" id="kapa" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Kapazitätsplanung</span><span class="kopf-unter" id="kopf-unter">Geschäftsjahr 2027 · Perioden 2 bis 12 · Werte in Std.</span></div>
+  <div class="mk-inhalt">
+    <div class="mk-reiter reiter" id="reiter">
+      <span class="aktiv" id="reiter-aktiv">Kapazitätsbedarf Anlagen</span><span>Kapazitätsbedarf Personal</span><span>Kapazitätsangebot Anlagen</span>
+    </div>
+
+    <div class="mk-gruppe g-auswahl" id="g-auswahl">
+      <div class="mk-gruppenkopf" id="kopf-auswahl">Planung Kapazitätsbedarf Anlagen</div>
+      <div class="mk-spalten">
+        <div class="links">
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-werk">Werk</label>
+            <select class="mk-feld" id="f-werk"><option value="4010" selected>4010</option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-pc">Profit-Center</label>
+            <select class="mk-feld" id="f-pc" data-hilfe="leer = alle Profit-Center"><option value="" selected></option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-kst">Kostenstelle</label>
+            <select class="mk-feld" id="f-kst"><option value="4-4651" selected>4-4651 Zuschneiden</option></select>
+          </div>
+        </div>
+        <div class="rechts">
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-ap">Arbeitsplatz</label>
+            <select class="mk-feld" id="f-ap" data-hilfe="leer = alle Arbeitsplätze der Kostenstelle"><option value="" selected></option><option value="51210">51210 Pkw-Stanzen</option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-la">Leistungsart</label>
+            <select class="mk-feld" id="f-la" data-hilfe="leer = alle Leistungsarten"><option value="" selected></option><option value="130">130 Maschinenstunden</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx" id="mx" role="grid" aria-label="Kapazitätsbedarf je Periode in Stunden mit Korrektur und Mehrbedarf">
+      <div class="mx-zeile k1">
+        <div class="mx-k links" id="h-periode">Periode</div>
+        <div class="mx-k" id="h-bedarf">Kapazitätsbedarf</div>
+        <div class="mx-k" id="h-korr">Korrektur</div>
+        <div class="mx-k" id="h-mehr">Mehrbedarf</div>
+        <div class="mx-k" id="h-korrigiert">Kapazitätsbedarf</div>
+      </div>
+      <div class="mx-zeile k2">
+        <div class="mx-k links">2027</div>
+        <div class="mx-k">aus Absatzplanung</div>
+        <div class="mx-k">in %</div>
+        <div class="mx-k">Neuanläufe</div>
+        <div class="mx-k" id="h-korrigiert2">nach Korrektur und Mehrbedarf</div>
+      </div>
+      <div class="gruppe" id="gruppe">
+        <span><span class="mk-neben">Kostenstelle</span><span id="g-kst">4-4651 Zuschneiden</span></span>
+        <span><span class="mk-neben">Arbeitsplatz</span><span id="g-ap">51210 Pkw-Stanzen</span></span>
+        <span><span class="mk-neben">Leistungsart</span><span id="g-la">130 Maschinenstunden</span></span>
+      </div>
+      <!-- Perioden und Ergebniszeile erzeugt kapazitaet.js -->
+    </div>
+
+    <div class="mk-knopfleiste" id="aktionen">
+      <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-beenden">Beenden</button>
+      <button type="button" class="mk-knopf" id="k-sichern">Sichern</button>
+    </div>
+  </div>
+</form>

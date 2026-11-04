@@ -36,11 +36,13 @@ def build(theme):
     # ------------------------------------------------------------ Geometrie
     CX0, CW = 0.2, W - 0.4                     # Container Business Intelligence
     XM, WM = 1.8, 5.4                          # Spalte Metadaten
-    XB0, XB1 = 8.8, 99.4                       # Bänder
+    XB0, XB1 = 8.8, 100.4                      # Bänder
     XS = 106.6                                 # Pfeil Systemintegration
     xa, xb = XB0 + 1.6, XB1 - 1.6              # Inhalt der Bänder
-    L = B(xa, 0, 52.0, 0)                      # linke Spalte (Analyse, Data Warehouse)
-    R = B(xa + 52.0 + 6.0, 0, xb - (xa + 58.0), 0)  # rechte Spalte
+    L = B(xa, 0, 54.0, 0)                      # linke Spalte (Analyse, Data Warehouse)
+    R = B(xa + 54.0 + 5.6, 0, xb - (xa + 59.6), 0)  # rechte Spalte
+    XP = L.r - 3.0                             # Pfeil Analyse → Portal (rechts vom Bandtitel)
+    XD = L.x + 34.0                            # Pfeil Analyse ↔ Data Warehouse
 
     y1 = 6.2                                   # Band Informationszugriff
     h1 = TOP + BH + 1.2
@@ -83,10 +85,10 @@ def build(theme):
           name="Content & Document Management")
 
     # Verbindungen zwischen den Schichten
-    A([(AN.cx, AN.y), (AN.cx, POR.b)], name="Analysesysteme → BI-Portal")
+    A([(XP, AN.y), (XP, POR.b)], name="Analysesysteme → BI-Portal")
     A([(ID.cx, ID.y), (ID.cx, POR.b)], name="Informationsdistribution → BI-Portal")
     A([(AN.r, AN.cy), (ID.x, ID.cy)], head=True, tail=True, name="Analysesysteme ↔ Informationsdistribution")
-    A([(AN.cx, AN.b), (AN.cx, DW.y)], head=True, tail=True, name="Analysesysteme ↔ Data Warehouse")
+    A([(XD, AN.b), (XD, DW.y)], head=True, tail=True, name="Analysesysteme ↔ Data Warehouse")
     A([(ID.cx, ID.b), (ID.cx, CM.y)], head=True, tail=True, name="Informationsdistribution ↔ Content")
     A([(CM.x, CM.cy), (DW.r, CM.cy)], name="Content → Data Warehouse")
 
@@ -99,17 +101,18 @@ def build(theme):
 
     # ------------------------------------------------------------ Quellsysteme
     f.band(CX0, yq, CW, hq, "Externe und operative Systeme mit strukturierten und unstrukturierten Daten")
-    qw, qg, qx = 14.4, 2.0, 3.4
+    QS, QI = 6.5, (0.5, 0.4)                   # Quellsysteme: 6,5 pt (E-Procurement ausgeschrieben)
+    qw, qg, qx = 17.4, 1.0, 2.8
     r1 = yq + TOP + 0.4
     r2 = r1 + QB + 2.2 + 1.0
     for i, s in enumerate(("SCM", "E-Procurement", "ERP", "CRM", "…")):
-        f.box(qx + i * (qw + qg), r1, qw, QB, [P(s, size=SZ)], role="box_hi", name=f"Quelle {s}")
-    grp = B(qx - 1.2, r2 - 1.0, 5 * qw + 4 * qg + 2.4, QB + 2.0)
+        f.box(qx + i * (qw + qg), r1, qw, QB, [P(s, size=QS)], role="box_hi", ins=QI, name=f"Quelle {s}")
+    grp = B(qx - 1.0, r2 - 1.0, 5 * qw + 4 * qg + 2.0, QB + 2.0)
     f.box(grp.x, grp.y, grp.w, grp.h, None, role="container", name="Gruppe technische Systeme")
     for i, s in enumerate(("CAx", "PPS", "MES", "PDM/PLM", "…")):
-        f.box(qx + i * (qw + qg), r2, qw, QB, [P(s, size=SZ)], role="box_hi", name=f"Quelle {s}")
-    EX = B(grp.r + 4.0, r1, CX0 + CW - 1.6 - (grp.r + 4.0), grp.b - r1)
-    f.box(EX.x, EX.y, EX.w, EX.h, [P("Externe Daten", size=SZ)], role="box_hi", name="Externe Daten")
+        f.box(qx + i * (qw + qg), r2, qw, QB, [P(s, size=QS)], role="box_hi", ins=QI, name=f"Quelle {s}")
+    EX = B(grp.r + 2.0, r1, CX0 + CW - 1.4 - (grp.r + 2.0), grp.b - r1)
+    f.box(EX.x, EX.y, EX.w, EX.h, [P("Externe Daten", size=QS)], role="box_hi", ins=QI, name="Externe Daten")
 
     # Quellsysteme → Business Intelligence
     A([(DW.r - 6.0, yq), (DW.r - 6.0, cb)], name="Quellsysteme → BI")

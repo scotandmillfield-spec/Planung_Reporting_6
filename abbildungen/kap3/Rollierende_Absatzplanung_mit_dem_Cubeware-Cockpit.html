@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rollierende Absatzplanung</title>
+<style>
+/* maskkit.css – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Maßstab wie bei den Dashboards: 727 px = 110 mm (Abbildungsbreite), 1024 px = 155 mm; 14 px = 6 pt im Druck.
+   Rollen: Eingabefeld weiß mit Rahmen · Anzeigefeld grau ohne Rahmen · Abschnittsband · Gruppenkopf · Knopf. */
+:root {
+  --ac: #3A3F44;          /* Anthrazit: Kopfleiste, Knopf, Pfeile, Links */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --rahmen: #9A9A9A;      /* Kontur der Eingabefelder und der Maske */
+  --linie: #D9D9D9;       /* Haarlinien */
+  --anzeige: #EFEFEF;     /* Anzeigefelder (nicht editierbar) */
+  --band: #F6F6F6;        /* Abschnittsband */
+  --schlecht: #C62828;    /* nur Fehlermeldungen in der interaktiven Fassung */
+  --gut: #00806B;
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+  --zh: 26px;             /* Feldhöhe */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste und Panel (nicht im Druck) ---------- */
+.mk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.mk-leiste .mk-leiste-titel { font-weight: bold; margin-right: auto; }
+.mk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid var(--rahmen); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.mk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .mk-leiste, body.print .mk-panel, body.print .mk-meldung { display: none !important; }
+.mk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .mk-buehne { position: static; overflow: visible; }
+.mk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .mk-rahmen { margin: 0; box-shadow: none; }
+.mk-seite { position: relative; transform-origin: 0 0; background: #FFFFFF; }
+
+.mk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.mk-marke.gestaltung { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.mk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.mk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.mk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.mk-panel .mk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.mk-panel .mk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); cursor: pointer; }
+.mk-panel .mk-eintrag.aktiv { background: var(--band); margin: 0 -18px; padding: 10px 18px; }
+.mk-panel .mk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.mk-panel .mk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.mk-meldung { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ac); color: #FFFFFF;
+  padding: 10px 16px; border-radius: 3px; font-size: 14px; z-index: 40; display: none; }
+.mk-markiert { outline: 2px solid var(--schlecht); outline-offset: 2px; }
+
+/* ---------- Maske ---------- */
+.mk-maske { position: relative; width: 727px; background: #FFFFFF; border: 1px solid var(--rahmen);
+  font-size: 14px; line-height: 18px; color: var(--text); margin: 0; }
+.mk-kopf { height: 30px; background: var(--ac); color: #FFFFFF; font-size: 16px; font-weight: bold;
+  line-height: 30px; padding: 0 15px; display: flex; justify-content: space-between; }
+.mk-kopf .mk-kopf-info { font-weight: normal; font-size: 14px; color: #FFFFFF; }
+.mk-inhalt { padding: 14px 15px 16px; }
+
+/* Abschnitt mit Band (in der interaktiven Fassung auf- und zuklappbar) */
+.mk-abschnitt + .mk-abschnitt { margin-top: 18px; }
+.mk-band { height: 26px; line-height: 26px; background: var(--band); color: var(--ac); font-size: 14px; font-weight: bold;
+  text-transform: uppercase; letter-spacing: .02em; padding: 0 8px; margin-bottom: 10px; position: relative; }
+.mk-band .mk-klapp { position: absolute; right: 9px; top: 10px; }
+body:not(.print) .mk-band { cursor: pointer; user-select: none; }
+.mk-abschnitt.zu > :not(.mk-band) { display: none; }
+.mk-abschnitt.zu .mk-klapp { transform: rotate(180deg); }
+
+/* Gruppen */
+.mk-gruppenkopf { font-weight: bold; height: 24px; line-height: 18px; border-bottom: 1px solid var(--rahmen);
+  margin-bottom: 6px; white-space: nowrap; overflow: hidden; }
+.mk-gruppe + .mk-gruppe { margin-top: 12px; }
+
+/* Zeilen: Beschriftung + Feld(er); Spaltenbreiten über --sp-label, --sp-feld */
+.mk-zeile { display: grid; grid-template-columns: var(--sp-label, 160px) var(--sp-feld, 192px); column-gap: 8px;
+  align-items: center; min-height: var(--zh); }
+.mk-zeile + .mk-zeile { margin-top: 4px; }
+.mk-label { white-space: nowrap; overflow: hidden; }
+.mk-label.mk-neben, .mk-neben { color: var(--muted); }
+.mk-feldgruppe { display: flex; align-items: center; gap: 0; }
+.mk-feldgruppe > .mk-feld { flex: 1 1 0; min-width: 0; }
+.mk-feldgruppe > .mk-zwischen { flex: 0 0 auto; padding: 0 6px; color: var(--muted); }
+.mk-feld.mk-datum { padding: 0 4px; text-align: center; }
+
+/* Felder: input, select, textarea und deren Druckfassung (div) sehen gleich aus */
+.mk-feld { display: block; width: 100%; height: var(--zh); margin: 0; padding: 0 7px; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; color: var(--text); font: inherit; font-size: 14px; line-height: 24px;
+  white-space: nowrap; overflow: hidden; text-overflow: clip; position: relative; text-align: left; }
+input.mk-feld, select.mk-feld, textarea.mk-feld { -webkit-appearance: none; appearance: none; outline: none; }
+input.mk-feld:focus, select.mk-feld:focus, textarea.mk-feld:focus { border-color: var(--ac); box-shadow: 0 0 0 1px var(--ac); }
+.mk-feld.mk-zahl { text-align: right; }
+.mk-feld.mk-mitte { text-align: center; }
+.mk-feld.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-feld.mk-leer { color: var(--muted); }
+.mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: 0 0 0 1px var(--schlecht); }
+select.mk-feld, .mk-feld.mk-auswahl { padding-right: 24px; cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><polygon points='0,0 8,0 4,5' fill='%233A3F44'/></svg>");
+  background-repeat: no-repeat; background-position: right 9px center; background-size: 8px 5px; }
+div.mk-feld.mk-auswahl { background-image: none; }
+.mk-feld .mk-pfeil { position: absolute; right: 9px; top: 10px; }
+textarea.mk-feld, .mk-feld.mk-mehrzeilig { height: auto; white-space: pre-wrap; line-height: 18px; padding: 6px 8px; resize: none; }
+
+/* Mehrzeiliger Anzeige- bzw. Textbereich (z. B. Brief), Absätze als <p> */
+.mk-textbereich { border: 1px solid var(--rahmen); border-radius: 2px; background: #FFFFFF; padding: 8px 10px;
+  font-size: 14px; line-height: 18px; overflow: hidden; }
+.mk-textbereich.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-textbereich p { margin: 0 0 8px; }
+.mk-textbereich p:last-child { margin-bottom: 0; }
+
+/* Links */
+.mk-link, a.mk-link { color: var(--ac); text-decoration: underline; cursor: pointer; }
+
+/* Knöpfe */
+.mk-knopf { display: inline-block; height: 30px; padding: 0 16px; border-radius: 3px; border: 1px solid var(--ac);
+  background: var(--ac); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: bold; line-height: 28px; cursor: pointer;
+  white-space: nowrap; margin: 0; vertical-align: top; }
+.mk-knopf.mk-zweit { background: #FFFFFF; color: var(--ac); }
+button.mk-knopf { -webkit-appearance: none; appearance: none; }
+.mk-knopfleiste { display: flex; gap: 8px; margin-top: 16px; }
+
+/* Kontrollkästchen und Optionsfelder (Druckfassung als SVG) */
+.mk-option { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+input.mk-check { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin: 0; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; position: relative; cursor: pointer; flex: 0 0 auto; }
+input.mk-check[type="radio"] { border-radius: 7px; }
+input.mk-check:checked { background: var(--ac); border-color: var(--ac); }
+input.mk-check[type="checkbox"]:checked::after { content: ""; position: absolute; left: 4px; top: 1px; width: 3px; height: 7px;
+  border: solid #FFFFFF; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+input.mk-check[type="radio"]:checked { background: #FFFFFF; }
+input.mk-check[type="radio"]:checked::after { content: ""; position: absolute; left: 3px; top: 3px; width: 6px; height: 6px;
+  border-radius: 3px; background: var(--ac); }
+.mk-check-druck { width: 14px; height: 14px; flex: 0 0 auto; display: block; }
+
+/* Raster / Tabelle mit Eingabezellen */
+table.mk-tabelle { border-collapse: separate; border-spacing: 0 4px; margin: -4px 0; }
+table.mk-tabelle th { font-weight: normal; color: var(--muted); text-align: left; padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td { padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td:last-child, table.mk-tabelle th:last-child { padding-right: 0; }
+
+/* Reiter */
+.mk-reiter { display: flex; gap: 2px; border-bottom: 1px solid var(--ac); margin-bottom: 10px; }
+.mk-reiter > * { height: 26px; line-height: 26px; padding: 0 12px; background: var(--anzeige); color: var(--text); white-space: nowrap; }
+.mk-reiter > .aktiv { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+
+/* Hilfsklassen für das Raster */
+.mk-spalten { display: grid; grid-template-columns: var(--sp-links, 360px) var(--sp-rechts, 315px); column-gap: 20px; align-items: start; }
+.mk-nur-interaktiv { }
+body.print .mk-nur-interaktiv { display: none !important; }
+
+</style>
+</head>
+<body>
+<!-- Abb. 3.183 „Rollierende Absatzplanung“: Planungsmaske „Absatzplanung Produkt/Kunde“ (softwareneutral nachgebaut).
+     Querformat 1024 px = 155 mm; Inhalt 992 px. Titelzeile wie Abb. 3.7/3.179 (Titel fett, Untertitel, Haarlinie).
+     Raster (absatz.js): Block 110 · Planzeile 112 · Ø 12/6/3 Monate je 40 · Verlauf 54 · Ist 5 × 35 · Plan 12 × 35 = 991 px.
+     Je Block sechs Zeilen: Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant, Summe.
+     Zellen wie Abb. 3.179: Eingabe weiß mit Gitterlinie, Anzeige grau, Summenzeilen fett. -->
+<style>
+  #absatz { width: 1024px; }
+  /* Titelzeile wie Abb. 3.5/3.7 */
+  #absatz .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #absatz .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #absatz .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  /* Auswahl und Berichtsknöpfe in einer Zeile */
+  #absatz .auswahl { display: flex; align-items: center; margin-bottom: 14px; }
+  #absatz .auswahl .mk-label { flex: 0 0 auto; margin-right: 8px; }
+  #absatz .auswahl .mk-feld { flex: 0 0 auto; width: 210px; margin-right: 24px; }
+  #absatz .auswahl #f-gruppe { width: 160px; }
+  #absatz .auswahl .rechts { margin-left: auto; display: flex; gap: 8px; }
+  /* Raster */
+  #absatz .mx { display: grid; grid-template-columns: 110px 112px repeat(3, 40px) 54px repeat(17, 35px); }
+  #absatz .mx-k { height: 21px; line-height: 21px; padding: 0 4px; text-align: right; color: var(--muted);
+    white-space: nowrap; overflow: hidden; }
+  #absatz .mx-k.links { text-align: left; padding-left: 0; }
+  #absatz .mx-k.mitte { text-align: center; }
+  #absatz .mx-k.gruppe { text-align: left; color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen);
+    margin-left: 4px; padding-left: 4px; }
+  #absatz .mx-k.k3 { border-bottom: 1px solid var(--ac); }
+  #absatz .mx-k.trenn, #absatz .mx .mk-feld.trenn { border-left: 1px solid var(--rahmen); }
+  #absatz .mx-b { grid-row: span 6; border-bottom: 1px solid var(--rahmen); padding: 3px 6px 0 0; }
+  #absatz .mx-b .mk-label { display: block; height: 18px; line-height: 18px; }
+  #absatz .mx-b .mk-label:first-child { font-weight: bold; }
+  #absatz .mx-l { height: 24px; line-height: 23px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #absatz .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #absatz .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #absatz .mx .mk-feld.mk-anzeige.trenn { border-left-color: var(--rahmen); }
+  #absatz .mx .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #absatz .mx .summe { font-weight: bold; }
+  #absatz .mx .mx-l.summe, #absatz .mx .mk-feld.summe { border-bottom: 1px solid var(--rahmen); }
+  #absatz .mx .verlauf { padding: 0; }
+  #absatz .mx .verlauf svg { display: block; margin: 3px auto 0; }
+</style>
+<form class="mk-maske" id="absatz" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Absatzplanung Produkt/Kunde</span><span class="kopf-unter" id="kopf-unter">Absatzmenge in Stück nach Liefermonat · Stand 12.10.2027 · Bearbeitung: Frau Brandt</span></div>
+  <div class="mk-inhalt">
+    <div class="auswahl" id="auswahl">
+      <label class="mk-label" for="f-auswahl" id="l-auswahl">Produkt</label>
+      <select class="mk-feld" id="f-auswahl"></select>
+      <label class="mk-label" for="f-gruppe">Kundengruppe</label>
+      <select class="mk-feld" id="f-gruppe"><option value="nord" selected>Region Nord</option></select>
+      <div class="rechts">
+        <button type="button" class="mk-knopf mk-zweit" id="k-drucken">Bericht drucken</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-pdf">PDF-Bericht</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-excel">Excel-Bericht</button>
+      </div>
+    </div>
+
+    <div class="mx" id="raster"><!-- Kopfzeilen und Blöcke erzeugt absatz.js --></div>
+
+    <div class="mk-knopfleiste">
+      <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiterrollen</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-tauschen" style="margin-left:auto">Kunde/Produkt tauschen</button>
+    </div>
+  </div>
+</form>
+
+<script>
+/* maskkit.js – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Die Maske ist HTML5 (<form class="mk-maske">) mit den Klassen aus maskkit.css.
+   ?print: Druckfassung – Steuerelemente werden zu statischen Elementen gleicher Geometrie, ohne Leiste.
+   MK.exportieren() liefert alle Flächen, Linien, Formen und Textzeilen in px für die PowerPoint-Ausgabe. */
+const MK = (() => {
+  "use strict";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  if (PRINT) document.body.classList.add("print");
+  const NS = "http://www.w3.org/2000/svg";
+  const NBSP = String.fromCharCode(0xA0), MINUS = String.fromCharCode(0x2212);
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  // Pfeil nach unten (Auswahlfeld) bzw. oben (Klappband), 8 x 5 px
+  function pfeil(cls, oben = false) {
+    const s = sv("svg", { width: 8, height: 5, viewBox: "0 0 8 5", class: cls, "aria-hidden": "true" });
+    sv("polygon", { points: oben ? "0,5 8,5 4,0" : "0,0 8,0 4,5", fill: "#3A3F44" }, s);
+    return s;
+  }
+
+  /* ---------------- Zahlen und Datum (deutsches Format) ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  function zahl(v, nk = 1) { return v == null || isNaN(v) ? "" : (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function leseZahl(text) {
+    const t = String(text).trim().replace(MINUS, "-").replace(/\s/g, "");
+    if (!t) return null;
+    if (!/^-?(\d{1,3}(\.\d{3})+|\d+)(,\d+)?$/.test(t)) return NaN;
+    return parseFloat(t.replace(/\./g, "").replace(",", "."));
+  }
+  function leseDatum(text) {
+    const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(String(text).trim());
+    if (!m) return null;
+    const d = new Date(+m[3], +m[2] - 1, +m[1]);
+    return d.getMonth() === +m[2] - 1 ? d : null;
+  }
+  function datum(d) { return d ? String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear() : ""; }
+  // Eingabe prüfen und markieren; liefert den Wert oder null
+  function pruefeFeld(feld, art = "zahl", opt = {}) {
+    const t = feld.value;
+    let v = null, ok = true;
+    if (art === "zahl") {
+      v = leseZahl(t);
+      ok = v === null ? !opt.pflicht : !isNaN(v) && (opt.min == null || v >= opt.min) && (opt.max == null || v <= opt.max);
+    } else if (art === "datum") {
+      v = leseDatum(t);
+      ok = t.trim() === "" ? !opt.pflicht : v !== null;
+    }
+    feld.classList.toggle("mk-fehler", !ok);
+    feld.title = ok ? (feld.dataset.hilfe || "") : (opt.meldung || "Eingabe prüfen");
+    return ok ? v : null;
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel, maske, meldungEl, leiste, B = 727, H = 0;
+  function init(o = {}) {
+    document.title = o.titel || document.title;
+    maske = document.querySelector(o.maske || ".mk-maske");
+    if (!maske) throw new Error("Keine .mk-maske gefunden");
+    if (!PRINT) {
+      leiste = el("div", { class: "mk-leiste" }, document.body);
+      el("div", { class: "mk-leiste-titel" }, leiste, o.titel || "");
+    }
+    buehne = el("div", { class: "mk-buehne" }, document.body);
+    rahmen = el("div", { class: "mk-rahmen" }, buehne);
+    seite = el("div", { class: "mk-seite", id: "seite" }, rahmen);
+    seite.appendChild(maske);
+    panel = el("div", { class: "mk-panel" }, document.body);
+    meldungEl = el("div", { class: "mk-meldung", role: "status" }, document.body);
+    // Klappbänder: Klick auf das Band klappt den Abschnitt auf und zu (nur interaktiv)
+    maske.querySelectorAll(".mk-abschnitt > .mk-band").forEach(b => {
+      if (PRINT || b.dataset.klappbar === "nein") return;
+      b.appendChild(pfeil("mk-klapp mk-nur-interaktiv", true));
+      b.setAttribute("role", "button"); b.tabIndex = 0;
+      const klapp = () => { b.parentElement.classList.toggle("zu"); skalieren(); if (MK._ebenenNeu) MK._ebenenNeu(); };
+      b.addEventListener("click", klapp);
+      b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); klapp(); } });
+    });
+    maske.addEventListener("submit", e => e.preventDefault());
+    addEventListener("resize", skalieren);
+    return maske;
+  }
+  function skalieren() {
+    B = maske.offsetWidth; H = maske.offsetHeight;
+    seite.style.width = B + "px"; seite.style.height = H + "px";
+    if (PRINT) { rahmen.style.width = B + "px"; rahmen.style.height = H + "px"; seite.style.transform = ""; return; }
+    const frei = panel.style.display === "block" ? 380 : 0;
+    const s = Math.max(0.4, Math.min(1.6, (innerWidth - frei - 32) / B, (innerHeight - 44 - 32) / H));
+    seite.style.transform = `scale(${s})`;
+    rahmen.style.width = B * s + "px"; rahmen.style.height = H * s + "px";
+    rahmen.style.marginLeft = frei ? "16px" : "auto";
+  }
+  function meldung(text) {
+    meldungEl.textContent = text; meldungEl.style.display = "block";
+    clearTimeout(meldung._t); meldung._t = setTimeout(() => { meldungEl.style.display = "none"; }, 2600);
+  }
+
+  /* ---------------- Druckfassung: Steuerelemente -> statische Elemente ---------------- */
+  let fertigGemeldet = false;
+  function kopieAttribute(von, nach) {
+    ["id", "style", "title"].forEach(a => { if (von.getAttribute(a)) nach.setAttribute(a, von.getAttribute(a)); });
+    Object.entries(von.dataset).forEach(([k, v]) => { nach.dataset[k] = v; });
+  }
+  function druckfassung() {
+    maske.querySelectorAll("input, select, textarea, button").forEach(f => {
+      let d;
+      if (f.matches("input.mk-check")) {
+        d = sv("svg", { width: 14, height: 14, viewBox: "0 0 14 14", class: "mk-check-druck" });
+        if (f.type === "radio") {
+          sv("circle", { cx: 7, cy: 7, r: 6.5, fill: "#FFFFFF", stroke: "#9A9A9A", "stroke-width": 1 }, d);
+          if (f.checked) sv("circle", { cx: 7, cy: 7, r: 3, fill: "#3A3F44" }, d);
+        } else {
+          sv("rect", { x: 0.5, y: 0.5, width: 13, height: 13, rx: 2, fill: f.checked ? "#3A3F44" : "#FFFFFF",
+                       stroke: f.checked ? "#3A3F44" : "#9A9A9A", "stroke-width": 1 }, d);
+          if (f.checked) sv("polyline", { points: "3.5,7.2 6,9.6 10.5,4.4", fill: "none", stroke: "#FFFFFF", "stroke-width": 2 }, d);
+        }
+      } else if (f.tagName === "SELECT") {
+        d = el("div", { class: f.className + " mk-auswahl" });
+        el("span", {}, d, f.selectedIndex >= 0 ? f.options[f.selectedIndex].text : "");
+        d.appendChild(pfeil("mk-pfeil"));
+      } else if (f.tagName === "TEXTAREA") {
+        d = el("div", { class: f.className + " mk-mehrzeilig" }, undefined, f.value);
+        d.style.height = f.offsetHeight + "px";               // Höhe aus rows übernehmen
+      } else if (f.tagName === "BUTTON") {
+        d = el("div", { class: f.className }, undefined, f.textContent);
+      } else if (f.type === "hidden") {
+        return;
+      } else {
+        d = el("div", { class: f.className }, undefined, f.value);
+      }
+      if (!(d instanceof SVGElement)) { const h = d.style.height; kopieAttribute(f, d); if (h) d.style.height = h; }
+      f.replaceWith(d);
+    });
+  }
+  // Am Ende des Masken-Skripts aufrufen: setzt die Druckfassung und skaliert
+  function fertig() {
+    if (fertigGemeldet) return;
+    fertigGemeldet = true;
+    if (PRINT) druckfassung();
+    skalieren();
+    if (MK._ebenenNeu) MK._ebenenNeu();
+  }
+
+  /* ---------------- Ebenen der Lernplattform: Erläuterungen und Gestaltung ---------------- */
+  function zielElement(z) { return !z ? null : document.getElementById(z) || maske.querySelector(z); }
+  function ebenen(o) {
+    if (PRINT) return;
+    let modus = null;
+    const marken = [], knoepfe = {};
+    const arten = [["erlaeuterungen", "Erläuterungen", ""], ["gestaltung", "Gestaltung", "gestaltung"]].filter(([k]) => o[k]);
+    arten.forEach(([k, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text);
+      b.addEventListener("click", () => umschalten(k));
+      knoepfe[k] = b;
+    });
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; maske.querySelectorAll(".mk-markiert").forEach(e => e.classList.remove("mk-markiert")); }
+    function markeSetzen(eintrag, text, cls) {
+      const z = zielElement(eintrag.ziel);
+      if (!z || !z.offsetParent) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / B;
+      // anker "rechts" (Standard): Marke an der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "mk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text, eintrag));
+      marken.push(m);
+    }
+    function aktiv(text, eintrag) {
+      panel.querySelectorAll(".mk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      maske.querySelectorAll(".mk-markiert").forEach(e => e.classList.remove("mk-markiert"));
+      const z = eintrag && zielElement(eintrag.ziel);
+      if (z) z.classList.add("mk-markiert");
+      const e = panel.querySelector(`.mk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(k) {
+      modus = modus === k ? null : k;
+      Object.entries(knoepfe).forEach(([a, b]) => b.setAttribute("aria-pressed", String(modus === a)));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      skalieren();
+      if (!modus) return;
+      const def = o[modus], cls = modus === "gestaltung" ? "gestaltung" : "";
+      el("h2", {}, panel, def.titel || (modus === "gestaltung" ? "Gestaltung" : "Erläuterungen"));
+      if (def.intro) el("div", { class: "mk-panel-intro" }, panel, def.intro);
+      def.eintraege.forEach(r => {
+        const nr = String(r.nr);
+        const e = el("div", { class: "mk-eintrag", "data-marke": nr }, panel);
+        const kopf = el("div", { class: "mk-eintrag-kopf" }, e);
+        el("span", {}, kopf, modus === "gestaltung" ? nr : nr + "."); el("span", {}, kopf, r.titel);
+        if (r.regel) el("div", { class: "mk-regel" }, e, r.regel);
+        el("div", {}, e, r.text);
+        e.addEventListener("click", () => aktiv(nr, r));
+        markeSetzen(r, nr, cls);
+      });
+    }
+    MK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+    addEventListener("keydown", e => { if (e.key === "Escape" && modus) umschalten(modus); });
+  }
+
+  /* ---------------- Export für PowerPoint (Druckfassung) ---------------- */
+  function farbe(c) {
+    const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/.exec(c || "");
+    if (!m) return null;
+    const a = m[4] === undefined ? 1 : parseFloat(m[4]);
+    const hex = [m[1], m[2], m[3]].map(v => Math.round(+v).toString(16).padStart(2, "0")).join("").toUpperCase();
+    return { hex, a };
+  }
+  function exportieren() {
+    const R = maske.getBoundingClientRect();
+    const formen = [];
+    const name = e => e.id || e.dataset.name || (e.className && typeof e.className === "string" ? e.className.split(" ")[0] : e.tagName);
+    const sichtbar = s => s.w > 0 && s.st !== "none" && s.st !== "hidden" && s.c && s.c.a > 0;
+    function kasten(e, cs) {
+      const r = e.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const bg = farbe(cs.backgroundColor);
+      const seiten = ["Top", "Right", "Bottom", "Left"].map(s => ({ w: parseFloat(cs["border" + s + "Width"]) || 0,
+        c: farbe(cs["border" + s + "Color"]), st: cs["border" + s + "Style"] }));
+      const gleich = seiten.every(s => sichtbar(s) && s.w === seiten[0].w && s.c.hex === seiten[0].c.hex && s.st === seiten[0].st);
+      const x = r.left - R.left, y = r.top - R.top, rad = parseFloat(cs.borderTopLeftRadius) || 0;
+      const fuell = bg && bg.a > 0.01 ? bg.hex : null;
+      if (fuell || gleich) {
+        const lw = gleich ? seiten[0].w : 0;
+        formen.push({ t: "rect", name: name(e), x: x + lw / 2, y: y + lw / 2, w: r.width - lw, h: r.height - lw,
+                      fill: fuell, line: gleich ? seiten[0].c.hex : null, lw, dash: gleich && seiten[0].st === "dashed", r: rad });
+      }
+      if (!gleich) seiten.forEach((s, i) => {
+        if (!sichtbar(s)) return;
+        const h = s.w / 2;
+        const p = [[x, y + h, x + r.width, y + h], [x + r.width - h, y, x + r.width - h, y + r.height],
+                   [x, y + r.height - h, x + r.width, y + r.height - h], [x + h, y, x + h, y + r.height]][i];
+        formen.push({ t: "linie", name: name(e), x1: p[0], y1: p[1], x2: p[2], y2: p[3], farbe: s.c.hex, lw: s.w, dash: s.st === "dashed" });
+      });
+    }
+    function svgFormen(svg) {
+      svg.querySelectorAll("polygon, polyline, rect, circle, line").forEach(k => {
+        const cs = getComputedStyle(k), M = k.getScreenCTM();
+        const pt = (x, y) => { const p = new DOMPoint(x, y).matrixTransform(M); return [p.x - R.left, p.y - R.top]; };
+        const f = farbe(cs.fill), s = farbe(cs.stroke), lw = parseFloat(cs.strokeWidth) || 0;
+        const fill = f && f.a > 0.01 ? f.hex : null, line = s && s.a > 0.01 && lw > 0 ? s.hex : null;
+        const tag = k.tagName.toLowerCase();
+        if (tag === "polygon" || tag === "polyline") {
+          const pts = [...k.points].map(p => pt(p.x, p.y));
+          formen.push({ t: "poly", name: "Form", pts, zu: tag === "polygon", fill: tag === "polygon" ? fill : null, line, lw });
+        } else if (tag === "rect") {
+          const x = +k.getAttribute("x") || 0, y = +k.getAttribute("y") || 0, w = +k.getAttribute("width"), h = +k.getAttribute("height");
+          const a = pt(x, y), b = pt(x + w, y + h);
+          formen.push({ t: "rect", name: "Form", x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1], fill, line, lw, r: +k.getAttribute("rx") || 0 });
+        } else if (tag === "circle") {
+          const cx = +k.getAttribute("cx"), cy = +k.getAttribute("cy"), r = +k.getAttribute("r");
+          const a = pt(cx - r, cy - r), b = pt(cx + r, cy + r);
+          formen.push({ t: "oval", name: "Form", x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1], fill, line, lw });
+        } else if (tag === "line") {
+          const a = pt(+k.getAttribute("x1"), +k.getAttribute("y1")), b = pt(+k.getAttribute("x2"), +k.getAttribute("y2"));
+          formen.push({ t: "linie", name: "Linie", x1: a[0], y1: a[1], x2: b[0], y2: b[1], farbe: line, lw });
+        }
+      });
+    }
+    function text(n) {
+      const t = n.textContent;
+      if (!t.trim()) return;
+      const p = n.parentElement, cs = getComputedStyle(p);
+      const woerter = [], re = /[^\s]+/g;
+      let m;
+      while ((m = re.exec(t))) {
+        const rg = document.createRange();
+        rg.setStart(n, m.index); rg.setEnd(n, m.index + m[0].length);
+        const rs = [...rg.getClientRects()].filter(r => r.width > 0);
+        if (rs.length) woerter.push({ a: m.index, b: m.index + m[0].length, r: rs[0] });
+      }
+      if (!woerter.length) return;
+      const zeilen = [];
+      woerter.forEach(w => {
+        const z = zeilen[zeilen.length - 1];
+        if (z && Math.abs(z.top - w.r.top) < 2) { z.b = w.b; z.right = Math.max(z.right, w.r.right); z.bottom = Math.max(z.bottom, w.r.bottom); }
+        else zeilen.push({ a: w.a, b: w.b, left: w.r.left, right: w.r.right, top: w.r.top, bottom: w.r.bottom });
+      });
+      const gross = cs.textTransform === "uppercase";
+      const unter = (cs.textDecorationLine || cs.textDecoration || "").includes("underline");
+      formen.push({ t: "text", name: name(p), groesse: parseFloat(cs.fontSize), fett: parseInt(cs.fontWeight, 10) >= 600,
+        kursiv: cs.fontStyle === "italic", farbe: (farbe(cs.color) || { hex: "1A1A1A" }).hex, unter,
+        ausr: { right: "r", end: "r", center: "c" }[cs.textAlign] || "l",
+        sperr: parseFloat(cs.letterSpacing) || 0,
+        zeilen: zeilen.map(z => {
+          let s = t.slice(z.a, z.b).replace(/[ \t\n\r]+/g, " ");
+          if (gross) s = s.toUpperCase();
+          return { x: z.left - R.left, y: z.top - R.top, w: z.right - z.left, h: z.bottom - z.top, text: s };
+        }) });
+    }
+    function gehe(n) {
+      if (n.nodeType === 3) { text(n); return; }
+      if (n.nodeType !== 1) return;
+      const cs = getComputedStyle(n);
+      if (cs.display === "none" || cs.visibility === "hidden") return;
+      if (n.tagName.toLowerCase() === "svg") { svgFormen(n); return; }
+      kasten(n, cs);
+      n.childNodes.forEach(gehe);
+    }
+    gehe(maske);
+    return { breite: R.width, hoehe: R.height, formen };
+  }
+
+  /* ---------------- Prüfungen (Druckfassung) ---------------- */
+  function kontrast(a, b) {
+    const lin = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+    const L = h => 0.2126 * lin(parseInt(h.slice(0, 2), 16)) + 0.7152 * lin(parseInt(h.slice(2, 4), 16)) + 0.0722 * lin(parseInt(h.slice(4, 6), 16));
+    const [x, y] = [L(a), L(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05);
+  }
+  function pruefen() {
+    const R = maske.getBoundingClientRect(), probleme = [];
+    const kurz = s => s.trim().replace(/\s+/g, " ").slice(0, 40);
+    maske.querySelectorAll("*").forEach(e => {
+      const cs = getComputedStyle(e);
+      if (cs.display === "none" || e.closest("svg")) return;
+      const r = e.getBoundingClientRect();
+      if (r.width && (r.left < R.left - 0.5 || r.right > R.right + 0.5 || r.bottom > R.bottom + 0.5))
+        probleme.push(`Überlauf aus der Maske: ${e.className || e.tagName} „${kurz(e.textContent)}“`);
+      if (e.textContent.trim() && (cs.overflow === "hidden" || cs.overflowX === "hidden") &&
+          (e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 1))
+        probleme.push(`Text abgeschnitten: „${kurz(e.textContent)}“`);
+    });
+    const tw = document.createTreeWalker(maske, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = tw.nextNode())) {
+      if (!n.textContent.trim()) continue;
+      const p = n.parentElement, cs = getComputedStyle(p);
+      if (cs.display === "none") continue;
+      if (parseFloat(cs.fontSize) < 13.9) probleme.push(`Schrift unter 6 pt (${cs.fontSize}): „${kurz(n.textContent)}“`);
+      let a = p, bg = null;
+      while (a && !bg) { const f = farbe(getComputedStyle(a).backgroundColor); if (f && f.a > 0.5) bg = f.hex; a = a.parentElement; }
+      const fg = farbe(cs.color);
+      if (fg && kontrast(fg.hex, bg || "FFFFFF") < 4.5) probleme.push(`Kontrast < 4,5:1: „${kurz(n.textContent)}“`);
+    }
+    return [...new Set(probleme)];
+  }
+
+  return { PRINT, NBSP, MINUS, el, sv, pfeil, zahl, leseZahl, leseDatum, datum, pruefeFeld, init, fertig, skalieren,
+           meldung, ebenen, exportieren, pruefen, druckfassung };
+})();
+
+</script>
+<script>
+/* Abb. 3.183 „Rollierende Absatzplanung“ – Logik der Maske „Absatzplanung Produkt/Kunde“.
+   Absatzmengen in Stück je Produkt und Kunde: Ø des Ist der letzten 12/6/3 Monate, Ist der letzten fünf Monate,
+   Plan für die nächsten zwölf Monate (rollierend). Trend (Vorjahr) = Ist des Vorjahresmonats.
+   Summe = Ist/Plan + Aktion bestätigt + Aktion geplant + Listung geplant; „Alle Kunden“ bzw. „Alle Produkte“ = Summe der Blöcke.
+   Werte der Kundenblöcke wie im Original (Ebene „All Products“, Kunden 15548 und 15561); sie stimmen in sich:
+   Ø 12/6/3 Monate und Trend folgen aus derselben Ist-Historie. Produkt „Kombi 2.0“ aus dem Block „A4“ des Originals,
+   auf die beiden Kunden aufgeteilt. Monatsachse um 15 Jahre und 8 Monate verschoben (2/2012 → 10/2027). */
+(() => {
+  "use strict";
+  const { el, sv, zahl, leseZahl, pruefeFeld } = MK;
+  MK.init({ titel: "Rollierende Absatzplanung" });
+  const $ = id => document.getElementById(id);
+
+  /* ---------- Monate: m = 0 ist Oktober 2026; c = erster Planmonat (Oktober 2027) ---------- */
+  const MON = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+  const MON_LANG = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const mIdx = m => (m + 9) % 12, mJahr = m => 2026 + Math.floor((m + 9) / 12);
+  const mLang = m => MON_LANG[mIdx(m)] + " " + mJahr(m);
+  let c = 12;
+
+  /* ---------- Stammdaten (fiktiv) ---------- */
+  const PROD = [["P1", "Kompakt 2.0"], ["P2", "Kombi 2.0"]];
+  const KUND = [["15548", "Autohaus Kiel"], ["15561", "Service Lübeck"]];
+  const ARTEN = ["basis", "akb", "akg", "lst"];
+  const ZEILEN = ["Trend (Vorjahr)", "Ist/Plan", "Aktion bestätigt", "Aktion geplant", "Listung geplant", "Summe"];
+  // Ist Okt 2026 bis Sep 2027 (m 0–11); Planzeilen ab Okt 2027 (m 12 ff.)
+  function blatt(ist, plan) {
+    const o = { ist: {} };
+    ist.forEach((v, i) => { if (v) o.ist[i] = v; });
+    ARTEN.forEach((a, j) => { o[a] = {}; plan[j].forEach((v, i) => { if (v) o[a][12 + i] = v; }); });
+    return o;
+  }
+  const D = {
+    P1: { "15548": blatt([3, 2, 3, 4, 6, 1, 2, 0, 1, 2, 0, 1], [[5, 5, 8, 8], [3, 1, 2, 1], [0, 2, 2, 2], [1, 0, 0, 0]]),
+          "15561": blatt([1, 2, 1, 2, 1, 1, 0, 3, 2, 1, 1, 1], [[2, 1, 3, 2], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 2, 0]]) },
+    P2: { "15548": blatt([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1], [[2, 2, 3, 3], [1, 1, 1, 0], [0, 1, 0, 1], [1, 0, 0, 0]]),
+          "15561": blatt([0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [[0, 1, 2, 1], [1, 0, 1, 0], [0, 0, 1, 1], [0, 0, 0, 0]]) },
+  };
+
+  /* ---------- Hierarchie: Produkt → Kunde (PK) oder Kunde → Produkt (KP) ---------- */
+  let hier = "PK";
+  const wahl = { PK: "P1", KP: "15548" };
+  function bloecke() {
+    if (hier === "PK") {
+      const p = wahl.PK;
+      return [{ p, k: "*", text: ["Alle Kunden", "Region Nord"] }, ...KUND.map(([k, t]) => ({ p, k, text: [k, t] }))];
+    }
+    const k = wahl.KP;
+    return [{ p: "*", k, text: ["Alle Produkte"] }, ...PROD.map(([p, t]) => ({ p, k, text: [t] }))];
+  }
+  const blaetter = blk => {
+    const r = [];
+    PROD.forEach(([p]) => KUND.forEach(([k]) => { if ((blk.p === "*" || blk.p === p) && (blk.k === "*" || blk.k === k)) r.push(D[p][k]); }));
+    return r;
+  };
+  const wert = (blk, art, m) => blaetter(blk).reduce((s, L) => s + (L[art][m] || 0), 0);
+  const plansumme = (blk, m) => ARTEN.reduce((s, a) => s + wert(blk, a, m), 0);
+  const mittel = (blk, n) => { let s = 0; for (let m = c - n; m < c; m++) s += wert(blk, "ist", m); return s / n; };
+  const editierbar = blk => blk.p !== "*" && blk.k !== "*";
+
+  /* ---------- Auswahlfeld ---------- */
+  function auswahlFuellen() {
+    const sel = $("f-auswahl");
+    sel.textContent = "";
+    const liste = hier === "PK" ? [["*", "Alle Produkte"], ...PROD] : [["*", "Alle Kunden"], ...KUND.map(([k, t]) => [k, k + " " + t])];
+    liste.forEach(([v, t]) => el("option", v === wahl[hier] ? { value: v, selected: "" } : { value: v }, sel, t));
+    $("l-auswahl").textContent = hier === "PK" ? "Produkt" : "Kunde";
+    $("kopf-titel").textContent = hier === "PK" ? "Absatzplanung Produkt/Kunde" : "Absatzplanung Kunde/Produkt";
+  }
+  $("f-auswahl").addEventListener("change", e => { wahl[hier] = e.target.value; aufbauen(); });
+
+  /* ---------- Raster aufbauen ---------- */
+  const raster = $("raster");
+  const SP_IST = 4, SP_PLAN = 9;                                // Spaltenindex j der ersten Ist- bzw. Planspalte
+  const monat = j => (j < SP_PLAN ? c - 5 + (j - SP_IST) : c + (j - SP_PLAN));
+  const pos = (z, s, n = 1) => `grid-row:${z};grid-column:${s}${n > 1 ? " / span " + n : ""}`;
+  function kopfzeilen() {
+    el("div", { class: "mx-k gruppe", id: "h-avg", style: pos(1, 3, 3) }, raster, "Ø Ist der letzten");
+    el("div", { class: "mx-k gruppe", id: "h-ist", style: pos(1, 3 + SP_IST, 5) }, raster, "Ist in Stück");
+    el("div", { class: "mx-k gruppe", id: "h-plan", style: pos(1, 3 + SP_PLAN, 12) }, raster, "Plan in Stück – rollierend über 12 Monate");
+    // Jahreszeile: zusammenhängende Monate desselben Jahres je Abschnitt
+    [[SP_IST, 5, "ist"], [SP_PLAN, 12, "plan"]].forEach(([j0, n, name]) => {
+      let j = j0;
+      while (j < j0 + n) {
+        const jahr = mJahr(monat(j));
+        let k = j;
+        while (k + 1 < j0 + n && mJahr(monat(k + 1)) === jahr) k++;
+        const at = { class: "mx-k links" + (j === j0 ? " trenn" : ""), style: pos(2, 3 + j, k - j + 1) + ";padding-left:4px" };
+        if (j === j0) at.id = "h-jahr-" + name;
+        el("div", at, raster, String(jahr));
+        j = k + 1;
+      }
+    });
+    el("div", { class: "mx-k links k3", id: "h-block", style: pos(3, 1) }, raster, hier === "PK" ? "Kunde" : "Produkt");
+    el("div", { class: "mx-k links k3", style: pos(3, 2) }, raster, "Planzeile");
+    ["12 M", "6 M", "3 M"].forEach((t, j) => el("div", { class: "mx-k k3", style: pos(3, 3 + j) }, raster, t));
+    el("div", { class: "mx-k mitte k3", id: "h-verlauf", style: pos(3, 6) }, raster, "Verlauf");
+    for (let j = SP_IST; j < SP_PLAN + 12; j++)
+      el("div", { class: "mx-k k3" + (j === SP_IST || j === SP_PLAN ? " trenn" : ""), style: pos(3, 3 + j) }, raster, MON[mIdx(monat(j))]);
+  }
+  let BL = [];
+  function aufbauen() {
+    raster.textContent = "";
+    kopfzeilen();
+    BL = bloecke();
+    BL.forEach((blk, b) => {
+      const z0 = 4 + b * 6, edit = editierbar(blk);
+      const kb = el("div", { class: "mx-b", id: "b" + b, style: `grid-row:${z0} / span 6;grid-column:1` }, raster);
+      blk.text.forEach(t => el("span", { class: "mk-label" }, kb, t));
+      ZEILEN.forEach((t, r) => {
+        const sum = r === 5 ? " summe" : "";
+        el("span", { class: "mk-label mx-l" + sum, id: `z${b}-${r}`, style: pos(z0 + r, 2) }, raster, t);
+        for (let j = 0; j < SP_PLAN + 12; j++) {
+          const id = `c${b}-${r}-${j}`, st = pos(z0 + r, 3 + j);
+          const trenn = j === SP_IST || j === SP_PLAN ? " trenn" : "";
+          if (edit && j >= SP_PLAN && r >= 1 && r <= 4) {
+            const art = ARTEN[r - 1], m = monat(j), v = wert(blk, art, m);
+            const f = el("input", { class: "mk-feld mk-zahl" + trenn, id, style: st, value: v ? zahl(v, 0) : "", inputmode: "numeric",
+              "aria-label": `${t}, ${MON_LANG[mIdx(m)]} ${mJahr(m)}`, "data-hilfe": "Ganze Stückzahl", "data-b": b, "data-art": art, "data-j": j }, raster);
+            f.addEventListener("input", eingabe);
+            f.addEventListener("blur", () => { const w = gueltig(f); if (w !== undefined) f.value = w ? zahl(w, 0) : ""; });
+          } else {
+            el("div", { class: "mk-feld mk-anzeige" + (j === 3 ? " verlauf" : " mk-zahl") + trenn + sum, id, style: st }, raster);
+          }
+        }
+      });
+    });
+    const mm = String(mIdx(c) + 1).padStart(2, "0");
+    $("kopf-unter").textContent = `Absatzmenge in Stück nach Liefermonat · Stand 12.${mm}.${mJahr(c)} · Bearbeitung: Frau Brandt`;
+    rechnen();
+    if (MK.skalieren) MK.skalieren();
+    if (MK._ebenenNeu) MK._ebenenNeu();
+  }
+
+  /* ---------- Rechnen: Ø, Verlauf, Ist, Trend, Summen ---------- */
+  const setze = (id, v, nk = 0) => { const e = $(id); if (e) e.textContent = v ? zahl(v, nk) : ""; };
+  function verlauf(zelle, werte) {
+    zelle.textContent = "";
+    const max = Math.max(...werte);
+    const s = sv("svg", { width: 30, height: 17, viewBox: "0 0 30 17", "aria-hidden": "true" }, zelle);
+    ["#A9A9A9", "#6E747A", "#3A3F44"].forEach((f, i) => {
+      const h = max > 0 && werte[i] > 0 ? Math.max(1, Math.round(werte[i] / max * 16)) : 0;
+      if (h) sv("rect", { x: i * 11, y: 17 - h, width: 8, height: h, fill: f }, s);
+    });
+    zelle.title = "Ø 12 / 6 / 3 Monate: " + werte.map(v => zahl(v, 1)).join(" / ");
+  }
+  function rechnen() {
+    BL.forEach((blk, b) => {
+      const avg = [12, 6, 3].map(n => mittel(blk, n));
+      [1, 5].forEach(r => avg.forEach((v, j) => setze(`c${b}-${r}-${j}`, v, 1)));
+      verlauf($(`c${b}-1-3`), avg);
+      for (let j = SP_IST; j < SP_PLAN; j++) { const v = wert(blk, "ist", monat(j)); setze(`c${b}-1-${j}`, v); setze(`c${b}-5-${j}`, v); }
+      for (let j = SP_PLAN; j < SP_PLAN + 12; j++) {
+        const m = monat(j);
+        setze(`c${b}-0-${j}`, wert(blk, "ist", m - 12));
+        if (!editierbar(blk)) ARTEN.forEach((a, i) => setze(`c${b}-${i + 1}-${j}`, wert(blk, a, m)));
+        setze(`c${b}-5-${j}`, plansumme(blk, m));
+      }
+    });
+  }
+
+  /* ---------- Eingaben: ganze Stückzahlen 0–999 ---------- */
+  const MELD = "Ganze Stückzahl von 0 bis 999";
+  function gueltig(f) {
+    const v = pruefeFeld(f, "zahl", { min: 0, max: 999, meldung: MELD });
+    if (v != null && !Number.isInteger(v)) { f.classList.add("mk-fehler"); f.title = MELD; }
+    return f.classList.contains("mk-fehler") ? undefined : (v || 0);
+  }
+  function eingabe(e) {
+    const f = e.target, v = gueltig(f);
+    if (v !== undefined) {
+      const blk = BL[+f.dataset.b], L = D[blk.p][blk.k], m = monat(+f.dataset.j);
+      if (v) L[f.dataset.art][m] = v; else delete L[f.dataset.art][m];
+    }
+    rechnen();
+  }
+
+  /* ---------- Knöpfe ---------- */
+  $("k-tauschen").addEventListener("click", () => { hier = hier === "PK" ? "KP" : "PK"; auswahlFuellen(); aufbauen(); });
+  $("k-rollieren").addEventListener("click", () => {
+    if (document.querySelector("#absatz .mk-fehler")) { MK.meldung("Bitte zuerst die rot markierten Eingaben korrigieren."); return; }
+    if (c >= 18) { MK.meldung("Beispielmaske: höchstens sechs Monate weiterrollen."); return; }
+    PROD.forEach(([p]) => KUND.forEach(([k]) => {
+      const L = D[p][k], s = ARTEN.reduce((a, art) => a + (L[art][c] || 0), 0);
+      if (s) L.ist[c] = s; else delete L.ist[c];
+      ARTEN.forEach(art => delete L[art][c]);
+    }));
+    const alt = c;
+    c++;
+    aufbauen();
+    MK.meldung(`${mLang(alt)} abgeschlossen: Plansumme als Ist übernommen, Planung reicht jetzt bis ${mLang(c + 11)}.`);
+  });
+  [["k-drucken", "Bericht drucken"], ["k-pdf", "PDF-Bericht"], ["k-excel", "Excel-Bericht"]].forEach(([id, t]) =>
+    $(id).addEventListener("click", () => MK.meldung(`Beispielmaske: „${t}“ ist nicht hinterlegt.`)));
+
+  auswahlFuellen();
+  aufbauen();
+
+  /* ---------- Lernplattform: Erläuterungen und Gestaltung ---------- */
+  MK.ebenen({
+    erlaeuterungen: {
+      titel: "Erläuterungen",
+      intro: "Was die Bereiche der Maske in der rollierenden Absatzplanung leisten. Die Nummern in der Maske zeigen, wo.",
+      eintraege: [
+        { nr: 1, ziel: "f-auswahl", versatz: [-4, 2], titel: "Planungsobjekt Produkt und Kunde",
+          text: "Geplant wird die Absatzmenge in Stück je Produkt und Kunde, nach Liefermonat. Die Auswahl legt den Ausschnitt fest: ein Produkt mit allen Kunden der Kundengruppe. Wählen Sie „Alle Produkte“: Dann zeigt die Maske nur verdichtete Werte." },
+        { nr: 2, ziel: "c1-0-2", versatz: [-6, 1], titel: "Vergleichswerte",
+          text: "Der Durchschnitt des Ist der letzten 12, 6 und 3 Monate zeigt das übliche Niveau eines Kunden. Die drei Balken unter „Verlauf“ stellen ihn nebeneinander: Wird der rechte, jüngste Balken kürzer, sinkt der Absatz." },
+        { nr: 3, ziel: "c1-2-6", versatz: [-6, 1], titel: "Ist der letzten fünf Monate",
+          text: "Das Ist der jüngsten Monate schließt die Planung an die Vergangenheit an. Planende sehen, ob der zuletzt geplante Verlauf eingetreten ist, bevor sie die nächsten Monate planen." },
+        { nr: 4, ziel: "h-plan", versatz: [-4, -2], titel: "Rollierender Planungshorizont",
+          text: "Geplant werden immer die nächsten zwölf Monate. Ist ein Monat abgeschlossen, rückt sein Ist in den Vergleich, und am Ende kommt ein neuer Planmonat hinzu – der Horizont bleibt gleich lang. Probieren Sie „Monat weiterrollen“." },
+        { nr: 5, ziel: "c1-0-8", versatz: [-6, 1], titel: "Trend aus dem Vorjahr",
+          text: "Als Vorschlag zeigt die Zeile „Trend (Vorjahr)“ die Absatzmenge desselben Monats im Vorjahr. So wird die Saison sichtbar; wer davon abweicht, plant bewusst." },
+        { nr: 6, ziel: "c1-3-15", versatz: [-6, 1], titel: "Planzeilen und Summe",
+          text: "Neben der Grundplanung (Ist/Plan) werden bestätigte und geplante Verkaufsaktionen sowie geplante Listungen getrennt erfasst. Die Summe rechnet sich aus den vier Zeilen; Sondereffekte bleiben so im Plan-Ist-Vergleich erkennbar." },
+        { nr: 7, ziel: "b0", versatz: [-6, 62], titel: "Verdichtung bottom-up",
+          text: "Der Block „Alle Kunden“ addiert die Kundenblöcke. Geplant wird nur auf der untersten Ebene Produkt und Kunde; die Summen folgen bottom-up und gehen in die Umsatzplanung ein." },
+        { nr: 8, ziel: "k-tauschen", versatz: [14, -12], titel: "Sicht wechseln",
+          text: "„Kunde/Produkt tauschen“ wechselt die Hierarchie: Dann stehen die Produkte eines Kunden untereinander. Die Zahlen bleiben dieselben, nur die Sicht ändert sich – für Kundengespräche ist sie oft die passendere." },
+      ],
+    },
+    gestaltung: {
+      titel: "Gestaltung",
+      intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
+      eintraege: [
+        { nr: "A", ziel: "kopf", versatz: [-6, 8], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Logo, kein Benutzername",
+          text: "Firmenlogo, farbiger Titelbalken mit Verlauf, Benutzername, Filtersymbole, Bildlaufleiste und die Navigationsknöpfe „Start-Cockpit“ und „Zurück zur Vertrieb“ des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen als Titel." },
+        { nr: "B", ziel: "z1-5", versatz: [-6, 1], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Summen fett statt gelb",
+          text: "Summenzeilen sind fett und grau hinterlegt, die Abschnitte durch Linien getrennt. Das Original färbte die Summen gelb, die Spaltenköpfe türkis, grün und violett und trennte die Abschnitte durch dunkle Balken – im Graustufendruck kaum zu unterscheiden." },
+        { nr: "C", ziel: "c1-1-14", versatz: [-6, 1], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
+          text: "Nur die Planzellen der Kunden sind weiß und eingabebereit; Ist, Durchschnitte, Trend, Summen und der Block „Alle Kunden“ sind grau. Im Original sahen alle Zellen gleich aus." },
+        { nr: "D", ziel: "c2-2-5", versatz: [-6, 1], regel: "ERWARTUNGSKONFORMITÄT", titel: "Stückzahlen ohne Nachkommastellen",
+          text: "Absatzmengen stehen als ganze Stück, Durchschnitte mit einer Nachkommastelle. Das Original zeigte Stückzahlen wie „7,00“ mit zwei Nachkommastellen." },
+        { nr: "E", ziel: "h-jahr-ist", versatz: [-6, -2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Monate und Einheit lesbar",
+          text: "Spaltenköpfe mit Jahreszeile und Monatsnamen statt „9 2011“; die Einheit Stück steht an den Abschnitten. „IstPlan“, „Aktion_bestätigt“ und „Listung_geplant“ heißen jetzt „Ist/Plan“, „Aktion bestätigt“ und „Listung geplant“." },
+        { nr: "F", ziel: "b1", versatz: [-6, 62], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Fiktive Namen, stimmige Daten",
+          text: "Hersteller, Modelle, Kunden und Benutzername des Originals sind durch fiktive Angaben ersetzt. Das Original nannte als Datum den 12.10.2015, zeigte aber Monate von 2011 bis 2013; jetzt passen Stand 12.10.2027, Ist Mai bis September 2027 und Plan Oktober 2027 bis September 2028 zusammen." },
+        { nr: "G", ziel: "z0-5", versatz: [-6, 1], regel: "AUFGABENANGEMESSENHEIT", titel: "Summen über alle Ebenen",
+          text: "„Alle Kunden“ ist genau die Summe der gezeigten Kundenblöcke und rechnet bei jeder Eingabe mit. Im Original enthielt die Summe weitere, nicht gezeigte Kunden." },
+        { nr: "H", ziel: "c2-1-13", versatz: [-6, 1], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Eingaben werden geprüft",
+          text: "Planzellen nehmen nur ganze Stückzahlen von 0 bis 999 an. Ungültige Eingaben werden rot markiert und nicht in die Summen übernommen; „Monat weiterrollen“ ist erst nach der Korrektur möglich." },
+      ],
+    },
+  });
+  MK.fertig();
+})();
+
+</script>
+</body>
+</html>

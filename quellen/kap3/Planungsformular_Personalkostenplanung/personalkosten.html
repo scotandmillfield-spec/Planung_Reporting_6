@@ -1,0 +1,150 @@
+<!-- Abb. 3.189 „Planungsformular Personalkostenplanung“: Reiter „Planstellen bearbeiten“ einer Personalkostenplanung
+     (softwareneutral nachgebaut). Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Oben: Auswahl 482 (184 · 16 · 282) · 20 · Prämissen 230 · 20 · Ergebnis 240.
+     Raster: Auswahl 24 · Planstelle 70 · Bezeichnung 154 · Mitarbeiterkreis 104 · Meisterbereich 100 · Vertragsart 76 ·
+             FTE 48 · Monatsentgelt 96 · gültig von 80 · gültig bis 80 · Monate 56 · Personalkosten 104 = 992 px.
+     Zeilen erzeugt personalkosten.js aus dem Block PLAN; dieselben Planstellen liest die Planungsauswertung (Abb. 3.190). -->
+<style>
+  #pk { width: 1024px; }
+  /* Titelzeile wie Abb. 3.5/3.7/3.179 */
+  #pk .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #pk .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #pk .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  /* Kopfbereich: drei Gruppen nebeneinander */
+  #pk .oben { display: grid; grid-template-columns: 482px 230px 240px; column-gap: 20px; align-items: start; margin-bottom: 16px; }
+  #pk .mk-gruppe + .mk-gruppe { margin-top: 0; }
+  #pk .auswahl { display: grid; grid-template-columns: 184px 282px; column-gap: 16px; }
+  #pk .auswahl .sp1 { --sp-label: 80px; --sp-feld: 96px; }
+  #pk .auswahl .sp2 { --sp-label: 96px; --sp-feld: 178px; }
+  #pk .g-praem { --sp-label: 150px; --sp-feld: 72px; }
+  #pk .g-erg { --sp-label: 132px; --sp-feld: 100px; }
+  /* Reiter über die volle Breite */
+  #pk .reiter { margin-bottom: 12px; }
+  #pk .reiter > span { flex: 1 1 auto; text-align: center; padding: 0 8px; }
+  body:not(.print) #pk .reiter > span { cursor: pointer; }
+  /* Referenzplanstelle */
+  #pk .refzeile { display: grid; grid-template-columns: 124px 230px 168px; column-gap: 8px; align-items: center; margin-bottom: 10px; }
+  #pk .refzeile .mk-knopf { height: 26px; line-height: 24px; padding: 0 10px; text-align: center; }
+  /* Planstellenraster */
+  #pk .mx { display: grid; grid-template-columns: 24px 70px 154px 104px 100px 76px 48px 96px 80px 80px 56px 104px;
+    border-top: 1px solid var(--ac); }
+  #pk .mx-zeile { display: contents; }
+  #pk .mx-k { height: 24px; line-height: 23px; padding: 0 4px; color: var(--muted); text-align: left; white-space: nowrap;
+    overflow: hidden; border-bottom: 1px solid var(--ac); }
+  #pk .mx-k.r { text-align: right; }
+  #pk .mx-k.m { text-align: center; }
+  #pk .mx-r { height: 24px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #D4D4D4; }
+  #pk .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #pk .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #pk .mx .mk-feld.mk-fehler { border-color: var(--schlecht); }
+  #pk .mx .mk-feld.trenn { border-left: 1px solid var(--rahmen); }
+  #pk .mx-l { height: 24px; line-height: 23px; padding: 0 4px; white-space: nowrap; overflow: hidden; }
+  #pk .summe > .mx-l, #pk .summe > .mk-feld { font-weight: bold; border-top: 1px solid var(--ac); }
+  #pk .summe > .mx-l { grid-column: 1 / span 11; border-bottom: 1px solid var(--ac); }
+  #pk .summe > .mk-feld.mk-anzeige { border-bottom: 1px solid var(--ac); }
+  /* Fußzeile: neue Zeilen links, Aktionen rechts */
+  #pk .fuss { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  #pk .neu { display: grid; grid-template-columns: 86px 44px 104px; column-gap: 8px; align-items: center; }
+  #pk .neu .mk-knopf, #pk .fuss .mk-knopfleiste .mk-knopf { height: 26px; line-height: 24px; padding: 0 10px; text-align: center; }
+  #pk .fuss .mk-knopfleiste { margin-top: 0; }
+  #pk .fuss .mk-knopfleiste .mk-knopf { width: 112px; }
+</style>
+<form class="mk-maske" id="pk" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Personalkostenplanung</span><span class="kopf-unter" id="kopf-unter">Planjahr 2027 · Planversion 0 · Kostenstelle 6-1110 Intralogistik · Werte in €</span></div>
+  <div class="mk-inhalt">
+    <div class="oben">
+      <div class="mk-gruppe" id="g-auswahl">
+        <div class="mk-gruppenkopf">Auswahl</div>
+        <div class="auswahl">
+          <div class="sp1">
+            <div class="mk-zeile">
+              <label class="mk-label" for="f-planjahr">Planjahr</label>
+              <select class="mk-feld" id="f-planjahr" data-hilfe="Jahr, für das geplant wird"><option value="2027" selected>2027</option></select>
+            </div>
+            <div class="mk-zeile">
+              <label class="mk-label" for="f-planversion">Planversion</label>
+              <select class="mk-feld" id="f-planversion" data-hilfe="Version 0 nimmt die verabschiedete Planung auf"><option value="0" selected>0</option></select>
+            </div>
+            <div class="mk-zeile">
+              <span class="mk-label" id="l-version">Version</span>
+              <div class="mk-feld mk-anzeige" id="f-version"></div>
+            </div>
+          </div>
+          <div class="sp2">
+            <div class="mk-zeile">
+              <span class="mk-label" id="l-gjahr">Geschäftsjahr</span>
+              <div class="mk-feld mk-anzeige" id="f-gjahr"></div>
+            </div>
+            <div class="mk-zeile">
+              <label class="mk-label" for="f-bukrs">Buchungskreis</label>
+              <select class="mk-feld" id="f-bukrs"><option value="6000" selected>6000</option></select>
+            </div>
+            <div class="mk-zeile">
+              <label class="mk-label" for="f-kostenstelle">Kostenstelle</label>
+              <select class="mk-feld" id="f-kostenstelle"><option value="6-1110" selected>6-1110 Intralogistik</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mk-gruppe g-praem" id="g-praem">
+        <div class="mk-gruppenkopf" id="kopf-praem">Prämissen in %</div>
+        <div class="mk-zeile"><span class="mk-label">Zulagen</span><div class="mk-feld mk-anzeige mk-zahl" id="p-zulagen"></div></div>
+        <div class="mk-zeile"><span class="mk-label">Urlaubsgeld (Juli)</span><div class="mk-feld mk-anzeige mk-zahl" id="p-urlaub"></div></div>
+        <div class="mk-zeile"><span class="mk-label">Weihnachtsgeld (Nov.)</span><div class="mk-feld mk-anzeige mk-zahl" id="p-weihnacht"></div></div>
+        <div class="mk-zeile"><span class="mk-label">Sozialabgaben</span><div class="mk-feld mk-anzeige mk-zahl" id="p-sozial"></div></div>
+      </div>
+
+      <div class="mk-gruppe g-erg" id="g-erg">
+        <div class="mk-gruppenkopf" id="kopf-erg">Ergebnis Planjahr</div>
+        <div class="mk-zeile"><span class="mk-label" id="l-erg-pk">Personalkosten</span><div class="mk-feld mk-anzeige mk-zahl" id="e-pk"></div></div>
+        <div class="mk-zeile"><span class="mk-label">Anwesenheitslohn</span><div class="mk-feld mk-anzeige mk-zahl" id="e-al"></div></div>
+        <div class="mk-zeile"><span class="mk-label">Lohnnebenkosten</span><div class="mk-feld mk-anzeige mk-zahl" id="e-lnk"></div></div>
+        <div class="mk-zeile"><span class="mk-label" id="l-erg-fte">FTE im Jahresmittel</span><div class="mk-feld mk-anzeige mk-zahl" id="e-fte"></div></div>
+      </div>
+    </div>
+
+    <div class="mk-reiter reiter" id="reiter">
+      <span>Prämissen</span><span>Zuordnung Planstellen</span><span class="aktiv" id="reiter-aktiv">Planstellen bearbeiten</span><span>Abrechnungsdaten</span><span>Kostenstellenplanung</span><span>Periodische Planung</span><span id="reiter-auswertung">Auswertung</span>
+    </div>
+
+    <div class="refzeile" id="refzeile">
+      <label class="mk-label" for="f-referenz">Referenzplanstelle</label>
+      <select class="mk-feld" id="f-referenz" data-hilfe="Muster für neue Planstellen; Auswahl auch über die Markierung einer Zeile"></select>
+      <button type="button" class="mk-knopf mk-zweit" id="k-generieren">Planstelle generieren</button>
+    </div>
+
+    <div class="mx" id="mx" role="grid" aria-label="Planstellen der Kostenstelle mit FTE, Monatsentgelt, Gültigkeit und Personalkosten in €">
+      <div class="mx-zeile" id="kopfzeile">
+        <div class="mx-k m" id="h-wahl" aria-label="Auswahl"></div>
+        <div class="mx-k" id="h-planstelle">Planstelle</div>
+        <div class="mx-k" id="h-bez">Bezeichnung</div>
+        <div class="mx-k" id="h-kreis">Mitarbeiterkreis</div>
+        <div class="mx-k" id="h-bereich">Meisterbereich</div>
+        <div class="mx-k" id="h-vertrag">Vertragsart</div>
+        <div class="mx-k r" id="h-fte">FTE</div>
+        <div class="mx-k r" id="h-entgelt">Monatsentgelt</div>
+        <div class="mx-k m" id="h-von">gültig von</div>
+        <div class="mx-k m" id="h-bis">gültig bis</div>
+        <div class="mx-k r" id="h-monate">Monate</div>
+        <div class="mx-k r" id="h-pk">Personalkosten</div>
+      </div>
+      <!-- Planstellen erzeugt personalkosten.js -->
+    </div>
+
+    <div class="fuss">
+      <div class="neu" id="g-neu">
+        <label class="mk-label" for="f-neu">Neue Zeilen</label>
+        <input class="mk-feld mk-zahl" id="f-neu" value="1" inputmode="numeric" data-hilfe="Anzahl neuer NN-Zeilen, 1 bis 4">
+        <button type="button" class="mk-knopf mk-zweit" id="k-neu">Hinzufügen</button>
+      </div>
+      <div class="mk-knopfleiste" id="aktionen">
+        <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-beenden">Beenden</button>
+        <button type="button" class="mk-knopf" id="k-sichern">Sichern</button>
+      </div>
+    </div>
+  </div>
+</form>

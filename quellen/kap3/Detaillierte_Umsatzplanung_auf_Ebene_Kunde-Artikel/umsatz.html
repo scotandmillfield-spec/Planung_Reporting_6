@@ -1,0 +1,87 @@
+<!-- Abb. 3.185 „Detaillierte Umsatzplanung auf Ebene Kunde/Artikel“: Maske „Übersicht Absatz-/Umsatzplanung“
+     (softwareneutral nachgebaut). Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Gleiche Stammdaten wie Abb. 3.184: Savings je Materialgruppe und Rabatt je Kundengruppe kommen dort aus der
+     Gruppenplanung und stehen hier als Vorschlag je Artikel (manuell überschreibbar).
+     Raster: Kunde 104 · Material 64 · Bezeichnung 180 · Auswahl 62 · Planabsatz 76 · Vk-Preis 76 · Saving 76 + 92 ·
+     Nettopreis 80 · Rabatt 64 · Planumsatz 86 = 960 px. Zellen wie Abb. 3.179/3.183. -->
+<style>
+  #umsatz { width: 1024px; --sp-label: 130px; --sp-feld: 220px; }
+  #umsatz .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #umsatz .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #umsatz .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  /* Auswahl: zwei Zeilen, rechts eine zweite Spalte */
+  #umsatz .auswahl { display: grid; grid-template-columns: 358px 358px; column-gap: 40px; row-gap: 4px; margin-bottom: 14px; }
+  #umsatz .auswahl .mk-zeile + .mk-zeile { margin-top: 0; }
+  #umsatz .auswahl .kunde { display: flex; align-items: center; color: var(--muted); }
+  /* Raster */
+  #umsatz .mx { display: grid; grid-template-columns: 104px 64px 180px 62px 76px 76px 76px 92px 80px 64px 86px; }
+  #umsatz .mx-k { height: 21px; line-height: 21px; padding: 0 4px; text-align: right; color: var(--muted);
+    white-space: nowrap; overflow: hidden; }
+  #umsatz .mx-k.links { text-align: left; }
+  #umsatz .mx-k.mitte { text-align: center; }
+  #umsatz .mx-k.gruppe { text-align: left; color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen); margin-left: 4px; }
+  #umsatz .mx-k.k2 { border-bottom: 1px solid var(--ac); }
+  #umsatz .mx-k.unten { height: 42px; padding-top: 21px; }
+  #umsatz .mx-b { border-bottom: 1px solid var(--rahmen); padding: 3px 4px 0 4px; }
+  #umsatz .mx-b .mk-label { display: block; height: 18px; line-height: 18px; }
+  #umsatz .mx-b .mk-label:first-child { font-weight: bold; }
+  #umsatz .mx-l { height: 24px; line-height: 23px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #umsatz .mx-r { height: 24px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #D4D4D4; }
+  #umsatz .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #umsatz .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #umsatz .mx .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #umsatz .mx .summe { font-weight: bold; }
+  #umsatz .mx .mx-l.summe { border-bottom: 0; border-top: 1px solid var(--ac); }
+  #umsatz .mx .mk-feld.summe { border-top: 1px solid var(--ac); height: 25px; }
+  #umsatz .mx .leer { border-top: 1px solid var(--ac); height: 25px; }
+</style>
+<form class="mk-maske" id="umsatz" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Übersicht Absatz-/Umsatzplanung</span><span class="kopf-unter" id="kopf-unter">Budget 2028 · Planung je Kunde und Artikel · Mengen in Stück, Preise und Umsatz in €, Savings und Rabatt in %</span></div>
+  <div class="mk-inhalt">
+    <div class="auswahl" id="auswahl">
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-kg">Kundengruppe 3</label>
+        <select class="mk-feld" id="f-kg"></select>
+      </div>
+      <div class="kunde"><span class="mk-label mk-neben" id="kunden-info"></span></div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-mg2">Materialgruppe 2</label>
+        <select class="mk-feld" id="f-mg2"></select>
+      </div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-mg3">Materialgruppe 3</label>
+        <select class="mk-feld" id="f-mg3"></select>
+      </div>
+    </div>
+
+    <div class="mx" id="raster">
+      <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:1">Kunde</div>
+      <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:2">Material</div>
+      <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:3">Bezeichnung</div>
+      <div class="mx-k mitte k2 unten" style="grid-row:1 / span 2;grid-column:4">Auswahl</div>
+      <div class="mx-k" style="grid-row:1;grid-column:5">Planabsatz</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:5">in Stück</div>
+      <div class="mx-k" style="grid-row:1;grid-column:6">Vk-Preis</div>
+      <div class="mx-k k2" id="h-vk" style="grid-row:2;grid-column:6">in €</div>
+      <div class="mx-k gruppe" id="h-saving" style="grid-row:1;grid-column:7 / span 2">Saving in %</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:7">beeinfl.</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:8">nicht beeinfl.</div>
+      <div class="mx-k" style="grid-row:1;grid-column:9">Nettopreis</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:9">n. Saving</div>
+      <div class="mx-k" style="grid-row:1;grid-column:10">Rabatt</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:10">in %</div>
+      <div class="mx-k" id="h-umsatz" style="grid-row:1;grid-column:11">Planumsatz</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:11">in €</div>
+      <!-- Zeilen erzeugt umsatz.js -->
+    </div>
+
+    <div class="mk-knopfleiste">
+      <button type="button" class="mk-knopf" id="k-sichern">Sichern</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-perioden">Periodenwerte planen</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-verteilen">Jahreswerte auf Perioden verteilen</button>
+    </div>
+  </div>
+</form>

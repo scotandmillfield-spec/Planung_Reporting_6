@@ -27,7 +27,7 @@ KUNDEN = [
     ["Elektromarkt Ost", 1, 2, [3200, 3349, 3064, 3399], [1243086, 1290095, 1186169, 1314065], [601431, 476396, 380219, 273368]],
     ["Systemhaus Rhein", 2, 1, [2380, 2189, 2698, 964], [601582, 310772, 521787, 202203], [511024, 139999, 212800, 50297]],
     ["Systemhaus Ruhr", 2, 1, [2758, 2107, 1662, 2069], [585271, 383505, 344530, 344717], [450777, 176609, 135206, 71467]],
-    ["Komponentenhandel Main", 2, 0, [993, 275, 933, 623], [882428, 254362, 856620, 557574], [361795, 98304, 342648, 189575]],
+    ["Bauteilehandel Main", 2, 0, [993, 275, 933, 623], [882428, 254362, 856620, 557574], [361795, 98304, 342648, 189575]],
 ]
 # Kontrollwerte des Originals: „Ergebnis“ je Vertriebsbeauftragtem (Absatz, Erlös, DB I je Quartal); das Original
 # rundete verdeckte Nachkommastellen, die Summe der Kundenzeilen weicht dort um bis zu 1 € ab

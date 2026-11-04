@@ -1075,6 +1075,18 @@
    ],
    "alt": "Gestapelte 100-%-Säulen der Umsatzanteile Ist 2027 je Quartal nach Region: Region Süd (anthrazit, unten) 50 %, 62 %, 50 % und 73 %, Region Nord (grau, oben) 50 %, 38 %, 50 % und 27 %. Kernaussage: Der Anteil der Region Süd steigt von 50 % im ersten auf 73 % im vierten Quartal."
   },
+  "3.53": {
+   "status": "pruefung",
+   "datei": "Vermeidung_von_Verzerrungen",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit); beide Teile wie im Original nebeneinander, jetzt mit a) und b) gekennzeichnet",
+    "Negativbeispiel bleibt sichtbar: a) Achse ab 52, b) Achse ab 0; Werte des Originals (Europa 57,7 … Ozeanien 55,6 Mio. €)",
+    "Abbruch der Achse in a) rot gestrichelt markiert; Aussagen stellen den Eindruck gegenüber (a: Asien wirkt 2,2-mal so groß wie Ozeanien, b: tatsächlich nur 8 % mehr)",
+    "Beide Teile gleich gestaltet (Ist anthrazit, Werte am Balken), Rahmen und blaue Balken entfallen; Einheit im Titel statt doppelter Überschrift „Umsatz in Mio. €“",
+    "Hinweis für die Caption/den Text: ggf. „a) verzerrte, b) unverzerrte Darstellung“ ergänzen"
+   ],
+   "alt": "Zwei Balkendiagramme mit denselben Umsätzen je Region in Mio. €: Europa 57,7, Asien 59,8, Nordamerika 58,8, Südamerika 58,2, Afrika 56,3, Ozeanien 55,6. a) Die Achse beginnt bei 52 (rot gestrichelt markiert), dadurch wirkt der Balken von Asien 2,2-mal so lang wie der von Ozeanien. b) Die Achse beginnt bei 0, die Balken sind fast gleich lang – Asien liegt nur 8 % über Ozeanien."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

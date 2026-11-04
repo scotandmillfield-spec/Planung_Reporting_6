@@ -207,7 +207,7 @@
   /* ---------- Eingaben im Raster ---------- */
   const leer = s => { if (!SP[index(s)]) { MK.meldung("Zuerst ein Feld in diese Spalte ziehen oder in der Zeile „Feld“ wählen."); zeigen(); return true; } return false; };
   for (let s = 0; s < PRO_SEITE; s++) {
-    Z.feld[s].addEventListener("focus", () => { Z.feld.forEach(f => f.classList.toggle("aktiv", f === Z.feld[s])); });
+    Z.feld[s].addEventListener("focus", () => Z.feld[0].classList.remove("aktiv"));   // Pfeil folgt dem Fokus
     Z.feld[s].addEventListener("change", () => {
       const v = Z.feld[s].value, i = index(s);
       if (!v) SP[i] = null;
@@ -279,7 +279,11 @@
       let geist = null, ziel = null;
       const bewegen = ev => {
         if (!geist && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 5) return;
-        if (!geist) geist = el("div", { class: "zieh-geist" }, document.body, `${tabelle(tab).name}.${feld}`);
+        if (!geist) {
+          geist = el("div", { class: "zieh-geist" }, document.body, `${tabelle(tab).name}.${feld}`);
+          const sk = $("seite").getBoundingClientRect().width / $("abfrage").offsetWidth;   // Maßstab der Seite
+          geist.style.fontSize = 14 * sk + "px"; geist.style.lineHeight = 18 * sk + "px";
+        }
         geist.style.left = ev.clientX + 12 + "px"; geist.style.top = ev.clientY + 10 + "px";
         ziel = zielBei(ev.clientX, ev.clientY); markieren(ziel);
       };
@@ -295,6 +299,7 @@
 
   /* ---------- Blättern und SQL-Ansicht ---------- */
   $("k-weiter").addEventListener("click", () => {
+    Z.feld[0].classList.remove("aktiv");
     if ((seite + 1) * PRO_SEITE >= SP.length) { MK.meldung("Letzte Spalten erreicht – neue Felder kommen hinter die letzte Spalte."); return; }
     seite++; zeigen();
   });
@@ -333,17 +338,17 @@
       eintraege: [
         { nr: 1, ziel: "tk-auftrag", versatz: [-4, 2], titel: "Tabellen als Datenquelle",
           text: "Die Abfrage liest aus vier Tabellen der Auftragsdatenbank. Jede Feldliste zeigt alle Felder einer Tabelle, Primärschlüssel fett; „*“ steht für alle Felder. Die Felder entsprechen dem Listing in Abb. 5.39." },
-        { nr: 2, ziel: "kard-0-a", versatz: [4, -2], titel: "Beziehungen (Joins)",
+        { nr: 2, ziel: "kard-0-a", versatz: [30, -8], titel: "Beziehungen (Joins)",
           text: "Die Linien verbinden gleichbedeutende Felder: Ein Kunde hat viele Aufträge (1:n über KNDNR), jeder Auftrag betrifft einen Artikel (ARTNR), jeder Artikel eine Farbe. Der Generator setzt sie als INNER JOIN in die FROM-Klausel." },
-        { nr: 3, ziel: "f-auftrag-Rabatt", versatz: [-4, -3], titel: "Felder per Drag & Drop",
+        { nr: 3, ziel: "f-auftrag-Gruppenbonus", versatz: [-4, 0], titel: "Felder per Drag & Drop",
           text: "Ein Feld wird aus der Feldliste in eine Spalte des Rasters gezogen oder doppelgeklickt. Jede Spalte ist ein Feld der SELECT-Anweisung; die Tabelle trägt der Generator selbst ein." },
-        { nr: 4, ziel: "l-fn", versatz: [-6, 2], titel: "Gruppierung und Summe",
+        { nr: 4, ziel: "fn-0", versatz: [-4, 1], titel: "Gruppierung und Summe",
           text: "„Gruppierung“ verdichtet die Aufträge je Kunde, Artikel, Plan-/Ist-Kennzeichen, Kundenhierarchie und Farbe (GROUP BY), „Summe“ addiert die Wertfelder (Sum … AS [Summe von …]) – daher der Name „Verdichtete Summenwerte“." },
-        { nr: 5, ziel: "l-sort", versatz: [-6, 2], titel: "Sortierung",
+        { nr: 5, ziel: "sort-0", versatz: [-4, 1], titel: "Sortierung",
           text: "Aufsteigend oder absteigend sortierte Spalten bilden die ORDER-BY-Klausel, in der Reihenfolge der Spalten von links nach rechts." },
-        { nr: 6, ziel: "l-zeigen", versatz: [-6, 2], titel: "Anzeigen",
+        { nr: 6, ziel: "zelle-zeigen-0", versatz: [-4, 1], titel: "Anzeigen",
           text: "Nur angehakte Felder erscheinen im Ergebnis. Ein ausgeblendetes Gruppierungsfeld gruppiert trotzdem mit – so lassen sich Werte je Kunde verdichten, ohne die Kundennummer auszugeben." },
-        { nr: 7, ziel: "l-krit", versatz: [-6, 2], titel: "Kriterien und oder",
+        { nr: 7, ziel: "krit-0", versatz: [-4, 1], titel: "Kriterien und oder",
           text: "Bedingungen in einer Zeile gelten gemeinsam (UND), die Zeilen „Kriterien“ und „oder“ alternativ (ODER). Bei Gruppierungs- und Summenfeldern entsteht HAVING, bei der Funktion „Bedingung“ WHERE." },
         { nr: 8, ziel: "k-sql", versatz: [-6, -12], titel: "SQL-Anweisung",
           text: "Der Generator schreibt die Anweisung aus Abb. 5.39. So können Fachanwender frei recherchieren, ohne SQL zu beherrschen – das Datenmodell mit seinen Tabellen und Beziehungen müssen sie aber kennen." },
@@ -359,11 +364,11 @@
           text: "Die Tabelle folgt aus dem gewählten Feld und ist grau hinterlegt; Feld, Funktion und Sortierung sind Auswahlfelder, Kriterien Eingabefelder. Im Original sahen alle Zellen gleich aus." },
         { nr: "C", ziel: "kard-0-b", versatz: [-20, -2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "n statt ∞, rechtwinklige Linien",
           text: "Die Kardinalität heißt „1“ und „n“ wie im Text; das Unendlichzeichen entfällt. Die schrägen Verbindungslinien sind rechtwinklig geführt und docken an den verknüpften Feldern an." },
-        { nr: "D", ziel: "seiten", versatz: [-4, -3], regel: "AUFGABENANGEMESSENHEIT", titel: "Blättern statt abschneiden",
+        { nr: "D", ziel: "seiten", versatz: [-30, -20], regel: "AUFGABENANGEMESSENHEIT", titel: "Blättern statt abschneiden",
           text: "Das Original zeigte acht Spalten, die letzte abgeschnitten, und einen Bildlauf. Jetzt stehen sieben vollständige Spalten im Raster, die übrigen der 16 Felder sind über „Weitere Spalten“ erreichbar." },
-        { nr: "E", ziel: "feld-6", versatz: [-4, 1], regel: "ERWARTUNGSKONFORMITÄT", titel: "Feldname statt Alias",
+        { nr: "E", ziel: "tabelle-6", versatz: [-2, 2], regel: "ERWARTUNGSKONFORMITÄT", titel: "Feldname statt Alias",
           text: "Die Zeile „Feld“ nennt das Feld (Umsatz Flaschen); der Alias „Summe von Umsatz Flaschen“ entsteht beim Erzeugen der Anweisung. Im Original stand der Alias abgeschnitten als „Summe von Umsatz“ im Raster." },
-        { nr: "F", ziel: "feld-0", versatz: [-4, 1], regel: "ERWARTUNGSKONFORMITÄT", titel: "Pfeil in der aktiven Zelle",
+        { nr: "F", ziel: "feld-0", versatz: [-24, 1], regel: "ERWARTUNGSKONFORMITÄT", titel: "Pfeil in der aktiven Zelle",
           text: "Wie im Original trägt nur die aktive Zelle den Pfeil des Auswahlfelds; das Raster bleibt ruhig. Die grünen Häkchen der Kontrollkästchen sind anthrazit." },
         { nr: "G", ziel: "t-farbe", versatz: [-4, 2], regel: "STEUERBARKEIT", titel: "Ziehen, Doppelklick oder Tastatur",
           text: "Felder lassen sich ziehen, doppelklicken oder mit der Tabulatortaste ansteuern und mit Enter übernehmen. Eine senkrechte Marke zeigt beim Ziehen, wo die neue Spalte eingefügt wird." },

@@ -77,49 +77,58 @@ for c, (u, r, a) in KAT_SUMME.items():
     assert sum(x[1] for x in OST26[c]) == u and sum(x[2] for x in OST26[c]) == r and sum(x[3] for x in OST26[c]) == a, c
 assert sum(KAT_SUMME[c][0] for c in KAT_SUMME) == GESAMT_OST26[0]
 
-# Zielsummen je Land, VO, Jahr: (Umsatz Cent, Absatz Stück)
+# Zielsummen je Land, VO, Jahr: (Umsatz Cent, Absatz Stück); Absatz Deutschland (None) ergibt sich aus den Preisen
 ZIEL = {
     (1, 1, 2026): GESAMT_OST26[0::2], (1, 1, 2025): (3789000000, 19900),
     (1, 0, 2026): (2445000000, 11927), (1, 0, 2025): (2368200000, 11476),
-    (0, 0, 2026): (1762480000, 7605), (0, 0, 2025): (1821930000, 7980),
-    (0, 1, 2026): (2893160000, 12160), (0, 1, 2025): (2641270000, 11350),
+    (0, 0, 2026): (1762480000, None), (0, 0, 2025): (1821930000, None),
+    (0, 1, 2026): (2893160000, None), (0, 1, 2025): (2641270000, None),
 }
 RABATT = {(0, 0): 0.029, (0, 1): 0.031, (1, 0): 0.034}
-MIX = {(1, 0): [0.40, 0.31, 0.19, 0.08, 0.012, 0.008], (0, 0): [0.30, 0.18, 0.14, 0.35, 0.018, 0.012],
+MIX = {(1, 0): [0.41, 0.31, 0.19, 0.075, 0.006, 0.009], (0, 0): [0.30, 0.18, 0.14, 0.35, 0.018, 0.012],
        (0, 1): [0.26, 0.17, 0.20, 0.34, 0.017, 0.013]}
-PREIS = [3767, 3223, 2364, 4872, 40, 1752]          # € je Stück je Kategorie (aus dem Original)
+WACHSTUM = {(1, 0): [1.02, 1.05, 1.03, 1.12, 1.0, 0.95], (0, 0): [0.94, 0.95, 0.97, 1.02, 0.98, 0.93],
+            (0, 1): [1.04, 1.06, 1.08, 1.16, 1.03, 0.98]}
+PREIS = {1: [3767, 3223, 2364, 4872, 40, 1752],      # € je Stück je Kategorie (USA, aus dem Original)
+         0: [3350, 2980, 2550, 5150, 45, 1650]}      # Deutschland
+PREIS_VJ = [0.985, 0.99, 0.99, 0.97, 1.0, 1.0]        # Preise im Vorjahr etwas niedriger (E-Bikes deutlich)
 
 saetze = []      # [land, vo, jahr, kat, kunde, umsatz_cent, rabatt_cent, absatz]
-for (l, v, j), (zu, za) in ZIEL.items():
-    if (l, v, j) == (1, 1, 2026):
+for (l, v) in [(1, 1), (1, 0), (0, 0), (0, 1)]:
+    if (l, v) == (1, 1):
         for c, zeilen in OST26.items():
             for k, u, r, a in zeilen:
-                saetze.append([l, v, j - 2025, c, K[k], u, r, a])
-        continue
-    if (l, v) == (1, 1):
-        # Vorjahr Ost: aus 2026 je Zelle mit Faktor zurückgerechnet (E-Bikes und Rennräder wuchsen stärker)
-        basis = {(c, K[k]): (u, a) for c, zs in OST26.items() for k, u, r, a in zs}
+                saetze.append([l, v, 1, c, K[k], u, r, a])
+        # Vorjahr Ost: aus 2026 je Zelle zurückgerechnet (E-Bikes und Rennräder wuchsen stärker)
         wachstum = [1.06, 1.12, 1.05, 1.28, 1.02, 0.96]
-        gu = {ck: u / wachstum[ck[0]] * rnd.uniform(0.94, 1.06) for ck, (u, a) in basis.items()}
-        ga = {ck: a / wachstum[ck[0]] * rnd.uniform(0.95, 1.05) for ck, (u, a) in basis.items()}
-        rq = {k: (0 if k == 6 else (0.048 if k == 0 else 0.029)) for k in range(7)}
-    else:
-        mix = MIX[(l, v)]
-        kshare = [rnd.uniform(0.6, 1.5) for _ in range(7)]
-        kshare.sort(reverse=True)
-        gu, ga = {}, {}
-        for c in range(6):
-            for k in range(7):
-                w = mix[c] * kshare[k] * rnd.uniform(0.8, 1.2) * (1.0 if j == 2026 else rnd.uniform(0.92, 1.05))
-                gu[(c, k)] = w
-                ga[(c, k)] = w / PREIS[c] * rnd.uniform(0.9, 1.1)
-        rq = {k: RABATT[(l, v)] * rnd.uniform(0.75, 1.4) for k in range(7)}
-        rq[6] = 0.0
-    zellen = sorted(gu)
-    us = verteilen(zu, [gu[z] for z in zellen])
-    ab = verteilen(za, [ga[z] for z in zellen])
-    for (c, k), u, a in zip(zellen, us, ab):
-        saetze.append([l, v, j - 2025, c, k, u, round(u * rq[k]), max(a, 0)])
+        zellen = [(c, K[k]) for c, zs in OST26.items() for k, u, r, a in zs]
+        ist = {(c, K[k]): (u, r, a) for c, zs in OST26.items() for k, u, r, a in zs}
+        gu = {z: ist[z][0] / wachstum[z[0]] * rnd.uniform(0.95, 1.05) for z in zellen}
+        ga = {z: ist[z][2] / wachstum[z[0]] * rnd.uniform(0.97, 1.03) for z in zellen}
+        zu, za = ZIEL[(1, 1, 2025)]
+        us = verteilen(zu, [gu[z] for z in zellen])
+        ab = verteilen(za, [ga[z] for z in zellen])
+        for (c, k), u, a in zip(zellen, us, ab):
+            q = ist[(c, k)][1] / ist[(c, k)][0] if ist[(c, k)][0] else 0
+            saetze.append([l, v, 0, c, k, u, round(u * q * rnd.uniform(0.9, 1.0)), a])
+        continue
+    # übrige Organisationen: Grundgewichte je Kategorie und Kunde, je Jahr mit Wachstum und leichtem Rauschen
+    mix, kshare = MIX[(l, v)], sorted((rnd.uniform(0.6, 1.5) for _ in range(7)), reverse=True)
+    w0 = {(c, k): mix[c] * kshare[k] * rnd.uniform(0.85, 1.15) for c in range(6) for k in range(7)}
+    rq = {k: RABATT[(l, v)] * rnd.uniform(0.75, 1.4) for k in range(7)}
+    rq[6] = 0.0                                       # wie im Original: ein Kunde ohne Rabatt
+    zellen = sorted(w0)
+    for j in (0, 1):
+        zu, za = ZIEL[(l, v, JAHRE[j])]
+        gw = {z: w0[z] * (WACHSTUM[(l, v)][z[0]] * rnd.uniform(0.96, 1.04) if j == 1 else 1) for z in zellen}
+        us = verteilen(zu, [gw[z] for z in zellen])
+        preis = {z: PREIS[l][z[0]] * (1 if j == 1 else PREIS_VJ[z[0]]) * rnd.uniform(0.97, 1.03) for z in zellen}
+        stueck = [u / 100 / preis[z] for z, u in zip(zellen, us)]
+        ab = verteilen(za if za is not None else round(sum(stueck)), stueck)
+        for (c, k), u, a in zip(zellen, us, ab):
+            saetze.append([l, v, j, c, k, u, round(u * rq[k] * (1 if j == 1 else rnd.uniform(0.95, 1.05))), a])
+        if za is None:
+            ZIEL[(l, v, JAHRE[j])] = (zu, sum(ab))
 
 # Kontrollsummen
 print("Kontrollsummen (Umsatz Mio. € / Absatz / Preis je Stück Tsd. € / Rabatt Tsd. €):")

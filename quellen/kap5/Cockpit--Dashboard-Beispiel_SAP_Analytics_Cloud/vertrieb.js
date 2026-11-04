@@ -99,7 +99,7 @@
     const spanne = key => { const w = zeilen.filter(z => !z.gesamt).map(z => z[key]); return { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) }; };
     const dBalken = (g, x0, breite, z, key, txt, y) => {
       const s = spanne(key), txtW = 50, kk = (breite - txtW - 10) / Math.max(s.neg + s.pos, 1e-9), m = x0 + txtW + 4 + s.neg * kk;
-      const kl = wirkung(z[key], o.richtung, key === "dp" ? 1 : o.nkD);
+      const kl = wirkung(key === "dp" ? z.dp : o.dWert(z.d), o.richtung, key === "dp" ? 1 : o.nkD);   // Wirkung des angezeigten Werts
       sv("text", { x: x0 + txtW, y, dy: "0.35em", "text-anchor": "end", style: `fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};${z.gesamt ? "font-weight:bold" : ""}` }, g, txt);
       if (!z.gesamt) { const b = Math.abs(z[key]) * kk; sv("rect", { x: z[key] >= 0 ? m : m - b, y: y - 5, width: b, height: 10, fill: FARBE[kl] }, g); }
       sv("line", { x1: m, x2: m, y1: y - 9, y2: y + 9, stroke: "#8C8C8C", "stroke-width": 1 }, g);
@@ -199,10 +199,12 @@
   }
   function botschaftUmsatz(z) {
     const g = z[z.length - 1], vs = z.slice(0, -1).sort((a, b) => b.d - a.d), top = vs[0];
-    const anteil = g.d ? Math.round(top.d / g.d * 100) : 0;
+    const mioD = x => `${x.name} ${delta(x.d / 1e8, 2)}`;
+    // Anteil am Zuwachs nur, wenn alle Organisationen in dieselbe Richtung laufen; sonst beide Beiträge nennen
+    const gleich = vs.every(x => x.d > 0) || vs.every(x => x.d < 0);
     return passt([
-      top.d > 0 && g.d > 0 ? `Umsatz ${delta(g.dp, 1, NBSP + "%")}, davon ${anteil}${NBSP}% aus ${top.name} (${delta(top.d / 1e8, 2)} Mio. €)`
-        : `Umsatz ${delta(g.dp, 1, NBSP + "%")}, ${vs[vs.length - 1].name} ${delta(vs[vs.length - 1].d / 1e8, 2)} Mio. €`,
+      gleich ? `Umsatz ${delta(g.dp, 1, NBSP + "%")}, davon ${Math.round(top.d / g.d * 100)}${NBSP}% aus ${top.name} (${delta(top.d / 1e8, 2)} Mio. €)`
+             : `Umsatz ${delta(g.dp, 1, NBSP + "%")}: ${vs.map(mioD).join(", ")} Mio. €`,
       `Umsatz ${LAND()} ${delta(g.dp, 1, NBSP + "%")} zum Vorjahr`], 468);
   }
   function botschaftTabelle(t) {
@@ -249,6 +251,10 @@
       schalter: { optionen: VO().map((n, i) => [i, n]), wert: tabVo(), onChange: v => { S.tabVo = Number(v); S.vo = null; S.sel = null; zeichnen(); } } });
     const t = tabelle(f);
     bTab.querySelector(".dk-botschaft").textContent = botschaftTabelle(t);
+    // Titelzeilen der oberen Visuals gleich hoch (rechts mit Schalter), damit Titel und Botschaften auf einer Linie stehen
+    const tz = [bPreis, bUmsatz, bTab].map(b => b.querySelector(".dk-titelzeile"));
+    const h = Math.max(...tz.map(x => x.offsetHeight));
+    tz.forEach(x => { x.style.height = h + "px"; x.style.alignItems = "center"; });
     if (DK._ebenenNeu) DK._ebenenNeu();
   }
 
@@ -257,17 +263,17 @@
     regeln: [
       { nr: 1, ziel: "v-umsatz", anker: "links", versatz: [440, 22], regel: "SAY – Botschaft vermitteln", titel: "Aussage je Visual",
         text: "Unter jedem Titel steht, was zählt – etwa, dass der Umsatzzuwachs in den USA zu 82 % aus der Verkaufsorganisation Ost kommt. Die Sätze rechnen bei Land, Kategorie und Auswahl neu. Das Original hatte nur technische Titel („Price per PC per Calendar Year and Sales Organization“)." },
-      { nr: 2, ziel: "vg-preis-kopf", anker: "links", versatz: [28, -2], regel: "UNIFY – Semantische Notation", titel: "Ist dunkel, Vorjahr hell, ein Balkenpaar",
+      { nr: 2, ziel: "vg-preis-kopf", anker: "links", versatz: [130, -2], regel: "UNIFY – Semantische Notation", titel: "Ist dunkel, Vorjahr hell, ein Balkenpaar",
         text: "Ist 2026 anthrazit, Vorjahr 2025 hellgrau und leicht versetzt dahinter – wie in allen Dashboards des Buches. Das Original zeigte beide Jahre als getrennte Balken in zwei Grautönen ohne Legende; welcher Ton welche Organisation war, verriet nur die Legende über dem Diagramm." },
-      { nr: 3, ziel: "vg-preis-dpz", versatz: [14, -4], regel: "UNIFY – Abweichung nach Wirkung", titel: "Blaugrün und Rot statt Hellgrün und Pink",
+      { nr: 3, ziel: "vg-preis-dpz", versatz: [30, -2], regel: "UNIFY – Abweichung nach Wirkung", titel: "Blaugrün und Rot statt Hellgrün und Pink",
         text: "Abweichungen zum Vorjahr stehen als Balken an einer Nulllinie, günstig blaugrün, ungünstig rot. Das Original färbte Hellgrün und Pink – rot-grün-farbenfehlsichtig kaum unterscheidbar – und hatte für ΔVJ % zusätzlich Endmarken an den Balken." },
-      { nr: 4, ziel: "kpis", anker: "links", versatz: [250, 2], regel: "CONDENSE – Kennzahlen verdichten", titel: "KPI-Leiste ergänzt",
+      { nr: 4, ziel: "kpis", anker: "links", versatz: [128, 2], regel: "CONDENSE – Kennzahlen verdichten", titel: "KPI-Leiste ergänzt",
         text: "Umsatz, Absatz, Preis je Stück und Rabattquote stehen als KPI-Leiste mit Vorjahresvergleich über den Details. Im Original musste man die Summen aus der Tabelle (Kopfzeile „Totals“) ablesen." },
-      { nr: 5, ziel: "v-tabelle", anker: "links", versatz: [440, 76], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Tabelle ohne Wiederholungen",
+      { nr: 5, ziel: "vt-kopf-label", anker: "links", versatz: [178, 0], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Tabelle ohne Wiederholungen",
         text: "Die Spalten Verkaufsorganisation, Ort und Währung des Originals wiederholten in jeder Zeile denselben Wert; Ort und Ø Preis stehen jetzt im Tooltip, die Organisation im Schalter. Statt „1.125,00 PC“ und Cent-Beträgen: Tsd. € mit einer Nachkommastelle und Stück ohne Nachkommastellen." },
-      { nr: 6, ziel: "vt-kopf-d", versatz: [-2, -4], regel: "EXPRESS – Vergleich ergänzen", titel: "Abweichung auch in der Tabelle",
+      { nr: 6, ziel: "vt-kopf-d", versatz: [0, -18], regel: "EXPRESS – Vergleich ergänzen", titel: "Abweichung auch in der Tabelle",
         text: "Die Tabelle zeigt je Kategorie und Kunde die Abweichung des Umsatzes zum Vorjahr mit Balken. Das Original zeigte nur absolute Werte; ob ein Kunde wächst, war nicht erkennbar." },
-      { nr: 7, ziel: "v-tabelle", anker: "links", versatz: [44, 124], regel: "STRUCTURE – Aufklappen statt Endlosliste", titel: "Kategorien auf- und zuklappen",
+      { nr: 7, ziel: "v-tabelle", anker: "links", versatz: [132, 235], regel: "STRUCTURE – Aufklappen statt Endlosliste", titel: "Kategorien auf- und zuklappen",
         text: "Kategorien stehen als Gruppenzeilen, ihre Kunden lassen sich mit ▾/▸ aufklappen (im Startzustand die Tourenräder). Das Original listete alle 42 Kundenzeilen untereinander und war unten abgeschnitten; Kunden sind wie dort nach Umsatz sortiert." },
       { nr: 8, ziel: "kopf-titel", versatz: [30, 0], regel: "CHECK – Stimmige Zahlen", titel: "Werte des Originals, neutral benannt",
         text: "Umsatz, Rabatt und Absatz der Verkaufsorganisation Ost sind die Werte des Originals; die Summen der Diagramme ergeben sich daraus (41,34 Mio. € : 20.956 Stück = 1,97 Tsd. € je Stück). Browserrahmen, Reiterleiste, Firmenlogo und Kundennamen der Demodaten entfallen bzw. sind neutral ersetzt." },
@@ -277,16 +283,16 @@
       { id: "A", ziel: "kpis", anker: "links", versatz: [130, 2], titel: "KPI-Leiste", visual: "Karte (neu) mit Referenzbeschriftung",
         felder: "Umsatz, Absatz, Ø Preis, Rabattquote = DIVIDE([Rabatt]; [Umsatz]); Referenz ΔVJ % bzw. %-Pkt.",
         format: "Wert 19,5 pt fett; Referenzbeschriftung mit bedingter Farbe (#00806B günstig, #C62828 ungünstig; Rabattquote: Anstieg ungünstig)" },
-      { id: "B", ziel: "vg-preis-kopf", anker: "links", versatz: [28, -2], titel: "Ø Preis je Stück", visual: "Gruppiertes Balkendiagramm (überlappend) und zwei Tabellen mit Datenbalken",
+      { id: "B", ziel: "vg-preis-kopf", anker: "links", versatz: [130, -2], titel: "Ø Preis je Stück", visual: "Gruppiertes Balkendiagramm (überlappend) und zwei Tabellen mit Datenbalken",
         felder: "Y-Achse: Verkaufsorganisation; X-Achse: Ø Preis VJ, Ø Preis; daneben Matrix mit ΔVJ = [Ø Preis] − [Ø Preis VJ] und ΔVJ %",
         format: "Überlappung 60 %, Abstand innerhalb der Kategorie −40 %; Farben #C9C9C9 (VJ), #3A3F44 (Ist); Datenbalken ΔVJ mit zwei Measures (günstig/ungünstig) in #00806B bzw. #C62828",
         hinweis: "Die Zeile „Gesamt“ ist im Balkendiagramm keine Kategorie; als Karte oder über eine Hilfstabelle mit Gesamtzeile nachbauen." },
       { id: "C", ziel: "v-umsatz", anker: "links", versatz: [440, 22], titel: "Umsatz nach Verkaufsorganisation", visual: "wie B",
         felder: "Umsatz VJ, Umsatz (Mio. €: DIVIDE([Umsatz]; 1E6)), ΔVJ, ΔVJ %" },
-      { id: "D", ziel: "v-tabelle", anker: "links", versatz: [440, 76], titel: "Kategorien und Kunden", visual: "Matrix",
+      { id: "D", ziel: "vt-kopf-label", anker: "links", versatz: [178, 0], titel: "Kategorien und Kunden", visual: "Matrix",
         felder: "Zeilen: Produktkategorie, Kunde; Werte: Umsatz, Rabatt (Tsd. €), Absatz, ΔVJ Umsatz %; QuickInfo: Ort, Ø Preis",
         format: "Layout „Abgestuft“, +/–-Symbole ein, nur Produktkategorie 1 erweitert; Zeilenteilsummen oben, Gesamtsumme „Summe“; ΔVJ % mit Datenbalken (zwei Measures, Achse automatisch)" },
-      { id: "E", ziel: "filter", anker: "links", versatz: [190, -2], titel: "Datenschnitte", visual: "Datenschnitt Land (Kacheln), Datenschnitt Produktkategorie (Dropdown); Schalter West/Ost als Datenschnitt (Kacheln) nur für die Matrix",
+      { id: "E", ziel: "filter", anker: "links", versatz: [336, -2], titel: "Datenschnitte", visual: "Datenschnitt Land (Kacheln), Datenschnitt Produktkategorie (Dropdown); Schalter West/Ost als Datenschnitt (Kacheln) nur für die Matrix",
         felder: "Land; Produktkategorie; Verkaufsorganisation",
         hinweis: "„Interaktionen bearbeiten“: Der Schalter West/Ost filtert nur die Matrix; Klick auf eine Organisation im Balkendiagramm filtert KPI-Leiste und Matrix (Standard „Filtern“)." },
     ],

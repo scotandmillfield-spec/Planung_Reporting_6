@@ -1029,6 +1029,18 @@
    ],
    "alt": "Säulendiagramm des Umsatzes der SGE A 2027 je Quartal in Mio. €. Je Quartal steht eine weiße Plansäule mit Kontur leicht versetzt hinter der dunklen Ist-Säule: Q1 Ist 120 bei Plan 100, Q2 Ist 130 bei Plan 120, Q3 Ist 100 bei Plan 90, Q4 Ist 110 bei Plan 130. Darunter die Abweichungen +20, +10, +10 (blaugrün) und −20 (rot). Kernaussage: Ist über Plan in Q1 bis Q3, Q4 20 Mio. € unter Plan; im Jahr +20 Mio. € (+4,5 %)."
   },
+  "3.49": {
+   "status": "pruefung",
+   "datei": "Balkendiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48: Titel mit Einheit, Kernaussage, Diagramm",
+    "Diagrammtyp bleibt: waagerechte Balken in Tagen, Werte des Originals (63, 10, 31, 39, 64)",
+    "Reihenfolge folgt jetzt der Rechnung: Materialumschlag + Erzeugnisumschlag + Debitorenziel − Kreditorenziel = Cash-to-Cash Cycle; Rechenzeichen vor den Namen, Ergebnis unten fett und durch eine Linie abgesetzt; Kreditorenziel als Kontur (verkürzt den Zyklus)",
+    "Rechnung geht auf: Mit ganzen Tagen ergäbe sie 65 statt 64 – Werte mit einer Nachkommastelle hinterlegt (62,6 + 10,2 + 30,8 − 39,4 = 64,2), gerundet wie im Original. Bitte prüfen, ob der Buchtext die Rechnung erläutert",
+    "Flieder als Balkenfarbe, Größenachse und Gitternetz entfallen; Einheit „Tage“ im Titel"
+   ],
+   "alt": "Balkendiagramm des Cash-to-Cash Cycle 2027 in Tagen, in der Reihenfolge der Rechnung: Materialumschlag 63 Tage, plus Erzeugnisumschlag 10 Tage, plus Debitorenziel 31 Tage, minus Kreditorenziel 39 Tage (als Kontur gezeichnet), gleich Cash-to-Cash Cycle 64 Tage (fett, durch eine Linie abgesetzt). Kernaussage: 64 Tage Kapitalbindung, größter Treiber ist der Materialumschlag."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

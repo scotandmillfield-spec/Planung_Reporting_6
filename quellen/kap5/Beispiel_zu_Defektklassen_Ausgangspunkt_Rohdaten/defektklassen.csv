@@ -1,0 +1,29 @@
+﻿Schritt;Datensatz;Kunden_ID;Name;Geburtsdatum;Alter;Bestelldatum;Bestellung;Betrag_EUR;Offene_Defekte;Korrigiert_in_diesem_Schritt
+Rohdaten;1;1001;Meyer, Sofia;1985-07-12;39;01-05-2023;Latte Macchiato;4,50;Bestelldatum (Klasse 1);–
+Rohdaten;2;1002;Meier, Max;1205-10-06;32;03-01-2023;Americano;3,20;Bestelldatum (Klasse 1), Geburtsdatum (Klasse 2), Alter (Klasse 2);–
+Rohdaten;3;1003;Müller, Anna;1989-11-01;34;06/15/2023;Cappuccino, Cookies;7,80;Bestelldatum (Klasse 1);–
+Rohdaten;4;1004;Meyer, Sofíá;1992-02-30;32;2023-04-05;Green Tea;3,50;Name (Klasse 1), Geburtsdatum (Klasse 2), Alter (Klasse 2);–
+Rohdaten;5;1005;Meyer, Sofia;1985-07-12;39;01.06.2023;Espresso;2,50;Bestelldatum (Klasse 1), Kunden_ID (Klasse 3);–
+Rohdaten;6;1006;Maier, Clara;1995-12-15;28;01-07-2023;Latte, Croissant;6,50;Bestelldatum (Klasse 1);–
+Rohdaten;7;1007;MÜLLER, Karl;1978-03-08;45;03/05/2023;Cappuccino, Cheesecake;9,00;Bestelldatum (Klasse 1), Name (Klasse 1);–
+nach Klasse 1;1;1001;Meyer, Sofia;1985-07-12;39;2023-05-01;Latte Macchiato;4,50;–;Bestelldatum (Klasse 1): 01-05-2023 → 2023-05-01
+nach Klasse 1;2;1002;Meier, Max;1205-10-06;32;2023-01-03;Americano;3,20;Geburtsdatum (Klasse 2), Alter (Klasse 2);Bestelldatum (Klasse 1): 03-01-2023 → 2023-01-03
+nach Klasse 1;3;1003;Müller, Anna;1989-11-01;34;2023-06-15;Cappuccino, Cookies;7,80;–;Bestelldatum (Klasse 1): 06/15/2023 → 2023-06-15
+nach Klasse 1;4;1004;Meyer, Sofía;1992-02-30;32;2023-04-05;Green Tea;3,50;Geburtsdatum (Klasse 2), Alter (Klasse 2);Name (Klasse 1): Meyer, Sofíá → Meyer, Sofía
+nach Klasse 1;5;1005;Meyer, Sofia;1985-07-12;39;2023-06-01;Espresso;2,50;Kunden_ID (Klasse 3);Bestelldatum (Klasse 1): 01.06.2023 → 2023-06-01
+nach Klasse 1;6;1006;Maier, Clara;1995-12-15;28;2023-07-01;Latte, Croissant;6,50;–;Bestelldatum (Klasse 1): 01-07-2023 → 2023-07-01
+nach Klasse 1;7;1007;Müller, Karl;1978-03-08;45;2023-05-03;Cappuccino, Cheesecake;9,00;–;Bestelldatum (Klasse 1): 03/05/2023 → 2023-05-03, Name (Klasse 1): MÜLLER, Karl → Müller, Karl
+nach Klasse 2;1;1001;Meyer, Sofia;1985-07-12;39;2023-05-01;Latte Macchiato;4,50;–;–
+nach Klasse 2;2;1002;Meier, Max;1985-10-06;37;2023-01-03;Americano;3,20;–;Geburtsdatum (Klasse 2): 1205-10-06 → 1985-10-06, Alter (Klasse 2): 32 → 37
+nach Klasse 2;3;1003;Müller, Anna;1989-11-01;34;2023-06-15;Cappuccino, Cookies;7,80;–;–
+nach Klasse 2;4;1004;Meyer, Sofía;1992-02-28;31;2023-04-05;Green Tea;3,50;–;Geburtsdatum (Klasse 2): 1992-02-30 → 1992-02-28, Alter (Klasse 2): 32 → 31
+nach Klasse 2;5;1005;Meyer, Sofia;1985-07-12;39;2023-06-01;Espresso;2,50;Kunden_ID (Klasse 3);–
+nach Klasse 2;6;1006;Maier, Clara;1995-12-15;28;2023-07-01;Latte, Croissant;6,50;–;–
+nach Klasse 2;7;1007;Müller, Karl;1978-03-08;45;2023-05-03;Cappuccino, Cheesecake;9,00;–;–
+nach Klasse 3 (Ergebnis);1;1001;Meyer, Sofia;1985-07-12;39;2023-05-01;Latte Macchiato;4,50;–;–
+nach Klasse 3 (Ergebnis);2;1002;Meier, Max;1985-10-06;37;2023-01-03;Americano;3,20;–;–
+nach Klasse 3 (Ergebnis);3;1003;Müller, Anna;1989-11-01;34;2023-06-15;Cappuccino, Cookies;7,80;–;–
+nach Klasse 3 (Ergebnis);4;1004;Meyer, Sofía;1992-02-28;31;2023-04-05;Green Tea;3,50;–;–
+nach Klasse 3 (Ergebnis);5;1001;Meyer, Sofia;1985-07-12;39;2023-06-01;Espresso;2,50;–;Kunden_ID (Klasse 3): 1005 → 1001
+nach Klasse 3 (Ergebnis);6;1006;Maier, Clara;1995-12-15;28;2023-07-01;Latte, Croissant;6,50;–;–
+nach Klasse 3 (Ergebnis);7;1007;Müller, Karl;1978-03-08;45;2023-05-03;Cappuccino, Cheesecake;9,00;–;–

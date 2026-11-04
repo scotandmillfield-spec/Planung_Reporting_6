@@ -15,13 +15,13 @@ INS = (0.6, 0.4)
 SZ = 6                           # Schriftgrad (dichtes Netz)
 # Spalten
 SX, SW = 3.2, 23.0               # Quellsystem
-MX, MW = 31.2, 27.0              # Transformationen
-TX, TW = 63.2, 22.0              # Zielsystem
-DX, DW = 89.7, 19.6              # Dialoge
+MX, MW = 30.6, 27.0              # Transformationen
+TX, TW = 62.6, 22.0              # Zielsystem
+DX, DW = 89.9, 19.6              # Dialoge
 XK = 1.4                         # Leitung der Filterwerte (links am Quellsystem)
-XG, XO = 27.7, 29.5              # Spuren zwischen Quelle und Transformation
-XM2 = 60.7                       # Spur zwischen Transformation und Ziel
-XE, XS = 86.6, 88.2              # Spuren zwischen Dialog und Ziel (End-, Startperiode)
+XG, XO = 27.5, 29.1              # Spuren zwischen Quelle und Transformation
+XM2 = 60.1                       # Spur zwischen Transformation und Ziel
+XE, XS = 86.6, 88.3              # Spuren zwischen Dialog und Ziel (End-, Startperiode)
 
 
 def yc(r):

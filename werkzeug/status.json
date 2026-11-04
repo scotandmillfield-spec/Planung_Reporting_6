@@ -634,6 +634,30 @@
     }
    ]
   },
+  "3.24": {
+   "status": "pruefung",
+   "datei": "Objekt-Vergleich",
+   "kommentare": [
+    "Tabelle als Einzelvisual (110 × 50 mm) mit Datenschnitten „Standort“ und „Vergleich mit“; Werte von Hamburg und München unverändert aus dem Original",
+    "Δ % als Abweichungsbalken, Δ und Δ % nach Wirkung gefärbt (höherer Betriebsaufwand rot, Investitionen ohne Wertung); Δ der Umsatzrendite als %-Pkt. (Original „0,2%“)",
+    "Gemeinsamer Datensatz mit Abb. 3.25: zehn Standorte, acht davon erfunden und so gewählt, dass bester Standort (Frankfurt) und Durchschnitt genau die Werte von Abb. 3.25 ergeben; Δ % entfällt bei Vorzeichenwechsel (Leipzig mit Verlust)",
+    "Jahr 2027 ergänzt (Original ohne Jahr); senkrechte Trennlinie und fette zweizeilige Spaltenköpfe entfallen; Fußzeile nennt den Rechenweg (Δ = Standort − Vergleich, Δ % bezogen auf den Vergleich)",
+    "Frage: Einheit „Mio. €“ wie im Original übernommen – das ergibt rund 11 Mrd. € Betriebsertrag je Standort; ggf. Tsd. € gemeint?"
+   ],
+   "alt": "Tabelle „Geschäftszahlen Hamburg und München 2027“ in Mio. € mit absoluter und relativer Differenz je Kennzahl. Hamburg erzielt bei 10.980 Betriebsertrag und 8.168 Betriebsaufwand einen Gewinn von 2.812 und damit 91 Mio. € (+3,3 %) mehr als München; ungünstig ist nur der um 180 Mio. € (+2,3 %) höhere Aufwand. Balken zeigen die relativen Differenzen, am stärksten weichen Investitionen (+19,7 %) und Free Cashflow (+15,0 %) ab."
+  },
+  "3.25": {
+   "status": "pruefung",
+   "datei": "Benchmark-Vergleich",
+   "kommentare": [
+    "Tabelle als Einzelvisual (110 × 55 mm) mit Datenschnitt Standort; alle Werte des Originals unverändert (Hamburg, bester Standort, Durchschnitt und sämtliche Δ)",
+    "„Bester Standort“ als Frankfurt benannt (höchster Gewinn unter den übrigen Standorten), Durchschnitt über zehn Standorte – derselbe Datensatz wie Abb. 3.24",
+    "Rot für alle negativen Differenzen (Vorzeichen) → Farbe nach Wirkung: höherer Aufwand rot (+180, +218), geringere Investitionen ohne Wertung; Δ der Umsatzrendite in %-Pkt.",
+    "Kürzel „Δ +S“ und „Δ ⌀S“ → Gruppenköpfe „Bester Standort“ und „Durchschnitt aller 10 Standorte“; beide Δ-%-Spalten mit gemeinsamem Maßstab, senkrechte Linien entfallen",
+    "Frage: Einheit „Mio. €“ wie im Original (siehe Abb. 3.24)"
+   ],
+   "alt": "Tabelle „Geschäftszahlen Hamburg im Standortvergleich 2027“ in Mio. €: Hamburg gegenüber dem besten Standort Frankfurt und dem Durchschnitt aller zehn Standorte, jeweils mit absoluter und relativer Differenz. Beim Gewinn liegt Hamburg mit 2.812 um 909 Mio. € (−24,4 %) hinter Frankfurt, aber 1.222 Mio. € (+76,9 %) über dem Durchschnitt von 1.590. Balken mit gemeinsamem Maßstab zeigen, dass der Abstand zum Durchschnitt deutlich größer ist als der zum besten Standort."
+  },
   "3.12": {
    "status": "pruefung",
    "quer": true,
@@ -925,6 +949,19 @@
      "text": "Jahreswerte auf 2027, Vorjahr 2026 (Datenschnitt Jahr: 2026 und 2027). Über den Filtern steht neu der Berichtsname „Top-Ten-Analyse“ mit Untertitel; die Filter Jahr und Vertriebsgebiet stehen darunter. Die Werte der zehn Kunden sind unverändert, nur das Jahr ist verschoben."
     }
    ]
+  },
+  "3.21": {
+   "status": "pruefung",
+   "datei": "ABC-Analyse_Beispiel_MS_Excel",
+   "kommentare": [
+    "Excel-Screenshot softwareneutral als Rechentabelle neu aufgebaut (Einzelvisual 110 × 83,6 mm): Rang, Wert, Anteil, kumulierter Wert, kumulierter Anteil, Klasse und Summe – ohne Tabellenblatt, Gitternetz und Rahmen",
+    "Dieselben Daten wie Abb. 3.22 (gleicher Generator, 49 Produkte, Absatz 2027, alle Kunden, Grenzen A 80 % / B weitere 10 %): A 21 Produkte/80,0 %, B 7/9,7 %, C 21/10,3 % – beide Abbildungen zeigen dieselben Klassen; Schalter Absatz/Umsatz",
+    "Werte des Originals (21 Versicherungen nach Umsatz, Grenzen 70/90 %) bewusst nicht übernommen: reale Firmennamen (Allianz, R+V …) und andere Datenbasis als Abb. 3.22 – bitte prüfen, ob der Buchtext Werte oder Grenzen des Excel-Beispiels zitiert",
+    "Ampelfarben der Klassen (grün/gelb/rot) → Klassenbuchstabe und Zwischensumme je Klasse; separates Excel-Diagramm entfällt: kumulierter Anteil als Balken mit gestrichelten Klassengrenzen (die Kurve selbst zeigt Abb. 3.22)",
+    "Druck-PNG zeigt je Klasse die ersten Ränge und die Ränge an der Klassengrenze, mittlere Ränge zusammengefasst; HTML zeigt alle 49 Produkte, Tooltip mit dem Rechenweg jeder Zeile",
+    "Caption ohne Produktnamen? z. B. „ABC-Analyse (Rechentabelle)“ oder „ABC-Analyse in einer Tabellenkalkulation“"
+   ],
+   "alt": "Rechentabelle einer ABC-Analyse von 49 Produkten nach Absatz 2027 in Stück mit Rang, Produkt, Absatz, Anteil, kumuliertem Absatz, kumuliertem Anteil als Balken und Klasse, gegliedert nach Klassen mit Zwischensummen. Die 21 A-Produkte (43 % der Produkte) bringen 80,0 % des Absatzes, die 7 B-Produkte 9,7 % und die 21 C-Produkte 10,3 %; gestrichelte Linien markieren die Klassengrenzen bei 80 und 90 % kumuliert, die Summe beträgt 5.521 Stück."
   },
   "3.27": {
    "status": "pruefung",
@@ -1277,6 +1314,20 @@
    ],
    "alt": "Flächendiagramm der Kapazität 2027 je Quartal in Tonnen. Eine dunkle Ist-Fläche verläuft über 80, 100, 70 und 70 t, darüber eine Plankontur mit 110, 120, 110 und 120 t; die Fläche dazwischen ist hellrot getönt. Darunter die Abweichungen −30, −20, −40 und −50 t. Kernaussage: Ist liegt in allen Quartalen unter Plan, die größte Lücke im vierten Quartal; im Jahr −140 t (−30,4 %)."
   },
+  "3.64": {
+   "status": "pruefung",
+   "datei": "Ampelsignale-Heatmap",
+   "kommentare": [
+    "Vier Screenshot-Ausschnitte softwareneutral als ein Einzelvisual mit vier Elementen nachgebaut (110 × 97 mm, HTML mit Ebenen): Kennzahlenliste mit Ampel, Heatmap, ABC-Tabelle mit Ampelspalte, Karte mit Ampelzeichen; Programmfenster, Glaskugel-Effekte, Link-Unterstreichung und bunte Länderflächen entfallen",
+    "Typ bleibt, Ampel barrierearm: drei Stufen nach Farbe (Blaugrün/Gelb/Rot), Form (Kreis/Dreieck/Quadrat), Zeichen (✓/!/✕) und Helligkeit unterscheidbar, graustufentauglich; Gelb #E8A317 nur hier als Ampelfarbe – bitte prüfen, ob das für die Ampel-Beispiele akzeptiert ist",
+    "Kennzahlenliste: englische Begriffe übersetzt, Produkt-/Releasenamen des Herstellers neutralisiert (z. B. „Brio 8.0 FCS“ → „Release 8.0“); Ist/Ziel erfunden, Ampelstufen wie im Original (10 im Ziel, 5 beobachten, 2 kritisch, 1 ohne Wert); Regel ≥ 100 % / ≥ 95 %",
+    "Heatmap: Werte des Originals (2014–2016 → 2025–2027), als Umsatz in Tsd. € gedeutet (Original ohne Einheit); einfarbige Helligkeitsskala statt Rot-Gelb-Grün, Jahressumme ergänzt",
+    "ABC-Tabelle: Werte des Originals in Tsd. € (01–03/2009 → Q1 2027), Klassen 70/90 % wie im Original; Gutschrift PLZ 81 (−1,3) übernommen, dadurch kumuliert kurz 100,1 % – ggf. streichen? Karte: vereinfachter Umriss, Lage = Mittelpunkt der PLZ-Leitregion, mit Tabelle verbunden",
+    "Nachbesserung: ABC-Klassen in Tabelle, Karte und Legende in Grautönen statt Ampelfarben (A Kreis anthrazit, B Dreieck mittelgrau, C Quadrat hell mit Kontur) – eine ABC-Klasse ist keine Bewertung; Ampelfarben nur noch in der Kennzahlenliste",
+    "Designregeln nennen Grenzen und Alternativen: Abweichungsbalken (Abb. 3.16), Bullet-Chart (Abb. 3.54), Konzentrationskurve (Abb. 3.22) – ABC-Klasse ist keine Bewertung; Caption „… in Anlehnung an Schön und Müller 2010 … und Schön 2004b“ kann bleiben (Inhalt übernommen, Gestaltung neu)"
+   ],
+   "alt": "Vier Berichtselemente mit Signalfarben. Oben links eine Kennzahlenliste für Juni 2027 in den Bereichen Marketing, Vertrieb und Entwicklung mit Ampelzeichen je Kennzahl (Kreis mit Häkchen = im Ziel, gelbes Dreieck mit Ausrufezeichen = beobachten, rotes Quadrat mit Kreuz = kritisch); kritisch sind Aufträge und Budget Zentrale. Oben rechts eine Heatmap des Monatsumsatzes 2025 bis 2027 in Tsd. €, je höher der Wert, desto dunkler die Zelle; der Jahresumsatz steigt von 8.345 auf 9.819 (+17,7 %). Unten eine ABC-Tabelle von 13 PLZ-Regionen mit grauen Klassenzeichen (A dunkler Kreis, B graues Dreieck, C helles Quadrat) – 5 Regionen bringen 69 % des Umsatzes (Klasse A) – und daneben eine Deutschlandkarte mit denselben Zeichen an der Lage der Regionen, alle im Westen und Süden, sieben in Nordrhein-Westfalen."
+  },
   "3.65": {
    "status": "pruefung",
    "datei": "Tachos_und_Thermometer",
@@ -1314,6 +1365,20 @@
     "Hinweis: Abb. 3.28 nennt die Platzhalter „Tabellen/Grafiken“ und „Kommentare“, Abb. 3.29 einzeln „Tabelle“, „Grafik“, „Kommentare“ – Begriffe aus dem Original übernommen"
    ],
    "alt": "Vier Beispiele, wie ein Auswertungsbereich eines Berichts in zwei Spalten und zwei Zeilen aufgeteilt werden kann: erstens eine Tabelle links über die ganze Höhe, rechts eine Grafik und darunter Kommentare; zweitens Tabelle und Grafik oben, Kommentare und eine zweite Grafik unten; drittens zwei Grafiken oben, Tabelle und Kommentare unten; viertens zwei Grafiken oben und eine Tabelle über die ganze Breite darunter."
+  },
+  "3.30": {
+   "status": "pruefung",
+   "datei": "Exemplarischer_Bericht_in_Anlehnung_an_das_Grundraster",
+   "kommentare": [
+    "Bericht als Dashboard 1024 × 646 nach dem Grundraster (Abb. 3.28): Kopf mit Berichtsinformationen, Selektionskriterien links und Funktionen (E-Mail, Drucken) rechts, Auswertungsbereiche Tabelle, Grafik und Kommentar; Logo „Reporting AG“ entfällt (Platz der CI: Stand und Legende); ein Navigationsmenü hat schon das Original nicht – ggf. im Text erwähnen",
+    "Sparte A über alle Vertriebswege = alle Zahlen des Originals, auch ΔPL, ΔPL % und scheinbare Rundungsdifferenzen wie 138 − 118 = 19 (über euro-genaue Werte nachgebildet); Jan 11 → Januar 2027, Stand 04.02.2027; „Forcast“ → „Forecast“",
+    "Erfunden für die Selektion: Sparten B und C, Aufteilung auf Fachhandel/Direktvertrieb/Online sowie Kommentare der Sparten B, C und der Gesamtsicht; Verantwortliche SD/HS/RT → Herr Seidel, Frau Haas, Herr Roth",
+    "Abweichungen nach Wirkung (günstige jetzt blaugrün, das Original färbte nur ungünstige rot) mit Abweichungsbalken je Zeitraum; Positionen links statt in der Tabellenmitte; Szenario-Marken Ist/Plan/Forecast",
+    "Cash-to-Cash-Cycle: lila Balken → Wasserfall (Materialumschlag + Erzeugnisumschlag + Debitorenziel − Kreditorenziel = 64 Tage); Planwerte erfunden (Zyklus 50, Materialumschlag 50), damit „Materialumschlag zu hoch“ belegt ist",
+    "Status und Maßnahmen inhaltlich wie im Original, sprachlich gekürzt; abgeschnittene dritte Maßnahme („… und Prüfung einer“) als „Aggregate reparieren, Ersatz prüfen“ ergänzt – bitte prüfen; Termine 02/12, 04/12 → 02/2027, 04/2027",
+    "Kommentare sind mit Zeilen verknüpft: Klick auf eine Position oder eine Zykluskennzahl hebt Status und Maßnahmen dazu hervor und umgekehrt"
+   ],
+   "alt": "Dashboard „Segmenterfolgsbericht“ für Sparte A, alle Vertriebswege, Januar 2027, Stand 04.02.2027, aufgebaut nach dem Grundraster: oben Berichtsinformationen, Selektionskriterien und Funktionen, darunter die Erfolgsrechnung mit Ist, Plan und Planabweichung für Januar sowie Forecast und Jahresplan. Der Erfolg liegt im Januar mit 82 Tsd. € um 22 Tsd. € (+36,8 %) über Plan, im Forecast mit 352 Tsd. € nur noch 2 Tsd. € darüber, weil die Personalkosten 99 Tsd. € über Plan liegen. Unten links zeigt ein Wasserfall den Cash-to-Cash-Cycle von 64 Tagen (14 über Plan, vor allem durch den Materialumschlag), unten rechts stehen Status und geplante Maßnahmen mit Verantwortlichen und Terminen."
   }
  }
 }

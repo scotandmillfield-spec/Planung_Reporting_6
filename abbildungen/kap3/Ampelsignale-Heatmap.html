@@ -635,11 +635,12 @@ const DK = (() => {
 <script>
 /* Einzelvisual „Ampelsignale/Heatmap“ (Abb. 3.64): vier Berichtselemente mit Signal- bzw. Farbcodierung.
    Seite 727 x 640 px = 110 x 96,8 mm. Daten: ampel.json (daten_ampel.py).
-   Diagrammtypen bleiben: Kennzahlenliste mit Ampel, Heatmap, Tabelle mit Ampelspalte (ABC-Analyse) und Karte mit
-   Ampelzeichen. Barrierearm: Die drei Ampelstufen unterscheiden sich nicht nur in der Farbe, sondern auch in Form
+   Diagrammtypen bleiben: Kennzahlenliste mit Ampel, Heatmap, Tabelle mit Signalspalte (ABC-Analyse) und Karte mit
+   Signalzeichen. Barrierearm: Die drei Ampelstufen unterscheiden sich nicht nur in der Farbe, sondern auch in Form
    (Kreis, Dreieck, Quadrat), Zeichen (✓, !, ✕) und Helligkeit (heller Ring, mittleres Gelb, dunkles Rot). Die Heatmap
-   nutzt eine einfarbige Helligkeitsskala statt Rot-Gelb-Grün. Tabelle und Karte sind verbunden: Klick auf eine
-   Zeile oder ein Zeichen hebt die Region in beiden hervor. */
+   nutzt eine einfarbige Helligkeitsskala statt Rot-Gelb-Grün. Die ABC-Klassen sind keine Bewertung und stehen deshalb
+   in Grautönen (A anthrazit, B mittelgrau, C hell mit Kontur), nicht in Ampelfarben. Tabelle und Karte sind
+   verbunden: Klick auf eine Zeile oder ein Zeichen hebt die Region in beiden hervor. */
 (() => {
   "use strict";
   const { zahl, delta, NBSP, sv, el, PRINT } = DK;
@@ -669,7 +670,6 @@ const DK = (() => {
     roh.ges = ges;
     return roh;
   })();
-  const KL_STUFE = { A: "gut", B: "warn", C: "krit" };
   const KL_TEXT = { A: `bis ${GRENZEN[0]}${NBSP}%`, B: `bis ${GRENZEN[1]}${NBSP}%`, C: "Rest" };
   const OST = ["Berlin", "Brandenburg", "Mecklenburg-Vorpommern", "Sachsen", "Sachsen-Anhalt", "Thüringen"];
   const LANDKURZ = { "Nordrhein-Westfalen": "NRW", "Baden-Württemberg": "Baden-Württemberg" };
@@ -725,6 +725,14 @@ const DK = (() => {
       if (zeichen) linie(cx - 3.4 * s, cy, cx + 3.4 * s, cy, GRAU);
     }
     return g;
+  }
+
+  /* ---------- ABC-Klassenzeichen: Grautöne und Form, keine Ampelfarben (Klasse ist keine Bewertung) ---------- */
+  function klassenZeichen(p, cx, cy, kl, s = 1) {
+    if (kl === "A") return sv("circle", { cx, cy, r: 7.2 * s, style: "fill:#3A3F44" }, p);
+    if (kl === "B") return sv("polygon", { points: `${cx},${cy - 8.8 * s} ${cx + 9 * s},${cy + 6.8 * s} ${cx - 9 * s},${cy + 6.8 * s}`,
+      style: "fill:#8F8F8F;stroke-linejoin:round" }, p);
+    return sv("rect", { x: cx - 6.5 * s, y: cy - 6.5 * s, width: 13 * s, height: 13 * s, style: "fill:#D4D4D4;stroke:#6E747A;stroke-width:1" }, p);
   }
 
   /* ---------- A: Kennzahlenliste mit Ampel ---------- */
@@ -820,7 +828,7 @@ const DK = (() => {
     JSUM.forEach((v, n) => sv("text", { x: lw + cw * (n + 1) - 9, y: ys + 12, dy: "0.35em", "text-anchor": "end", style: "font-weight:bold" }, gs, zahl(v)));
   }
 
-  /* ---------- C: ABC-Tabelle mit Ampelspalte ---------- */
+  /* ---------- C: ABC-Tabelle mit Signalspalte ---------- */
   const tsd = v => zahl(v / 1000, 1);
   function botschaftC(b) {
     if (S.region !== null) {
@@ -861,7 +869,7 @@ const DK = (() => {
       el("td", { style: H }, tr, pz(r.kumA));
       const td = el("td", { style: H + ";text-align:left;padding-left:6px" }, tr);
       const s = sv("svg", { width: 18, height: 15, style: "display:inline-block;vertical-align:-3px;overflow:visible" }, td);
-      signal(s, 8, 7.5, KL_STUFE[r.klasse], { zeichen: false, gr: 0.82 });
+      klassenZeichen(s, 8, 7.5, r.klasse, 0.82);
       td.appendChild(document.createTextNode(" " + r.klasse));
       tr.addEventListener("click", () => setze("region", r.i));
       tooltip(tr, () => [`PLZ-Region ${r.plz} (${r.land})`, `Umsatz ${DATA.quartal}: ${tsd(r.u)} Tsd. € · Anteil ${pz(r.anteil)}`,
@@ -872,7 +880,7 @@ const DK = (() => {
     ["Summe", tsd(RG.ges), "", "", ""].forEach((v, n) => el("td", { style: H + (n === 0 ? ";text-align:left" : "") }, ts, v));
   }
 
-  /* ---------- D: Karte mit Ampelzeichen ---------- */
+  /* ---------- D: Karte mit Signalzeichen ---------- */
   function botschaftD(b) {
     if (S.region !== null) {
       const r = RG[S.region];
@@ -908,7 +916,7 @@ const DK = (() => {
     const gp = sv("g", { id: "ka-zeichen" }, svg);
     P.slice().sort((a, c) => (a.r.klasse > c.r.klasse ? -1 : 1)).forEach(({ r, x, y }) => {
       const g = sv("g", { class: "dk-klick" + (S.region !== null && S.region !== r.i ? " dk-blass" : ""), "data-name": "PLZ " + r.plz }, gp);
-      signal(g, x, y, KL_STUFE[r.klasse], { zeichen: false, gr: 0.82 });
+      klassenZeichen(g, x, y, r.klasse, 0.82);
       if (S.region === r.i) sv("circle", { cx: x, cy: y, r: 11, fill: "none", stroke: "#1A1A1A", "stroke-width": 1.5 }, g);
       const hit = sv("circle", { cx: x, cy: y, r: 9, fill: "transparent" }, g);
       hit.addEventListener("click", () => setze("region", r.i));
@@ -920,7 +928,7 @@ const DK = (() => {
     sv("text", { x: lx, y: ly, dy: "0.35em", class: "muted" }, gl, "ABC-Klasse");
     ["A", "B", "C"].forEach((kl, n) => {
       const y = ly + 24 + n * 24;
-      signal(gl, lx + 8, y, KL_STUFE[kl], { zeichen: false, gr: 0.82 });
+      klassenZeichen(gl, lx + 8, y, kl, 0.82);
       const t = sv("text", { x: lx + 22, y, dy: "0.35em" }, gl);
       sv("tspan", { style: "font-weight:bold" }, t, kl + " ");
       sv("tspan", { class: "muted", style: "fill:#4D4D4D" }, t, KL_TEXT[kl]);
@@ -956,9 +964,9 @@ const DK = (() => {
       { nr: 6, ziel: "hm-summe", anker: "links", versatz: [81, 2], regel: "STRUCTURE – Inhalte ordnen", titel: "Monate in Folge, Summe darunter",
         text: "Monate in natürlicher Reihenfolge, Jahre nebeneinander, die Jahressumme als letzte Zeile ohne Farbe. Das Original nutzte englische Monatsnamen, Spaltenbuchstaben und Zeilennummern der Tabellenkalkulation." },
       { nr: 7, ziel: "abc-kopf-klasse", anker: "links", versatz: [81, 2], regel: "CHECK – Farbe bewertet", titel: "ABC-Klasse ist keine Bewertung",
-        text: "Die Ampelspalte zeigt die ABC-Klasse wie im Original (A grün, B gelb, C rot), jetzt mit Buchstaben. Ampelfarben bewerten aber: Rot suggeriert ein Problem, obwohl C nur „kleiner Umsatzanteil“ heißt. Für ABC-Analysen ist eine Konzentrationskurve (Abb. 3.22) aussagekräftiger. Die Gutschrift in PLZ 81 stammt aus dem Original – davor liegt der kumulierte Anteil über 100 %." },
+        text: "Das Original färbte die ABC-Klassen wie eine Ampel: A grün, B gelb, C rot. Ampelfarben bewerten aber – Rot suggeriert ein Problem, obwohl C nur „kleiner Umsatzanteil“ heißt. Hier steht die Klasse als Buchstabe mit einem Zeichen in Grautönen: A anthrazit, B mittelgrau, C hell. Die Ampelfarben bleiben den Kennzahlen oben vorbehalten, die tatsächlich ein Ziel haben. Für ABC-Analysen ist eine Konzentrationskurve (Abb. 3.22) aussagekräftiger. Die Gutschrift in PLZ 81 stammt aus dem Original – davor liegt der kumulierte Anteil über 100 %." },
       { nr: 8, ziel: "ka-karte", anker: "links", versatz: [155, 100], regel: "SIMPLIFY – Karte nur mit Raumbezug", titel: "Umriss statt bunter Länder",
-        text: "Die Karte zeigt nur, wo die Regionen liegen: alle im Westen und Süden, sieben in Nordrhein-Westfalen. Die bunten Länderflächen des Originals trugen keine Information und konkurrierten mit den Ampelpunkten. Tabelle und Karte sind verbunden – Klick auf eine Zeile oder ein Zeichen hebt die Region in beiden hervor, Esc hebt auf." },
+        text: "Die Karte zeigt nur, wo die Regionen liegen: alle im Westen und Süden, sieben in Nordrhein-Westfalen. Die bunten Länderflächen des Originals trugen keine Information und konkurrierten mit den Klassenzeichen. Tabelle und Karte sind verbunden – Klick auf eine Zeile oder ein Zeichen hebt die Region in beiden hervor, Esc hebt auf." },
     ],
     nachbauIntro: "Seitengröße benutzerdefiniert 727 × 640 px, vier Visuals. Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt. Datenmodell: drei Tabellen (Kennzahlen, Monatsumsatz, Regionsumsatz) wie in der CSV-Datei.",
     nachbau: [
@@ -971,10 +979,11 @@ const DK = (() => {
         format: "Bedingte Formatierung › Hintergrundfarbe: Farbskala Minimum #F2F2F2, Maximum #3A3F44; Schriftfarbe nach Regel: ab 758 (Mitte) #FFFFFF; Gesamtzeile ohne Formatierung, fett" },
       { id: "C", ziel: "abc-tabelle", anker: "links", versatz: [389, 2], titel: "ABC-Tabelle", visual: "Tabelle (Standardvisual)",
         felder: "PLZ-Region; Umsatz; Measure Kumuliert = SUMX(WINDOW(1; ABS; 0; REL; ALLSELECTED(Region[PLZ]); ORDERBY([Umsatz]; DESC)); [Umsatz]); Measure kum. Anteil = DIVIDE([Kumuliert]; CALCULATE([Umsatz]; ALLSELECTED())); Measure Klasse = SWITCH(TRUE(); [kum. Anteil] <= 0,7; \"A\"; [kum. Anteil] <= 0,9; \"B\"; \"C\")",
-        format: "Sortierung nach Umsatz absteigend; Spalte Klasse mit bedingter Formatierung › Symbole nach Regel auf Klasse (A Kreis, B Dreieck, C Quadrat)" },
+        format: "Sortierung nach Umsatz absteigend; Spalte Klasse mit Zeichen in Grautönen (A Kreis #3A3F44, B Dreieck #8F8F8F, C Quadrat #D4D4D4 mit Kontur #6E747A)",
+        hinweis: "Die Standardsymbolsätze sind farbig (Ampel); graue Zeichen über eine Measure mit SVG-Text, Datenkategorie „Bild-URL“ – oder nur den Klassenbuchstaben zeigen." },
       { id: "D", ziel: "ka-karte", anker: "links", versatz: [155, 100], titel: "Karte", visual: "Azure-Karte (Standardvisual), Blasenebene",
         felder: "Breitengrad, Längengrad je PLZ-Region; Legende: Klasse; QuickInfo: Umsatz, kum. Anteil",
-        format: "Blasenfarben A #00806B, B #E8A317, C #C62828; Kartenstil „Graustufen hell“; Kategoriebeschriftung Klasse ein",
+        format: "Blasenfarben A #3A3F44, B #8F8F8F, C #D4D4D4 mit Rand #6E747A; Kartenstil „Graustufen hell“; Kategoriebeschriftung Klasse ein",
         hinweis: "Die Standardkarte kennt keine Formen je Kategorie; die Klasse steht deshalb als Beschriftung an der Blase. Wechselwirkung Tabelle ↔ Karte: Hervorheben (Standard)." },
     ],
     theme: DK.thema(),

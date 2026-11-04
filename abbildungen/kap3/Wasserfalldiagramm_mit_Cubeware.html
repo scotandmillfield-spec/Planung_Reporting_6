@@ -633,7 +633,7 @@ const DK = (() => {
 
 </script>
 <script>
-/* Einzelvisual „Wasserfalldiagramm mit Cubeware“ (Abb. 3.56), softwareneutral: Ergebnisüberleitung eines
+/* Einzelvisual „Wasserfalldiagramm in einem BI-Werkzeug“ (Abb. 3.56), softwareneutral nachgebaut: Ergebnisüberleitung eines
    Autohandelskonzerns 2025 → 2026 → 2027 nach GuV-Positionen als Wasserfall, darunter die Detailanalyse der gewählten
    Position nach Konten oder Gesellschaften. Seite 727 x 560 px = 110 x 84,7 mm.
    Daten: ergebnis.json (daten_ergebnis.py) – Einzelwerte Gesellschaft × Konto × Jahr in 0,1 Tsd. €; alle angezeigten
@@ -849,7 +849,7 @@ const DK = (() => {
       { nr: 6, ziel: "v-detail", anker: "links", versatz: [430, -2], regel: "CONDENSE – Eine Tabelle, zwei Sichten", titel: "Klick und Umschalter statt Kontrollkästchen",
         text: "Ein Klick auf eine Position im Wasserfall zeigt ihre Konten; der Umschalter wechselt zur Sicht nach Gesellschaften. Das Original brauchte dafür vier Kontrollkästchen, einen Knopf „Select Position“ und eine zweite Tabelle mit Bildlaufleiste. Die Auswahl Plan/Ist sowie Gesellschaft und Währung entfallen, weil nur Ist-Werte gezeigt werden." },
       { nr: 7, ziel: "dt-tabelle", anker: "links", versatz: [187, 182], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Doppelte Ebenen und Navigation entfernt",
-        text: "Hierarchieebenen, die nur eine Zeile wiederholen (Verkaufserlöse = Umsatzerlöse, Provisionen = Konto 67710), entfallen, Kontonummern stehen im Tooltip. Logo, Fensterrahmen und die Knöpfe „Zurück“ und „Home“ entfallen." },
+        text: "Hierarchieebenen, die nur eine Zeile wiederholen (Verkaufserlöse = Umsatzerlöse, Provisionen = Konto 67710), entfallen, ebenso die Zwischenebene „Einkauf Fahrzeuge“ im Materialaufwand; Kontonummern stehen im Tooltip. Logo, Fensterrahmen und die Knöpfe „Zurück“ und „Home“ entfallen." },
       { nr: 8, ziel: "dt-tabelle", anker: "links", versatz: [142, 162], regel: "UNIFY – Rechenschema", titel: "Zwischensummen unter ihren Konten",
         text: "Umsatzerlöse und Materialaufwand stehen als fette Zwischensummen unter ihren Konten, der Rohertrag als Gesamtsumme am Ende – wie in einem Rechenschema. Das Original stellte die Summen über die Konten. Ein Klick auf einen Spaltenkopf sortiert die Konten, ein dritter Klick stellt das Rechenschema wieder her." },
     ],

@@ -824,16 +824,15 @@ const DK = (() => {
     FEHLER.forEach((F, i) => {
       const x0 = i < 4 ? 0 : 352, y = (i % 4) * 25, cy = y + 12.5, weg = S.behoben.has(F.nr);
       const g = sv("g", { class: "dk-klick" + (S.fehler != null && S.fehler !== F.nr ? " dk-blass" : ""), id: "vl-" + F.nr, role: "listitem" }, svg);
-      const hit = sv("rect", { x: x0, y, width: 340, height: 25, fill: "transparent" }, g);
-      hit.addEventListener("click", () => fehlerWaehlen(F.nr));
-      tooltip(hit, () => tipFehler(F));
+      sv("rect", { x: x0, y, width: 340, height: 25, fill: "transparent" }, g);
+      g.addEventListener("click", () => fehlerWaehlen(F.nr));             // ganze Zeile klickbar (Text, Punkt, Fläche)
+      tooltip(g, () => tipFehler(F));
       const xm = DK.PRINT ? x0 + 11 : x0 + 34;
       if (!DK.PRINT) {
         const k = sv("g", { class: "dk-klick", "aria-label": "Fehler " + F.nr + " beheben" }, g);
         sv("rect", { x: x0 + 1.5, y: cy - 7.5, width: 15, height: 15, rx: 2, fill: weg ? FARBE.ist : "#FFFFFF", stroke: "#6E747A" }, k);
         if (weg) sv("path", { d: `M${x0 + 5} ${cy} l3 3.5 l6 -7`, fill: "none", stroke: "#FFFFFF", "stroke-width": 2 }, k);
         k.addEventListener("click", ev => { ev.stopPropagation(); umschalten(F.nr); });
-        tooltip(k, () => [weg ? `Fehler ${F.nr} wiederherstellen` : `Fehler ${F.nr} in a) beheben`, `Korrektur: ${F.fixKurz}`]);
       }
       sv("circle", { cx: xm, cy, r: 10, fill: weg ? "#A9A9A9" : ROT }, g);
       sv("text", { x: xm, y: cy, dy: "0.35em", "text-anchor": "middle", style: "font-size:13px;font-weight:bold;fill:#FFFFFF" }, g, String(F.nr));

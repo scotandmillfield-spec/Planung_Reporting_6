@@ -189,16 +189,15 @@
     FEHLER.forEach((F, i) => {
       const x0 = i < 4 ? 0 : 352, y = (i % 4) * 25, cy = y + 12.5, weg = S.behoben.has(F.nr);
       const g = sv("g", { class: "dk-klick" + (S.fehler != null && S.fehler !== F.nr ? " dk-blass" : ""), id: "vl-" + F.nr, role: "listitem" }, svg);
-      const hit = sv("rect", { x: x0, y, width: 340, height: 25, fill: "transparent" }, g);
-      hit.addEventListener("click", () => fehlerWaehlen(F.nr));
-      tooltip(hit, () => tipFehler(F));
+      sv("rect", { x: x0, y, width: 340, height: 25, fill: "transparent" }, g);
+      g.addEventListener("click", () => fehlerWaehlen(F.nr));             // ganze Zeile klickbar (Text, Punkt, Fläche)
+      tooltip(g, () => tipFehler(F));
       const xm = DK.PRINT ? x0 + 11 : x0 + 34;
       if (!DK.PRINT) {
         const k = sv("g", { class: "dk-klick", "aria-label": "Fehler " + F.nr + " beheben" }, g);
         sv("rect", { x: x0 + 1.5, y: cy - 7.5, width: 15, height: 15, rx: 2, fill: weg ? FARBE.ist : "#FFFFFF", stroke: "#6E747A" }, k);
         if (weg) sv("path", { d: `M${x0 + 5} ${cy} l3 3.5 l6 -7`, fill: "none", stroke: "#FFFFFF", "stroke-width": 2 }, k);
         k.addEventListener("click", ev => { ev.stopPropagation(); umschalten(F.nr); });
-        tooltip(k, () => [weg ? `Fehler ${F.nr} wiederherstellen` : `Fehler ${F.nr} in a) beheben`, `Korrektur: ${F.fixKurz}`]);
       }
       sv("circle", { cx: xm, cy, r: 10, fill: weg ? "#A9A9A9" : ROT }, g);
       sv("text", { x: xm, y: cy, dy: "0.35em", "text-anchor": "middle", style: "font-size:13px;font-weight:bold;fill:#FFFFFF" }, g, String(F.nr));
@@ -250,23 +249,23 @@
         text: "Teil a) zeigt die acht Gestaltungsfehler des Originals bewusst weiter: übergenaue Skala, grauer Hintergrund, Gitterlinien, fehlende Werte, Rahmen, breite umrandete Säulen, Legende und alphabetische Sortierung. Nur Schrift und Farben folgen dem Buchstil; nummerierte Punkte ersetzen die Pfeile mit Text." },
       { nr: 2, ziel: "v-liste", anker: "links", versatz: [690, 2], regel: "EXPRESS – Fehler einzeln beheben", titel: "Schritt für Schritt von a) nach b)",
         text: "Ein Klick auf einen Eintrag hebt den Fehler im Diagramm rot gestrichelt hervor; das Kästchen davor behebt ihn in a). „Alle behoben“ verwandelt a) in die Darstellung b). Esc hebt die Hervorhebung auf." },
-      { nr: 3, ziel: "vb-balken", anker: "links", versatz: [500, 36], regel: "SIMPLIFY – Weglassen", titel: "Kein Hintergrund, Gitter, Rahmen, Legende",
+      { nr: 3, ziel: "vb-balken", anker: "links", versatz: [612, 36], regel: "SIMPLIFY – Weglassen", titel: "Kein Hintergrund, Gitter, Rahmen, Legende",
         text: "Hintergrundfläche, Gitterlinien, Rahmen, Achse und Legende entfallen in b) ersatzlos – keines dieser Elemente trägt einen Wert. Was bleibt, sind Balken, Namen und Zahlen." },
-      { nr: 4, ziel: "vb-balken", anker: "links", versatz: [500, 4], regel: "EXPRESS – Werte direkt beschriften", titel: "Zahlen am Balken statt Skala",
+      { nr: 4, ziel: "vb-balken", anker: "links", versatz: [698, 4], regel: "EXPRESS – Werte direkt beschriften", titel: "Zahlen am Balken statt Skala",
         text: "Jeder Balken trägt seinen Wert in Mio. € mit zwei Nachkommastellen. Die Skala „9.000.000“ in a) ist übergenau und lässt den Wert trotzdem nur auf eine Million genau schätzen." },
-      { nr: 5, ziel: "vb-balken", anker: "links", versatz: [130, 4], regel: "STRUCTURE – Inhalte ordnen", titel: "Waagerechte Balken, absteigend sortiert",
+      { nr: 5, ziel: "vb-balken", anker: "links", versatz: [412, 73], regel: "STRUCTURE – Inhalte ordnen", titel: "Waagerechte Balken, absteigend sortiert",
         text: "Ohne natürliche Reihenfolge werden Kategorien nach Wert sortiert. Waagerechte Balken lassen links Platz für lange Namen; in a) stehen die Säulen alphabetisch und die Namen gedrängt darunter." },
-      { nr: 6, ziel: "va-saeulen", anker: "links", versatz: [620, 60], regel: "UNIFY – Semantische Notation", titel: "Ist anthrazit, ohne Rahmen",
+      { nr: 6, ziel: "va-saeulen", anker: "links", versatz: [211, 121], regel: "UNIFY – Semantische Notation", titel: "Ist anthrazit, ohne Rahmen",
         text: "Die Balken in b) sind schmal, anthrazit und ohne Rahmen – die Notation für Istwerte im ganzen Buch. In a) sind die Säulen mittelgrau mit schwarzem Rahmen, damit der Fehler „Rahmen“ sichtbar bleibt; das Original zeigte blaue Säulen." },
       { nr: 7, ziel: "v-b", anker: "links", versatz: [690, 0], regel: "SAY – Botschaft vermitteln", titel: "Titel mit Einheit und Aussage",
         text: "Der Titel von b) nennt Inhalt und Einheit, die Zeile darunter die Erkenntnis. In a) steht wie im Original nur „Umsatz“ ohne Einheit, und die Legende wiederholt das Wort." },
     ],
     nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 727 × 592 px. Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt. Datenmodell: Tabelle Umsatz (Produktgruppe, Umsatz) wie in der CSV-Datei.",
     nachbau: [
-      { id: "A", ziel: "vb-balken", anker: "links", versatz: [500, 4], titel: "b) Korrigierte Darstellung", visual: "Gruppiertes Balkendiagramm",
+      { id: "A", ziel: "vb-balken", anker: "links", versatz: [412, 73], titel: "b) Korrigierte Darstellung", visual: "Gruppiertes Balkendiagramm",
         felder: "Y-Achse: Produktgruppe; X-Achse: Umsatz (Summe); Sortierung absteigend nach Umsatz",
         format: "Datenbeschriftungen an, Anzeigeeinheit Millionen, 2 Dezimalstellen; X-Achse aus; Gitternetzlinien aus; Legende aus; Hintergrund und Rahmen des Visuals aus; Datenfarbe #3A3F44; Titel „Umsatz je Produktgruppe in Mio. €“" },
-      { id: "B", ziel: "va-saeulen", anker: "links", versatz: [620, 60], titel: "a) Fehlerhafte Darstellung (zum Vergleich)", visual: "Gruppiertes Säulendiagramm",
+      { id: "B", ziel: "va-saeulen", anker: "links", versatz: [211, 121], titel: "a) Fehlerhafte Darstellung (zum Vergleich)", visual: "Gruppiertes Säulendiagramm",
         felder: "X-Achse: Produktgruppe (Sortierung nach Produktgruppe aufsteigend); Y-Achse: Umsatz",
         format: "Plotbereich-Hintergrund #D4D4D4; Gitternetzlinien an; Y-Achse Anzeigeeinheit „Keine“; Legende rechts an; Rahmen des Visuals an; Spaltenrahmen an",
         hinweis: "Nur zur Demonstration: Jeder Fehler aus a) entspricht einer Einstellung, die man für b) ausschaltet oder ändert." },

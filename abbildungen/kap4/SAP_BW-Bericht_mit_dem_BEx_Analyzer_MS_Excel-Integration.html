@@ -832,7 +832,7 @@ const DK = (() => {
     const wLab = dims.map((d, i) => Math.ceil(Math.max(kopfBreite(DIMS[d].name), ...out.map(z => (z.typ !== "gesamt" && z.labels[i] && z.labels[i].text ?
       tw(z.labels[i].text, 14, z.typ !== "zeile" || !!z.labels[i].pfad) + (z.labels[i].klapp ? 14 : 0) : 0)))) + 16);
     const wKz = Math.ceil(Math.max(tw("Kennzahl"), ...kzListe().map(k => tw(k.name, 14, true)))) + 16;
-    const wW = sp.map(s => Math.max(62, Math.ceil(Math.max(tw(spName(s)), ...out.map(z => tw(fmtWert(z, sp.indexOf(s)), 14, true)))) + 18));
+    const wW = sp.map(s => Math.max(62, Math.ceil(Math.max(tw(spName(s)) + (S.sort && S.sort.sp === s ? tw(" ▾") : 0), ...out.map(z => tw(fmtWert(z, sp.indexOf(s)), 14, true)))) + 18));
     const summe = wLab.reduce((a, b) => a + b, 0) + wKz + wW.reduce((a, b) => a + b, 0);
     const frei = Math.max(0, 716 - summe);
     const W = [...wLab.map(w => w + frei * 0.5 / Math.max(1, wLab.length + 1)), wKz + frei * 0.5 / Math.max(1, wLab.length + 1),

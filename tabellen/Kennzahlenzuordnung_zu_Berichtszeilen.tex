@@ -1,0 +1,26 @@
+% benötigt im Präambel: \usepackage{booktabs}
+% Abb. 5.24 als gesetzte Tabelle statt Bild (Inhalt aus dem eingebetteten Objekt der 5. Auflage). Die figure-Umgebung
+% hält die Nummer „Abb. 5.24“. Die beiden Teiltabellen des Originals hatten dieselben Berichtszeilen; sie stehen jetzt
+% als zwei Zuordnungsspalten nebeneinander; das Pluszeichen steht vor jedem weiteren Summanden. Fett: Umsatzstufen
+% wie im Original.
+\begin{figure}[htbp]
+  \centering
+  \footnotesize
+  \begin{tabular}{@{}l@{\hspace{2em}}l@{\hspace{2em}}l@{}}
+    \toprule
+     & \multicolumn{2}{l@{}}{Kennzahlenzuordnung} \\
+    \cmidrule(l{0pt}){2-3}
+    Berichtszeile & eine Kennzahl je Zeile & Summe mehrerer Kennzahlen \\
+    \midrule
+    \textbf{Bruttoumsatz}      & Bruttoumsatz      & Bruttoumsatz \\
+    Rabatte                    & Rabatte           & Kundenrabatte \\
+                               &                   & \llap{$+$\,}Aktionsrabatte \\
+                               &                   & \llap{$+$\,}Sonderrabatte \\
+    \textbf{Nettoumsatz}       & Nettoumsatz       & Nettoumsatz \\
+    Skonti                     & Skonti            & Skonti \\
+    \textbf{NettoNetto-Umsatz} & NettoNetto-Umsatz & NettoNetto-Umsatz \\
+    \bottomrule
+  \end{tabular}
+  \caption{Kennzahlenzuordnung zu Berichtszeilen}
+  \label{fig:Kennzahlenzuordnung_zu_Berichtszeilen}
+\end{figure}

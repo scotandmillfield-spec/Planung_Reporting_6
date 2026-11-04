@@ -1,0 +1,45 @@
+% benötigt im Präambel: \usepackage{booktabs,array}
+% Abb. 5.62 als gesetzte Tabellen statt Bild (Inhalt aus dem Bild der 5. Auflage). Die figure-Umgebung hält die
+% Nummer „Abb. 5.62“. Oben: Kennzahlen der Faktentabelle Sales je Dimension (× = Kennzahl ist nach dieser Dimension
+% auswertbar, – = nicht auswertbar); unten: Eigenschaften (Attribute) und Hierarchien der drei Dimensionen, Ebenen von
+% oben nach unten; \HierZeile rückt Folgezeilen einer umbrochenen Hierarchie ein (lokal definiert).
+\begin{figure}[htbp]
+  \centering
+  \footnotesize
+  \providecommand{\HierZeile}{}\renewcommand{\HierZeile}{\hangindent=1em\hangafter=1 }
+  \begin{tabular}{@{}l@{\hspace{2.5em}}c@{\hspace{2.5em}}c@{\hspace{2.5em}}c@{}}
+    \toprule
+              & \multicolumn{3}{c@{}}{Sales} \\
+    \cmidrule(l{0pt}){2-4}
+    Dimension & Umsatz   & Menge    & Bonuspunkte \\
+    \midrule
+    Kunden    & $\times$ & $\times$ & $\times$ \\
+    Datum     & $\times$ & $\times$ & $\times$ \\
+    Produkte  & $\times$ & $\times$ & -- \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{1.5\baselineskip}
+
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{26mm}@{\hspace{5mm}}>{\raggedright\arraybackslash}p{46mm}@{\hspace{5mm}}>{\raggedright\arraybackslash}p{28mm}@{}}
+    \toprule
+    \multicolumn{3}{@{}l@{}}{\textit{Eigenschaften}} \\
+    \cmidrule{1-3}
+    Kunde         & Datum    & Produkte \\
+    \midrule
+    Name          & Tag      & Bezeichnung \\
+    Kundennummer  & Monat    & Saisonal \\
+    Postleitzahl  & Quartal  & Produktlinie \\
+    Stadt         & Halbjahr & Produktgruppe \\
+    DreamCard     & Jahr     & \\
+    \midrule
+    \multicolumn{3}{@{}l@{}}{\textit{Hierarchien}} \\
+    \cmidrule{1-3}
+    \HierZeile Stadt -- Postleitzahl & \HierZeile Jahr -- Quartal -- Monat -- Tag & \HierZeile Produktlinie -- Produktgruppe \\
+    \addlinespace[2pt]
+                             & \HierZeile Jahr -- Halbjahr -- Quartal -- Monat -- Tag & \\
+    \bottomrule
+  \end{tabular}
+  \caption{Metadatenbeschreibung Star-Schema für einen Sales Data Mart}
+  \label{fig:Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart}
+\end{figure}

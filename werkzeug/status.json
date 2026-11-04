@@ -1053,6 +1053,17 @@
    ],
    "alt": "Balkendiagramm der Veränderung zum Vorjahr 2027 in Prozent für die Tochtergesellschaften A, B und C in drei Spalten mit Nulllinie. Absatz: A +1,5, B +8,0, C +5,0. Umsatz: A −2,5, B +3,0, C +4,0. EBIT: A −6,0, B −2,0, C +1,0. Zuwächse sind blaugrün nach rechts, Rückgänge rot nach links gezeichnet. Kernaussage: Tochter A verliert Umsatz und EBIT trotz Absatzplus, nur C steigert das EBIT."
   },
+  "3.51": {
+   "status": "pruefung",
+   "datei": "Normale_Stapelsaeulen",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48; gleiche Gestaltung wie das Gegenstück Abb. 3.52",
+    "Werte aus der eingebetteten Excel-Tabelle des Originals (Ist Süd 60/80/50/80, Nord 60/50/50/30 Mio. €; Summen wie Ist in Abb. 3.48), Jahr 2027 ergänzt",
+    "Diagrammtyp bleibt: gestapelte Säulen je Quartal; Region Süd anthrazit, Nord grau statt Grün und Orange; Quartalssumme über jeder Säule",
+    "Regionen rechts neben der letzten Säule benannt statt Legende; Achse und Gitternetz entfallen, Werte in den Segmenten; Quartale als Q1–Q4 statt Achsentitel „Quartal“ mit 1–4"
+   ],
+   "alt": "Gestapeltes Säulendiagramm des Umsatzes Ist 2027 je Quartal in Mio. €, unten Region Süd (anthrazit), oben Region Nord (grau): Q1 60 + 60 = 120, Q2 80 + 50 = 130, Q3 50 + 50 = 100, Q4 80 + 30 = 110. Kernaussage: Region Süd trägt 270 von 460 Mio. € (59 %), Region Nord fällt im vierten Quartal auf 30 Mio. €."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

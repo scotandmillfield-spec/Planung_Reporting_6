@@ -647,6 +647,32 @@
    ],
    "alt": "Tabelle des Planumsatzes in Tsd. € für das Unternehmen und vier Regionen nach vier Verfahren: Top-down verteilt die Vorgabe 1.200 nach Vorjahresanteil (300, 360, 240, 300), Bottom-up verdichtet die erfassten Regionalwerte zu 1.150, im Gegenstrom melden die Regionen auf die verteilte Vorgabe 1.140 zurück (−60). Bei der Verteilung mit fixiertem Wert bleibt West bei 220, der Rest von 980 geht nach Vorjahresanteil an Nord und Ost (je 306,25) und Süd (367,50). Erfasste Werte sind umrandet, Pfeile zeigen Verteilen (nach unten) und Verdichten (nach oben)."
   },
+  "3.179": {
+   "status": "pruefung",
+   "datei": "Verschiedene_Eingabe-_und_Planungsfunktionen_am_Beispiel_der_Erloesplanung_mit_prevero",
+   "kommentare": [
+    "Produktscreenshot (Arbeitsblatt Erlösplanung) softwareneutral als Eingabemaske neu gebaut (Querformat 1024 px = 155 × 102 mm, im LaTeX gedreht): HTML mit allen fünf Funktionen bedienbar, PNG, PDF, PPTX",
+    "Sprechblasen 1–5 des Originals als nummerierte Beschriftungen in die Maske übernommen (1. Prognose, 2. Vertikal, 3. Horizontal mit Verfahren und Knopf, 4. Monatswerte manuell korrigierbar, 5. Ergebnisvorschau); dafür entfallen die Knöpfe in den Spaltenköpfen (∅, …, reset, refresh) und Verteilungsart/Periode/Kontrollkästchen „Planung auf Monatsebene“ je Zeile",
+    "Werte des Originals in Tsd. € (Ist 2025/2026, Forecast 2027; Vorgabe = Durchschnitt der drei Jahre 151,7, verteilt wie Forecast – entspricht dem Original); Monatswerte wie Original, die abgeschnittenen Monate Nov/Dez aus der Budgetsumme ergänzt; Rennrad 200 und Skates wie im Original noch ohne Monatswerte",
+    "Entfallen: Fenster, Menü-/Symbolleiste, Logo, grüne Navigationsleiste, Statusleiste mit Benutzer und Server, zugeklappter Abschnitt „Planungsvorgaben“, Zeilen „Absatzmenge“ (Platz) und Ebene „Outdoor“ (= Gesamt); zweites Skate-Produkt (im Original abgeschnitten) als „Inline 200S“ ergänzt, damit die Summen stimmen",
+    "Ersetzt: Kunde „1001 - Hervis“ (reales Unternehmen) → „1001 – Sportfachhandel“, Rolle „GL Administrator“ entfällt; gelber Ampelpunkt → Zielerreichung in % (86,0 %); Umsatzziel 13.000.000 € (passte nicht zu den Zeilen) → Vorgabe Gesamt 151,7 Tsd. €; IST 2009/2010, FC 1 2011, BUD 2012 → Ist 2025/2026, Forecast 2027, Budget 2028",
+    "Caption ohne Produktnamen? z. B. „Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung (in Anlehnung an Hein 2011, S. 42)“"
+   ],
+   "alt": "Eingabemaske „Erlösplanung“ für das Budget 2028 in Tsd. €. Oben stehen die Auswahl (Vertriebsgebiet, Kunde, Variante), die Planungsfunktionen 1. Prognose (Durchschnitt der drei Vorjahre: 151,7), 2. vertikale Verteilung wie Forecast 2027 und 3. horizontale Verteilung nach dem Saisonverlauf sowie die 5. Ergebnisvorschau mit Umsatzziel 151,7, aktueller Planung 130,4 und Zielerreichung 86,0 %. Darunter die Produkthierarchie von Gesamt über Winter- und Sommersport bis zu acht Einzelprodukten mit Ist 2025, Ist 2026, Forecast 2027, Vorgabe und Budget 2028 sowie den manuell korrigierbaren Monatswerten (4.); drei Produkte sind noch nicht auf Monate geplant."
+  },
+  "3.180": {
+   "status": "pruefung",
+   "datei": "Integrierte_Planungsfunktionen_in_Power_BI_mit_Power_ON_von_insightsoftware",
+   "kommentare": [
+    "Produktscreenshot (Planungsseite in einem BI-Bericht) softwareneutral als Planungsmaske neu gebaut (Querformat 1024 px = 155 × 104 mm, im LaTeX gedreht): HTML mit Verteilung (Summenzelle → proportional auf die Einzelwerte, Restausgleich auf 0,1 Tsd. €) und Verdichtung (Einzelwert → alle Summen); PNG, PDF, PPTX",
+    "Neu: Säulendiagramm „Monatsverlauf“ (Plan weiß mit Kontur) unter der Matrix, an den Monatsspalten ausgerichtet, zeigt die gewählte Zeile – jede Eingabe ändert Summen und Diagramm sofort („Eingabe im Bericht, Visual aktualisiert sich“)",
+    "Werte des Originals (Summe 20.000.000, ohne Einheit) als Umsatz in Tsd. € mit einer Nachkommastelle übernommen; auf 0,1 Tsd. € gerundet, ein Rundungsrest (Cola 0,5 l Dose, Mai) ausgeglichen, damit alle Summen exakt stimmen; Jahr 2015 → 2028",
+    "Entfallen: Logo des Beratungshauses, Startseiten- und Radiergummi-Symbol (→ Link „Filter zurücksetzen“), dunkelblaue Flächen und Zebrastreifen; Knopf mit dem Produktnamen einer Tabellenkalkulation → „Export“; zweizeilige Funktionsknöpfe auf ein Wort gekürzt (z. B. „Übernahme Versionen“ → „Versionen“, „Write Back“ → „Rückschreiben“, „Abstimmung Genehmigung“ → „Genehmigung“), „Goal Seek“ → „Zielwertsuche“",
+    "Sorten und Produkte deutsch (Apple 0.5l bottle → Apfel, 0,5 l Flasche; Cola DAVID 20l → 20 l Fass; KEG/keg 30l → 30 l Fass); in der Lernplattform zusätzlich Planungsalternativen Best Case (+5 %) und Worst Case (−8 %)",
+    "Caption ohne Produktnamen? z. B. „Integrierte Planungsfunktionen in einem BI-Bericht (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)“"
+   ],
+   "alt": "Planungsseite „Verteilung und Verdichtung“ eines Berichts für die Umsatzplanung 2028 in Tsd. €, rechts oben Datenschnitte für Jahr, Planungsalternative und Sorte. Darunter eine Leiste mit elf Planungsfunktionen von der manuellen Planung über Verteilung, Hochrechnung und Rückschreiben bis zu Genehmigung, Kommentaren und Export sowie die Knöpfe Speichern, Verwerfen, Zielwertsuche und Zurücksetzen. Die Matrix zeigt die Sorten Apfel, Cola, Orange und Tonic mit elf Produkten, Summen je Sorte und Monat und das Gesamtjahr von 20.000,0; ein Säulendiagramm darunter zeigt den Monatsverlauf des Gesamtumsatzes mit dem Höchstwert im Mai (3.306,5)."
+  },
   "3.181": {
    "status": "pruefung",
    "datei": "Abstimmung_von_Planungs-_und_Reportinginhalten",
@@ -658,6 +684,19 @@
     "Kursiver Kopf der unteren Kontengruppe übernommen (verdichtete, nicht geplante Ebene); Idee, nicht umgesetzt: kurze Überschriften „Planung auf der Kontengruppe“ / „Planung auf einem Planungskonto“"
    ],
    "alt": "Zwei Blöcke der Kontengruppe 472 Beiträge und Gebühren mit den Konten 472010 bis 472050. Oben ist die Kontengruppe die Planebene; der Planwert wird nach unten auf die Konten verteilt. Unten wird auf dem zusätzlichen Planungskonto 472090 Plan Beiträge und Gebühren geplant, das nach oben in die Kontengruppe eingeht."
+  },
+  "3.182": {
+   "status": "pruefung",
+   "datei": "Exemplarische_Balanced_Scorecard_Planung_mit_SAP_NetWeaver-Technologie",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Planungsmaske neu gebaut (Querformat 1024 px = 155 × 108 mm, im LaTeX gedreht): HTML mit erfassbaren Planwerten 2028–2030, Prüfungen, Hinweis bei rückläufigem Zielpfad und klappbaren Perspektiven; PNG, PDF, PPTX",
+    "Alle Kennzahlen und Werte des Originals übernommen; Jahre +19 (IST 2007/2008, PLAN 2008, PLAN 2009–2011 → Ist 2026/2027, Plan 2027, Plan 2028–2030); Beträge „[EUR]“ als Tsd. € gelesen – bitte prüfen; „Ist 2027“ ist beim Stand 30.06.2027 ein erwartetes Ist",
+    "Tendenzpfeile (↑ ↗ →) → „deutlich besser / besser / stabil“, Statussymbole (Häkchen, Ausrufezeichen, grünes Symbol) → „im Rahmen / kritisch / übertroffen“; Regeln aus den Werten rekonstruiert (Tendenz: Ist-Veränderung nach Wirkung ab 10 %/5 %; Status: Ist 2027 ggü. Plan 2027, bis 10 % darunter im Rahmen) – fachlich prüfen",
+    "Ein gemeinsamer Spaltenkopf statt vier; Maßnahmen-Panels rechts → Maßnahmen im Band jeder Perspektive; Knöpfe „Uebersicht“, „Anlegen“, „Aendern“ entfallen (Lernplattform: Link „Anlegen“, Abschnitte klappbar); blaue Flächen und gelbe Auswahlzeilen entfallen; Einheit in der Beschriftung statt an jeder Zahl, deutsches Zahlenformat",
+    "Umbenannt: zweimal „Stammkundenumsatz mit ext. Kunden“ → Stammkundenanteil (%) und Stammkundenumsatz (Tsd. €); „Neukundenumsatz“ (%) → Neukundenumsatzanteil; „Aufwendungen fuer Aus- und Weiterbildung“ → Weiterbildungsaufwand; „strategische Aufgabendeckungsziffer“ → Aufgabendeckungsziffer; „Potentiale“ → Potenziale; ROS und Umsatz neue Produkte als abgeleitete Werte (EBIT/Umsatz bzw. Anteil × Umsatz)",
+    "Caption ohne Produktnamen? z. B. „Exemplarische Balanced-Scorecard-Planung (in Anlehnung an Schön et al. 2010, S. 25)“; „Entnommen aus“ → „In Anlehnung an“"
+   ],
+   "alt": "Planungsmaske „Balanced-Scorecard-Planung“ für 2028 bis 2030 mit den Perspektiven Finanzen, Kunden, Prozesse und Potenziale. Je Perspektive stehen strategische Ziele mit ihren Kennzahlen, Ist 2026 und Ist 2027, eine Tendenz in Worten, Plan 2027 mit dem Status der Zielerreichung sowie die Planwerte 2028 bis 2030; im Band jeder Perspektive die zugehörigen Maßnahmen. Kritisch sind die persönlichen Kundenkontakte (350 statt 400) und die neuen Produkte (3 statt 4), übertroffen sind unter anderem Cashflow und Anzahl Neukunden."
   },
   "3.188": {
    "status": "pruefung",
@@ -1057,6 +1096,19 @@
      "text": "Der obere Kasten lautet jetzt „Navigation im Startcockpit“, die zweite Zeile „z. B. nach Bereichen und Spitzenkennzahlen“ steht ohne Klammern."
     }
    ]
+  },
+  "3.11": {
+   "status": "pruefung",
+   "datei": "Exemplarische_Startnavigation",
+   "kommentare": [
+    "Produktscreenshot (Startseite eines Berichtsportals) softwareneutral als Navigationsseite neu gebaut (Bauweg M, Hochformat 110 × 70 mm): HTML für die Lernplattform (Links mit Kurzinfo), PNG, Vektor-PDF, PPTX",
+    "Entfallen: Fensterrahmen, Menü- und Symbolleiste, Produktname, Firmenname im Titel und Firmenlogo, Statusleiste; hellblaue Kacheln mit Schatten und die vielen leeren Kacheln → gegliederte Linklisten; sechs Bereichsspalten → 2 × 3 Gruppen (Reihenfolge wie Original)",
+    "Abkürzungen ausgeschrieben: KST-/KTR-Analyse → Kostenstellen-/Kostenträgeranalyse, KTR-Rankings → Kostenträger-Ranking, Sales-/P-/PE-/KS-/CO-Cockpit → Vertriebs-, Produktions-, Entwicklungs-, Service-, Controlling-Cockpit; „(pdf)“ → „(PDF)“; im Controlling Kostenträger- vor Kostenstellenanalyse wie in den übrigen Bereichen",
+    "Kachel „FOCUS“ (unten links, vermutlich Absprung in eine weitere Anwendung, evtl. Produktname) entfallen; neu: Hinweiszeile zu interaktiven und PDF-Berichten",
+    "Bitte prüfen: Bedeutung von „FK-Bericht“ und „CPU-Übersicht“ unklar – unverändert übernommen, ggf. ausschreiben",
+    "Bauweg M beibehalten (reine Navigation ohne Daten); Ebenen Erläuterungen/Gestaltung fachlich prüfen"
+   ],
+   "alt": "Startseite „Berichtsnavigation“ eines Berichtsportals mit den Berichten nach sechs Unternehmensbereichen in zwei Reihen zu drei Spalten: Geschäftsleitung, Vertrieb, Produkterstellung, Produktentwicklung, Kundenservice und Controlling. Jede Gruppe beginnt mit einem Cockpit, darunter folgen Planvergleiche, Kostenträger- und Kostenstellenanalysen sowie PDF-Standardberichte, alle als Links. Eine Hinweiszeile erklärt, dass interaktive Berichte auf den Bereich vorselektiert öffnen und Einträge mit (PDF) Druckberichte sind."
   },
   "3.13": {
    "status": "pruefung",

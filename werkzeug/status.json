@@ -917,6 +917,22 @@
    ],
    "alt": "Kreisdiagramm des Umsatzes 2027 von 1.080 Mio. € nach vier strategischen Geschäftseinheiten, beginnend bei 12 Uhr im Uhrzeigersinn: SGE A 510 Mio. € (47 %), SGE B 420 Mio. € (39 %), SGE C 110 Mio. € (10 %) und SGE D 40 Mio. € (4 %). Die Segmente sind nach Größe von dunkel- nach hellgrau abgestuft und außen beschriftet. Kernaussage: SGE A und B erwirtschaften 86 % des Umsatzes, am stärksten wächst SGE C (+14,6 %)."
   },
+  "3.43": {
+   "status": "pruefung",
+   "datei": "Pie-_bzw_Donut-Chart",
+   "kommentare": [
+    "Als Dashboard (155 × 98 mm, quer) mit dem Dashboard-Baukasten neu aufgebaut: Kopf, Datenschnitte Monat und Kanal, KPI-Leiste, drei Ringdiagramme",
+    "Diagrammtyp bleibt: drei Donuts wie im Original (Besuche nach Kanal, Produktaufrufe und Umsatz nach Kategorie), Summe in der Mitte; die drei Quoten stehen als KPI-Leiste jeweils über dem zugehörigen Donut",
+    "Anteile und Quoten für Juni 2027 aus dem Original übernommen (Organisch 66 %, Textilien 40 % der Aufrufe, Schuhe 36 % des Umsatzes, 53 % / 50 % / 2,04 %); absolute Zahlen stimmig gemacht: 440 Tsd. statt 44 Mio. Besuche, Ø Warenkorb rund 200 €",
+    "Vormonatsvergleich in %-Punkten, farbig nach Wirkung (Blaugrün/Rot), statt grüner und roter Dreiecke ohne Wert",
+    "Grautöne statt Blau, Grün, Gelb und Pink; Kategorien in beiden Ringen in gleicher Reihenfolge und gleichem Grauton; Namen ungekürzt (Original: „Paid c…“, „Orga…“, „Decor…“, „Hous…“)",
+    "Entfallen: Browserrahmen, Reiter (Global, Traffic Sources …), Logos, Export-Knöpfe, englische Beschriftung; Firmenname „Shopping Made Easy“ entfällt",
+    "Online: Klick auf einen Kanal filtert das Dashboard, Klick auf eine Kategorie hebt sie in beiden Kategorie-Ringen hervor",
+    "Ringdiagramm ist in Power BI ein Standardvisual; Datenmodell mit zwei Tabellen (Besuche, Kategorien) in der Ebene „Nachbau“",
+    "Caption: Daten und Gestaltung sind neu – „In Anlehnung an bime Showcase 2017“ kann bleiben oder entfallen"
+   ],
+   "alt": "Dashboard eines Online-Shops für Juni 2027 mit drei Kennzahlen und drei Ringdiagrammen. Kennzahlen mit Vergleich zum Vormonat: qualifizierte Besuche 53,0 % (+1,5 %-Punkte), Produktaufrufquote 50,0 % (+1,3 %-Punkte), Konversionsrate 2,04 % (−0,11 %-Punkte, ungünstig). Darunter: Besuche nach Kanal (440 Tsd., 66 % organisch, 34 % bezahlte Kampagnen), Produktaufrufe nach Kategorie (1,10 Mio.; Textilien 40 %, Schuhe 30 %, Haushalt 20 %, Dekoration 10 %) und Umsatz nach Kategorie (1,82 Mio. €; Schuhe 36 %, Textilien 31 %, Dekoration 18 %, Haushalt 15 %). Kernaussage: Dekoration bringt 10 % der Aufrufe, aber 18 % des Umsatzes."
+  },
   "3.44": {
    "status": "pruefung",
    "datei": "Sunburst-Chart",

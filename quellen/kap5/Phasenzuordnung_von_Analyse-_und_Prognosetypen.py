@@ -23,16 +23,16 @@ PHASEN = ["Deskriptive Analyse", "Diagnostische Analyse", "Prädiktive Analyse",
           "Traditionelle Planung/Prognose", "Prädiktive Prognose", "Präskriptive Prognose"]
 ZEITRAUM = ["Vergangenheit"] * 3 + ["Gegenwart"] + ["Zukunft"] * 3
 GRUNDFRAGE = ["Was ist geschehen?", "Warum ist es geschehen?", f"Welche Zusammen{SHY}hänge und Trends gibt es?",
-              "Was geschieht gerade?", "Was wird erwartet? Was soll geschehen?", "Was könnte geschehen?",
-              "Was soll getan werden? Was wird getan?"]
+              "Was geschieht gerade?", "Was wird erwartet?\nWas soll geschehen?", "Was könnte geschehen?",
+              "Was soll getan werden?\nWas wird getan?"]
 TYPEN = [  # (Text, zugeordnete Phasen 0–6)
-    ("Optimierung durch Maßnahmen auf Basis statistischer Analyse- und Prognosemethoden/-modelle "
+    ("Optimierung durch Maßnahmen auf Basis statistischer Analyse- und Prognosemethoden/-modelle\n"
      "(Big-Data-Analytics)", {6}),
-    ("Simulationen & Szenarien auf Basis statistischer Analyse- und Prognosemethoden/-modelle "
+    ("Simulationen & Szenarien auf Basis statistischer Analyse- und Prognosemethoden/-modelle\n"
      "(Big-Data-Analytics)", {2, 5}),
-    ("Forecasts/Prognosen auf Basis statistischer Analyse- und Prognosemethoden/-modelle (Big-Data-Analytics)",
+    ("Forecasts/Prognosen auf Basis statistischer Analyse- und Prognosemethoden/-modelle\n(Big-Data-Analytics)",
      {2, 5}),
-    ("Radar-/Scan-Analysen auf Basis statistischer Analysemethoden [Zusammenhänge, Trends etc.] "
+    ("Radar-/Scan-Analysen auf Basis statistischer Analysemethoden [Zusammenhänge, Trends etc.]\n"
      "(Big-Data-Analytics)", {2}),
     ("Monitoring mit Streamingdaten", {3}),
     ("Multidimensionale OLAP-gestützte Planung und Analyse", {0, 1, 4}),

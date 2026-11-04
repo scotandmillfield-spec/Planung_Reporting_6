@@ -1,0 +1,337 @@
+﻿Land;Verkaufsorganisation;Jahr;Produktkategorie;Kunde;Ort;Umsatz_EUR;Rabatt_EUR;Absatz_Stueck
+USA;Ost;2026;Tourenräder;Fachhandel Boston;Boston;4242782,70;212139,24;1125
+USA;Ost;2026;Tourenräder;Fachmarkt Detroit;Detroit;3044132,73;91323,99;804
+USA;Ost;2026;Tourenräder;Sporthaus New York;New York;3021475,08;90644,32;806
+USA;Ost;2026;Tourenräder;Radhandel Philadelphia;Philadelphia;2263061,04;67891,90;601
+USA;Ost;2026;Tourenräder;Fachhandel Atlanta;Atlanta;1878128,76;56343,90;497
+USA;Ost;2026;Tourenräder;Sporthaus Washington;Washington;1844751,60;55342,56;492
+USA;Ost;2026;Tourenräder;Radhandel Grand Rapids;Grand Rapids;847338,39;0,00;225
+USA;Ost;2026;Rennräder;Fachhandel Boston;Boston;3153156,10;157657,90;954
+USA;Ost;2026;Rennräder;Fachhandel Atlanta;Atlanta;1935564,05;58067,01;607
+USA;Ost;2026;Rennräder;Sporthaus New York;New York;1891345,58;56740,45;587
+USA;Ost;2026;Rennräder;Fachmarkt Detroit;Detroit;1650884,73;49526,60;551
+USA;Ost;2026;Rennräder;Radhandel Philadelphia;Philadelphia;1501845,18;45055,40;453
+USA;Ost;2026;Rennräder;Sporthaus Washington;Washington;1413164,52;42394,96;418
+USA;Ost;2026;Rennräder;Radhandel Grand Rapids;Grand Rapids;625880,53;0,00;207
+USA;Ost;2026;Mountainbikes;Fachhandel Boston;Boston;2241134,53;112056,83;960
+USA;Ost;2026;Mountainbikes;Fachmarkt Detroit;Detroit;1561046,73;46831,43;661
+USA;Ost;2026;Mountainbikes;Sporthaus New York;New York;1418159,11;42544,79;596
+USA;Ost;2026;Mountainbikes;Radhandel Philadelphia;Philadelphia;1376011,22;41280,28;570
+USA;Ost;2026;Mountainbikes;Fachhandel Atlanta;Atlanta;1304993,87;39149,81;553
+USA;Ost;2026;Mountainbikes;Sporthaus Washington;Washington;742213,02;22266,39;309
+USA;Ost;2026;Mountainbikes;Radhandel Grand Rapids;Grand Rapids;641716,31;0,00;278
+USA;Ost;2026;E-Bikes;Fachhandel Boston;Boston;716266,32;35813,30;147
+USA;Ost;2026;E-Bikes;Fachhandel Atlanta;Atlanta;433657,84;13009,73;89
+USA;Ost;2026;E-Bikes;Fachmarkt Detroit;Detroit;287481,04;8624,42;59
+USA;Ost;2026;E-Bikes;Sporthaus Washington;Washington;258245,68;7747,37;53
+USA;Ost;2026;E-Bikes;Sporthaus New York;New York;243628,00;7308,84;50
+USA;Ost;2026;E-Bikes;Radhandel Grand Rapids;Grand Rapids;141304,24;0,00;29
+USA;Ost;2026;E-Bikes;Radhandel Philadelphia;Philadelphia;131559,12;3946,77;27
+USA;Ost;2026;Zubehör;Fachhandel Boston;Boston;85677,94;4284,18;2161
+USA;Ost;2026;Zubehör;Fachmarkt Detroit;Detroit;50705,39;1521,21;1188
+USA;Ost;2026;Zubehör;Sporthaus New York;New York;50677,89;1520,28;1242
+USA;Ost;2026;Zubehör;Radhandel Philadelphia;Philadelphia;47791,90;1433,86;1159
+USA;Ost;2026;Zubehör;Fachhandel Atlanta;Atlanta;37654,29;1129,66;958
+USA;Ost;2026;Zubehör;Sporthaus Washington;Washington;37555,66;1126,69;952
+USA;Ost;2026;Zubehör;Radhandel Grand Rapids;Grand Rapids;18433,72;0,00;472
+USA;Ost;2026;Trendräder;Fachhandel Boston;Boston;49700,13;2485,00;29
+USA;Ost;2026;Trendräder;Sporthaus New York;New York;36035,77;1195,42;21
+USA;Ost;2026;Trendräder;Fachmarkt Detroit;Detroit;32031,79;1062,59;18
+USA;Ost;2026;Trendräder;Radhandel Philadelphia;Philadelphia;26693,16;885,49;15
+USA;Ost;2026;Trendräder;Fachhandel Atlanta;Atlanta;24023,84;796,94;14
+USA;Ost;2026;Trendräder;Sporthaus Washington;Washington;20019,87;664,12;11
+USA;Ost;2026;Trendräder;Radhandel Grand Rapids;Grand Rapids;14681,24;0,00;8
+USA;Ost;2025;Tourenräder;Fachhandel Boston;Boston;4078440,57;195765,15;1098
+USA;Ost;2025;Tourenräder;Fachmarkt Detroit;Detroit;2793316,01;81006,16;744
+USA;Ost;2025;Tourenräder;Sporthaus New York;New York;2782744,84;80699,60;791
+USA;Ost;2025;Tourenräder;Radhandel Philadelphia;Philadelphia;2148689,09;62311,98;537
+USA;Ost;2025;Tourenräder;Fachhandel Atlanta;Atlanta;1865014,20;54085,41;465
+USA;Ost;2025;Tourenräder;Sporthaus Washington;Washington;1780904,62;51646,23;459
+USA;Ost;2025;Tourenräder;Radhandel Grand Rapids;Grand Rapids;826200,09;0,00;212
+USA;Ost;2025;Rennräder;Fachhandel Boston;Boston;2651142,69;127254,85;881
+USA;Ost;2025;Rennräder;Fachmarkt Detroit;Detroit;1392658,88;40387,11;494
+USA;Ost;2025;Rennräder;Sporthaus New York;New York;1681302,67;48757,78;546
+USA;Ost;2025;Rennräder;Radhandel Philadelphia;Philadelphia;1311458,25;38032,29;400
+USA;Ost;2025;Rennräder;Fachhandel Atlanta;Atlanta;1704800,28;49439,21;533
+USA;Ost;2025;Rennräder;Sporthaus Washington;Washington;1283766,12;37229,22;359
+USA;Ost;2025;Rennräder;Radhandel Grand Rapids;Grand Rapids;530631,99;0,00;192
+USA;Ost;2025;Mountainbikes;Fachhandel Boston;Boston;2239252,53;107484,12;923
+USA;Ost;2025;Mountainbikes;Fachmarkt Detroit;Detroit;1428884,68;41437,66;640
+USA;Ost;2025;Mountainbikes;Sporthaus New York;New York;1315854,85;38159,79;567
+USA;Ost;2025;Mountainbikes;Radhandel Philadelphia;Philadelphia;1291104,87;37442,04;566
+USA;Ost;2025;Mountainbikes;Fachhandel Atlanta;Atlanta;1223836,40;35491,26;514
+USA;Ost;2025;Mountainbikes;Sporthaus Washington;Washington;665885,54;19310,68;308
+USA;Ost;2025;Mountainbikes;Radhandel Grand Rapids;Grand Rapids;605480,14;0,00;270
+USA;Ost;2025;E-Bikes;Fachhandel Boston;Boston;559424,72;26852,39;116
+USA;Ost;2025;E-Bikes;Fachmarkt Detroit;Detroit;235304,30;6823,82;48
+USA;Ost;2025;E-Bikes;Sporthaus New York;New York;192839,08;5592,33;41
+USA;Ost;2025;E-Bikes;Radhandel Philadelphia;Philadelphia;107832,56;3127,14;22
+USA;Ost;2025;E-Bikes;Fachhandel Atlanta;Atlanta;332927,43;9654,90;71
+USA;Ost;2025;E-Bikes;Sporthaus Washington;Washington;210058,73;6091,70;42
+USA;Ost;2025;E-Bikes;Radhandel Grand Rapids;Grand Rapids;112439,43;0,00;24
+USA;Ost;2025;Zubehör;Fachhandel Boston;Boston;84704,63;4065,82;2064
+USA;Ost;2025;Zubehör;Fachmarkt Detroit;Detroit;51734,58;1500,30;1216
+USA;Ost;2025;Zubehör;Sporthaus New York;New York;48546,27;1407,84;1181
+USA;Ost;2025;Zubehör;Radhandel Philadelphia;Philadelphia;49448,51;1434,01;1153
+USA;Ost;2025;Zubehör;Fachhandel Atlanta;Atlanta;36171,76;1048,98;974
+USA;Ost;2025;Zubehör;Sporthaus Washington;Washington;35564,72;1031,38;892
+USA;Ost;2025;Zubehör;Radhandel Grand Rapids;Grand Rapids;18912,91;0,00;439
+USA;Ost;2025;Trendräder;Fachhandel Boston;Boston;49755,02;2388,24;29
+USA;Ost;2025;Trendräder;Fachmarkt Detroit;Detroit;34509,50;1000,78;18
+USA;Ost;2025;Trendräder;Sporthaus New York;New York;38641,09;1120,59;22
+USA;Ost;2025;Trendräder;Radhandel Philadelphia;Philadelphia;29011,21;841,33;15
+USA;Ost;2025;Trendräder;Fachhandel Atlanta;Atlanta;23868,87;692,20;15
+USA;Ost;2025;Trendräder;Sporthaus Washington;Washington;21219,36;615,36;11
+USA;Ost;2025;Trendräder;Radhandel Grand Rapids;Grand Rapids;15716,01;0,00;8
+USA;West;2026;Tourenräder;Fachhandel Seattle;Seattle;2176734,62;60990,05;448
+USA;West;2026;Tourenräder;Fachmarkt Portland;Portland;1513939,80;65872,24;310
+USA;West;2026;Tourenräder;Sporthaus San Francisco;San Francisco;1684486,47;55353,12;376
+USA;West;2026;Tourenräder;Radhandel Los Angeles;Los Angeles;1130743,72;29218,94;252
+USA;West;2026;Tourenräder;Fachhandel San Diego;San Diego;1177639,51;30302,44;246
+USA;West;2026;Tourenräder;Sporthaus Denver;Denver;1074044,00;46570,23;205
+USA;West;2026;Tourenräder;Radhandel Phoenix;Phoenix;905911,96;0,00;208
+USA;West;2026;Rennräder;Fachhandel Seattle;Seattle;1319007,74;36957,35;347
+USA;West;2026;Rennräder;Fachmarkt Portland;Portland;1660376,31;72243,76;370
+USA;West;2026;Rennräder;Sporthaus San Francisco;San Francisco;1386656,52;45566,27;373
+USA;West;2026;Rennräder;Radhandel Los Angeles;Los Angeles;944634,32;24409,79;235
+USA;West;2026;Rennräder;Fachhandel San Diego;San Diego;902605,87;23225,41;222
+USA;West;2026;Rennräder;Sporthaus Denver;Denver;808193,85;35043,05;188
+USA;West;2026;Rennräder;Radhandel Phoenix;Phoenix;803962,37;0,00;184
+USA;West;2026;Mountainbikes;Fachhandel Seattle;Seattle;804336,58;22536,75;251
+USA;West;2026;Mountainbikes;Fachmarkt Portland;Portland;680308,99;29600,57;211
+USA;West;2026;Mountainbikes;Sporthaus San Francisco;San Francisco;773447,46;25415,89;268
+USA;West;2026;Mountainbikes;Radhandel Los Angeles;Los Angeles;686446,50;17738,10;207
+USA;West;2026;Mountainbikes;Fachhandel San Diego;San Diego;719432,60;18512,08;228
+USA;West;2026;Mountainbikes;Sporthaus Denver;Denver;544491,46;23608,99;177
+USA;West;2026;Mountainbikes;Radhandel Phoenix;Phoenix;358120,89;0,00;112
+USA;West;2026;E-Bikes;Fachhandel Seattle;Seattle;318874,01;8934,55;47
+USA;West;2026;E-Bikes;Fachmarkt Portland;Portland;343559,24;14948,43;59
+USA;West;2026;E-Bikes;Sporthaus San Francisco;San Francisco;248636,13;8170,32;42
+USA;West;2026;E-Bikes;Radhandel Los Angeles;Los Angeles;278115,04;7186,62;46
+USA;West;2026;E-Bikes;Fachhandel San Diego;San Diego;308653,50;7942,12;47
+USA;West;2026;E-Bikes;Sporthaus Denver;Denver;220949,34;9580,30;34
+USA;West;2026;E-Bikes;Radhandel Phoenix;Phoenix;184057,33;0,00;32
+USA;West;2026;Zubehör;Fachhandel Seattle;Seattle;62097,41;1739,91;1184
+USA;West;2026;Zubehör;Fachmarkt Portland;Portland;50855,82;2212,76;1059
+USA;West;2026;Zubehör;Sporthaus San Francisco;San Francisco;53528,36;1758,97;1034
+USA;West;2026;Zubehör;Radhandel Los Angeles;Los Angeles;40172,68;1038,08;859
+USA;West;2026;Zubehör;Fachhandel San Diego;San Diego;36605,93;941,93;766
+USA;West;2026;Zubehör;Sporthaus Denver;Denver;36252,45;1571,90;667
+USA;West;2026;Zubehör;Radhandel Phoenix;Phoenix;27221,32;0,00;549
+USA;West;2026;Trendräder;Fachhandel Seattle;Seattle;38742,66;1085,53;17
+USA;West;2026;Trendräder;Fachmarkt Portland;Portland;33541,01;1459,39;16
+USA;West;2026;Trendräder;Sporthaus San Francisco;San Francisco;29362,94;964,88;14
+USA;West;2026;Trendräder;Radhandel Los Angeles;Los Angeles;21424,58;553,62;9
+USA;West;2026;Trendräder;Fachhandel San Diego;San Diego;23359,49;601,07;11
+USA;West;2026;Trendräder;Sporthaus Denver;Denver;24274,71;1052,54;11
+USA;West;2026;Trendräder;Radhandel Phoenix;Phoenix;14194,51;0,00;6
+USA;West;2025;Tourenräder;Fachhandel Seattle;Seattle;1597063,91;57666,83;300
+USA;West;2025;Tourenräder;Fachmarkt Portland;Portland;1608680,17;48910,22;329
+USA;West;2025;Tourenräder;Sporthaus San Francisco;San Francisco;2114557,16;87144,37;413
+USA;West;2025;Tourenräder;Radhandel Los Angeles;Los Angeles;1255302,78;32030,83;265
+USA;West;2025;Tourenräder;Fachhandel San Diego;San Diego;1456408,15;54039,65;281
+USA;West;2025;Tourenräder;Sporthaus Denver;Denver;692546,67;26645,42;145
+USA;West;2025;Tourenräder;Radhandel Phoenix;Phoenix;936745,13;0,00;208
+USA;West;2025;Rennräder;Fachhandel Seattle;Seattle;1306058,03;47159,18;296
+USA;West;2025;Rennräder;Fachmarkt Portland;Portland;1424996,60;43325,51;317
+USA;West;2025;Rennräder;Sporthaus San Francisco;San Francisco;1221346,11;50333,67;279
+USA;West;2025;Rennräder;Radhandel Los Angeles;Los Angeles;1214952,71;31001,24;319
+USA;West;2025;Rennräder;Fachhandel San Diego;San Diego;887438,19;32928,17;212
+USA;West;2025;Rennräder;Sporthaus Denver;Denver;577130,11;22204,82;137
+USA;West;2025;Rennräder;Radhandel Phoenix;Phoenix;571137,09;0,00;142
+USA;West;2025;Mountainbikes;Fachhandel Seattle;Seattle;974600,41;35190,90;341
+USA;West;2025;Mountainbikes;Fachmarkt Portland;Portland;689820,59;20973,26;234
+USA;West;2025;Mountainbikes;Sporthaus San Francisco;San Francisco;676510,74;27880,12;217
+USA;West;2025;Mountainbikes;Radhandel Los Angeles;Los Angeles;657078,61;16766,29;210
+USA;West;2025;Mountainbikes;Fachhandel San Diego;San Diego;630775,99;23404,78;214
+USA;West;2025;Mountainbikes;Sporthaus Denver;Denver;437193,90;16820,84;136
+USA;West;2025;Mountainbikes;Radhandel Phoenix;Phoenix;322562,00;0,00;115
+USA;West;2025;E-Bikes;Fachhandel Seattle;Seattle;382819,12;13822,84;59
+USA;West;2025;E-Bikes;Fachmarkt Portland;Portland;310873,79;9451,79;54
+USA;West;2025;E-Bikes;Sporthaus San Francisco;San Francisco;337137,50;13893,99;57
+USA;West;2025;E-Bikes;Radhandel Los Angeles;Los Angeles;319505,35;8152,63;52
+USA;West;2025;E-Bikes;Fachhandel San Diego;San Diego;272107,27;10096,47;42
+USA;West;2025;E-Bikes;Sporthaus Denver;Denver;193461,20;7443,33;33
+USA;West;2025;E-Bikes;Radhandel Phoenix;Phoenix;128390,54;0,00;20
+USA;West;2025;Zubehör;Fachhandel Seattle;Seattle;50623,22;1827,90;1052
+USA;West;2025;Zubehör;Fachmarkt Portland;Portland;62899,05;1912,38;1323
+USA;West;2025;Zubehör;Sporthaus San Francisco;San Francisco;53987,78;2224,92;1151
+USA;West;2025;Zubehör;Radhandel Los Angeles;Los Angeles;40801,96;1041,12;853
+USA;West;2025;Zubehör;Fachhandel San Diego;San Diego;35015,77;1299,25;623
+USA;West;2025;Zubehör;Sporthaus Denver;Denver;23351,61;898,44;426
+USA;West;2025;Zubehör;Radhandel Phoenix;Phoenix;29750,52;0,00;536
+USA;West;2025;Trendräder;Fachhandel Seattle;Seattle;37388,37;1350,02;15
+USA;West;2025;Trendräder;Fachmarkt Portland;Portland;31528,19;958,58;14
+USA;West;2025;Trendräder;Sporthaus San Francisco;San Francisco;36885,91;1520,13;18
+USA;West;2025;Trendräder;Radhandel Los Angeles;Los Angeles;27208,54;694,26;12
+USA;West;2025;Trendräder;Fachhandel San Diego;San Diego;20232,43;750,72;10
+USA;West;2025;Trendräder;Sporthaus Denver;Denver;15292,15;588,36;7
+USA;West;2025;Trendräder;Radhandel Phoenix;Phoenix;19834,68;0,00;9
+Deutschland;Nord;2026;Tourenräder;Fachhandel Hamburg;Hamburg;824866,47;19770,71;129
+Deutschland;Nord;2026;Tourenräder;Fachmarkt Bremen;Bremen;897197,65;29623,64;147
+Deutschland;Nord;2026;Tourenräder;Sporthaus Hannover;Hannover;1043246,65;36583,52;158
+Deutschland;Nord;2026;Tourenräder;Radhandel Berlin;Berlin;942007,01;24916,95;140
+Deutschland;Nord;2026;Tourenräder;Fachhandel Kiel;Kiel;674826,07;22100,81;106
+Deutschland;Nord;2026;Tourenräder;Sporthaus Rostock;Rostock;648783,16;15712,69;103
+Deutschland;Nord;2026;Tourenräder;Radhandel Münster;Münster;610436,22;0,00;88
+Deutschland;Nord;2026;Rennräder;Fachhandel Hamburg;Hamburg;529851,24;12699,67;98
+Deutschland;Nord;2026;Rennräder;Fachmarkt Bremen;Bremen;473019,42;15618,14;93
+Deutschland;Nord;2026;Rennräder;Sporthaus Hannover;Hannover;506395,92;17757,78;97
+Deutschland;Nord;2026;Rennräder;Radhandel Berlin;Berlin;536848,24;14200,13;94
+Deutschland;Nord;2026;Rennräder;Fachhandel Kiel;Kiel;403533,38;13215,87;73
+Deutschland;Nord;2026;Rennräder;Sporthaus Rostock;Rostock;301519,41;7302,41;51
+Deutschland;Nord;2026;Rennräder;Radhandel Münster;Münster;336440,40;0,00;64
+Deutschland;Nord;2026;Mountainbikes;Fachhandel Hamburg;Hamburg;543117,86;13017,65;128
+Deutschland;Nord;2026;Mountainbikes;Fachmarkt Bremen;Bremen;385915,33;12742,14;86
+Deutschland;Nord;2026;Mountainbikes;Sporthaus Hannover;Hannover;433536,85;15202,83;113
+Deutschland;Nord;2026;Mountainbikes;Radhandel Berlin;Berlin;398982,66;10553,46;108
+Deutschland;Nord;2026;Mountainbikes;Fachhandel Kiel;Kiel;319203,09;10454,02;84
+Deutschland;Nord;2026;Mountainbikes;Sporthaus Rostock;Rostock;284147,64;6881,69;68
+Deutschland;Nord;2026;Mountainbikes;Radhandel Münster;Münster;223682,18;0,00;55
+Deutschland;Nord;2026;E-Bikes;Fachhandel Hamburg;Hamburg;1000410,60;23978,21;110
+Deutschland;Nord;2026;E-Bikes;Fachmarkt Bremen;Bremen;973628,73;32147,23;121
+Deutschland;Nord;2026;E-Bikes;Sporthaus Hannover;Hannover;884481,44;31016,10;95
+Deutschland;Nord;2026;E-Bikes;Radhandel Berlin;Berlin;789258,58;20876,61;100
+Deutschland;Nord;2026;E-Bikes;Fachhandel Kiel;Kiel;770748,97;25242,32;89
+Deutschland;Nord;2026;E-Bikes;Sporthaus Rostock;Rostock;688781,72;16681,41;79
+Deutschland;Nord;2026;E-Bikes;Radhandel Münster;Münster;654910,66;0,00;79
+Deutschland;Nord;2026;Zubehör;Fachhandel Hamburg;Hamburg;49574,48;1188,22;739
+Deutschland;Nord;2026;Zubehör;Fachmarkt Bremen;Bremen;45135,66;1490,29;639
+Deutschland;Nord;2026;Zubehör;Sporthaus Hannover;Hannover;64163,30;2250,01;939
+Deutschland;Nord;2026;Zubehör;Radhandel Berlin;Berlin;50530,71;1336,58;807
+Deutschland;Nord;2026;Zubehör;Fachhandel Kiel;Kiel;46433,68;1520,72;703
+Deutschland;Nord;2026;Zubehör;Sporthaus Rostock;Rostock;34627,84;838,64;543
+Deutschland;Nord;2026;Zubehör;Radhandel Münster;Münster;29280,50;0,00;406
+Deutschland;Nord;2026;Trendräder;Fachhandel Hamburg;Hamburg;46682,49;1118,90;15
+Deutschland;Nord;2026;Trendräder;Fachmarkt Bremen;Bremen;38468,43;1270,15;12
+Deutschland;Nord;2026;Trendräder;Sporthaus Hannover;Hannover;35472,41;1243,91;11
+Deutschland;Nord;2026;Trendräder;Radhandel Berlin;Berlin;29012,26;767,40;10
+Deutschland;Nord;2026;Trendräder;Fachhandel Kiel;Kiel;30848,42;1010,30;10
+Deutschland;Nord;2026;Trendräder;Sporthaus Rostock;Rostock;24790,09;600,38;8
+Deutschland;Nord;2026;Trendräder;Radhandel Münster;Münster;20002,18;0,00;7
+Deutschland;Nord;2025;Tourenräder;Fachhandel Hamburg;Hamburg;1093866,44;30644,99;191
+Deutschland;Nord;2025;Tourenräder;Fachmarkt Bremen;Bremen;1014041,02;24402,87;153
+Deutschland;Nord;2025;Tourenräder;Sporthaus Hannover;Hannover;968308,93;21270,83;161
+Deutschland;Nord;2025;Tourenräder;Radhandel Berlin;Berlin;928718,59;20775,49;140
+Deutschland;Nord;2025;Tourenräder;Fachhandel Kiel;Kiel;831159,66;24110,41;135
+Deutschland;Nord;2025;Tourenräder;Sporthaus Rostock;Rostock;554860,50;21006,09;98
+Deutschland;Nord;2025;Tourenräder;Radhandel Münster;Münster;412026,43;0,00;72
+Deutschland;Nord;2025;Rennräder;Fachhandel Hamburg;Hamburg;486473,78;13628,71;93
+Deutschland;Nord;2025;Rennräder;Fachmarkt Bremen;Bremen;569691,10;13709,60;101
+Deutschland;Nord;2025;Rennräder;Sporthaus Hannover;Hannover;595805,06;13088,04;111
+Deutschland;Nord;2025;Rennräder;Radhandel Berlin;Berlin;458383,43;10254,06;87
+Deutschland;Nord;2025;Rennräder;Fachhandel Kiel;Kiel;422049,80;12242,88;79
+Deutschland;Nord;2025;Rennräder;Sporthaus Rostock;Rostock;278040,60;10526,15;55
+Deutschland;Nord;2025;Rennräder;Radhandel Münster;Münster;236669,84;0,00;50
+Deutschland;Nord;2025;Mountainbikes;Fachhandel Hamburg;Hamburg;462388,50;12953,95;112
+Deutschland;Nord;2025;Mountainbikes;Fachmarkt Bremen;Bremen;559967,72;13475,61;149
+Deutschland;Nord;2025;Mountainbikes;Sporthaus Hannover;Hannover;375314,86;8244,54;90
+Deutschland;Nord;2025;Mountainbikes;Radhandel Berlin;Berlin;400541,73;8960,14;98
+Deutschland;Nord;2025;Mountainbikes;Fachhandel Kiel;Kiel;371677,55;10781,68;106
+Deutschland;Nord;2025;Mountainbikes;Sporthaus Rostock;Rostock;213117,02;8068,25;58
+Deutschland;Nord;2025;Mountainbikes;Radhandel Münster;Münster;210618,28;0,00;55
+Deutschland;Nord;2025;E-Bikes;Fachhandel Hamburg;Hamburg;1401698,39;39269,00;184
+Deutschland;Nord;2025;E-Bikes;Fachmarkt Bremen;Bremen;1158448,76;27878,04;136
+Deutschland;Nord;2025;E-Bikes;Sporthaus Hannover;Hannover;941348,76;20678,60;114
+Deutschland;Nord;2025;E-Bikes;Radhandel Berlin;Berlin;798313,12;17858,31;96
+Deutschland;Nord;2025;E-Bikes;Fachhandel Kiel;Kiel;898605,42;26066,88;122
+Deutschland;Nord;2025;E-Bikes;Sporthaus Rostock;Rostock;559348,45;21176,00;76
+Deutschland;Nord;2025;E-Bikes;Radhandel Münster;Münster;479151,35;0,00;67
+Deutschland;Nord;2025;Zubehör;Fachhandel Hamburg;Hamburg;64626,59;1810,53;963
+Deutschland;Nord;2025;Zubehör;Fachmarkt Bremen;Bremen;61138,36;1471,29;871
+Deutschland;Nord;2025;Zubehör;Sporthaus Hannover;Hannover;48087,22;1056,33;741
+Deutschland;Nord;2025;Zubehör;Radhandel Berlin;Berlin;52435,97;1173,00;861
+Deutschland;Nord;2025;Zubehör;Fachhandel Kiel;Kiel;43515,10;1262,29;661
+Deutschland;Nord;2025;Zubehör;Sporthaus Rostock;Rostock;31669,55;1198,96;442
+Deutschland;Nord;2025;Zubehör;Radhandel Münster;Münster;24713,70;0,00;376
+Deutschland;Nord;2025;Trendräder;Fachhandel Hamburg;Hamburg;39912,74;1118,17;15
+Deutschland;Nord;2025;Trendräder;Fachmarkt Bremen;Bremen;41612,40;1001,40;16
+Deutschland;Nord;2025;Trendräder;Sporthaus Hannover;Hannover;40738,20;894,90;14
+Deutschland;Nord;2025;Trendräder;Radhandel Berlin;Berlin;25155,82;562,74;9
+Deutschland;Nord;2025;Trendräder;Fachhandel Kiel;Kiel;33040,83;958,45;12
+Deutschland;Nord;2025;Trendräder;Sporthaus Rostock;Rostock;16057,95;607,93;5
+Deutschland;Nord;2025;Trendräder;Radhandel Münster;Münster;15960,48;0,00;5
+Deutschland;Süd;2026;Tourenräder;Fachhandel München;München;1542954,05;40810,18;279
+Deutschland;Süd;2026;Tourenräder;Fachmarkt Stuttgart;Stuttgart;1122546,13;33586,27;181
+Deutschland;Süd;2026;Tourenräder;Sporthaus Nürnberg;Nürnberg;1436434,07;53033,18;226
+Deutschland;Süd;2026;Tourenräder;Radhandel Freiburg;Freiburg;954775,40;30022,98;157
+Deutschland;Süd;2026;Tourenräder;Fachhandel Augsburg;Augsburg;838837,27;23385,29;136
+Deutschland;Süd;2026;Tourenräder;Sporthaus Regensburg;Regensburg;812306,70;25252,52;129
+Deutschland;Süd;2026;Tourenräder;Radhandel Karlsruhe;Karlsruhe;823623,02;0,00;128
+Deutschland;Süd;2026;Rennräder;Fachhandel München;München;957263,05;25319,02;179
+Deutschland;Süd;2026;Rennräder;Fachmarkt Stuttgart;Stuttgart;1060187,12;31720,50;189
+Deutschland;Süd;2026;Rennräder;Sporthaus Nürnberg;Nürnberg;739860,22;27315,66;154
+Deutschland;Süd;2026;Rennräder;Radhandel Freiburg;Freiburg;560849,94;17635,97;108
+Deutschland;Süd;2026;Rennräder;Fachhandel Augsburg;Augsburg;583163,79;16257,57;111
+Deutschland;Süd;2026;Rennräder;Sporthaus Regensburg;Regensburg;572398,29;17794,39;117
+Deutschland;Süd;2026;Rennräder;Radhandel Karlsruhe;Karlsruhe;524911,77;0,00;99
+Deutschland;Süd;2026;Mountainbikes;Fachhandel München;München;1306449,02;34554,77;372
+Deutschland;Süd;2026;Mountainbikes;Fachmarkt Stuttgart;Stuttgart;974925,95;29169,51;236
+Deutschland;Süd;2026;Mountainbikes;Sporthaus Nürnberg;Nürnberg;862644,46;31848,85;250
+Deutschland;Süd;2026;Mountainbikes;Radhandel Freiburg;Freiburg;621262,32;19535,64;151
+Deutschland;Süd;2026;Mountainbikes;Fachhandel Augsburg;Augsburg;733819,18;20457,57;194
+Deutschland;Süd;2026;Mountainbikes;Sporthaus Regensburg;Regensburg;698649,67;21719,22;202
+Deutschland;Süd;2026;Mountainbikes;Radhandel Karlsruhe;Karlsruhe;448055,77;0,00;113
+Deutschland;Süd;2026;E-Bikes;Fachhandel München;München;2140253,86;56608,40;265
+Deutschland;Süd;2026;E-Bikes;Fachmarkt Stuttgart;Stuttgart;1998408,52;59791,82;240
+Deutschland;Süd;2026;E-Bikes;Sporthaus Nürnberg;Nürnberg;1886555,65;69651,68;232
+Deutschland;Süd;2026;E-Bikes;Radhandel Freiburg;Freiburg;951644,33;29924,53;111
+Deutschland;Süd;2026;E-Bikes;Fachhandel Augsburg;Augsburg;1283551,66;35783,13;163
+Deutschland;Süd;2026;E-Bikes;Sporthaus Regensburg;Regensburg;863137,16;26832,71;102
+Deutschland;Süd;2026;E-Bikes;Radhandel Karlsruhe;Karlsruhe;830223,28;0,00;106
+Deutschland;Süd;2026;Zubehör;Fachhandel München;München;96349,36;2548,38;1621
+Deutschland;Süd;2026;Zubehör;Fachmarkt Stuttgart;Stuttgart;81180,28;2428,89;1338
+Deutschland;Süd;2026;Zubehör;Sporthaus Nürnberg;Nürnberg;82251,23;3036,72;1261
+Deutschland;Süd;2026;Zubehör;Radhandel Freiburg;Freiburg;46565,02;1464,24;746
+Deutschland;Süd;2026;Zubehör;Fachhandel Augsburg;Augsburg;56657,58;1579,51;795
+Deutschland;Süd;2026;Zubehör;Sporthaus Regensburg;Regensburg;49826,48;1548,98;754
+Deutschland;Süd;2026;Zubehör;Radhandel Karlsruhe;Karlsruhe;38490,58;0,00;592
+Deutschland;Süd;2026;Trendräder;Fachhandel München;München;64348,92;1701,99;23
+Deutschland;Süd;2026;Trendräder;Fachmarkt Stuttgart;Stuttgart;70816,21;2118,80;28
+Deutschland;Süd;2026;Trendräder;Sporthaus Nürnberg;Nürnberg;67526,07;2493,06;22
+Deutschland;Süd;2026;Trendräder;Radhandel Freiburg;Freiburg;37919,74;1192,39;13
+Deutschland;Süd;2026;Trendräder;Fachhandel Augsburg;Augsburg;34943,44;974,16;12
+Deutschland;Süd;2026;Trendräder;Sporthaus Regensburg;Regensburg;45924,86;1427,69;15
+Deutschland;Süd;2026;Trendräder;Radhandel Karlsruhe;Karlsruhe;29108,58;0,00;10
+Deutschland;Süd;2025;Tourenräder;Fachhandel München;München;1135377,09;38667,15;169
+Deutschland;Süd;2025;Tourenräder;Fachmarkt Stuttgart;Stuttgart;1273935,81;32055,59;208
+Deutschland;Süd;2025;Tourenräder;Sporthaus Nürnberg;Nürnberg;927728,41;37124,63;151
+Deutschland;Süd;2025;Tourenräder;Radhandel Freiburg;Freiburg;1206440,59;50685,63;178
+Deutschland;Süd;2025;Tourenräder;Fachhandel Augsburg;Augsburg;907589,80;38904,50;159
+Deutschland;Süd;2025;Tourenräder;Sporthaus Regensburg;Regensburg;826049,23;29505,84;143
+Deutschland;Süd;2025;Tourenräder;Radhandel Karlsruhe;Karlsruhe;656598,95;0,00;103
+Deutschland;Süd;2025;Rennräder;Fachhandel München;München;820351,94;27938,45;163
+Deutschland;Süd;2025;Rennräder;Fachmarkt Stuttgart;Stuttgart;803227,20;20211,32;162
+Deutschland;Süd;2025;Rennräder;Sporthaus Nürnberg;Nürnberg;747595,60;29916,31;135
+Deutschland;Süd;2025;Rennräder;Radhandel Freiburg;Freiburg;785929,63;33018,90;133
+Deutschland;Süd;2025;Rennräder;Fachhandel Augsburg;Augsburg;653867,94;28028,53;120
+Deutschland;Süd;2025;Rennräder;Sporthaus Regensburg;Regensburg;461680,05;16490,86;80
+Deutschland;Süd;2025;Rennräder;Radhandel Karlsruhe;Karlsruhe;330551,64;0,00;58
+Deutschland;Süd;2025;Mountainbikes;Fachhandel München;München;795184,40;27081,33;196
+Deutschland;Süd;2025;Mountainbikes;Fachmarkt Stuttgart;Stuttgart;969106,36;24385,28;257
+Deutschland;Süd;2025;Mountainbikes;Sporthaus Nürnberg;Nürnberg;826500,66;33073,83;228
+Deutschland;Süd;2025;Mountainbikes;Radhandel Freiburg;Freiburg;930298,98;39084,22;254
+Deutschland;Süd;2025;Mountainbikes;Fachhandel Augsburg;Augsburg;816868,00;35015,64;194
+Deutschland;Süd;2025;Mountainbikes;Sporthaus Regensburg;Regensburg;485555,91;17343,68;128
+Deutschland;Süd;2025;Mountainbikes;Radhandel Karlsruhe;Karlsruhe;392376,10;0,00;102
+Deutschland;Süd;2025;E-Bikes;Fachhandel München;München;1207433,45;41121,15;151
+Deutschland;Süd;2025;E-Bikes;Fachmarkt Stuttgart;Stuttgart;1770072,63;44539,71;221
+Deutschland;Süd;2025;E-Bikes;Sporthaus Nürnberg;Nürnberg;1505380,04;60240,34;196
+Deutschland;Süd;2025;E-Bikes;Radhandel Freiburg;Freiburg;1484520,70;62368,48;177
+Deutschland;Süd;2025;E-Bikes;Fachhandel Augsburg;Augsburg;1326389,53;56856,65;168
+Deutschland;Süd;2025;E-Bikes;Sporthaus Regensburg;Regensburg;922888,40;32964,86;111
+Deutschland;Süd;2025;E-Bikes;Radhandel Karlsruhe;Karlsruhe;656648,18;0,00;74
+Deutschland;Süd;2025;Zubehör;Fachhandel München;München;89660,17;3053,53;1291
+Deutschland;Süd;2025;Zubehör;Fachmarkt Stuttgart;Stuttgart;71098,51;1789,03;1118
+Deutschland;Süd;2025;Zubehör;Sporthaus Nürnberg;Nürnberg;89614,56;3586,08;1306
+Deutschland;Süd;2025;Zubehör;Radhandel Freiburg;Freiburg;63494,73;2667,57;928
+Deutschland;Süd;2025;Zubehör;Fachhandel Augsburg;Augsburg;60314,53;2585,43;930
+Deutschland;Süd;2025;Zubehör;Sporthaus Regensburg;Regensburg;47448,73;1694,83;735
+Deutschland;Süd;2025;Zubehör;Radhandel Karlsruhe;Karlsruhe;32564,73;0,00;514
+Deutschland;Süd;2025;Trendräder;Fachhandel München;München;63308,33;2156,07;21
+Deutschland;Süd;2025;Trendräder;Fachmarkt Stuttgart;Stuttgart;50706,90;1275,92;17
+Deutschland;Süd;2025;Trendräder;Sporthaus Nürnberg;Nürnberg;49129,23;1965,99;15
+Deutschland;Süd;2025;Trendräder;Radhandel Freiburg;Freiburg;51531,26;2164,96;17
+Deutschland;Süd;2025;Trendräder;Fachhandel Augsburg;Augsburg;49298,09;2113,20;16
+Deutschland;Süd;2025;Trendräder;Sporthaus Regensburg;Regensburg;36123,88;1290,32;13
+Deutschland;Süd;2025;Trendräder;Radhandel Karlsruhe;Karlsruhe;32259,13;0,00;10

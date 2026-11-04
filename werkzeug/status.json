@@ -1719,6 +1719,56 @@
    ],
    "alt": "Zwei Diagramme mit denselben Umsätzen 2027 in Mio. €, Plan und Ist je Quartal, gesamt und für die Regionen Süd und Nord. a) 3D-Säulendiagramm: Plan und Ist (je gesamt, Süd, Nord) nebeneinander, die Quartale Q1 bis Q4 in die Tiefe gestaffelt, das Gitternetz auf der Rückwand; vordere Säulen verdecken die hinteren, und an der Rückwand gemessen wirkt Ist Q1 gesamt (120) wie 90. b) Dieselben Werte ohne 3D als drei kleine Säulendiagramme für Gesamt, Region Süd und Region Nord, Ist dunkel vor weißem Plan, darunter die Abweichung: gesamt Q1 bis Q3 über Plan (+20, +10, +10), Q4 −20; im Jahr +20 Mio. €, allein durch die Region Süd, Nord liegt im Q4 20 Mio. € unter Plan."
   },
+  "3.74": {
+   "status": "pruefung",
+   "datei": "Durch_Selektion_aenderbare_dynamische_Diagramme_-_vorher_QlikView",
+   "kommentare": [
+    "Produktscreenshot (Demo „Market Share“) softwareneutral als Dashboard 1024 × 646 nachgebaut: KPI-Leiste, Kategorien, Segmente, Regionen, Anbieter, Zeitverlauf; Programmrahmen, Menüs, Reiter, Logos, Weltkarte und Kreisdiagramme entfallen",
+    "Ein Datensatz für 3.74 und 3.75 (Absatz je Quartal, Unterkategorie, Untersegment, Region, Anbieter), Q4 2013 → Q2 2027; eigene Anteile wie im Original (15,0 %, Vorquartal 15,7 %, Vorjahresquartal 16,1 %, Zeitreihe aus „Market Share against Time“), Regionen nahe am Original (17,3/13,6/18,4/11,9 statt 17,38/13,69/18,48/11,99 %)",
+    "Korrektur: Die Kategorieanteile des Originals (55,1/41,8/26,9 %) lagen alle über dem Gesamtanteil von 15,0 % – jetzt stimmig (Smartphones 33,5 %, Tablets 10,1 %, Wearables 7,8 %); Anbieternamen neutral (Firefly → Anbieter A usw., Bulldozer = eigenes Unternehmen)",
+    "Change-Dreiecke → ΔVJ in %-Pkt. als Balken nach Wirkung; „Total Share“ ohne Einheit → Absatz in Tsd. Stück im Tooltip; Marktvolumen (Reiter „Market Size“) als Kennzahl; elf bunte Linien mit Legende → eigenes Unternehmen anthrazit, Wettbewerber grau, direkt beschriftet",
+    "Online: Datenschnitt oder Klick auf eine Zeile filtert alle Visuals (im Original reagierten Zeitverlauf und Wettbewerber nicht), Klick auf ein Quartal wählt das Berichtsquartal, Esc hebt auf; 3.74 und 3.75 sind gleich bedienbar, nur der Startzustand unterscheidet sich",
+    "Caption ohne Produktnamen? z. B. „Durch Selektion änderbare dynamische Diagramme – vorher (In Anlehnung an QlikView-Demo Market Share 2015)“, also „(QlikView)“ im Titel streichen"
+   ],
+   "alt": "Dashboard „Marktanteile nach Kategorie, Segment und Region“ für Q2 2027 ohne Selektion: oben drei Kennzahlen (eigener Marktanteil 15,0 %, −0,7 %-Punkte zum Vorquartal und −1,1 %-Punkte zum Vorjahresquartal; Absatz; Marktvolumen), darunter Tabellen mit Marktanteil und Vorjahresabweichung je Kategorie, Segment und Region, eine Anbieterrangliste und ein Liniendiagramm der Marktanteile seit Q3 2023. Das eigene Unternehmen liegt mit 15,0 % knapp hinter Anbieter A, sein Anteil ist seit Q3 2023 von 24,2 % gesunken."
+  },
+  "3.75": {
+   "status": "pruefung",
+   "datei": "Durch_Selektion_aenderbare_dynamische_Diagramme_-_nachher_QlikView",
+   "kommentare": [
+    "Gleiches Dashboard, gleicher Datensatz und gleiches Layout wie 3.74; Startzustand nach der Selektion des Originals: Segment Privatkunden (Consumer) und Kategorie Smartphones",
+    "Werte des Originals nach der Selektion übernommen: 58,7 % (Vorquartal 51,8 %, Vorjahresquartal 55,1 %); Regionen 66,0/75,5/44,2/32,5 % (Original 66,22/75,68/43,40/32,57 %)",
+    "Selektion wie in Power BI: das auslösende Visual hebt hervor (Tablets/Wearables bzw. Großunternehmen/Mittelstand blass), alle übrigen Visuals sind gefiltert – auch Anbieter und Zeitverlauf, die im Original unverändert blieben; Feld „Current Selections“ → Untertitel und gedrückte Datenschnitte",
+    "Aussage des Bildes: Im gewählten Teilmarkt ist das eigene Unternehmen mit 58,7 % klarer Marktführer (gesamt 15,0 %, Rang 2)",
+    "Caption ohne Produktnamen? z. B. „Durch Selektion änderbare dynamische Diagramme – nachher (In Anlehnung an QlikView-Demo Market Share 2015)“"
+   ],
+   "alt": "Dasselbe Dashboard wie Abb. 3.74 nach Selektion von Smartphones und Privatkunden: Der eigene Marktanteil steigt auf 58,7 % (+6,9 %-Punkte zum Vorquartal, +3,6 %-Punkte zum Vorjahresquartal). In den Tabellen Kategorien und Segmente sind die gewählten Zeilen hervorgehoben und die übrigen blass; Regionen, Anbieter und Zeitverlauf zeigen nur noch den gewählten Teilmarkt, in dem das eigene Unternehmen mit großem Abstand Marktführer ist."
+  },
+  "3.76": {
+   "status": "pruefung",
+   "datei": "Dynamische_Vollkraefte-Statistik_mit_HEARTBEAT_-_vorher",
+   "kommentare": [
+    "Produktscreenshot (VK-Statistik) softwareneutral als Dashboard 1024 × 646 nachgebaut: Filterzeile, Kennzahlen des aktuellen Monats, VK je Monat, Tabelle je Planungseinheit; Produktname, Logo, Navigationspfad, Benutzername und Schaltflächen entfallen",
+    "Ein Datensatz für 3.76 und 3.77 (Krankenhaus mit Standorten Ost und Süd-West, 23 Kostenstellen, 8 Planungseinheiten, 7 Dienstarten nach KHBV); Juni 2020 → Juni 2027, Zeitachse 2010–2022 → 2017–2029; Kennzahlen wie im Original (1.884 VK, Teilzeitquote 50,3 % nach Köpfen, 34,6 % nach VK), Verlauf mit Höchststand im Januar und anschließendem Rückgang",
+    "Annahme – bitte prüfen: Die Werte nach dem aktuellen Monat sind Planwerte (Stellenplan); das Original zeigte sie ohne Unterscheidung in derselben blauen Fläche. Jetzt Ist anthrazit, Plan weiß mit Kontur, Kennzahl „Plan Dezember 2029“",
+    "Fläche mit Wert an jedem zweiten Punkt → Monatssäulen ab null, Werte nur im Dezember und im aktuellen Monat; 24 Monatsspalten mit Scrollen → Sparkline je Zeile plus Anfang, Ende, Veränderung; grüne Teilzeitquoten ohne Wertung → neutral",
+    "Filter: Organisationsstruktur → Standort; Planungseinheit, Kostenstelle, Dienstart bleiben; Jahr → Klick ins Diagramm; Mitarbeiter (Personendaten) und Qualifikation entfallen; Reiter Planungseinheiten/Kostenstellen → Schalter Planungseinheiten/Dienstarten (23 Kostenstellen passen nicht als Zeilen)",
+    "Caption ohne Produktnamen? z. B. „Dynamische Vollkräfte-Statistik – vorher (In Anlehnung an Pradtke GmbH 2021)“"
+   ],
+   "alt": "Dashboard „Vollkräftestatistik“ eines Krankenhauses ohne Selektion: oben fünf Kennzahlen für Juni 2027 (1.884 Vollkräfte, 2.477 Köpfe, Teilzeitquote 50,3 % nach Köpfen und 34,6 % nach VK, Plan Dezember 2029 1.746 VK), darunter Monatssäulen von Januar 2017 bis Dezember 2029, Ist dunkel und Plan weiß umrandet, mit dem Höchststand von 1.959 VK im Januar 2027. Die Tabelle zeigt je Planungseinheit Verlauf, Anfangs- und Endwert sowie die Veränderung von Januar 2017 bis Juni 2027; am stärksten gewachsen ist die Innere Medizin."
+  },
+  "3.77": {
+   "status": "pruefung",
+   "datei": "Dynamische_Vollkraefte-Statistik_mit_HEARTBEAT_-_nachher",
+   "kommentare": [
+    "Gleiches Dashboard, gleicher Datensatz und gleiches Layout wie 3.76; Startzustand nach der Selektion des Originals: Zeitraum im Diagramm markiert (15.10.2014–26.08.2018 → November 2021 bis August 2025) und Auswahl im Feld Kostenstelle",
+    "Deutung – bitte prüfen: Die im Original nicht lesbare Kostenstellenauswahl ist als Standort Ost nachgebildet; damit stimmen 1.697 VK und 51,4 % Teilzeitquote nach Köpfen mit dem Original, die Teilzeitquote nach VK ergibt sich zu 35,2 % (Original 34,5 %, mit den übrigen Originalwerten nur bei unplausibler Teilzeit von Ø 0,9 VK am Standort Süd-West erreichbar)",
+    "Der Zeitraum wirkt wie im Original auf Diagramm und Tabelle (Monate außerhalb blass, Tabelle mit Nov 2021 und Aug 2025 und Veränderung, gesamt +218 VK); die Kennzahlen bleiben beim aktuellen Monat Juni 2027",
+    "Bestätigung mit Haken/Kreuz und Navigator entfallen – der Zeitraum gilt sofort; Klammer mit Monatsangabe über den Säulen statt der Datumsfelder „15.10.2014“ und „<26.08.2018“",
+    "Caption ohne Produktnamen? z. B. „Dynamische Vollkräfte-Statistik – nachher (In Anlehnung an Pradtke GmbH 2021)“; Tippfehler „nacher“ der Folie ist in der Inventur-Caption bereits korrigiert"
+   ],
+   "alt": "Dasselbe Dashboard wie Abb. 3.76 nach der Selektion: Standort Ost ist gewählt und der Zeitraum November 2021 bis August 2025 im Säulendiagramm markiert, die Monate außerhalb sind blass. Die Kennzahlen für Juni 2027 zeigen 1.697 Vollkräfte und eine Teilzeitquote von 51,4 % nach Köpfen; die Tabelle nennt je Planungseinheit die Werte am Anfang und Ende des Zeitraums – insgesamt +218 VK (+15,0 %), am stärksten gewachsen ist die Chirurgie mit +51 VK."
+  },
   "3.78": {
    "status": "pruefung",
    "datei": "Integrierte_Fotos_und_Logos_Beispiel_Cubeware",

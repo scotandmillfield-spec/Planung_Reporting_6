@@ -378,6 +378,28 @@
    ],
    "alt": "Organigramm: Unter Geschäftsführung/Vorstand stehen links die dezentralen Einheiten – Sparte 1 bis Sparte n mit jeweils Vertrieb, Produktion, Einkauf, Controlling und weiteren Funktionen – und rechts die zentralen Einheiten Controlling, Rechnungswesen/Finanzen, Einkauf, Personal, IT und weitere. Controlling ist rot hervorgehoben und kommt sowohl zentral als auch dezentral in jeder Sparte vor."
   },
+  "4.8": {
+   "status": "pruefung",
+   "datei": "Prozesse_der_Planung_und_des_Reportings",
+   "kommentare": [
+    "Baum wie im Original: Wurzel grau hinterlegt, drei gleich große Teilprozesse über eine Sammelleitung (Linien ohne Spitzen)",
+    "Silbentrennung der Kästen („Einführungs-/prozess“) entfällt, wo der Platz reicht",
+    "Kein Rot, da kein Teilprozess hervorgehoben ist",
+    "Kastentext „Reporting- und Planungsprozesse“ unverändert, Caption lautet „Prozesse der Planung und des Reportings“ – vereinheitlichen?"
+   ],
+   "alt": "Baumdiagramm: Die Reporting- und Planungsprozesse gliedern sich in drei Teilprozesse – Einführungsprozess, zyklischer Durchführungsprozess und Qualitätssicherungsprozess."
+  },
+  "4.9": {
+   "status": "pruefung",
+   "datei": "Einfuehrungsprozess_fuer_die_Planung_und_das_Reporting",
+   "kommentare": [
+    "Aufzählung mit langem Pfeil daneben → senkrechte Prozesskette aus neun gleich breiten Schritten mit Pfeilen dazwischen",
+    "Rahmen um die Abbildung entfernt",
+    "Texte unverändert; kein Rot, da kein Schritt hervorgehoben ist",
+    "Schrittbreite wie in Abb. 4.24 (einheitlicher Auftritt der Prozessabbildungen)"
+   ],
+   "alt": "Senkrechte Prozesskette mit neun Schritten von oben nach unten: Festlegung der Rahmenbedingungen, Informationsbedarfs- und Ist-Analyse, Best-Practice-Abgleich, Blueprint, Soll- bzw. Fachkonzept, IT-Auswahl, IT-Konzept, IT-Implementierung sowie Coaching/Schulung."
+  },
   "5.39": {
    "status": "latex",
    "latex": "tabellen/Beispiel_zur_freien_Datenrecherche_z_B_SELECT-Anweisung.tex",
@@ -454,6 +476,74 @@
      "text": "Der Kennzahlname „Anlagendeckung (%)“ steht jetzt in der rechten Spalte linksbündig über dem Text, „Kennzahl:“ in der linken Spalte. Hinter allen Begriffen der linken Spalte steht ein Doppelpunkt. Die Vorschau wird erst bei der nächsten LaTeX-Übersetzung aktualisiert."
     }
    ]
+  },
+  "4.12": {
+   "status": "pruefung",
+   "datei": "Rollierende_Planung-rollierender_Forecast",
+   "kommentare": [
+    "Farben nach Stilregeln: lfd. Ist anthrazit (statt gelb), Plan weiß mit Kontur (statt hellblau), ggf. überarbeiteter Plan grau #8F8F8F, Ist für Plan-Ist-Vergleich rot",
+    "Legende entfällt, jede Kategorie ist einmal direkt im Balken beschriftet; im Original fehlte das graue Legendenfeld zu „ggf. überarbeiteter Plan“ (war weiß)",
+    "Gelbe Fläche hinter allen Zeilen als Ist-Abschnitt je Zeile umgesetzt; zwei Zeilen ohne eigenen Inhalt (nur lfd. Ist bis 1. Jan. 13) entfallen, stattdessen Abstand vor den Ist-Zeilen – bitte bestätigen",
+    "Datumsangaben vereinheitlicht („1.Jan.11“, „1. Okt.12“ → „1. Jan. 11“, „1. Okt. 12“)",
+    "Rot gepunktete Linie bei 1. Jan. 13 übernommen, im Original unbeschriftet – Bedeutung (Betrachtungszeitpunkt?) ggf. im Text nennen oder beschriften"
+   ],
+   "alt": "Zeitachse von Anfang 2011 bis Anfang 2013 in Quartalen mit einer Zeile je Planungszeitpunkt: Bis zum jeweiligen Zeitpunkt liegt laufendes Ist vor, es folgt der Plan für das nächste Quartal bzw. Jahr und danach der ggf. überarbeitete Plan, der jedes Quartal fortgeschrieben wird. Darunter ist das Ist des Jahres 2012 für den Plan-Ist-Vergleich hervorgehoben und das laufende Ist über den gesamten Zeitraum dargestellt."
+  },
+  "4.13": {
+   "status": "pruefung",
+   "datei": "Zyklischer_Planungsprozess",
+   "kommentare": [
+    "Aufzählung → Phasenkette links (grau hinterlegt, mit Pfeilen), Tätigkeiten je Phase rechts daneben; Muster und Geometrie identisch mit Abb. 4.17",
+    "Rückpfeil von der letzten zur ersten Phase ergänzt, zeigt den Zyklus aus dem Titel – bitte bestätigen",
+    "Bildtitel „Zyklischer Planungsprozess:“ und Rahmen entfernt (Caption)",
+    "Texte unverändert, kein Rot"
+   ],
+   "alt": "Zyklischer Planungsprozess mit drei aufeinanderfolgenden Phasen und ihren Tätigkeiten: Planungsvorbereitung (Terminplan, Systemeinstellungen, Beschaffung und Transformation der Vorgabe- und Orientierungswerte, Bereitstellung der Planungsformulare und -funktionen), Planungsdurchführung (automatische Planungsfunktionen und manuelle Eingaben, Plausibilisierung und Prüfung, Kommentierung) sowie Abstimmung und Genehmigung der Planung (Präsentation und Abstimmung, Pflege und Korrektur, Genehmigung, Fixierung). Ein Rückpfeil führt von der letzten zur ersten Phase."
+  },
+  "4.14": {
+   "status": "pruefung",
+   "datei": "Planungsgrundausrichtung",
+   "kommentare": [
+    "Blaue Blockpfeile und Linien → Grau/Anthrazit; „Gegenstromverfahren“ als einziges rotes Element",
+    "Gestapelte Ebenen (mehrere Hauptbereiche bzw. Niederlassungen) als versetzte Tafeln beibehalten, ohne Schatten",
+    "Verbindungen der Hauptbereichsleitung zu den dezentralen Planungen (Sammelleitung und Schleife) zu einer Sammelleitung mit Pfeilen in beide Richtungen gebündelt; gestrichelte Rückmeldungen aus den hinteren Tafeln an die übrigen konzentrierten Planungen beibehalten",
+    "Pfeile docken jetzt an den Kästen an (im Original teils an der Kastenkante entlang); „...“ → „…“",
+    "Waagerechte Beschriftung der Blockpfeile nicht möglich (zu schmal), daher senkrecht wie im Original"
+   ],
+   "alt": "Drei Planungsebenen untereinander: oben die zentrale Planung (Controlling) im Austausch mit dem Vorstand, darunter mehrere konzentrierte Planungen der Hauptbereichsleiter, unten mehrere dezentrale Planungen der Niederlassungsleiter. Pfeile in beide Richtungen zwischen den Ebenen stehen für das Gegenstromverfahren; links zeigt ein Pfeil die Top-Down-, rechts einer die Bottom-Up-Richtung."
+  },
+  "4.17": {
+   "status": "pruefung",
+   "datei": "Zyklischer_Reportingprozess",
+   "kommentare": [
+    "Aufzählung → Phasenkette links (grau hinterlegt, mit Pfeilen), Tätigkeiten je Phase rechts daneben; Muster und Geometrie identisch mit Abb. 4.13",
+    "Rückpfeil von der letzten zur ersten Phase ergänzt, zeigt den Zyklus aus dem Titel – bitte bestätigen",
+    "Bildtitel „Zyklischer Reportingprozess“ und Rahmen entfernt (Caption)",
+    "Phase und erste Tätigkeit heißen beide „Berichterstellung“ (wie im Original) – Tätigkeit ggf. präzisieren, z. B. „Berichtsgenerierung“?"
+   ],
+   "alt": "Zyklischer Reportingprozess mit vier aufeinanderfolgenden Phasen und ihren Tätigkeiten: Berichterstellung (Informationsbeschaffung, -aufbereitung und Berichterstellung), Analysevorbereitung (Plausibilisierung, Abweichungs- und Ursachenanalysen, Kommentierung und Entscheidungsvorbereitung), Berichtsbereitstellung (Bündelung und Versendung) sowie Informationsanalyse und -steuerung (Analyse durch den Empfänger, Präsentation und Diskussion, Entscheidung und Maßnahmen). Ein Rückpfeil führt von der letzten zur ersten Phase."
+  },
+  "4.18": {
+   "status": "pruefung",
+   "datei": "Hyperion_Application_Link",
+   "kommentare": [
+    "Bildschirmfoto als softwareneutrales Datenflussdiagramm nachgebaut: Produkt- und Systemnamen, Logos, Programmfenster, Menüs, Werkzeugpalette, Auswahlfelder und Schaltflächen OK/Abbrechen entfernt",
+    "Englische Feld- und Bausteinnamen übersetzt (z. B. Net Posting → Nettobuchung, Entity/Account Translation → Umschlüsselung Einheit/Konto, Add Audit Adj to 12th Period → Abschlussbuchungen in Periode 12)",
+    "Anschlussfelder der Bausteine ergeben sich aus den Pfeilen; Nettobuchungen und Perioden 02–11 wie im Original gebündelt; Zeilen Gesellschaft/Objektkonto getauscht, damit sich keine Leitungen kreuzen",
+    "Caption ohne Produktnamen? z. B. „Datenintegration zwischen Vorsystem und Planungsanwendung (in Anlehnung an Schön 2004, S. 323)“; „Entnommen aus“ → „In Anlehnung an“ ist bereits umgesetzt",
+    "Inhaltlich veraltet (Werkzeug um 2004) – nur Hinweis"
+   ],
+   "alt": "Datenflussdiagramm einer Schnittstelle: Kontensalden aus einem Quellsystem, gefiltert nach Geschäftsjahr und Ledger-Typ, laufen über Umschlüsselungen von Gesellschaft und Konto, eine Vorzeichenumkehr sowie Berechnungen für Januar und Periode 12 in die Felder einer Planungsanwendung. Anmeldedaten und Start- und Endperiode kommen aus zwei Dialogen."
+  },
+  "4.24": {
+   "status": "pruefung",
+   "datei": "Qualitaetssicherungsprozess",
+   "kommentare": [
+    "Aufzählung → Stapel gleich breiter Kästen, ohne Pfeile, da das Original keine Reihenfolge zeigt",
+    "Bildtitel „Qualitätssicherungsprozess:“ und Rahmen entfernt (Caption)",
+    "Kastenbreite wie Abb. 4.9; Texte unverändert, kein Rot"
+   ],
+   "alt": "Fünf Bestandteile des Qualitätssicherungsprozesses untereinander: Informationsbedarfsanalyse und -änderungen, Prozessqualitätsprüfung und -änderungen, organisatorische Qualitätsprüfung und -änderungen, Datenqualitätsprüfung und -steuerung sowie Informationssystem-Qualitätsprüfung und -steuerung."
   },
   "Folie 5": {
    "status": "entfaellt",

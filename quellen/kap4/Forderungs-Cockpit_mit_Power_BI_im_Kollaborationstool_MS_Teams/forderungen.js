@@ -478,7 +478,7 @@
         : "Browser- und Programmleisten, Logo, Navigationsknöpfe und Seitenliste entfallen. Monat und Sammelkonto filtern das Dashboard, ein Klick auf Band, Mahnstufe oder Debitor filtert die übrigen Visuals, ein Klick auf einen Monat im Verlauf wählt den Stichtag; Esc hebt die Auswahl auf." },
   ];
   if (KANAL) regeln.push({ nr: 9, ziel: "unterhaltung", anker: "links", versatz: [212, 4], regel: "STRUCTURE – Bericht im Arbeitskontext", titel: "Unterhaltung neben dem Bericht",
-    text: "Der Bericht ist als Registerkarte in den Kanal des Teams eingebunden; daneben läuft die Unterhaltung. Beiträge mit Bezug (↗) wählen per Klick den genannten Debitor bzw. die Mahnstufe im Bericht aus. Die Zahlen in den Beiträgen stammen aus denselben Daten wie der Bericht. Eigene Antworten lassen sich unten eingeben." });
+    text: "Der Bericht ist als Registerkarte in den Kanal „Forderungsmanagement“ eingebunden; daneben läuft die Unterhaltung. Beiträge mit Bezug (↗) wählen per Klick den genannten Debitor bzw. die Mahnstufe im Bericht aus. Die Zahlen in den Beiträgen stammen aus denselben Daten wie der Bericht. Eigene Antworten lassen sich unten eingeben." });
 
   DK.ebenen({
     regeln,

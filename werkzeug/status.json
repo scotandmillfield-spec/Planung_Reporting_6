@@ -612,6 +612,70 @@
    ],
    "alt": "Datenflussdiagramm einer Schnittstelle: Kontensalden aus einem Quellsystem, gefiltert nach Geschäftsjahr und Ledger-Typ, laufen über Umschlüsselungen von Gesellschaft und Konto, eine Vorzeichenumkehr sowie Berechnungen für Januar und Periode 12 in die Felder einer Planungsanwendung. Anmeldedaten und Start- und Endperiode kommen aus zwei Dialogen."
   },
+  "4.19": {
+   "status": "pruefung",
+   "datei": "SAP_BW-Bericht_mit_dem_BEx_Analyzer_MS_Excel-Integration",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als interaktiver Bericht 1024 × 646 px nachgebaut (HTML, PNG): Navigationsbereich mit festen Filtern und freien Merkmalen (Aufriss „Zeilen“/„Spalten“/„–“, Auswahlliste als Filter) neben der Ergebnistabelle; Tabellenkalkulations-Menüs, Spalten-/Zeilenköpfe, Logo und Vollbild-Dialog entfallen",
+    "Werte des Originals übernommen (Absatz, Erlös, DB I je Kunde und Quartal); nur der abgeschnittene DB I des letzten Kunden ergänzt; Ergebnisse aus den Kundenzeilen gerechnet – im Original wichen einzelne Ergebnisse um 1 € ab (verdeckte Nachkommastellen)",
+    "Namen neutralisiert (Frau Lenz, Herr Krause, Herr Vogt; Kunden als Branche + Region), „(IDES)“ im Titel entfernt, Geschäftsjahr 1999 → 2026, Quartale „19991“ → „Q1 2026“; Mengeneinheiten ST und KAR einheitlich als Stück, Erlös/DB I in Tsd. € (Einheiten im Titel statt an jeder Zahl)",
+    "Gelbe Ergebnisflächen/orange Schrift → fett mit Linien; Herr Vogt startet zugeklappt (▸), damit der Bericht vollständig auf eine Seite passt – das Original war unten abgeschnitten; Branche und Warengruppe sind für den Aufriss mit summengetreu verteilten Werten belegt",
+    "Bitte prüfen: Kennzahl als „DB I“ abgekürzt (ausgeschrieben im Tooltip) – ok?",
+    "Caption ohne Produktnamen? z. B. ‚Bericht mit Navigationsbereich in einer Tabellenkalkulation (in Anlehnung an Schön 2004, S. 331)‘; Quellenangabe nennt zusätzlich das Demosystem"
+   ],
+   "alt": "Bericht „Vertriebsbeauftragte im Quartalsvergleich“ mit einem Navigationsbereich links und einer Ergebnistabelle rechts. Im Navigationsbereich stehen die festen Filter Verkaufsorganisation 1000 und Geschäftsjahr 2026 sowie sechs Merkmale, von denen Vertriebsbeauftragter und Kunde in den Zeilen und das Quartal in den Spalten stehen. Die Tabelle zeigt Absatz, Erlös und Deckungsbeitrag I je Kunde für vier Quartale mit Ergebniszeilen je Vertriebsbeauftragtem; die Botschaft lautet, dass der Erlös im 4. Quartal 38 % unter dem Vorquartal liegt und die DB-I-Quote von 44 % auf 29 % sinkt."
+  },
+  "4.20": {
+   "status": "pruefung",
+   "datei": "Web-Bericht-Beispiel_mit_Cognos_ReportNet",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px nachgebaut (HTML, PNG): Browserfenster, Adresszeile, Portal-Navigation, Benutzername, Logo und Kürzel „FIS II“ entfallen; Aufbau bleibt (Scorecard und Risiken rechts, Bilanz-/GuV-Kennzahlen links, Auswahllisten als Datenschnitte)",
+    "Perspektive Finanzen mit den Werten des Originals; korrigiert: „Realisierung“ (81–92 % ohne erkennbare Rechnung) → ΔBU % nach Wirkung; liquide Mittel 118.000 → 11.800 T€ (lagen über dem Gesamtkapital); Betriebsergebnis 4.499.035 / Finanzergebnis 18.620 → 23.890 / −3.000, damit BE + FE + AO = EBT 24.500; Kapitalumschlag 3,2 → 1,66 (ROS 11 % × 1,66 = GKR 18,3 %) – bitte bestätigen",
+    "Kreisdiagramm „Ken_Auspraegung“ (AO-Ergebnis, EBT, liquide Mittel als Anteile) → Ergebnisbrücke bis EBT; Kennzahlenliste nach Rentabilität und Umschlag gegliedert, Vorjahr und ΔVJ ergänzt (erfunden); übrige Perspektiven und Risiken außerhalb Finanzen erfunden",
+    "Risiken: Punkte ●●●○○ → Beurteilung 1–5 als Balken, Ausmaß für alle Risiken ergänzt (Original nur 250 und 150), Abkürzungen ausgeschrieben; „Konjunktur“ → „Nachfragerückgang Inland“ (sonst doppelt zu „Konjunkturelle Entwicklung“); Verantwortliche neutral (Frau Arndt, Herr Tal …); Auswahlliste „3“ als „Risiken mit Beurteilung ab 3“ gedeutet",
+    "Caption ohne Produktnamen? z. B. ‚Web-Bericht-Beispiel: Scorecard im Berichtsportal (in Anlehnung an Schön 2004, S. 324)‘"
+   ],
+   "alt": "Web-Bericht „Scorecard“ für die Perspektive Finanzen im Geschäftsjahr 2026 mit Datenschnitten für Perspektive und Mindestbeurteilung der Risiken. Rechts oben stehen sieben Messgrößen unter vier strategischen Zielen mit Ist, Budget, Abweichung zum Budget als Balken nach Wirkung und Plan 2027/2028 – vier Messgrößen liegen ungünstig, am stärksten der Cash Flow mit −6,3 %; darunter acht Risiken mit Ausmaß, Beurteilung, Maßnahme und Verantwortlichem. Links zeigen eine Ergebnisbrücke vom Betriebsergebnis zum EBT von 24.500 Tsd. € und eine Kennzahlenliste Rentabilität und Umschlag mit Vorjahresvergleich."
+  },
+  "4.21": {
+   "status": "pruefung",
+   "datei": "Forderungs-Cockpit_mit_Power_BI_im_Webbrowser",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px nachgebaut (HTML für die Lernplattform, PNG): Browser- und Programmleisten, Logo, Seitenliste, Navigationsknöpfe und Produktname entfallen",
+    "Werte des Originals als Anker übernommen: Forderungen 1.768,7 Tsd. € = 1400 Inland 1.286.866,62 € + 1401 Ausland 481.877,44 €, Reichweite 22 Tage, rund 350 offene Posten (351); übrige Zahlen erfunden und aus Einzelrechnungen je Monatsultimo gerechnet",
+    "Korrigiert: Im Original waren „Überfällige Forderungen“ (1,77 Mio.) so hoch wie alle Forderungen (Fälligkeiten 2018 bei Datenstand 2024), die Fälligkeitsklassen ergaben aber nur 89,5 Tsd. €; die drei Auslandsdebitoren (rund 570 Tsd. €) überstiegen das Sammelkonto Ausland – jetzt eine stimmige Datenbasis (überfällig 103, gemahnt 60 Tsd. €)",
+    "Umbau: 40 Einzeltage (absteigend, mit Bildlauf) → Fälligkeitsbänder mit Stichtagslinie, Fälligkeitsklassen des Rings darin aufgegangen; Ampel- und Blau-Ringdiagramme → Balken; neu: Überfällig je Monatsultimo und ΔVM in der KPI-Leiste; Debitoren neutral (Branche + Ort), Nummern im Tooltip",
+    "Gleicher Datensatz und gleiches Dashboard wie Abb. 4.22",
+    "Bitte prüfen: Wirkungsrichtung – Forderungen und Anzahl offener Posten neutral, Anstieg von Überfälligem, Gemahntem und Reichweite ungünstig",
+    "Caption ohne Produktnamen? z. B. ‚Forderungs-Cockpit im Webbrowser (in Anlehnung an Vortragsunterlagen des Controlling Innovations Center, Dortmund 2023)‘"
+   ],
+   "alt": "Dashboard „Forderungs-Cockpit“ zum Stichtag 30.06.2027 mit Datenschnitten für Monat und Sammelkonto und fünf Kennzahlen mit Vormonatsvergleich: Forderungen 1.769 Tsd. €, überfällig 103 Tsd. €, 351 offene Posten, Reichweite 22 Tage, gemahnt 60 Tsd. €. Säulen zeigen die offenen Posten nach Fälligkeitsbändern (überfällige anthrazit, nicht fällige hellgrau) und die überfälligen Forderungen je Monatsultimo, die seit Januar von 42 auf 103 Tsd. € steigen. Balken zeigen Mahnstufen, Sammelkonten und die größten Debitoren; der Importeur in Skagen trägt zwei Drittel der Überfälligkeit."
+  },
+  "4.22": {
+   "status": "pruefung",
+   "datei": "Forderungs-Cockpit_mit_Power_BI_im_Kollaborationstool_MS_Teams",
+   "kommentare": [
+    "Gleiches Dashboard und gleicher Datensatz wie Abb. 4.21 (Generator von 4.21, alle Zahlen identisch); Unterschied wie im Original nur die Umgebung: schlanker neutraler Rahmen mit Team- und Kanalname, Registerkarten (Beiträge, Forderungs-Cockpit, Dateien) und Unterhaltungsspalte",
+    "Programmoberfläche, App-Leiste, Logos, Symbole, Personenfoto und Menüs entfernt (softwareneutral); Beiträge mit erfundenen Namen (Frau Brandt, Herr Tal, Herr Ohm), ihre Zahlen werden aus den Berichtsdaten gerechnet",
+    "Dashboard für die Kanalspalte schmaler angeordnet (730 statt 992 px), Inhalte und Werte unverändert; interaktiv: Beiträge mit Bezug (↗) wählen Debitor bzw. Mahnstufe im Bericht aus, eigene Antworten lassen sich eingeben",
+    "Korrigiert: „Mahnstufe 1 oder höher“ wich im Original zwischen den beiden Screenshots ab (1,77 Mio. vs. 82,65 Tsd.) – jetzt in beiden 60 Tsd. €",
+    "Caption ohne Produktnamen? z. B. ‚Forderungs-Cockpit im Kanal eines Kollaborationswerkzeugs (in Anlehnung an Vortragsunterlagen des Controlling Innovations Center, Dortmund 2023)‘"
+   ],
+   "alt": "Dasselbe Forderungs-Cockpit wie in Abb. 4.21, eingebunden als Registerkarte „Forderungs-Cockpit“ im Kanal Forderungsmanagement des Teams Finanzen. Links stehen Kennzahlen und Visuals zum Stichtag 30.06.2027, rechts eine Unterhaltung, in der Debitorenbuchhaltung, Vertrieb und Controlling die Zahlen besprechen, etwa die 69 Tsd. € überfälligen Forderungen beim Importeur in Skagen. Der Bericht wird so im Arbeitskontext diskutiert, ohne das Werkzeug zu wechseln."
+  },
+  "4.23": {
+   "status": "pruefung",
+   "datei": "Multidimensionale_Analysen_mit_Powerplay_von_Cognos",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als interaktive OLAP-Analyse 1024 × 646 px nachgebaut (HTML, PNG): Dimensionsbaum, Dimensionsleiste (Schicht = Perspektive, „Schicht 1 von 4“; Spaltendimension), Kreuztabelle; neu: Säulendiagramm der gewählten Kennzahl; Titel-, Menü-, Symbol- und Statusleisten sowie Titelgrafik mit Namen entfallen",
+    "Echter Drill-down: Jahr › Quartale, Konzern › Standorte › Produkte (Klick auf Spaltenkopf, Säule oder Baumelement; „↑ Ebene höher“/Esc zurück); Schnitte über den Baum; alle Quoten aus additiven Basisgrößen gerechnet, daher auf jeder Ebene stimmig",
+    "Konzernwerte Finanzen = Original (2000–2002 → 2024–2026): EVA, EBT, Cash Flow, Umsatz, Bruttoertrag, Risikovorsorgekosten exakt, WACC/ROI/ROS/Risikoquoten/Verschuldungsgrad auf zwei Nachkommastellen; Verteilung auf Quartale, Standorte (Dortmund, Hamburg, München wie im Original), Produkte sowie die Perspektiven Markt und Kunden, Prozesse, Potenziale erfunden",
+    "Korrigiert: Veränderungen von Quoten in %-Pkt. statt in % (z. B. ROI −0,98 %-Pkt. statt −12,68 %); Farbe nach Wirkung statt „Chancen grün, Risiken rot“; dunkel-/hellblaue Bänder → Gruppenzeilen; Beträge in Tsd. € statt €, Einheit an der Kennzahl",
+    "Bitte prüfen: Wirkungsrichtung WACC (Anstieg ungünstig) und Verschuldungsgrad (Rückgang günstig); Jahre auf 2024–2026 verschoben",
+    "Caption ohne Produktnamen? z. B. ‚Multidimensionale Analyse der Balanced Chance and Risk Card in einem OLAP-Werkzeug‘"
+   ],
+   "alt": "Multidimensionale Analyse der Balanced Chance and Risk Card mit einem Dimensionsbaum links (Jahr, Standort, Produkt, Kennzahlen) und einer Dimensionsleiste für Schicht und Spaltendimension. Die Kreuztabelle zeigt für die Perspektive Finanzen acht Chancen- und fünf Risikokennzahlen des Konzerns für 2024 bis 2026 mit Veränderungen, farbig nach Wirkung; sieben von 13 Kennzahlen haben sich verbessert, die Risikovorsorgekosten aber um 322,5 % erhöht. Darunter zeigt ein Säulendiagramm den EVA, der von 56 auf 241 Tsd. € steigt; ein Klick auf Jahr oder Standort öffnet Quartale bzw. Produkte."
+  },
   "4.24": {
    "status": "pruefung",
    "datei": "Qualitaetssicherungsprozess",

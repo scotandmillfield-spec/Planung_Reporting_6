@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balanced Chance and Risk Card – multidimensionale Analyse</title>
+<style>
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }
+
+</style>
+</head>
+<body>
+<script>const DATA = {"jahre":[2024,2025,2026],"standorte":["Dortmund","Hamburg","München"],"produkte":["Produkt A","Produkt B","Produkt C"],"perspektiven":["Finanzen","Markt und Kunden","Prozesse","Potenziale"],"felder":["umsatz","bruttoertrag","ebt","cashflow","eva","kapital","kapitalkosten","rv_int","rv_ext","ausfall","fk","absatz","marktvolumen","kunden","zufr_punkte","neukundenumsatz","grosskundenumsatz","reklamationen","auftraege","lieferungen","puenktlich","dlz_tage","ausschuss","produktion","neuproduktumsatz","vorschlaege","kranktage","solltage","austritte"],"kennzahlen":[[0,"C","EVA","Tsd. €",["eva"],null,0.001,0,1,"rel"],[0,"C","WACC","%",["kapitalkosten"],"kapital",100,2,-1,"pp"],[0,"C","EBT","Tsd. €",["ebt"],null,0.001,0,1,"rel"],[0,"C","ROI","%",["ebt"],"kapital",100,2,1,"pp"],[0,"C","ROS","%",["ebt"],"umsatz",100,2,1,"pp"],[0,"C","Cash Flow","Tsd. €",["cashflow"],null,0.001,0,1,"rel"],[0,"C","Umsatz","Tsd. €",["umsatz"],null,0.001,0,1,"rel"],[0,"C","Bruttoertrag","Tsd. €",["bruttoertrag"],null,0.001,0,1,"rel"],[0,"R","Risikovorsorgequote intern","%",["rv_int"],"umsatz",100,2,-1,"pp"],[0,"R","Risikovorsorgequote extern","%",["rv_ext"],"umsatz",100,2,-1,"pp"],[0,"R","Risikovorsorgekosten","Tsd. €",["rv_int","rv_ext"],null,0.001,0,-1,"rel"],[0,"R","Forderungsausfallquote","%",["ausfall"],"umsatz",100,2,-1,"pp"],[0,"R","Verschuldungsgrad","%",["fk"],"kapital",100,2,-1,"pp"],[1,"C","Marktanteil","%",["absatz"],"marktvolumen",100,1,1,"pp"],[1,"C","Kundenzufriedenheit","Index",["zufr_punkte"],"kunden",1,1,1,"abs"],[1,"C","Neukundenumsatz","Tsd. €",["neukundenumsatz"],null,0.001,0,1,"rel"],[1,"R","Großkundenanteil","%",["grosskundenumsatz"],"umsatz",100,1,-1,"pp"],[1,"R","Reklamationsquote","%",["reklamationen"],"auftraege",100,2,-1,"pp"],[2,"C","Liefertreue","%",["puenktlich"],"lieferungen",100,1,1,"pp"],[2,"C","Durchlaufzeit","Tage",["dlz_tage"],"auftraege",1,1,-1,"abs"],[2,"R","Ausschussquote","%",["ausschuss"],"produktion",100,2,-1,"pp"],[3,"C","Innovationsquote","%",["neuproduktumsatz"],"umsatz",100,1,1,"pp"],[3,"C","Verbesserungsvorschläge","Anzahl",["vorschlaege"],null,1,0,1,"rel"],[3,"R","Krankenquote","%",["kranktage"],"solltage",100,1,-1,"pp"],[3,"R","Austritte","Anzahl",["austritte"],null,1,0,-1,"rel"]],"saetze":[[0,0,0,0,320507,92972,17959,20895,1850,219750,13185,1833,1322,2440,130366,5259,38790,13,1022,52247,146536,5,240,288,268,3508,181,5833,30470,9,129,2662,1],[0,0,0,1,261423,76599,11721,13539,1132,184520,11071,1706,1006,1863,112760,5318,36518,10,730,32327,114920,4,203,205,192,2732,129,4816,25630,8,123,2496,1],[0,0,0,2,167394,48849,8664,11451,885,96689,5801,926,663,1374,62426,2795,20346,7,506,16592,69706,3,127,113,103,1736,80,2752,17910,4,74,1362,0],[0,0,1,0,495947,147635,23232,25763,2692,297319,17839,3290,1870,3908,182048,6738,47899,14,1054,43824,217186,8,325,364,338,4666,181,5991,48971,13,187,3991,1],[0,0,1,1,336883,103599,15443,19514,1599,195432,11726,2181,1474,2455,125244,4411,32560,11,783,37382,141403,7,288,291,272,4131,173,5894,35340,7,143,2646,1],[0,0,1,2,215723,64703,10300,11824,1151,108154,6489,1240,970,1633,68787,3651,26918,8,604,22223,83653,4,156,200,187,2144,97,3322,20084,6,73,1479,1],[0,0,2,0,328911,98100,17716,19531,1688,235410,14125,1822,1259,2453,142835,5106,38594,15,1125,45665,132354,9,349,349,321,4896,162,5727,35248,9,156,3190,1],[0,0,2,1,243099,72625,11163,12039,1226,130758,7845,1333,1014,1792,83471,5435,40787,10,699,28357,90562,6,242,203,188,3377,149,4864,25097,9,143,2880,1],[0,0,2,2,138107,43109,7393,8525,849,115302,6918,769,586,1137,76685,2580,18088,7,547,22811,54184,3,130,128,121,1825,81,2740,12511,6,66,1237,0],[0,1,0,0,345344,98689,19005,22389,2014,237464,14248,1979,1375,2606,140620,6127,44545,14,1091,58844,156499,5,233,317,295,3465,189,6132,33525,9,129,2645,1],[0,1,0,1,256968,75449,12028,13695,1216,201439,12086,1723,1013,1802,124305,5517,37929,10,746,35395,113333,5,217,227,213,2950,143,5320,24896,8,136,2659,1],[0,1,0,2,176117,51429,8873,11277,880,99691,5981,997,685,1413,64305,2659,19584,7,527,17049,76002,3,141,126,116,1954,88,3062,19519,4,78,1422,0],[0,1,1,0,488230,145947,23088,25109,2749,293627,17618,3253,1797,3817,180899,7687,52634,15,1183,47877,211477,9,340,403,375,4885,187,6386,46846,13,195,4142,1],[0,1,1,1,354692,111416,16517,20579,1637,204346,12261,2302,1614,2530,131038,4823,34936,11,848,36220,149142,8,306,298,279,4443,196,6479,37552,8,150,2716,1],[0,1,1,2,207439,63600,10013,11099,1086,118458,7108,1209,953,1556,77101,3774,27813,8,617,24374,81003,4,161,214,201,2236,103,3505,19796,6,74,1504,1],[0,1,2,0,342470,102466,17763,19214,1765,246783,14807,1895,1302,2648,148063,5221,39532,15,1196,48355,141925,9,345,360,331,4955,164,5821,35153,10,171,3443,1],[0,1,2,1,250926,75711,11693,13145,1335,145051,8703,1397,1049,1835,94181,5618,42095,10,722,29305,94473,6,239,209,194,3357,155,4919,25665,10,161,3177,1],[0,1,2,2,143585,44114,7504,9042,881,126157,7569,836,602,1216,83654,2744,18830,8,560,22825,57101,3,128,135,126,1801,86,2936,12795,6,67,1252,0],[0,2,0,0,330153,95015,18127,21346,1828,236976,14219,1862,1338,2532,140075,5900,42686,15,1175,58989,151609,5,256,326,305,3796,208,6767,32744,10,138,2894,1],[0,2,0,1,279348,81915,12482,14487,1251,201489,12089,1890,1092,2040,124124,5973,41171,11,799,35997,121715,5,234,229,214,3156,147,5477,26713,9,133,2705,1],[0,2,0,2,180157,52264,9388,12278,983,108762,6526,1021,698,1423,71158,2792,20828,7,555,17764,75975,3,149,122,113,2047,90,3087,19434,4,83,1546,0],[0,2,1,0,536558,162056,24881,27131,2920,297393,17844,3560,2017,4314,184458,7584,52239,15,1144,48165,235095,9,348,393,365,5060,196,6536,51736,14,206,4318,1],[0,2,1,1,345225,107478,16316,20013,1687,208455,12507,2216,1526,2492,134736,5120,36540,12,919,40505,147363,9,335,297,278,4880,196,6748,36641,9,145,2698,1],[0,2,1,2,224369,68150,10723,11977,1178,115103,6906,1318,988,1711,74015,3885,28503,9,691,23936,88416,4,160,216,202,2203,113,3939,21131,6,77,1600,1],[0,2,2,0,380979,115139,19334,20859,1957,260621,15637,2020,1421,2877,158904,5429,40562,16,1245,46986,155291,9,362,373,343,5228,173,6185,40125,10,177,3516,1],[0,2,2,1,253878,74707,11896,13250,1276,148528,8912,1420,1107,1821,94672,5897,43261,11,812,29662,97550,7,270,221,205,3755,163,5112,24917,10,159,3136,1],[0,2,2,2,141667,43302,7605,8806,901,120175,7211,791,578,1192,81095,2908,20029,8,606,24390,57543,3,134,152,142,1912,90,3104,12427,6,70,1313,1],[0,3,0,0,379836,107893,20910,24504,2090,279487,16769,2250,1539,2801,165889,6735,48389,16,1254,66927,170252,6,287,361,337,4248,234,7482,37831,11,157,3324,1],[0,3,0,1,318426,93367,14625,17152,1451,233766,14026,2130,1269,2273,142983,6547,45286,11,858,40477,136917,5,241,251,234,3272,162,6211,31166,10,154,3061,1],[0,3,0,2,199838,57994,10525,13486,1048,117937,7076,1117,787,1605,77771,3320,24318,8,613,20941,86575,3,158,136,126,2167,95,3311,21298,5,91,1660,1],[0,3,1,0,602479,181762,27091,29989,3207,364045,21843,4127,2256,4860,226928,8394,58899,18,1339,54534,265434,10,383,467,435,5515,213,7131,58074,15,243,5167,1],[0,3,1,1,406290,126423,18108,22572,1865,238498,14310,2667,1821,2982,151571,5509,39336,14,1042,45699,168981,10,376,340,317,5482,223,7560,42378,10,179,3280,1],[0,3,1,2,254917,76395,12345,14048,1376,130494,7830,1493,1149,1907,85250,4705,34690,10,785,26726,98930,4,180,231,216,2480,122,4305,24663,7,88,1831,1],[0,3,2,0,437726,131659,22448,24451,2237,272353,16341,2423,1721,3294,166829,6206,45980,18,1422,56409,175749,10,409,429,394,5898,204,7146,46539,11,194,3969,1],[0,3,2,1,297289,89486,13450,14690,1438,162750,9765,1639,1295,2186,105908,6536,47337,12,861,33743,109823,7,286,262,242,3955,183,5868,30812,12,178,3568,1],[0,3,2,2,166100,50997,8671,10249,1006,134839,8090,965,704,1362,89859,3097,21548,8,632,26478,65323,4,162,164,154,2265,104,3532,14363,6,83,1511,1],[1,0,0,0,438158,121654,35476,38628,2002,587100,35226,2921,2066,3831,362005,6866,40672,14,1091,92319,209063,6,283,366,348,3814,217,7729,54712,11,142,2888,1],[1,0,0,1,379046,108643,25435,28400,1436,516619,30997,2982,1785,3132,338508,6285,35660,10,762,58016,172010,5,247,256,244,3118,155,6281,48057,10,128,2528,1],[1,0,0,2,242751,69000,17779,21733,1038,271224,16273,1613,1100,2254,187532,3199,19002,7,576,28049,108074,3,153,137,129,1945,94,3387,33731,5,86,1554,0],[1,0,1,0,729404,210278,47930,49372,3252,842753,50565,5829,3083,6709,552305,9985,56472,18,1381,83979,345687,11,474,533,507,6322,233,8268,93904,17,237,4979,2],[1,0,1,1,507114,154358,34068,40478,1924,574764,34486,3810,2684,4098,383915,6551,38351,13,989,68369,223172,10,416,385,369,5480,246,8776,69833,11,182,3246,1],[1,0,1,2,317975,94633,22463,23742,1393,329031,19742,2169,1680,2778,223025,5148,30833,9,743,44368,132899,4,208,264,252,2682,132,4965,39865,8,89,1732,1],[1,0,2,0,518413,151921,39462,41626,2233,685846,41151,3301,2273,4610,428471,6433,40039,17,1310,81730,220285,10,427,441,416,5591,197,7407,70340,11,178,3522,1],[1,0,2,1,351910,103519,22895,24180,1395,380995,22860,2378,1709,2905,257368,7094,42643,11,811,54637,137422,7,317,268,253,4094,179,6188,46402,12,164,3196,1],[1,0,2,2,214715,65730,17034,18542,1125,338757,20325,1427,1039,2041,236969,3344,18772,9,663,40741,89722,4,171,181,174,2249,109,3879,25518,7,74,1335,1],[1,1,0,0,466047,128839,36505,40048,2167,655603,39336,3138,2156,4101,402966,7424,44341,15,1191,93789,218661,6,311,384,366,4165,228,7871,57180,11,140,2865,1],[1,1,0,1,398284,115006,25822,28974,1387,555228,33314,3100,1801,3261,361788,6973,39406,11,835,58487,183379,5,271,263,251,3397,161,6546,51626,10,138,2675,1],[1,1,0,2,236724,66142,17744,21562,1015,284005,17040,1523,1111,2140,195198,3324,19727,7,576,30600,105352,3,162,150,141,2077,97,3629,34189,5,86,1545,0],[1,1,1,0,763269,222818,51327,51546,3536,944501,56670,5912,3210,6898,606680,10561,60765,18,1454,89351,352569,11,450,527,501,6034,245,8807,93966,19,252,5210,2],[1,1,1,1,551905,167077,35910,42726,2064,623436,37406,4270,2913,4575,418724,6716,40173,14,1086,74168,242930,10,433,389,372,5827,239,8626,76347,11,186,3328,1],[1,1,1,2,341347,101686,24891,26147,1462,347205,20832,2321,1764,2964,232988,5524,33288,10,759,43936,141760,4,214,289,276,2770,134,5077,42341,8,94,1848,1],[1,1,2,0,555463,164195,43234,44721,2363,652384,39143,3515,2487,4710,409647,6930,41651,17,1384,85206,235763,11,466,477,447,6087,213,7898,75916,12,200,3925,1],[1,1,2,1,372793,107142,24506,26042,1489,413159,24790,2408,1842,3098,279314,7433,44836,12,891,52593,147581,7,316,287,272,4056,181,6187,49552,13,177,3372,1],[1,1,2,2,212212,63543,16663,18205,1096,363017,21781,1400,1060,2025,254833,3599,20877,8,649,43984,89912,3,169,173,166,2191,105,3789,24450,8,80,1452,1],[1,2,0,0,493445,137122,39015,42462,2292,689851,41391,3422,2263,4168,430473,7169,42934,16,1266,105460,230545,6,315,382,364,4218,230,7925,61806,11,143,2929,1],[1,2,0,1,396194,114429,26284,29066,1487,532467,31948,3041,1874,3247,347066,7381,41729,11,831,59350,181237,5,281,285,272,3465,169,6930,50740,10,141,2767,1],[1,2,0,2,263147,74283,19230,23496,1057,277432,16646,1715,1188,2398,190831,3715,22110,7,590,31497,118295,3,172,160,150,2182,103,3848,38049,5,88,1583,0],[1,2,1,0,801524,236817,51858,53972,3576,897439,53846,6092,3488,7334,578951,10185,59003,18,1442,94877,370918,11,477,546,520,6425,247,9007,103003,19,255,5352,2],[1,2,1,1,591451,177640,38592,45552,2108,646322,38779,4463,3047,4901,427529,6841,40875,15,1100,77529,255748,11,457,434,415,6167,268,9500,80448,12,180,3218,1],[1,2,1,2,379090,112197,26464,27968,1626,358814,21529,2631,2008,3233,242108,5638,34303,10,786,48339,155505,5,229,297,284,2918,142,5315,46392,9,97,1896,1],[1,2,2,0,558211,163120,42115,44487,2296,686418,41185,3642,2487,4850,430120,7597,45885,20,1559,89796,241500,10,454,484,454,6061,209,7841,77522,12,200,3892,1],[1,2,2,1,402188,116928,25806,27340,1639,439248,26355,2677,1985,3437,294308,8081,48849,12,864,57953,161012,8,351,289,272,4540,197,6720,51671,13,190,3693,1],[1,2,2,2,236417,70615,18288,20304,1170,349160,20950,1605,1165,2316,242067,3854,21640,9,709,44870,98313,4,189,189,180,2467,113,4114,27117,8,78,1426,1],[1,3,0,0,528509,148428,41550,44616,2319,718831,43130,3610,2517,4584,448126,7984,47738,17,1383,113095,256580,6,337,435,415,4560,246,8598,67264,13,162,3257,1],[1,3,0,1,463683,134295,30632,33952,1731,651132,39068,3654,2103,3826,425684,8339,46640,12,960,71270,209539,6,324,325,310,4071,184,7548,56896,11,174,3311,1],[1,3,0,2,295634,83088,22182,27051,1269,328015,19681,1936,1379,2689,224647,4098,24687,8,642,35845,129975,4,195,173,162,2488,113,4198,43290,6,105,1868,1],[1,3,1,0,900048,262144,59539,61533,3897,1006379,60383,6992,3799,8288,657395,11554,64871,20,1563,109447,408943,12,529,645,613,7038,292,10449,112156,21,277,5813,2],[1,3,1,1,642687,192553,40788,48563,2243,703118,42187,4776,3306,5242,473669,7810,46045,16,1250,82188,283345,11,489,472,451,6476,306,10957,88476,14,205,3702,1],[1,3,1,2,402133,118170,28723,30617,1695,385837,23150,2778,2131,3442,261898,6047,36921,12,910,52449,167811,5,254,335,320,3213,165,6019,50939,10,104,2058,1],[1,3,2,0,643832,186782,47578,48466,2620,815905,48954,4196,2774,5615,519733,8146,50637,22,1730,96656,268194,11,506,537,504,6583,241,9221,87231,14,230,4445,2],[1,3,2,1,464099,134384,30827,32280,1909,488326,29300,3046,2340,3792,325124,9138,54634,13,989,63303,180580,9,396,322,304,5154,231,7840,59404,16,206,3971,1],[1,3,2,2,259178,79324,20385,22598,1353,401947,24117,1707,1258,2488,279221,4034,22991,10,779,51754,105719,4,207,220,211,2690,129,4660,29667,9,92,1619,1],[2,0,0,0,496628,147043,44982,46648,6878,660405,39624,6480,4668,4470,374613,7585,41224,14,1136,98005,246972,5,300,383,368,3853,187,7759,77377,13,134,2677,1],[2,0,0,1,409083,123411,28979,30629,4035,580486,34829,6120,3816,3453,334271,7004,36228,10,816,59924,192863,4,253,277,268,2963,137,6280,61834,10,139,2653,1],[2,0,0,2,259569,77129,20789,23910,3041,305213,18313,3428,2326,2420,186558,3188,18085,7,593,29608,118934,3,165,147,139,2004,82,3557,45796,5,86,1490,0],[2,0,1,0,923586,279263,70999,69907,12234,1097142,65828,14138,7874,8382,645238,10751,56867,18,1454,99815,450242,11,542,596,573,6850,223,9133,140566,21,259,5343,1],[2,0,1,1,621738,197192,45856,50491,6468,663125,39787,9438,6410,5268,399285,6983,38587,14,1107,85387,280224,9,455,445,429,5732,238,10000,106505,13,201,3498,1],[2,0,1,2,411954,129267,31521,31839,4868,402244,24135,5693,4284,3598,247317,5886,33260,10,822,52719,176201,4,244,319,309,2905,135,5846,64658,10,97,1859,1],[2,0,2,0,662878,203490,56345,55523,8080,768084,46085,8514,5750,6011,442301,7873,44879,19,1588,94166,288927,9,491,513,486,6003,193,8395,108876,14,206,3960,1],[2,0,2,1,430665,131456,31936,31441,5152,466942,28017,5622,4223,3666,285572,8544,47874,12,926,60524,180678,7,364,322,308,4447,178,7006,69427,15,194,3696,1],[2,0,2,2,247197,78204,21320,22427,3628,392008,23520,3304,2396,2420,248800,4186,22051,9,751,51639,109718,3,188,204,198,2293,97,4191,35244,9,86,1525,1],[2,1,0,0,508485,151784,46263,47957,7027,686859,41212,6977,4696,4502,389409,7484,41564,15,1213,108873,258176,5,303,405,390,3826,207,8252,77085,13,142,2875,1],[2,1,0,1,440965,133168,33262,35057,4523,599226,35954,6584,4062,3637,352428,7222,37896,11,845,65551,209496,4,280,270,261,3277,142,6576,66498,12,139,2687,1],[2,1,0,2,282722,82831,22949,27029,3369,313966,18838,3686,2529,2731,190000,3363,18845,7,602,32895,132030,3,168,149,141,1997,91,3843,49962,5,91,1604,0],[2,1,1,0,1015044,307624,73769,72715,12411,1064158,63849,15370,8703,9216,616914,11023,59493,20,1623,107239,502350,11,557,620,594,7061,243,9978,156801,23,266,5327,1],[2,1,1,1,649009,204739,47018,52160,6976,689090,41345,9522,6598,5327,407470,7522,41069,16,1225,88286,302955,9,469,477,460,5859,244,10470,113970,14,201,3602,1],[2,1,1,2,445404,140277,34818,36117,5461,401464,24088,5982,4654,4066,242225,6274,35205,11,920,53277,192258,4,255,332,320,3082,137,6012,67546,10,94,1866,1],[2,1,2,0,704317,217499,57366,57236,8148,875037,52502,8749,6118,6162,490774,7783,43979,20,1648,102783,315978,10,541,515,489,6627,212,9242,120680,15,224,4276,1],[2,1,2,1,488532,149382,35219,34108,5543,479368,28762,6370,4725,4121,294563,8909,50089,13,1014,67349,197038,7,366,342,327,4479,192,7630,79950,16,190,3575,1],[2,1,2,2,268351,84756,22679,23684,3917,422956,25377,3519,2598,2678,262890,4356,22746,9,751,53095,117141,3,201,219,212,2505,111,4699,39399,10,91,1609,1],[2,2,0,0,564285,164919,49474,52528,7560,763126,45788,7350,5301,5074,427239,7559,42262,15,1233,107804,284214,5,320,420,404,4157,206,8453,90218,14,144,2847,1],[2,2,0,1,456797,139163,34604,35501,4740,609782,36587,6827,4045,3739,350264,7388,38789,11,915,64738,216301,5,296,282,272,3526,142,6754,72541,12,141,2703,1],[2,2,0,2,290483,86508,24760,28251,3637,332215,19933,3771,2704,2756,204936,3698,21042,8,659,31910,137419,3,183,152,144,2175,89,3806,49555,5,91,1580,0],[2,2,1,0,1042197,321367,79321,77359,13673,1088527,65312,16574,8826,9605,640501,12251,64204,21,1745,107017,511707,11,570,643,619,7306,242,10339,161197,24,283,5795,2],[2,2,1,1,732805,233361,52389,59461,7506,743638,44618,10724,7273,6278,441409,8206,44706,16,1261,93165,337928,10,517,478,461,6568,262,11260,125576,14,207,3674,1],[2,2,1,2,454801,139765,36542,36365,5676,419510,25171,6162,4678,4101,251815,6096,34198,12,976,53694,193092,5,267,340,328,3249,132,5826,68640,11,108,2060,1],[2,2,2,0,719621,225589,61370,59245,8866,912805,54768,8881,6364,6517,522325,8233,47371,21,1716,108271,320473,10,518,552,524,6511,211,9374,120751,16,217,4137,1],[2,2,2,1,515780,158755,38379,38963,6157,491668,29500,6717,5016,4328,301934,8640,48019,13,1019,68383,208875,7,388,328,313,4790,195,7694,85985,17,212,4094,1],[2,2,2,2,275008,87801,24204,26031,4129,456677,27401,3544,2595,2657,285964,4222,22551,10,754,53635,118534,4,205,209,203,2540,108,4544,38620,10,92,1655,1],[2,3,0,0,596150,176012,53284,56063,8166,802793,48168,7949,5351,5204,450572,8564,48123,18,1495,117792,297610,6,366,440,424,4741,225,9045,92006,15,161,3177,1],[2,3,0,1,518566,156976,38985,40241,5325,707040,42422,8080,4652,4372,408742,8630,44943,13,1020,75782,250457,5,333,325,313,3883,171,7854,79114,13,161,3045,1],[2,3,0,2,309039,90830,24540,28063,3541,373219,22393,3899,2741,2896,227269,4028,22458,8,668,37762,144929,3,197,170,161,2363,110,4643,53354,6,97,1721,0],[2,3,1,0,1159897,353004,83733,80208,14531,1315801,78948,18210,9918,10934,777326,13488,70208,22,1806,122694,550287,13,659,725,696,8341,272,11123,184433,27,295,6061,2],[2,3,1,1,811389,260112,57534,64167,8162,854087,51245,11899,8179,6923,510115,9280,50222,18,1390,103538,375477,12,584,555,536,7420,285,11708,140377,17,232,4126,1],[2,3,1,2,518835,163296,41892,42304,6633,483331,29000,7223,5455,4561,289346,6938,38890,13,1104,64477,226624,5,296,369,357,3513,149,6550,77321,11,115,2232,1],[2,3,2,0,760613,237786,63999,63897,9347,945414,56725,9321,6467,6858,544010,9266,51827,23,1852,118522,329546,11,584,646,614,7279,236,10379,125278,17,263,5025,1],[2,3,2,1,549303,170047,42128,42502,6865,602981,36179,7118,5509,4719,367338,10686,58943,15,1201,79112,221989,8,429,396,380,5316,222,8644,88280,18,220,4187,1],[2,3,2,2,308304,98418,26792,28508,4440,513195,30792,4155,3046,3050,325580,4891,26303,11,895,60569,132357,4,246,235,227,2999,124,5135,44580,11,101,1759,1]]};</script>
+<script>
+/* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
+   Jeder Baustein entspricht einem Standard-Visual von Power BI.
+   Seite: 1024 x 646 px. Parameter: ?print (Druckansicht ohne Leiste), ?gut=gruen (Farbvariante). */
+const DK = (() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  let SEITE_B = 1024, SEITE_H = 646;          // Dashboard; Einzelvisual: init({breite: 727, hoehe: …})
+  if (Q.get("gut") === "gruen") document.body.dataset.gut = "gruen";
+  if (PRINT) document.body.classList.add("print");
+
+  /* ---------------- Format ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  const MINUS = "−", NBSP = String.fromCharCode(0xA0);
+  function zahl(v, nk = 0) { return (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function delta(v, nk = 0, einheit = "") {
+    const r = Number(v.toFixed(nk));
+    const vz = r > 0 ? "+" : r < 0 ? MINUS : "±";
+    return vz + nf(nk).format(Math.abs(r)) + einheit;
+  }
+  function prozent(v, nk = 1) { return zahl(v * 100, nk) + NBSP + "%"; }
+  /* Wirkung: richtung +1 = Anstieg günstig, -1 = Anstieg ungünstig, 0 = neutral */
+  function wirkung(d, richtung, nk = 1) {
+    if (!richtung || Number(d.toFixed(nk)) === 0) return "neutral";
+    return d * richtung > 0 ? "gut" : "schlecht";
+  }
+  const FARBE = { gut: "var(--gut)", schlecht: "var(--schlecht)", neutral: "var(--ac)",
+                  ist: "var(--ac)", fc: "var(--fc)", vj: "var(--py)" };
+
+  /* ---------------- Textmessung ---------------- */
+  const ctx = document.createElement("canvas").getContext("2d");
+  function tw(t, px = 14, bold = false) {
+    ctx.font = (bold ? "bold " : "") + px + "px Arial, 'Liberation Sans', Helvetica, sans-serif";
+    return ctx.measureText(String(t)).width;
+  }
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------------- Tooltip ---------------- */
+  let tip;
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      const zeilen = zeilenFn();
+      tip.textContent = "";
+      zeilen.forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel;
+  function init(o) {
+    document.title = o.titel;
+    if (o.breite) SEITE_B = o.breite;
+    if (o.hoehe) SEITE_H = o.hoehe;
+    if (!PRINT) {
+      const leiste = el("div", { class: "dk-leiste" }, document.body);
+      el("div", { class: "dk-leiste-titel" }, leiste, o.titel);
+      o.knoepfe = leiste;
+    }
+    buehne = el("div", { class: "dk-buehne" }, document.body);
+    rahmen = el("div", { class: "dk-rahmen" }, buehne);
+    seite = el("div", { class: "dk-seite", id: "seite", style: `width:${SEITE_B}px;height:${SEITE_H}px` }, rahmen);
+    panel = el("div", { class: "dk-panel" }, document.body);
+    tip = el("div", { class: "dk-tooltip" }, document.body);
+    const skalieren = () => {
+      if (PRINT) { rahmen.style.width = SEITE_B + "px"; rahmen.style.height = SEITE_H + "px"; return; }
+      const frei = panel.style.display === "block" ? 380 : 0;
+      const s = Math.max(0.4, Math.min((innerWidth - frei - 32) / SEITE_B, (innerHeight - 44 - 32) / SEITE_H));
+      seite.style.transform = `scale(${s})`;
+      rahmen.style.width = SEITE_B * s + "px"; rahmen.style.height = SEITE_H * s + "px";
+      rahmen.style.marginLeft = frei ? "16px" : "auto";
+    };
+    addEventListener("resize", skalieren);
+    DK._skalieren = skalieren;
+    skalieren();
+    return seite;
+  }
+  function box(id, x, y, w, h, cls = "") {
+    return el("div", { id, class: "dk-abs " + cls, style: `left:${x}px;top:${y}px;width:${w}px;height:${h}px` }, seite);
+  }
+  function haarlinie(y, links = 16, rechts = 16) {
+    el("div", { class: "dk-haar", style: `top:${y}px;left:${links}px;right:${rechts}px` }, seite);
+  }
+
+  /* ---------------- Kopf ---------------- */
+  function kopf(ziel, o) {
+    ziel.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0" }, ziel);
+    el("div", { class: "dk-titel" }, l, o.titel);
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, o.untertitel);
+    const r = el("div", { style: "position:absolute;right:0;top:2px;text-align:right" }, ziel);
+    el("div", { class: "dk-quelle" }, r, o.quelle);
+    const lg = el("div", { id: "kopf-legende", class: "dk-legende", style: "margin-top:8px" }, r);
+    o.legende.forEach(([farbe, text, rahmenFarbe]) => {
+      const s = el("span", {}, lg);
+      el("i", { style: `background:${farbe};${rahmenFarbe ? "outline:1px solid " + rahmenFarbe + ";outline-offset:-1px" : ""}` }, s);
+      s.appendChild(document.createTextNode(text));
+    });
+  }
+
+  /* ---------------- Datenschnitte (Slicer) ---------------- */
+  function knoepfe(ziel, o) {
+    const g = el("div", { class: "dk-knoepfe", role: "group" }, ziel);
+    const bs = o.optionen.map(([wert, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(wert === o.wert) }, g, text);
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); o.onChange(wert); });
+      return b;
+    });
+    return g;
+  }
+  function schnitt(ziel, label, typ, o) {
+    const s = el("div", { class: "dk-schnitt" }, ziel);
+    el("label", {}, s, label);
+    if (typ === "knoepfe") return knoepfe(s, o);
+    const sel = el("select", { "aria-label": label, style: o.breite ? `width:${o.breite}px` : "" }, s);
+    o.optionen.forEach(([wert, text]) => { const op = el("option", { value: wert }, sel, text); if (wert === o.wert) op.selected = true; });
+    sel.addEventListener("change", () => o.onChange(sel.value));
+    return sel;
+  }
+
+  /* ---------------- KPI-Leiste (Karte mit Referenzbeschriftung) ---------------- */
+  function kpis(ziel, items) {
+    ziel.textContent = "";
+    const w = el("div", { class: "dk-kpis" }, ziel);
+    items.forEach(k => {
+      const c = el("div", { class: "dk-kpi" }, w);
+      el("div", { class: "dk-kpi-label" }, c, k.label);
+      const wz = el("div", { class: "dk-kpi-wert" + (k.wertKlasse ? " " + k.wertKlasse : "") }, c, k.wert);
+      if (k.einheit) el("span", { class: "dk-kpi-einheit" }, wz, k.einheit);
+      const d = el("div", { class: "dk-kpi-delta" }, c, (k.bezug ?? "ΔVJ") + " ");
+      el("b", { class: k.klasse }, d, k.delta);
+    });
+  }
+
+  /* ---------------- Visual-Rahmen: Titel + Botschaft ---------------- */
+  function visual(ziel, o) {
+    ziel.textContent = "";
+    ziel.classList.add("dk-visual");
+    const tz = el("div", { class: "dk-titelzeile" }, ziel);
+    const t = el("div", { class: "dk-visual-titel" }, tz, o.titel);
+    if (o.einheit) { t.appendChild(document.createTextNode(", ")); el("span", { class: "dk-einheit" }, t, o.einheit); }
+    if (o.schalter) knoepfe(tz, o.schalter);
+    if (o.botschaft !== undefined) el("div", { class: "dk-botschaft", title: o.botschaft }, ziel, o.botschaft);
+    const top = (o.botschaft !== undefined ? 42 : 24) + (o.abstand || 6);
+    return { flaeche: el("div", { style: `position:absolute;left:0;top:${top}px;right:0;bottom:0` }, ziel),
+             breite: ziel.clientWidth, hoehe: ziel.clientHeight - top };
+  }
+
+  /* ---------------- Balkendiagramm (gruppiertes Balkendiagramm) ---------------- */
+  function balken(ziel, o) {
+    const W = o.breite, n = o.zeilen.length;
+    const rh = o.zeilenhoehe || Math.floor(o.hoehe / n), bh = Math.round(rh * 0.7);
+    const H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = o.labelBreite || Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9);
+    const pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bw = Math.max(z.wert > 0 ? 1 : 0, z.wert / max * pw);
+      if (z.kontur) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: Math.max(0, bw - 1), height: bh - 1,
+                                 fill: "#FFFFFF", stroke: z.kontur, "stroke-width": 1 }, g);
+      else sv("rect", { x: lw, y: y + (rh - bh) / 2, width: bw, height: bh, fill: z.farbe || FARBE.ist }, g);
+      sv("text", { x: lw + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    return svg;
+  }
+
+  /* ---------------- Bevölkerungspyramide (gestapeltes Balkendiagramm, Männer negativ) ---------------- */
+  function pyramide(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, kopfH = 18;
+    const rh = o.zeilenhoehe || Math.floor((o.hoehe - kopfH) / n), bh = Math.round(rh * 0.72);
+    const H = kopfH + rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vl = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.m))))) + 7;
+    const vr = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.w))))) + 7;
+    const maxM = Math.max(...o.zeilen.map(z => z.m), 1e-9), maxW = Math.max(...o.zeilen.map(z => z.w), 1e-9);
+    const k = (W - lw - vl - vr - 2) / (maxM + maxW);      // ein Maßstab für beide Seiten
+    const x0 = lw + vl + maxM * k + 1;
+    sv("text", { x: x0 - 6, y: 12, "text-anchor": "end", class: "muted" }, svg, o.kopf[0]);
+    sv("text", { x: x0 + 6, y: 12, class: "muted" }, svg, o.kopf[1]);
+    o.zeilen.forEach((z, i) => {
+      const y = kopfH + i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, z.label);
+      const bm = z.m * k, bw = z.w * k;
+      sv("rect", { x: x0 - 1 - bm, y: y + (rh - bh) / 2, width: bm, height: bh, fill: FARBE.ist }, g);
+      sv("rect", { x: x0 + 1, y: y + (rh - bh) / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: x0 - 1 - bm - 5, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, o.fmt(z.m));
+      sv("text", { x: x0 + 1 + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.w));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: x0, x2: x0, y1: kopfH - 2, y2: H, stroke: "#FFFFFF", "stroke-width": 2 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Gestapeltes Säulendiagramm ---------------- */
+  function saeulen(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.segNamen.map(t => tw(t)))) + 10;
+    const oben = 20, unten = 20, PH = H - oben - unten;
+    const slot = (W - lw) / n, bw = Math.min(26, slot * 0.72);
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9);
+    const k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = lw + slot * i + slot / 2, x = cx - bw / 2;
+      const g = sv("g", {}, svg);
+      let y = basis, summe = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        sv("rect", { x, y: y - h, width: bw, height: Math.max(0, h - (j < s.segs.length - 1 ? 0 : 0)),
+                     fill: FARBE[s.szenario] }, g);
+        if (j > 0) sv("line", { x1: x - 1, x2: x + bw + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, g);
+        if (i === 0 && h >= 15) sv("text", { x: lw - 10, y: y - h / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, o.segNamen[j]);
+        y -= h; summe += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(summe));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: lw + slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      if (o.tooltip) tooltip(hit, () => o.tooltip(s, summe));
+    });
+    sv("line", { x1: lw - 2, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Matrix / Tabelle mit Datenbalken ----------------
+     Spaltentypen: (leer) Zahl rechtsbündig über s.fmt · "text" linksbündig · "delta" Abweichung mit Balken
+     an einer Mittellinie, gefärbt nach Wirkung (s.richtung) · "anteil" Fortschritt 0..1 als Balken ab Null.
+     null-Werte erscheinen als „–“ ohne Balken. o.zeilenhoehe (Standard 21), o.onSort(key) macht Köpfe klickbar. */
+  function matrix(ziel, o) {
+    ziel.textContent = "";
+    const zh = o.zeilenhoehe || 21, H = zh - 3;
+    const t = el("table", { class: "dk-matrix" }, ziel);
+    const kopf = el("tr", {}, el("thead", {}, t));
+    o.spalten.forEach(s => {
+      const st = (s.breite ? `width:${s.breite}px;` : "") + (s.typ === "delta" || s.typ === "anteil" ? "text-align:center;" : "") +
+                 (s.typ === "text" ? "text-align:left;" : "");
+      const th = el("th", s.id ? { style: st, id: s.id } : { style: st }, kopf, s.titel);
+      if (o.onSort && !PRINT) {
+        th.classList.add("dk-sortierbar");
+        th.title = "Klick sortiert";
+        th.addEventListener("click", () => o.onSort(s.key));
+        if (o.sortierung && o.sortierung.key === s.key) th.appendChild(document.createTextNode(o.sortierung.ab ? " ▾" : " ▴"));
+      }
+    });
+    const tb = el("tbody", {}, t);
+    // Achse der Abweichungsbalken proportional (wie „Achse: automatisch“ bei Datenbalken in Power BI)
+    const spanne = {};
+    o.spalten.filter(s => s.typ === "delta").forEach(s => {
+      const w = o.zeilen.filter(z => !z.summe && z.werte[s.key] != null).map(z => z.werte[s.key]);
+      spanne[s.key] = { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) };
+    });
+    const hoehe = o.zeilenhoehe ? `height:${zh}px` : "";
+    o.zeilen.forEach(z => {
+      const blass = !z.summe && o.auswahl != null && o.auswahl !== z.key;
+      // Trennlinie über einer neuen Gruppe: an der Vorzeile setzen (im border-collapse gewinnt die obere Zelle)
+      if (z.trenner && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
+      const tr = el("tr", { class: (z.summe ? "dk-summe" : "dk-zeile") + (blass ? " dk-blass" : "") }, tb);
+      o.spalten.forEach((s, j) => {
+        if (j === 0) { el("td", { style: hoehe }, tr, z.label); return; }
+        const v = z.werte[s.key];
+        if (s.typ === "text") { el("td", { style: "text-align:left;" + hoehe }, tr, v); return; }
+        if (s.typ !== "delta" && s.typ !== "anteil") { el("td", { style: hoehe }, tr, v == null ? "–" : s.fmt(v)); return; }
+        const td = el("td", { class: "dk-dbalken", style: hoehe }, tr);
+        const W = s.breite - 8, svg = sv("svg", { width: W, height: H, style: "display:block" }, td);
+        if (s.typ === "anteil") {
+          const txtW = s.textBreite || 48, pw = W - txtW - 2;
+          sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end", style: "font-size:14px" }, svg,
+             v == null ? "–" : zahl(v * 100, 0) + NBSP + "%");
+          if (v != null) sv("rect", { x: txtW, y: (H - 10) / 2, width: Math.max(v > 0 ? 1 : 0, Math.min(1, v) * pw), height: 10, fill: FARBE.ist }, svg);
+          sv("line", { x1: txtW, x2: txtW, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+          return;
+        }
+        const txtW = s.textBreite || 50, sp = spanne[s.key];
+        const k = (W - txtW - 4) / Math.max(sp.neg + sp.pos, 1e-9), mitte = txtW + 2 + sp.neg * k;
+        const kl = v == null ? "neutral" : wirkung(v, s.richtung, s.nk ?? 1);
+        sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end",
+                     style: `font-size:14px;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};font-weight:${z.summe ? "bold" : "normal"}` },
+           svg, v == null ? "–" : delta(v, s.nk ?? 1));
+        if (!z.summe && v != null) {
+          const bwid = Math.abs(v) * k;
+          sv("rect", { x: v >= 0 ? mitte : mitte - bwid, y: (H - 10) / 2, width: bwid, height: 10, fill: FARBE[kl] }, svg);
+        }
+        sv("line", { x1: mitte, x2: mitte, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+      });
+      if (!z.summe && o.onClick) tr.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip && !z.summe) tooltip(tr, () => o.tooltip(z));
+    });
+    return t;
+  }
+
+  /* ---------------- Streudiagramm (Punktdiagramm mit Größe) ----------------
+     o.punkte: [{key, x, y, g}] – g bestimmt die Kreisfläche. o.x / o.y: {min, max, ticks, titel, fmt}.
+     o.linien: {x, y} Konstantenlinien; o.felder: [{ecke: "ol"|"or"|"ul"|"ur", text}] Beschriftung der Quadranten. */
+  function streuung(ziel, o) {
+    const W = o.breite, H = o.hoehe;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const fx = o.x.fmt || String, fy = o.y.fmt || String;
+    const links = Math.ceil(Math.max(...o.y.ticks.map(t => tw(fy(t))))) + 8;
+    const rechts = Math.ceil(tw(fx(o.x.ticks[o.x.ticks.length - 1])) / 2) + 2;
+    const oben = 22, unten = 38, PW = W - links - rechts, PH = H - oben - unten;
+    const sx = v => links + (v - o.x.min) / (o.x.max - o.x.min) * PW;
+    const sy = v => oben + PH - (v - o.y.min) / (o.y.max - o.y.min) * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, o.y.titel);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, o.x.titel);
+    o.y.ticks.forEach(t => sv("text", { x: links - 6, y: sy(t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, fy(t)));
+    o.x.ticks.forEach(t => sv("text", { x: sx(t), y: oben + PH + 16, "text-anchor": "middle", class: "muted" }, svg, fx(t)));
+    if (o.linien) {
+      const st = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+      if (o.linien.x != null) sv("line", { x1: sx(o.linien.x), x2: sx(o.linien.x), y1: oben, y2: oben + PH, ...st }, svg);
+      if (o.linien.y != null) sv("line", { x1: links, x2: links + PW, y1: sy(o.linien.y), y2: sy(o.linien.y), ...st }, svg);
+    }
+    (o.felder || []).forEach(f => {
+      const l = f.ecke[1] === "l", ob = f.ecke[0] === "o";
+      sv("text", { x: l ? links + 6 : links + PW - 6, y: ob ? oben + 13 : oben + PH - 6, "text-anchor": l ? "start" : "end",
+                   class: "muted" }, svg, f.text);
+    });
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    const gMax = Math.max(...o.punkte.map(p => p.g || 0), 1e-9), rMax = o.rMax || 13, rMin = o.rMin || 3;
+    const kreise = o.punkte.slice().sort((a, b) => (b.g || 0) - (a.g || 0))
+      .map(p => ({ p, cx: sx(p.x), cy: sy(p.y), r: Math.max(rMin, Math.sqrt((p.g || 0) / gMax) * rMax) }));
+    const gruppen = new Map();
+    kreise.forEach(({ p, cx, cy, r }) => {
+      const blass = o.auswahl && !o.auswahl(p);
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("circle", { cx, cy, r, fill: p.farbe || FARBE.ist, "fill-opacity": 0.8, stroke: "#FFFFFF", "stroke-width": 1 }, g);
+      const hit = sv("circle", { cx, cy, r: Math.max(r, 6), fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(p.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(p));
+      gruppen.set(p, g);
+    });
+    // Beschriftungen nach allen Kreisen: rechts, links, oben, unten – erste Lage ohne Überdeckung
+    const belegt = [];
+    const schneidetKreis = (b, k) => {
+      const nx = Math.max(b.x, Math.min(k.cx, b.x + b.w)), ny = Math.max(b.y, Math.min(k.cy, b.y + b.h));
+      return (nx - k.cx) ** 2 + (ny - k.cy) ** 2 < (k.r + 1) ** 2;
+    };
+    const schneidet = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    kreise.filter(k => k.p.label).forEach(k => {
+      const w = tw(k.p.label), h = 16, { cx, cy, r } = k;
+      const lagen = [[cx + r + 4, cy - h / 2], [cx - r - 4 - w, cy - h / 2], [cx - w / 2, cy - r - 2 - h], [cx - w / 2, cy + r + 2]];
+      const frei = b => b.x >= links && b.x + b.w <= links + PW && b.y >= oben && b.y + b.h <= oben + PH &&
+        !kreise.some(a => a !== k && schneidetKreis(b, a)) && !belegt.some(c => schneidet(b, c));
+      const b = lagen.map(([x, y]) => ({ x, y, w, h })).find(frei) || { x: lagen[0][0], y: lagen[0][1], w, h };
+      belegt.push(b);
+      sv("text", { x: b.x, y: b.y + h / 2, dy: "0.35em" }, gruppen.get(k.p), k.p.label);
+    });
+    return svg;
+  }
+
+  /* ---------------- Berichtsdesign für Power BI (Theme-JSON) ---------------- */
+  function thema() {
+    const GUT = getComputedStyle(document.body).getPropertyValue("--gut").trim() || "#00806B";
+    return { name: "6. Auflage – Buchstil", dataColors: ["#3A3F44", "#8F8F8F", "#C9C9C9", GUT, "#C62828"],
+      background: "#FFFFFF", foreground: "#1A1A1A", tableAccent: "#3A3F44", good: GUT, neutral: "#8F8F8F", bad: "#C62828",
+      maximum: "#3A3F44", center: "#C9C9C9", minimum: "#F6F6F6",
+      textClasses: { callout: { fontSize: 19.5, fontFace: "Arial", color: "#1A1A1A" },
+                     title: { fontSize: 12, fontFace: "Arial", color: "#1A1A1A" },
+                     header: { fontSize: 10.5, fontFace: "Arial", color: "#4D4D4D" },
+                     label: { fontSize: 10.5, fontFace: "Arial", color: "#1A1A1A" } },
+      visualStyles: { "*": { "*": { border: [{ show: false }], dropShadow: [{ show: false }], background: [{ show: false }] } } } };
+  }
+
+  /* ---------------- Ebenen der Lernplattform ---------------- */
+  function download(name, inhalt, typ = "text/csv;charset=utf-8") {
+    const blob = new Blob([String.fromCharCode(0xFEFF) + inhalt], { type: typ });
+    const a = el("a", { href: URL.createObjectURL(blob), download: name }, document.body);
+    a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function ebenen(o) {
+    if (PRINT) return;
+    const leiste = document.querySelector(".dk-leiste");
+    let modus = null;
+    const marken = [];
+    const knopf = (text, fn) => { const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text); b.addEventListener("click", fn); return b; };
+    const kRegeln = knopf("Designregeln", () => umschalten("regeln"));
+    const kNachbau = knopf("Nachbau in Power BI", () => umschalten("nachbau"));
+    const kTab = knopf("Werte als Tabelle", () => umschalten("tabelle"));
+    knopf("Daten (CSV)", () => download(o.csv.name, o.csv.text()));
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; }
+    function markeSetzen(eintrag, text, cls) {
+      const z = document.getElementById(eintrag.ziel);
+      if (!z) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / SEITE_B;
+      // anker "rechts" (Standard): Marke auf der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "dk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text));
+      marken.push(m);
+    }
+    function aktiv(text) {
+      panel.querySelectorAll(".dk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      const e = panel.querySelector(`.dk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(m) {
+      modus = modus === m ? null : m;
+      [kRegeln, kNachbau, kTab].forEach((b, i) => b.setAttribute("aria-pressed", String(modus === ["regeln", "nachbau", "tabelle"][i])));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      DK._skalieren();
+      if (modus === "regeln") {
+        el("h2", {}, panel, "Designregeln (SUCCESS)");
+        el("div", { class: "dk-panel-intro" }, panel, "SUCCESS-Formel nach Hichert/Faisst (IBCS): Say, Unify, Condense, Check, Express, Simplify, Structure. Die Nummern im Dashboard zeigen, wo eine Regel angewendet ist.");
+        o.regeln.forEach(r => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": String(r.nr) }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, r.nr + "."); el("span", {}, k, r.titel);
+          el("div", { class: "dk-regel" }, e, r.regel);
+          el("div", {}, e, r.text);
+          markeSetzen(r, String(r.nr), "");
+        });
+      } else if (modus === "nachbau") {
+        el("h2", {}, panel, "Nachbau in Power BI");
+        el("div", { class: "dk-panel-intro" }, panel, o.nachbauIntro);
+        if (o.theme) { const b = el("button", { type: "button", style: "margin-bottom:10px;font:inherit;padding:5px 10px;border:1px solid #9A9A9A;background:#fff;border-radius:3px;cursor:pointer" }, panel, "Berichtsdesign (JSON) herunterladen");
+          b.addEventListener("click", () => download("berichtsdesign.json", JSON.stringify(o.theme, null, 2), "application/json")); }
+        o.nachbau.forEach(n => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": n.id }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, n.id); el("span", {}, k, n.titel);
+          const dl = el("dl", {}, e);
+          [["Visual", n.visual], ["Felder", n.felder], ["Format", n.format], ["Hinweis", n.hinweis]].forEach(([a, b]) => {
+            if (!b) return; el("dt", {}, dl, a); el("dd", {}, dl, b);
+          });
+          markeSetzen(n, n.id, "nachbau");
+        });
+      } else if (modus === "tabelle") {
+        el("h2", {}, panel, "Werte als Tabelle");
+        el("div", { class: "dk-panel-intro" }, panel, "Alle Werte der Visuals in der aktuellen Filterung (entspricht „Als Tabelle anzeigen“ in Power BI).");
+        o.tabellen().forEach(tab => {
+          el("div", { style: "font-weight:bold;margin:12px 0 4px" }, panel, tab.titel);
+          const t = el("table", { class: "dk-matrix" }, panel);
+          const hr = el("tr", {}, el("thead", {}, t));
+          tab.kopf.forEach(h => el("th", {}, hr, h));
+          const tb = el("tbody", {}, t);
+          tab.zeilen.forEach(z => { const tr = el("tr", {}, tb); z.forEach(c => el("td", {}, tr, c)); });
+        });
+      }
+    }
+    DK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+  }
+
+  return { PRINT, NBSP, zahl, delta, prozent, wirkung, FARBE, tw, el, sv, init, box, haarlinie, kopf, schnitt, knoepfe,
+           kpis, visual, balken, pyramide, saeulen, matrix, streuung, thema, ebenen, download };
+})();
+
+</script>
+<script>
+/* Abb. 4.23 – Multidimensionale Analyse der Balanced Chance and Risk Card (softwareneutraler Nachbau eines
+   OLAP-Analysewerkzeugs). Seite 1024 x 646 px. Daten: bcr_olap.json (daten_bcr_olap.py) – additive Basisgrößen je
+   Jahr, Quartal, Standort und Produkt; alle Kennzahlen werden aus Zähler und Nenner gerechnet.
+   Aufbau wie im Original: links der Dimensionsbaum (Jahr, Standort, Produkt, Kennzahlen), oben die Dimensionsleiste mit
+   der Schicht (Perspektive, „Schicht 1 von 4“) und der Spaltendimension, rechts die Kreuztabelle mit Chancen und
+   Risiken je Perspektive, Jahren und Veränderungen; neu darunter ein Diagramm der gewählten Kennzahl.
+   Drill-down: Klick auf einen Jahres- bzw. Standortkopf (oder die Säule, oder das Element im Baum) zeigt die nächste
+   Ebene (Quartale bzw. Produkte des Standorts), „↑ Ebene höher“ oder Esc gehen zurück. Elemente im Baum, deren
+   Dimension nicht in den Spalten steht, filtern (Schnitt). Klick auf eine Zeile wählt die Kennzahl für das Diagramm. */
+(() => {
+  "use strict";
+  const { zahl, delta, wirkung, FARBE, NBSP, sv, el, tw } = DK;
+  const D = DATA, J = D.jahre, STO = D.standorte, PRO = D.produkte, PER = D.perspektiven;
+  const FI = Object.fromEntries(D.felder.map((f, i) => [f, 4 + i]));
+  const R = D.saetze;
+  const KZ = D.kennzahlen.map(([p, art, name, einheit, zaehler, nenner, faktor, nk, richtung, dmodus], i) =>
+    ({ i, p, art, name, einheit, zaehler, nenner, faktor, nk, richtung, dmodus }));
+  const FELDNAME = { eva: "EVA", kapitalkosten: "Kapitalkosten", kapital: "Kapital", ebt: "EBT", umsatz: "Umsatz", cashflow: "Cash Flow",
+    bruttoertrag: "Bruttoertrag", rv_int: "Risikovorsorge intern", rv_ext: "Risikovorsorge extern", ausfall: "Forderungsausfälle", fk: "Fremdkapital",
+    absatz: "Absatz", marktvolumen: "Marktvolumen", zufr_punkte: "Zufriedenheitspunkte", kunden: "Kunden", neukundenumsatz: "Umsatz mit Neukunden",
+    grosskundenumsatz: "Umsatz mit Großkunden", reklamationen: "Reklamationen", auftraege: "Aufträge", puenktlich: "pünktliche Lieferungen",
+    lieferungen: "Lieferungen", dlz_tage: "Durchlaufzeit (Tage)", ausschuss: "Ausschuss", produktion: "Produktion", neuproduktumsatz: "Umsatz neuer Produkte",
+    vorschlaege: "Verbesserungsvorschläge", kranktage: "Krankheitstage", solltage: "Sollarbeitstage", austritte: "Austritte" };
+  const passt = (k, breite) => k.find(t => tw(t) <= breite) || k[k.length - 1];
+  const kurzJ = j => "’" + String(J[j]).slice(2);
+
+  /* ---------- Rechnen ---------- */
+  function wert(k, rs) {
+    let z = 0, n = 0;
+    for (const r of rs) { for (const f of k.zaehler) z += r[FI[f]]; if (k.nenner) n += r[FI[k.nenner]]; }
+    if (!rs.length) return null;
+    return k.nenner ? (n ? z / n * k.faktor : null) : z * k.faktor;
+  }
+  const fmt = (k, v) => (v == null ? "–" : zahl(v, k.nk));
+  function dWert(k, a, b) {
+    if (a == null || b == null) return null;
+    if (k.dmodus === "rel") return a ? (b / a - 1) * 100 : null;
+    return b - a;
+  }
+  const dFmt = (k, d) => (d == null ? "–" : k.dmodus === "rel" ? delta(d, 1, NBSP + "%") : k.dmodus === "pp" ? delta(d, k.nk, NBSP + "%-Pkt.") : delta(d, k.nk));
+  const relAenderung = (k, a, b) => (a ? (b / a - 1) * 100 : 0);
+
+  /* ---------- Zustand ---------- */
+  const S = { persp: 0, spalten: "jahr", drillJahr: null, drillStandort: null, jahr: 2, standort: null, produkt: null, kz: null };
+  const gedrillt = () => (S.spalten === "jahr" && S.drillJahr !== null) || (S.spalten === "standort" && S.drillStandort !== null);
+  function hoch() { if (S.spalten === "jahr") S.drillJahr = null; else S.drillStandort = null; zeichnen(); }
+  addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    if (S.kz !== null) { S.kz = null; zeichnen(); } else if (gedrillt()) hoch();
+  });
+
+  // Schnitte der Dimensionen, die nicht in den Spalten stehen
+  const basis = () => R.filter(r => (S.spalten === "jahr" || r[0] === S.jahr) &&
+    (S.spalten === "standort" || S.standort === null || r[2] === S.standort) &&
+    (S.spalten === "produkt" || (S.spalten === "standort" && S.drillStandort !== null) || S.produkt === null || r[3] === S.produkt));
+  function spaltenListe() {
+    if (S.spalten === "jahr") {
+      if (S.drillJahr === null) return [
+        ...J.map((y, j) => ({ key: "j" + j, titel: String(y), lang: `Jahr ${y}`, pred: r => r[0] === j, drill: () => { S.drillJahr = j; } })),
+        ...[[0, 1], [1, 2], [0, 2]].map(([a, b]) => ({ key: `d${a}${b}`, titel: `Δ ${J[a]}–${kurzJ(b)}`, lang: `Veränderung ${J[a]}–${J[b]}`, delta: [a, b] }))];
+      const dj = S.drillJahr;
+      return [...[0, 1, 2, 3].map(q => ({ key: "q" + q, titel: `Q${q + 1} ${J[dj]}`, lang: `${q + 1}. Quartal ${J[dj]}`, pred: r => r[0] === dj && r[1] === q })),
+              { key: "jg", titel: `Jahr ${J[dj]}`, lang: `Jahr ${J[dj]}`, pred: r => r[0] === dj, summe: true }];
+    }
+    if (S.spalten === "standort") {
+      if (S.drillStandort === null) return [
+        ...STO.map((n, s) => ({ key: "s" + s, titel: n, lang: `Standort ${n}`, pred: r => r[2] === s, drill: () => { S.drillStandort = s; } })),
+        { key: "k", titel: "Konzern", lang: "Konzern", pred: () => true, summe: true }];
+      const ds = S.drillStandort;
+      return [...PRO.map((n, p) => ({ key: "p" + p, titel: n, lang: `${STO[ds]} · ${n}`, pred: r => r[2] === ds && r[3] === p })),
+              { key: "sg", titel: STO[ds], lang: `Standort ${STO[ds]} gesamt`, pred: r => r[2] === ds, summe: true }];
+    }
+    return [...PRO.map((n, p) => ({ key: "p" + p, titel: n, lang: n, pred: r => r[3] === p })),
+            { key: "pa", titel: "alle Produkte", lang: "alle Produkte", pred: () => true, summe: true }];
+  }
+  function matrixDaten() {
+    const rs = basis(), sp = spaltenListe(), ks = KZ.filter(k => k.p === S.persp);
+    const zeilen = ks.map(k => {
+      const w = {};
+      sp.forEach(c => { if (!c.delta) w[c.key] = wert(k, rs.filter(c.pred)); });
+      sp.forEach(c => { if (c.delta) w[c.key] = dWert(k, w["j" + c.delta[0]], w["j" + c.delta[1]]); });
+      return { k, w };
+    });
+    return { rs, sp, zeilen };
+  }
+  const dimName = () => (S.spalten === "jahr" ? (S.drillJahr === null ? "Jahren" : `Quartalen ${J[S.drillJahr]}`)
+    : S.spalten === "standort" ? (S.drillStandort === null ? "Standorten" : `Produkten in ${STO[S.drillStandort]}`) : "Produkten");
+  function schnittText() {
+    const t = [];
+    if (S.spalten !== "jahr") t.push(`Jahr ${J[S.jahr]}`);
+    if (S.spalten !== "standort") t.push(S.standort === null ? "Konzern" : `Standort ${STO[S.standort]}`);
+    if (S.spalten !== "produkt" && !(S.spalten === "standort" && S.drillStandort !== null)) t.push(S.produkt === null ? "alle Produkte" : PRO[S.produkt]);
+    return t;
+  }
+
+  /* ---------- Layout ---------- */
+  DK.init({ titel: "Balanced Chance and Risk Card – multidimensionale Analyse" });
+  const seite = document.getElementById("seite");
+  const bBaum = DK.box("dimensionen", 16, 10, 190, 630);
+  el("div", { style: "position:absolute;left:218px;top:10px;height:630px;border-left:1px solid var(--linie)" }, seite);
+  const bKopf = DK.box("kopf", 232, 10, 776, 46);
+  DK.haarlinie(62, 232, 16);
+  const bFilter = DK.box("filter", 232, 68, 776, 50, "dk-filter");
+  DK.haarlinie(124, 232, 16);
+  const bTab = DK.box("v-kreuztabelle", 232, 132, 776, 350);
+  DK.haarlinie(488, 232, 16);
+  const bDia = DK.box("v-diagramm", 232, 496, 776, 146);
+  DK.el("style", {}, document.head, `
+    .kt { table-layout: fixed; }
+    .kt td { height: 18px; overflow: hidden; text-overflow: ellipsis; }
+    .kt th { height: 20px; }
+    .kt tr.kt-gruppe td { font-weight: bold; color: var(--muted); border-top: 1px solid #9A9A9A; padding-top: 2px; }
+    .kt tr.kt-gruppe.erste td { border-top: none; }
+    .kt td.kt-summe, .kt th.kt-summe { font-weight: bold; }
+    .kt th.kt-drill { cursor: pointer; text-decoration: underline; text-decoration-color: #BDBDBD; text-underline-offset: 3px; }
+    .kt th.kt-drill:hover { color: var(--text); text-decoration-color: var(--text); }
+    .kt td.kt-delta { border-left: none; }
+    .kt th.kt-trenner, .kt td.kt-trenner { border-left: 1px solid var(--linie); }
+    .kt-hoch { margin-left: auto; font: inherit; font-size: 14px; height: 24px; padding: 0 8px; border: 1px solid #9A9A9A; border-radius: 3px;
+      background: #FFFFFF; color: var(--text); cursor: pointer; }
+    #dimensionen { font-size: 14px; }
+    .bm-kopf { font-size: 16px; font-weight: bold; }
+    .bm-unter { color: var(--muted); margin: 2px 0 8px; }
+    .bm-dim { margin-top: 10px; padding-bottom: 3px; border-bottom: 1px solid var(--ac); display: flex; justify-content: space-between; font-weight: bold; }
+    .bm-dim span { font-weight: normal; color: var(--muted); }
+    .bm-el { height: 22px; display: flex; align-items: center; padding-left: 10px; cursor: pointer; border-left: 3px solid transparent; }
+    .bm-el.tief { padding-left: 24px; }
+    .bm-el:hover { background: var(--flaeche); }
+    .bm-el.an { font-weight: bold; border-left-color: var(--ac); }
+    .bm-el.aus { color: #8F8F8F; cursor: default; }
+    .bm-el.aus:hover { background: none; }
+    .bm-hinweis { color: var(--muted); margin-top: 12px; line-height: 1.35; }`);
+
+  /* ---------- lokaler Tooltip mit Ereignis ---------- */
+  const tip = document.querySelector(".dk-tooltip");
+  function tooltip(ziel, fn) {
+    ziel.addEventListener("pointermove", ev => {
+      const z = (fn(ev) || []).filter(Boolean);
+      if (!z.length) { tip.style.display = "none"; return; }
+      tip.textContent = "";
+      z.forEach((t, i) => el(i === 0 ? "b" : "div", {}, tip, t));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------- Dimensionsleiste: Schicht und Spaltendimension ---------- */
+  const knopfSchicht = DK.schnitt(bFilter, "Schicht (Perspektive)", "knoepfe", { optionen: PER.map((n, i) => [i, n]), wert: 0,
+    onChange: v => { S.persp = Number(v); S.kz = null; zeichnen(); } });
+  const knopfSpalten = DK.schnitt(bFilter, "Spalten", "knoepfe", { optionen: [["jahr", "Jahr"], ["standort", "Standort"], ["produkt", "Produkt"]], wert: "jahr",
+    onChange: v => { S.spalten = v; S.drillJahr = null; S.drillStandort = null; zeichnen(); } });
+
+  /* ---------- Dimensionsbaum ---------- */
+  function baum() {
+    bBaum.textContent = "";
+    el("div", { class: "bm-kopf" }, bBaum, "Dimensionen");
+    el("div", { class: "bm-unter" }, bBaum, "Klick filtert oder öffnet die Ebene");
+    const dim = (name, achse, id) => { const d = el("div", { class: "bm-dim", id }, bBaum, name); if (achse) el("span", {}, d, "Spalten"); };
+    const eintrag = (text, an, fn, tief = false, aus = false, id) => {
+      const e = el("div", { class: "bm-el" + (tief ? " tief" : "") + (an ? " an" : "") + (aus ? " aus" : ""), ...(id ? { id } : {}) }, bBaum, text);
+      if (!aus && !DK.PRINT) e.addEventListener("click", fn);
+      return e;
+    };
+    dim("Jahr", S.spalten === "jahr", "bm-jahr");
+    J.forEach((y, j) => eintrag(String(y) + (S.spalten === "jahr" ? " › Quartale" : ""), S.spalten === "jahr" ? S.drillJahr === j : S.jahr === j,
+      () => { if (S.spalten === "jahr") S.drillJahr = S.drillJahr === j ? null : j; else S.jahr = j; zeichnen(); }, true));
+    dim("Standort", S.spalten === "standort", "bm-standort");
+    eintrag("Konzern", S.spalten === "standort" ? S.drillStandort === null : S.standort === null,
+      () => { if (S.spalten === "standort") S.drillStandort = null; else S.standort = null; zeichnen(); });
+    STO.forEach((n, s) => eintrag(n + (S.spalten === "standort" ? " › Produkte" : ""), S.spalten === "standort" ? S.drillStandort === s : S.standort === s,
+      () => { if (S.spalten === "standort") S.drillStandort = S.drillStandort === s ? null : s; else S.standort = S.standort === s ? null : s; zeichnen(); }, true));
+    const prodAus = S.spalten === "produkt" || (S.spalten === "standort" && S.drillStandort !== null);
+    dim("Produkt", S.spalten === "produkt", "bm-produkt");
+    eintrag("alle Produkte", !prodAus && S.produkt === null, () => { S.produkt = null; zeichnen(); }, false, prodAus);
+    PRO.forEach((n, p) => eintrag(n, !prodAus && S.produkt === p, () => { S.produkt = S.produkt === p ? null : p; zeichnen(); }, true, prodAus));
+    dim("Kennzahlen", false, "bm-kennzahlen");
+    PER.forEach((n, i) => eintrag(n, S.persp === i, () => { S.persp = i; S.kz = null; zeichnen(); }, true));
+    el("div", { class: "bm-hinweis" }, bBaum, "Steht die Dimension in den Spalten, öffnet der Klick die nächste Ebene (Drill-down).");
+  }
+
+  /* ---------- Kreuztabelle ---------- */
+  function kreuztabelle(f, M) {
+    const { sp, zeilen } = M;
+    const lw = Math.ceil(Math.max(tw("Kennzahl"), ...zeilen.map(z => tw(`${z.k.name} (${z.k.einheit})`) + 12))) + 14;
+    const ww = sp.map(c => Math.ceil(Math.max(tw(c.titel, 14, !!c.summe), ...zeilen.map(z => tw(c.delta ? dFmt(z.k, z.w[c.key]) : fmt(z.k, z.w[c.key]), 14, true)))) + 18);
+    const summe = lw + ww.reduce((a, b) => a + b, 0), frei = Math.max(0, f.breite - summe);
+    const W = [lw + frei * 0.3, ...ww.map(w => w + frei * 0.7 / ww.length)];
+    const t = el("table", { class: "dk-matrix kt", id: "kt-tabelle", style: `width:${Math.max(f.breite, summe)}px` }, f.flaeche);
+    const cg = el("colgroup", {}, t);
+    W.forEach(w => el("col", { style: `width:${w}px` }, cg));
+    const hr = el("tr", {}, el("thead", {}, t));
+    el("th", { id: "kt-kopf-kz" }, hr, "Kennzahl");
+    sp.forEach((c, i) => {
+      const th = el("th", { id: "kt-kopf-" + c.key, class: (c.summe ? "kt-summe" : "") + (c.delta && !sp[i - 1].delta ? " kt-trenner" : "") + (c.drill && !DK.PRINT ? " kt-drill" : "") }, hr, c.titel);
+      if (c.drill && !DK.PRINT) { th.title = "Klick: nächste Ebene (Drill-down)"; th.addEventListener("click", () => { c.drill(); zeichnen(); }); }
+    });
+    const tb = el("tbody", {}, t);
+    let art = null;
+    zeilen.forEach(z => {
+      if (z.k.art !== art) {
+        art = z.k.art;
+        const g = el("tr", { class: "kt-gruppe" + (tb.children.length ? "" : " erste") }, tb);
+        el("td", { colspan: sp.length + 1 }, g, art === "C" ? "Chancen" : "Risiken");
+      }
+      const tr = el("tr", { class: "dk-zeile" + (S.kz !== null && S.kz !== z.k.i ? " dk-blass" : "") }, tb);
+      const lt = el("td", { style: "padding-left:12px" }, tr, z.k.name + " ");
+      el("span", { style: "color:var(--muted)" }, lt, `(${z.k.einheit})`);
+      sp.forEach((c, i) => {
+        const v = z.w[c.key], cls = [c.summe ? "kt-summe" : "", c.delta && !sp[i - 1].delta ? "kt-trenner" : ""];
+        if (c.delta) {
+          const kl = v == null ? "neutral" : wirkung(v, z.k.richtung, z.k.dmodus === "rel" ? 1 : z.k.nk);
+          el("td", { class: cls.join(" ") + " " + kl, "data-j": i }, tr, dFmt(z.k, v));
+        } else el("td", { class: cls.join(" "), "data-j": i }, tr, fmt(z.k, v));
+      });
+      tr.addEventListener("click", () => { S.kz = S.kz === z.k.i ? null : z.k.i; zeichnen(); });
+      tooltip(tr, ev => {
+        const td = ev.target.closest ? ev.target.closest("td") : null, j = td && td.dataset.j !== undefined ? +td.dataset.j : null;
+        const c = j === null ? null : sp[j], k = z.k;
+        const def = k.nenner ? `${k.zaehler.map(f => FELDNAME[f]).join(" + ")} : ${FELDNAME[k.nenner]}${k.faktor === 100 ? " × 100" : ""}`
+          : k.zaehler.map(f => FELDNAME[f]).join(" + ");
+        const out = [`${k.name} (${k.einheit}) · ${k.art === "C" ? "Chance" : "Risiko"} · ${PER[k.p]}`];
+        if (c && c.delta) out.push(`${c.lang}: ${dFmt(k, z.w[c.key])} (${fmt(k, z.w["j" + c.delta[0]])} → ${fmt(k, z.w["j" + c.delta[1]])})`,
+          k.dmodus === "pp" ? "Bei Quoten Veränderung in Prozentpunkten" : null,
+          `Wirkung: ${k.richtung > 0 ? "Anstieg günstig" : "Anstieg ungünstig"}`);
+        else if (c) out.push(`${c.lang}: ${fmt(k, z.w[c.key])} ${k.einheit}`);
+        out.push(`Berechnung: ${def}`);
+        const st = schnittText();
+        if (st.length) out.push("Schnitt: " + st.join(", "));
+        out.push("Klick wählt die Kennzahl für das Diagramm");
+        return out;
+      });
+    });
+    requestAnimationFrame(() => t.querySelectorAll("td").forEach(td => { if (!td.colSpan || td.colSpan === 1) if (td.scrollWidth > td.clientWidth + 1) console.error("Text zu lang: " + td.textContent); }));
+  }
+
+  /* ---------- Diagramm der gewählten Kennzahl über die Spaltenelemente (ohne Summen und Veränderungen) ---------- */
+  function diagramm(f, k, M) {
+    const sp = M.sp.filter(c => !c.delta && !c.summe), W = f.breite, H = f.hoehe;
+    const z = M.zeilen.find(x => x.k.i === k.i), werte = sp.map(c => z.w[c.key]);
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": `${k.name} nach ${dimName()}`, id: "dia-svg" }, f.flaeche);
+    const oben = 18, unten = 20, PH = H - oben - unten, slot = Math.min(150, W / sp.length), bw = Math.min(56, slot * 0.5);
+    const max = Math.max(...werte.map(v => Math.abs(v || 0)), 1e-9), basisY = oben + PH;
+    sp.forEach((c, i) => {
+      const v = werte[i], cx = slot * i + slot / 2, h = Math.abs(v || 0) / max * PH;
+      const g = sv("g", { class: c.drill ? "dk-klick" : "" }, svg);
+      sv("rect", { x: cx - bw / 2, y: basisY - h, width: bw, height: Math.max(v ? 1 : 0, h), fill: FARBE.ist }, g);
+      sv("text", { x: cx, y: basisY - h - 5, "text-anchor": "middle" }, g, fmt(k, v));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle", class: "muted" }, g, c.titel);
+      // Trefferfläche bewusst nicht „transparent“: Klick öffnet die nächste Ebene, keine Auswahl
+      const hit = sv("rect", { x: slot * i, y: 0, width: slot, height: H, fill: "#FFFFFF", "fill-opacity": 0 }, g);
+      if (c.drill && !DK.PRINT) hit.addEventListener("click", () => { c.drill(); zeichnen(); });
+      tooltip(hit, () => [`${k.name} · ${c.lang}`, `${fmt(k, v)} ${k.einheit}`, c.drill ? "Klick: nächste Ebene (Drill-down)" : null]);
+    });
+    sv("line", { x1: 0, x2: slot * sp.length, y1: basisY + 0.5, y2: basisY + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+  }
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    [...knopfSchicht.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(i === S.persp)));
+    [...knopfSpalten.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(["jahr", "standort", "produkt"][i] === S.spalten)));
+    const st = schnittText();
+    DK.kopf(bKopf, { titel: "Balanced Chance and Risk Card",
+      untertitel: passt([`Multidimensionale Analyse · Schicht ${S.persp + 1} von ${PER.length}: ${PER[S.persp]} · ${st.length ? st.join(" · ") + " · " : ""}Spalten nach ${dimName()}`,
+                         `Schicht ${S.persp + 1} von ${PER.length}: ${PER[S.persp]} · ${st.join(" · ")}`], 560),
+      quelle: "Quelle: Konzern-Controlling", legende: [[FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
+    baum();
+
+    const M = matrixDaten(), k = KZ.find(x => x.i === S.kz) || M.zeilen[0].k;
+    // Botschaft der Kreuztabelle
+    let bT;
+    if (S.spalten === "jahr" && S.drillJahr === null) {
+      const bew = M.zeilen.map(z => ({ z, d: z.w.d02, kl: z.w.d02 == null ? "neutral" : wirkung(z.w.d02, z.k.richtung, z.k.dmodus === "rel" ? 1 : z.k.nk),
+                                     rel: relAenderung(z.k, z.w.j0, z.w.j2) }));
+      const gut = bew.filter(b => b.kl === "gut"), schlecht = bew.filter(b => b.kl === "schlecht").sort((a, b) => Math.abs(b.rel) - Math.abs(a.rel));
+      bT = passt([`${gut.length} von ${bew.length} Kennzahlen seit ${J[0]} verbessert` + (schlecht.length ? `; ungünstig vor allem ${schlecht[0].z.k.name} (${dFmt(schlecht[0].z.k, schlecht[0].d)})` : ""),
+                  `${gut.length} von ${bew.length} Kennzahlen seit ${J[0]} verbessert`], 772);
+    } else {
+      const z = M.zeilen.find(x => x.k.i === k.i), sp = M.sp.filter(c => !c.summe);
+      const o = sp.map(c => ({ c, v: z.w[c.key] })).filter(x => x.v != null).sort((a, b) => b.v - a.v);
+      bT = o.length ? passt([`${k.name}: höchster Wert ${o[0].c.titel} (${fmt(k, o[0].v)} ${k.einheit}), niedrigster ${o[o.length - 1].c.titel} (${fmt(k, o[o.length - 1].v)} ${k.einheit})`,
+                             `${k.name}: ${o[0].c.titel} am höchsten, ${o[o.length - 1].c.titel} am niedrigsten`], 772) : "Keine Werte";
+    }
+    let f = DK.visual(bTab, { titel: `${PER[S.persp]} nach ${dimName()}`, einheit: "Einheit je Zeile", botschaft: bT });
+    if (gedrillt() && !DK.PRINT) {
+      const b = el("button", { type: "button", class: "kt-hoch", id: "kt-hoch" }, bTab.querySelector(".dk-titelzeile"), "↑ Ebene höher");
+      b.addEventListener("click", hoch);
+    }
+    kreuztabelle(f, M);
+
+    // Diagramm
+    const zk = M.zeilen.find(x => x.k.i === k.i), spd = M.sp.filter(c => !c.delta && !c.summe), wv = spd.map(c => zk.w[c.key]);
+    let bD;
+    if (S.spalten === "jahr" && S.drillJahr === null) {
+      const d = dWert(k, wv[0], wv[wv.length - 1]), kl = d == null ? "neutral" : wirkung(d, k.richtung, k.dmodus === "rel" ? 1 : k.nk);
+      bD = passt([`${k.name} ${J[0]}–${J[J.length - 1]}: ${fmt(k, wv[0])} → ${fmt(k, wv[wv.length - 1])} ${k.einheit} (${dFmt(k, d)}, ${kl === "gut" ? "günstig" : kl === "schlecht" ? "ungünstig" : "neutral"})`,
+                  `${k.name}: ${fmt(k, wv[0])} → ${fmt(k, wv[wv.length - 1])} ${k.einheit}`], 772);
+    } else {
+      const mx = Math.max(...wv.filter(v => v != null)), i = wv.indexOf(mx);
+      bD = passt([`${k.name}: ${spd[i].titel} vorn mit ${fmt(k, mx)} ${k.einheit}` + (spd[i].drill ? " – Klick auf eine Säule öffnet die nächste Ebene" : ""),
+                  `${k.name}: ${spd[i].titel} vorn`], 772);
+    }
+    f = DK.visual(bDia, { titel: `${k.name} nach ${dimName()}`, einheit: k.einheit, botschaft: bD });
+    diagramm(f, k, M);
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Lernplattform ---------- */
+  DK.ebenen({
+    regeln: [
+      { nr: 1, ziel: "kt-kopf-j2", anker: "links", versatz: [30, -2], regel: "STRUCTURE – Hierarchien öffnen", titel: "Echter Drill-down",
+        text: "Ein Klick auf einen Jahres- oder Standortkopf, auf eine Säule oder auf das Element im Dimensionsbaum zeigt die nächste Ebene: Jahr › Quartale, Konzern › Standorte › Produkte. „↑ Ebene höher“ oder Esc gehen zurück. Alle Kennzahlen werden dabei aus additiven Basisgrößen neu gerechnet, so stimmen Quoten wie ROI oder Risikovorsorgequote auf jeder Ebene." },
+      { nr: 2, ziel: "dimensionen", anker: "links", versatz: [180, 2], regel: "CONDENSE – Schnitt und Würfel", titel: "Dimensionsbaum und Dimensionsleiste",
+        text: "Wie im Original stehen links die Dimensionen Jahr, Standort, Produkt und Kennzahlen. Ein Klick auf ein Element einer Dimension, die nicht in den Spalten steht, schneidet den Würfel (z. B. nur Hamburg oder nur Produkt B). Die Dimensionsleiste wählt die Schicht – die Perspektive, im Original „Schicht 1 von 4“ – und die Spaltendimension (Pivotieren)." },
+      { nr: 3, ziel: "kt-kopf-d02", anker: "links", versatz: [26, -2], regel: "EXPRESS – Richtige Veränderung", titel: "Prozentpunkte bei Quoten, Farbe nach Wirkung",
+        text: "Bei Quoten steht die Veränderung in Prozentpunkten: ROI 7,68 % → 6,70 % ist −0,98 %-Pkt.; das Original zeigte −12,68 % (Veränderung der Quote in Prozent). Die Farbe folgt der Wirkung – bei Risiken ist ein Anstieg ungünstig. Das Original färbte alle Chancen grün und alle Risiken rot, unabhängig von der Entwicklung." },
+      { nr: 4, ziel: "v-diagramm", anker: "links", versatz: [250, 2], regel: "SAY – Botschaft vermitteln", titel: "Diagramm der gewählten Kennzahl",
+        text: "Unter der Kreuztabelle zeigt ein Säulendiagramm die gewählte Kennzahl über die Elemente der Spaltendimension, mit einer berechneten Aussage. Ein Klick auf eine Zeile der Tabelle wählt die Kennzahl, ein Klick auf eine Säule öffnet die nächste Ebene. Im Original gab es Diagramme nur als eigene Ansicht über die Symbolleiste." },
+      { nr: 5, ziel: "kt-tabelle", anker: "links", versatz: [100, 24], regel: "UNIFY – Ohne Farbflächen", titel: "Chancen und Risiken als Gruppen",
+        text: "Perspektive, Chancen und Risiken sind Gruppenüberschriften mit Linien statt dunkel- und hellblauer Bänder; grüne und rote Schrift für Chancen und Risiken entfällt. Die Einheit steht an der Kennzahl statt an jeder Zahl, Beträge in Tsd. €." },
+      { nr: 6, ziel: "kt-kopf-j0", anker: "links", versatz: [-6, -4], regel: "CHECK – Werte des Originals", titel: "Konzernwerte wie im Original",
+        text: "Die Konzernwerte der Finanzperspektive entsprechen dem Original (2000–2002 als 2024–2026): EVA, EBT, Cash Flow, Umsatz, Bruttoertrag und Risikovorsorgekosten exakt, WACC, ROI, ROS und die Risikoquoten auf zwei Nachkommastellen. Die Verteilung auf Quartale, Standorte und Produkte und die übrigen Perspektiven sind erfunden." },
+      { nr: 7, ziel: "kopf-titel", anker: "links", versatz: [384, 0], regel: "SIMPLIFY – Ohne Programmrahmen", titel: "Ohne Menüs, Symbolleisten und Logo",
+        text: "Titelleiste, Menü- und Symbolleisten, Statuszeile, Bildlaufleisten und die Titelgrafik mit Namen entfallen. Die Analyse heißt nach ihrem Inhalt; Standorte und Produkte bleiben als Dimensionselemente erhalten." },
+    ],
+    nachbauIntro: "Seitengröße benutzerdefiniert 1024 × 646 px, Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle mit den Basisgrößen je Jahr, Quartal, Standort und Produkt (CSV), Dimensionstabellen Datum (Jahr › Quartal), Standort, Produkt sowie eine Kennzahlentabelle (Perspektive, Art, Kennzahl) für einen Feldparameter. Quoten als Measures mit DIVIDE, z. B. ROI = DIVIDE(SUM(Fakten[ebt]); SUM(Fakten[kapital])); Δ in %-Pkt. als Differenz der Quoten.",
+    nachbau: [
+      { id: "A", ziel: "v-kreuztabelle", versatz: [0, 0], titel: "Kreuztabelle", visual: "Matrix",
+        felder: "Zeilen: Art (Chance/Risiko), Kennzahl (Feldparameter oder berechnete Gruppe); Spalten: Datum[Jahr] › Datum[Quartal] bzw. Standort › Produkt; Werte: [Kennzahlwert], dazu Δ-Measures",
+        format: "Drill-down über die Symbole „Eine Ebene nach unten“ bzw. „Zur nächsten Ebene wechseln“ (Spaltenhierarchie); Δ-Schriftfarbe bedingt nach Wirkung (#00806B/#C62828); Gruppenüberschriften fett ohne Hintergrund",
+        hinweis: "Die Schicht (Perspektive) entspricht einem Filter auf die Kennzahlentabelle." },
+      { id: "B", ziel: "v-diagramm", versatz: [0, 0], titel: "Diagramm der Kennzahl", visual: "Gruppiertes Säulendiagramm",
+        felder: "X-Achse: dieselbe Hierarchie wie die Matrixspalten; Y-Achse: [Kennzahlwert] der in der Matrix gewählten Kennzahl (Interaktion „Filtern“)",
+        format: "#3A3F44, Datenbeschriftungen ein, Y-Achse aus; Drill-down-Modus ein" },
+      { id: "C", ziel: "dimensionen", anker: "links", versatz: [180, 2], titel: "Dimensionsbaum", visual: "Datenschnitt (Hierarchie) je Dimension",
+        felder: "Datum (Jahr › Quartal), Standort, Produkt, Perspektive", format: "Stil „Vertikale Liste“, Einzelauswahl; Kopfzeile fett" },
+      { id: "D", ziel: "filter", anker: "links", versatz: [180, -2], titel: "Dimensionsleiste", visual: "Datenschnitt (Kacheln) und Feldparameter",
+        felder: "Schicht: Perspektive; Spalten: Feldparameter mit Jahr, Standort, Produkt für die Matrixspalten", format: "Ausgewählt #3A3F44 mit weißer Schrift" },
+    ],
+    theme: DK.thema(),
+    csv: { name: "bcr_wuerfel_basisgroessen.csv", text: () =>
+      [["Jahr", "Quartal", "Standort", "Produkt", ...D.felder].join(";"),
+       ...R.map(z => [J[z[0]], "Q" + (z[1] + 1), STO[z[2]], PRO[z[3]], ...z.slice(4)].join(";"))].join("\r\n") },
+    tabellen: () => {
+      const M = matrixDaten(), st = schnittText();
+      return [{ titel: `${PER[S.persp]} nach ${dimName()}${st.length ? " – " + st.join(", ") : ""}`, kopf: ["Kennzahl", "Einheit", ...M.sp.map(c => c.titel)],
+        zeilen: M.zeilen.map(z => [z.k.name, z.k.einheit, ...M.sp.map(c => (c.delta ? dFmt(z.k, z.w[c.key]) : fmt(z.k, z.w[c.key])))]) }];
+    },
+  });
+  zeichnen();
+})();
+
+</script>
+</body>
+</html>

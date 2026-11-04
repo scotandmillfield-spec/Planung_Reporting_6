@@ -103,20 +103,36 @@ def verteilen(summe, anteile):
     return ganz
 
 
-# Grundgewicht je Zelle (Quartal, Standort, Produkt) und Jahr; je Größe eigener Streufaktor je Standort/Produkt
+# Grundgewicht je Zelle (Quartal, Standort, Produkt) und Jahr; je Größe eigener Streufaktor je Standort/Produkt.
+# Zähler von Quoten streuen eng um ihren Nenner, damit Quoten zwischen Standorten und Produkten plausibel bleiben
+# (Liefertreue unter 100 %, Zufriedenheit im Bereich des Konzernwerts).
 zellen = [(q, s, p) for q in range(4) for s in range(3) for p in range(3)]
-streu = {f: {(s, p): rnd.uniform(0.8, 1.2) for s in range(3) for p in range(3)} for f in FELDER}
-for f in ("kapital", "kapitalkosten"):                 # WACC je Zelle konstant 6 %: gleiche Verteilung wie Kapital
-    streu[f] = streu["kapital"]
+PAARE = {"zufr_punkte": ("kunden", 0.03), "puenktlich": ("lieferungen", 0.012), "kranktage": ("solltage", 0.08),
+         "rv_int": ("umsatz", 0.12), "rv_ext": ("umsatz", 0.12), "ausfall": ("umsatz", 0.1), "fk": ("kapital", 0.06),
+         "kapitalkosten": ("kapital", 0.0), "reklamationen": ("auftraege", 0.1), "dlz_tage": ("auftraege", 0.06),
+         "ausschuss": ("produktion", 0.1), "neuproduktumsatz": ("umsatz", 0.12), "grosskundenumsatz": ("umsatz", 0.1),
+         "absatz": ("marktvolumen", 0.08), "ebt": ("umsatz", 0.15), "bruttoertrag": ("umsatz", 0.06), "eva": ("ebt", 0.15),
+         "cashflow": ("ebt", 0.1)}
+streu, rausch = {}, {}
+for f in FELDER:
+    if f in PAARE and PAARE[f]:
+        continue
+    streu[f] = {(s, p): rnd.uniform(0.8, 1.2) for s in range(3) for p in range(3)}
+    rausch[f] = {(j, z): rnd.uniform(0.95, 1.05) for j in range(3) for z in zellen}
+offen = [f for f in FELDER if f not in streu]
+while offen:                                           # Paare in Abhängigkeitsfolge (z. B. eva → ebt → umsatz)
+    for f in list(offen):
+        n, e = PAARE[f]
+        if n not in streu:
+            continue
+        streu[f] = {k: v * rnd.uniform(1 - e, 1 + e) for k, v in streu[n].items()}
+        rausch[f] = {k: v * rnd.uniform(1 - e / 4, 1 + e / 4) for k, v in rausch[n].items()}
+        offen.remove(f)
 saetze = []
 werte = {}
 for j in range(3):
     for f in FELDER:
-        a = [ST_ANTEIL[j][s] * PR_ANTEIL[p] * SAISON[q] * streu[f][(s, p)] * rnd.uniform(0.95, 1.05) for q, s, p in zellen]
-        if f == "kapitalkosten":
-            a = werte[(j, "kapital_anteile")]
-        if f == "kapital":
-            werte[(j, "kapital_anteile")] = a
+        a = [ST_ANTEIL[j][s] * PR_ANTEIL[p] * SAISON[q] * streu[f][(s, p)] * rausch[f][(j, (q, s, p))] for q, s, p in zellen]
         werte[(j, f)] = verteilen(JAHRESWERTE[f][j], a)
     for i, (q, s, p) in enumerate(zellen):
         saetze.append([j, q, s, p] + [werte[(j, f)][i] for f in FELDER])
@@ -139,4 +155,8 @@ for j, jahr in enumerate(JAHRE):
         v = sum(s[x] for x in k[4]) / (s[k[5]] if k[5] else 1) * k[6]
         zeile.append(f"{k[2]} {v:,.{k[7]}f}".replace(",", "X").replace(".", ",").replace("X", "."))
     print(jahr, " · ".join(zeile))
+lt = [z[idx["puenktlich"]] / z[idx["lieferungen"]] for z in saetze]
+zf = [z[idx["zufr_punkte"]] / z[idx["kunden"]] for z in saetze if z[idx["kunden"]]]
+print(f"Liefertreue je Zelle {min(lt):.1%}–{max(lt):.1%}; Zufriedenheit je Zelle {min(zf):.1f}–{max(zf):.1f}")
+assert max(lt) < 1
 print(f"{len(saetze)} Sätze, {len(FELDER)} Basisgrößen")

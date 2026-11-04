@@ -17,7 +17,7 @@
   const B = 695;                                             // Inhaltsbreite
   const eur = cent => zahl(cent / 100, 2);
   const und = l => (l.length < 2 ? l.join("") : l.slice(0, -1).join(", ") + " und " + l[l.length - 1]);
-  const passt = (k, breite = B) => k.find(t => tw(t) <= breite) || k[k.length - 1];
+  const passt = (k, breite = B - 12) => k.find(t => tw(t) <= breite) || k[k.length - 1];
   const MEHRZAHL = { Kunden_ID: ["Kundennummer", "Kundennummern"], Name: ["Name", "Namen"], Geburtsdatum: ["Geburtsdatum", "Geburtsdaten"],
                      Alter: ["Alter", "Alter"], Bestelldatum: ["Bestelldatum", "Bestelldaten"] };
   const anzahl = (n, sp) => `${n} ${MEHRZAHL[sp][n === 1 ? 0 : 1]}`;
@@ -103,7 +103,7 @@
     { c: 2, titel: "Geburtsdatum", id: "sp-geburt", breite: 92, slot: true },
     { c: 3, titel: "Alter", id: "sp-alter", breite: 40, slot: true, re: true },
     { c: 4, titel: "Bestelldatum", id: "sp-bestelldatum", breite: 92, slot: true },
-    { c: 5, titel: "Bestellung", id: "sp-bestellung", breite: 162 },
+    { c: 5, titel: "Bestellung", id: "sp-bestellung", breite: 169 },        // Summe der Spalten = 695 px
     { c: 6, titel: "Betrag", id: "sp-betrag", breite: 44, re: true, kopfRe: true },
   ];
   function zeilen(s) {
@@ -287,8 +287,9 @@
     const k = s - 1, neu = DEF.filter(d => d.klasse === k), wie = k === 1 ? "automatisch" : "manuell";
     if (k === 3) {
       const d = neu[0], n4 = new Set(stand(4).map(w => w[0])).size, n3 = new Set(stand(3).map(w => w[0])).size;
-      return passt([`Klasse 3 manuell korrigiert: Kundennummer ${d.roh} als Dublette von ${d.neu} zusammengeführt – ${n4} statt ${n3} Kunden, ${offenText(s)}`,
-        `Klasse 3 manuell korrigiert: Kundennummer ${d.roh} als Dublette von ${d.neu} zusammengeführt – ${offenText(s)}`]);
+      return passt([`Klasse 3 manuell korrigiert: Dublette ${d.roh} in Kundennummer ${d.neu} zusammengeführt – ${n4} statt ${n3} Kunden, ${offenText(s)}`,
+        `Klasse 3 manuell korrigiert: Dublette ${d.roh} mit ${d.neu} zusammengeführt – ${n4} statt ${n3} Kunden, ${offenText(s)}`,
+        `Klasse 3 manuell korrigiert: Dublette ${d.roh} mit ${d.neu} zusammengeführt – ${offenText(s)}`]);
     }
     return passt([`Klasse ${k} ${wie} korrigiert: ${und(proSpalte(neu))} – ${offenText(s)}`]);
   }

@@ -171,7 +171,7 @@
         { nr: "B", ziel: "kopf-unter", versatz: [-6, -2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Einheiten einmal genannt",
           text: "Die Spalten „Basis-ME“ und „Währung“ und die Einheiten ST und EUR in jeder Zeile entfallen; die Einheiten stehen im Untertitel und an den Spaltenköpfen. Mengen ganzzahlig statt „138,000“." },
         { nr: "C", ziel: "net-1", anker: "links", versatz: [32, 1], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
-          text: "Planabsatz, Nettopreis und Planumsatz sind berechnet bzw. übernommen und grau; Preise, Savings und Rabatt sind weiße Eingabefelder. Im Original stand der Nettopreis ohne Kennzeichnung zwischen den Eingabefeldern." },
+          text: "Planabsatz, Nettopreis und Planumsatz sind berechnet bzw. übernommen und grau; Preise, Savings und Rabatt sind weiße Eingabefelder. Im Original unterschied nur ein dünner Kasten die Eingabe; Planabsatz und Nettopreis standen ohne Kasten auf demselben Grund." },
         { nr: "D", ziel: "f-mg2", versatz: [-26, 2], regel: "ERWARTUNGSKONFORMITÄT", titel: "Auswahlfelder",
           text: "Kunden- und Materialgruppen werden aus einer Liste gewählt, leere Felder heißen „Alle“. Das Original verlangte den Code mit Suchhilfesymbol." },
         { nr: "E", ziel: "l-summe", versatz: [-6, 1], regel: "AUFGABENANGEMESSENHEIT", titel: "Planumsatz und Summe ergänzt",

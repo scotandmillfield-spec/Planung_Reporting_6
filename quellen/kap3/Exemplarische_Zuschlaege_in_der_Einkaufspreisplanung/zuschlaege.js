@@ -157,7 +157,7 @@
         { nr: "C", ziel: "h-oben", versatz: [-6, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Klartext statt Systemkürzel",
           text: "„PP3 Faktor“ heißt „Planpreisfaktor“, „PP3 Faktor MTZ“ „MTZ-Faktor“, „Commodity“ „Warengruppe“, „Plan MatPreis (%)“ „Veränderung in %“." },
         { nr: "D", ziel: "f-gj", versatz: [-6, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
-          text: "Geschäfts- und Planjahr sowie das Ergebnis sind grau und nicht änderbar; Faktoren und Veränderungen sind weiße Eingabefelder. Im Original waren Jahre und Ergebnis nicht als Anzeige erkennbar." },
+          text: "Geschäfts- und Planjahr sowie das Ergebnis sind grau und nicht änderbar; Faktoren und Veränderungen sind weiße Eingabefelder. Im Original standen die Jahre nur als Text „Geschäftsjahr: 2009 | Planjahr: 2009“ in der Kopfzeile." },
         { nr: "E", ziel: "band-erg", versatz: [-24, 2], regel: "AUFGABENANGEMESSENHEIT", titel: "Ergebnis ergänzt",
           text: "Neu ist der Abschnitt „Ergebnis für die Preisplanung“: Er zeigt, welcher Zuschlag aus Lieferantenfaktor und Umwertung entsteht und was er für das Einkaufsvolumen bedeutet." },
         { nr: "F", ziel: "l-name-0", versatz: [-6, 1], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Fiktive Lieferanten, aktuelles Jahr",

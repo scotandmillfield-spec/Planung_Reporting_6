@@ -622,6 +622,86 @@
    ],
    "alt": "Fünf Bestandteile des Qualitätssicherungsprozesses untereinander: Informationsbedarfsanalyse und -änderungen, Prozessqualitätsprüfung und -änderungen, organisatorische Qualitätsprüfung und -änderungen, Datenqualitätsprüfung und -steuerung sowie Informationssystem-Qualitätsprüfung und -steuerung."
   },
+  "5.9": {
+   "status": "pruefung",
+   "datei": "Beispiel_einer_horizontalen_Integration",
+   "kommentare": [
+    "Lkw- und Waagensymbol entfernt (Deko, die Bereiche sind beschriftet)",
+    "orangefarbener Pfeil → roter Akzentpfeil mit Beschriftung „triggert“ (einzige Hervorhebung: die Integration zwischen den Bereichen)",
+    "Bereiche als zwei gleich große Boxen, Tätigkeiten als Spiegelstriche (Umbruch im Original war nicht von getrennten Tätigkeiten zu unterscheiden)",
+    "Caption: „(eigene Darstellung)“ kann entfallen?"
+   ],
+   "alt": "Zwei Bereiche nebeneinander: links Einkauf/Logistik mit der Tätigkeit „Bestellung neuer Kaffeebohnen“, rechts Buchhaltung mit „Erhöhung der Lagerbestände“ und „Verbuchen des Geschäftsvorfalls“. Ein roter Pfeil mit der Beschriftung „triggert“ zeigt, dass der Vorgang im Einkauf die Buchung in der Buchhaltung auslöst."
+  },
+  "5.10": {
+   "status": "pruefung",
+   "datei": "Schematische_Darstellung_des_ETL-Prozesses",
+   "kommentare": [
+    "drei Phasen als Karten mit Kopfleiste (Extract, Transform, Load); Datenbanksymbole → beschriftete Boxen Staging, Cleansing, Core Data Warehouse (box_hi)",
+    "Wecker am ersten Pfeil → Pfeilbeschriftung „zeitgesteuert“ (Deutung prüfen); Zahnrad, Schraubenschlüssel und Sackkarre entfernt (doppelt zu Transform/Load)",
+    "Quellen im Raster statt verstreut, „Databases“ oben über beide Spalten; Auslassungspunkte „…“ entfallen (wie Revision Abb. 2.2) – wieder aufnehmen?",
+    "Korrekturen: „JSon“ → „JSON“, „On Prem“ → „On-Premises“",
+    "Beschriftungen englisch wie im Original (Databases, Flatfiles) – eindeutschen (Datenbanken, Flatfiles)?"
+   ],
+   "alt": "ETL-Prozess in drei Phasen von links nach rechts. Extract fasst die Quellen Databases, API, JSON, XML, Flatfiles, Cloud und On-Premises zusammen; ein zeitgesteuerter Pfeil führt zu Transform mit Staging und Cleansing, ein weiterer Pfeil zu Load mit dem Core Data Warehouse."
+  },
+  "5.16": {
+   "status": "pruefung",
+   "datei": "Drei_Ebenen_der_Data-Warehouse-Architektur",
+   "kommentare": [
+    "Ebenen als Bänder mit Titel oben links (Band 2 zweizeilig, damit die Leitungen frei bleiben); blau verlaufender Bereich → gestrichelter Container „Daten-Virtualisierung“ (Titel unten, oben kreuzen die Leitungen)",
+    "Zylinder und Würfel → beschriftete Boxen; Würfel heißen „Data Mart“, „OLAP-Engine“ unter dem mittleren; Core DWH und Data Marts box_hi, Quellsysteme box, kein Rot (Paket 5.1 nutzt Quellsysteme box_hi/DWH rot – angleichen?)",
+    "Verbindungen nach der Folie (die Vorschau zeigte eine verzerrte Schräglinie): Core DWH → Sammelleitung → Data Marts und direkt zur Analyse, ODS → Core DWH, Rückfluss Core DWH → interne Quellen; Abzweige ohne Knotenpunkt",
+    "Korrekturen: „Daten - Virtualisierung“ → „Daten-Virtualisierung“, „BSC“ → „Balanced Scorecard“; „Excel“ → „Tabellenkalkulation“ (softwareneutral); unbeschrifteter Zylinder bei „Externe Quellen“ entfällt, „…“ zwischen den Quellen entfallen",
+    "ODS, CMS, DMS als Abkürzung belassen (Platz) – im Text eingeführt?"
+   ],
+   "alt": "Data-Warehouse-Architektur in drei Ebenen. Unten die Datenanbindung mit internen Quellsystemen (ERP, CRM, Tabellenkalkulation) und externen Quellen; in der Mitte die Datenverwaltung mit Administration und Metadaten sowie den Schichten Staging, Cleansing, Core und Marts: ETL-Prozesse laden die Daten in Core Data Warehouse, ODS und CMS/DMS, das Core Data Warehouse versorgt drei Data Marts, alles umschlossen von der Daten-Virtualisierung. Oben greifen Analyse- und Planungswerkzeuge auf Data Marts, Core Data Warehouse, ODS und CMS/DMS zu."
+  },
+  "5.28": {
+   "status": "pruefung",
+   "datei": "Stufenorientiertes_Erloesschema",
+   "kommentare": [
+    "Bauweg D bestätigt: keine Werte, keine Analyse-Tabelle, sondern drei Aufklappzustände derselben Hierarchie; +/− sind Auf-/Zuklappschalter (als kleine Schalterboxen am Zeilenende), keine Rechenzeichen",
+    "Zustände als gestrichelte Gruppen nebeneinander, Einzug je Stufe; Knoten (im Original fett) box_hi, Blätter box",
+    "Caption: „Erlösschemata“ → „Erlösschema“ (Singular passt zu „Stufenorientiertes“)",
+    "Schreibweise „NettoNetto-Umsatz“ belassen – „Netto-Netto-Umsatz“?"
+   ],
+   "alt": "Drei nebeneinanderstehende Zustände einer aufklappbaren Erlöshierarchie. Links ist nur der NettoNetto-Umsatz zu sehen, in der Mitte ist er in Skonti und Nettoumsatz aufgeklappt, rechts ist zusätzlich der Nettoumsatz in Rabatte und Bruttoumsatz aufgeklappt."
+  },
+  "5.29": {
+   "status": "pruefung",
+   "datei": "4-V-Modell",
+   "kommentare": [
+    "Programmfenster der Tabellenkalkulation entfernt; Symbole (Dokument, Festplatte, Sanduhr, Trichter) entfernt",
+    "farbige Viertel → einheitlich Grau (Bedeutung tragen Position und Beschriftung); Doppellinienpfeile → radiale Pfeile, unter den Ausprägungen ausgespart",
+    "Korrekturen: „socia“ → „social“, „unstructure“ → „unstructured“ (abgeschnitten), „correct Data“/„enriched Data“ → Kleinschreibung",
+    "Beschriftungen englisch wie im Original – Ausprägungen eindeutschen (z. B. Echtzeit, unstrukturiert, korrekt)?"
+   ],
+   "alt": "Ringdiagramm mit vier Vierteln für die vier V von Big Data. Von innen nach außen nehmen die Ausprägungen zu: Volume von MB über GB und TB bis PB, Velocity von batch über periodic und near real time bis real time, Variety von table und data bis photo, Web, audio, social, video, unstructured und mobile, Veracity von false über undetermined und enriched data bis correct data."
+  },
+  "5.30": {
+   "status": "pruefung",
+   "datei": "CAP-Theorem",
+   "kommentare": [
+    "farbige, transparente Kreise → Grau, Überschneidungen dunkler (box_hi) wie die Überlagerung im Original",
+    "schräge Hinweislinien → waagerecht bzw. senkrecht zu den Beispielen",
+    "Korrektur: „Hbase“ → „HBase“",
+    "Datenbankprodukte (MongoDB, HBase, Redis, CouchDB, Cassandra, DynamoDB, Riak) als fachliche Beispiele belassen – trotz Regel „keine Produktnamen“ entfernen oder durch Systemklassen ersetzen?",
+    "Begriffe englisch (Consistency, Availability, Partition Tolerance) – deutsch ergänzen?"
+   ],
+   "alt": "Venn-Diagramm aus drei Kreisen für Consistency, Availability und Partition Tolerance. Die paarweisen Überschneidungen sind mit CA, CP und AP beschriftet und Beispielsystemen zugeordnet: CA relationalen Datenbanksystemen (RDBMS), CP MongoDB, HBase und Redis, AP CouchDB, Cassandra, DynamoDB und Riak."
+  },
+  "5.31": {
+   "status": "pruefung",
+   "datei": "Zeilen-_bzw_spaltenorientierte_Speicherung",
+   "kommentare": [
+    "Tabelle und Speicherfolgen als Zellraster; Klammern unter den Zellgruppen, nummeriert (Zeile 1–4, Spalte 1–3)",
+    "graue Hervorhebung der A-Zellen bleibt (box_hi), zusätzlich Spalte 1 in der Tabelle: zeilenorientiert verstreut, spaltenorientiert zusammenhängend",
+    "Korrektur: Spaltenköpfe „Reihe 1–3“ → „Spalte 1–3“ (die Klammern rechts heißen „Spalte“)",
+    "zwei Schrägpfeile → orthogonale Verzweigung ohne Knotenpunkt; Unterstreichung der Titel entfällt"
+   ],
+   "alt": "Links eine Tabelle mit vier Zeilen und drei Spalten, deren Werte A, B und C lauten. Rechts oben die zeilenorientierte Speicherung als Folge A B C je Zeile, rechts unten die spaltenorientierte Speicherung als Folge aller A, dann aller B, dann aller C. Die hervorgehobenen Werte der Spalte 1 liegen zeilenorientiert verstreut und spaltenorientiert hintereinander."
+  },
   "Folie 5": {
    "status": "entfaellt",
    "kommentare": [

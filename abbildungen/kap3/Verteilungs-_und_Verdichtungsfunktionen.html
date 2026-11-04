@@ -635,7 +635,7 @@ const DK = (() => {
 <script>
 /* Einzelvisual „Verteilungs- und Verdichtungsfunktionen“ (Abb. 3.178): Planumsatz je Region nach vier Verfahren –
    Top-down (verteilen), Bottom-up (verdichten), Gegenstrom (Vorgabe verteilen, Rückmeldung verdichten) und
-   Verteilung mit fixiertem Wert. Seite 727 x 310 px = 110 x 46,9 mm. Daten: verteilung.json (daten_verteilung.py),
+   Verteilung mit fixiertem Wert. Seite 727 x 296 px = 110 x 44,8 mm. Daten: verteilung.json (daten_verteilung.py),
    Werte des Originals; die Seite rechnet Verteilungen und Summen selbst.
    Die vier Tabellen des Originals stehen nebeneinander in einer Tabelle mit gemeinsamen Zeilen. Erfasste Werte
    (im Original gelb) sind umrandet, berechnete nicht; Pfeile zeigen die Richtung (↓ verteilen, ↑ verdichten).
@@ -676,11 +676,11 @@ const DK = (() => {
 
   /* ---------- Spalten der Tabelle ---------- */
   const SP = [
-    { key: "td", gruppe: "Top-down", unter: "verteilen", x: 214, b: 88, auf: false },
-    { key: "bu", gruppe: "Bottom-up", unter: "verdichten", x: 312, b: 88, auf: true },
-    { key: "gv", gruppe: "Gegenstrom", unter: "Vorgabe", x: 410, b: 88, auf: false },
-    { key: "gr", gruppe: null, unter: "Rückmeldung", x: 498, b: 92, auf: true },
-    { key: "fx", gruppe: "Mit Fixierung", unter: "", x: 600, b: 95, auf: false },
+    { key: "td", gruppe: "Top-down", unter: "verteilen", x: 210, b: 86, auf: false },
+    { key: "bu", gruppe: "Bottom-up", unter: "verdichten", x: 304, b: 86, auf: true },
+    { key: "gv", gruppe: "Gegenstrom", unter: "Vorgabe", x: 398, b: 86, auf: false },
+    { key: "gr", gruppe: null, unter: "Rückmeldung", x: 484, b: 92, auf: true },
+    { key: "fx", gruppe: "Mit Fixierung", unter: "", x: 586, b: 109, auf: false },
   ];
   const ERKL = {
     vj: "Vorjahresumsatz – Grundlage des Verteilschlüssels",
@@ -692,8 +692,8 @@ const DK = (() => {
   };
 
   /* ---------- Layout ---------- */
-  DK.init({ titel: "Verteilungs- und Verdichtungsfunktionen", breite: 727, hoehe: 310 });
-  const bVis = DK.box("v-verteilung", 16, 10, 695, 292);
+  DK.init({ titel: "Verteilungs- und Verdichtungsfunktionen", breite: 727, hoehe: 296 });
+  const bVis = DK.box("v-verteilung", 16, 10, 695, 278);
   const tip = document.querySelector(".dk-tooltip");
   function tooltip(ziel, zeilenFn) {
     ziel.addEventListener("pointermove", ev => {
@@ -767,12 +767,12 @@ const DK = (() => {
     kopfKlick("vj", LW, VJR - LW + 6);
     SP.forEach(s => {
       if (s.gruppe) {
-        const breiteGr = s.key === "gv" ? 180 : s.b;
-        sv("text", { x: s.x + breiteGr / 2 + (s.key === "gv" ? 0 : 10), y: K1, dy: "0.35em", "text-anchor": "middle", style: "font-weight:bold" }, gk, s.gruppe);
-        if (s.key === "gv") sv("line", { x1: s.x + 20, x2: s.x + breiteGr - 2, y1: K1 + 11, y2: K1 + 11, stroke: "#9A9A9A", "stroke-width": 1 }, gk);
+        const breiteGr = s.key === "gv" ? 178 : s.b;
+        sv("text", { x: s.x + breiteGr / 2, y: K1, dy: "0.35em", "text-anchor": "middle", style: "font-weight:bold" }, gk, s.gruppe);
+        if (s.key === "gv") sv("line", { x1: s.x + 4, x2: s.x + breiteGr - 2, y1: K1 + 11, y2: K1 + 11, stroke: "#9A9A9A", "stroke-width": 1 }, gk);
       }
       const unter = s.key === "fx" ? `${REG[S.E.fixRegion]} fixiert` : s.unter;
-      sv("text", { x: s.x + 20 + (s.b - 22) / 2, y: K2, dy: "0.35em", "text-anchor": "middle", class: "muted" }, gk, unter + sortZeichen(s.key));
+      sv("text", { x: s.x + s.b / 2, y: K2, dy: "0.35em", "text-anchor": "middle", class: "muted" }, gk, unter + sortZeichen(s.key));
       kopfKlick(s.key, s.x, s.b);
     });
     sv("line", { x1: 0, x2: breite, y1: LK + 0.5, y2: LK + 0.5, stroke: "#3A3F44", "stroke-width": 1 }, svg);
@@ -832,7 +832,8 @@ const DK = (() => {
           if (!c.erfasst[k] || !feld) return;
           const inp = el("input", { class: "vv-feld" + (r === null ? " vv-fett" : ""), type: "text", inputmode: "decimal",
             "aria-label": `${s.gruppe || "Gegenstrom"} ${s.unter || "fixiert"}, ${r === null ? "Unternehmen gesamt" : "Region " + REG[r]}`,
-            style: `left:${s.x + 20}px;top:${y + 4}px;width:${s.b - 22}px;height:${ZH - 8}px` }, ziel);
+            style: `left:${s.x + 20}px;top:${y + 4}px;width:${s.b - 22}px;height:${ZH - 8}px` +
+                   (r !== null && S.auswahl !== null && S.auswahl !== r ? ";opacity:.32" : "") }, ziel);
           inp.value = zahl(c.werte[k], nk(c.werte));
           inp.addEventListener("change", () => {
             const v = Number(inp.value.replace(/\s/g, "").replace(/\./g, "").replace(",", "."));
@@ -877,31 +878,31 @@ const DK = (() => {
 
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "v-verteilung", anker: "links", versatz: [690, 26], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage unter dem Titel",
+      { nr: 1, ziel: "v-verteilung", anker: "links", versatz: [377, 5], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage unter dem Titel",
         text: "Unter dem Titel steht, was die Verfahren ergeben: Top-down verteilt die Vorgabe, Bottom-up und Gegenstrom landen unter ihr. Bei Auswahl einer Region stehen dort ihre Werte in allen Verfahren. Das Original hatte nur Überschriften je Verfahren." },
-      { nr: 2, ziel: "vv-kopf", anker: "links", versatz: [205, -6], regel: "CONDENSE – Eine Tabelle statt sieben", titel: "Verfahren nebeneinander",
+      { nr: 2, ziel: "vv-kopf", anker: "links", versatz: [162, 6], regel: "CONDENSE – Eine Tabelle statt sieben", titel: "Verfahren nebeneinander",
         text: "Die vier Verfahren stehen als Spalten nebeneinander, Regionen und Vorjahr nur einmal. Das Original zeigte sieben Tabellen (Eingabe und Ergebnis je Verfahren getrennt) mit siebenmal denselben Zeilen und Spaltenköpfen „Umsatz VJ/Plan“. Eingabe und Ergebnis stehen jetzt in derselben Spalte." },
-      { nr: 3, ziel: "vv-erfasst", anker: "links", versatz: [6, -10], regel: "UNIFY – Erfasst und berechnet", titel: "Umrandet = erfasst",
+      { nr: 3, ziel: "vv-legende", anker: "links", versatz: [34, 4], regel: "UNIFY – Erfasst und berechnet", titel: "Umrandet = erfasst",
         text: "Erfasste Werte sind umrandet wie Eingabefelder, berechnete stehen ohne Rahmen. In der Online-Fassung sind die umrandeten Werte tatsächlich Eingabefelder; jede Änderung rechnet die Verteilung neu. Das Original markierte Eingaben gelb." },
-      { nr: 4, ziel: "vv-pfeile", anker: "links", versatz: [16, 70], regel: "EXPRESS – Richtung zeigen", titel: "↓ verteilen, ↑ verdichten",
+      { nr: 4, ziel: "vv-pfeile", anker: "links", versatz: [42, 60], regel: "EXPRESS – Richtung zeigen", titel: "↓ verteilen, ↑ verdichten",
         text: "Jede Spalte hat einen Pfeil in Rechenrichtung: nach unten, wenn ein Gesamtwert auf die Regionen verteilt wird, nach oben, wenn sich die Regionen zum Gesamtwert verdichten. Im Gegenstrom stehen beide Richtungen nebeneinander. Im Original fehlten die Pfeile bei den Ergebnistabellen." },
-      { nr: 5, ziel: "vv-gesamt", anker: "links", versatz: [26, -12], regel: "STRUCTURE – Planungshierarchie", titel: "Gesamt oben",
+      { nr: 5, ziel: "vv-gesamt", anker: "links", versatz: [122, 29], regel: "STRUCTURE – Planungshierarchie", titel: "Gesamt oben",
         text: "Anders als in Berichten (Summe unten) steht das Unternehmen oben: Es ist der Ausgangspunkt der Top-down-Verteilung. Eine Linie trennt es von den Regionen. Die Regionen bleiben in der Reihenfolge des Originals; ein Klick auf einen Spaltenkopf sortiert sie." },
-      { nr: 6, ziel: "vv-zeilen", anker: "links", versatz: [690, 120], regel: "CHECK – Rechnung nachvollziehbar", titel: "Fixierung: Rest verteilen",
+      { nr: 6, ziel: "vv-zeilen", anker: "links", versatz: [634, 68], regel: "CHECK – Rechnung nachvollziehbar", titel: "Fixierung: Rest verteilen",
         text: "West ist mit 220 fixiert; verteilt wird nur der Rest 1.200 − 220 = 980, nach dem Vorjahresanteil der übrigen Regionen (800): Nord und Ost je 306,25, Süd 367,50. Die Spalte hat deshalb zwei Nachkommastellen, alle anderen keine. Das Original schrieb „1200,00“ ohne Tausenderpunkt neben „1.200“." },
-      { nr: 7, ziel: "vv-legende", anker: "links", versatz: [26, -12], regel: "SIMPLIFY – Kürzer beschriften", titel: "Kurze Köpfe, ein Zeichenschlüssel",
+      { nr: 7, ziel: "vv-zeilen", anker: "links", versatz: [122, 69], regel: "SIMPLIFY – Kürzer beschriften", titel: "Kurze Köpfe, ein Zeichenschlüssel",
         text: "„Vertrieb Region Nord“ heißt „Region Nord“, die Überschrift „Verteilung ohne fixierte Werte zu überschreiben“ wird zu „Mit Fixierung“ mit „West fixiert“; der Hinweis „fixiert (manuell geplant)“ steht im Tooltip. Ein Zeichenschlüssel unter der Tabelle erklärt Rahmen und Pfeile." },
     ],
-    nachbauIntro: "Seitengröße benutzerdefiniert 727 × 310 px. Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt. Datenmodell: Tabellen Region (Region, Umsatz_VJ), Planeingaben (Verfahren, Region, Plan) und Vorgaben (Verfahren, Wert) wie in der CSV-Datei. Eingaben direkt in der Matrix sind im Standard nicht möglich; die erfassten Werte kommen aus einer Planungstabelle oder einem Planungswerkzeug.",
+    nachbauIntro: "Seitengröße benutzerdefiniert 727 × 296 px. Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt. Datenmodell: Tabellen Region (Region, Umsatz_VJ), Planeingaben (Verfahren, Region, Plan) und Vorgaben (Verfahren, Wert) wie in der CSV-Datei. Eingaben direkt in der Matrix sind im Standard nicht möglich; die erfassten Werte kommen aus einer Planungstabelle oder einem Planungswerkzeug.",
     nachbau: [
-      { id: "A", ziel: "vv-zeilen", anker: "links", versatz: [690, 60], titel: "Planumsatz je Verfahren", visual: "Matrix",
+      { id: "A", ziel: "vv-zeilen", anker: "links", versatz: [634, 38], titel: "Planumsatz je Verfahren", visual: "Matrix",
         felder: "Zeilen: Unternehmen, Region (Hierarchie, Zwischensumme oben); Werte: Umsatz VJ, Top-down, Bottom-up, Vorgabe, Rückmeldung, Mit Fixierung",
         format: "Zwischensummen der Zeilen: Position oben, fett; Gesamtergebnis aus; Spaltenkopf mit Unterstrich #3A3F44; Raster #EFEFEF; erfasste Werte über bedingte Formatierung › Rahmen #3A3F44 bzw. Hintergrund #FFFFFF",
         hinweis: "Measure Top-down = [Vorgabe] × DIVIDE( [Umsatz VJ]; CALCULATE( [Umsatz VJ]; ALL( Region ) ) ). Mit Fixierung: fixierte Region = Fixwert, übrige = ( [Vorgabe] − Fixwert ) × Anteil am Vorjahr der nicht fixierten Regionen." },
-      { id: "B", ziel: "vv-erfasst", anker: "links", versatz: [6, -10], titel: "Jahresvorgabe ändern", visual: "Was-wäre-wenn-Parameter mit Datenschnitt",
+      { id: "B", ziel: "vv-erfasst", anker: "links", versatz: [26, 34], titel: "Jahresvorgabe ändern", visual: "Was-wäre-wenn-Parameter mit Datenschnitt",
         felder: "Modellierung › Neuer Parameter › Numerischer Bereich (z. B. 1.000 bis 1.400, Schrittweite 10); das Measure [Vorgabe] liest den Parameterwert",
         format: "Datenschnitt als Einzelwert-Eingabe" },
-      { id: "C", ziel: "v-verteilung", anker: "links", versatz: [460, 0], titel: "Verteilschlüssel", visual: "Datenschnitt (Kacheln)",
+      { id: "C", ziel: "v-verteilung", anker: "links", versatz: [500, 0], titel: "Verteilschlüssel", visual: "Datenschnitt (Kacheln)",
         felder: "Hilfstabelle Schlüssel (nach Vorjahr; gleichmäßig); im Measure SWITCH( SELECTEDVALUE( Schlüssel[Schlüssel] ); … ) wählt den Nenner",
         format: "Einfachauswahl, ausgewählt #3A3F44 mit weißer Schrift" },
     ],

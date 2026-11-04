@@ -834,6 +834,7 @@ const DK = (() => {
     const eigen = reihen[0];
     [q - 4, q - 1, q].filter(i => i >= 0).forEach(i => {
       sv("circle", { cx: xq(i), cy: sy(eigen.w[i]), r: 3.5, fill: "#3A3F44", stroke: "#FFFFFF", "stroke-width": 1 }, gl);
+      if (i === NQ - 1) return;                                       // letzter Wert steht in der Beschriftung am Linienende
       sv("text", { x: xq(i), y: sy(eigen.w[i]) - 9, "text-anchor": "middle", style: `font-weight:${i === q ? "bold" : "normal"};paint-order:stroke;stroke:#FFFFFF;stroke-width:3px` }, gl,
          zahl(eigen.w[i] * 100, 1));
     });
@@ -955,17 +956,17 @@ const DK = (() => {
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "filter", anker: "links", versatz: [560, -2], regel: "CONDENSE – Selektion", titel: "Auswahl filtert alle Visuals",
+      { nr: 1, ziel: "filter", anker: "links", versatz: [975, 26], regel: "CONDENSE – Selektion", titel: "Auswahl filtert alle Visuals",
         text: "Ein Datenschnitt oder ein Klick auf eine Zeile filtert alle übrigen Visuals; das angeklickte Visual hebt die Auswahl hervor und zeigt den Rest blass. Abb. 3.75 zeigt die Selektion Smartphones und Privatkunden: Der eigene Marktanteil steigt dort auf 58,7 %. Ein Klick auf ein Quartal im Zeitverlauf wählt das Berichtsquartal, Esc hebt die Selektion auf. Im Original blieben Zeitverlauf und Wettbewerber bei einer Selektion unverändert; die Auswahl stand in einem eigenen Feld „Current Selections“, hier im Untertitel und in den gedrückten Datenschnitten." },
-      { nr: 2, ziel: "kat", anker: "links", versatz: [222, -22], regel: "SAY – Botschaft vermitteln", titel: "Aussage je Visual",
+      { nr: 2, ziel: "v-kat", anker: "links", versatz: [262, -2], regel: "SAY – Botschaft vermitteln", titel: "Aussage je Visual",
         text: "Unter jedem Titel steht ein aus den Daten berechneter Satz, der sich mit der Selektion ändert – etwa welche Kategorie den höchsten und welche den niedrigsten Marktanteil hat. Das Original hatte nur Überschriften („Category“, „Segment“, „Geography“) mit Symbolen." },
       { nr: 3, ziel: "kat-kopf-d", anker: "links", versatz: [-2, -4], regel: "UNIFY – Semantische Notation", titel: "Abweichung nach Wirkung",
         text: "ΔVJ steht als Balken an einer Nulllinie in Prozentpunkten, blaugrün bei steigendem, rot bei sinkendem Marktanteil – ein Maßstab für alle drei Tabellen. Das Original zeigte graue und rote Dreiecke mit „%“ statt Prozentpunkten." },
-      { nr: 4, ziel: "reg", anker: "links", versatz: [140, 128], regel: "EXPRESS – Passende Darstellung", titel: "Balken statt Torten und Weltkarte",
+      { nr: 4, ziel: "reg", anker: "links", versatz: [140, 150], regel: "EXPRESS – Passende Darstellung", titel: "Balken statt Torten und Weltkarte",
         text: "Marktanteile sind Balken auf einer gemeinsamen Skala von 0 bis 100 %. Das Original zeigte zusätzlich Kreisdiagramme neben den Tabellen und vier Ringdiagramme auf einer grauen Weltkarte, die keinen weiteren Raumbezug liefert." },
-      { nr: 5, ziel: "kpis", anker: "links", versatz: [660, 4], regel: "CHECK – Visuelle Integrität", titel: "Eine Zahlenbasis",
+      { nr: 5, ziel: "kpis", anker: "links", versatz: [304, 2], regel: "CHECK – Visuelle Integrität", titel: "Eine Zahlenbasis",
         text: "KPI-Leiste, Tabellen und Zeitverlauf rechnen aus denselben Absatzzahlen; jeder Anteil ist das mit dem Marktvolumen gewichtete Mittel seiner Zeilen. Im Original lagen alle drei Kategorien (55,1 %, 41,8 %, 26,9 %) über dem Gesamtanteil von 15,0 % – das kann nicht stimmen." },
-      { nr: 6, ziel: "seg", anker: "links", versatz: [80, 150], regel: "STRUCTURE – Inhalte ordnen", titel: "Gleicher Aufbau, eingerückte Unterebene",
+      { nr: 6, ziel: "v-seg", anker: "links", versatz: [237, -2], regel: "STRUCTURE – Inhalte ordnen", titel: "Gleicher Aufbau, eingerückte Unterebene",
         text: "Kategorien, Segmente und Regionen stehen in gleich aufgebauten Tabellen mit denselben Spalten; Unterkategorien und Untersegmente sind eingerückt statt mit Plus-/Minus-Symbolen aufgeklappt, Obergruppen fett. Die Spalte „Total Share“ des Originals (ohne Einheit) steht als Absatz in Tsd. Stück im Tooltip." },
       { nr: 7, ziel: "zeit-namen", anker: "links", versatz: [20, -10], regel: "UNIFY – Hervorheben", titel: "Eigenes Unternehmen anthrazit",
         text: "Die eigene Linie ist kräftig und an Vorjahresquartal, Vorquartal und Berichtsquartal beschriftet, die Wettbewerber sind grau und am Linienende benannt. Das Original zeigte elf bunte Linien mit Legende und daneben dieselben Werte als Tabelle „Market Share against Time“; diese Werte stehen jetzt im Tooltip je Quartal." },
@@ -974,7 +975,7 @@ const DK = (() => {
     ],
     nachbauIntro: "Seitengröße benutzerdefiniert 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt, KPI-Werte 19,5 pt. Datenmodell: die CSV-Datei in Power Query entpivotieren (Spalten „Absatz_Tsd_Stueck_…“ → Anbieter und Absatz), dazu eine Datumstabelle auf Quartalsebene. Measures: Absatz = SUM(Absatz[Tsd_Stueck]); Marktvolumen = CALCULATE([Absatz]; REMOVEFILTERS(Absatz[Anbieter])); Marktanteil = DIVIDE([Absatz]; [Marktvolumen]); Marktanteil eigen = CALCULATE([Marktanteil]; Absatz[Anbieter] = \"Eigenes Unternehmen\"). Interaktionen (Format › Interaktionen bearbeiten): alle Visuals „Filtern“, das auslösende Visual hebt hervor.",
     nachbau: [
-      { id: "A", ziel: "kpis", anker: "links", versatz: [130, 4], titel: "KPI-Leiste", visual: "Karte (neu) mit drei Kennzahlen und Referenzbeschriftungen",
+      { id: "A", ziel: "kpis", anker: "links", versatz: [304, 2], titel: "KPI-Leiste", visual: "Karte (neu) mit drei Kennzahlen und Referenzbeschriftungen",
         felder: "Marktanteil eigen, Absatz eigen, Marktvolumen; Referenzen ΔVQ = [Marktanteil eigen] − CALCULATE([Marktanteil eigen]; DATEADD('Datum'[Datum]; −1; QUARTER)), ΔVJ mit SAMEPERIODLASTYEAR",
         format: "Wert 19,5 pt fett; Referenzbeschriftung 10,5 pt, Farbe über bedingte Formatierung (#00806B steigend, #C62828 fallend)" },
       { id: "B", ziel: "v-kat", titel: "Kategorien", visual: "Matrix (Layout gestuft, Zwischensummen oben)",

@@ -651,15 +651,15 @@ const DK = (() => {
     datumMitJahr: false,
     csvName: "planungskalender_daten.csv",
     regeln: [
-      { nr: 1, ziel: "v-kalender", anker: "links", versatz: [600, 26], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage über dem Kalender",
+      { nr: 1, ziel: "v-kalender", anker: "links", versatz: [507, 3], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage über dem Kalender",
         text: "Unter dem Titel steht, welcher Teilplan zum Stichtag überfällig ist, welcher verspätet fertig wurde und wie viele planmäßig laufen. Der Satz folgt den Datenschnitten. Der Bildschirmausschnitt des Originals zeigte nur Balken – ob die Planung im Zeitplan liegt, war nicht zu sehen." },
       { nr: 2, ziel: "kopf-legende", anker: "links", regel: "UNIFY – Semantische Notation", titel: "Plan, Ist und Verzug",
         text: "Plantermine sind weiße Balken mit Kontur, der Ist-Verlauf ist anthrazit, Verzug rot – wie im Reporting- und Planungskalender (Abb. 3.12) und in der Roadmap (Abb. 3.3). Das Original zeichnete jeden Vorgang als schwarzen Sammelbalken mit Endmarken; Plan und Ist ließen sich nicht unterscheiden." },
-      { nr: 3, ziel: "sp-dauer", versatz: [8, -2], regel: "CONDENSE – Informationsdichte", titel: "Termine als Zahlen neben dem Balken",
+      { nr: 3, ziel: "sp-dauer", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Termine als Zahlen neben dem Balken",
         text: "Dauer in Arbeitstagen, Anfang und Ende stehen in eigenen Spalten wie in der Vorgangstabelle einer Projektsoftware – so bleiben die Termine auch im Druck ablesbar. Die Vorgangsnummern des Originals (77, 83, 84 …) entfallen." },
-      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [40, 14], regel: "CHECK – Visuelle Integrität", titel: "Lineare, tagesgenaue Zeitachse",
+      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [150, 0], regel: "CHECK – Visuelle Integrität", titel: "Lineare, tagesgenaue Zeitachse",
         text: "Jede Kalenderwoche ist gleich breit, Balken beginnen und enden am Tag. Die Achse reicht von der strategischen Planung bis zur Veröffentlichung des Budgets; der Datenschnitt Zeitraum vergrößert einen Monat. Das Original zeigte Wochenspalten bis in den Dezember mit leerem Rand." },
-      { nr: 5, ziel: "kal-stichtag", versatz: [26, -2], regel: "EXPRESS – Passende Darstellung", titel: "Stichtag und Status",
+      { nr: 5, ziel: "kal-stichtag", anker: "links", versatz: [0, -2], regel: "EXPRESS – Passende Darstellung", titel: "Stichtag und Status",
         text: "Die gestrichelte Linie trennt Erledigtes von Kommendem; der Status steht als Wort in der Tabelle, „überfällig“ rot. Verzug in Arbeitstagen und Ist-Termine stehen im Tooltip und unter „Werte als Tabelle“." },
       { nr: 6, ziel: "kopf-titel", versatz: [26, 0], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Keine Programmoberfläche",
         text: "Titel-, Menü- und Symbolleisten, die Ansichtsleiste links, Bildlaufleisten, Statuszeile und Taskleiste des Originals entfallen, ebenso der Produktname: Der Kalender ist softwareneutral und lässt sich mit jedem Projekt- oder BI-Werkzeug bauen." },
@@ -671,7 +671,7 @@ const DK = (() => {
       { id: "A", ziel: "kopf-titel", versatz: [26, 0], titel: "Kopfzeile und Legende", visual: "Textfeld; Formen (Rechteck)",
         felder: "Untertitel mit dynamischem Wert: Measure „Stichtag Text“",
         format: "Titel 16,5 pt fett; Legende: Rechtecke 9 × 9 px (Plan weiß mit Rahmen #3A3F44, Ist #3A3F44, Verzug #C62828)" },
-      { id: "B", ziel: "filter", anker: "links", versatz: [520, 0], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln)",
+      { id: "B", ziel: "filter", anker: "links", versatz: [742, 28], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln)",
         felder: "Zeitraum (berechnete Spalte der Datumstabelle: Monat bzw. „Aug.–Nov.“), Status zum Stichtag",
         format: "Ausgewählt: Füllung #3A3F44, Schrift weiß; nicht ausgewählt: weiß, Rahmen #9A9A9A",
         hinweis: "Status als berechnete Spalte: SWITCH(TRUE(); Vorgang[Ist_Ende] <= [Stichtag]; \"erledigt\"; Vorgang[Plan_Ende] < [Stichtag]; \"überfällig\"; Vorgang[Plan_Anfang] <= [Stichtag]; \"läuft\"; \"offen\")." },
@@ -679,13 +679,13 @@ const DK = (() => {
         felder: "Zeilen: Gruppe, Vorgang (Hierarchie); Spalten: Tabelle „Kalenderspalten“ (ohne Beziehung) mit den Einträgen Dauer, Anfang, Ende, Status und danach je Tag eine Spalte, sortiert nach Spaltennummer; Werte: Measure „Zelle“",
         format: "Zeilenüberschriften 10,5 pt, oberste Ebene fett; Text-Measure „Zelle“ liefert für die ersten vier Spalten Dauer (NETWORKDAYS), Anfang und Ende (FORMAT „TT.MM.“) und Status; „überfällig“ per bedingter Schriftfarbe #C62828",
         hinweis: "Auf Gruppenebene nimmt „Zelle“ MIN(Plan_Anfang) und MAX(Plan_Ende) der Teilpläne; ISINSCOPE(Vorgang[Vorgang]) unterscheidet die Ebenen." },
-      { id: "D", ziel: "kal-achse", anker: "links", versatz: [40, 14], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
+      { id: "D", ziel: "kal-achse", anker: "links", versatz: [150, 0], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
         felder: "Measure „Zelle“ liefert in den Tagesspalten einen Code: 1 Plan, 2 Ist, 3 Verzug, leer außerhalb des Vorgangs",
         format: "Bedingte Formatierung Hintergrund nach Feldwert über Measure „Zellfarbe“ (Plan #EFEFEF, da weiß mit Rahmen nicht möglich; Ist #3A3F44; Verzug #C62828); Schriftfarbe = Hintergrund; Spaltenbreite 4 px, Spaltenüberschrift Kalenderwoche",
         hinweis: "Tagesraster statt freier Balken. Zugeklappt zeigt die Budgetierung die Spanne vom ersten Beginn bis zum letzten Ende." },
-      { id: "E", ziel: "kal-stichtag", versatz: [26, -2], titel: "Stichtag", visual: "Bedingte Formatierung der Spalte bzw. Textfeld",
+      { id: "E", ziel: "kal-stichtag", anker: "links", versatz: [0, -2], titel: "Stichtag", visual: "Bedingte Formatierung der Spalte bzw. Textfeld",
         felder: "Measure „Stichtag“ (Datum)", format: "Tagesspalte des Stichtags mit Rahmen rechts #1A1A1A; Beschriftung „Stichtag“ fett als Textfeld über der Matrix" },
-      { id: "F", ziel: "v-kalender", anker: "links", versatz: [600, 26], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
+      { id: "F", ziel: "v-kalender", anker: "links", versatz: [507, 3], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure aus TOPN(1; FILTER(Vorgang; [Status] = \"überfällig\"); [Verzug]) und der Anzahl laufender Vorgänge",
         format: "10,5 pt, #4D4D4D" },
     ],
@@ -827,9 +827,9 @@ const DK = (() => {
     const einheit = pxTag >= 34 ? "tag" : pxTag * (at ? 5 : 7) >= 18 ? "woche" : "monat";
     const oben = [];                                   // Beschriftungen der oberen Zeile [links, rechts]
     const obenText = (x, text) => { const w = tw(text); if (x + w > x1) return; oben.push([x, x + w, sv("text", { x, y: 12 }, achse, text)]); };
-    const linie = (x, y1, farbe, beide = true) => {
+    const linie = (x, y1, farbe, beide = true, y2 = KOPF_H) => {
       const xr = Math.round(x) + 0.5;
-      sv("line", { x1: xr, x2: xr, y1, y2: KOPF_H, stroke: farbe, "stroke-width": 1 }, linienK);
+      sv("line", { x1: xr, x2: xr, y1, y2, stroke: farbe, "stroke-width": 1 }, linienK);
       if (beide) sv("line", { x1: xr, x2: xr, y1: 0, y2: H, stroke: farbe, "stroke-width": 1 }, svg);
     };
     if (einheit === "tag") {
@@ -847,7 +847,7 @@ const DK = (() => {
       for (let t = T0; t < T1; t++) {
         const d = D(t);
         if (d.getUTCDate() === 1 || t === T0) {
-          if (t > T0) linie(X(t), 0, "#C9C9C9", false);
+          if (t > T0) linie(X(t), 0, "#C9C9C9", false, 17);
           const naechster = tag(d.getUTCMonth() === 11 ? `${d.getUTCFullYear() + 1}-01-01` : `${d.getUTCFullYear()}-${p2(d.getUTCMonth() + 2)}-01`);
           const text = MONATE[d.getUTCMonth()] + (mehrjahr && (d.getUTCMonth() === 0 || t === T0) ? " " + d.getUTCFullYear() : "");
           if (X(Math.min(naechster, T1)) - X(t) >= tw(text) + 8) obenText(X(t) + 4, text);

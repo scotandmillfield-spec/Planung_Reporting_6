@@ -988,6 +988,20 @@
    ],
    "alt": "Treemap des Umsatzes 2027 von 17,8 Mio. €, gegliedert in vier Regionen mit dunkler Kopfzeile: Deutschland 7,7 Mio. € (43 %), Frankreich 4,8 Mio. € (27 %), Niederlande 18 % und Österreich 2,1 Mio. € (12 %). Jede Region ist in Produktgruppen mit grauer Kopfzeile unterteilt (City, Mountain, Racing, Trekking Bike), diese wiederum in hellgraue Felder je Kaufgrund. Die Fläche entspricht dem Umsatz; größtes Feld sind City Bikes in Deutschland mit 2,34 Mio. €. Kernaussage: City Bikes prägen die Niederlande (51 %), Mountain Bikes Österreich (46 %)."
   },
+  "3.46": {
+   "status": "pruefung",
+   "datei": "Beispiel_zu_einem_Portfolio--Blasendiagramm",
+   "kommentare": [
+    "Softwarescreenshot (ICARIS) softwareneutral als Einzelvisual nachgebaut (HTML für die Lernplattform, PNG fürs Buch), Format wie Abb. 3.44: Titel, Kernaussage, Filter Jahr",
+    "Inhalt wie im Original: sieben Geschäftsfelder des Bereichs Blechverarbeitung im Portfolio Wettbewerbsstärke × Marktattraktivität (0–15), Umsätze 2027 aus dem Original (z. B. Brennzuschnitte 11.280 T€); Lage leicht auseinandergezogen, Vorjahr 2026 ergänzt (erfunden)",
+    "Neu: Die Felder der Neun-Felder-Matrix sind nach Normstrategie hinterlegt (Investieren und wachsen, Selektiv vorgehen, Abschöpfen oder desinvestieren) – bitte prüfen, ob das zum Buchtext passt",
+    "Kreisfläche jetzt maßstabsgetreu zum Umsatz (im Original passten die Kreisgrößen nicht zu den Werten); Name und Umsatz am Kreis statt Farblegende mit sieben Farben",
+    "Entfallen: Programmfenster, Menüs, Logos (CIC, WIAG), Navigationsknöpfe; Monatsfilter und Bereichsauswahl des Originals",
+    "Online: Klick auf einen Kreis zeigt gestrichelt die Lage im Vorjahr",
+    "Caption: Statt „Bildauszug entnommen aus Schön et al. 2001, S. 386“ besser „In Anlehnung an Schön et al. 2001, S. 386“"
+   ],
+   "alt": "Portfolio der sieben Geschäftsfelder des Bereichs Blechverarbeitung für 2027 mit der Wettbewerbsstärke auf der x-Achse und der Marktattraktivität auf der y-Achse, jeweils von 0 bis 15, aufgeteilt in neun Felder. Die Kreisfläche entspricht dem Umsatz. Hohe Marktattraktivität bei mittlerer Wettbewerbsstärke haben Laserzuschnitte (9,6 Mio. €), Brennzuschnitte (11,3 Mio. €), Plasmaschneiden (6,7 Mio. €) und CNC-Blechbearbeitung (7,0 Mio. €); Blechzuschnitte (2,8 Mio. €) haben die höchste Wettbewerbsstärke. Im Feld zum Abschöpfen liegen Feinblechverarbeitung (8,5 Mio. €) und Stahlblechverarbeitung (1,8 Mio. €), zusammen 22 % des Umsatzes."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

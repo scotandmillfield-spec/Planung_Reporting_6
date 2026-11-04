@@ -1041,6 +1041,18 @@
    ],
    "alt": "Balkendiagramm des Cash-to-Cash Cycle 2027 in Tagen, in der Reihenfolge der Rechnung: Materialumschlag 63 Tage, plus Erzeugnisumschlag 10 Tage, plus Debitorenziel 31 Tage, minus Kreditorenziel 39 Tage (als Kontur gezeichnet), gleich Cash-to-Cash Cycle 64 Tage (fett, durch eine Linie abgesetzt). Kernaussage: 64 Tage Kapitalbindung, größter Treiber ist der Materialumschlag."
   },
+  "3.50": {
+   "status": "pruefung",
+   "datei": "Balkendiagramm_mit_negativen_und_positiven_Werten",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48/3.49",
+    "Werte des Originals übernommen (A +1,5/−2,5/−6,0, B +8,0/+3,0/−2,0, C +5,0/+4,0/+1,0 %); Jahr 2014 auf 2027 aktualisiert, Einheit „Veränderung zum Vorjahr in %“ im Titel",
+    "Diagrammtyp bleibt: Balken nach links (negativ) und rechts (positiv) von der Nulllinie; statt einer Gruppe je Kennzahl mit drei Farben je Gesellschaft jetzt eine Spalte je Kennzahl (Absatz, Umsatz, EBIT), Gesellschaften in Zeilen, gemeinsamer Maßstab",
+    "Farbe nach Wirkung: Zuwachs Blaugrün, Rückgang Rot (im Original war Rot die Farbe der Gesellschaft B, deren Zuwächse rot erschienen)",
+    "Fehler im Original behoben: Achsenbeschriftung „08 %“, „-08 %“ usw.; Kennzahlnamen überdeckten Balken („EBIT“); Achse, Gitternetz und Farblegende entfallen, Werte an den Balken"
+   ],
+   "alt": "Balkendiagramm der Veränderung zum Vorjahr 2027 in Prozent für die Tochtergesellschaften A, B und C in drei Spalten mit Nulllinie. Absatz: A +1,5, B +8,0, C +5,0. Umsatz: A −2,5, B +3,0, C +4,0. EBIT: A −6,0, B −2,0, C +1,0. Zuwächse sind blaugrün nach rechts, Rückgänge rot nach links gezeichnet. Kernaussage: Tochter A verliert Umsatz und EBIT trotz Absatzplus, nur C steigert das EBIT."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

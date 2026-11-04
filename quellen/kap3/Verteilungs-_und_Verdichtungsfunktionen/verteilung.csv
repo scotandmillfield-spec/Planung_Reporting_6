@@ -1,0 +1,26 @@
+﻿Verfahren;Spalte;Ebene;Umsatz_VJ_TEUR;Plan_TEUR;Herkunft
+Top-down;Plan;Unternehmen gesamt;1000;1200,00;erfasst
+Top-down;Plan;Region Nord;250;300,00;verteilt
+Top-down;Plan;Region Süd;300;360,00;verteilt
+Top-down;Plan;Region West;200;240,00;verteilt
+Top-down;Plan;Region Ost;250;300,00;verteilt
+Bottom-up;Plan;Unternehmen gesamt;1000;1150,00;verdichtet
+Bottom-up;Plan;Region Nord;250;250,00;erfasst
+Bottom-up;Plan;Region Süd;300;360,00;erfasst
+Bottom-up;Plan;Region West;200;240,00;erfasst
+Bottom-up;Plan;Region Ost;250;300,00;erfasst
+Gegenstrom;Vorgabe;Unternehmen gesamt;1000;1200,00;erfasst
+Gegenstrom;Vorgabe;Region Nord;250;300,00;verteilt
+Gegenstrom;Vorgabe;Region Süd;300;360,00;verteilt
+Gegenstrom;Vorgabe;Region West;200;240,00;verteilt
+Gegenstrom;Vorgabe;Region Ost;250;300,00;verteilt
+Gegenstrom;Rückmeldung;Unternehmen gesamt;1000;1140,00;verdichtet
+Gegenstrom;Rückmeldung;Region Nord;250;320,00;erfasst
+Gegenstrom;Rückmeldung;Region Süd;300;340,00;erfasst
+Gegenstrom;Rückmeldung;Region West;200;200,00;erfasst
+Gegenstrom;Rückmeldung;Region Ost;250;280,00;erfasst
+Mit Fixierung;Plan;Unternehmen gesamt;1000;1200,00;erfasst
+Mit Fixierung;Plan;Region Nord;250;306,25;verteilt
+Mit Fixierung;Plan;Region Süd;300;367,50;verteilt
+Mit Fixierung;Plan;Region West;200;220,00;erfasst (fixiert)
+Mit Fixierung;Plan;Region Ost;250;306,25;verteilt

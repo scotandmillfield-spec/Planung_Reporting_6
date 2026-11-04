@@ -1,0 +1,88 @@
+<!-- Abb. 3.11 „Exemplarische Startnavigation“: Startseite eines Berichtsportals (softwareneutral nachgebaut).
+     Titelzeile wie Abb. 3.5/3.7: Titel fett ohne Balken, Untertitel grau, Haarlinie.
+     Raster: Maske 727 px = 110 mm; Inhalt 695 px = drei Spalten zu 218 px mit 20 px Abstand, zwei Reihen.
+     Die sechs Unternehmensbereiche des Originals stehen in derselben Reihenfolge (links nach rechts, oben nach unten). -->
+<style>
+  #navigation .nav-raster { display: grid; grid-template-columns: 218px 218px 219px; column-gap: 20px; row-gap: 18px; align-items: start; }
+  #navigation .mk-gruppe + .mk-gruppe { margin-top: 0; }
+  #navigation .nav-liste { margin: 0; padding: 0; list-style: none; }
+  #navigation .nav-liste li { height: 22px; line-height: 22px; white-space: nowrap; }
+  #navigation .nav-liste a.mk-link { display: inline-block; line-height: 18px; }
+  #navigation .nav-liste a.mk-link:focus { outline: 2px solid var(--ac); outline-offset: 1px; }
+  #navigation .nav-hinweis { margin-top: 16px; padding-top: 8px; border-top: 1px solid var(--linie); color: var(--muted); line-height: 18px; }
+  /* Titelzeile wie in Abb. 3.5: kein Balken, Titel fett, Untertitel grau, Haarlinie darunter */
+  #navigation .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #navigation .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #navigation .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+</style>
+<form class="mk-maske" id="navigation" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Berichtsnavigation</span><span class="kopf-unter" id="kopf-unter">Startseite des Berichtsportals · Berichte nach Unternehmensbereichen</span></div>
+  <div class="mk-inhalt">
+    <div class="nav-raster" id="raster">
+
+      <div class="mk-gruppe" id="g-gl">
+        <div class="mk-gruppenkopf" id="k-gl">Geschäftsleitung</div>
+        <ul class="nav-liste">
+          <li><a class="mk-link" id="l-gl-cockpit" data-art="cockpit">Management-Cockpit</a></li>
+          <li><a class="mk-link" id="l-gl-guv" data-art="planvergleich">GuV-Planvergleich</a></li>
+          <li><a class="mk-link" id="l-gl-ranking" data-art="ranking">Kostenträger-Ranking</a></li>
+          <li><a class="mk-link" data-art="ktr">Kostenträgeranalyse</a></li>
+          <li><a class="mk-link" id="l-gl-kst" data-art="kst">Kostenstellenanalyse</a></li>
+          <li><a class="mk-link" id="l-gl-fk" data-art="pdf">FK-Bericht (PDF)</a></li>
+        </ul>
+      </div>
+
+      <div class="mk-gruppe" id="g-vt">
+        <div class="mk-gruppenkopf" id="k-vt">Vertrieb</div>
+        <ul class="nav-liste">
+          <li><a class="mk-link" data-art="cockpit">Vertriebscockpit</a></li>
+          <li><a class="mk-link" id="l-vt-plan" data-art="planvergleich">Planvergleich Absatz/Umsatz</a></li>
+          <li><a class="mk-link" data-art="ranking">Kostenträger-Ranking</a></li>
+          <li><a class="mk-link" data-art="ktr">Kostenträgeranalyse</a></li>
+          <li><a class="mk-link" id="l-vt-kst" data-art="kst">Kostenstellenanalyse</a></li>
+        </ul>
+      </div>
+
+      <div class="mk-gruppe" id="g-pe">
+        <div class="mk-gruppenkopf" id="k-pe">Produkterstellung</div>
+        <ul class="nav-liste">
+          <li><a class="mk-link" id="l-pe-cockpit" data-art="cockpit">Produktionscockpit</a></li>
+          <li><a class="mk-link" data-art="kst">Kostenstellenanalyse</a></li>
+          <li><a class="mk-link" id="l-pe-fert" data-art="pdf">Fertigungskosten (PDF)</a></li>
+          <li><a class="mk-link" data-art="pdf">Projektkosten (PDF)</a></li>
+        </ul>
+      </div>
+
+      <div class="mk-gruppe" id="g-ent">
+        <div class="mk-gruppenkopf" id="k-ent">Produktentwicklung</div>
+        <ul class="nav-liste">
+          <li><a class="mk-link" data-art="cockpit">Entwicklungscockpit</a></li>
+          <li><a class="mk-link" data-art="kst">Kostenstellenanalyse</a></li>
+          <li><a class="mk-link" data-art="projekt">Projektkosten F&amp;E</a></li>
+        </ul>
+      </div>
+
+      <div class="mk-gruppe" id="g-ks">
+        <div class="mk-gruppenkopf" id="k-ks">Kundenservice</div>
+        <ul class="nav-liste">
+          <li><a class="mk-link" data-art="cockpit">Servicecockpit</a></li>
+          <li><a class="mk-link" id="l-ks-kst" data-art="kst">Kostenstellenanalyse</a></li>
+        </ul>
+      </div>
+
+      <div class="mk-gruppe" id="g-co">
+        <div class="mk-gruppenkopf" id="k-co">Controlling</div>
+        <ul class="nav-liste">
+          <li><a class="mk-link" data-art="cockpit">Controlling-Cockpit</a></li>
+          <li><a class="mk-link" data-art="ktr">Kostenträgeranalyse</a></li>
+          <li><a class="mk-link" data-art="kst">Kostenstellenanalyse</a></li>
+          <li><a class="mk-link" id="l-co-umsatz" data-art="pdf">Umsatzabgrenzung (PDF)</a></li>
+          <li><a class="mk-link" data-art="pdf">CPU-Übersicht (PDF)</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="nav-hinweis" id="hinweis">Cockpits und Analysen öffnen interaktiv, vorselektiert auf den Bereich; Einträge mit (PDF) sind Druckberichte.</div>
+  </div>
+</form>

@@ -1,0 +1,93 @@
+﻿Nr;Perspektive;Kennzahl;Rohwert_sinkt_guenstig;Reihe;Index_2024_100
+1;Finanzen;ROCE;nein;Ist 2025;104
+1;Finanzen;ROCE;nein;Plan 2026;110
+1;Finanzen;ROCE;nein;Ist 2026;101
+1;Finanzen;ROCE;nein;Plan 2027;130
+2;Finanzen;EVA;nein;Ist 2025;98
+2;Finanzen;EVA;nein;Plan 2026;110
+2;Finanzen;EVA;nein;Ist 2026;116
+2;Finanzen;EVA;nein;Plan 2027;131
+3;Finanzen;Umsatzrentabilität;nein;Ist 2025;102
+3;Finanzen;Umsatzrentabilität;nein;Plan 2026;96
+3;Finanzen;Umsatzrentabilität;nein;Ist 2026;86
+3;Finanzen;Umsatzrentabilität;nein;Plan 2027;111
+4;Finanzen;Kapitalumschlag;nein;Ist 2025;99
+4;Finanzen;Kapitalumschlag;nein;Plan 2026;108
+4;Finanzen;Kapitalumschlag;nein;Ist 2026;91
+4;Finanzen;Kapitalumschlag;nein;Plan 2027;115
+5;Finanzen;Ergebnisbeitrag;nein;Ist 2025;97
+5;Finanzen;Ergebnisbeitrag;nein;Plan 2026;94
+5;Finanzen;Ergebnisbeitrag;nein;Ist 2026;88
+5;Finanzen;Ergebnisbeitrag;nein;Plan 2027;109
+6;Finanzen;Reinvestitionsquote;nein;Ist 2025;103
+6;Finanzen;Reinvestitionsquote;nein;Plan 2026;108
+6;Finanzen;Reinvestitionsquote;nein;Ist 2026;84
+6;Finanzen;Reinvestitionsquote;nein;Plan 2027;116
+7;Prozesse;Fertigstellungsgrad;nein;Ist 2025;95
+7;Prozesse;Fertigstellungsgrad;nein;Plan 2026;86
+7;Prozesse;Fertigstellungsgrad;nein;Ist 2026;72
+7;Prozesse;Fertigstellungsgrad;nein;Plan 2027;108
+8;Prozesse;Verhältnis Fremd- zu Eigenleistung;nein;Ist 2025;101
+8;Prozesse;Verhältnis Fremd- zu Eigenleistung;nein;Plan 2026;113
+8;Prozesse;Verhältnis Fremd- zu Eigenleistung;nein;Ist 2026;97
+8;Prozesse;Verhältnis Fremd- zu Eigenleistung;nein;Plan 2027;128
+9;Prozesse;Durchschnittliche Reklamationszeit;ja;Ist 2025;98
+9;Prozesse;Durchschnittliche Reklamationszeit;ja;Plan 2026;105
+9;Prozesse;Durchschnittliche Reklamationszeit;ja;Ist 2026;95
+9;Prozesse;Durchschnittliche Reklamationszeit;ja;Plan 2027;120
+10;Assets;Assetabnutzungsgrad;ja;Ist 2025;104
+10;Assets;Assetabnutzungsgrad;ja;Plan 2026;125
+10;Assets;Assetabnutzungsgrad;ja;Ist 2026;110
+10;Assets;Assetabnutzungsgrad;ja;Plan 2027;136
+11;Assets;Budgetverbrauch;ja;Ist 2025;100
+11;Assets;Budgetverbrauch;ja;Plan 2026;96
+11;Assets;Budgetverbrauch;ja;Ist 2026;86
+11;Assets;Budgetverbrauch;ja;Plan 2027;148
+12;Assets;Leerstandsquote;ja;Ist 2025;96
+12;Assets;Leerstandsquote;ja;Plan 2026;95
+12;Assets;Leerstandsquote;ja;Ist 2026;84
+12;Assets;Leerstandsquote;ja;Plan 2027;106
+13;Assets;Kosten pro BGF;ja;Ist 2025;99
+13;Assets;Kosten pro BGF;ja;Plan 2026;92
+13;Assets;Kosten pro BGF;ja;Ist 2026;72
+13;Assets;Kosten pro BGF;ja;Plan 2027;107
+14;Assets;Wertzuwachs Assets;nein;Ist 2025;102
+14;Assets;Wertzuwachs Assets;nein;Plan 2026;101
+14;Assets;Wertzuwachs Assets;nein;Ist 2026;76
+14;Assets;Wertzuwachs Assets;nein;Plan 2027;120
+15;Mitarbeiter;Fluktuationsquote;ja;Ist 2025;97
+15;Mitarbeiter;Fluktuationsquote;ja;Plan 2026;96
+15;Mitarbeiter;Fluktuationsquote;ja;Ist 2026;80
+15;Mitarbeiter;Fluktuationsquote;ja;Plan 2027;106
+16;Mitarbeiter;Krankheitsquote;ja;Ist 2025;100
+16;Mitarbeiter;Krankheitsquote;ja;Plan 2026;106
+16;Mitarbeiter;Krankheitsquote;ja;Ist 2026;98
+16;Mitarbeiter;Krankheitsquote;ja;Plan 2027;120
+17;Mitarbeiter;Personalintensität;nein;Ist 2025;103
+17;Mitarbeiter;Personalintensität;nein;Plan 2026;115
+17;Mitarbeiter;Personalintensität;nein;Ist 2026;85
+17;Mitarbeiter;Personalintensität;nein;Plan 2027;121
+18;Mitarbeiter;MA-Zufriedenheit;nein;Ist 2025;101
+18;Mitarbeiter;MA-Zufriedenheit;nein;Plan 2026;108
+18;Mitarbeiter;MA-Zufriedenheit;nein;Ist 2026;62
+18;Mitarbeiter;MA-Zufriedenheit;nein;Plan 2027;125
+19;Mitarbeiter;Verbesserungsvorschlagsquote;nein;Ist 2025;96
+19;Mitarbeiter;Verbesserungsvorschlagsquote;nein;Plan 2026;109
+19;Mitarbeiter;Verbesserungsvorschlagsquote;nein;Ist 2026;48
+19;Mitarbeiter;Verbesserungsvorschlagsquote;nein;Plan 2027;116
+20;Mitarbeiter;Anzahl qualifizierter MA;nein;Ist 2025;99
+20;Mitarbeiter;Anzahl qualifizierter MA;nein;Plan 2026;97
+20;Mitarbeiter;Anzahl qualifizierter MA;nein;Ist 2026;95
+20;Mitarbeiter;Anzahl qualifizierter MA;nein;Plan 2027;111
+21;Mitarbeiter;MA-Auslastung;nein;Ist 2025;102
+21;Mitarbeiter;MA-Auslastung;nein;Plan 2026;104
+21;Mitarbeiter;MA-Auslastung;nein;Ist 2026;96
+21;Mitarbeiter;MA-Auslastung;nein;Plan 2027;120
+22;Kunden;Anzahl Beschwerden;ja;Ist 2025;98
+22;Kunden;Anzahl Beschwerden;ja;Plan 2026;104
+22;Kunden;Anzahl Beschwerden;ja;Ist 2026;90
+22;Kunden;Anzahl Beschwerden;ja;Plan 2027;112
+23;Kunden;Kundenzufriedenheit;nein;Ist 2025;101
+23;Kunden;Kundenzufriedenheit;nein;Plan 2026;128
+23;Kunden;Kundenzufriedenheit;nein;Ist 2026;121
+23;Kunden;Kundenzufriedenheit;nein;Plan 2027;145

@@ -1,0 +1,111 @@
+<!-- Abb. 3.180 „Integrierte Planungsfunktionen …“: Planungsseite „Verteilung und Verdichtung“ in einem Bericht
+     (softwareneutral nachgebaut). Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Matrix: Sorte 72 · Produkt 112 · 12 Monate zu 61 · Jahr 76 = 992 px. Diagramm darunter mit denselben Spalten.
+     Zeilen, Zellen und Diagramm erzeugt verteilung.js. Werte in Zehnteln Tsd. € gespeichert (Summen exakt). -->
+<style>
+  #verteilung { width: 1024px; }
+  /* Titelzeile wie Abb. 3.5/3.7, rechts die Datenschnitte */
+  #verteilung .mk-kopf { display: flex; justify-content: space-between; align-items: flex-end; height: auto; background: none;
+    color: var(--text); padding: 12px 0 10px; margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal;
+    font-size: 14px; font-weight: normal; }
+  #verteilung .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #verteilung .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #verteilung .schnitte { display: flex; gap: 12px; align-items: flex-end; }
+  #verteilung .schnitt { display: flex; flex-direction: column; }
+  #verteilung .schnitt > .mk-label { height: 18px; line-height: 18px; color: var(--muted); }
+  #verteilung .schnitt-jahr { width: 84px; }
+  #verteilung .schnitt-alt { width: 146px; }
+  #verteilung .schnitt-sorte { width: 120px; }
+  #verteilung .filter-link { display: block; height: 26px; line-height: 26px; white-space: nowrap; }
+  /* Planungsfunktionen als Reiterleiste */
+  #verteilung .funktionen { margin-bottom: 12px; }
+  #verteilung .funktionen > span { flex: 1 1 auto; text-align: center; padding: 0 6px; }
+  body:not(.print) #verteilung .funktionen > span { cursor: pointer; }
+  /* Titel der Matrix und Knöpfe */
+  #verteilung .mx-titelzeile { display: flex; justify-content: space-between; align-items: center; height: 30px; margin-bottom: 8px; }
+  #verteilung .mx-titel { font-weight: bold; white-space: nowrap; }
+  #verteilung .mx-titelzeile .mk-knopfleiste { margin-top: 0; }
+  /* Matrix */
+  #verteilung .mx { display: grid; grid-template-columns: 72px 112px repeat(12, 61px) 76px; border-top: 1px solid var(--ac); }
+  #verteilung .mx-zeile { display: contents; }
+  #verteilung .mx-zeile.aus { display: none; }
+  #verteilung .mx-k { height: 24px; line-height: 23px; padding: 0 5px; color: var(--muted); text-align: right; white-space: nowrap;
+    border-bottom: 1px solid var(--ac); }
+  #verteilung .mx-k.links { text-align: left; }
+  #verteilung .mx-k.jahr { font-weight: bold; color: var(--text); }
+  #verteilung .mx-l { height: 24px; line-height: 23px; padding: 0 6px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #verteilung .mx-l.sorte { font-weight: bold; padding-left: 0; }
+  #verteilung .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 5px; border: 0; border-radius: 0;
+    border-bottom: 1px solid #D4D4D4; border-left: 1px solid #D4D4D4; background: #FFFFFF; }
+  #verteilung .mx .mk-feld.mk-fehler { border-color: var(--schlecht); }
+  #verteilung .mx .jahr.mk-feld { font-weight: bold; }
+  #verteilung .summe > .mk-feld, #verteilung .summe > .mx-l { font-weight: bold; border-bottom-color: #9A9A9A; }
+  #verteilung .gesamt > .mk-feld, #verteilung .gesamt > .mx-l { font-weight: bold; border-bottom-color: var(--ac); }
+  #verteilung .gesamt > .mx-l.sorte { grid-column: span 2; }
+  body:not(.print) #verteilung .mx-l.gewaehlt { background: var(--band); }
+  /* Diagramm: Monatsverlauf der gewählten Zeile, Spalten wie die Matrix */
+  #verteilung .dg { display: grid; grid-template-columns: 184px repeat(12, 61px) 76px; height: 86px; margin-top: 10px; }
+  #verteilung .dg-titel { padding: 0 6px 0 0; display: flex; flex-direction: column; justify-content: flex-end; border-bottom: 1px solid var(--ac); }
+  #verteilung .dg-titel > span { height: 18px; line-height: 18px; white-space: nowrap; overflow: hidden; }
+  #verteilung .dg-titel .dg-name { font-weight: bold; }
+  #verteilung .dg-titel .dg-einheit { color: var(--muted); margin-bottom: 4px; }
+  #verteilung .dg-monat { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; border-bottom: 1px solid var(--ac); }
+  #verteilung .dg-wert { height: 18px; line-height: 18px; margin-bottom: 2px; white-space: nowrap; }
+  #verteilung .dg-balken { width: 34px; background: #FFFFFF; border: 1px solid var(--ac); border-bottom: 0; }
+  #verteilung .dg-leer { border-bottom: 0; }
+</style>
+<form class="mk-maske" id="verteilung" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf">
+    <div class="kopf-links">
+      <span class="kopf-titel" id="kopf-titel">Verteilung und Verdichtung</span>
+      <span class="kopf-unter" id="kopf-unter">Umsatzplanung 2028 · Werte in Tsd. €</span>
+    </div>
+    <div class="schnitte" id="schnitte">
+      <div class="schnitt schnitt-jahr">
+        <label class="mk-label" for="f-jahr">Jahr</label>
+        <select class="mk-feld" id="f-jahr"><option value="2028" selected>2028</option></select>
+      </div>
+      <div class="schnitt schnitt-alt">
+        <label class="mk-label" for="f-alternative">Planungsalternative</label>
+        <select class="mk-feld" id="f-alternative">
+          <option value="Planung" selected>Planung</option>
+          <option value="Best Case">Best Case</option>
+          <option value="Worst Case">Worst Case</option>
+        </select>
+      </div>
+      <div class="schnitt schnitt-sorte">
+        <label class="mk-label" for="f-sorte">Sorte</label>
+        <select class="mk-feld" id="f-sorte"><option value="alle" selected>Alle</option></select>
+      </div>
+      <a class="mk-link filter-link" id="l-filter">Filter zurücksetzen</a>
+    </div>
+  </div>
+  <div class="mk-inhalt">
+    <div class="mk-reiter funktionen" id="funktionen">
+      <span data-info="Werte Zelle für Zelle erfassen, ohne Verteilung">Manuelle Planung</span>
+      <span class="aktiv" id="r-verteilung" data-info="Summen proportional verteilen (top-down), Einzelwerte verdichten (bottom-up) – diese Seite">Verteilung</span>
+      <span data-info="Ist der abgelaufenen Monate plus Plan der Restmonate zur Hochrechnung des Jahres">Hochrechnung</span>
+      <span data-info="Werte einer Planversion oder des Ist als Ausgangspunkt in eine andere Version übernehmen">Versionen</span>
+      <span id="r-rueck" data-info="Gespeicherte Planwerte in die Datenbank zurückschreiben (Write-back)">Rückschreiben</span>
+      <span data-info="Planungsumfang vorab auf Bereiche, Produkte oder Kunden einschränken">Vorselektion</span>
+      <span data-info="Ansicht während der Planung filtern, z. B. nach Sorte">Filter</span>
+      <span data-info="Planungsfortschritt je Planer und Bereich überwachen">Überwachung</span>
+      <span data-info="Planstände abstimmen und freigeben (Genehmigungsworkflow)">Genehmigung</span>
+      <span data-info="Kommentare und Begründungen zu einzelnen Planwerten erfassen">Kommentare</span>
+      <span id="r-export" data-info="Planwerte in eine Tabellenkalkulation exportieren und von dort wieder einlesen">Export</span>
+    </div>
+
+    <div class="mx-titelzeile" id="mx-titelzeile">
+      <span class="mx-titel" id="mx-titel">Proportionale Verteilung auf Basis der bisherigen Werte</span>
+      <div class="mk-knopfleiste">
+        <button type="button" class="mk-knopf" id="k-speichern">Speichern</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-verwerfen">Verwerfen</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-zielwert">Zielwertsuche</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-zurueck">Zurücksetzen</button>
+      </div>
+    </div>
+
+    <div class="mx" id="mx" role="grid" aria-label="Umsatzplanung 2028 nach Sorte, Produkt und Monat in Tsd. €"><!-- erzeugt verteilung.js --></div>
+    <div class="dg" id="diagramm" aria-hidden="true"><!-- erzeugt verteilung.js --></div>
+  </div>
+</form>

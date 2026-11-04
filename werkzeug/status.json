@@ -1002,6 +1002,21 @@
    ],
    "alt": "Portfolio der sieben Geschäftsfelder des Bereichs Blechverarbeitung für 2027 mit der Wettbewerbsstärke auf der x-Achse und der Marktattraktivität auf der y-Achse, jeweils von 0 bis 15, aufgeteilt in neun Felder. Die Kreisfläche entspricht dem Umsatz. Hohe Marktattraktivität bei mittlerer Wettbewerbsstärke haben Laserzuschnitte (9,6 Mio. €), Brennzuschnitte (11,3 Mio. €), Plasmaschneiden (6,7 Mio. €) und CNC-Blechbearbeitung (7,0 Mio. €); Blechzuschnitte (2,8 Mio. €) haben die höchste Wettbewerbsstärke. Im Feld zum Abschöpfen liegen Feinblechverarbeitung (8,5 Mio. €) und Stahlblechverarbeitung (1,8 Mio. €), zusammen 22 % des Umsatzes."
   },
+  "3.47": {
+   "status": "pruefung",
+   "datei": "Bubble-Chart_In_Anlehnung_an_a_PPM_Execution_2017_b_react_2017",
+   "kommentare": [
+    "Als Dashboard (155 × 98 mm, quer) mit beiden Beispielen des Originals nebeneinander: a) Projektportfolio als Blasendiagramm, b) gepackte Blasen; Kennzeichnung a) und b) wie in der Caption",
+    "a) Lage, Kategorie und Größenklasse der 15 Projekte (A–V) aus dem Original abgelesen; Kapitalwerte innerhalb der Klassen erfunden, Kreisfläche jetzt maßstabsgetreu statt vier Größenklassen; Kategorien benannt (Wachstum, Effizienz, Digitalisierung, Pflicht) und in Grautönen statt Grün/Orange/Blau/Rot",
+    "a) Risikoachse wie im Original mit geringem Risiko oben; Feldnamen außen an den Ecken, das günstige Feld fett; grüne und rote Farbverläufe sowie 3D-Glanz entfallen",
+    "b) Inhalt neutral ersetzt: statt Begriffen der US-Wahlberichterstattung 2016 (Personen wie Clinton, Trump) Begriffe aus Kundenbewertungen eines Online-Shops (erfunden); Farbe = Stimmung (negativ Rot, positiv Blaugrün, neutral Grau), Kreisfläche = Nennungen",
+    "b) Begriffe nur in Kreisen, in die sie vollständig passen (ggf. getrennt), Original schnitt Wörter an",
+    "Online: Datenschnitte Kategorie (a) und Stimmung (b), Klick hebt Projekt bzw. Begriff hervor",
+    "Nachbau: a) Punktdiagramm (Standardvisual); b) kein Standardvisual – Wortwolke oder Treemap",
+    "Caption: Daten und Gestaltung neu – „In Anlehnung an a) PPM Execution 2017, b) react 2017“ kann bleiben; ggf. im Text ergänzen, dass b) andere Inhalte zeigt"
+   ],
+   "alt": "Zwei Blasendiagramme nebeneinander. a) Projektportfolio: 15 Projekte nach Wert (waagerecht, gering bis hoch) und Risiko (senkrecht, oben gering, unten hoch), Kreisfläche gleich Kapitalwert über fünf Jahre, Grauton gleich Kategorie (Wachstum, Effizienz, Digitalisierung, Pflicht). Nur die Projekte A und T liegen im Feld hoher Wert und geringes Risiko (zusammen 9,7 Mio. € Kapitalwert); die großen Projekte D, M, S und I haben hohen Wert, aber hohes Risiko. b) Gepackte Blasen mit 36 Begriffen aus Kundenbewertungen, Kreisfläche gleich Anzahl der Nennungen, rot negativ, blaugrün positiv, grau neutral; am häufigsten Qualität (620, positiv), Lieferzeit (540, negativ) und Preis (480, neutral)."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

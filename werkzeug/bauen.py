@@ -8,6 +8,7 @@ Optionen:
     --titel T          Titel der HTML-Seite (Dashboard, Maske); Standard: <title> der bisherigen HTML-Datei
     --trotzdem         Dateien auch übernehmen, wenn das Bauwerkzeug Probleme meldet
     --ohne-inventur    vorschau.py und inventur.py nicht aufrufen
+    --art A            Bauweg abweichend von einordnung.json (z. B. V für eine Kreuztabelle als interaktives Visual)
 
 Je Art (einordnung.json):
   D  Diagramm     quellen/kapN/<name>.py   → werkzeug/bookfig/build_figure.py      → .png .pdf .pptx
@@ -95,10 +96,11 @@ def main():
     ap.add_argument("--titel")
     ap.add_argument("--trotzdem", action="store_true")
     ap.add_argument("--ohne-inventur", action="store_true")
+    ap.add_argument("--art", choices=["D", "V", "M"])
     a = ap.parse_args()
 
     x = finde(a.nr)
-    art, kap, stem = x["art"], x["kap"], x["stem"]
+    art, kap, stem = a.art or x["art"], x["kap"], x["stem"]
     ziel = os.path.join(ROOT, "abbildungen", f"kap{kap}")
     tmp = os.path.join("/tmp/bauen", stem)
     shutil.rmtree(tmp, ignore_errors=True)

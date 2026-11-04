@@ -1017,6 +1017,18 @@
    ],
    "alt": "Zwei Blasendiagramme nebeneinander. a) Projektportfolio: 15 Projekte nach Wert (waagerecht, gering bis hoch) und Risiko (senkrecht, oben gering, unten hoch), Kreisfläche gleich Kapitalwert über fünf Jahre, Grauton gleich Kategorie (Wachstum, Effizienz, Digitalisierung, Pflicht). Nur die Projekte A und T liegen im Feld hoher Wert und geringes Risiko (zusammen 9,7 Mio. € Kapitalwert); die großen Projekte D, M, S und I haben hohen Wert, aber hohes Risiko. b) Gepackte Blasen mit 36 Begriffen aus Kundenbewertungen, Kreisfläche gleich Anzahl der Nennungen, rot negativ, blaugrün positiv, grau neutral; am häufigsten Qualität (620, positiv), Lieferzeit (540, negativ) und Preis (480, neutral)."
   },
+  "3.48": {
+   "status": "pruefung",
+   "datei": "Saeulendiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit, PNG fürs Buch, HTML für die Lernplattform), Aufbau wie Abb. 3.19: Titel mit Einheit, Kernaussage, Diagramm",
+    "Werte des Originals übernommen (Plan 100/120/90/130, Ist 120/130/100/110 Mio. €), Jahr 2027 ergänzt",
+    "Diagrammtyp bleibt: Säulen je Quartal; Notation nach IBCS – Ist anthrazit gefüllt, Plan weiß mit Kontur, leicht versetzt hinter Ist (statt Flieder und Bordeaux nebeneinander)",
+    "Neu: Abweichung Ist − Plan je Quartal unter den Säulen, farbig nach Wirkung (Blaugrün/Rot); Größenachse und Gitternetz entfallen, Werte stehen über den Säulen",
+    "Titel ergänzt um Jahr und Einheit: „Umsatz SGE A 2027 je Quartal, Mio. €“ statt „Umsatz SGE A“ mit Achsentitel „Mio. €“"
+   ],
+   "alt": "Säulendiagramm des Umsatzes der SGE A 2027 je Quartal in Mio. €. Je Quartal steht eine weiße Plansäule mit Kontur leicht versetzt hinter der dunklen Ist-Säule: Q1 Ist 120 bei Plan 100, Q2 Ist 130 bei Plan 120, Q3 Ist 100 bei Plan 90, Q4 Ist 110 bei Plan 130. Darunter die Abweichungen +20, +10, +10 (blaugrün) und −20 (rot). Kernaussage: Ist über Plan in Q1 bis Q3, Q4 20 Mio. € unter Plan; im Jahr +20 Mio. € (+4,5 %)."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

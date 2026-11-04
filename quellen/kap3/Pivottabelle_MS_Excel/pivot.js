@@ -1,5 +1,5 @@
 /* Visual „Pivottabelle“ (Abb. 3.32) – softwareneutraler Nachbau einer Pivottabelle mit bedienbarer Feldliste.
-   Seite 1024 x 460 px = 155 x 69,6 mm (Querformat wegen der Feldliste neben der Tabelle).
+   Seite 1024 x 392 px = 155 x 59,3 mm (Querformat wegen der Feldliste neben der Tabelle).
    Daten: pivot.json (daten_pivot.py) – Einzelsätze Material × Verkaufsorganisation × Vertriebsweg × Jahr mit Absatz und
    Umsatz in Cent. Standardzustand wie im Original: Filter Jahr (2026 und 2027), Material, Vertriebsweg; Spalten
    Verkaufsorganisation; Zeilen Produktgruppe; Werte Summe von Umsatz – alle angezeigten Zahlen = Original.
@@ -43,13 +43,13 @@
   });
 
   /* ---------- Layout ---------- */
-  DK.init({ titel: "Pivottabelle", breite: 1024, hoehe: 460 });
-  const bTitel = DK.box("v-titel", 16, 8, 648, 46);
-  const bFilter = DK.box("filter", 16, 60, 648, 50, "dk-filter");
-  DK.haarlinie(116, 16, 360);
-  const bTab = DK.box("v-tabelle", 16, 124, 648, 326);
-  DK.el("div", { style: "position:absolute;left:674px;top:8px;width:0;height:444px;border-left:1px solid var(--linie)" }, document.getElementById("seite"));
-  const bFeld = DK.box("feldliste", 684, 8, 324, 444);
+  DK.init({ titel: "Pivottabelle", breite: 1024, hoehe: 392 });
+  const bTitel = DK.box("v-titel", 16, 8, 592, 46);
+  const bFilter = DK.box("filter", 16, 60, 592, 50, "dk-filter");
+  DK.haarlinie(116, 16, 416);
+  const bTab = DK.box("v-tabelle", 16, 124, 592, 260);
+  DK.el("div", { style: "position:absolute;left:618px;top:8px;width:0;height:376px;border-left:1px solid var(--linie)" }, document.getElementById("seite"));
+  const bFeld = DK.box("feldliste", 628, 8, 380, 376);
   DK.el("style", {}, document.head, `
     #v-tabelle { overflow: ${DK.PRINT ? "hidden" : "auto"}; }
     .pv { table-layout: fixed; }
@@ -70,6 +70,7 @@
     #feldliste { font-size: 14px; }
     .pv-kopf { font-size: 16px; font-weight: bold; }
     .pv-unterkopf { color: var(--muted); margin: 2px 0 8px; }
+    #pv-felder { display: grid; grid-template-columns: 1fr 1fr; column-gap: 10px; }
     .pv-feld { display: flex; align-items: center; gap: 8px; height: 22px; cursor: pointer; user-select: none; }
     .pv-feld:hover { background: var(--flaeche); }
     .pv-box { width: 14px; height: 14px; border: 1px solid #6E747A; border-radius: 2px; display: inline-flex;
@@ -78,10 +79,10 @@
     .pv-feld.an .pv-name { font-weight: bold; }
     .pv-feld .pv-neben { margin-left: auto; color: var(--muted); }
     .pv-bereiche { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-    .pv-bereich { border: 1px solid var(--linie); border-radius: 3px; padding: 5px 6px; height: 108px; overflow: hidden; }
+    .pv-bereich { border: 1px solid var(--linie); border-radius: 3px; padding: 5px 5px; height: 108px; overflow: hidden; }
     .pv-bereich.pv-ziel { border-color: var(--ac); background: var(--flaeche); }
     .pv-bereich-titel { color: var(--muted); margin-bottom: 4px; }
-    .pv-chip { display: flex; align-items: center; height: 24px; padding: 0 6px; margin-top: 3px; background: #FFFFFF;
+    .pv-chip { display: flex; align-items: center; height: 24px; padding: 0 5px; margin-top: 3px; background: #FFFFFF;
       border: 1px solid #9A9A9A; border-radius: 3px; cursor: grab; white-space: nowrap; overflow: hidden; }
     .pv-chip span { overflow: hidden; text-overflow: ellipsis; }
     .pv-chip b { margin-left: auto; padding-left: 6px; font-weight: normal; color: var(--muted); }
@@ -198,7 +199,7 @@
       teile.push(`${FELDER[S.b.spalten[0]].mitglieder[top]} ist mit ${pz(v("", String(top)), ges)} ${FELDER[S.b.spalten[0]].stark}`);
     }
     const lang = teile.length ? teile.join(", ") : `${F.name} gesamt ${txt("", "")}`;
-    return DK.tw(lang) <= 640 ? lang : teile[0];
+    return DK.tw(lang) <= 588 ? lang : teile[0];
   }
 
   /* ---------- Tabelle mit Mehrfachkopf ---------- */
@@ -211,9 +212,9 @@
     const breiteZ = Math.max(DK.tw(zFelder || " ") + 18, ...zl.map(z => DK.tw(zName(z.p), 14, !z.blatt) + 16 * Math.max(0, z.ebene) + 30), 110);
     const breiten = sp.map(c => Math.max(DK.tw(sName(c), 14, c.typ !== "blatt") + 18,
       ...zl.map(z => DK.tw(fmt(M.get(z.p + "|" + c.p)), 14, true) + 18), 76));
-    const summe = breiteZ + breiten.reduce((a, b) => a + b, 0), frei = 648 - summe;
+    const summe = breiteZ + breiten.reduce((a, b) => a + b, 0), frei = 592 - summe;
     const W = frei > 0 ? [breiteZ + frei * 0.25, ...breiten.map(b => b + frei * 0.75 / breiten.length)] : [breiteZ, ...breiten];
-    const t = el("table", { class: "dk-matrix pv", style: `width:${Math.max(648, summe)}px` }, bTab);
+    const t = el("table", { class: "dk-matrix pv", style: `width:${Math.max(592, summe)}px` }, bTab);
     const cg = el("colgroup", {}, t);
     W.forEach(b => el("col", { style: `width:${b}px` }, cg));
     const kopf = el("thead", {}, t);
@@ -312,7 +313,7 @@
     bFilter.textContent = "";
     const fs = S.b.filter;
     if (!fs.length) { el("div", { class: "pv-hinweis", style: "align-self:center" }, bFilter, "Keine Berichtsfilter – Felder in den Bereich „Filter“ ziehen"); return; }
-    const breite = Math.min(170, Math.floor((648 - 24 * (fs.length - 1)) / fs.length));
+    const breite = Math.min(170, Math.floor((592 - 24 * (fs.length - 1)) / fs.length));
     fs.forEach(f => {
       const F = FELDER[f], aktuell = S.fw[f];
       const optionen = [["alle", "(Alle)"]];
@@ -363,7 +364,7 @@
     punkt("Feld entfernen", () => verschieben(key, null));
     const x = Math.min((r.left - sr.left) / sk, 1024 - 200), y = (r.bottom - sr.top) / sk + 2;
     m.style.left = x + "px";
-    m.style.top = Math.min(y, 460 - m.offsetHeight - 4) + "px";
+    m.style.top = Math.min(y, 392 - m.offsetHeight - 4) + "px";
     S.menue = m;
     const zu = ev => { if (!m.contains(ev.target) && ev.target !== chip) { menueZu(false); document.removeEventListener("pointerdown", zu, true); } };
     document.addEventListener("pointerdown", zu, true);
@@ -444,7 +445,7 @@
       { nr: 8, ziel: "v-tabelle", anker: "links", versatz: [130, 100], regel: "EXPRESS – Hervorheben statt Farbe", titel: "Fadenkreuz und Sortierung",
         text: "Ein Klick auf eine Zelle hebt ihre Zeile und Spalte hervor, ein Klick auf eine Zeilenbeschriftung die Zeile samt Unterzeilen; Esc hebt auf. Ein Klick auf einen Spaltenkopf sortiert die Zeilen, ein zweiter Klick kehrt die Richtung um." },
     ],
-    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 460 px. Schrift Arial: Matrix und Datenschnitte 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle Verkauf (Jahr, Produktgruppe, Material, Verkaufsorganisation, Vertriebsweg, Absatz, Umsatz) wie in der CSV-Datei.",
+    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 392 px. Schrift Arial: Matrix und Datenschnitte 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle Verkauf (Jahr, Produktgruppe, Material, Verkaufsorganisation, Vertriebsweg, Absatz, Umsatz) wie in der CSV-Datei.",
     nachbau: [
       { id: "A", ziel: "v-tabelle", anker: "links", versatz: [130, 52], titel: "Pivottabelle", visual: "Matrix",
         felder: "Zeilen: Produktgruppe; Spalten: Verkaufsorganisation; Werte: Umsatz (Summe)",

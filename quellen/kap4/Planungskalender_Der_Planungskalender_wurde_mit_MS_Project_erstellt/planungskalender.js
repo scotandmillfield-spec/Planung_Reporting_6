@@ -22,7 +22,7 @@
         text: "Plantermine sind weiße Balken mit Kontur, der Ist-Verlauf ist anthrazit, Verzug rot – wie im Reporting- und Planungskalender (Abb. 3.12) und in der Roadmap (Abb. 3.3). Das Original zeichnete jeden Vorgang als schwarzen Sammelbalken mit Endmarken; Plan und Ist ließen sich nicht unterscheiden." },
       { nr: 3, ziel: "sp-dauer", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Termine als Zahlen neben dem Balken",
         text: "Dauer in Arbeitstagen, Anfang und Ende stehen in eigenen Spalten wie in der Vorgangstabelle einer Projektsoftware – so bleiben die Termine auch im Druck ablesbar. Die Vorgangsnummern des Originals (77, 83, 84 …) entfallen." },
-      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [150, 0], regel: "CHECK – Visuelle Integrität", titel: "Lineare, tagesgenaue Zeitachse",
+      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [150, -2], regel: "CHECK – Visuelle Integrität", titel: "Lineare, tagesgenaue Zeitachse",
         text: "Jede Kalenderwoche ist gleich breit, Balken beginnen und enden am Tag. Die Achse reicht von der strategischen Planung bis zur Veröffentlichung des Budgets; der Datenschnitt Zeitraum vergrößert einen Monat. Das Original zeigte Wochenspalten bis in den Dezember mit leerem Rand." },
       { nr: 5, ziel: "kal-stichtag", anker: "links", versatz: [0, -2], regel: "EXPRESS – Passende Darstellung", titel: "Stichtag und Status",
         text: "Die gestrichelte Linie trennt Erledigtes von Kommendem; der Status steht als Wort in der Tabelle, „überfällig“ rot. Verzug in Arbeitstagen und Ist-Termine stehen im Tooltip und unter „Werte als Tabelle“." },
@@ -44,7 +44,7 @@
         felder: "Zeilen: Gruppe, Vorgang (Hierarchie); Spalten: Tabelle „Kalenderspalten“ (ohne Beziehung) mit den Einträgen Dauer, Anfang, Ende, Status und danach je Tag eine Spalte, sortiert nach Spaltennummer; Werte: Measure „Zelle“",
         format: "Zeilenüberschriften 10,5 pt, oberste Ebene fett; Text-Measure „Zelle“ liefert für die ersten vier Spalten Dauer (NETWORKDAYS), Anfang und Ende (FORMAT „TT.MM.“) und Status; „überfällig“ per bedingter Schriftfarbe #C62828",
         hinweis: "Auf Gruppenebene nimmt „Zelle“ MIN(Plan_Anfang) und MAX(Plan_Ende) der Teilpläne; ISINSCOPE(Vorgang[Vorgang]) unterscheidet die Ebenen." },
-      { id: "D", ziel: "kal-achse", anker: "links", versatz: [150, 0], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
+      { id: "D", ziel: "kal-achse", anker: "links", versatz: [150, -2], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
         felder: "Measure „Zelle“ liefert in den Tagesspalten einen Code: 1 Plan, 2 Ist, 3 Verzug, leer außerhalb des Vorgangs",
         format: "Bedingte Formatierung Hintergrund nach Feldwert über Measure „Zellfarbe“ (Plan #EFEFEF, da weiß mit Rahmen nicht möglich; Ist #3A3F44; Verzug #C62828); Schriftfarbe = Hintergrund; Spaltenbreite 4 px, Spaltenüberschrift Kalenderwoche",
         hinweis: "Tagesraster statt freier Balken. Zugeklappt zeigt die Budgetierung die Spanne vom ersten Beginn bis zum letzten Ende." },
@@ -212,10 +212,12 @@
       for (let t = T0; t < T1; t++) {
         const d = D(t);
         if (d.getUTCDate() === 1 || t === T0) {
-          if (t > T0) linie(X(t), 0, "#C9C9C9", false, 17);
           const naechster = tag(d.getUTCMonth() === 11 ? `${d.getUTCFullYear() + 1}-01-01` : `${d.getUTCFullYear()}-${p2(d.getUTCMonth() + 2)}-01`);
           const text = MONATE[d.getUTCMonth()] + (mehrjahr && (d.getUTCMonth() === 0 || t === T0) ? " " + d.getUTCFullYear() : "");
-          if (X(Math.min(naechster, T1)) - X(t) >= tw(text) + 8) obenText(X(t) + 4, text);
+          if (X(Math.min(naechster, T1)) - X(t) >= tw(text) + 8) {
+            if (t > T0) linie(X(t), 0, "#C9C9C9", false, 17);
+            obenText(X(t) + 4, text);
+          }
         }
         if (t === T0 || d.getUTCDay() === 1) {
           let e = t + 1; while (e < T1 && D(e).getUTCDay() !== 1) e++;

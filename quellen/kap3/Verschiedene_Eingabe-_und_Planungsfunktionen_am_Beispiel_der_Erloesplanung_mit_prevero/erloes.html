@@ -1,0 +1,121 @@
+<!-- Abb. 3.179 „Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung“: Arbeitsblatt „Erlösplanung“
+     (softwareneutral nachgebaut). Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Oben: Auswahl 288 · 20 · Planungsfunktionen 1–3 (459) · 20 · Ergebnisvorschau 5 (186).
+     Tabelle: Produkt 160 · Ist 2025 / Ist 2026 / Forecast 2027 / Vorgabe 2028 / Budget 2028 je 62 · 12 Monate zu 43 = 986 px.
+     Die Sprechblasen 1–5 des Originals sind als nummerierte Beschriftungen in die Maske übernommen. Zeilen erzeugt erloes.js. -->
+<style>
+  #erloes { width: 1024px; }
+  /* Titelzeile wie Abb. 3.5/3.7 */
+  #erloes .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #erloes .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #erloes .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #erloes .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  /* Kopfbereich: drei Gruppen nebeneinander */
+  #erloes .oben { display: grid; grid-template-columns: 288px 459px 186px; column-gap: 20px; align-items: start; margin-bottom: 16px; }
+  #erloes .mk-gruppe + .mk-gruppe { margin-top: 0; }
+  #erloes .g-auswahl { --sp-label: 100px; --sp-feld: 180px; }
+  #erloes .g-ergebnis { --sp-label: 108px; --sp-feld: 70px; }
+  #erloes .fz { display: grid; grid-template-columns: 92px 170px 58px 115px; column-gap: 8px; align-items: center; min-height: 26px; }
+  #erloes .fz + .fz { margin-top: 4px; }
+  #erloes .fz .breit { grid-column: 2 / span 2; }
+  #erloes .fz .mk-knopf { height: 26px; line-height: 24px; padding: 0 8px; width: 115px; text-align: center; }
+  /* Tabelle */
+  #erloes .mx { display: grid; grid-template-columns: 160px repeat(5, 62px) repeat(12, 43px); }
+  #erloes .mx-zeile { display: contents; }
+  #erloes .mx-k { height: 21px; line-height: 21px; padding: 0 3px; text-align: right; color: var(--muted); white-space: nowrap; overflow: hidden; }
+  #erloes .mx-k.links { text-align: left; padding-left: 0; }
+  #erloes .mx-k.gruppe { grid-column: span 12; text-align: left; padding-left: 6px; color: var(--text); font-weight: bold;
+    border-bottom: 1px solid var(--rahmen); margin-left: 4px; }
+  #erloes .k2 > .mx-k { border-bottom: 1px solid var(--ac); }
+  #erloes .mx-l { height: 24px; line-height: 23px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #erloes .eltern > .mx-l { font-weight: bold; }
+  #erloes .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #erloes .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #erloes .mx .mk-feld.trenn { border-left: 1px solid var(--rahmen); }
+  #erloes .mx .mk-feld.mk-fehler { border-color: var(--schlecht); }
+  #erloes .eltern > .mk-feld { font-weight: bold; }
+</style>
+<form class="mk-maske" id="erloes" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Erlösplanung</span><span class="kopf-unter" id="kopf-unter">Budget 2028 · Stand 30.06.2027 · Werte in Tsd. €</span></div>
+  <div class="mk-inhalt">
+    <section class="mk-abschnitt" id="abschnitt">
+      <div class="mk-band" id="band">Top-down-Planung über Produkte</div>
+      <div class="oben">
+        <div class="mk-gruppe g-auswahl" id="g-auswahl">
+          <div class="mk-gruppenkopf">Auswahl</div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-gebiet">Vertriebsgebiet</label>
+            <select class="mk-feld" id="f-gebiet"><option selected>Österreich</option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-kunde">Kunde</label>
+            <select class="mk-feld" id="f-kunde"><option selected>1001 – Sportfachhandel</option></select>
+          </div>
+          <div class="mk-zeile">
+            <label class="mk-label" for="f-variante">Variante</label>
+            <select class="mk-feld" id="f-variante"><option selected>1. Planungsdurchlauf</option></select>
+          </div>
+        </div>
+
+        <div class="mk-gruppe" id="g-funktionen">
+          <div class="mk-gruppenkopf">Planungsfunktionen</div>
+          <div class="fz" id="z-prognose">
+            <label class="mk-label" for="f-prognose">1. Prognose</label>
+            <select class="mk-feld" id="f-prognose" data-hilfe="Prognoseverfahren für den Gesamterlös">
+              <option value="mittel" selected>Durchschnitt 3 Jahre</option>
+              <option value="fc">Forecast fortschreiben</option>
+              <option value="trend">Linearer Trend</option>
+            </select>
+            <div class="mk-feld mk-anzeige mk-zahl" id="f-prognosewert"></div>
+            <button type="button" class="mk-knopf mk-zweit" id="k-prognose">Übernehmen</button>
+          </div>
+          <div class="fz" id="z-vertikal">
+            <label class="mk-label" for="f-vertikal">2. Vertikal</label>
+            <select class="mk-feld breit" id="f-vertikal" data-hilfe="Verteilungsschlüssel von Gesamt auf die Produkte">
+              <option value="fc" selected>wie Forecast 2027</option>
+              <option value="ist">wie Ist 2026</option>
+              <option value="gleich">gleichmäßig</option>
+            </select>
+            <button type="button" class="mk-knopf mk-zweit" id="k-vertikal">Verteilen</button>
+          </div>
+          <div class="fz" id="z-horizontal">
+            <label class="mk-label" for="f-horizontal">3. Horizontal</label>
+            <select class="mk-feld breit" id="f-horizontal" data-hilfe="Verteilungskurve vom Jahr auf die Monate">
+              <option value="saison" selected>Saisonverlauf Ist 2026</option>
+              <option value="gleich">gleichmäßig</option>
+            </select>
+            <button type="button" class="mk-knopf mk-zweit" id="k-horizontal">Verteilen</button>
+          </div>
+        </div>
+
+        <div class="mk-gruppe g-ergebnis" id="g-ergebnis">
+          <div class="mk-gruppenkopf">5. Ergebnisvorschau</div>
+          <div class="mk-zeile">
+            <span class="mk-label">Umsatzziel 2028</span>
+            <div class="mk-feld mk-anzeige mk-zahl" id="f-ziel"></div>
+          </div>
+          <div class="mk-zeile">
+            <span class="mk-label">Aktuelle Planung</span>
+            <div class="mk-feld mk-anzeige mk-zahl" id="f-planung"></div>
+          </div>
+          <div class="mk-zeile">
+            <span class="mk-label" id="l-erreichung">Zielerreichung</span>
+            <div class="mk-feld mk-anzeige mk-zahl" id="f-erreichung"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx" id="mx" role="grid" aria-label="Erlösplanung 2028 nach Produkten in Tsd. €">
+        <div class="mx-zeile k1">
+          <div class="mx-k links">Produkt</div>
+          <div class="mx-k">Ist</div><div class="mx-k">Ist</div><div class="mx-k">Forecast</div>
+          <div class="mx-k" id="k-vorgabe">Vorgabe</div><div class="mx-k" id="k-budget">Budget</div>
+          <div class="mx-k gruppe" id="k-monate">4. Monatswerte 2028 – manuell korrigierbar</div>
+        </div>
+        <div class="mx-zeile k2" id="kopf2"><!-- Jahre und Monate erzeugt erloes.js --></div>
+      </div>
+    </section>
+  </div>
+</form>

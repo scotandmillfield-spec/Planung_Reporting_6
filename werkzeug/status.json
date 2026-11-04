@@ -622,6 +622,101 @@
    ],
    "alt": "Fünf Bestandteile des Qualitätssicherungsprozesses untereinander: Informationsbedarfsanalyse und -änderungen, Prozessqualitätsprüfung und -änderungen, organisatorische Qualitätsprüfung und -änderungen, Datenqualitätsprüfung und -steuerung sowie Informationssystem-Qualitätsprüfung und -steuerung."
   },
+  "5.1": {
+   "status": "pruefung",
+   "datei": "BI-Ordnungsrahmen",
+   "kommentare": [
+    "Schichten als Bänder mit Titel oben links, Metadaten und Systemintegration als senkrechte Spalten über alle Schichten – gleiche Bildsprache wie Abb. 5.6",
+    "Zylinder, Trapeze, Hohlblockpfeile und Schatten entfernt; Datenbanksymbole als beschriftete Boxen, Quellsysteme box (Abstimmung Kap. 5)",
+    "Data Warehouse (Data Mart, Core Data Warehouse, Operational Data Store) als Schlüsselelement rot – ebenso Core Data Warehouse in Abb. 5.6",
+    "„E-Proc.“ → „E-Procurement“, „Content & Document Mgmt.“ → „Content & Document Management“; Platzhalter „…“ bei den Quellsystemen entfernt",
+    "Copyright-Zeile im Bild entfernt (Quelle nur in der Caption); Caption: ‚Quelle: Kemper et al. 2010‘ → ‚In Anlehnung an Kemper et al. 2010, S. 11‘, da umgestaltet"
+   ],
+   "alt": "BI-Ordnungsrahmen: Innerhalb des Rahmens Business Intelligence liegen drei Schichten – Informationszugriff (BI-Portal), Informationsgenerierung/-distribution (Analysesysteme, Informationsdistribution) und Datenbereitstellung (Data Mart, Core Data Warehouse, Operational Data Store sowie Content & Document Management). Metadaten und Systemintegration ziehen sich über alle Schichten. Gespeist wird der Rahmen aus externen und operativen Systemen wie SCM, E-Procurement, ERP, CRM, CAx, PPS, MES und PDM/PLM sowie aus externen Daten."
+  },
+  "5.2": {
+   "status": "pruefung",
+   "datei": "Unterschiedliche_Facetten_von_BI",
+   "kommentare": [
+    "Legende rechts mit schrägen Zeigerpfeilen entfernt, die drei Flächen direkt beschriftet (Helligkeitsleiter: weit hell, analyseorientiert grau, eng weiß)",
+    "„Analyse-orientiertes“ → „Analyseorientiertes BI-Verständnis“, „Planung/ Konsolidierung“ → „Planung/Konsolidierung“",
+    "Achsentitel Prozessphase und Schwerpunkt fett, Begriffe an den Positionen des Originals; Verzweigung Reporting → Standard/Ad hoc ohne Knotenpunkt",
+    "Caption: ‚Von Kemper modifiziert übernommen aus …‘ → ‚In Anlehnung an Gluchowski 2001, S. 7, und Kemper et al. 2010, S. 4‘ (alte Notiz mit Umlautfehler ‚¨ubernommen‘)"
+   ],
+   "alt": "Einordnung von BI-Begriffen nach Prozessphase (senkrecht, von der Datenbereitstellung oben bis zur Datenauswertung unten) und Schwerpunkt (waagerecht, von Technik bis Anwendung). Das weite BI-Verständnis umfasst alle Begriffe von Extraktion, Transformation und Data Warehouse über Standard- und Ad-hoc-Reporting bis zur Auswertung; das analyseorientierte Verständnis umfasst Ad-hoc-Reporting, Text und Data Mining, Kennzahlen, BSC-Systeme, analytisches CRM sowie Planung/Konsolidierung; das enge Verständnis nur OLAP, MIS und EIS."
+  },
+  "5.3": {
+   "status": "pruefung",
+   "datei": "Business_Performance_Management",
+   "kommentare": [
+    "Rahmen des Führungssystems als gestrichelte Gruppe; Business Performance Management als Schlüsselelement rot (im Original hellblau)",
+    "Hohlblockpfeile ‚Informationen‘ (nach oben) und ‚Wissen‘ (nach unten) als Pfeile mit kursiver Beschriftung",
+    "Teilfunktionen als weiße Boxen an einer Leitung; Verteiler vom Führungssystem ohne Knotenpunkte",
+    "Tippfehler „Systemkopploung“ → „Systemkopplung“; „Infor-mationen“ ohne Trennung",
+    "Caption: Zusatz ‚(eigene Darstellung)‘ entfällt"
+   ],
+   "alt": "Das Führungssystem gliedert sich in das Informationsversorgungssystem, die primären Führungsfunktionen (Planung, Entscheidung, Steuerung, Kontrolle) und die sekundären Führungsfunktionen (Systembildung, Systemkopplung). Darunter liegt das Business Performance Management, das dem Führungssystem Informationen liefert und von ihm Wissen zurückerhält."
+  },
+  "5.4": {
+   "status": "pruefung",
+   "datei": "Enge_und_weite_BI-Definition",
+   "kommentare": [
+    "Zwei Karten mit Kopfleiste (Betriebswirtschaftliche Sicht, IT-Sicht); die weite BI-Definition umschließt wie im Original die oberen Kartenteile – blaue gestrichelte Linie → rote Akzentlinie mit rotem Titel",
+    "Enge BI-Definition (3. Data-Warehouse-Ebene) zusätzlich grau hinterlegt, im Original nur fett gesetzt",
+    "„Reporting/ / Kennzahlensysteme“ → „Reporting/Kennzahlensysteme“, „z.B.“ → „z. B.“, „=>“ → „→“",
+    "Abgerundete Kartenformen vereinheitlicht; Überschriften der operativen Ebene kursiv wie im Original",
+    "Caption: Zusatz ‚(eigene Darstellung)‘ entfällt"
+   ],
+   "alt": "Gegenüberstellung der betriebswirtschaftlichen Sicht und der IT-Sicht auf BI. Die weite BI-Definition umfasst die Steuerungsunterstützung für das Management (Reporting/Kennzahlensysteme, Planung/Prognosen, Konsolidierung, BSC) sowie die Data-Warehouse-Ebenen Datenanbindung, Datenverwaltung und Datenauswertung und -nutzung samt Big-Data- und KI-Technologie; die enge BI-Definition beschränkt sich auf die Datenauswertung und -nutzung (z. B. OLAP-Analyse, MIS, EIS). Außerhalb liegen die operative Geschäftsabwicklung (Bestellungen, Bearbeitungen, Abrechnungen) und die Quellsysteme (ERP-, Kommunikations-, SCM-Systeme)."
+  },
+  "5.5": {
+   "status": "pruefung",
+   "datei": "Einsatzfelder_von_BI-Anwendungssystemen",
+   "kommentare": [
+    "Weltkarte entfernt (Deko, ‚Externe Daten‘ ist beschriftet); Hohlblockpfeile als Pfeile mit kursiver Beschriftung",
+    "Klammer ‚Business Intelligence‘ als rote Akzentklammer; Top und Middle hell, Lower grau wie in der Graustufenfassung des Originals (Top war hellblau, ohne erkennbare eigene Bedeutung)",
+    "Blaue Chevrons ‚Wertschöpfende Prozesse‘ → graue Pfeilkette; Container ‚Führungssystem‘/‚Ausführungssystem‘ gestrichelt, Titel oben links wie im Original",
+    "Top, Middle, Lower englisch belassen wie im Original – ggf. ‚Top-/Middle-/Lower-Management‘?",
+    "Caption: ‚Vgl. Kemper et al. 2010, S. 9‘ → ‚In Anlehnung an Kemper et al. 2010, S. 9‘?; der Nachsatz zu Seufert und Oehler 2009 aus der alten Notiz gehört in den Text bzw. eine Fußnote, nicht in die Caption"
+   ],
+   "alt": "Im Führungssystem steht die Managementpyramide mit Top-, Middle- und Lower-Management neben dem Bereich Koordination und Unterstützung; eine Klammer ordnet beides der Business Intelligence zu. Externe Daten fließen von außen, interne Daten aus dem Ausführungssystem in das Führungssystem; umgekehrt plant, steuert und überwacht das Führungssystem das Ausführungssystem mit seinen operativen Informations- und Kommunikationssystemen und wertschöpfenden Prozessen."
+  },
+  "5.6": {
+   "status": "pruefung",
+   "datei": "Business_Intelligence_Referenzarchitektur_als_Ordnungsrahmen",
+   "kommentare": [
+    "Original englisch beschriftet – Texte übertragen (Output/Data storage/Integration layer → Ausgabe-/Datenhaltungs-/Integrationsschicht, Source systems → Quellsysteme, Evaluation Database → Auswertungsdatenbank, Area data → Bereichsdaten, Planning | extrapolation → Planung | Hochrechnung, Load/Transform/Extract → Laden/Transformation/Extraktion, PPC → PPS, Mgmt. Cockpit → Management-Cockpit); bitte prüfen",
+    "Schichtenspalte rechts als Bandtitel wie in Abb. 5.1; Metadaten-, Rechte- und Rollen- sowie Qualitätsmanagement als senkrechte Spalten; Core Data Warehouse rot wie in Abb. 5.1, Datenbanken grau, Quellsysteme box",
+    "Zylinder-, Würfel- und Globussymbole, Schatten und Platzhalter „…“ entfernt; Pfeilpaare auf/ab als Doppelpfeile; Rückfluss von Planung und Core Data Warehouse in die operativen Systeme als Sammelleitung links ohne Knotenpunkt",
+    "Frage: ‚ODI‘ – gemeint ODS (Operational Data Store, vgl. Abb. 5.1)? Sonst bitte Langform nennen",
+    "Caption: Tippfehler ‚Referanzarchitektur‘ korrigiert; Durchkopplung ‚Business-Intelligence-Referenzarchitektur als Ordnungsrahmen‘? (Datei- und Labelname würde sich mitändern); Zusatz ‚(eigene Darstellung)‘ entfällt"
+   ],
+   "alt": "Referenzarchitektur in fünf Schichten: Quellsysteme (operative Anwendungssysteme wie ERP, PPS und CRM sowie externe Daten), Integrationsschicht (Staging Area mit Extraktion, Transformation und Laden), Datenhaltungsschicht (Core Data Warehouse, ODI), Ausgabeschicht (Auswertungsdatenbank mit Bereichsdaten, Aggregationen und OLAP sowie Planung) und Frontend (Reporting | Analyse, Planung | Hochrechnung, Management-Cockpit). Metadaten-, Rechte- und Rollen- sowie Qualitätsmanagement wirken über alle Schichten; Planungsdaten fließen in das Core Data Warehouse und in die operativen Systeme zurück."
+  },
+  "5.7": {
+   "status": "pruefung",
+   "datei": "Dimensionsebenen_von_betrieblichen_IT-Systemen",
+   "kommentare": [
+    "Pseudo-3D-Stufenpyramide flach gezeichnet, blaue Flächen → Grau; BI-gestützt als Schlüsselelement rot",
+    "Würfelsymbol (Data Warehouse) und 4V-Rad (Big Data) als beschriftete Boxen, die vier V (Volume, Velocity, Variety, Veracity) als Erläuterung",
+    "Dimensionen als Achsen: Systemebene unten, zeitlicher Horizont entlang der rechten Flanke (operativ bis operativ/strategisch), Inhalte/Objekte/Bereiche (intern/extern) rechts senkrecht – die dunkle Seitenfläche ‚Intern / extern‘ entfällt",
+    "„Auftragsabw.“ → „Auftragsabwicklung“, „Tabellenkalk.“ → „Tabellenkalkulation“; Platzhalter „…“ entfernt",
+    "Hinweis: BDE, ZDE, DNC werden im Bild nicht aufgelöst – im Text oder Abkürzungsverzeichnis erklärt?"
+   ],
+   "alt": "Pyramide betrieblicher IT-Systeme mit vier Ebenen: Erfassungs- und Steuerungssysteme (BDE, ZDE, CAD, DNC), Administrations- und Dispositionssysteme (Materialwirtschaft, PPS, Auftragsabwicklung), Abrechnungssysteme (Finanz- und Rechnungswesen, Personalwesen) sowie Planungs- und Berichtssysteme (ERP-gestützt, Tabellenkalkulation) mit BI-gestützten Systemen an der Spitze, die aus dem Data Warehouse und Big Data gespeist werden. Achsen zeigen die Dimensionen Systemebene, zeitlicher Horizont von operativ bis operativ/strategisch und Inhalte/Objekte/Bereiche (intern/extern)."
+  },
+  "5.8": {
+   "status": "pruefung",
+   "datei": "Horizontale_und_vertikale_Integration_von_Informationssystemen",
+   "kommentare": [
+    "Hellblaue Pyramide → Grau, Ebenen mit Abstand wie in Abb. 5.7, weiße Kästen als Boxen; Integrationsrichtungen als beschriftete Achsen",
+    "„Management-unterstützungs-systeme“ → „Managementunterstützungssysteme (MUS)“; „Büroinformationssystem“ → „Büroinformationssysteme“ (Plural wie die übrigen Systemklassen)",
+    "Frage: ‚Personalwirtschaft‘ steht in der PPTX doppelt (untere Ebene, erste Reihe) – soll das zweite Feld einen anderen Bereich nennen (z. B. Beschaffung, Logistik) oder entfallen?",
+    "Beschriftung ‚Administrations- und Dispositionssysteme‘ aus Platzgründen etwas höher als im Original (Höhe Übergang mittlere/untere Ebene)",
+    "Caption: ‚modifiziert übernommen aus Hansen (2019, S.9)‘ → ‚In Anlehnung an Hansen 2019, S. 9‘"
+   ],
+   "alt": "Pyramide der Informationssysteme: An der Spitze Managementunterstützungssysteme (MUS) auf strategischer sowie auf operativer und taktischer Ebene und Abfrage- und Berichtssysteme, zusammengefasst als Planungs- und Kontrollsysteme; darunter Büroinformationssysteme (individuelle Unterstützung, Gruppenunterstützung, Vorgangsbearbeitung) und unten die ERP-Systeme als Administrations- und Dispositionssysteme der Funktionsbereiche wie Finanz- und Rechnungswesen, Personalwirtschaft, Forschung und Entwicklung, Materialwirtschaft, Produktion sowie Vertrieb und Marketing. Pfeile zeigen die horizontale Integration über die Funktionsbereiche und die vertikale Integration über die Ebenen."
+  },
   "5.9": {
    "status": "pruefung",
    "datei": "Beispiel_einer_horizontalen_Integration",

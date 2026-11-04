@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrierte Fotos und Logos</title>
+<style>
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }
+
+</style>
+</head>
+<body>
+<script>const DATA = {"monat":"2027-03","stand":"2027-03-31","regionen":["Kontinentaleuropa","Nordamerika","Australien","Großbritannien"],"kennzahlen":["Umsatzerlöse","Rohertrag","Ergebnis"],"modelle":["Limousine L 67","SUV S 55","Kombi K 40","Kompakt C 20"],"maerz":[[0,0,8388258,8559447],[0,1,904004,599472],[0,2,354231,82169],[1,0,3925807,4304613],[1,1,380070,350618],[1,2,153236,115825],[2,0,1807180,1966464],[2,1,167446,469036],[2,2,37600,344954],[3,0,880404,1013123],[3,1,87821,70652],[3,2,-74762,-84097]],"quartal":[[0,0,850,780],[0,1,null,840],[0,2,null,680],[0,3,null,620],[1,0,-20,60],[1,1,null,670],[1,2,null,230],[1,3,null,790],[2,0,30,120],[2,1,null,490],[2,2,null,470],[2,3,null,10],[3,0,-200,-150],[3,1,null,300],[3,2,null,60],[3,3,null,260]],"verkaeufer":[[0,"Frau Brandt",31,1120,26],[0,"Herr Tal",27,980,26],[0,"Frau Lenz",24,860,25],[1,"Herr Kaya",22,790,20],[1,"Frau Moreau",19,700,21],[1,"Herr Olsen",17,610,18],[2,"Frau Petrov",14,470,15],[2,"Herr Weber",12,410,14],[3,"Herr Novak",9,300,8],[3,"Frau Albers",7,240,9]],"absatz":[[0,0,62],[0,1,51],[0,2,55],[0,3,42],[1,0,27],[1,1,34],[1,2,19],[1,3,15],[2,0,10],[2,1,16],[2,2,12],[2,3,7],[3,0,6],[3,1,3],[3,2,5],[3,3,8]]};</script>
+<script>
+/* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
+   Jeder Baustein entspricht einem Standard-Visual von Power BI.
+   Seite: 1024 x 646 px. Parameter: ?print (Druckansicht ohne Leiste), ?gut=gruen (Farbvariante). */
+const DK = (() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  let SEITE_B = 1024, SEITE_H = 646;          // Dashboard; Einzelvisual: init({breite: 727, hoehe: …})
+  if (Q.get("gut") === "gruen") document.body.dataset.gut = "gruen";
+  if (PRINT) document.body.classList.add("print");
+
+  /* ---------------- Format ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  const MINUS = "−", NBSP = String.fromCharCode(0xA0);
+  function zahl(v, nk = 0) { return (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function delta(v, nk = 0, einheit = "") {
+    const r = Number(v.toFixed(nk));
+    const vz = r > 0 ? "+" : r < 0 ? MINUS : "±";
+    return vz + nf(nk).format(Math.abs(r)) + einheit;
+  }
+  function prozent(v, nk = 1) { return zahl(v * 100, nk) + NBSP + "%"; }
+  /* Wirkung: richtung +1 = Anstieg günstig, -1 = Anstieg ungünstig, 0 = neutral */
+  function wirkung(d, richtung, nk = 1) {
+    if (!richtung || Number(d.toFixed(nk)) === 0) return "neutral";
+    return d * richtung > 0 ? "gut" : "schlecht";
+  }
+  const FARBE = { gut: "var(--gut)", schlecht: "var(--schlecht)", neutral: "var(--ac)",
+                  ist: "var(--ac)", fc: "var(--fc)", vj: "var(--py)" };
+
+  /* ---------------- Textmessung ---------------- */
+  const ctx = document.createElement("canvas").getContext("2d");
+  function tw(t, px = 14, bold = false) {
+    ctx.font = (bold ? "bold " : "") + px + "px Arial, 'Liberation Sans', Helvetica, sans-serif";
+    return ctx.measureText(String(t)).width;
+  }
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------------- Tooltip ---------------- */
+  let tip;
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      const zeilen = zeilenFn();
+      tip.textContent = "";
+      zeilen.forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel;
+  function init(o) {
+    document.title = o.titel;
+    if (o.breite) SEITE_B = o.breite;
+    if (o.hoehe) SEITE_H = o.hoehe;
+    if (!PRINT) {
+      const leiste = el("div", { class: "dk-leiste" }, document.body);
+      el("div", { class: "dk-leiste-titel" }, leiste, o.titel);
+      o.knoepfe = leiste;
+    }
+    buehne = el("div", { class: "dk-buehne" }, document.body);
+    rahmen = el("div", { class: "dk-rahmen" }, buehne);
+    seite = el("div", { class: "dk-seite", id: "seite", style: `width:${SEITE_B}px;height:${SEITE_H}px` }, rahmen);
+    panel = el("div", { class: "dk-panel" }, document.body);
+    tip = el("div", { class: "dk-tooltip" }, document.body);
+    const skalieren = () => {
+      if (PRINT) { rahmen.style.width = SEITE_B + "px"; rahmen.style.height = SEITE_H + "px"; return; }
+      const frei = panel.style.display === "block" ? 380 : 0;
+      const s = Math.max(0.4, Math.min((innerWidth - frei - 32) / SEITE_B, (innerHeight - 44 - 32) / SEITE_H));
+      seite.style.transform = `scale(${s})`;
+      rahmen.style.width = SEITE_B * s + "px"; rahmen.style.height = SEITE_H * s + "px";
+      rahmen.style.marginLeft = frei ? "16px" : "auto";
+    };
+    addEventListener("resize", skalieren);
+    DK._skalieren = skalieren;
+    skalieren();
+    return seite;
+  }
+  function box(id, x, y, w, h, cls = "") {
+    return el("div", { id, class: "dk-abs " + cls, style: `left:${x}px;top:${y}px;width:${w}px;height:${h}px` }, seite);
+  }
+  function haarlinie(y, links = 16, rechts = 16) {
+    el("div", { class: "dk-haar", style: `top:${y}px;left:${links}px;right:${rechts}px` }, seite);
+  }
+
+  /* ---------------- Kopf ---------------- */
+  function kopf(ziel, o) {
+    ziel.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0" }, ziel);
+    el("div", { class: "dk-titel" }, l, o.titel);
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, o.untertitel);
+    const r = el("div", { style: "position:absolute;right:0;top:2px;text-align:right" }, ziel);
+    el("div", { class: "dk-quelle" }, r, o.quelle);
+    const lg = el("div", { id: "kopf-legende", class: "dk-legende", style: "margin-top:8px" }, r);
+    o.legende.forEach(([farbe, text, rahmenFarbe]) => {
+      const s = el("span", {}, lg);
+      el("i", { style: `background:${farbe};${rahmenFarbe ? "outline:1px solid " + rahmenFarbe + ";outline-offset:-1px" : ""}` }, s);
+      s.appendChild(document.createTextNode(text));
+    });
+  }
+
+  /* ---------------- Datenschnitte (Slicer) ---------------- */
+  function knoepfe(ziel, o) {
+    const g = el("div", { class: "dk-knoepfe", role: "group" }, ziel);
+    const bs = o.optionen.map(([wert, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(wert === o.wert) }, g, text);
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); o.onChange(wert); });
+      return b;
+    });
+    return g;
+  }
+  function schnitt(ziel, label, typ, o) {
+    const s = el("div", { class: "dk-schnitt" }, ziel);
+    el("label", {}, s, label);
+    if (typ === "knoepfe") return knoepfe(s, o);
+    const sel = el("select", { "aria-label": label, style: o.breite ? `width:${o.breite}px` : "" }, s);
+    o.optionen.forEach(([wert, text]) => { const op = el("option", { value: wert }, sel, text); if (wert === o.wert) op.selected = true; });
+    sel.addEventListener("change", () => o.onChange(sel.value));
+    return sel;
+  }
+
+  /* ---------------- KPI-Leiste (Karte mit Referenzbeschriftung) ---------------- */
+  function kpis(ziel, items) {
+    ziel.textContent = "";
+    const w = el("div", { class: "dk-kpis" }, ziel);
+    items.forEach(k => {
+      const c = el("div", { class: "dk-kpi" }, w);
+      el("div", { class: "dk-kpi-label" }, c, k.label);
+      const wz = el("div", { class: "dk-kpi-wert" + (k.wertKlasse ? " " + k.wertKlasse : "") }, c, k.wert);
+      if (k.einheit) el("span", { class: "dk-kpi-einheit" }, wz, k.einheit);
+      const d = el("div", { class: "dk-kpi-delta" }, c, (k.bezug ?? "ΔVJ") + " ");
+      el("b", { class: k.klasse }, d, k.delta);
+    });
+  }
+
+  /* ---------------- Visual-Rahmen: Titel + Botschaft ---------------- */
+  function visual(ziel, o) {
+    ziel.textContent = "";
+    ziel.classList.add("dk-visual");
+    const tz = el("div", { class: "dk-titelzeile" }, ziel);
+    const t = el("div", { class: "dk-visual-titel" }, tz, o.titel);
+    if (o.einheit) { t.appendChild(document.createTextNode(", ")); el("span", { class: "dk-einheit" }, t, o.einheit); }
+    if (o.schalter) knoepfe(tz, o.schalter);
+    if (o.botschaft !== undefined) el("div", { class: "dk-botschaft", title: o.botschaft }, ziel, o.botschaft);
+    const top = (o.botschaft !== undefined ? 42 : 24) + (o.abstand || 6);
+    return { flaeche: el("div", { style: `position:absolute;left:0;top:${top}px;right:0;bottom:0` }, ziel),
+             breite: ziel.clientWidth, hoehe: ziel.clientHeight - top };
+  }
+
+  /* ---------------- Balkendiagramm (gruppiertes Balkendiagramm) ---------------- */
+  function balken(ziel, o) {
+    const W = o.breite, n = o.zeilen.length;
+    const rh = o.zeilenhoehe || Math.floor(o.hoehe / n), bh = Math.round(rh * 0.7);
+    const H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = o.labelBreite || Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9);
+    const pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bw = Math.max(z.wert > 0 ? 1 : 0, z.wert / max * pw);
+      if (z.kontur) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: Math.max(0, bw - 1), height: bh - 1,
+                                 fill: "#FFFFFF", stroke: z.kontur, "stroke-width": 1 }, g);
+      else sv("rect", { x: lw, y: y + (rh - bh) / 2, width: bw, height: bh, fill: z.farbe || FARBE.ist }, g);
+      sv("text", { x: lw + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    return svg;
+  }
+
+  /* ---------------- Bevölkerungspyramide (gestapeltes Balkendiagramm, Männer negativ) ---------------- */
+  function pyramide(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, kopfH = 18;
+    const rh = o.zeilenhoehe || Math.floor((o.hoehe - kopfH) / n), bh = Math.round(rh * 0.72);
+    const H = kopfH + rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vl = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.m))))) + 7;
+    const vr = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.w))))) + 7;
+    const maxM = Math.max(...o.zeilen.map(z => z.m), 1e-9), maxW = Math.max(...o.zeilen.map(z => z.w), 1e-9);
+    const k = (W - lw - vl - vr - 2) / (maxM + maxW);      // ein Maßstab für beide Seiten
+    const x0 = lw + vl + maxM * k + 1;
+    sv("text", { x: x0 - 6, y: 12, "text-anchor": "end", class: "muted" }, svg, o.kopf[0]);
+    sv("text", { x: x0 + 6, y: 12, class: "muted" }, svg, o.kopf[1]);
+    o.zeilen.forEach((z, i) => {
+      const y = kopfH + i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, z.label);
+      const bm = z.m * k, bw = z.w * k;
+      sv("rect", { x: x0 - 1 - bm, y: y + (rh - bh) / 2, width: bm, height: bh, fill: FARBE.ist }, g);
+      sv("rect", { x: x0 + 1, y: y + (rh - bh) / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: x0 - 1 - bm - 5, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, o.fmt(z.m));
+      sv("text", { x: x0 + 1 + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.w));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: x0, x2: x0, y1: kopfH - 2, y2: H, stroke: "#FFFFFF", "stroke-width": 2 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Gestapeltes Säulendiagramm ---------------- */
+  function saeulen(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.segNamen.map(t => tw(t)))) + 10;
+    const oben = 20, unten = 20, PH = H - oben - unten;
+    const slot = (W - lw) / n, bw = Math.min(26, slot * 0.72);
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9);
+    const k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = lw + slot * i + slot / 2, x = cx - bw / 2;
+      const g = sv("g", {}, svg);
+      let y = basis, summe = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        sv("rect", { x, y: y - h, width: bw, height: Math.max(0, h - (j < s.segs.length - 1 ? 0 : 0)),
+                     fill: FARBE[s.szenario] }, g);
+        if (j > 0) sv("line", { x1: x - 1, x2: x + bw + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, g);
+        if (i === 0 && h >= 15) sv("text", { x: lw - 10, y: y - h / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, o.segNamen[j]);
+        y -= h; summe += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(summe));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: lw + slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      if (o.tooltip) tooltip(hit, () => o.tooltip(s, summe));
+    });
+    sv("line", { x1: lw - 2, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Matrix / Tabelle mit Datenbalken ----------------
+     Spaltentypen: (leer) Zahl rechtsbündig über s.fmt · "text" linksbündig · "delta" Abweichung mit Balken
+     an einer Mittellinie, gefärbt nach Wirkung (s.richtung) · "anteil" Fortschritt 0..1 als Balken ab Null.
+     null-Werte erscheinen als „–“ ohne Balken. o.zeilenhoehe (Standard 21), o.onSort(key) macht Köpfe klickbar. */
+  function matrix(ziel, o) {
+    ziel.textContent = "";
+    const zh = o.zeilenhoehe || 21, H = zh - 3;
+    const t = el("table", { class: "dk-matrix" }, ziel);
+    const kopf = el("tr", {}, el("thead", {}, t));
+    o.spalten.forEach(s => {
+      const st = (s.breite ? `width:${s.breite}px;` : "") + (s.typ === "delta" || s.typ === "anteil" ? "text-align:center;" : "") +
+                 (s.typ === "text" ? "text-align:left;" : "");
+      const th = el("th", s.id ? { style: st, id: s.id } : { style: st }, kopf, s.titel);
+      if (o.onSort && !PRINT) {
+        th.classList.add("dk-sortierbar");
+        th.title = "Klick sortiert";
+        th.addEventListener("click", () => o.onSort(s.key));
+        if (o.sortierung && o.sortierung.key === s.key) th.appendChild(document.createTextNode(o.sortierung.ab ? " ▾" : " ▴"));
+      }
+    });
+    const tb = el("tbody", {}, t);
+    // Achse der Abweichungsbalken proportional (wie „Achse: automatisch“ bei Datenbalken in Power BI)
+    const spanne = {};
+    o.spalten.filter(s => s.typ === "delta").forEach(s => {
+      const w = o.zeilen.filter(z => !z.summe && z.werte[s.key] != null).map(z => z.werte[s.key]);
+      spanne[s.key] = { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) };
+    });
+    const hoehe = o.zeilenhoehe ? `height:${zh}px` : "";
+    o.zeilen.forEach(z => {
+      const blass = !z.summe && o.auswahl != null && o.auswahl !== z.key;
+      // Trennlinie über einer neuen Gruppe: an der Vorzeile setzen (im border-collapse gewinnt die obere Zelle)
+      if (z.trenner && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
+      const tr = el("tr", { class: (z.summe ? "dk-summe" : "dk-zeile") + (blass ? " dk-blass" : "") }, tb);
+      o.spalten.forEach((s, j) => {
+        if (j === 0) { el("td", { style: hoehe }, tr, z.label); return; }
+        const v = z.werte[s.key];
+        if (s.typ === "text") { el("td", { style: "text-align:left;" + hoehe }, tr, v); return; }
+        if (s.typ !== "delta" && s.typ !== "anteil") { el("td", { style: hoehe }, tr, v == null ? "–" : s.fmt(v)); return; }
+        const td = el("td", { class: "dk-dbalken", style: hoehe }, tr);
+        const W = s.breite - 8, svg = sv("svg", { width: W, height: H, style: "display:block" }, td);
+        if (s.typ === "anteil") {
+          const txtW = s.textBreite || 48, pw = W - txtW - 2;
+          sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end", style: "font-size:14px" }, svg,
+             v == null ? "–" : zahl(v * 100, 0) + NBSP + "%");
+          if (v != null) sv("rect", { x: txtW, y: (H - 10) / 2, width: Math.max(v > 0 ? 1 : 0, Math.min(1, v) * pw), height: 10, fill: FARBE.ist }, svg);
+          sv("line", { x1: txtW, x2: txtW, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+          return;
+        }
+        const txtW = s.textBreite || 50, sp = spanne[s.key];
+        const k = (W - txtW - 4) / Math.max(sp.neg + sp.pos, 1e-9), mitte = txtW + 2 + sp.neg * k;
+        const kl = v == null ? "neutral" : wirkung(v, s.richtung, s.nk ?? 1);
+        sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end",
+                     style: `font-size:14px;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};font-weight:${z.summe ? "bold" : "normal"}` },
+           svg, v == null ? "–" : delta(v, s.nk ?? 1));
+        if (!z.summe && v != null) {
+          const bwid = Math.abs(v) * k;
+          sv("rect", { x: v >= 0 ? mitte : mitte - bwid, y: (H - 10) / 2, width: bwid, height: 10, fill: FARBE[kl] }, svg);
+        }
+        sv("line", { x1: mitte, x2: mitte, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+      });
+      if (!z.summe && o.onClick) tr.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip && !z.summe) tooltip(tr, () => o.tooltip(z));
+    });
+    return t;
+  }
+
+  /* ---------------- Streudiagramm (Punktdiagramm mit Größe) ----------------
+     o.punkte: [{key, x, y, g}] – g bestimmt die Kreisfläche. o.x / o.y: {min, max, ticks, titel, fmt}.
+     o.linien: {x, y} Konstantenlinien; o.felder: [{ecke: "ol"|"or"|"ul"|"ur", text}] Beschriftung der Quadranten. */
+  function streuung(ziel, o) {
+    const W = o.breite, H = o.hoehe;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const fx = o.x.fmt || String, fy = o.y.fmt || String;
+    const links = Math.ceil(Math.max(...o.y.ticks.map(t => tw(fy(t))))) + 8;
+    const rechts = Math.ceil(tw(fx(o.x.ticks[o.x.ticks.length - 1])) / 2) + 2;
+    const oben = 22, unten = 38, PW = W - links - rechts, PH = H - oben - unten;
+    const sx = v => links + (v - o.x.min) / (o.x.max - o.x.min) * PW;
+    const sy = v => oben + PH - (v - o.y.min) / (o.y.max - o.y.min) * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, o.y.titel);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, o.x.titel);
+    o.y.ticks.forEach(t => sv("text", { x: links - 6, y: sy(t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, fy(t)));
+    o.x.ticks.forEach(t => sv("text", { x: sx(t), y: oben + PH + 16, "text-anchor": "middle", class: "muted" }, svg, fx(t)));
+    if (o.linien) {
+      const st = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+      if (o.linien.x != null) sv("line", { x1: sx(o.linien.x), x2: sx(o.linien.x), y1: oben, y2: oben + PH, ...st }, svg);
+      if (o.linien.y != null) sv("line", { x1: links, x2: links + PW, y1: sy(o.linien.y), y2: sy(o.linien.y), ...st }, svg);
+    }
+    (o.felder || []).forEach(f => {
+      const l = f.ecke[1] === "l", ob = f.ecke[0] === "o";
+      sv("text", { x: l ? links + 6 : links + PW - 6, y: ob ? oben + 13 : oben + PH - 6, "text-anchor": l ? "start" : "end",
+                   class: "muted" }, svg, f.text);
+    });
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    const gMax = Math.max(...o.punkte.map(p => p.g || 0), 1e-9), rMax = o.rMax || 13, rMin = o.rMin || 3;
+    const kreise = o.punkte.slice().sort((a, b) => (b.g || 0) - (a.g || 0))
+      .map(p => ({ p, cx: sx(p.x), cy: sy(p.y), r: Math.max(rMin, Math.sqrt((p.g || 0) / gMax) * rMax) }));
+    const gruppen = new Map();
+    kreise.forEach(({ p, cx, cy, r }) => {
+      const blass = o.auswahl && !o.auswahl(p);
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("circle", { cx, cy, r, fill: p.farbe || FARBE.ist, "fill-opacity": 0.8, stroke: "#FFFFFF", "stroke-width": 1 }, g);
+      const hit = sv("circle", { cx, cy, r: Math.max(r, 6), fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(p.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(p));
+      gruppen.set(p, g);
+    });
+    // Beschriftungen nach allen Kreisen: rechts, links, oben, unten – erste Lage ohne Überdeckung
+    const belegt = [];
+    const schneidetKreis = (b, k) => {
+      const nx = Math.max(b.x, Math.min(k.cx, b.x + b.w)), ny = Math.max(b.y, Math.min(k.cy, b.y + b.h));
+      return (nx - k.cx) ** 2 + (ny - k.cy) ** 2 < (k.r + 1) ** 2;
+    };
+    const schneidet = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    kreise.filter(k => k.p.label).forEach(k => {
+      const w = tw(k.p.label), h = 16, { cx, cy, r } = k;
+      const lagen = [[cx + r + 4, cy - h / 2], [cx - r - 4 - w, cy - h / 2], [cx - w / 2, cy - r - 2 - h], [cx - w / 2, cy + r + 2]];
+      const frei = b => b.x >= links && b.x + b.w <= links + PW && b.y >= oben && b.y + b.h <= oben + PH &&
+        !kreise.some(a => a !== k && schneidetKreis(b, a)) && !belegt.some(c => schneidet(b, c));
+      const b = lagen.map(([x, y]) => ({ x, y, w, h })).find(frei) || { x: lagen[0][0], y: lagen[0][1], w, h };
+      belegt.push(b);
+      sv("text", { x: b.x, y: b.y + h / 2, dy: "0.35em" }, gruppen.get(k.p), k.p.label);
+    });
+    return svg;
+  }
+
+  /* ---------------- Berichtsdesign für Power BI (Theme-JSON) ---------------- */
+  function thema() {
+    const GUT = getComputedStyle(document.body).getPropertyValue("--gut").trim() || "#00806B";
+    return { name: "6. Auflage – Buchstil", dataColors: ["#3A3F44", "#8F8F8F", "#C9C9C9", GUT, "#C62828"],
+      background: "#FFFFFF", foreground: "#1A1A1A", tableAccent: "#3A3F44", good: GUT, neutral: "#8F8F8F", bad: "#C62828",
+      maximum: "#3A3F44", center: "#C9C9C9", minimum: "#F6F6F6",
+      textClasses: { callout: { fontSize: 19.5, fontFace: "Arial", color: "#1A1A1A" },
+                     title: { fontSize: 12, fontFace: "Arial", color: "#1A1A1A" },
+                     header: { fontSize: 10.5, fontFace: "Arial", color: "#4D4D4D" },
+                     label: { fontSize: 10.5, fontFace: "Arial", color: "#1A1A1A" } },
+      visualStyles: { "*": { "*": { border: [{ show: false }], dropShadow: [{ show: false }], background: [{ show: false }] } } } };
+  }
+
+  /* ---------------- Ebenen der Lernplattform ---------------- */
+  function download(name, inhalt, typ = "text/csv;charset=utf-8") {
+    const blob = new Blob([String.fromCharCode(0xFEFF) + inhalt], { type: typ });
+    const a = el("a", { href: URL.createObjectURL(blob), download: name }, document.body);
+    a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function ebenen(o) {
+    if (PRINT) return;
+    const leiste = document.querySelector(".dk-leiste");
+    let modus = null;
+    const marken = [];
+    const knopf = (text, fn) => { const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text); b.addEventListener("click", fn); return b; };
+    const kRegeln = knopf("Designregeln", () => umschalten("regeln"));
+    const kNachbau = knopf("Nachbau in Power BI", () => umschalten("nachbau"));
+    const kTab = knopf("Werte als Tabelle", () => umschalten("tabelle"));
+    knopf("Daten (CSV)", () => download(o.csv.name, o.csv.text()));
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; }
+    function markeSetzen(eintrag, text, cls) {
+      const z = document.getElementById(eintrag.ziel);
+      if (!z) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / SEITE_B;
+      // anker "rechts" (Standard): Marke auf der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "dk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text));
+      marken.push(m);
+    }
+    function aktiv(text) {
+      panel.querySelectorAll(".dk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      const e = panel.querySelector(`.dk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(m) {
+      modus = modus === m ? null : m;
+      [kRegeln, kNachbau, kTab].forEach((b, i) => b.setAttribute("aria-pressed", String(modus === ["regeln", "nachbau", "tabelle"][i])));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      DK._skalieren();
+      if (modus === "regeln") {
+        el("h2", {}, panel, "Designregeln (SUCCESS)");
+        el("div", { class: "dk-panel-intro" }, panel, "SUCCESS-Formel nach Hichert/Faisst (IBCS): Say, Unify, Condense, Check, Express, Simplify, Structure. Die Nummern im Dashboard zeigen, wo eine Regel angewendet ist.");
+        o.regeln.forEach(r => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": String(r.nr) }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, r.nr + "."); el("span", {}, k, r.titel);
+          el("div", { class: "dk-regel" }, e, r.regel);
+          el("div", {}, e, r.text);
+          markeSetzen(r, String(r.nr), "");
+        });
+      } else if (modus === "nachbau") {
+        el("h2", {}, panel, "Nachbau in Power BI");
+        el("div", { class: "dk-panel-intro" }, panel, o.nachbauIntro);
+        if (o.theme) { const b = el("button", { type: "button", style: "margin-bottom:10px;font:inherit;padding:5px 10px;border:1px solid #9A9A9A;background:#fff;border-radius:3px;cursor:pointer" }, panel, "Berichtsdesign (JSON) herunterladen");
+          b.addEventListener("click", () => download("berichtsdesign.json", JSON.stringify(o.theme, null, 2), "application/json")); }
+        o.nachbau.forEach(n => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": n.id }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, n.id); el("span", {}, k, n.titel);
+          const dl = el("dl", {}, e);
+          [["Visual", n.visual], ["Felder", n.felder], ["Format", n.format], ["Hinweis", n.hinweis]].forEach(([a, b]) => {
+            if (!b) return; el("dt", {}, dl, a); el("dd", {}, dl, b);
+          });
+          markeSetzen(n, n.id, "nachbau");
+        });
+      } else if (modus === "tabelle") {
+        el("h2", {}, panel, "Werte als Tabelle");
+        el("div", { class: "dk-panel-intro" }, panel, "Alle Werte der Visuals in der aktuellen Filterung (entspricht „Als Tabelle anzeigen“ in Power BI).");
+        o.tabellen().forEach(tab => {
+          el("div", { style: "font-weight:bold;margin:12px 0 4px" }, panel, tab.titel);
+          const t = el("table", { class: "dk-matrix" }, panel);
+          const hr = el("tr", {}, el("thead", {}, t));
+          tab.kopf.forEach(h => el("th", {}, hr, h));
+          const tb = el("tbody", {}, t);
+          tab.zeilen.forEach(z => { const tr = el("tr", {}, tb); z.forEach(c => el("td", {}, tr, c)); });
+        });
+      }
+    }
+    DK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+  }
+
+  return { PRINT, NBSP, zahl, delta, prozent, wirkung, FARBE, tw, el, sv, init, box, haarlinie, kopf, schnitt, knoepfe,
+           kpis, visual, balken, pyramide, saeulen, matrix, streuung, thema, ebenen, download };
+})();
+
+</script>
+<script>
+/* Dashboard „Integrierte Fotos und Logos“ (Abb. 3.78): Monatsübersicht eines Automobilvertriebs mit Logo im Kopf,
+   Foto der Verkäuferin/des Verkäufers des Monats und Produktfoto des Modells des Monats.
+   Seite 1024 x 646 px. Daten: vertrieb.json (daten_vertrieb.py) – Ergebnisübersicht März mit den Werten des Originals,
+   Ergebnis je Quartal, Verkäufer und Absatz je Modell (erfunden). Die Bildflächen sind bewusst neutrale Platzhalter
+   (graue Fläche mit Symbol und Beschriftung) – keine echten Fotos und Logos.
+   Datenschnitt Region; Klick auf eine Region (Diagramm, Tabelle) wirkt wie der Datenschnitt, Esc hebt auf. */
+(() => {
+  "use strict";
+  const { zahl, delta, wirkung, FARBE, NBSP, sv, el } = DK;
+  const RG = DATA.regionen, KZ = DATA.kennzahlen, MOD = DATA.modelle, QN = ["Q1", "Q2", "Q3", "Q4"];
+  const pdl = (ist, plan) => (ist - plan) / Math.abs(plan) * 100;       // bei negativem Plan auf |Plan| bezogen
+  const pz = (a, nk = 0) => zahl(a * 100, nk) + NBSP + "%";
+  const tsd = v => zahl(v / 1000);
+  const liste = a => (a.length > 1 ? a.slice(0, -1).join(", ") + " und " + a[a.length - 1] : a[0]);
+
+  /* ---------- Zustand ---------- */
+  const S = { region: null, sort: { key: "reihe", ab: false } };
+  addEventListener("keydown", e => { if (e.key === "Escape" && S.region !== null) { S.region = null; zeichnen(); } });
+  const regionSetzen = ri => { S.region = S.region === ri ? null : ri; zeichnen(); };
+
+  /* ---------- Layout ---------- */
+  DK.init({ titel: "Integrierte Fotos und Logos" });
+  const bKopf = DK.box("kopf", 16, 10, 856, 46);
+  const bLogo = DK.box("logo", 888, 10, 120, 46);
+  DK.haarlinie(62);
+  const bFilter = DK.box("filter", 16, 68, 992, 50, "dk-filter");
+  const bKpi = DK.box("kpis", 16, 128, 992, 68);
+  DK.haarlinie(206);
+  const bQuartal = DK.box("v-quartal", 16, 216, 640, 212);
+  const bTabelle = DK.box("v-tabelle", 16, 444, 640, 198);
+  const bVerk = DK.box("v-verkaeufer", 680, 216, 328, 212);
+  const bProd = DK.box("v-produkt", 680, 444, 328, 198);
+  DK.haarlinie(436, 16, 368);
+  DK.haarlinie(436, 680, 16);
+
+  /* ---------- Berechnungen ---------- */
+  const maerz = (ri, ki) => { const z = DATA.maerz.find(x => x[0] === ri && x[1] === ki); return { ist: z[2], plan: z[3] }; };
+  const quartal = ri => QN.map((q, qi) => { const z = DATA.quartal.find(x => x[0] === ri && x[1] === qi); return { ist: z[2], plan: z[3] }; });
+  const imFilter = ri => S.region === null || ri === S.region;
+  function summeMaerz(ki) {
+    let ist = 0, plan = 0;
+    RG.forEach((r, ri) => { if (imFilter(ri)) { const m = maerz(ri, ki); ist += m.ist; plan += m.plan; } });
+    return { ist, plan };
+  }
+  function summeQ1() {
+    let ist = 0, plan = 0;
+    RG.forEach((r, ri) => { if (imFilter(ri)) { const q = quartal(ri)[0]; ist += q.ist; plan += q.plan; } });
+    return { ist, plan };
+  }
+  const zeileTab = ri => {
+    const [u, r, e] = [0, 1, 2].map(ki => maerz(ri, ki));
+    return { ri, u, r, e, werte: { reihe: ri, umsatz: u.ist, du: pdl(u.ist, u.plan), roh: r.ist, dr: pdl(r.ist, r.plan), erg: e.ist, de: pdl(e.ist, e.plan) } };
+  };
+  function verkaeufer() {
+    const vs = DATA.verkaeufer.filter(v => imFilter(v[0])).map(([ri, name, fz, ums, ziel]) => ({ ri, name, fz, ums, ziel }))
+      .sort((a, b) => b.fz - a.fz || b.fz / b.ziel - a.fz / a.ziel);
+    return vs;
+  }
+  function modelle() {
+    const m = MOD.map((name, mi) => ({ mi, name, n: DATA.absatz.filter(a => a[1] === mi && imFilter(a[0])).reduce((s, a) => s + a[2], 0) }));
+    const ges = m.reduce((s, x) => s + x.n, 0);
+    return { liste: m.sort((a, b) => b.n - a.n), ges };
+  }
+
+  /* ---------- Tooltip ---------- */
+  const tip = document.querySelector(".dk-tooltip");
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      tip.textContent = "";
+      zeilenFn().forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+  const passt = (k, b) => k.find(t => DK.tw(t) <= b) || k[k.length - 1];
+
+  /* ---------- Bildplatzhalter (keine echten Fotos/Logos) ---------- */
+  function platzhalter(svg, x, y, w, h, art, zeilen, id) {
+    const g = sv("g", { id }, svg);
+    sv("rect", { x: x + 0.5, y: y + 0.5, width: w - 1, height: h - 1, fill: "#EFEFEF", stroke: "#A9A9A9", "stroke-width": 1, "stroke-dasharray": "4 3" }, g);
+    const cx = x + w / 2, ic = art === "logo" ? { x: x + 12, y: y + h / 2 - 8 } : { x: cx - 16, y: y + h / 2 - 30 };
+    if (art === "person") {
+      sv("circle", { cx: cx, cy: ic.y + 9, r: 9, fill: "#C9C9C9" }, g);
+      sv("path", { d: `M${cx - 17},${ic.y + 36}Q${cx - 17},${ic.y + 20} ${cx},${ic.y + 20}Q${cx + 17},${ic.y + 20} ${cx + 17},${ic.y + 36}Z`, fill: "#C9C9C9" }, g);
+    } else if (art === "bild") {
+      sv("polygon", { points: `${cx - 20},${ic.y + 34} ${cx - 6},${ic.y + 14} ${cx + 4},${ic.y + 26} ${cx + 10},${ic.y + 19} ${cx + 22},${ic.y + 34}`, fill: "#C9C9C9" }, g);
+      sv("circle", { cx: cx + 12, cy: ic.y + 6, r: 5, fill: "#C9C9C9" }, g);
+    } else {
+      sv("rect", { x: ic.x, y: ic.y, width: 16, height: 16, rx: 3, fill: "#C9C9C9" }, g);
+    }
+    if (art === "logo") {
+      sv("text", { x: x + 36, y: y + h / 2 - 8, dy: "0.35em", style: "font-weight:bold;fill:#4D4D4D" }, g, zeilen[0]);
+      sv("text", { x: x + 36, y: y + h / 2 + 9, dy: "0.35em", class: "muted" }, g, zeilen[1]);
+    } else {
+      zeilen.forEach((t, i) => sv("text", { x: cx, y: ic.y + 50 + i * 17, dy: "0.35em", "text-anchor": "middle", class: i ? "muted" : "", style: i ? "" : "fill:#4D4D4D" }, g, t));
+    }
+    return g;
+  }
+
+  /* ---------- Datenschnitt ---------- */
+  const regKnoepfe = DK.schnitt(bFilter, "Region", "knoepfe", {
+    optionen: [["alle", "Alle"], ...RG.map((r, i) => [String(i), r])], wert: "alle",
+    onChange: v => { S.region = v === "alle" ? null : Number(v); zeichnen(); } });
+
+  /* ---------- Visuals ---------- */
+  function quartalsDiagramm(ziel, breite, hoehe) {
+    ziel.textContent = "";
+    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Ergebnis je Quartal 2027 nach Region, Q1 Ist und Plan, Q2 bis Q4 Plan" }, ziel);
+    const abst = 18, pw = (breite - 3 * abst) / 4, yA = 36, yB = hoehe - 62;
+    const alle = RG.flatMap((r, ri) => quartal(ri).flatMap(q => [q.plan, q.ist ?? 0]));
+    const max = Math.max(0, ...alle), min = Math.min(0, ...alle), k = (yB - yA) / (max - min), Y = v => yA + (max - v) * k;
+    const fach = pw / 4, sb = 18, vers = 5;
+    RG.forEach((r, ri) => {
+      const x0 = ri * (pw + abst), qs = quartal(ri), blass = S.region !== null && S.region !== ri;
+      const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), "data-name": r, id: "qd-" + ri }, svg);
+      sv("text", { x: x0, y: 8, dy: "0.35em", style: "font-weight:bold" }, g, r);
+      qs.forEach((q, qi) => {
+        const cx = x0 + fach * (qi + 0.5), mitIst = q.ist !== null;
+        const px = mitIst ? cx - sb / 2 - vers : cx - sb / 2;
+        sv("rect", { x: px + 0.5, y: Math.min(Y(q.plan), Y(0)) + 0.5, width: sb - 1, height: Math.max(1, Math.abs(Y(q.plan) - Y(0)) - 1), fill: "#FFFFFF", stroke: "#3A3F44", "stroke-width": 1 }, g);
+        let wert = q.plan, xl = cx;
+        if (mitIst) {
+          sv("rect", { x: cx - sb / 2 + vers, y: Math.min(Y(q.ist), Y(0)), width: sb, height: Math.max(1, Math.abs(Y(q.ist) - Y(0))), fill: "#3A3F44" }, g);
+          wert = q.ist; xl = cx + vers;
+        }
+        const oben = Math.max(q.plan, q.ist ?? -Infinity), unten = Math.min(q.plan, q.ist ?? Infinity);
+        const yl = wert >= 0 ? Y(Math.max(oben, 0)) - 6 : Y(Math.min(unten, 0)) + 14;
+        sv("text", { x: xl, y: yl, "text-anchor": "middle", style: mitIst ? "font-weight:bold" : "" }, g, zahl(wert));
+        sv("text", { x: cx, y: hoehe - 30, dy: "0.35em", "text-anchor": "middle", class: "muted" }, g, QN[qi]);
+      });
+      sv("line", { x1: x0, x2: x0 + pw, y1: Y(0) + 0.5, y2: Y(0) + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, g);
+      const d = qs[0].ist - qs[0].plan;
+      sv("text", { x: x0 + fach * 0.5, y: hoehe - 10, dy: "0.35em", "text-anchor": "middle", style: `font-weight:bold;fill:${FARBE[wirkung(d, 1, 0)] || "var(--text)"}` }, g, delta(d, 0));
+      sv("text", { x: x0 + fach * 1.2, y: hoehe - 10, dy: "0.35em", class: "muted" }, g, "ΔPL Q1");
+      const hit = sv("rect", { x: x0, y: 0, width: pw, height: hoehe, fill: "transparent" }, g);
+      hit.addEventListener("click", () => regionSetzen(ri));
+      tooltip(hit, () => [r, `Q1 Ist ${zahl(qs[0].ist)} · Plan ${zahl(qs[0].plan)} Tsd. € · ΔPL ${delta(d, 0)} (${delta(pdl(qs[0].ist, qs[0].plan), 1, NBSP + "%")})`,
+        `Plan Q2 ${zahl(qs[1].plan)} · Q3 ${zahl(qs[2].plan)} · Q4 ${zahl(qs[3].plan)} Tsd. €`,
+        `Jahr: Q1 Ist + Plan Q2–Q4 = ${zahl(qs[0].ist + qs[1].plan + qs[2].plan + qs[3].plan)} Tsd. € (Plan ${zahl(qs.reduce((s, q) => s + q.plan, 0))})`,
+        "Klick filtert das Dashboard auf die Region"]);
+    });
+  }
+
+  function tabelle(ziel) {
+    let zeilen = RG.map((r, ri) => ({ ...zeileTab(ri), key: ri, label: r }));
+    const s = S.sort;
+    if (s.key !== "reihe") zeilen.sort((a, b) => (s.ab ? b.werte[s.key] - a.werte[s.key] : a.werte[s.key] - b.werte[s.key]));
+    DK.matrix(ziel, {
+      spalten: [
+        { key: "region", titel: "Region", breite: 136, id: "tb-region" },
+        { key: "umsatz", titel: "Umsatz", breite: 66, fmt: tsd },
+        { key: "du", titel: "ΔPL in %", breite: 98, typ: "delta", richtung: 1, nk: 1, textBreite: 50, id: "tb-du" },
+        { key: "roh", titel: "Rohertrag", breite: 74, fmt: tsd },
+        { key: "dr", titel: "ΔPL in %", breite: 98, typ: "delta", richtung: 1, nk: 1, textBreite: 50 },
+        { key: "erg", titel: "Ergebnis", breite: 68, fmt: tsd, id: "tb-erg" },
+        { key: "de", titel: "ΔPL in %", breite: 100, typ: "delta", richtung: 1, nk: 1, textBreite: 54 },
+      ],
+      zeilen: zeilen.map(z => ({ key: z.key, label: z.label, werte: z.werte })),
+      zeilenhoehe: 26, auswahl: S.region, onClick: regionSetzen, sortierung: s.key === "reihe" ? null : s,
+      onSort: key => { if (key === "region") S.sort = { key: "reihe", ab: false }; else S.sort = { key, ab: S.sort.key === key ? !S.sort.ab : true }; zeichnen(); },
+      tooltip: z => { const t = zeileTab(z.key);
+        return [z.label, ...[["Umsatzerlöse", t.u], ["Rohertrag", t.r], ["Ergebnis", t.e]].map(([n, m]) =>
+          `${n}: Ist ${zahl(m.ist)} € · Plan ${zahl(m.plan)} € · ΔPL ${delta(pdl(m.ist, m.plan), 1, NBSP + "%")}`), "Klick filtert das Dashboard auf die Region"]; },
+    });
+    ziel.querySelector("table").id = "tb-matrix";
+  }
+
+  function verkaeuferBox(ziel, breite, hoehe, vs) {
+    ziel.textContent = "";
+    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Verkäufer des Monats mit Fotoplatzhalter" }, ziel);
+    platzhalter(svg, 0, 4, 108, 140, "person", ["Foto", "(Platzhalter)"], "vk-foto");
+    const v = vs[0], x = 126, g = sv("g", { id: "vk-text" }, svg);
+    sv("text", { x, y: 14, dy: "0.35em", style: "font-weight:bold;font-size:16px" }, g, v.name);
+    sv("text", { x, y: 36, dy: "0.35em", class: "muted" }, g, RG[v.ri]);
+    sv("text", { x, y: 66, dy: "0.35em" }, g, `${zahl(v.fz)} Fahrzeuge, Ziel ${zahl(v.ziel)}`);
+    sv("text", { x, y: 86, dy: "0.35em", style: `font-weight:bold;fill:${FARBE[wirkung(v.fz - v.ziel, 1, 0)] || "var(--text)"}` }, g,
+      `${delta(v.fz - v.ziel, 0)} Fahrzeuge (${pz(v.fz / v.ziel)})`);
+    sv("text", { x, y: 106, dy: "0.35em" }, g, `Umsatz ${zahl(v.ums / 1000, 2)} Mio. €`);
+    if (vs[1]) sv("text", { x, y: 136, dy: "0.35em", class: "muted" }, g, `danach ${vs[1].name} (${zahl(vs[1].fz)})`);
+  }
+
+  function produktBox(ziel, breite, hoehe, m) {
+    ziel.textContent = "";
+    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Modell des Monats mit Produktfotoplatzhalter" }, ziel);
+    platzhalter(svg, 0, 4, 150, 104, "bild", ["Produktfoto", "(Platzhalter)"], "pd-foto");
+    const [a, b] = m.liste, x = 166, g = sv("g", { id: "pd-text" }, svg);
+    sv("text", { x, y: 14, dy: "0.35em", style: "font-weight:bold;font-size:16px" }, g, a.name);
+    sv("text", { x, y: 42, dy: "0.35em" }, g, `${zahl(a.n)} Fahrzeuge`);
+    sv("text", { x, y: 62, dy: "0.35em" }, g, `${pz(a.n / m.ges)} des Absatzes`);
+    if (b) sv("text", { x, y: 92, dy: "0.35em", class: "muted" }, g, `vor ${b.name} (${zahl(b.n)})`);
+  }
+
+  /* ---------- Botschaften ---------- */
+  function botQuartal() {
+    if (S.region !== null) {
+      const qs = quartal(S.region), d = qs[0].ist - qs[0].plan;
+      return passt([`${RG[S.region]}: Q1 Ist ${zahl(qs[0].ist)} bei Plan ${zahl(qs[0].plan)} Tsd. € (${delta(d, 0)}), Plan Q2–Q4 ${zahl(qs[1].plan + qs[2].plan + qs[3].plan)}`,
+        `${RG[S.region]}: Q1 Ist ${zahl(qs[0].ist)} bei Plan ${zahl(qs[0].plan)} Tsd. € (${delta(d, 0)})`], 640);
+    }
+    const q = summeQ1(), ueber = RG.filter((r, ri) => { const x = quartal(ri)[0]; return x.ist > x.plan; });
+    const teil = ueber.length === 0 ? "keine Region über Plan" : ueber.length === 1 ? `nur ${ueber[0]} über Plan` : `${liste(ueber)} über Plan`;
+    return passt([`Q1 Ist ${zahl(q.ist)} bei Plan ${zahl(q.plan)} Tsd. € (${delta(q.ist - q.plan, 0)}); ${teil}`], 640);
+  }
+  function botTabelle() {
+    if (S.region !== null) {
+      const t = zeileTab(S.region).werte;
+      return passt([`${RG[S.region]}: Umsatz ${delta(t.du, 1, NBSP + "%")}, Rohertrag ${delta(t.dr, 1, NBSP + "%")}, Ergebnis ${delta(t.de, 1, NBSP + "%")} zum Plan`], 640);
+    }
+    const ts = RG.map((r, ri) => zeileTab(ri)), nU = ts.filter(t => t.werte.du < 0).length;
+    const eNeg = ts.filter(t => t.werte.de < 0).map(t => RG[t.ri]);
+    const a = nU === RG.length ? "Umsatz in allen Regionen unter Plan" : `Umsatz in ${nU} von ${RG.length} Regionen unter Plan`;
+    const b = eNeg.length === 0 ? "Ergebnis überall über Plan" : `Ergebnis nur in ${liste(eNeg)} unter Plan`;
+    return passt([`${a}, ${b}`, a], 640);
+  }
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    [...regKnoepfe.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0 ? S.region === null : S.region === i - 1)));
+    DK.kopf(bKopf, { titel: "Monatsübersicht Vertrieb",
+      untertitel: `Ergebnis nach Regionen · März 2027 · ${S.region === null ? "alle Regionen" : RG[S.region]} · Vergleich mit Plan (ΔPL)`,
+      quelle: "Stand 31.03.2027",
+      legende: [["#3A3F44", "Ist"], ["#FFFFFF", "Plan", "#3A3F44"], [FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
+    const kpi = (label, s, fmt, einheit) => ({ label, wert: fmt(s.ist), einheit, bezug: "ΔPL",
+      delta: delta(pdl(s.ist, s.plan), 1, NBSP + "%"), klasse: wirkung(pdl(s.ist, s.plan), 1, 1) });
+    DK.kpis(bKpi, [
+      kpi("Umsatzerlöse März", summeMaerz(0), v => zahl(v / 1e6, 2), "Mio. €"),
+      kpi("Rohertrag März", summeMaerz(1), v => zahl(v / 1000), "Tsd. €"),
+      kpi("Ergebnis März", summeMaerz(2), v => zahl(v / 1000), "Tsd. €"),
+      kpi("Ergebnis 1. Quartal", summeQ1(), v => zahl(v), "Tsd. €"),
+    ]);
+    let v = DK.visual(bQuartal, { titel: "Ergebnis je Quartal 2027", einheit: "Tsd. €, Q1 Ist, Q2–Q4 Plan", botschaft: botQuartal() });
+    quartalsDiagramm(v.flaeche, v.breite, v.hoehe);
+    v = DK.visual(bTabelle, { titel: "Ergebnisübersicht nach Regionen, März 2027", einheit: "Tsd. €", botschaft: botTabelle() });
+    tabelle(v.flaeche);
+    const vs = verkaeufer(), w = vs[0];
+    v = DK.visual(bVerk, { titel: "Verkäufer des Monats", einheit: "März 2027",
+      botschaft: passt([`${w.name}: ${zahl(w.fz)} Fahrzeuge, ${pz(w.fz / w.ziel)} des Ziels`, `${w.name}: ${zahl(w.fz)} Fahrzeuge`], 328) });
+    verkaeuferBox(v.flaeche, v.breite, v.hoehe, vs);
+    const m = modelle(), a = m.liste[0];
+    v = DK.visual(bProd, { titel: "Modell des Monats", einheit: "März 2027",
+      botschaft: passt([`${a.name}: ${zahl(a.n)} Fahrzeuge, ${pz(a.n / m.ges)} des Absatzes`, `${a.name}: ${zahl(a.n)} Fahrzeuge (${pz(a.n / m.ges)})`], 328) });
+    produktBox(v.flaeche, v.breite, v.hoehe, m);
+    bLogo.textContent = "";
+    platzhalter(sv("svg", { width: 120, height: 46, role: "img", "aria-label": "Platzhalter für das Logo" }, bLogo), 0, 0, 120, 46, "logo", ["Logo", "(Platzhalter)"], "lg-logo");
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Lernplattform ---------- */
+  DK.ebenen({
+    regeln: [
+      { nr: 1, ziel: "v-quartal", anker: "links", versatz: [600, 26], regel: "SAY – Botschaft vermitteln", titel: "Aussage statt Begrüßung",
+        text: "Jedes Visual nennt in einem Satz, was es zeigt – etwa, dass im ersten Quartal nur Kontinentaleuropa über Plan liegt. Das Original begann mit „Hallo User Admin, willkommen beim … Info-System“." },
+      { nr: 2, ziel: "vk-foto", anker: "links", versatz: [71, 148], regel: "SIMPLIFY – Bilder mit Informationswert", titel: "Fotos nur, wo sie etwas sagen",
+        text: "Fotos stehen dort, wo sie Inhalt tragen: bei der Verkäuferin oder dem Verkäufer des Monats und beim Modell des Monats; das Logo klein im Kopf. Das dekorative Fahrzeugbild im Kopfbanner und das Hintergrundbild hinter dem ganzen Bericht entfallen. Hier sind alle Bildflächen bewusst neutrale Platzhalter. Fotos von Beschäftigten nur mit deren Einwilligung verwenden." },
+      { nr: 3, ziel: "v-quartal", anker: "links", versatz: [272, 149], regel: "EXPRESS – Passende Visualisierung", titel: "Säulen statt überlagerter Flächen",
+        text: "Das Original zeigte vier geglättete, halbtransparente Flächen übereinander; wo sie sich überlagerten, entstanden Mischfarben, und negative Werte verschwanden hinter anderen Flächen. Jetzt hat jede Region ein eigenes kleines Diagramm mit gleichem Maßstab." },
+      { nr: 4, ziel: "kopf-legende", anker: "links", versatz: [-6, -2], regel: "UNIFY – Semantische Notation", titel: "Ist, Plan und Wirkung",
+        text: "Ist anthrazit, Plan weiß mit Kontur; Abweichungen blaugrün (günstig) oder rot (ungünstig) nach Wirkung. Das Original nutzte rote Abwärtspfeile und gelbe Rechtspfeile – auch für eine Ergebnisverbesserung um 331 %." },
+      { nr: 5, ziel: "tb-erg", anker: "links", versatz: [53, -23], regel: "CHECK – Richtige Inhalte", titel: "Abweichung bei negativem Plan",
+        text: "Die Abweichung ist auf den Betrag des Plans bezogen: Großbritannien liegt mit −74,8 Tsd. € Ergebnis über dem Plan von −84,1 Tsd. € (+11,1 %), also günstig. Werte in Tsd. € statt auf den Euro genau." },
+      { nr: 6, ziel: "tb-region", anker: "links", versatz: [80, -4], regel: "STRUCTURE – Inhalte ordnen", titel: "Gleiche Reihenfolge überall",
+        text: "Die Regionen stehen nach Umsatz geordnet – in Diagramm und Tabelle in derselben Reihenfolge; die Tabelle lässt sich per Klick auf den Spaltenkopf sortieren. Im Original waren Tabelle und Legende unterschiedlich geordnet, die Namen der Gesellschaften nannten die Region nur indirekt." },
+      { nr: 7, ziel: "kpis", anker: "links", versatz: [662, 26], regel: "CONDENSE – Verdichten", titel: "KPI-Leiste ergänzt",
+        text: "Neu ist die Leiste mit den Summen für März und das erste Quartal. Sie zeigt sofort den Widerspruch, den das Original verbarg: Im März liegt das Ergebnis über Plan, im Quartal deutlich darunter." },
+      { nr: 8, ziel: "filter", anker: "links", versatz: [680, -2], regel: "CONDENSE – Filtern", titel: "Region filtern",
+        text: "Der Datenschnitt Region filtert Kennzahlen, Verkäufer und Modell des Monats; ein Klick auf eine Region im Diagramm oder in der Tabelle wirkt genauso und hebt sie dort hervor. Esc hebt die Auswahl auf. Das Original bot nur die Periodenauswahl „März“." },
+    ],
+    nachbauIntro: "Seitengröße 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt, KPI-Werte 19,5 pt. Datenmodell: Tabellen Monatswerte (Region, Periode, Kennzahl, Ist, Plan), Quartale (Region, Quartal, Ist, Plan), Verkäufer (Region, Name, Fahrzeuge, Umsatz, Ziel, Foto-URL) und Absatz (Region, Modell, Fahrzeuge) mit Dimension Region; in der CSV-Datei durch die Spalte „Ebene“ getrennt.",
+    nachbau: [
+      { id: "A", ziel: "kpis", anker: "links", versatz: [190, 26], titel: "Kennzahlen", visual: "Karte (neu) mit Referenzbeschriftung",
+        felder: "Ist = SUM(Monatswerte[Ist]) je Kennzahl; ΔPL % = DIVIDE([Ist] − [Plan]; ABS([Plan]))", format: "Wert 19,5 pt fett; Referenz farbig über bedingte Formatierung (#00806B / #C62828)" },
+      { id: "B", ziel: "v-quartal", anker: "links", versatz: [272, 149], titel: "Ergebnis je Quartal", visual: "Gruppiertes Säulendiagramm (Standardvisual) mit kleinen Vielfachen",
+        felder: "X-Achse: Quartal; Y-Achse: Plan, Ist; Kleine Vielfache: Region", format: "Plan weiß mit Rahmen #3A3F44, Ist #3A3F44; Datenbeschriftung; gemeinsame Y-Achse, Achse und Gitternetz aus" },
+      { id: "C", ziel: "tb-region", anker: "links", versatz: [80, -4], titel: "Ergebnisübersicht", visual: "Matrix (Standardvisual)",
+        felder: "Zeilen: Region; Werte: Ist und ΔPL % je Kennzahl", format: "ΔPL % mit Datenbalken (positiv #00806B, negativ #C62828) und Schriftfarbe nach Wirkung; Werte in Tsd. €" },
+      { id: "D", ziel: "vk-foto", anker: "links", versatz: [71, 148], titel: "Foto Verkäufer des Monats", visual: "Tabelle oder Karte (neu) mit Bild",
+        felder: "Spalte Foto-URL mit Datenkategorie „Bild-URL“; Filter TOPN(1; Verkäufer; [Fahrzeuge])", format: "Bildgröße fest (z. B. 108 × 140 px), ohne Rahmen",
+        hinweis: "Bilder werden über eine URL eingebunden und folgen dem Datenschnitt; das Foto wechselt mit der Region." },
+      { id: "E", ziel: "pd-foto", anker: "links", versatz: [92, 112], titel: "Produktfoto", visual: "Tabelle oder Karte (neu) mit Bild",
+        felder: "Modell, Bild-URL; TOPN(1; Absatz; [Fahrzeuge])", format: "wie D" },
+      { id: "F", ziel: "logo", anker: "links", versatz: [80, 52], titel: "Logo", visual: "Bild (Einfügen › Bild)",
+        felder: "–", format: "Höhe 46 px, rechts oben", hinweis: "Statisches Bild; alternativ im Berichtsdesign hinterlegt." },
+      { id: "G", ziel: "filter", anker: "links", versatz: [120, -2], titel: "Datenschnitt", visual: "Datenschnitt",
+        felder: "Region als Kacheln (Einzelauswahl)", format: "Ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A" },
+    ],
+    theme: DK.thema(),
+    csv: { name: "vertrieb_fotos_logos_daten.csv", text: () => {
+      const z = ["Ebene;Region;Periode;Kennzahl_oder_Name;Ist;Plan;Ziel"];
+      DATA.maerz.forEach(([ri, ki, i, p]) => z.push(["Monat", RG[ri], DATA.monat, KZ[ki] + " (€)", i, p, ""].join(";")));
+      DATA.quartal.forEach(([ri, qi, i, p]) => z.push(["Quartal", RG[ri], "2027-" + QN[qi], "Ergebnis (Tsd. €)", i ?? "", p, ""].join(";")));
+      DATA.verkaeufer.forEach(([ri, n, f, u, zi]) => z.push(["Verkäufer", RG[ri], DATA.monat, n, f, "", zi].join(";")));
+      DATA.absatz.forEach(([ri, mi, s]) => z.push(["Modell", RG[ri], DATA.monat, MOD[mi], s, "", ""].join(";")));
+      return z.join("\r\n"); } },
+    tabellen: () => {
+      const reg = S.region === null ? "alle Regionen" : RG[S.region];
+      return [
+        { titel: "Ergebnisübersicht März 2027 (€)", kopf: ["Region", "Kennzahl", "Ist", "Plan", "ΔPL in %"],
+          zeilen: RG.flatMap((r, ri) => KZ.map((k, ki) => { const m = maerz(ri, ki); return [r, k, zahl(m.ist), zahl(m.plan), delta(pdl(m.ist, m.plan), 1)]; })) },
+        { titel: "Ergebnis je Quartal 2027 (Tsd. €)", kopf: ["Region", "Quartal", "Ist", "Plan"],
+          zeilen: RG.flatMap((r, ri) => quartal(ri).map((q, qi) => [r, QN[qi], q.ist === null ? "–" : zahl(q.ist), zahl(q.plan)])) },
+        { titel: `Verkäufer März 2027, ${reg}`, kopf: ["Name", "Region", "Fahrzeuge", "Ziel", "Umsatz Tsd. €"],
+          zeilen: verkaeufer().map(v => [v.name, RG[v.ri], zahl(v.fz), zahl(v.ziel), zahl(v.ums)]) },
+        { titel: `Absatz März 2027 je Modell, ${reg}`, kopf: ["Modell", "Fahrzeuge", "Anteil"],
+          zeilen: (() => { const m = modelle(); return m.liste.map(x => [x.name, zahl(x.n), pz(x.n / m.ges, 1)]); })() },
+      ];
+    },
+  });
+  zeichnen();
+})();
+
+</script>
+</body>
+</html>

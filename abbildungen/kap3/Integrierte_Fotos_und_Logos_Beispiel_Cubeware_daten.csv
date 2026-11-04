@@ -1,0 +1,55 @@
+﻿Ebene;Region;Periode;Kennzahl_oder_Name;Ist;Plan;Ziel
+Monat;Kontinentaleuropa;2027-03;Umsatzerlöse (€);8388258;8559447;
+Monat;Kontinentaleuropa;2027-03;Rohertrag (€);904004;599472;
+Monat;Kontinentaleuropa;2027-03;Ergebnis (€);354231;82169;
+Monat;Nordamerika;2027-03;Umsatzerlöse (€);3925807;4304613;
+Monat;Nordamerika;2027-03;Rohertrag (€);380070;350618;
+Monat;Nordamerika;2027-03;Ergebnis (€);153236;115825;
+Monat;Australien;2027-03;Umsatzerlöse (€);1807180;1966464;
+Monat;Australien;2027-03;Rohertrag (€);167446;469036;
+Monat;Australien;2027-03;Ergebnis (€);37600;344954;
+Monat;Großbritannien;2027-03;Umsatzerlöse (€);880404;1013123;
+Monat;Großbritannien;2027-03;Rohertrag (€);87821;70652;
+Monat;Großbritannien;2027-03;Ergebnis (€);-74762;-84097;
+Quartal;Kontinentaleuropa;2027-Q1;Ergebnis (Tsd. €);850;780;
+Quartal;Kontinentaleuropa;2027-Q2;Ergebnis (Tsd. €);;840;
+Quartal;Kontinentaleuropa;2027-Q3;Ergebnis (Tsd. €);;680;
+Quartal;Kontinentaleuropa;2027-Q4;Ergebnis (Tsd. €);;620;
+Quartal;Nordamerika;2027-Q1;Ergebnis (Tsd. €);-20;60;
+Quartal;Nordamerika;2027-Q2;Ergebnis (Tsd. €);;670;
+Quartal;Nordamerika;2027-Q3;Ergebnis (Tsd. €);;230;
+Quartal;Nordamerika;2027-Q4;Ergebnis (Tsd. €);;790;
+Quartal;Australien;2027-Q1;Ergebnis (Tsd. €);30;120;
+Quartal;Australien;2027-Q2;Ergebnis (Tsd. €);;490;
+Quartal;Australien;2027-Q3;Ergebnis (Tsd. €);;470;
+Quartal;Australien;2027-Q4;Ergebnis (Tsd. €);;10;
+Quartal;Großbritannien;2027-Q1;Ergebnis (Tsd. €);-200;-150;
+Quartal;Großbritannien;2027-Q2;Ergebnis (Tsd. €);;300;
+Quartal;Großbritannien;2027-Q3;Ergebnis (Tsd. €);;60;
+Quartal;Großbritannien;2027-Q4;Ergebnis (Tsd. €);;260;
+Verkäufer;Kontinentaleuropa;2027-03;Frau Brandt;31;;26
+Verkäufer;Kontinentaleuropa;2027-03;Herr Tal;27;;26
+Verkäufer;Kontinentaleuropa;2027-03;Frau Lenz;24;;25
+Verkäufer;Nordamerika;2027-03;Herr Kaya;22;;20
+Verkäufer;Nordamerika;2027-03;Frau Moreau;19;;21
+Verkäufer;Nordamerika;2027-03;Herr Olsen;17;;18
+Verkäufer;Australien;2027-03;Frau Petrov;14;;15
+Verkäufer;Australien;2027-03;Herr Weber;12;;14
+Verkäufer;Großbritannien;2027-03;Herr Novak;9;;8
+Verkäufer;Großbritannien;2027-03;Frau Albers;7;;9
+Modell;Kontinentaleuropa;2027-03;Limousine L 67;62;;
+Modell;Kontinentaleuropa;2027-03;SUV S 55;51;;
+Modell;Kontinentaleuropa;2027-03;Kombi K 40;55;;
+Modell;Kontinentaleuropa;2027-03;Kompakt C 20;42;;
+Modell;Nordamerika;2027-03;Limousine L 67;27;;
+Modell;Nordamerika;2027-03;SUV S 55;34;;
+Modell;Nordamerika;2027-03;Kombi K 40;19;;
+Modell;Nordamerika;2027-03;Kompakt C 20;15;;
+Modell;Australien;2027-03;Limousine L 67;10;;
+Modell;Australien;2027-03;SUV S 55;16;;
+Modell;Australien;2027-03;Kombi K 40;12;;
+Modell;Australien;2027-03;Kompakt C 20;7;;
+Modell;Großbritannien;2027-03;Limousine L 67;6;;
+Modell;Großbritannien;2027-03;SUV S 55;3;;
+Modell;Großbritannien;2027-03;Kombi K 40;5;;
+Modell;Großbritannien;2027-03;Kompakt C 20;8;;

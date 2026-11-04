@@ -1678,6 +1678,61 @@
    ],
    "alt": "Kerzendiagramm des Aktienkurses vom 06. bis 10.09.2027 in Euro mit Handelsvolumen darunter. Montag bis Mittwoch steigen die Kurse (hohle Kerzen, Schluss 44,56, 45,73 und 47,91 €), Donnerstag und Freitag fallen sie (rot gefüllte Kerzen, Schluss 45,89 und 43,76 €); dazwischen die Veränderung zum Vortag von +2,6 % bis −4,6 %. Die Volumensäulen ab null sind fast gleich hoch (87.520 bis 95.820 €)."
   },
+  "3.71": {
+   "status": "pruefung",
+   "datei": "Beispiel_Chartanalysediagramm",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Einzelvisual nachgebaut (110 mm breit): Wertpapiername (reales Unternehmen) → „Aktie A“, Kopfzeile mit Kürzeln (C, O, H, L, TckV, LV, TotV), „Chart erstellt mit …“, Web-Adresse und Symbolleiste entfernt",
+    "Kursverlauf erfunden, in Anlehnung an das Original abgelesen und um 16 Jahre verschoben (14.10.2026–14.07.2027); beschriftete Marken übernommen: Hoch 43,33, Tief 37,82, Unterstützung 33,53, letzter Tag 43,00/43,00/42,70/42,88 (+0,175)",
+    "Inhalt vollständig: Tageskerzen, gleitende Durchschnitte 20 und 50 Tage, Abwärtstrend, Dreieck, Unterstützung, Hoch/Tief, bevorzugtes Szenario und Alternativszenario als Skizze über den Stand hinaus",
+    "Farben: Kerzen schwarz-weiß (steigend hohl) wie im Original; Durchschnitte rot/blau → zwei Grautöne; Szenarien blau/grau → blaugrün (steigend) und rot (fallend), gestrichelt und direkt beschriftet statt Erklärkasten. Abb. 3.70 färbt die Kerzen blaugrün/rot – bei 190 Kerzen hier bewusst ruhiger; angleichen?",
+    "Kursachse linear statt logarithmisch (Original logarithmisch, bei 30–47 € kaum Unterschied) – bitte prüfen, ob der Text auf die Skalierung eingeht",
+    "Nachbau: Kerzen sind kein Power-BI-Standardvisual – Näherung Liniendiagramm mit Fehlerbalken (Ebene „Nachbau“)",
+    "Caption: „(In Anlehnung an godmode-trader 2011)“ nennt ein Angebot mit Web-Adresse – beibehalten oder streichen, da Daten und Gestaltung neu sind?"
+   ],
+   "alt": "Kerzendiagramm der Tageskurse einer Aktie A von Oktober 2026 bis Juli 2027 in Euro mit den gleitenden Durchschnitten über 20 und 50 Tage. Der Kurs steigt von rund 31 € auf ein Hoch von 43,33 € Anfang Mai, fällt entlang einer eingezeichneten Abwärtstrendlinie auf ein Tief von 37,82 € und bildet ein Dreieck; im Juli bricht er über Abwärtstrend und Dreieck aus und schließt bei 42,88 €. Eine waagerechte Unterstützung liegt bei 33,53 €; zwei gestrichelte Skizzen zeigen nach dem Stand ein bevorzugtes Szenario mit Anstieg über 46 € und ein Alternativszenario mit Rückgang bis nahe an die Unterstützung."
+  },
+  "3.72": {
+   "status": "pruefung",
+   "datei": "Kombination_Kreis-Saeulen-Diagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.42/3.48: Titel mit Einheit, Kernaussage, Diagramm",
+    "Diagrammtyp bleibt: Kreis mit herausgelöstem Segment A, daneben die gestapelte Säule, Verbindungslinien vom Segment zur Säule",
+    "Anteile des Originals übernommen (A 30, B 24, C 25, D 21 %; Kunde A1 6, A2 3, A3 8, A4 9, sonstige A-Kunden 4 %); absolute Werte erfunden (Gesamtumsatz 50 Mio. €, Jahr 2027). Annahme: Messgröße Umsatz – das Original hatte weder Titel noch Einheit, bitte prüfen",
+    "Gelb- und Blautöne → Grau; Segment A und alle Säulenabschnitte anthrazit (eine Gruppe); Legende mit acht Farbfeldern entfällt, Name, Wert und Anteil direkt am Element",
+    "Reihenfolge geordnet: Gruppen im Uhrzeigersinn nach Größe (C, B, D statt D, B, C), Kunden in der Säule absteigend, „sonstige A-Kunden“ zuletzt",
+    "Power BI hat kein Kreis-aus-Säule-Standardvisual – Nachbau aus Kreis, gestapelter Säule und zwei Linienformen (Ebene „Nachbau“)"
+   ],
+   "alt": "Kreisdiagramm des Umsatzes 2027 von 50 Mio. € nach vier Kundengruppen: Kundengruppe A 15,0 Mio. € (30 %), C 12,5 Mio. € (25 %), B 12,0 Mio. € (24 %) und D 10,5 Mio. € (21 %). Das dunkle Segment A zeigt nach rechts und ist über zwei Linien mit einer gestapelten Säule verbunden, die es nach Kunden aufschlüsselt: Kunde A4 9 %, A3 8 %, A1 6 %, A2 3 % und sonstige A-Kunden 4 % des Gesamtumsatzes. Kernaussage: Kundengruppe A ist mit 30 % die größte Gruppe, die Kunden A4 und A3 bringen allein 17 % des Umsatzes."
+  },
+  "3.73": {
+   "status": "pruefung",
+   "datei": "Verzerrungen_durch_3D-Effekte",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Muster Abb. 3.53: a) mit 3D-Effekt wie im Original, b) als Ergänzung dieselben Werte ohne 3D",
+    "Negativbeispiel bleibt sichtbar: a) 3D-Säulen als Schrägprojektion nachgebildet (Rückwand mit Gitternetz, Tiefenreihen Q1–Q4, verdeckte Säulen); nur Stil angepasst: Flieder, Bordeaux, Gelb, Türkis → Grautöne, Legende und Rahmen entfallen, Achsenbeschriftung waagerecht und nach Plan/Ist gruppiert",
+    "Werte des Originals aus der Geometrie des 3D-Diagramms zurückgerechnet (Plan Süd 50/70/50/80, Nord 50/50/40/50; Ist Süd 60/80/50/80, Nord 60/50/50/30 Mio. €); die Summen entsprechen Abb. 3.48 (Plan 100/120/90/130, Ist 120/130/100/110) – Jahr 2027 ergänzt",
+    "Aussagen aus den Daten berechnet: a) Ist Q1 gesamt (120) wirkt an der Rückwand wie 90, 18 von 24 Säulen mehr als zur Hälfte verdeckt; b) Jahr ΔPL +20 Mio. € (Süd +20, Nord ±0), größte Lücke Nord Q4 −20",
+    "b) nach IBCS: kleine Vielfache Gesamt/Süd/Nord mit gleichem Maßstab, Ist gefüllt, Plan als Kontur, ΔPL nach Wirkung",
+    "Nachbau-Ebene: Hinweis, dass die Power-BI-Standardvisuals kein 3D bieten (a) nicht nachbaubar, gewollt)",
+    "Caption/Text: ggf. „a) mit, b) ohne 3D-Effekt“ ergänzen"
+   ],
+   "alt": "Zwei Diagramme mit denselben Umsätzen 2027 in Mio. €, Plan und Ist je Quartal, gesamt und für die Regionen Süd und Nord. a) 3D-Säulendiagramm: Plan und Ist (je gesamt, Süd, Nord) nebeneinander, die Quartale Q1 bis Q4 in die Tiefe gestaffelt, das Gitternetz auf der Rückwand; vordere Säulen verdecken die hinteren, und an der Rückwand gemessen wirkt Ist Q1 gesamt (120) wie 90. b) Dieselben Werte ohne 3D als drei kleine Säulendiagramme für Gesamt, Region Süd und Region Nord, Ist dunkel vor weißem Plan, darunter die Abweichung: gesamt Q1 bis Q3 über Plan (+20, +10, +10), Q4 −20; im Jahr +20 Mio. €, allein durch die Region Süd, Nord liegt im Q4 20 Mio. € unter Plan."
+  },
+  "3.78": {
+   "status": "pruefung",
+   "datei": "Integrierte_Fotos_und_Logos_Beispiel_Cubeware",
+   "kommentare": [
+    "Produktscreenshot (Browser- und PDF-Viewer-Fenster) softwareneutral als Dashboard (155 × 98 mm, quer) nachgebaut; Thema bleibt: Logo im Kopf, Foto „Verkäufer des Monats“, Produktfoto „Modell des Monats“",
+    "Alle Bildflächen sind neutrale Platzhalter (graue Fläche mit Symbol und Beschriftung „Foto/Produktfoto/Logo (Platzhalter)“) – keine echten Fotos und Logos. Bitte klären: Sollen echte (lizenzfreie) Bilder eingesetzt werden?",
+    "Firmen- und Markennamen entfernt (Pantara, Audi): Gesellschaften → Regionen (Kontinentaleuropa, Nordamerika, Australien, Großbritannien), „Audi 67 Cars“ → „Limousine L 67“, „Flemming, Bernd“ → „Frau Brandt“; Begrüßung, Kopfbanner-Foto und Hintergrundbild entfallen",
+    "Ergebnisübersicht März mit den Werten des Originals (Ist und Abweichung); Annahme: Abweichung = Ist zu Plan, Plan daraus zurückgerechnet, bei negativem Plan auf |Plan| bezogen. Rote/gelbe Pfeil-Icons → Abweichungsbalken nach Wirkung",
+    "Flächendiagramm mit überlagerten transparenten Flächen → Säulen je Region (kleine Vielfache), Q1 Ist und Plan, Q2–Q4 Plan; Werte in Anlehnung an das Original. KPI-Leiste neu (März über, Q1 unter Plan); Verkäufer und Absatz je Modell erfunden",
+    "Hinweis in den Designregeln: Fotos von Beschäftigten nur mit Einwilligung; Nachbau-Ebene zeigt Bilder per Bild-URL (Tabelle/Karte) und Logo als Bild-Visual",
+    "Caption ohne Produktnamen? z. B. „Integrierte Fotos und Logos in einem Dashboard“; „Quelle: Cubeware Bildergalerie 2011“ entfällt, da Daten und Gestaltung neu sind"
+   ],
+   "alt": "Dashboard „Monatsübersicht Vertrieb“ für März 2027 mit einem Logo-Platzhalter oben rechts, Datenschnitt Region und vier Kennzahlen: Umsatzerlöse 15,00 Mio. € (−5,3 % zum Plan), Rohertrag 1.539 Tsd. € (+3,3 %), Ergebnis März 470 Tsd. € (+2,5 %) und Ergebnis 1. Quartal 660 Tsd. € (−18,5 %). Links ein Säulendiagramm des Ergebnisses je Quartal für vier Regionen (nur Kontinentaleuropa liegt im ersten Quartal über Plan) und eine Tabelle mit Umsatz, Rohertrag und Ergebnis je Region samt Abweichungsbalken; rechts zwei graue Bildplatzhalter mit Symbol – ein Foto der Verkäuferin des Monats (Frau Brandt, 31 Fahrzeuge, 119 % des Ziels) und ein Produktfoto des Modells des Monats (Limousine L 67, 105 Fahrzeuge, 28 % des Absatzes)."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

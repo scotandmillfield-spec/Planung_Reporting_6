@@ -49,7 +49,7 @@
     const A = st(S.a), B = st(S.b);
     return KZ.map(k => {
       const va = A[k.key], vb = B[k.key], d = va - vb;
-      const dp = vb ? d / Math.abs(vb) * 100 : null;
+      const dp = vb && va * vb >= 0 ? d / Math.abs(vb) * 100 : null;     // kein Δ % bei Vorzeichenwechsel
       return { k, key: k.key, va, vb, d, dp, kl: wirkung(dp ?? d, k.richtung, 1), rang: rang(A, k) };
     });
   }
@@ -73,7 +73,7 @@
   function tipZeile(z) {
     const k = z.k, e = k.quote ? "%" : EINHEIT, de = k.quote ? "%-Pkt." : EINHEIT;
     return [k.label.replace(" in %", ""), `${S.a}: ${fw(k, z.va)} ${e} · ${S.b}: ${fw(k, z.vb)} ${e}`,
-      `Δ ${delta(z.d, k.nk)} ${de}` + (z.dp == null ? "" : ` · Δ ${delta(z.dp, 1)}${NBSP}% (bezogen auf ${S.b})`),
+      `Δ ${delta(z.d, k.nk)} ${de}` + (z.dp == null ? " · Δ % entfällt (Vorzeichenwechsel)" : ` · Δ ${delta(z.dp, 1)}${NBSP}% (bezogen auf ${S.b})`),
       `Wirkung für ${S.a}: ${WIRKUNG[z.kl]}` + (k.richtung ? "" : " (mehr Investitionen sind weder gut noch schlecht)"),
       `${S.a} auf Rang ${z.rang} von ${N} Standorten`, "Klick hebt hervor, Klick auf einen Spaltenkopf sortiert"];
   }
@@ -140,7 +140,8 @@
   function botschaft(zs, breite) {
     if (S.a === S.b) return "Beide Datenschnitte zeigen denselben Standort – bitte zwei Standorte wählen";
     const g = zs.find(z => z.key === "g");
-    const anfang = `${S.a}: Gewinn ${delta(g.d, 0)} Mio. € (${delta(g.dp, 1)}${NBSP}%) ${g.d >= 0 ? "über" : "unter"} ${S.b}`;
+    const anfang = `${S.a}: Gewinn ${delta(g.d, 0)} Mio. €` + (g.dp == null ? "" : ` (${delta(g.dp, 1)}${NBSP}%)`) +
+                   ` ${g.d >= 0 ? "über" : "unter"} ${S.b}`;
     // ungünstige Kennzahlen außer Gewinn und Rendite, die stärksten zuerst (höchstens zwei)
     const schlecht = zs.filter(z => z.kl === "schlecht" && z.key !== "g" && z.key !== "r" && z.dp != null)
       .sort((a, b) => Math.abs(b.dp) - Math.abs(a.dp)).slice(0, 2);

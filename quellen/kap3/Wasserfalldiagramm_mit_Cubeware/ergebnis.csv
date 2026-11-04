@@ -1,0 +1,253 @@
+﻿Gesellschaft;Region;Position;Konto;Kontobezeichnung;Jahr;Wert_Tsd_EUR
+Autohaus Sydney;Australien;Rohertrag;40001;Erlöse Neuwagen;2025;7022,5
+Autohaus Sydney;Australien;Rohertrag;40001;Erlöse Neuwagen;2026;7964,6
+Autohaus Sydney;Australien;Rohertrag;40001;Erlöse Neuwagen;2027;12008,2
+Autohaus Sydney;Australien;Rohertrag;40002;Erlöse Gebrauchtwagen;2025;1914,0
+Autohaus Sydney;Australien;Rohertrag;40002;Erlöse Gebrauchtwagen;2026;2655,4
+Autohaus Sydney;Australien;Rohertrag;40002;Erlöse Gebrauchtwagen;2027;3375,2
+Autohaus Sydney;Australien;Rohertrag;40010;Zusatzpakete;2025;68,3
+Autohaus Sydney;Australien;Rohertrag;40010;Zusatzpakete;2026;129,5
+Autohaus Sydney;Australien;Rohertrag;40010;Zusatzpakete;2027;208,7
+Autohaus Sydney;Australien;Rohertrag;54010;Einkauf Neuwagen;2025;-6280,6
+Autohaus Sydney;Australien;Rohertrag;54010;Einkauf Neuwagen;2026;-7229,4
+Autohaus Sydney;Australien;Rohertrag;54010;Einkauf Neuwagen;2027;-10961,5
+Autohaus Sydney;Australien;Rohertrag;54020;Einkauf Gebrauchtwagen;2025;-1760,4
+Autohaus Sydney;Australien;Rohertrag;54020;Einkauf Gebrauchtwagen;2026;-2211,5
+Autohaus Sydney;Australien;Rohertrag;54020;Einkauf Gebrauchtwagen;2027;-2826,6
+Autohaus Sydney;Australien;Rohertrag;54050;Fahrzeuginstandsetzung;2025;-89,8
+Autohaus Sydney;Australien;Rohertrag;54050;Fahrzeuginstandsetzung;2026;-117,7
+Autohaus Sydney;Australien;Rohertrag;54050;Fahrzeuginstandsetzung;2027;-155,2
+Autohaus Sydney;Australien;Rohertrag;67710;Provisionen;2025;-51,8
+Autohaus Sydney;Australien;Rohertrag;67710;Provisionen;2026;-65,3
+Autohaus Sydney;Australien;Rohertrag;67710;Provisionen;2027;-86,0
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;68100;Werbung;2025;-93,2
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;68100;Werbung;2026;-108,0
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;68100;Werbung;2027;-134,2
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2025;-41,8
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2026;-46,5
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2027;-50,6
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2025;-84,5
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2026;-86,7
+Autohaus Sydney;Australien;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2027;-98,6
+Autohaus Sydney;Australien;Raumkosten;67100;Miete;2025;-65,2
+Autohaus Sydney;Australien;Raumkosten;67100;Miete;2026;-68,6
+Autohaus Sydney;Australien;Raumkosten;67100;Miete;2027;-77,4
+Autohaus Sydney;Australien;Raumkosten;67200;Energie und Nebenkosten;2025;-23,9
+Autohaus Sydney;Australien;Raumkosten;67200;Energie und Nebenkosten;2026;-25,8
+Autohaus Sydney;Australien;Raumkosten;67200;Energie und Nebenkosten;2027;-28,6
+Autohaus Sydney;Australien;Personalkosten;62000;Löhne und Gehälter;2025;-551,5
+Autohaus Sydney;Australien;Personalkosten;62000;Löhne und Gehälter;2026;-591,3
+Autohaus Sydney;Australien;Personalkosten;62000;Löhne und Gehälter;2027;-632,0
+Autohaus Sydney;Australien;Personalkosten;64000;Soziale Abgaben;2025;-108,6
+Autohaus Sydney;Australien;Personalkosten;64000;Soziale Abgaben;2026;-128,8
+Autohaus Sydney;Australien;Personalkosten;64000;Soziale Abgaben;2027;-142,5
+Autohaus Melbourne;Australien;Rohertrag;40001;Erlöse Neuwagen;2025;5640,6
+Autohaus Melbourne;Australien;Rohertrag;40001;Erlöse Neuwagen;2026;6296,5
+Autohaus Melbourne;Australien;Rohertrag;40001;Erlöse Neuwagen;2027;9008,4
+Autohaus Melbourne;Australien;Rohertrag;40002;Erlöse Gebrauchtwagen;2025;1707,7
+Autohaus Melbourne;Australien;Rohertrag;40002;Erlöse Gebrauchtwagen;2026;1997,5
+Autohaus Melbourne;Australien;Rohertrag;40002;Erlöse Gebrauchtwagen;2027;2481,2
+Autohaus Melbourne;Australien;Rohertrag;40010;Zusatzpakete;2025;56,0
+Autohaus Melbourne;Australien;Rohertrag;40010;Zusatzpakete;2026;107,1
+Autohaus Melbourne;Australien;Rohertrag;40010;Zusatzpakete;2027;153,8
+Autohaus Melbourne;Australien;Rohertrag;54010;Einkauf Neuwagen;2025;-5032,4
+Autohaus Melbourne;Australien;Rohertrag;54010;Einkauf Neuwagen;2026;-5728,7
+Autohaus Melbourne;Australien;Rohertrag;54010;Einkauf Neuwagen;2027;-8236,0
+Autohaus Melbourne;Australien;Rohertrag;54020;Einkauf Gebrauchtwagen;2025;-1559,7
+Autohaus Melbourne;Australien;Rohertrag;54020;Einkauf Gebrauchtwagen;2026;-1682,2
+Autohaus Melbourne;Australien;Rohertrag;54020;Einkauf Gebrauchtwagen;2027;-2070,4
+Autohaus Melbourne;Australien;Rohertrag;54050;Fahrzeuginstandsetzung;2025;-72,6
+Autohaus Melbourne;Australien;Rohertrag;54050;Fahrzeuginstandsetzung;2026;-89,9
+Autohaus Melbourne;Australien;Rohertrag;54050;Fahrzeuginstandsetzung;2027;-118,1
+Autohaus Melbourne;Australien;Rohertrag;67710;Provisionen;2025;-42,2
+Autohaus Melbourne;Australien;Rohertrag;67710;Provisionen;2026;-50,1
+Autohaus Melbourne;Australien;Rohertrag;67710;Provisionen;2027;-66,3
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;68100;Werbung;2025;-82,5
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;68100;Werbung;2026;-81,1
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;68100;Werbung;2027;-101,3
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2025;-34,6
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2026;-34,3
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2027;-38,6
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2025;-67,7
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2026;-66,5
+Autohaus Melbourne;Australien;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2027;-71,6
+Autohaus Melbourne;Australien;Raumkosten;67100;Miete;2025;-49,3
+Autohaus Melbourne;Australien;Raumkosten;67100;Miete;2026;-49,0
+Autohaus Melbourne;Australien;Raumkosten;67100;Miete;2027;-56,3
+Autohaus Melbourne;Australien;Raumkosten;67200;Energie und Nebenkosten;2025;-21,2
+Autohaus Melbourne;Australien;Raumkosten;67200;Energie und Nebenkosten;2026;-18,8
+Autohaus Melbourne;Australien;Raumkosten;67200;Energie und Nebenkosten;2027;-21,6
+Autohaus Melbourne;Australien;Personalkosten;62000;Löhne und Gehälter;2025;-436,3
+Autohaus Melbourne;Australien;Personalkosten;62000;Löhne und Gehälter;2026;-456,8
+Autohaus Melbourne;Australien;Personalkosten;62000;Löhne und Gehälter;2027;-465,6
+Autohaus Melbourne;Australien;Personalkosten;64000;Soziale Abgaben;2025;-96,4
+Autohaus Melbourne;Australien;Personalkosten;64000;Soziale Abgaben;2026;-97,7
+Autohaus Melbourne;Australien;Personalkosten;64000;Soziale Abgaben;2027;-95,9
+Autohaus Los Angeles;Nordamerika;Rohertrag;40001;Erlöse Neuwagen;2025;10571,1
+Autohaus Los Angeles;Nordamerika;Rohertrag;40001;Erlöse Neuwagen;2026;12143,7
+Autohaus Los Angeles;Nordamerika;Rohertrag;40001;Erlöse Neuwagen;2027;14738,6
+Autohaus Los Angeles;Nordamerika;Rohertrag;40002;Erlöse Gebrauchtwagen;2025;3153,7
+Autohaus Los Angeles;Nordamerika;Rohertrag;40002;Erlöse Gebrauchtwagen;2026;3782,0
+Autohaus Los Angeles;Nordamerika;Rohertrag;40002;Erlöse Gebrauchtwagen;2027;4083,6
+Autohaus Los Angeles;Nordamerika;Rohertrag;40010;Zusatzpakete;2025;101,2
+Autohaus Los Angeles;Nordamerika;Rohertrag;40010;Zusatzpakete;2026;195,0
+Autohaus Los Angeles;Nordamerika;Rohertrag;40010;Zusatzpakete;2027;271,6
+Autohaus Los Angeles;Nordamerika;Rohertrag;54010;Einkauf Neuwagen;2025;-9674,3
+Autohaus Los Angeles;Nordamerika;Rohertrag;54010;Einkauf Neuwagen;2026;-11011,3
+Autohaus Los Angeles;Nordamerika;Rohertrag;54010;Einkauf Neuwagen;2027;-13203,3
+Autohaus Los Angeles;Nordamerika;Rohertrag;54020;Einkauf Gebrauchtwagen;2025;-2648,4
+Autohaus Los Angeles;Nordamerika;Rohertrag;54020;Einkauf Gebrauchtwagen;2026;-3308,7
+Autohaus Los Angeles;Nordamerika;Rohertrag;54020;Einkauf Gebrauchtwagen;2027;-3681,8
+Autohaus Los Angeles;Nordamerika;Rohertrag;54050;Fahrzeuginstandsetzung;2025;-130,0
+Autohaus Los Angeles;Nordamerika;Rohertrag;54050;Fahrzeuginstandsetzung;2026;-155,5
+Autohaus Los Angeles;Nordamerika;Rohertrag;54050;Fahrzeuginstandsetzung;2027;-183,0
+Autohaus Los Angeles;Nordamerika;Rohertrag;67710;Provisionen;2025;-81,1
+Autohaus Los Angeles;Nordamerika;Rohertrag;67710;Provisionen;2026;-86,6
+Autohaus Los Angeles;Nordamerika;Rohertrag;67710;Provisionen;2027;-107,5
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;68100;Werbung;2025;-146,0
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;68100;Werbung;2026;-137,4
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;68100;Werbung;2027;-152,9
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2025;-63,9
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2026;-60,7
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2027;-65,6
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2025;-118,8
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2026;-131,7
+Autohaus Los Angeles;Nordamerika;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2027;-123,1
+Autohaus Los Angeles;Nordamerika;Raumkosten;67100;Miete;2025;-90,5
+Autohaus Los Angeles;Nordamerika;Raumkosten;67100;Miete;2026;-90,1
+Autohaus Los Angeles;Nordamerika;Raumkosten;67100;Miete;2027;-89,5
+Autohaus Los Angeles;Nordamerika;Raumkosten;67200;Energie und Nebenkosten;2025;-37,5
+Autohaus Los Angeles;Nordamerika;Raumkosten;67200;Energie und Nebenkosten;2026;-38,4
+Autohaus Los Angeles;Nordamerika;Raumkosten;67200;Energie und Nebenkosten;2027;-36,5
+Autohaus Los Angeles;Nordamerika;Personalkosten;62000;Löhne und Gehälter;2025;-843,9
+Autohaus Los Angeles;Nordamerika;Personalkosten;62000;Löhne und Gehälter;2026;-801,6
+Autohaus Los Angeles;Nordamerika;Personalkosten;62000;Löhne und Gehälter;2027;-745,0
+Autohaus Los Angeles;Nordamerika;Personalkosten;64000;Soziale Abgaben;2025;-176,5
+Autohaus Los Angeles;Nordamerika;Personalkosten;64000;Soziale Abgaben;2026;-169,0
+Autohaus Los Angeles;Nordamerika;Personalkosten;64000;Soziale Abgaben;2027;-167,0
+Autohaus Toronto;Nordamerika;Rohertrag;40001;Erlöse Neuwagen;2025;16271,5
+Autohaus Toronto;Nordamerika;Rohertrag;40001;Erlöse Neuwagen;2026;17962,0
+Autohaus Toronto;Nordamerika;Rohertrag;40001;Erlöse Neuwagen;2027;23194,7
+Autohaus Toronto;Nordamerika;Rohertrag;40002;Erlöse Gebrauchtwagen;2025;4798,1
+Autohaus Toronto;Nordamerika;Rohertrag;40002;Erlöse Gebrauchtwagen;2026;5744,0
+Autohaus Toronto;Nordamerika;Rohertrag;40002;Erlöse Gebrauchtwagen;2027;7057,5
+Autohaus Toronto;Nordamerika;Rohertrag;40010;Zusatzpakete;2025;151,5
+Autohaus Toronto;Nordamerika;Rohertrag;40010;Zusatzpakete;2026;310,3
+Autohaus Toronto;Nordamerika;Rohertrag;40010;Zusatzpakete;2027;432,6
+Autohaus Toronto;Nordamerika;Rohertrag;54010;Einkauf Neuwagen;2025;-14421,2
+Autohaus Toronto;Nordamerika;Rohertrag;54010;Einkauf Neuwagen;2026;-16259,5
+Autohaus Toronto;Nordamerika;Rohertrag;54010;Einkauf Neuwagen;2027;-20996,1
+Autohaus Toronto;Nordamerika;Rohertrag;54020;Einkauf Gebrauchtwagen;2025;-4436,0
+Autohaus Toronto;Nordamerika;Rohertrag;54020;Einkauf Gebrauchtwagen;2026;-4971,5
+Autohaus Toronto;Nordamerika;Rohertrag;54020;Einkauf Gebrauchtwagen;2027;-6114,4
+Autohaus Toronto;Nordamerika;Rohertrag;54050;Fahrzeuginstandsetzung;2025;-219,1
+Autohaus Toronto;Nordamerika;Rohertrag;54050;Fahrzeuginstandsetzung;2026;-238,6
+Autohaus Toronto;Nordamerika;Rohertrag;54050;Fahrzeuginstandsetzung;2027;-329,8
+Autohaus Toronto;Nordamerika;Rohertrag;67710;Provisionen;2025;-122,8
+Autohaus Toronto;Nordamerika;Rohertrag;67710;Provisionen;2026;-140,7
+Autohaus Toronto;Nordamerika;Rohertrag;67710;Provisionen;2027;-187,7
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;68100;Werbung;2025;-220,2
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;68100;Werbung;2026;-237,1
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;68100;Werbung;2027;-261,6
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2025;-98,4
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2026;-104,6
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2027;-111,8
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2025;-191,7
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2026;-188,6
+Autohaus Toronto;Nordamerika;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2027;-206,8
+Autohaus Toronto;Nordamerika;Raumkosten;67100;Miete;2025;-143,2
+Autohaus Toronto;Nordamerika;Raumkosten;67100;Miete;2026;-149,7
+Autohaus Toronto;Nordamerika;Raumkosten;67100;Miete;2027;-159,4
+Autohaus Toronto;Nordamerika;Raumkosten;67200;Energie und Nebenkosten;2025;-61,4
+Autohaus Toronto;Nordamerika;Raumkosten;67200;Energie und Nebenkosten;2026;-56,9
+Autohaus Toronto;Nordamerika;Raumkosten;67200;Energie und Nebenkosten;2027;-63,5
+Autohaus Toronto;Nordamerika;Personalkosten;62000;Löhne und Gehälter;2025;-1222,3
+Autohaus Toronto;Nordamerika;Personalkosten;62000;Löhne und Gehälter;2026;-1257,2
+Autohaus Toronto;Nordamerika;Personalkosten;62000;Löhne und Gehälter;2027;-1346,7
+Autohaus Toronto;Nordamerika;Personalkosten;64000;Soziale Abgaben;2025;-266,7
+Autohaus Toronto;Nordamerika;Personalkosten;64000;Soziale Abgaben;2026;-266,7
+Autohaus Toronto;Nordamerika;Personalkosten;64000;Soziale Abgaben;2027;-296,9
+Autohaus Hamburg;Europa;Rohertrag;40001;Erlöse Neuwagen;2025;31235,0
+Autohaus Hamburg;Europa;Rohertrag;40001;Erlöse Neuwagen;2026;37673,7
+Autohaus Hamburg;Europa;Rohertrag;40001;Erlöse Neuwagen;2027;50603,1
+Autohaus Hamburg;Europa;Rohertrag;40002;Erlöse Gebrauchtwagen;2025;9782,8
+Autohaus Hamburg;Europa;Rohertrag;40002;Erlöse Gebrauchtwagen;2026;12643,8
+Autohaus Hamburg;Europa;Rohertrag;40002;Erlöse Gebrauchtwagen;2027;14285,5
+Autohaus Hamburg;Europa;Rohertrag;40010;Zusatzpakete;2025;331,6
+Autohaus Hamburg;Europa;Rohertrag;40010;Zusatzpakete;2026;628,9
+Autohaus Hamburg;Europa;Rohertrag;40010;Zusatzpakete;2027;931,4
+Autohaus Hamburg;Europa;Rohertrag;54010;Einkauf Neuwagen;2025;-28193,1
+Autohaus Hamburg;Europa;Rohertrag;54010;Einkauf Neuwagen;2026;-34279,2
+Autohaus Hamburg;Europa;Rohertrag;54010;Einkauf Neuwagen;2027;-45503,7
+Autohaus Hamburg;Europa;Rohertrag;54020;Einkauf Gebrauchtwagen;2025;-8380,5
+Autohaus Hamburg;Europa;Rohertrag;54020;Einkauf Gebrauchtwagen;2026;-10607,3
+Autohaus Hamburg;Europa;Rohertrag;54020;Einkauf Gebrauchtwagen;2027;-12808,9
+Autohaus Hamburg;Europa;Rohertrag;54050;Fahrzeuginstandsetzung;2025;-415,1
+Autohaus Hamburg;Europa;Rohertrag;54050;Fahrzeuginstandsetzung;2026;-555,3
+Autohaus Hamburg;Europa;Rohertrag;54050;Fahrzeuginstandsetzung;2027;-643,9
+Autohaus Hamburg;Europa;Rohertrag;67710;Provisionen;2025;-255,7
+Autohaus Hamburg;Europa;Rohertrag;67710;Provisionen;2026;-300,6
+Autohaus Hamburg;Europa;Rohertrag;67710;Provisionen;2027;-351,5
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;68100;Werbung;2025;-445,3
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;68100;Werbung;2026;-499,3
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;68100;Werbung;2027;-558,8
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2025;-199,9
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2026;-212,2
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2027;-225,2
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2025;-384,0
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2026;-396,3
+Autohaus Hamburg;Europa;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2027;-427,2
+Autohaus Hamburg;Europa;Raumkosten;67100;Miete;2025;-315,8
+Autohaus Hamburg;Europa;Raumkosten;67100;Miete;2026;-305,1
+Autohaus Hamburg;Europa;Raumkosten;67100;Miete;2027;-323,8
+Autohaus Hamburg;Europa;Raumkosten;67200;Energie und Nebenkosten;2025;-112,8
+Autohaus Hamburg;Europa;Raumkosten;67200;Energie und Nebenkosten;2026;-122,7
+Autohaus Hamburg;Europa;Raumkosten;67200;Energie und Nebenkosten;2027;-132,7
+Autohaus Hamburg;Europa;Personalkosten;62000;Löhne und Gehälter;2025;-2465,3
+Autohaus Hamburg;Europa;Personalkosten;62000;Löhne und Gehälter;2026;-2799,8
+Autohaus Hamburg;Europa;Personalkosten;62000;Löhne und Gehälter;2027;-2855,5
+Autohaus Hamburg;Europa;Personalkosten;64000;Soziale Abgaben;2025;-536,8
+Autohaus Hamburg;Europa;Personalkosten;64000;Soziale Abgaben;2026;-605,0
+Autohaus Hamburg;Europa;Personalkosten;64000;Soziale Abgaben;2027;-593,1
+Autohaus Wien;Europa;Rohertrag;40001;Erlöse Neuwagen;2025;28957,3
+Autohaus Wien;Europa;Rohertrag;40001;Erlöse Neuwagen;2026;33870,1
+Autohaus Wien;Europa;Rohertrag;40001;Erlöse Neuwagen;2027;41284,2
+Autohaus Wien;Europa;Rohertrag;40002;Erlöse Gebrauchtwagen;2025;8066,3
+Autohaus Wien;Europa;Rohertrag;40002;Erlöse Gebrauchtwagen;2026;9016,5
+Autohaus Wien;Europa;Rohertrag;40002;Erlöse Gebrauchtwagen;2027;10341,8
+Autohaus Wien;Europa;Rohertrag;40010;Zusatzpakete;2025;272,0
+Autohaus Wien;Europa;Rohertrag;40010;Zusatzpakete;2026;528,4
+Autohaus Wien;Europa;Rohertrag;40010;Zusatzpakete;2027;759,5
+Autohaus Wien;Europa;Rohertrag;54010;Einkauf Neuwagen;2025;-26080,8
+Autohaus Wien;Europa;Rohertrag;54010;Einkauf Neuwagen;2026;-29766,9
+Autohaus Wien;Europa;Rohertrag;54010;Einkauf Neuwagen;2027;-36830,4
+Autohaus Wien;Europa;Rohertrag;54020;Einkauf Gebrauchtwagen;2025;-7275,4
+Autohaus Wien;Europa;Rohertrag;54020;Einkauf Gebrauchtwagen;2026;-8768,6
+Autohaus Wien;Europa;Rohertrag;54020;Einkauf Gebrauchtwagen;2027;-9284,9
+Autohaus Wien;Europa;Rohertrag;54050;Fahrzeuginstandsetzung;2025;-360,6
+Autohaus Wien;Europa;Rohertrag;54050;Fahrzeuginstandsetzung;2026;-412,6
+Autohaus Wien;Europa;Rohertrag;54050;Fahrzeuginstandsetzung;2027;-529,2
+Autohaus Wien;Europa;Rohertrag;67710;Provisionen;2025;-215,8
+Autohaus Wien;Europa;Rohertrag;67710;Provisionen;2026;-229,9
+Autohaus Wien;Europa;Rohertrag;67710;Provisionen;2027;-305,0
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;68100;Werbung;2025;-417,8
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;68100;Werbung;2026;-373,9
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;68100;Werbung;2027;-481,2
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2025;-179,4
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2026;-172,7
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;69000;Versicherungen und Beiträge;2027;-163,2
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2025;-363,3
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2026;-377,2
+Autohaus Wien;Europa;Sonst. betriebl. Aufwand;68500;Verwaltung und IT;2027;-353,5
+Autohaus Wien;Europa;Raumkosten;67100;Miete;2025;-248,0
+Autohaus Wien;Europa;Raumkosten;67100;Miete;2026;-249,5
+Autohaus Wien;Europa;Raumkosten;67100;Miete;2027;-241,6
+Autohaus Wien;Europa;Raumkosten;67200;Energie und Nebenkosten;2025;-99,2
+Autohaus Wien;Europa;Raumkosten;67200;Energie und Nebenkosten;2026;-99,4
+Autohaus Wien;Europa;Raumkosten;67200;Energie und Nebenkosten;2027;-98,1
+Autohaus Wien;Europa;Personalkosten;62000;Löhne und Gehälter;2025;-2216,7
+Autohaus Wien;Europa;Personalkosten;62000;Löhne und Gehälter;2026;-1998,3
+Autohaus Wien;Europa;Personalkosten;62000;Löhne und Gehälter;2027;-2063,2
+Autohaus Wien;Europa;Personalkosten;64000;Soziale Abgaben;2025;-491,0
+Autohaus Wien;Europa;Personalkosten;64000;Soziale Abgaben;2026;-445,8
+Autohaus Wien;Europa;Personalkosten;64000;Soziale Abgaben;2027;-461,6

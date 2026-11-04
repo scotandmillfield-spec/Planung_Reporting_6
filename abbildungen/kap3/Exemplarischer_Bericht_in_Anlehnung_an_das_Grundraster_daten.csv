@@ -1,0 +1,73 @@
+﻿Sparte;Vertriebsweg;Position;Januar_Ist_EUR;Januar_Plan_EUR;Forecast_2027_EUR;Plan_2027_EUR
+Sparte A;Fachhandel;Umsatzerlöse;70608;59191;530078;500000
+Sparte A;Direktvertrieb;Umsatzerlöse;38387;35514;304842;300000
+Sparte A;Online;Umsatzerlöse;28508;23676;215080;200000
+Sparte A;Fachhandel;Sonstige Einnahmen;9264;9414;109264;125000
+Sparte A;Direktvertrieb;Sonstige Einnahmen;4533;5648;57157;75000
+Sparte A;Online;Sonstige Einnahmen;3105;3766;36579;50000
+Sparte A;Fachhandel;Bestandsveränderungen;19132;16647;206517;200000
+Sparte A;Direktvertrieb;Bestandsveränderungen;13686;9988;149337;120000
+Sparte A;Online;Bestandsveränderungen;8979;6659;98146;80000
+Sparte A;Fachhandel;Materialkosten;21258;21841;260271;240000
+Sparte A;Direktvertrieb;Materialkosten;13240;14561;157296;160000
+Sparte A;Online;Materialkosten;7277;9101;85433;100000
+Sparte A;Fachhandel;Fremdleistungen;4881;6180;55372;72000
+Sparte A;Direktvertrieb;Fremdleistungen;3384;4120;40304;48000
+Sparte A;Online;Fremdleistungen;2128;2575;25324;30000
+Sparte A;Fachhandel;Personalkosten;23928;18001;286591;216000
+Sparte A;Direktvertrieb;Personalkosten;13981;12001;166506;144000
+Sparte A;Online;Personalkosten;7860;7501;95903;90000
+Sparte A;Fachhandel;Abschreibungen;4008;3745;46154;48000
+Sparte A;Direktvertrieb;Abschreibungen;2942;2496;33556;32000
+Sparte A;Online;Abschreibungen;1553;1560;17290;20000
+Sparte A;Fachhandel;Sonstige Kosten;3203;3119;37846;48000
+Sparte A;Direktvertrieb;Sonstige Kosten;2560;2079;29563;32000
+Sparte A;Online;Sonstige Kosten;1500;1299;17591;20000
+Sparte B;Fachhandel;Umsatzerlöse;33136;35700;408562;427000
+Sparte B;Direktvertrieb;Umsatzerlöse;54766;56100;666498;671000
+Sparte B;Online;Umsatzerlöse;8498;10200;104940;122000
+Sparte B;Fachhandel;Sonstige Einnahmen;2341;2100;27495;24500
+Sparte B;Direktvertrieb;Sonstige Einnahmen;3318;3300;36226;38500
+Sparte B;Online;Sonstige Einnahmen;541;600;6279;7000
+Sparte B;Fachhandel;Bestandsveränderungen;-1018;700;3300;7000
+Sparte B;Direktvertrieb;Bestandsveränderungen;-1762;1100;5667;11000
+Sparte B;Online;Bestandsveränderungen;-320;200;1033;2000
+Sparte B;Fachhandel;Materialkosten;13080;12960;155721;154800
+Sparte B;Direktvertrieb;Materialkosten;20955;18720;243806;223600
+Sparte B;Online;Materialkosten;4465;4320;52473;51600
+Sparte B;Fachhandel;Fremdleistungen;2765;2880;31817;34200
+Sparte B;Direktvertrieb;Fremdleistungen;4588;4160;54239;49400
+Sparte B;Online;Fremdleistungen;847;960;9944;11400
+Sparte B;Fachhandel;Personalkosten;9610;10260;115107;122400
+Sparte B;Direktvertrieb;Personalkosten;14924;14820;183788;176800
+Sparte B;Online;Personalkosten;3366;3420;39105;40800
+Sparte B;Fachhandel;Abschreibungen;2088;2160;25038;25920
+Sparte B;Direktvertrieb;Abschreibungen;3187;3120;37370;37440
+Sparte B;Online;Abschreibungen;825;720;9592;8640
+Sparte B;Fachhandel;Sonstige Kosten;2125;1980;25629;23760
+Sparte B;Direktvertrieb;Sonstige Kosten;2452;2860;29793;34320
+Sparte B;Online;Sonstige Kosten;723;660;8578;7920
+Sparte C;Fachhandel;Umsatzerlöse;8303;8000;96356;96000
+Sparte C;Direktvertrieb;Umsatzerlöse;5821;6000;70910;72000
+Sparte C;Online;Umsatzerlöse;27676;26000;337734;312000
+Sparte C;Fachhandel;Sonstige Einnahmen;253;300;3117;3600
+Sparte C;Direktvertrieb;Sonstige Einnahmen;151;225;1861;2700
+Sparte C;Online;Sonstige Einnahmen;796;975;10022;11700
+Sparte C;Fachhandel;Bestandsveränderungen;494;400;4112;4000
+Sparte C;Direktvertrieb;Bestandsveränderungen;388;300;3241;3000
+Sparte C;Online;Bestandsveränderungen;1518;1300;12647;13000
+Sparte C;Fachhandel;Materialkosten;3324;3630;40328;42240
+Sparte C;Direktvertrieb;Materialkosten;2379;2970;29663;34560
+Sparte C;Online;Materialkosten;10497;9900;126009;115200
+Sparte C;Fachhandel;Fremdleistungen;795;880;9623;10560
+Sparte C;Direktvertrieb;Fremdleistungen;669;720;8444;8640
+Sparte C;Online;Fremdleistungen;2436;2400;29933;28800
+Sparte C;Fachhandel;Personalkosten;3424;3080;39170;36960
+Sparte C;Direktvertrieb;Personalkosten;2529;2520;29860;30240
+Sparte C;Online;Personalkosten;8647;8400;102970;100800
+Sparte C;Fachhandel;Abschreibungen;646;704;7647;8360
+Sparte C;Direktvertrieb;Abschreibungen;624;576;7661;6840
+Sparte C;Online;Abschreibungen;1930;1920;22692;22800
+Sparte C;Fachhandel;Sonstige Kosten;592;550;7051;6600
+Sparte C;Direktvertrieb;Sonstige Kosten;527;450;6527;5400
+Sparte C;Online;Sonstige Kosten;1481;1500;17422;18000

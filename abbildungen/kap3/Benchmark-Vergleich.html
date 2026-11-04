@@ -695,7 +695,8 @@ const DK = (() => {
     const zeilen = KZ.map(k => {
       const va = A[k.key], vb = B[k.key], vd = OD[k.key];
       const db = va - vb, dd = va - vd;
-      const dbp = vb ? db / Math.abs(vb) * 100 : null, ddp = vd ? dd / Math.abs(vd) * 100 : null;
+      // kein Δ % bei Vorzeichenwechsel oder Basis null
+      const dbp = vb && va * vb >= 0 ? db / Math.abs(vb) * 100 : null, ddp = vd && va * vd >= 0 ? dd / Math.abs(vd) * 100 : null;
       return { k, key: k.key, va, vb, db, dbp, vd, dd, ddp, rang: rang(A, k),
                klB: wirkung(dbp ?? db, k.richtung, 1), klD: wirkung(ddp ?? dd, k.richtung, 1) };
     });
@@ -720,7 +721,7 @@ const DK = (() => {
   }
   function tipZeile(z, B) {
     const k = z.k, e = k.quote ? "%" : EINHEIT, de = k.quote ? "%-Pkt." : EINHEIT;
-    const pz = v => (v == null ? "–" : delta(v, 1) + NBSP + "%");
+    const pz = v => (v == null ? "Δ % entfällt (Vorzeichenwechsel)" : delta(v, 1) + NBSP + "%");
     return [k.label.replace(" in %", "") + " · " + S.standort,
       `${S.standort}: ${fw(k, z.va)} ${e} (Rang ${z.rang} von ${N})`,
       `Bester Standort ${B.name}: ${fw(k, z.vb)} ${e} · Δ ${delta(z.db, k.nk)} ${de} (${pz(z.dbp)}) – ${WIRKUNG[z.klB]}`,
@@ -730,19 +731,21 @@ const DK = (() => {
 
   /* ---------- Tabelle mit Abweichungsbalken (Wirkung je Zeile, ein Maßstab für beide Δ-%-Spalten) ---------- */
   const SP = [
-    { key: "label", titel: "Geschäftszahlen", breite: 135, id: "sp-kz" },
+    { key: "label", titel: "Geschäftszahlen", breite: 133, id: "sp-kz" },
     { key: "va", titel: () => S.standort, breite: 80, id: "sp-a" },
     { key: "vb", titel: () => besterVon(S.standort).name, breite: 76, id: "sp-b", neu: true },
     { key: "db", titel: "Δ", breite: 56, id: "sp-db", kl: "klB" },
-    { key: "dbp", titel: "Δ %", breite: 112, typ: "balken", kl: "klB", id: "sp-dbp" },
-    { key: "vd", titel: "Ø", breite: 64, id: "sp-d", neu: true },
+    { key: "dbp", titel: "Δ %", breite: 116, typ: "balken", kl: "klB", id: "sp-dbp" },
+    { key: "vd", titel: "Ø", breite: 58, id: "sp-d", neu: true },
     { key: "dd", titel: "Δ", breite: 60, id: "sp-dd", kl: "klD" },
-    { key: "ddp", titel: "Δ %", breite: 112, typ: "balken", kl: "klD", id: "sp-ddp" },
+    { key: "ddp", titel: "Δ %", breite: 116, typ: "balken", kl: "klD", id: "sp-ddp" },
   ];
-  const TXT = 44;                                           // Textbreite in den Balkenspalten
+  const TXT = 52;                                           // Textbreite in den Balkenspalten
   function tabelle(ziel, d, zeilen) {
     ziel.textContent = "";
     const t = el("table", { class: "dk-matrix vg-tab" }, ziel);
+    const cg = el("colgroup", {}, t);                         // Spaltenbreiten (table-layout: fixed liest sonst die Gruppenzeile)
+    SP.forEach(s => el("col", { style: `width:${s.breite}px` }, cg));
     const thead = el("thead", {}, t);
     const gr = el("tr", { class: "vg-gruppe" }, thead);
     el("th", { class: "vg-leer", colspan: 2 }, gr);
@@ -805,9 +808,12 @@ const DK = (() => {
   function botschaft(d, breite) {
     const g = d.zeilen.find(z => z.key === "g");
     const pz = v => delta(v, 1) + NBSP + "%";
-    const lang = `${S.standort}: Gewinn ${delta(g.db, 0)} Mio. € (${pz(g.dbp)}) zum besten Standort ${d.B.name}, ` +
-                 `${delta(g.dd, 0)} Mio. € (${pz(g.ddp)}) zum Durchschnitt`;
-    const kurz = `${S.standort}: Gewinn ${pz(g.dbp)} zum besten Standort ${d.B.name}, ${pz(g.ddp)} zum Durchschnitt`;
+    const kl = v => (v == null ? "" : ` (${pz(v)})`);
+    const lang = `${S.standort}: Gewinn ${delta(g.db, 0)} Mio. €${kl(g.dbp)} zum besten Standort ${d.B.name}, ` +
+                 `${delta(g.dd, 0)} Mio. €${kl(g.ddp)} zum Durchschnitt`;
+    const kurz = g.dbp == null || g.ddp == null
+      ? `${S.standort}: Gewinn ${delta(g.db, 0)} Mio. € zum besten Standort ${d.B.name}, ${delta(g.dd, 0)} zum Durchschnitt`
+      : `${S.standort}: Gewinn ${pz(g.dbp)} zum besten Standort ${d.B.name}, ${pz(g.ddp)} zum Durchschnitt`;
     return tw(lang) <= breite ? lang : kurz;
   }
 

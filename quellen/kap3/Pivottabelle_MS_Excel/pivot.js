@@ -1,5 +1,5 @@
 /* Visual „Pivottabelle“ (Abb. 3.32) – softwareneutraler Nachbau einer Pivottabelle mit bedienbarer Feldliste.
-   Seite 1024 x 392 px = 155 x 59,3 mm (Querformat wegen der Feldliste neben der Tabelle).
+   Seite 1024 x 410 px = 155 x 62,1 mm (Querformat wegen der Feldliste neben der Tabelle).
    Daten: pivot.json (daten_pivot.py) – Einzelsätze Material × Verkaufsorganisation × Vertriebsweg × Jahr mit Absatz und
    Umsatz in Cent. Standardzustand wie im Original: Filter Jahr (2026 und 2027), Material, Vertriebsweg; Spalten
    Verkaufsorganisation; Zeilen Produktgruppe; Werte Summe von Umsatz – alle angezeigten Zahlen = Original.
@@ -43,13 +43,13 @@
   });
 
   /* ---------- Layout ---------- */
-  DK.init({ titel: "Pivottabelle", breite: 1024, hoehe: 392 });
+  DK.init({ titel: "Pivottabelle", breite: 1024, hoehe: 410 });
   const bTitel = DK.box("v-titel", 16, 8, 592, 46);
   const bFilter = DK.box("filter", 16, 60, 592, 50, "dk-filter");
   DK.haarlinie(116, 16, 416);
-  const bTab = DK.box("v-tabelle", 16, 124, 592, 260);
-  DK.el("div", { style: "position:absolute;left:618px;top:8px;width:0;height:376px;border-left:1px solid var(--linie)" }, document.getElementById("seite"));
-  const bFeld = DK.box("feldliste", 628, 8, 380, 376);
+  const bTab = DK.box("v-tabelle", 16, 124, 592, 278);
+  DK.el("div", { style: "position:absolute;left:618px;top:8px;width:0;height:394px;border-left:1px solid var(--linie)" }, document.getElementById("seite"));
+  const bFeld = DK.box("feldliste", 628, 8, 380, 394);
   DK.el("style", {}, document.head, `
     #v-tabelle { overflow: ${DK.PRINT ? "hidden" : "auto"}; }
     .pv { table-layout: fixed; }
@@ -70,7 +70,7 @@
     #feldliste { font-size: 14px; }
     .pv-kopf { font-size: 16px; font-weight: bold; }
     .pv-unterkopf { color: var(--muted); margin: 2px 0 8px; }
-    #pv-felder { display: grid; grid-template-columns: 1fr 1fr; column-gap: 10px; }
+    #pv-felder { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(5, 22px); grid-auto-flow: column; column-gap: 10px; }
     .pv-feld { display: flex; align-items: center; gap: 8px; height: 22px; cursor: pointer; user-select: none; }
     .pv-feld:hover { background: var(--flaeche); }
     .pv-box { width: 14px; height: 14px; border: 1px solid #6E747A; border-radius: 2px; display: inline-flex;
@@ -339,15 +339,14 @@
       if (i >= 0) liste.splice(i, 0, key); else liste.push(key);
     }
     S.sel = { z: null, s: null }; S.sort = null; S.zu.clear();
-    menueZu(false);
+    menueZu();
     zeichnen();
   }
-  function menueZu(neu = true) {
+  function menueZu() {
     if (S.menue) { S.menue.remove(); S.menue = null; }
-    if (neu === undefined) zeichnen();
   }
   function menueAuf(chip, key) {
-    menueZu(false);
+    menueZu();
     const seite = document.getElementById("seite"), sr = seite.getBoundingClientRect(), r = chip.getBoundingClientRect();
     const sk = sr.width / 1024;
     const m = el("div", { class: "pv-menue", role: "menu" }, seite);
@@ -355,8 +354,8 @@
     const punkt = (text, fn, aus) => { const b = el("button", { type: "button", role: "menuitem" }, m, text); if (aus) b.disabled = true; else b.addEventListener("click", fn); };
     if (FELDER[key].dim) {
       BEREICHE.filter(([b]) => b !== "werte" && b !== hier).forEach(([b, name]) => punkt(`In „${name}“ verschieben`, () => verschieben(key, b)));
-      punkt("Nach oben", () => { liste.splice(i, 1); liste.splice(i - 1, 0, key); menueZu(false); S.sel = { z: null, s: null }; S.zu.clear(); zeichnen(); }, i === 0);
-      punkt("Nach unten", () => { liste.splice(i, 1); liste.splice(i + 1, 0, key); menueZu(false); S.sel = { z: null, s: null }; S.zu.clear(); zeichnen(); }, i === liste.length - 1);
+      punkt("Nach oben", () => { liste.splice(i, 1); liste.splice(i - 1, 0, key); menueZu(); S.sel = { z: null, s: null }; S.zu.clear(); zeichnen(); }, i === 0);
+      punkt("Nach unten", () => { liste.splice(i, 1); liste.splice(i + 1, 0, key); menueZu(); S.sel = { z: null, s: null }; S.zu.clear(); zeichnen(); }, i === liste.length - 1);
     } else {
       const ander = key === "umsatz" ? "absatz" : "umsatz";
       punkt(`Durch „${FELDER[ander].name}“ ersetzen`, () => verschieben(ander, "werte"));
@@ -364,9 +363,9 @@
     punkt("Feld entfernen", () => verschieben(key, null));
     const x = Math.min((r.left - sr.left) / sk, 1024 - 200), y = (r.bottom - sr.top) / sk + 2;
     m.style.left = x + "px";
-    m.style.top = Math.min(y, 392 - m.offsetHeight - 4) + "px";
+    m.style.top = Math.min(y, 410 - m.offsetHeight - 4) + "px";
     S.menue = m;
-    const zu = ev => { if (!m.contains(ev.target) && ev.target !== chip) { menueZu(false); document.removeEventListener("pointerdown", zu, true); } };
+    const zu = ev => { if (!m.contains(ev.target) && ev.target !== chip) { menueZu(); document.removeEventListener("pointerdown", zu, true); } };
     document.addEventListener("pointerdown", zu, true);
   }
   function feldliste() {
@@ -399,9 +398,9 @@
         el("span", {}, chip, b === "werte" ? "Summe von " + F.name : F.name);
         if (!DK.PRINT) {
           el("b", {}, chip, "▾");
-          chip.addEventListener("click", ev => { ev.stopPropagation(); if (S.menue) menueZu(false); else menueAuf(chip, key); });
+          chip.addEventListener("click", ev => { ev.stopPropagation(); if (S.menue) menueZu(); else menueAuf(chip, key); });
           chip.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); menueAuf(chip, key); } });
-          chip.addEventListener("dragstart", ev => { ziehen = key; ev.dataTransfer.setData("text/plain", key); ev.dataTransfer.effectAllowed = "move"; menueZu(false); });
+          chip.addEventListener("dragstart", ev => { ziehen = key; ev.dataTransfer.setData("text/plain", key); ev.dataTransfer.effectAllowed = "move"; menueZu(); });
           chip.addEventListener("drop", ev => { ev.preventDefault(); ev.stopPropagation(); z.classList.remove("pv-ziel");
             if (ziehen && ziehen !== key) verschieben(ziehen, b, key); ziehen = null; });
         }
@@ -428,33 +427,33 @@
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "pv-bereich-filter", anker: "links", versatz: [6, 0], regel: "STRUCTURE – Inhalte ordnen", titel: "Vier Bereiche bestimmen die Tabelle",
+      { nr: 1, ziel: "pv-bereich-filter", versatz: [-6, 7], regel: "STRUCTURE – Inhalte ordnen", titel: "Vier Bereiche bestimmen die Tabelle",
         text: "Wie im Original legt die Feldliste fest, was die Tabelle zeigt: Felder im Bereich Filter schränken die Daten ein, Spalten- und Zeilenfelder spannen die Kreuztabelle auf, das Feld unter Werte wird summiert. Ziehen Sie z. B. Material unter Produktgruppe in die Zeilen – es entsteht eine Hierarchie mit Teilsummen, die sich auf- und zuklappen lässt." },
-      { nr: 2, ziel: "pv-felder", anker: "links", versatz: [222, -2], regel: "SIMPLIFY – Weglassen", titel: "Sieben statt sechzehn Felder",
+      { nr: 2, ziel: "pv-felder", anker: "links", versatz: [230, 56], regel: "SIMPLIFY – Weglassen", titel: "Sieben statt sechzehn Felder",
         text: "Die Feldliste des Originals zeigte 16 Felder, darunter doppelte (Code und Text) und für das Beispiel unnötige wie Mengeneinheit, Währung oder Rabatt. Übrig bleiben fünf Dimensionen und zwei Kennzahlen; ein Haken zeigt, ob ein Feld verwendet wird." },
-      { nr: 3, ziel: "v-titel", anker: "links", versatz: [446, 0], regel: "SIMPLIFY – Einheit einmal", titel: "Einheit im Titel statt an jeder Zahl",
+      { nr: 3, ziel: "v-titel", anker: "links", versatz: [478, 0], regel: "SIMPLIFY – Einheit einmal", titel: "Einheit im Titel statt an jeder Zahl",
         text: "Das Original setzte „€“ hinter jede Zahl und nannte die Summen „Gesamtergebnis“. Jetzt steht die Einheit einmal im Titel, die Summen heißen „Gesamt“ und sind fett; der Titel benennt die gewählten Felder." },
-      { nr: 4, ziel: "v-titel", anker: "links", versatz: [646, 22], regel: "SAY – Botschaft vermitteln", titel: "Aussage unter dem Titel",
+      { nr: 4, ziel: "v-titel", anker: "links", versatz: [600, 22], regel: "SAY – Botschaft vermitteln", titel: "Aussage unter dem Titel",
         text: "Unter dem Titel steht in einem Satz, was die aktuelle Pivottabelle zeigt – hier den größten Anteil je Zeilen- und Spaltenfeld. Die Aussage rechnet bei jeder neuen Feldzuordnung, jedem Filter und jeder Auswahl neu." },
-      { nr: 5, ziel: "v-tabelle", anker: "links", versatz: [130, 52], regel: "UNIFY – Softwareneutral und deutsch", titel: "Deutsche Feldnamen, keine Programmoberfläche",
+      { nr: 5, ziel: "v-tabelle", anker: "links", versatz: [150, 52], regel: "UNIFY – Softwareneutral und deutsch", titel: "Deutsche Feldnamen, keine Programmoberfläche",
         text: "Fensterrahmen, Menüband und Programmname entfallen. Feldnamen sind deutsch (Produktgruppe, Verkaufsorganisation, Vertriebsweg, Umsatz), die Codes GER1–GER3 heißen Nord, Mitte und Süd, die englischen Produktgruppen Citybike, Kinderrad, Mountainbike, Rennrad und Trekkingrad." },
       { nr: 6, ziel: "pv-gesamt", versatz: [-62, 2], regel: "CHECK – Werte des Originals", titel: "Rundung in den Summen",
         text: "Alle angezeigten Werte entsprechen dem Original. Die Zellen enthalten Cent-Beträge; deshalb ergibt z. B. Rennrad 4.291.450 + 3.325.792 + 5.044.376 = 12.661.618 €, angezeigt wird wie im Original 12.661.619 €. Summen werden stets aus den ungerundeten Werten gebildet." },
-      { nr: 7, ziel: "filter", anker: "links", versatz: [560, 6], regel: "EXPRESS – Filter sichtbar machen", titel: "Berichtsfilter über der Tabelle",
+      { nr: 7, ziel: "filter", anker: "links", versatz: [596, 30], regel: "EXPRESS – Filter sichtbar machen", titel: "Berichtsfilter über der Tabelle",
         text: "Die Filter stehen als Auswahllisten über der Tabelle. Statt „(Mehrere Elemente)“ zeigt der Jahresfilter die gewählten Jahre „2026 und 2027“; in der Feldliste ist das Feld als „gefiltert“ markiert, der Tooltip nennt den Filter." },
-      { nr: 8, ziel: "v-tabelle", anker: "links", versatz: [130, 100], regel: "EXPRESS – Hervorheben statt Farbe", titel: "Fadenkreuz und Sortierung",
+      { nr: 8, ziel: "v-tabelle", anker: "links", versatz: [150, 100], regel: "EXPRESS – Hervorheben statt Farbe", titel: "Fadenkreuz und Sortierung",
         text: "Ein Klick auf eine Zelle hebt ihre Zeile und Spalte hervor, ein Klick auf eine Zeilenbeschriftung die Zeile samt Unterzeilen; Esc hebt auf. Ein Klick auf einen Spaltenkopf sortiert die Zeilen, ein zweiter Klick kehrt die Richtung um." },
     ],
-    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 392 px. Schrift Arial: Matrix und Datenschnitte 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle Verkauf (Jahr, Produktgruppe, Material, Verkaufsorganisation, Vertriebsweg, Absatz, Umsatz) wie in der CSV-Datei.",
+    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 1024 × 410 px. Schrift Arial: Matrix und Datenschnitte 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle Verkauf (Jahr, Produktgruppe, Material, Verkaufsorganisation, Vertriebsweg, Absatz, Umsatz) wie in der CSV-Datei.",
     nachbau: [
-      { id: "A", ziel: "v-tabelle", anker: "links", versatz: [130, 52], titel: "Pivottabelle", visual: "Matrix",
+      { id: "A", ziel: "v-tabelle", anker: "links", versatz: [150, 52], titel: "Pivottabelle", visual: "Matrix",
         felder: "Zeilen: Produktgruppe; Spalten: Verkaufsorganisation; Werte: Umsatz (Summe)",
         format: "Zeilen- und Spaltensummen an, Beschriftung „Gesamt“, fett; Layout „Kompakt“ mit +/–-Symbolen für mehrere Zeilenfelder; Werte ohne Dezimalstellen, Einheit im Titel; Spaltenkopf mit Unterstrich #3A3F44",
         hinweis: "Eine Feldliste für Leser bietet Power BI über „Visuals personalisieren“ (Berichtseinstellungen): Betrachter können dann Felder in Zeilen, Spalten und Werte tauschen, ohne den Bericht zu bearbeiten." },
-      { id: "B", ziel: "filter", anker: "links", versatz: [560, 6], titel: "Berichtsfilter", visual: "Datenschnitt (3×) oder Filterbereich",
+      { id: "B", ziel: "filter", anker: "links", versatz: [596, 30], titel: "Berichtsfilter", visual: "Datenschnitt (3×) oder Filterbereich",
         felder: "Jahr, Material, Vertriebsweg; Jahr mit Mehrfachauswahl 2026 und 2027",
         format: "Dropdown, Kopfzeile 10,5 pt #4D4D4D; alternativ „Filter für diese Seite“ im Filterbereich (entspricht dem Berichtsfilter des Originals)" },
-      { id: "C", ziel: "pv-bereich-filter", anker: "links", versatz: [6, 0], titel: "Feldliste", visual: "Bereich „Daten“ und Felder des Visuals",
+      { id: "C", ziel: "pv-bereich-filter", versatz: [-6, 7], titel: "Feldliste", visual: "Bereich „Daten“ und Felder des Visuals",
         felder: "Beim Bearbeiten: Felder aus dem Bereich „Daten“ in die Felder Zeilen, Spalten und Werte des Visuals ziehen",
         hinweis: "Die Feldliste ist in Power BI kein Teil der Berichtsseite; im Lesemodus übernimmt „Visuals personalisieren“ diese Rolle." },
     ],

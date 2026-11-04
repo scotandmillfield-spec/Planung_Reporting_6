@@ -719,6 +719,8 @@ const DK = (() => {
   K.forEach(k => { k.eltern = k.parent ? M.get(k.parent) : null; if (k.eltern) k.eltern.kinder.push(k); });
   K.forEach(k => { k.ebene = k.eltern ? k.eltern.ebene + 1 : 0; });
   const gruppe = k => k.kinder.length > 0;
+  // Nur eine Wurzel (Abb. 4.16): deren Auswahl hätte keine Wirkung – Klick auf die Zeile klappt stattdessen auf und zu
+  const nurKlappen = k => !k.eltern && K.filter(x => !x.eltern).length === 1;
   const BLATT = K.filter(k => !gruppe(k));
   const blaetter = k => (gruppe(k) ? k.kinder.flatMap(blaetter) : [k]);
   const pfad = k => (k.eltern ? [...pfad(k.eltern), k.name] : [k.name]);
@@ -919,7 +921,7 @@ const DK = (() => {
       if (i > 0) sv("line", { x1: 0, x2: W, y1: y - 0.5, y2: y - 0.5, stroke: k.ebene === 0 ? "#9A9A9A" : "#EFEFEF", "stroke-width": 1 }, svg);
       const sel = S.auswahl && M.get(S.auswahl);
       const blass = sel && !(unter(k, sel) || unter(sel, k));
-      const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), id: "z-" + k.id }, svg);
+      const g = sv("g", { class: (nurKlappen(k) ? "" : "dk-klick") + (blass ? " dk-blass" : ""), id: "z-" + k.id }, svg);
       const fett = k.ebene === 0 ? "font-weight:bold" : "";
       sv("text", { x: k.ebene * EINZUG + TEXT_X, y: cy, dy: "0.35em", id: "t-" + k.id, style: fett }, g, k.name);
       sv("text", { x: XD, y: cy, dy: "0.35em", "text-anchor": "end" }, g, String(anzahlAT(k.b, k.e)));
@@ -930,13 +932,13 @@ const DK = (() => {
       if (!gruppe(k)) balken(g, k, cy);
       else if (k.serie && !auf) bl.forEach(b => balken(g, b, cy));
       else klammer(g, bl, cy);
-      const hit = sv("rect", { x: 0, y, width: W, height: ZH, fill: "transparent" }, g);
-      hit.addEventListener("click", () => auswaehlen(k.id));
+      const hit = sv("rect", { x: 0, y, width: W, height: ZH, fill: "transparent", style: "cursor:pointer" }, g);
+      hit.addEventListener("click", () => (nurKlappen(k) ? umschalten(k.id) : auswaehlen(k.id)));
       tooltip(hit, () => tooltipZeile(k, bl, auf));
       if (gruppe(k)) {
         const ix = k.ebene * EINZUG + 0.5, iy = Math.round(cy - 4.5) + 0.5;
         const ic = sv("g", { class: "dk-klick", id: "i-" + k.id, "aria-label": auf ? "zuklappen" : "aufklappen" }, g);
-        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "transparent" }, ic);
+        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "#FFFFFF", "fill-opacity": 0 }, ic);
         sv("rect", { x: ix, y: iy, width: 9, height: 9, fill: "#FFFFFF", stroke: "#8C8C8C", "stroke-width": 1 }, ic);
         sv("line", { x1: ix + 2, x2: ix + 7, y1: iy + 4.5, y2: iy + 4.5, stroke: "#3A3F44", "stroke-width": 1 }, ic);
         if (!auf) sv("line", { x1: ix + 4.5, x2: ix + 4.5, y1: iy + 2, y2: iy + 7, stroke: "#3A3F44", "stroke-width": 1 }, ic);
@@ -954,7 +956,7 @@ const DK = (() => {
       .filter(([, v]) => v).map(([t, v]) => `${v} ${t}`).join(", ");
   }
   function tooltipZeile(k, bl, auf) {
-    const klick = gruppe(k) ? ["+/− klappt auf und zu", "Klick hebt hervor"] : ["Klick hebt hervor"];
+    const klick = nurKlappen(k) ? ["Klick klappt auf und zu"] : gruppe(k) ? ["+/− klappt auf und zu", "Klick hebt hervor"] : ["Klick hebt hervor"];
     const ort = k.eltern ? [pfad(k).slice(0, -1).join(" › ")] : [];
     const plan = `Plan: ${wt(k.b)} ${dmy(k.b)} bis ${wt(k.e)} ${dmy(k.e)} (${atText(anzahlAT(k.b, k.e))})`;
     if (gruppe(k)) return [k.name, ...ort, plan, `${bl.length} ${bl.length === 1 ? "Vorgang" : "Vorgänge"}: ${zaehlen(bl)}`, ...klick];

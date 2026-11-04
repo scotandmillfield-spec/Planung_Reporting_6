@@ -303,7 +303,7 @@
       if (gruppe(k)) {
         const ix = k.ebene * EINZUG + 0.5, iy = Math.round(cy - 4.5) + 0.5;
         const ic = sv("g", { class: "dk-klick", id: "i-" + k.id, "aria-label": auf ? "zuklappen" : "aufklappen" }, g);
-        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "transparent" }, ic);
+        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "#FFFFFF", "fill-opacity": 0 }, ic);
         sv("rect", { x: ix, y: iy, width: 9, height: 9, fill: "#FFFFFF", stroke: "#8C8C8C", "stroke-width": 1 }, ic);
         sv("line", { x1: ix + 2, x2: ix + 7, y1: iy + 4.5, y2: iy + 4.5, stroke: "#3A3F44", "stroke-width": 1 }, ic);
         if (!auf) sv("line", { x1: ix + 4.5, x2: ix + 4.5, y1: iy + 2, y2: iy + 7, stroke: "#3A3F44", "stroke-width": 1 }, ic);

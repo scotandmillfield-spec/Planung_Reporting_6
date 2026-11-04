@@ -17,13 +17,13 @@
     arbeitsfrei: true,
     csvName: "monatsabschluss_daten.csv",
     regeln: [
-      { nr: 1, ziel: "v-kalender", anker: "links", versatz: [400, 3], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage über dem Kalender",
+      { nr: 1, ziel: "v-kalender", anker: "links", versatz: [370, 3], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage über dem Kalender",
         text: "Unter dem Titel steht, welcher Schritt zum Stichtag überfällig ist und wie viele planmäßig laufen. Der Satz folgt den Datenschnitten. Der Bildschirmausschnitt des Originals zeigte nur Balken – ob der Abschluss im Plan liegt, war nicht zu sehen." },
       { nr: 2, ziel: "kopf-legende", anker: "links", regel: "UNIFY – Semantische Notation", titel: "Plan, Ist und Verzug",
         text: "Plantermine sind weiße Balken mit Kontur, der Ist-Verlauf ist anthrazit, Verzug rot – wie im Planungs- und im Reportingkalender (Abb. 4.11 und 4.15). Das Original zeichnete Schritte als blau schraffierte Balken und Phasen als schwarze Sammelbalken." },
       { nr: 3, ziel: "sp-dauer", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Termine als Zahlen neben dem Balken",
         text: "Dauer in Arbeitstagen, Anfang und Ende stehen in eigenen Spalten; die Phasen zeigen ihre Spanne. Die Vorgangsnummern des Originals (13 bis 31) entfallen." },
-      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [70, -2], regel: "CHECK – Visuelle Integrität", titel: "Tagesachse mit Wochentagen",
+      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [202, -2], regel: "CHECK – Visuelle Integrität", titel: "Tagesachse mit Wochentagen",
         text: "Jeder Tag ist gleich breit, das Wochenende grau. Der Datenschnitt „Arbeitstage“ blendet es aus und zeigt den Abschluss als Folge von Arbeitstag 1 bis 8. Im Original war nur der Sonntag grau, und die Informationsanalyse begann an einem Samstag – sie liegt jetzt auf Arbeitstag 5 und 6." },
       { nr: 5, ziel: "kal-stichtag", anker: "links", versatz: [0, -2], regel: "EXPRESS – Passende Darstellung", titel: "Stichtag und Status",
         text: "Die gestrichelte Linie markiert das Ende des Stichtags (3. Arbeitstag); der Status steht als Wort in der Tabelle, „überfällig“ rot. Der Tooltip nennt Termine mit Wochentag und den Verzug in Arbeitstagen." },
@@ -37,7 +37,7 @@
       { id: "A", ziel: "kopf-titel", versatz: [26, 0], titel: "Kopfzeile und Legende", visual: "Textfeld; Formen (Rechteck)",
         felder: "Untertitel mit dynamischem Wert: Measure „Stichtag Text“",
         format: "Titel 16,5 pt fett; Legende: Rechtecke 9 × 9 px (Plan weiß mit Rahmen #3A3F44, Ist #3A3F44, Verzug #C62828, arbeitsfrei #EFEFEF)" },
-      { id: "B", ziel: "filter", anker: "links", versatz: [742, 28], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln)",
+      { id: "B", ziel: "filter", anker: "links", versatz: [612, 28], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln)",
         felder: "Zeitachse (Spalte „Arbeitstag ja/nein“ der Datumstabelle; „Arbeitstage“ filtert auf ja), Status zum Stichtag",
         format: "Ausgewählt: Füllung #3A3F44, Schrift weiß; nicht ausgewählt: weiß, Rahmen #9A9A9A",
         hinweis: "Status als berechnete Spalte: SWITCH(TRUE(); Vorgang[Ist_Ende] <= [Stichtag]; \"erledigt\"; Vorgang[Plan_Ende] < [Stichtag]; \"überfällig\"; Vorgang[Plan_Anfang] <= [Stichtag]; \"läuft\"; \"offen\")." },
@@ -45,13 +45,13 @@
         felder: "Zeilen: Abschluss, Phase, Teilphase, Schritt (Hierarchie); Spalten: Tabelle „Kalenderspalten“ (ohne Beziehung) mit Dauer, Anfang, Ende, Status und danach je Tag eine Spalte; Werte: Measure „Zelle“",
         format: "Zeilenüberschriften 10,5 pt, oberste Ebene fett; Dauer über NETWORKDAYS, Anfang und Ende als FORMAT(…; \"TT.MM.\"); „überfällig“ per bedingter Schriftfarbe #C62828",
         hinweis: "Die Plantermine stehen in der Datentabelle als Arbeitstag 1 bis 8; ein Measure übersetzt sie über die Datumstabelle (Arbeitstag im Monat) in Kalenderdaten – so gilt der Plan für jeden Monat." },
-      { id: "D", ziel: "kal-achse", anker: "links", versatz: [70, -2], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
+      { id: "D", ziel: "kal-achse", anker: "links", versatz: [202, -2], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
         felder: "Measure „Zelle“ liefert in den Tagesspalten einen Code: 1 Plan, 2 Ist, 3 Verzug, 4 arbeitsfrei, leer sonst",
         format: "Bedingte Formatierung Hintergrund über Measure „Zellfarbe“ (Plan #EFEFEF, Ist #3A3F44, Verzug #C62828, arbeitsfrei #F6F6F6); Schriftfarbe = Hintergrund; Spaltenüberschrift Wochentag und Tag, z. B. „Mo 2“",
         hinweis: "Mit dem Datenschnitt „Arbeitstage“ verschwinden die Spalten von Samstag und Sonntag." },
       { id: "E", ziel: "kal-stichtag", anker: "links", versatz: [0, -2], titel: "Stichtag", visual: "Bedingte Formatierung der Spalte bzw. Textfeld",
         felder: "Measure „Stichtag“ (Datum)", format: "Tagesspalte des Stichtags mit Rahmen rechts #1A1A1A; Beschriftung „Stichtag“ fett als Textfeld über der Matrix" },
-      { id: "F", ziel: "v-kalender", anker: "links", versatz: [400, 3], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
+      { id: "F", ziel: "v-kalender", anker: "links", versatz: [370, 3], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure aus TOPN(1; FILTER(Vorgang; [Status] = \"überfällig\"); [Verzug]) und der Anzahl laufender Schritte",
         format: "10,5 pt, #4D4D4D" },
     ],
@@ -304,7 +304,7 @@
       if (gruppe(k)) {
         const ix = k.ebene * EINZUG + 0.5, iy = Math.round(cy - 4.5) + 0.5;
         const ic = sv("g", { class: "dk-klick", id: "i-" + k.id, "aria-label": auf ? "zuklappen" : "aufklappen" }, g);
-        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "transparent" }, ic);
+        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "#FFFFFF", "fill-opacity": 0 }, ic);
         sv("rect", { x: ix, y: iy, width: 9, height: 9, fill: "#FFFFFF", stroke: "#8C8C8C", "stroke-width": 1 }, ic);
         sv("line", { x1: ix + 2, x2: ix + 7, y1: iy + 4.5, y2: iy + 4.5, stroke: "#3A3F44", "stroke-width": 1 }, ic);
         if (!auf) sv("line", { x1: ix + 4.5, x2: ix + 4.5, y1: iy + 2, y2: iy + 7, stroke: "#3A3F44", "stroke-width": 1 }, ic);

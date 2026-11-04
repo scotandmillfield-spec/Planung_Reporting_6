@@ -1,0 +1,53 @@
+<!-- Abb. 3.182 „Exemplarische Balanced-Scorecard-Planung“ (softwareneutral nachgebaut). Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Spalten: Strategisches Ziel 206 · Kennzahl 182 · Einheit 46 · Ist 2026/2027 je 58 · Tendenz 100 · Plan 2027 66 · Status 76 ·
+     Plan 2028–2030 je 66 = 990 px. Ein gemeinsamer Spaltenkopf, je Perspektive ein klappbarer Abschnitt; Maßnahmen im Band.
+     Zeilen erzeugt bsc.js. Höhe: Kopf 48 + Spaltenkopf 24 + 4 Bänder + 24 Kennzahlzeilen zu 21 px. -->
+<style>
+  #bsc { width: 1024px; }
+  /* Titelzeile einzeilig: Titel fett links, Angaben rechts, Haarlinie */
+  #bsc .mk-kopf { display: flex; justify-content: space-between; align-items: baseline; height: auto; background: none; color: var(--text);
+    padding: 12px 0 9px; margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #bsc .mk-kopf .kopf-titel { font-size: 22px; line-height: 26px; font-weight: bold; }
+  #bsc .mk-kopf .mk-kopf-info { font-size: 14px; color: var(--muted); }
+  #bsc .mk-inhalt { padding: 10px 15px 12px; }
+  #bsc .raster { display: grid; grid-template-columns: 206px 182px 46px 58px 58px 100px 66px 76px 66px 66px 66px; }
+  #bsc .sk { height: 24px; line-height: 23px; padding: 0 4px; color: var(--muted); white-space: nowrap; text-align: right;
+    border-bottom: 1px solid var(--ac); }
+  #bsc .sk.links { text-align: left; }
+  #bsc .sk.erste { padding-left: 0; }
+  #bsc .mk-abschnitt + .mk-abschnitt { margin-top: 6px; }
+  #bsc .mk-band { height: 24px; line-height: 24px; margin-bottom: 0; padding-right: 30px; }
+  #bsc .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  #bsc .massnahmen { position: absolute; right: 30px; top: 0; text-transform: none; font-weight: normal; color: var(--muted);
+    letter-spacing: 0; white-space: nowrap; }
+  body.print #bsc .massnahmen { right: 8px; }
+  #bsc .massnahmen .mk-link { margin-left: 10px; }
+  #bsc .st { grid-column: 1; padding: 0 6px 0 0; line-height: 20px; border-bottom: 1px solid #9A9A9A; white-space: normal; overflow: hidden; }
+  #bsc .kz, #bsc .eh { height: 21px; line-height: 20px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #bsc .eh { color: var(--muted); }
+  #bsc .ende > .kz, #bsc .ende.eh, #bsc .kz.ende { border-bottom-color: #9A9A9A; }
+  #bsc .raster .mk-feld { height: 21px; line-height: 20px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #bsc .raster .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #bsc .raster .mk-feld.ende { border-bottom-color: #9A9A9A; }
+  #bsc .raster .mk-feld.mk-fehler { border-color: var(--schlecht); }
+</style>
+<form class="mk-maske" id="bsc" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Balanced-Scorecard-Planung</span><span class="mk-kopf-info" id="kopf-info">Planung 2028–2030 · Stand 30.06.2027</span></div>
+  <div class="mk-inhalt">
+    <div class="raster" id="spaltenkopf">
+      <div class="sk links erste">Strategisches Ziel</div>
+      <div class="sk links" id="sk-kennzahl">Kennzahl</div>
+      <div class="sk links" id="sk-einheit">Einheit</div>
+      <div class="sk">Ist 2026</div>
+      <div class="sk">Ist 2027</div>
+      <div class="sk links" id="sk-tendenz">Tendenz</div>
+      <div class="sk">Plan 2027</div>
+      <div class="sk links" id="sk-status">Status</div>
+      <div class="sk" id="sk-p28">Plan 2028</div>
+      <div class="sk">Plan 2029</div>
+      <div class="sk" id="sk-p30">Plan 2030</div>
+    </div>
+    <div id="perspektiven"><!-- Abschnitte je Perspektive erzeugt bsc.js --></div>
+  </div>
+</form>

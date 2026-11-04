@@ -650,13 +650,13 @@ const DK = (() => {
     datumMitJahr: true,
     csvName: "reportingkalender_daten.csv",
     regeln: [
-      { nr: 1, ziel: "v-kalender", anker: "links", versatz: [338, 3], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage über dem Kalender",
+      { nr: 1, ziel: "v-kalender", anker: "links", versatz: [384, 3], regel: "SAY – Botschaft vermitteln", titel: "Kernaussage über dem Kalender",
         text: "Unter dem Titel steht, welche Termine zum Stichtag überfällig sind und welcher Abschluss verspätet fertig wurde. Der Satz folgt den Datenschnitten. Der Bildschirmausschnitt des Originals zeigte nur Balken ohne Bezug zu einem Stichtag." },
       { nr: 2, ziel: "kopf-legende", anker: "links", regel: "UNIFY – Semantische Notation", titel: "Plan, Ist und Verzug",
         text: "Plantermine sind weiße Balken mit Kontur, der Ist-Verlauf ist anthrazit, Verzug rot – wie im Planungskalender (Abb. 4.11) und im Reporting- und Planungskalender (Abb. 3.12). Das Original zeichnete alle Vorgänge als schwarze Sammelbalken mit Endmarken." },
       { nr: 3, ziel: "sp-dauer", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Termine als Zahlen neben dem Balken",
         text: "Dauer in Arbeitstagen, Anfang und Ende stehen in eigenen Spalten. So sieht man auch im Druck, dass jeder Monatsabschluss vom 1. bis zum 8. Arbeitstag des Folgemonats läuft. Die Vorgangsnummern des Originals (1, 2, 11, 13 …) entfallen." },
-      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [100, -2], regel: "CHECK – Visuelle Integrität", titel: "Lineare Zeitachse über 14 Monate",
+      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [100, -4], regel: "CHECK – Visuelle Integrität", titel: "Lineare Zeitachse über 14 Monate",
         text: "Jeder Monat ist gleich breit, Balken beginnen und enden am Tag. Die Achse reicht vom Jahresabschluss 2025 im Januar bis zum Jahresabschluss 2026 im Februar 2027; der Datenschnitt Zeitraum zeigt ein Halbjahr. Das Original zeigte Quartale mit leeren Monaten am Rand." },
       { nr: 5, ziel: "kal-stichtag", anker: "links", versatz: [0, -2], regel: "EXPRESS – Passende Darstellung", titel: "Stichtag und Status",
         text: "Die gestrichelte Linie trennt Erledigtes von Kommendem; der Status steht als Wort in der Tabelle, „überfällig“ rot. Zugeklappte Gruppen zeigen den Status ihrer Vorgänge – die Budgetierung ist überfällig, weil die Produktionsplanung aussteht (siehe Abb. 4.11)." },
@@ -670,7 +670,7 @@ const DK = (() => {
       { id: "A", ziel: "kopf-titel", versatz: [26, 0], titel: "Kopfzeile und Legende", visual: "Textfeld; Formen (Rechteck)",
         felder: "Untertitel mit dynamischem Wert: Measure „Stichtag Text“",
         format: "Titel 16,5 pt fett; Legende: Rechtecke 9 × 9 px (Plan weiß mit Rahmen #3A3F44, Ist #3A3F44, Verzug #C62828)" },
-      { id: "B", ziel: "filter", anker: "links", versatz: [742, 28], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln)",
+      { id: "B", ziel: "filter", anker: "links", versatz: [812, 28], titel: "Datenschnitte", visual: "Datenschnitt (Stil Kacheln)",
         felder: "Zeitraum (berechnete Spalte der Datumstabelle), Status zum Stichtag",
         format: "Ausgewählt: Füllung #3A3F44, Schrift weiß; nicht ausgewählt: weiß, Rahmen #9A9A9A",
         hinweis: "Status als berechnete Spalte: SWITCH(TRUE(); Vorgang[Ist_Ende] <= [Stichtag]; \"erledigt\"; Vorgang[Plan_Ende] < [Stichtag]; \"überfällig\"; Vorgang[Plan_Anfang] <= [Stichtag]; \"läuft\"; \"offen\")." },
@@ -678,13 +678,13 @@ const DK = (() => {
         felder: "Zeilen: Bereich, Gruppe, Vorgang (Hierarchie); Spalten: Tabelle „Kalenderspalten“ (ohne Beziehung) mit Dauer, Anfang, Ende, Status und danach je Tag eine Spalte, sortiert nach Spaltennummer; Werte: Measure „Zelle“",
         format: "Zeilenüberschriften 10,5 pt, oberste Ebene fett; Dauer über NETWORKDAYS mit Feiertagstabelle, Anfang und Ende als FORMAT(…; \"TT.MM.JJ\"); „überfällig“ per bedingter Schriftfarbe #C62828",
         hinweis: "Monatsabschlüsse in der Datentabelle über die Spalte „Arbeitstag im Monat“ der Datumstabelle terminieren (Arbeitstag 1 bis 8 des Folgemonats)." },
-      { id: "D", ziel: "kal-achse", anker: "links", versatz: [100, -2], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
+      { id: "D", ziel: "kal-achse", anker: "links", versatz: [100, -4], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
         felder: "Measure „Zelle“ liefert in den Tagesspalten einen Code: 1 Plan, 2 Ist, 3 Verzug, leer außerhalb des Vorgangs",
         format: "Bedingte Formatierung Hintergrund über Measure „Zellfarbe“ (Plan #EFEFEF, Ist #3A3F44, Verzug #C62828); Schriftfarbe = Hintergrund; Spaltenbreite 1 px, Spaltenüberschrift Monat",
         hinweis: "Zugeklappte Gruppen zeigen die Spanne vom ersten Beginn bis zum letzten Ende (MIN/MAX über die Vorgänge der Gruppe)." },
       { id: "E", ziel: "kal-stichtag", anker: "links", versatz: [0, -2], titel: "Stichtag", visual: "Bedingte Formatierung der Spalte bzw. Textfeld",
         felder: "Measure „Stichtag“ (Datum)", format: "Tagesspalte des Stichtags mit Rahmen rechts #1A1A1A; Beschriftung „Stichtag“ fett als Textfeld über der Matrix" },
-      { id: "F", ziel: "v-kalender", anker: "links", versatz: [338, 3], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
+      { id: "F", ziel: "v-kalender", anker: "links", versatz: [384, 3], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure aus TOPN(2; FILTER(Vorgang; [Status] = \"überfällig\"); [Verzug]) und dem zuletzt verspätet erledigten Vorgang",
         format: "10,5 pt, #4D4D4D" },
     ],
@@ -718,6 +718,8 @@ const DK = (() => {
   K.forEach(k => { k.eltern = k.parent ? M.get(k.parent) : null; if (k.eltern) k.eltern.kinder.push(k); });
   K.forEach(k => { k.ebene = k.eltern ? k.eltern.ebene + 1 : 0; });
   const gruppe = k => k.kinder.length > 0;
+  // Nur eine Wurzel (Abb. 4.16): deren Auswahl hätte keine Wirkung – Klick auf die Zeile klappt stattdessen auf und zu
+  const nurKlappen = k => !k.eltern && K.filter(x => !x.eltern).length === 1;
   const BLATT = K.filter(k => !gruppe(k));
   const blaetter = k => (gruppe(k) ? k.kinder.flatMap(blaetter) : [k]);
   const pfad = k => (k.eltern ? [...pfad(k.eltern), k.name] : [k.name]);
@@ -918,7 +920,7 @@ const DK = (() => {
       if (i > 0) sv("line", { x1: 0, x2: W, y1: y - 0.5, y2: y - 0.5, stroke: k.ebene === 0 ? "#9A9A9A" : "#EFEFEF", "stroke-width": 1 }, svg);
       const sel = S.auswahl && M.get(S.auswahl);
       const blass = sel && !(unter(k, sel) || unter(sel, k));
-      const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), id: "z-" + k.id }, svg);
+      const g = sv("g", { class: (nurKlappen(k) ? "" : "dk-klick") + (blass ? " dk-blass" : ""), id: "z-" + k.id }, svg);
       const fett = k.ebene === 0 ? "font-weight:bold" : "";
       sv("text", { x: k.ebene * EINZUG + TEXT_X, y: cy, dy: "0.35em", id: "t-" + k.id, style: fett }, g, k.name);
       sv("text", { x: XD, y: cy, dy: "0.35em", "text-anchor": "end" }, g, String(anzahlAT(k.b, k.e)));
@@ -929,13 +931,13 @@ const DK = (() => {
       if (!gruppe(k)) balken(g, k, cy);
       else if (k.serie && !auf) bl.forEach(b => balken(g, b, cy));
       else klammer(g, bl, cy);
-      const hit = sv("rect", { x: 0, y, width: W, height: ZH, fill: "transparent" }, g);
-      hit.addEventListener("click", () => auswaehlen(k.id));
+      const hit = sv("rect", { x: 0, y, width: W, height: ZH, fill: "transparent", style: "cursor:pointer" }, g);
+      hit.addEventListener("click", () => (nurKlappen(k) ? umschalten(k.id) : auswaehlen(k.id)));
       tooltip(hit, () => tooltipZeile(k, bl, auf));
       if (gruppe(k)) {
         const ix = k.ebene * EINZUG + 0.5, iy = Math.round(cy - 4.5) + 0.5;
         const ic = sv("g", { class: "dk-klick", id: "i-" + k.id, "aria-label": auf ? "zuklappen" : "aufklappen" }, g);
-        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "transparent" }, ic);
+        sv("rect", { x: ix - 2, y: iy - 2, width: 13, height: 13, fill: "#FFFFFF", "fill-opacity": 0 }, ic);
         sv("rect", { x: ix, y: iy, width: 9, height: 9, fill: "#FFFFFF", stroke: "#8C8C8C", "stroke-width": 1 }, ic);
         sv("line", { x1: ix + 2, x2: ix + 7, y1: iy + 4.5, y2: iy + 4.5, stroke: "#3A3F44", "stroke-width": 1 }, ic);
         if (!auf) sv("line", { x1: ix + 4.5, x2: ix + 4.5, y1: iy + 2, y2: iy + 7, stroke: "#3A3F44", "stroke-width": 1 }, ic);
@@ -953,7 +955,7 @@ const DK = (() => {
       .filter(([, v]) => v).map(([t, v]) => `${v} ${t}`).join(", ");
   }
   function tooltipZeile(k, bl, auf) {
-    const klick = gruppe(k) ? ["+/− klappt auf und zu", "Klick hebt hervor"] : ["Klick hebt hervor"];
+    const klick = nurKlappen(k) ? ["Klick klappt auf und zu"] : gruppe(k) ? ["+/− klappt auf und zu", "Klick hebt hervor"] : ["Klick hebt hervor"];
     const ort = k.eltern ? [pfad(k).slice(0, -1).join(" › ")] : [];
     const plan = `Plan: ${wt(k.b)} ${dmy(k.b)} bis ${wt(k.e)} ${dmy(k.e)} (${atText(anzahlAT(k.b, k.e))})`;
     if (gruppe(k)) return [k.name, ...ort, plan, `${bl.length} ${bl.length === 1 ? "Vorgang" : "Vorgänge"}: ${zaehlen(bl)}`, ...klick];

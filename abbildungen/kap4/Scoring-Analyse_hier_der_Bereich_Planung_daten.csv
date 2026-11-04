@@ -1,0 +1,21 @@
+﻿Bereich;Gruppe;Analysefeld;Bewertung;Abstand_Best_Practice
+Planung;;Planungsinhalte;-1;5
+Planung;Planungsinhalte;Absatzplanung;0;4
+Planung;Planungsinhalte;Einkaufsplanung;1;3
+Planung;Planungsinhalte;Kostenplanung;0;4
+Planung;Planungsinhalte;Ergebnisplanung;-1;5
+Planung;Planungsinhalte;Finanzplanung;0;4
+Planung;Planungsinhalte;weitere Teilpläne;-1;5
+Planung;;Planungsprozesse;-2;6
+Planung;;Planungsorganisation;0;4
+Planung;;IT-Unterstützung;1;3
+Reporting;;Berichtsinhalte;0;4
+Reporting;Berichtsinhalte;Monatsbericht;1;3
+Reporting;Berichtsinhalte;Kennzahlenbericht;0;4
+Reporting;Berichtsinhalte;Abweichungsanalyse;-2;6
+Reporting;Berichtsinhalte;Forecastbericht;-1;5
+Reporting;Berichtsinhalte;Kommentierung;-1;5
+Reporting;Berichtsinhalte;weitere Berichte;0;4
+Reporting;;Berichtsprozesse;-1;5
+Reporting;;Berichtsorganisation;1;3
+Reporting;;IT-Unterstützung;2;2

@@ -483,6 +483,19 @@
    ],
    "datei": "Beispiel_fuer_eine_Planungs-Organisationsmatrix"
   },
+  "4.10": {
+   "status": "pruefung",
+   "datei": "Scoring-Analyse_hier_der_Bereich_Planung",
+   "kommentare": [
+    "Folie mit Regenbogenskala als interaktives Einzelvisual neu aufgebaut (727 × 446 px = 110 × 67,5 mm), konsistent zu Abb. 3.27: Spalten Analysefeld und Bewertung, daneben Abweichungsbalken vom Durchschnitt",
+    "Regenbogen-Farbverlauf entfernt: unter dem Durchschnitt rot, darüber blaugrün, ±0 ohne Balken; Skala −4 bis +4 fest und gleichabständig (im Original um 0 enger, „+4“ in die zweite Zeile gerutscht); „⌀“ → „Durchschnitt“",
+    "Werte aus den Punktlagen des Originals abgelesen (alle ganzzahlig): Planungsinhalte −1, Absatz ±0, Einkauf +1, Kosten ±0, Ergebnis −1, Finanz ±0, weitere Teilpläne −1, Prozesse −2, Organisation ±0, IT +1 – bitte prüfen (der Punkt der Absatzplanung lag minimal links der Null)",
+    "Planungsinhalte −1 ist im Original eine eigene Gesamtbewertung, nicht der Mittelwert der Teilpläne (≈ −0,2) – so gewollt?",
+    "„…“ → „weitere Teilpläne“; neu: Datenschnitt Bereich (Planung/Reporting, Reporting-Werte erfunden) und Schalter „nach Bewertung“ (schwächste Felder oben)",
+    "Caption „Scoring-Analyse (hier der Bereich Planung)“ passt; Abgrenzung zu Abb. 3.27 („Scoring-Analyse im Produktvergleich“) ist gegeben"
+   ],
+   "alt": "Scoring-Analyse für den Bereich Planung mit einem Datenschnitt für den Bereich. Je Analysefeld steht die Bewertung auf einer Skala von −4 (Worst Practice) über 0 (Durchschnitt) bis +4 (Best Practice), daneben ein Balken von der Durchschnittslinie: Planungsinhalte −1 mit den Teilplänen Absatz-, Kosten- und Finanzplanung (je ±0), Einkaufsplanung (+1), Ergebnisplanung und weitere Teilpläne (je −1), danach Planungsprozesse (−2), Planungsorganisation (±0) und IT-Unterstützung (+1). Am schwächsten sind die Planungsprozesse, über dem Durchschnitt liegen nur Einkaufsplanung und IT-Unterstützung."
+  },
   "Tab. 4.8": {
    "status": "latex",
    "kommentare": [
@@ -502,6 +515,19 @@
      "text": "Der Kennzahlname „Anlagendeckung (%)“ steht jetzt in der rechten Spalte linksbündig über dem Text, „Kennzahl:“ in der linken Spalte. Hinter allen Begriffen der linken Spalte steht ein Doppelpunkt. Die Vorschau wird erst bei der nächsten LaTeX-Übersetzung aktualisiert."
     }
    ]
+  },
+  "4.11": {
+   "status": "pruefung",
+   "datei": "Planungskalender_Der_Planungskalender_wurde_mit_MS_Project_erstellt",
+   "kommentare": [
+    "Produktscreenshot (MS Project) softwareneutral als Kalender-Dashboard neu aufgebaut, Gestaltung wie Abb. 3.12/3.3: links Vorgang, Dauer (Arbeitstage), Anfang, Ende, Status, rechts Zeitachse nach Kalenderwochen; Fenster, Menüs, Ansichtsleiste und Vorgangsnummern entfallen",
+    "Caption ohne Produktnamen? z. B. „Planungskalender“ (Zusatz „mit MS Project erstellt“ passt nicht mehr zum softwareneutralen Nachbau)",
+    "Vorgänge und Termine aus dem Original (2011) 783 Wochen später übertragen, Wochentage erhalten (Budgetierung 07.09.–24.11.2026 für das Budget 2027); „Ergebnispanungplanung“ → „Ergebnisplanung“",
+    "Schwarze Sammelbalken → Plan weiß, Ist anthrazit, Verzug rot; erfunden: Stichtag 16.10.2026 mit Status und Ist (Absatz- und Umsatzplanung 2 Arbeitstage später fertig, Produktionsplanung 5 Arbeitstage überfällig)",
+    "Strategische Planung im Original von Abb. 4.11 Aug./Sep., in Abb. 4.15 Jan./Feb. (zwei Stände derselben Projektdatei) – je Abbildung beibehalten; angleichen?",
+    "Originale ohne Meilensteine – keine ergänzt; Budgetierung identisch mit Abb. 4.15. Abb. 3.12 liegt ein Jahr später (2027/2028) – angleichen?"
+   ],
+   "alt": "Kalender „Planungskalender“ mit Stichtag 16.10.2026 und Filtern für Zeitraum und Status. Links stehen die strategische Planung, die Budgetierung 2027 mit 19 Teilplänen von der Vorbereitung und dem Kick-off (ab 07.09.2026) bis zur Veröffentlichung der Budgetplanung (bis 24.11.2026) und die Mehrjahresplanung, je mit Dauer in Arbeitstagen, Anfang, Ende und Status; rechts zeigt eine Zeitachse nach Kalenderwochen die Planbalken weiß umrandet, den Ist-Verlauf anthrazit und Verzug rot, eine gestrichelte Linie markiert den Stichtag. Überfällig ist die Produktionsplanung (5 Arbeitstage), die Absatz- und Umsatzplanung wurde 2 Arbeitstage später fertig, acht Teilpläne laufen im Plan."
   },
   "4.12": {
    "status": "pruefung",
@@ -537,6 +563,31 @@
     "Waagerechte Beschriftung der Blockpfeile nicht möglich (zu schmal), daher senkrecht wie im Original"
    ],
    "alt": "Drei Planungsebenen untereinander: oben die zentrale Planung (Controlling) im Austausch mit dem Vorstand, darunter mehrere konzentrierte Planungen der Hauptbereichsleiter, unten mehrere dezentrale Planungen der Niederlassungsleiter. Pfeile in beide Richtungen zwischen den Ebenen stehen für das Gegenstromverfahren; links zeigt ein Pfeil die Top-Down-, rechts einer die Bottom-Up-Richtung."
+  },
+  "4.15": {
+   "status": "pruefung",
+   "datei": "Reportingkalender_Der_Reportingkalender_wurde_mit_MS_Project_erstellt",
+   "kommentare": [
+    "Produktscreenshot (MS Project) softwareneutral neu aufgebaut, gleiche Gestaltung wie Abb. 4.11, 4.16 und 3.12; Caption ohne Produktnamen? z. B. „Reportingkalender“",
+    "Berichtsjahr 2011 → 2026 (Termine 2026/2027): Monatsabschlüsse wie im Original vom 1. bis 8. Arbeitstag des Folgemonats, Feiertage NRW berücksichtigt (März/Q I 01.–14.04. wegen Ostern); Forecasts parallel zu Quartals- bzw. Halbjahresabschluss; Jahresabschlüsse 2025 und 2026 ab dem 1. Arbeitstag",
+    "Namen ausgeschrieben („Monatsabschluss Sep 11/ Quartalsabschluss III“ → „Monats- und Quartalsabschluss September“); Strategieschritte gekürzt („Umwelt- und Wettbewerbsanalyse“, „Ziele, Kennzahlen, Projekte festlegen“), „Pärmissenplanung“ korrigiert",
+    "Planung im Druck zugeklappt: strategische Planung (5 Schritte) und Budgetierung mit allen Teilplänen aus Abb. 4.11 (gleiche Daten, gleicher Stichtag) – im HTML aufklappbar",
+    "Erfunden: Stichtag 16.10.2026 und Ist; Monats- und Quartalsabschluss September 2 Arbeitstage später erledigt, Forecast III 4 Arbeitstage überfällig",
+    "Strategische Planung hier Jan./Feb. wie im Original, in Abb. 4.11 Aug./Sep. – angleichen?"
+   ],
+   "alt": "Kalender „Reportingkalender“ mit Stichtag 16.10.2026 und Filtern für Zeitraum und Status. Links das Reporting mit Jahresabschluss 2025, 13 Monatsabschlüssen vom 1. bis 8. Arbeitstag des Folgemonats (März, Juni und September zugleich Quartals- bzw. Halbjahresabschluss), Forecast I bis III und dem Jahresabschluss 2026 im Januar und Februar 2027, darunter Risikomanagement, strategische Planung und Budgetierung 2027, je mit Dauer, Anfang, Ende und Status; rechts eine Zeitachse von Januar 2026 bis Februar 2027 mit Planbalken, Ist-Verlauf und Verzug. Überfällig sind Forecast III (4 Arbeitstage) und in der Budgetierung die Produktionsplanung, der Monats- und Quartalsabschluss September wurde 2 Arbeitstage später fertig."
+  },
+  "4.16": {
+   "status": "pruefung",
+   "datei": "Reportingkalender_Monatsabschluss_Der_Reportingkalender_Monatsabschluss_wurde_mit_MS_Project_erstellt",
+   "kommentare": [
+    "Produktscreenshot softwareneutral neu aufgebaut, gleiche Gestaltung wie Abb. 4.11 und 4.15; Tagesachse mit Wochentagen und grauem Wochenende, Datenschnitt „Zeitachse: Arbeitstage“ zeigt Arbeitstag 1–8; Caption ohne Produktnamen? z. B. „Reportingkalender Monatsabschluss“",
+    "Monatsabschluss Januar 2011 → Januar 2026 nach Arbeitstagen: 02.02. (AT 1) bis 11.02.2026 (AT 8), gleiche Termine wie in Abb. 4.15; die Informationsanalyse begann im Original an einem Samstag → AT 5–6 (Fr 06.02./Mo 09.02.)",
+    "Schritt „Berichtserstellung“ → „Berichte erstellen“ (Unterschied zur gleichnamigen Phase); blau schraffierte Balken und schwarze Sammelbalken → Plan/Ist/Verzug bzw. Klammer je Phase",
+    "Die im Original darunter zugeklappten übrigen Abschlüsse (Feb.–Dez.) entfallen – sie stehen in Abb. 4.15",
+    "Erfunden: Stichtag Mi 04.02.2026 (AT 3) mit Ist; Abschlussbuchungen 1 Arbeitstag überfällig"
+   ],
+   "alt": "Kalender „Reportingkalender Monatsabschluss“ für den Monatsabschluss Januar 2026, Stichtag 04.02.2026, mit Filtern für die Zeitachse (Kalender- oder Arbeitstage) und den Status. Links die vier Phasen Berichtserstellung, Analysevorbereitung, Berichtsbereitstellung sowie Berichtsanalyse und -steuerung mit 13 Schritten, je mit Dauer, Anfang, Ende und Status; rechts eine Tagesachse vom 02. bis 12.02.2026 mit grauem Wochenende, Planbalken, Ist-Verlauf und Verzug. Der Abschluss läuft vom 1. Arbeitstag (02.02.) bis zum 8. (11.02.), die Berichte gehen am 4. Arbeitstag hinaus; zum Stichtag sind die Abschlussbuchungen einen Arbeitstag überfällig."
   },
   "4.17": {
    "status": "pruefung",

@@ -2,10 +2,11 @@
 # Muster: Ordnungsrahmen als Bänder (wie Abb. 5.1). Die fünf Schichten der rechten Beschriftungsspalte des
 # Originals (Frontend … Source systems) sind Bänder mit Titel oben links; Metadaten-, Rechte- und Rollen- sowie
 # Qualitätsmanagement laufen rechts als senkrechte Spalten über alle Schichten.
-# Einheitliche Rollen mit Abb. 5.1: Quellsysteme und blaue Datenbanken des Originals box_hi, Core Data Warehouse
-# rot, graue Elemente box, Extraktion/Transformation/Laden weiß (box_plain), Querschnittsfunktionen gestrichelt.
+# Einheitliche Rollen mit Abb. 5.1 (Abstimmung Kapitel 5): Quell- und operative Systeme box, Datenhaltung
+# (Auswertungsdatenbank, ODI) box_hi, Core Data Warehouse als Schlüsselelement rot, übrige Elemente box,
+# Extraktion/Transformation/Laden weiß (box_plain), Querschnittsfunktionen gestrichelt.
 # Original englisch beschriftet – Texte ins Deutsche übertragen (PPC → PPS wie in Abb. 5.1 und 5.7).
-# Entfernt: Zylinder-, Würfel- und Globussymbole, Schatten; Pfeilpaare auf/ab als Doppelpfeile.
+# Entfernt: Zylinder-, Würfel- und Globussymbole, Schatten, Platzhalter „…“; Pfeilpaare auf/ab als Doppelpfeile.
 STEM = "Business_Intelligence_Referenzarchitektur_als_Ordnungsrahmen"
 from bookfig import Fig, P
 
@@ -111,12 +112,12 @@ def build(theme):
     f.box(OP.x, OP.y, OP.w, OP.h, None, role="container", name="Operative Anwendungssysteme")
     f.text(OP.x, OP.y + 0.3, OP.w, 3.4, [P("Operative Anwendungssysteme", size=6.5, bold=True)], align="c",
            anchor="m", bg=t.role("band").fill, name="Titel Operative Anwendungssysteme")
-    qw, qg = 12.8, 2.0
-    qx = OP.x + (OP.w - (4 * qw + 3 * qg)) / 2
-    for i, s in enumerate(("ERP", "PPS", "CRM", "…")):
-        f.box(qx + i * (qw + qg), OP.y + 4.2, qw, BH, [P(s, size=SZ)], role="box_hi", name=f"Quelle {s}")
+    qw, qg = 16.0, 2.4
+    qx = OP.x + (OP.w - (3 * qw + 2 * qg)) / 2
+    for i, s in enumerate(("ERP", "PPS", "CRM")):
+        f.box(qx + i * (qw + qg), OP.y + 4.2, qw, BH, [P(s, size=SZ)], name=f"Quelle {s}")
     EX = B(OL.x, OP.y + 4.2, OL.w, BH)
-    f.box(EX.x, EX.y, EX.w, EX.h, [P("Externe Daten", size=SZ)], role="box_hi", name="Externe Daten")
+    f.box(EX.x, EX.y, EX.w, EX.h, [P("Externe Daten", size=SZ)], name="Externe Daten")
 
     # ------------------------------------------------------------ Querschnittsspalten
     for i, s in enumerate(("Metadatenmanagement", "Rechte- und Rollenmanagement", "Qualitätsmanagement")):

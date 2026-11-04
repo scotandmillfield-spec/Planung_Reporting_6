@@ -1,9 +1,11 @@
 """Abb. 5.1 – BI-Ordnungsrahmen (in Anlehnung an Kemper et al. 2010, S. 11)."""
 # Muster: Ordnungsrahmen als Bänder (wie Abb. 5.6). Die drei Schichten des BI-Rahmens sind Bänder mit Titel
 # oben links, „Metadaten“ links und „Systemintegration“ rechts laufen als senkrechte Spalten über alle Schichten.
-# Darunter das Band der Quellsysteme. Einheitliche Rollen mit Abb. 5.6: Quellsysteme box_hi, Data Warehouse rot,
-# Analyse/Präsentation box, Querschnittsfunktionen gestrichelte Spalte.
-# Entfernt: Zylinder- und Trapezformen, Blockpfeile, Schatten, Copyright-Zeile (Quelle gehört in die Caption).
+# Darunter das Band der Quellsysteme. Einheitliche Rollen mit Abb. 5.6 (Abstimmung Kapitel 5): Quell- und
+# operative Systeme box, Datenhaltung box_hi, Data Warehouse als Schlüsselelement rot, Analyse/Präsentation box,
+# Querschnittsfunktionen gestrichelte Spalte.
+# Entfernt: Zylinder- und Trapezformen, Blockpfeile, Schatten, Copyright-Zeile (Quelle gehört in die Caption),
+# Platzhalter „…“ (Autorenwunsch, vgl. Abb. 2.2).
 STEM = "BI-Ordnungsrahmen"
 from bookfig import Fig, P
 
@@ -101,18 +103,17 @@ def build(theme):
 
     # ------------------------------------------------------------ Quellsysteme
     f.band(CX0, yq, CW, hq, "Externe und operative Systeme mit strukturierten und unstrukturierten Daten")
-    QS, QI = 6.5, (0.5, 0.4)                   # Quellsysteme: 6,5 pt (E-Procurement ausgeschrieben)
-    qw, qg, qx = 17.4, 1.0, 2.8
+    qw, qg, qx = 19.4, 2.0, 2.8
     r1 = yq + TOP + 0.4
     r2 = r1 + QB + 2.2 + 1.0
-    for i, s in enumerate(("SCM", "E-Procurement", "ERP", "CRM", "…")):
-        f.box(qx + i * (qw + qg), r1, qw, QB, [P(s, size=QS)], role="box_hi", ins=QI, name=f"Quelle {s}")
-    grp = B(qx - 1.0, r2 - 1.0, 5 * qw + 4 * qg + 2.0, QB + 2.0)
+    for i, s in enumerate(("SCM", "E-Procurement", "ERP", "CRM")):
+        f.box(qx + i * (qw + qg), r1, qw, QB, [P(s, size=SZ)], name=f"Quelle {s}")
+    grp = B(qx - 1.0, r2 - 1.0, 4 * qw + 3 * qg + 2.0, QB + 2.0)
     f.box(grp.x, grp.y, grp.w, grp.h, None, role="container", name="Gruppe technische Systeme")
-    for i, s in enumerate(("CAx", "PPS", "MES", "PDM/PLM", "…")):
-        f.box(qx + i * (qw + qg), r2, qw, QB, [P(s, size=QS)], role="box_hi", ins=QI, name=f"Quelle {s}")
+    for i, s in enumerate(("CAx", "PPS", "MES", "PDM/PLM")):
+        f.box(qx + i * (qw + qg), r2, qw, QB, [P(s, size=SZ)], name=f"Quelle {s}")
     EX = B(grp.r + 2.0, r1, CX0 + CW - 1.4 - (grp.r + 2.0), grp.b - r1)
-    f.box(EX.x, EX.y, EX.w, EX.h, [P("Externe Daten", size=QS)], role="box_hi", ins=QI, name="Externe Daten")
+    f.box(EX.x, EX.y, EX.w, EX.h, [P("Externe Daten", size=SZ)], name="Externe Daten")
 
     # Quellsysteme → Business Intelligence
     A([(DW.r - 6.0, yq), (DW.r - 6.0, cb)], name="Quellsysteme → BI")

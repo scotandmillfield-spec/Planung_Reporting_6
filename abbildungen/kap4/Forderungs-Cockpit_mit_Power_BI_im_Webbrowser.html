@@ -763,7 +763,8 @@ const DK = (() => {
       #unterhaltung .un-kopf { font-size: 16px; font-weight: bold; }
       #unterhaltung .un-unter { color: var(--muted); margin: 2px 0 6px; }
       #unterhaltung .un-liste { flex: 1 1 auto; overflow: hidden; }
-      #unterhaltung .un-msg { padding: 8px 0 9px; border-top: 1px solid var(--linie); }
+      #unterhaltung .un-tag { color: var(--muted); text-align: center; padding: 4px 0 6px; border-top: 1px solid var(--linie); }
+      #unterhaltung .un-msg { padding: 8px 0 9px; border-top: 1px solid #EFEFEF; }
       #unterhaltung .un-msg.bezug { cursor: pointer; }
       #unterhaltung .un-msg.bezug:hover { background: var(--flaeche); }
       #unterhaltung .un-msg.an { background: var(--flaeche); box-shadow: inset 3px 0 0 var(--ac); }
@@ -792,21 +793,22 @@ const DK = (() => {
     alle.filter(o => o.ue).forEach(o => je.set(o.di, (je.get(o.di) || 0) + o.c));
     const [spitze, betrag] = [...je.entries()].sort((a, b) => b[1] - a[1])[0];
     const st2 = summe(alle.filter(o => o.stufe === 2)), d0 = dso(m, true), d1 = dso(m - 1, true);
-    const kd = Math.round(d0) - Math.round(d1);
+    const kd = Math.round(d0) - Math.round(d1), te = c => tsd(c) + NBSP + "Tsd." + NBSP + "€";
     const msgs = [
-      { wer: "Frau Brandt", rolle: "Debitoren", zeit: "01.07., 08:42",
-        text: `Das Cockpit ist auf den ${dat(ST[m])} aktualisiert: ${tsd(ges)} Tsd. € offen, davon ${tsd(ue)} Tsd. € überfällig.` },
+      { wer: "Frau Brandt", rolle: "Debitoren", zeit: "08:42",
+        text: `Das Cockpit ist auf den ${dat(ST[m])} aktualisiert: ${te(ges)} offen, davon ${te(ue)} überfällig.` },
       { wer: "Herr Tal", rolle: "Vertrieb", zeit: "09:05", bezug: { typ: "deb", key: spitze },
-        text: `${DEB[spitze][1]}: ${tsd(betrag)} Tsd. € überfällig. Ich rufe dort heute an.` },
+        text: `${DEB[spitze][1]}: ${te(betrag)} überfällig. Ich rufe dort heute an.` },
       { wer: "Frau Brandt", rolle: "Debitoren", zeit: "09:18", bezug: { typ: "stufe", key: 2 },
-        text: `Danke! Mahnstufe 2 betrifft ${tsd(st2)} Tsd. €; der nächste Mahnlauf ist am Freitag.` },
+        text: `Danke! Mahnstufe 2 betrifft ${te(st2)}; der nächste Mahnlauf ist am Freitag.` },
       { wer: "Herr Ohm", rolle: "Controlling", zeit: "10:31",
-        text: `Reichweite ${zahl(d0, 0)} Tage, ${kd === 0 ? "unverändert zum" : (kd > 0 ? kd + " mehr als im" : -kd + " weniger als im")} Vormonat. Kommt in den Monatsbericht.` },
+        text: `Reichweite ${zahl(d0, 0)}${NBSP}Tage, ${kd === 0 ? "unverändert zum" : (kd > 0 ? kd + " mehr als im" : -kd + " weniger als im")} Vormonat. Kommt in den Monatsbericht.` },
       ...eigene,
     ];
     bU.textContent = "";
     el("div", { class: "un-kopf" }, bU, "Unterhaltung");
     el("div", { class: "un-unter" }, bU, "Beiträge zum Bericht");
+    el("div", { class: "un-tag" }, bU, "Donnerstag, 01.07.2027");
     const liste = el("div", { class: "un-liste", id: "un-liste" }, bU);
     msgs.slice(-5).forEach((x, i) => {
       const an = x.bezug && S.sel && S.sel.typ === x.bezug.typ && S.sel.key === x.bezug.key;
@@ -849,7 +851,7 @@ const DK = (() => {
   function faelligkeit(f, werte) {
     const W = f.breite, H = f.hoehe, n = BAENDER.length;
     const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": "Offene Posten nach Fälligkeit" }, f.flaeche);
-    const oben = 18, unten = 38, PH = H - oben - unten, slot = W / n, bw = Math.min(46, slot * 0.62);
+    const oben = 32, unten = 38, PH = H - oben - unten, slot = W / n, bw = Math.min(46, slot * 0.62);   // oben: Zeile für „Stichtag“
     const max = Math.max(...werte.map(w => w.c), 1);
     const basis = oben + PH;
     werte.forEach((w, i) => {
@@ -905,7 +907,7 @@ const DK = (() => {
     const pw = W - lw - vw - sw, max = Math.max(...o.zeilen.map(z => z.ue + z.nf), 1);
     if (o.spalteUe) {
       sv("text", { x: W, y: 12, "text-anchor": "end", class: "muted" }, svg, "überfällig");
-      sv("text", { x: lw, y: 12, class: "muted" }, svg, "offene Posten gesamt");
+      if (lw + tw("offene Posten gesamt") + 12 < W - tw("überfällig")) sv("text", { x: lw, y: 12, class: "muted" }, svg, "offene Posten gesamt");
     }
     o.zeilen.forEach((z, i) => {
       const y = kopfH + i * rh, ym = y + rh / 2;
@@ -1097,20 +1099,20 @@ const DK = (() => {
       text: "Die offenen Posten stehen in Fälligkeitsbändern in zeitlicher Folge: links die überfälligen (über 28, 15–28, 1–14 Tage, wie die Fälligkeitsklassen des Originals), rechts die in den nächsten Wochen fälligen, getrennt durch den Stichtag. Das Original zeigte jedes Fälligkeitsdatum einzeln, absteigend sortiert und nur mit Bildlauf vollständig; das Ringdiagramm der Fälligkeitsklassen geht darin auf." },
     { nr: 3, ziel: "kopf-legende", anker: "links", versatz: [-6, -2], regel: "UNIFY – Semantische Notation", titel: "Anthrazit heißt überfällig",
       text: "In allen Visuals ist der überfällige Teil anthrazit, der noch nicht fällige hellgrau; Blaugrün und Rot gibt es nur für Abweichungen zum Vormonat nach Wirkung (mehr Überfälliges, mehr Gemahntes und längere Reichweite sind ungünstig). Das Original nutzte Ampelfarben für Mahnstufen und Blautöne für Fälligkeitsklassen." },
-    { nr: 4, ziel: "kpis", anker: "links", versatz: [KANAL ? 128 : 180, 4], regel: "EXPRESS – Vergleich mit Maß", titel: "Kennzahlen mit Vormonat",
+    { nr: 4, ziel: "kpis", anker: "links", versatz: KANAL ? [122, 48] : [180, 4], regel: "EXPRESS – Vergleich mit Maß", titel: "Kennzahlen mit Vormonat",
       text: "Jede Kennzahl nennt die Veränderung zum Vormonat; die Einheit steht einmal im Label. Das Original zeigte die Werte ohne Vergleich und in wechselnden Formaten („1.768,74 Tsd.“ neben „1,77 Mio.“)." },
     { nr: 5, ziel: "kpi-1", anker: "links", versatz: [KANAL ? 98 : 150, 22], regel: "CHECK – Stimmige Zahlen", titel: "Eine Datenbasis für alle Werte",
       text: "Alle Werte rechnen aus denselben offenen Posten: Kennzahlen = Summen der Visuals, Sammelkonten zusammen = Forderungen. Im Original waren die „überfälligen Forderungen“ (1,77 Mio.) so hoch wie alle Forderungen, die Fälligkeitsklassen zusammen aber nur 89,5 Tsd. €; die drei Auslandsdebitoren überstiegen das Sammelkonto Ausland." },
-    { nr: 6, ziel: "c-stufen", anker: "links", versatz: [KANAL ? 230 : 300, -2], regel: "EXPRESS – Passende Darstellung", titel: "Balken statt Ringdiagrammen",
+    { nr: 6, ziel: "c-stufen", anker: "links", versatz: [KANAL ? 160 : 212, 22], regel: "EXPRESS – Passende Darstellung", titel: "Balken statt Ringdiagrammen",
       text: "Mahnstufen und Sammelkonten sind Balken in natürlicher Reihenfolge mit direkter Beschriftung. Im Original waren es Ringdiagramme mit Legende, deren kleine Segmente (Mahnstufe 1–3) kaum zu erkennen waren." },
-    { nr: 7, ziel: "e-debitoren", anker: "links", versatz: [KANAL ? 300 : 430, 0], regel: "CONDENSE – Verdichten", titel: "Top 6 und Übrige, Überfälligkeit je Kunde",
+    { nr: 7, ziel: "e-debitoren", anker: "links", versatz: [KANAL ? 342 : 430, 0], regel: "CONDENSE – Verdichten", titel: "Top 6 und Übrige, Überfälligkeit je Kunde",
       text: "Die sechs größten Debitoren stehen einzeln, der Rest als „Übrige“; jede Zeile zeigt den überfälligen Teil im Balken und als Zahl. Debitorennummer, älteste Fälligkeit, Mahnstufe und Zahlungsziel stehen im Tooltip. Das Original zeigte nur Gesamtbeträge mit Bildlaufleiste." },
     { nr: 8, ziel: "filter", anker: "links", versatz: [KANAL ? 600 : 650, -2], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Logo, Navigation und Programmrahmen",
       text: KANAL
         ? "Programmleisten, Logo, Navigationsknöpfe und Menüs entfallen; vom Kollaborationswerkzeug bleiben nur der Kanalname, die Registerkarte des Berichts und die Unterhaltung. Monat und Sammelkonto filtern das Dashboard, ein Klick auf Band, Mahnstufe oder Debitor filtert die übrigen Visuals, Esc hebt auf."
         : "Browser- und Programmleisten, Logo, Navigationsknöpfe und Seitenliste entfallen. Monat und Sammelkonto filtern das Dashboard, ein Klick auf Band, Mahnstufe oder Debitor filtert die übrigen Visuals, ein Klick auf einen Monat im Verlauf wählt den Stichtag; Esc hebt die Auswahl auf." },
   ];
-  if (KANAL) regeln.push({ nr: 9, ziel: "un-liste", anker: "links", versatz: [205, 4], regel: "STRUCTURE – Bericht im Arbeitskontext", titel: "Unterhaltung neben dem Bericht",
+  if (KANAL) regeln.push({ nr: 9, ziel: "unterhaltung", anker: "links", versatz: [212, 4], regel: "STRUCTURE – Bericht im Arbeitskontext", titel: "Unterhaltung neben dem Bericht",
     text: "Der Bericht ist als Registerkarte in den Kanal des Teams eingebunden; daneben läuft die Unterhaltung. Beiträge mit Bezug (↗) wählen per Klick den genannten Debitor bzw. die Mahnstufe im Bericht aus. Die Zahlen in den Beiträgen stammen aus denselben Daten wie der Bericht. Eigene Antworten lassen sich unten eingeben." });
 
   DK.ebenen({
@@ -1120,13 +1122,13 @@ const DK = (() => {
       "Tage überfällig = [Stichtag] − Rechnungen[Fälligkeit] (berechnete Spalte je Stichtag in einer Snapshot-Tabelle ist einfacher); Überfällig = CALCULATE([Offen]; [Tage überfällig] > 0); DSO = DIVIDE([Offen]; CALCULATE(SUM(Rechnungen[Betrag]); DATESINPERIOD(Datum[Datum]; [Stichtag]; −90; DAY))) * 90." +
       (KANAL ? " Einbindung: Bericht im Power-BI-Dienst veröffentlichen und als Registerkarte im Kanal des Kollaborationswerkzeugs anheften; die Unterhaltung sind die Kanalbeiträge, kein Teil des Berichts." : " Bereitstellung: Bericht im Power-BI-Dienst veröffentlichen und im Webbrowser öffnen (Lesemodus)."),
     nachbau: [
-      { id: "A", ziel: "kpis", anker: "links", versatz: [KANAL ? 128 : 180, 4], titel: "Kennzahlen", visual: "Karte (neu) mit fünf Kennzahlen und Referenzbeschriftungen",
+      { id: "A", ziel: "kpis", anker: "links", versatz: KANAL ? [122, 48] : [180, 4], titel: "Kennzahlen", visual: "Karte (neu) mit fünf Kennzahlen und Referenzbeschriftungen",
         felder: "Offen, Überfällig, Anzahl offene Posten (COUNTROWS), DSO, Gemahnt; Referenz ΔVM mit DATEADD(Stichtag[Datum]; −1; MONTH)",
         format: "Wert 19,5 pt fett; Referenzbeschriftung 10,5 pt; Farbe über bedingte Formatierung (#00806B günstig, #C62828 ungünstig), Forderungen und Anzahl neutral" },
       { id: "B", ziel: "v-faelligkeit", versatz: [0, 0], titel: "Offene Posten nach Fälligkeit", visual: "Gruppiertes Säulendiagramm",
         felder: "X-Achse: Fälligkeitsband (berechnete Spalte mit Sortierspalte); Y-Achse: Offen",
         format: "Spaltenfarbe bedingt: überfällige Bänder #3A3F44, nicht fällige #D4D4D4; Datenbeschriftungen ein, Y-Achse und Gitternetz aus",
-        hinweis: "Die gestrichelte Stichtagslinie ist eine Form (Linie) über dem Visual; alternativ eine X-Achsen-Konstantenlinie bei kategorischer Achse nicht möglich." },
+        hinweis: "Die gestrichelte Stichtagslinie ist eine Form (Linie) über dem Visual; eine Konstantenlinie gibt es bei kategorischer X-Achse nicht." },
       { id: "C", ziel: "v-verlauf", versatz: [0, 0], titel: "Überfällig je Monatsultimo", visual: "Säulendiagramm",
         felder: "X-Achse: Stichtag (Monat); Y-Achse: Überfällig", format: "#3A3F44, Datenbeschriftungen ein, Y-Achse aus",
         hinweis: "Interaktion „Filtern“ auf die übrigen Visuals ergibt den Stichtagswechsel per Klick." },
@@ -1137,7 +1139,7 @@ const DK = (() => {
       { id: "F", ziel: "v-debitoren", versatz: [0, 0], titel: "Offene Posten nach Debitor", visual: "Gestapeltes Balkendiagramm wie D",
         felder: "Y-Achse: Debitor (Gruppe „Übrige“ über TOPN bzw. eine Gruppierung); Tooltip: Debitor-Nr., älteste Fälligkeit, Mahnstufe",
         format: "Sortierung nach Offen absteigend, „Übrige“ zuletzt (Sortierspalte)" },
-      { id: "G", ziel: "filter", anker: "links", versatz: [124, -2], titel: "Datenschnitte", visual: "Datenschnitt (2×)",
+      { id: "G", ziel: "filter", anker: "links", versatz: [KANAL ? 600 : 650, -2], titel: "Datenschnitte", visual: "Datenschnitt (2×)",
         felder: "Stichtag (Monat) als Kacheln, Einzelauswahl; Sammelkonto als Kacheln", format: "Ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A" },
     ],
     theme: DK.thema(),

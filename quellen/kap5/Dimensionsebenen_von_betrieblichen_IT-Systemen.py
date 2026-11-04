@@ -3,7 +3,7 @@
 # BI-gestützte Planungs- und Berichtssysteme an der Spitze rot. Die drei Dimensionen als beschriftete Achsen:
 # Systemebene (unten), zeitlicher Horizont (entlang der rechten Flanke), Inhalte/Objekte/Bereiche (rechts).
 # Entfernt: 3D-Stufen und blaue Flächen, Würfelsymbol (Data Warehouse) und 4V-Rad (Big Data) – beide als
-# beschriftete Boxen, die vier V als Erläuterung.
+# beschriftete Boxen, die vier V als Erläuterung; Platzhalter „…“ (Autorenwunsch, vgl. Abb. 2.2).
 STEM = "Dimensionsebenen_von_betrieblichen_IT-Systemen"
 from bookfig import Fig, P
 
@@ -34,7 +34,7 @@ def build(theme):
     from bookfig import text_width_mm as tw
     t = theme
     band = t.role("band").fill
-    pc, WT, s = 44.0, 31.0, 0.45               # Mitte, Breite oben, Breitenzunahme je Seite und mm
+    pc, WT, s = 44.0, 17.0, 0.55               # Mitte, Breite oben, Breitenzunahme je Seite und mm
     yt = 1.0
     hw = lambda y: WT / 2 + s * (y - yt)       # halbe Breite in Höhe y
 
@@ -42,18 +42,19 @@ def build(theme):
         return max(10.0, max(tw(z, SZ) for z in txt.replace(SHY, "-\n").split("\n")) + 2.2)
 
     ebenen = [  # Titel, Elemente (Umbruch mit \n), zweizeilig?
-        ("Planungs- und Berichtssysteme", ["ERP-\ngestützt", "Tabellen-\nkalkulation", "…"], True),
-        ("Abrechnungssysteme", ["Finanz- und\nRechnungswesen", "Personal-\nwesen", "…"], True),
-        ("Administrations- und Dispositionssysteme", ["Material-\nwirtschaft", "PPS", "Auftrags-\nabwicklung", "…"],
+        ("Planungs- und\nBerichtssysteme", ["ERP-\ngestützt", "Tabellen-\nkalkulation"], True),
+        ("Abrechnungssysteme", ["Finanz- und\nRechnungswesen", "Personalwesen"], True),
+        ("Administrations- und Dispositionssysteme", ["Material-\nwirtschaft", "PPS", "Auftrags-\nabwicklung"],
          True),
-        ("Erfassungs- und Steuerungssysteme", ["BDE", "ZDE", "CAD", "DNC", "…"], False),
+        ("Erfassungs- und Steuerungssysteme", ["BDE", "ZDE", "CAD", "DNC"], False),
     ]
     H_BI = BH2
+    th = lambda titel: (titel.count("\n") + 1) * LH + 0.5   # Höhe der Ebenentitel
     lagen = []
     y = yt
     for i, (titel, el, zwei) in enumerate(ebenen):
         oben = 1.0 + H_BI + 0.8 if i == 0 else 0.6
-        h = oben + 3.4 + 0.3 + (BH2 if zwei else BH1) + 1.1
+        h = oben + th(titel) + 0.3 + (BH2 if zwei else BH1) + 1.1
         lagen.append((y, y + h))
         y += h + 1.2
     yb = lagen[-1][1]
@@ -67,12 +68,16 @@ def build(theme):
         f.poly([(pc - hw(y0), y0), (pc + hw(y0), y0), (pc + hw(y1), y1), (pc - hw(y1), y1)], closed=True,
                fill=band, name=f"Ebene {titel}")
         yti = y0 + (1.0 + H_BI + 0.8 if i == 0 else 0.6)
-        f.text(pc - 30.0, yti, 60.0, 3.4, [P(titel, size=SZ, bold=True)], align="c", anchor="m", bg=band,
+        f.text(pc - 30.0, yti, 60.0, th(titel), [P(titel, size=SZ, bold=True)], align="c", anchor="m", bg=band,
                name=f"Titel {titel}")
+        for z, zl in enumerate(titel.split("\n")):            # Titelzeile muss in die Ebene passen
+            yz = yti + (z + 1) * LH
+            if tw(zl, SZ, True) > 2 * hw(yz) - 2.0:
+                f.warnings.append(f"[Ebene {titel}] Titel zu breit")
         bh = BH2 if zwei else BH1
         ws = [bw(e) for e in el]
         total = sum(ws) + GAPX * (len(ws) - 1)
-        yr = yti + 3.4 + 0.3
+        yr = yti + th(titel) + 0.3
         avail = 2 * hw(yr) - 2.4
         if total > avail:
             f.warnings.append(f"[Ebene {titel}] Elemente zu breit ({total:.1f} > {avail:.1f} mm)")
@@ -113,11 +118,12 @@ def build(theme):
     yo, yu = yt + 11.0, yb - 2.0
     po, pu = (pc + hw(yo) + off, yo), (pc + hw(yu) + off, yu)
     A([po, pu], head=True, tail=True, name="Zeitlicher Horizont")
-    f.text(po[0] + 1.4, yo - 0.6, 16.0, 2 * LH + 0.2, [P("operativ/", size=SZ), P("strategisch", size=SZ)],
+    f.text(po[0] + s * 2 * LH + 1.4, yo - 0.4, 16.0, 2 * LH + 0.2, [P("operativ/", size=SZ),
+                                                                 P("strategisch", size=SZ)],
            name="operativ/strategisch")
     f.text(pu[0] + 1.4, yu - LH - 0.8, 12.0, LH + 0.2, [P("operativ", size=SZ)], name="operativ")
     ym = (yo + yu) / 2
-    f.text(pc + hw(ym) + off + 1.8, ym - LH, 14.0, 2 * LH + 0.2,
+    f.text(pc + hw(ym + LH) + off + 1.6, ym - LH, 14.0, 2 * LH + 0.2,
            [P("Zeitlicher", size=SZ, bold=True), P("Horizont", size=SZ, bold=True)], name="Achse Zeitlicher Horizont")
     # Inhalte/Objekte/Bereiche (rechts, senkrecht)
     xv = W - 3.4

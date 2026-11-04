@@ -1,0 +1,68 @@
+﻿Element;Gruppe;Objekt;Periode;Einheit;Ist;Ziel;Richtung
+Kennzahlenliste;Marketing;Interessenten;Juni 2027;Anzahl;1164;1200;1
+Kennzahlenliste;Marketing;Webbesuche;Juni 2027;Tsd.;48,6;45,0;1
+Kennzahlenliste;Marketing;Kanalumsatz;Juni 2027;Mio. €;12,4;12,0;1
+Kennzahlenliste;Marketing;Budget;Juni 2027;Mio. €;1,85;1,90;-1
+Kennzahlenliste;Vertrieb;Aufträge;Juni 2027;Mio. €;41,2;46,0;1
+Kennzahlenliste;Vertrieb;Pipeline;Juni 2027;Faktor;2,9;3,0;1
+Kennzahlenliste;Vertrieb;Forecast;Juni 2027;Mio. €;182,5;188,0;1
+Kennzahlenliste;Vertrieb;Budget Direkt;Juni 2027;Mio. €;2,40;2,50;-1
+Kennzahlenliste;Vertrieb;Budget Service;Juni 2027;Mio. €;1,12;1,20;-1
+Kennzahlenliste;Vertrieb;Budget Partner;Juni 2027;Mio. €;0,83;0,80;-1
+Kennzahlenliste;Vertrieb;Budget Handel;Juni 2027;Mio. €;0,64;0,70;-1
+Kennzahlenliste;Vertrieb;Budget Zentrale;Juni 2027;Mio. €;3,46;3,10;-1
+Kennzahlenliste;Entwicklung;Release 8.0;Juni 2027;%;100;100;1
+Kennzahlenliste;Entwicklung;Release 8.1;Juni 2027;%;72;70;1
+Kennzahlenliste;Entwicklung;Version 6.6;Juni 2027;%;100;100;1
+Kennzahlenliste;Entwicklung;Version 7.1;Juni 2027;%;45;40;1
+Kennzahlenliste;Entwicklung;Änderungen;Juni 2027;Anzahl;39;40;1
+Kennzahlenliste;Entwicklung;Budget;Juni 2027;Mio. €;;4,20;-1
+Heatmap;;Januar;2025;Tsd. €;600;;
+Heatmap;;Januar;2026;Tsd. €;708;;
+Heatmap;;Januar;2027;Tsd. €;594;;
+Heatmap;;Februar;2025;Tsd. €;607;;
+Heatmap;;Februar;2026;Tsd. €;984;;
+Heatmap;;Februar;2027;Tsd. €;749;;
+Heatmap;;März;2025;Tsd. €;901;;
+Heatmap;;März;2026;Tsd. €;886;;
+Heatmap;;März;2027;Tsd. €;908;;
+Heatmap;;April;2025;Tsd. €;608;;
+Heatmap;;April;2026;Tsd. €;615;;
+Heatmap;;April;2027;Tsd. €;835;;
+Heatmap;;Mai;2025;Tsd. €;715;;
+Heatmap;;Mai;2026;Tsd. €;833;;
+Heatmap;;Mai;2027;Tsd. €;734;;
+Heatmap;;Juni;2025;Tsd. €;520;;
+Heatmap;;Juni;2026;Tsd. €;663;;
+Heatmap;;Juni;2027;Tsd. €;618;;
+Heatmap;;Juli;2025;Tsd. €;731;;
+Heatmap;;Juli;2026;Tsd. €;521;;
+Heatmap;;Juli;2027;Tsd. €;950;;
+Heatmap;;August;2025;Tsd. €;709;;
+Heatmap;;August;2026;Tsd. €;663;;
+Heatmap;;August;2027;Tsd. €;987;;
+Heatmap;;September;2025;Tsd. €;633;;
+Heatmap;;September;2026;Tsd. €;863;;
+Heatmap;;September;2027;Tsd. €;979;;
+Heatmap;;Oktober;2025;Tsd. €;533;;
+Heatmap;;Oktober;2026;Tsd. €;651;;
+Heatmap;;Oktober;2027;Tsd. €;841;;
+Heatmap;;November;2025;Tsd. €;996;;
+Heatmap;;November;2026;Tsd. €;958;;
+Heatmap;;November;2027;Tsd. €;749;;
+Heatmap;;Dezember;2025;Tsd. €;792;;
+Heatmap;;Dezember;2026;Tsd. €;717;;
+Heatmap;;Dezember;2027;Tsd. €;875;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 32;1. Quartal 2027;€;201604,33;;
+ABC-Analyse;Bayern;PLZ 80;1. Quartal 2027;€;179990,40;;
+ABC-Analyse;Hessen;PLZ 60;1. Quartal 2027;€;123958,71;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 58;1. Quartal 2027;€;87324,24;;
+ABC-Analyse;Baden-Württemberg;PLZ 73;1. Quartal 2027;€;71971,09;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 40;1. Quartal 2027;€;66883,93;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 48;1. Quartal 2027;€;60444,02;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 50;1. Quartal 2027;€;51499,66;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 33;1. Quartal 2027;€;42888,09;;
+ABC-Analyse;Hamburg;PLZ 22;1. Quartal 2027;€;31853,63;;
+ABC-Analyse;Nordrhein-Westfalen;PLZ 44;1. Quartal 2027;€;27296,54;;
+ABC-Analyse;Niedersachsen;PLZ 30;1. Quartal 2027;€;15845,36;;
+ABC-Analyse;Bayern;PLZ 81;1. Quartal 2027;€;-1250,74;;

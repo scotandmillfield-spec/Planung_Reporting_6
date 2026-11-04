@@ -1,0 +1,17 @@
+﻿Kunde;Produktgruppe;Produkt;Absatz_Stueck
+Kunde 1;Produktgruppe A;Produkt 1;200
+Kunde 1;Produktgruppe A;Produkt 2;100
+Kunde 1;Produktgruppe B;Produkt 3;100
+Kunde 1;Produktgruppe B;Produkt 4;0
+Kunde 2;Produktgruppe A;Produkt 1;100
+Kunde 2;Produktgruppe A;Produkt 2;50
+Kunde 2;Produktgruppe B;Produkt 3;200
+Kunde 2;Produktgruppe B;Produkt 4;100
+Kunde 3;Produktgruppe A;Produkt 1;50
+Kunde 3;Produktgruppe A;Produkt 2;100
+Kunde 3;Produktgruppe B;Produkt 3;50
+Kunde 3;Produktgruppe B;Produkt 4;0
+Kunde 4;Produktgruppe A;Produkt 1;100
+Kunde 4;Produktgruppe A;Produkt 2;300
+Kunde 4;Produktgruppe B;Produkt 3;100
+Kunde 4;Produktgruppe B;Produkt 4;50

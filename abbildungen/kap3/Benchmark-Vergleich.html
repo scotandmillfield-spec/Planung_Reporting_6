@@ -677,8 +677,8 @@ const DK = (() => {
     .vg-tab th, .vg-tab td { padding: 0 6px; }
     .vg-tab th:first-child, .vg-tab td:first-child { padding-left: 0; }
     .vg-tab tr.vg-kopf th { height: 24px; vertical-align: bottom; }
-    .vg-tab tr.vg-gruppe th { height: 20px; border-bottom: 1px solid #9A9A9A; text-align: left; padding-left: 14px; }
-    .vg-tab tr.vg-gruppe th.vg-leer { border-bottom: none; }
+    .vg-tab tr.vg-gruppe th { height: 20px; border-bottom: none; text-align: left; padding: 0 0 0 14px; vertical-align: bottom; }
+    .vg-tab tr.vg-gruppe th div { border-bottom: 1px solid #9A9A9A; padding: 0 0 2px 0; }
     .vg-tab .vg-neu { padding-left: 14px; }
     .vg-tab td.vg-db { padding: 0 2px 0 6px; }
     #fussnote { font-size: 14px; color: var(--muted); line-height: 1.35; white-space: nowrap; }
@@ -746,8 +746,8 @@ const DK = (() => {
     const thead = el("thead", {}, t);
     const gr = el("tr", { class: "vg-gruppe" }, thead);
     el("th", { class: "vg-leer", colspan: 2 }, gr);
-    el("th", { colspan: 3, id: "gr-bester" }, gr, "Bester Standort");
-    el("th", { colspan: 3, id: "gr-schnitt" }, gr, `Durchschnitt aller ${N} Standorte`);
+    el("div", {}, el("th", { colspan: 3, id: "gr-bester" }, gr), "Bester Standort");
+    el("div", {}, el("th", { colspan: 3, id: "gr-schnitt" }, gr), `Durchschnitt aller ${N} Standorte`);
     const kopf = el("tr", { class: "vg-kopf" }, thead);
     SP.forEach(s => {
       const th = el("th", { id: s.id, class: s.neu ? "vg-neu" : "", style: `width:${s.breite}px;` + (s.typ === "balken" ? "text-align:center" : "") },
@@ -837,19 +837,19 @@ const DK = (() => {
     regeln: [
       { nr: 1, ziel: "v-titel", anker: "links", versatz: [600, 0], regel: "SAY – Botschaft vermitteln", titel: "Zwei Benchmarks in einem Satz",
         text: "Die Kernaussage nennt den Abstand des Gewinns zum besten Standort und zum Durchschnitt. Hamburg liegt deutlich hinter Frankfurt (−24,4 %), aber weit über dem Durchschnitt (+76,9 %). Das Original zeigte nur die Tabelle." },
-      { nr: 2, ziel: "sp-db", anker: "links", versatz: [2, 0], regel: "UNIFY – Farbe nach Wirkung", titel: "Rot ist ungünstig, nicht negativ",
+      { nr: 2, ziel: "sp-db", anker: "links", versatz: [33, 0], regel: "UNIFY – Farbe nach Wirkung", titel: "Rot ist ungünstig, nicht negativ",
         text: "Das Original färbte alle negativen Differenzen rot und alle positiven schwarz. So erschien der um 180 Mio. € höhere Betriebsaufwand unauffällig und geringere Investitionen als Mangel. Jetzt zeigt die Farbe die Wirkung: höherer Aufwand ist rot, Investitionen sind ohne Wertung." },
-      { nr: 3, ziel: "sp-ddp", anker: "links", versatz: [38, 104], regel: "CHECK – Visuelle Integrität", titel: "Ein Maßstab für beide Benchmarks",
+      { nr: 3, ziel: "sp-ddp", anker: "links", versatz: [109, 125], regel: "CHECK – Visuelle Integrität", titel: "Ein Maßstab für beide Benchmarks",
         text: "Beide Δ-%-Spalten nutzen denselben Maßstab. So ist sichtbar, dass Hamburg vom Durchschnitt viel weiter entfernt ist als vom besten Standort. Eigene Maßstäbe je Spalte würden −24,4 % und +76,9 % gleich lang zeichnen." },
       { nr: 4, ziel: "gr-bester", anker: "links", versatz: [150, 0], regel: "UNIFY – Klare Bezeichnungen", titel: "Lesbare Spaltenköpfe",
         text: "Die Kürzel „Δ +S“ und „Δ ⌀S“ des Originals sind durch Gruppenköpfe ersetzt: „Bester Standort“ mit seinem Namen und „Durchschnitt aller 10 Standorte“, darunter jeweils Wert, Δ und Δ %. Die Fußzeile nennt die Regeln für Bestwert und Durchschnitt." },
-      { nr: 5, ziel: "sp-dd", anker: "links", versatz: [-4, 0], regel: "UNIFY – Einheitliche Zahlen", titel: "Vorzeichen und Prozentpunkte",
+      { nr: 5, ziel: "sp-dd", anker: "links", versatz: [33, 0], regel: "UNIFY – Einheitliche Zahlen", titel: "Vorzeichen und Prozentpunkte",
         text: "Differenzen tragen ein Vorzeichen (+, −, ±) und ein echtes Minuszeichen. Die Differenz der Umsatzrendite steht in Prozentpunkten (−6,2 %-Pkt. zum besten Standort); das Original schrieb sie wie einen Anteil als „−6,2%“." },
       { nr: 6, ziel: "sp-dbp", anker: "links", versatz: [118, 104], regel: "EXPRESS – Passende Darstellung", titel: "Balken für relative Abstände",
         text: "Δ % hat Balken an einer Nulllinie, die absoluten Differenzen bleiben Zahlen, weil die Zeilen verschiedene Einheiten haben. Der Gewinn fällt in beiden Richtungen am stärksten auf." },
       { nr: 7, ziel: "filter", anker: "links", versatz: [190, 26], regel: "CONDENSE – Filtern statt vervielfachen", titel: "Jeder Standort im Benchmark",
         text: "Der Datenschnitt stellt jeden der zehn Standorte dem besten anderen Standort und dem Durchschnitt gegenüber; der Tooltip ergänzt den Rang. Dieselben Daten zeigt der Objekt-Vergleich (Abb. 3.24)." },
-      { nr: 8, ziel: "sp-kz", versatz: [-40, 0], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Weißraum statt Linien",
+      { nr: 8, ziel: "sp-kz", anker: "links", versatz: [136, 0], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Weißraum statt Linien",
         text: "Die senkrechten Trennlinien und die fetten Spaltenköpfe des Originals entfallen; die beiden Vergleiche sind durch Gruppenköpfe und Abstand getrennt. Die Zeilen folgen dem Rechenschema, ein Klick auf einen Spaltenkopf sortiert." },
     ],
     nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 727 × 366 px. Schrift Arial: Tabelle 10,5 pt, Visualtitel 12 pt. Das Berichtsdesign (JSON) setzt Farben und Schriften. Datenmodell: Tabelle Standorte wie in der CSV-Datei und eine Tabelle Kennzahlen (Name, Reihenfolge, Wirkung) für die Zeilen.",
@@ -863,7 +863,7 @@ const DK = (() => {
         format: "Kopfzeile 10,5 pt #4D4D4D, Rahmen #9A9A9A" },
       { id: "C", ziel: "v-titel", anker: "links", versatz: [636, 0], titel: "Titel und Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure aus Δ Gewinn zum besten Standort und zum Durchschnitt", format: "Titel 12 pt fett, Aussage 10,5 pt #4D4D4D" },
-      { id: "D", ziel: "fussnote", anker: "links", versatz: [30, 22], titel: "Fußzeile", visual: "Textfeld mit dynamischem Wert",
+      { id: "D", ziel: "fussnote", anker: "links", versatz: [637, 0], titel: "Fußzeile", visual: "Textfeld mit dynamischem Wert",
         felder: "Measure mit dem gewählten Standortnamen", format: "10,5 pt #4D4D4D" },
     ],
     theme: DK.thema(),

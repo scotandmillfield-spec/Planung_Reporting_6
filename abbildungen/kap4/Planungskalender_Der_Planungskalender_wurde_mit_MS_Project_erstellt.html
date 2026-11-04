@@ -657,7 +657,7 @@ const DK = (() => {
         text: "Plantermine sind weiße Balken mit Kontur, der Ist-Verlauf ist anthrazit, Verzug rot – wie im Reporting- und Planungskalender (Abb. 3.12) und in der Roadmap (Abb. 3.3). Das Original zeichnete jeden Vorgang als schwarzen Sammelbalken mit Endmarken; Plan und Ist ließen sich nicht unterscheiden." },
       { nr: 3, ziel: "sp-dauer", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Termine als Zahlen neben dem Balken",
         text: "Dauer in Arbeitstagen, Anfang und Ende stehen in eigenen Spalten wie in der Vorgangstabelle einer Projektsoftware – so bleiben die Termine auch im Druck ablesbar. Die Vorgangsnummern des Originals (77, 83, 84 …) entfallen." },
-      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [150, 0], regel: "CHECK – Visuelle Integrität", titel: "Lineare, tagesgenaue Zeitachse",
+      { nr: 4, ziel: "kal-achse", anker: "links", versatz: [150, -2], regel: "CHECK – Visuelle Integrität", titel: "Lineare, tagesgenaue Zeitachse",
         text: "Jede Kalenderwoche ist gleich breit, Balken beginnen und enden am Tag. Die Achse reicht von der strategischen Planung bis zur Veröffentlichung des Budgets; der Datenschnitt Zeitraum vergrößert einen Monat. Das Original zeigte Wochenspalten bis in den Dezember mit leerem Rand." },
       { nr: 5, ziel: "kal-stichtag", anker: "links", versatz: [0, -2], regel: "EXPRESS – Passende Darstellung", titel: "Stichtag und Status",
         text: "Die gestrichelte Linie trennt Erledigtes von Kommendem; der Status steht als Wort in der Tabelle, „überfällig“ rot. Verzug in Arbeitstagen und Ist-Termine stehen im Tooltip und unter „Werte als Tabelle“." },
@@ -679,7 +679,7 @@ const DK = (() => {
         felder: "Zeilen: Gruppe, Vorgang (Hierarchie); Spalten: Tabelle „Kalenderspalten“ (ohne Beziehung) mit den Einträgen Dauer, Anfang, Ende, Status und danach je Tag eine Spalte, sortiert nach Spaltennummer; Werte: Measure „Zelle“",
         format: "Zeilenüberschriften 10,5 pt, oberste Ebene fett; Text-Measure „Zelle“ liefert für die ersten vier Spalten Dauer (NETWORKDAYS), Anfang und Ende (FORMAT „TT.MM.“) und Status; „überfällig“ per bedingter Schriftfarbe #C62828",
         hinweis: "Auf Gruppenebene nimmt „Zelle“ MIN(Plan_Anfang) und MAX(Plan_Ende) der Teilpläne; ISINSCOPE(Vorgang[Vorgang]) unterscheidet die Ebenen." },
-      { id: "D", ziel: "kal-achse", anker: "links", versatz: [150, 0], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
+      { id: "D", ziel: "kal-achse", anker: "links", versatz: [150, -2], titel: "Kalender – Zeitachse", visual: "Dieselbe Matrix, Spalten ab Nummer 5 aus der Datumstabelle",
         felder: "Measure „Zelle“ liefert in den Tagesspalten einen Code: 1 Plan, 2 Ist, 3 Verzug, leer außerhalb des Vorgangs",
         format: "Bedingte Formatierung Hintergrund nach Feldwert über Measure „Zellfarbe“ (Plan #EFEFEF, da weiß mit Rahmen nicht möglich; Ist #3A3F44; Verzug #C62828); Schriftfarbe = Hintergrund; Spaltenbreite 4 px, Spaltenüberschrift Kalenderwoche",
         hinweis: "Tagesraster statt freier Balken. Zugeklappt zeigt die Budgetierung die Spanne vom ersten Beginn bis zum letzten Ende." },
@@ -787,7 +787,7 @@ const DK = (() => {
     onChange: v => { S.status = v; S.auswahl = null; zeichnen(); } });
 
   /* ---------- Kalender: Vorgangstabelle + Zeitachse ---------- */
-  const ZH = 19, KOPF_H = 36, EINZUG = 12, TEXT_X = 14, PLAN_RAND = "#3A3F44";
+  const ZH = 19, EINZUG = 12, TEXT_X = 14, PLAN_RAND = "#3A3F44";
   const BEISPIEL = datum(tag("2026-12-28"));
   const SP_V = Math.ceil(Math.max(...K.map(k => k.ebene * EINZUG + TEXT_X + tw(k.name, 14, k.ebene === 0)))) + 14;
   const SP_D = Math.ceil(Math.max(tw("Dauer"), tw("99"))) + 14;
@@ -797,22 +797,25 @@ const DK = (() => {
   const XD = SP_V + SP_D - 10, XA = SP_V + SP_D + 6, XE = XA + SP_A, XS = XE + SP_E;
 
   function kalender(ziel, breite, hoehe, rows) {
-    const H = rows.length * ZH, scroll = !DK.PRINT && KOPF_H + H > hoehe;
-    const W = scroll ? breite - 12 : breite;
-    const x0 = XS + SP_S + 4, x1 = W - 2;
     const { t0: T0, t1: T1 } = fenster();
     const at = S.achse === "arbeit";
     // Position eines Tagesanfangs: Kalendertage linear; Arbeitstage zählen nur Arbeitstage (Wochenende ohne Breite)
     const kum = [0];
     for (let t = T0; t < T1; t++) kum.push(kum[kum.length - 1] + (!at || istAT(t) ? 1 : 0));
-    const U = kum[kum.length - 1], pxTag = (x1 - x0) / U;
+    const U = kum[kum.length - 1], x0 = XS + SP_S + 4;
+    // Einheit nach verfügbarer Breite – Tage (Kopf dreizeilig: KW, Wochentag, Tag), Kalenderwochen oder Monate
+    const pxTag0 = (breite - 14 - x0) / U;
+    const einheit = pxTag0 >= 24 ? "tag" : pxTag0 * (at ? 5 : 7) >= 18 ? "woche" : "monat";
+    const KOPF_H = einheit === "tag" ? 53 : 36, kopfY = KOPF_H - 7;
+    const H = rows.length * ZH, scroll = !DK.PRINT && KOPF_H + H > hoehe;
+    const W = scroll ? breite - 12 : breite;
+    const x1 = W - 2, pxTag = (x1 - x0) / U;
     const X = t => x0 + kum[Math.min(Math.max(t, T0), T1) - T0] * pxTag;
     const box = el("div", { style: `position:absolute;inset:0;overflow-x:hidden;overflow-y:${scroll ? "auto" : "hidden"};scrollbar-width:thin` }, ziel);
     const kopf = sv("svg", { width: W, height: KOPF_H, style: "position:sticky;top:0;background:#FFFFFF;z-index:1;display:block" }, box);
     const svg = sv("svg", { width: W, height: H + 1, role: "img", "aria-label": CFG.aria, style: "display:block" }, box);
 
     // Spaltenköpfe
-    const kopfY = 29;
     sv("text", { x: 0, y: kopfY, class: "muted", id: "sp-vorgang" }, kopf, "Vorgang");
     sv("text", { x: XD, y: kopfY, class: "muted", id: "sp-dauer", "text-anchor": "end" }, kopf, "Dauer");
     sv("text", { x: XA, y: kopfY, class: "muted", id: "sp-anfang" }, kopf, "Anfang");
@@ -824,7 +827,6 @@ const DK = (() => {
     const HALO = "paint-order:stroke;stroke:#FFFFFF;stroke-width:4px;stroke-linejoin:round";
     const achse = sv("g", { id: "kal-achse", style: HALO }, kopf);
     const mehrjahr = D(T0).getUTCFullYear() !== D(T1 - 1).getUTCFullYear();
-    const einheit = pxTag >= 34 ? "tag" : pxTag * (at ? 5 : 7) >= 18 ? "woche" : "monat";
     const oben = [];                                   // Beschriftungen der oberen Zeile [links, rechts]
     const obenText = (x, text) => { const w = tw(text); if (x + w > x1) return; oben.push([x, x + w, sv("text", { x, y: 12 }, achse, text)]); };
     const linie = (x, y1, farbe, beide = true, y2 = KOPF_H) => {
@@ -841,16 +843,19 @@ const DK = (() => {
         const wochenanfang = t === T0 || D(t).getUTCDay() === 1;
         if (t > T0) linie(X(t), wochenanfang ? 0 : 17, wochenanfang ? "#C9C9C9" : "#E3E3E3");
         if (wochenanfang) obenText(X(t) + 4, "KW " + kw(t));
-        sv("text", { x: (X(t) + X(t + 1)) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, `${wt(t)} ${D(t).getUTCDate()}`);
+        sv("text", { x: (X(t) + X(t + 1)) / 2, y: 29, "text-anchor": "middle", class: "muted" }, achse, wt(t));
+        sv("text", { x: (X(t) + X(t + 1)) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, D(t).getUTCDate() + ".");
       }
     } else if (einheit === "woche") {
       for (let t = T0; t < T1; t++) {
         const d = D(t);
         if (d.getUTCDate() === 1 || t === T0) {
-          if (t > T0) linie(X(t), 0, "#C9C9C9", false, 17);
           const naechster = tag(d.getUTCMonth() === 11 ? `${d.getUTCFullYear() + 1}-01-01` : `${d.getUTCFullYear()}-${p2(d.getUTCMonth() + 2)}-01`);
           const text = MONATE[d.getUTCMonth()] + (mehrjahr && (d.getUTCMonth() === 0 || t === T0) ? " " + d.getUTCFullYear() : "");
-          if (X(Math.min(naechster, T1)) - X(t) >= tw(text) + 8) obenText(X(t) + 4, text);
+          if (X(Math.min(naechster, T1)) - X(t) >= tw(text) + 8) {
+            if (t > T0) linie(X(t), 0, "#C9C9C9", false, 17);
+            obenText(X(t) + 4, text);
+          }
         }
         if (t === T0 || d.getUTCDay() === 1) {
           let e = t + 1; while (e < T1 && D(e).getUTCDay() !== 1) e++;
@@ -866,7 +871,8 @@ const DK = (() => {
         if (t > T0) linie(X(t), 17, "#E3E3E3");
         if (d.getUTCMonth() === 0 || t === T0) obenText(X(t) + 4, String(d.getUTCFullYear()));
         const e = tag(d.getUTCMonth() === 11 ? `${d.getUTCFullYear() + 1}-01-01` : `${d.getUTCFullYear()}-${p2(d.getUTCMonth() + 2)}-01`);
-        sv("text", { x: (X(t) + X(Math.min(e, T1))) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, MONATE[d.getUTCMonth()]);
+        const mw = X(Math.min(e, T1)) - X(t), mt = mw >= tw("Mär") + 10 ? MONATE[d.getUTCMonth()] : MONATE[d.getUTCMonth()][0];
+        sv("text", { x: (X(t) + X(Math.min(e, T1))) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, mt);
       }
     }
     sv("line", { x1: 0, x2: W, y1: KOPF_H - 0.5, y2: KOPF_H - 0.5, stroke: "#3A3F44", "stroke-width": 1 }, kopf);
@@ -989,7 +995,7 @@ const DK = (() => {
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     const legende = [["#FFFFFF", "Plan", PLAN_RAND], [FARBE.ist, "Ist"], [FARBE.schlecht, "Verzug"]];
-    if (CFG.arbeitsfrei) legende.push(["#EFEFEF", "arbeitsfrei"]);
+    if (CFG.arbeitsfrei && S.achse !== "arbeit") legende.push(["#EFEFEF", "arbeitsfrei"]);
     DK.kopf(bKopf, { titel: CFG.titel, untertitel: CFG.untertitel(dmy(STICH)), quelle: "", legende });
     const v = DK.visual(bKal, { titel: CFG.visualTitel, einheit: CFG.einheit(S), botschaft: botschaft(bKal.clientWidth || 992) });
     kalender(v.flaeche, v.breite, v.hoehe, zeilen());

@@ -84,6 +84,8 @@
   K.forEach(k => { k.eltern = k.parent ? M.get(k.parent) : null; if (k.eltern) k.eltern.kinder.push(k); });
   K.forEach(k => { k.ebene = k.eltern ? k.eltern.ebene + 1 : 0; });
   const gruppe = k => k.kinder.length > 0;
+  // Nur eine Wurzel (Abb. 4.16): deren Auswahl hätte keine Wirkung – Klick auf die Zeile klappt stattdessen auf und zu
+  const nurKlappen = k => !k.eltern && K.filter(x => !x.eltern).length === 1;
   const BLATT = K.filter(k => !gruppe(k));
   const blaetter = k => (gruppe(k) ? k.kinder.flatMap(blaetter) : [k]);
   const pfad = k => (k.eltern ? [...pfad(k.eltern), k.name] : [k.name]);
@@ -152,7 +154,7 @@
     onChange: v => { S.status = v; S.auswahl = null; zeichnen(); } });
 
   /* ---------- Kalender: Vorgangstabelle + Zeitachse ---------- */
-  const ZH = 19, KOPF_H = 36, EINZUG = 12, TEXT_X = 14, PLAN_RAND = "#3A3F44";
+  const ZH = 19, EINZUG = 12, TEXT_X = 14, PLAN_RAND = "#3A3F44";
   const BEISPIEL = datum(tag("2026-12-28"));
   const SP_V = Math.ceil(Math.max(...K.map(k => k.ebene * EINZUG + TEXT_X + tw(k.name, 14, k.ebene === 0)))) + 14;
   const SP_D = Math.ceil(Math.max(tw("Dauer"), tw("99"))) + 14;
@@ -162,22 +164,25 @@
   const XD = SP_V + SP_D - 10, XA = SP_V + SP_D + 6, XE = XA + SP_A, XS = XE + SP_E;
 
   function kalender(ziel, breite, hoehe, rows) {
-    const H = rows.length * ZH, scroll = !DK.PRINT && KOPF_H + H > hoehe;
-    const W = scroll ? breite - 12 : breite;
-    const x0 = XS + SP_S + 4, x1 = W - 2;
     const { t0: T0, t1: T1 } = fenster();
     const at = S.achse === "arbeit";
     // Position eines Tagesanfangs: Kalendertage linear; Arbeitstage zählen nur Arbeitstage (Wochenende ohne Breite)
     const kum = [0];
     for (let t = T0; t < T1; t++) kum.push(kum[kum.length - 1] + (!at || istAT(t) ? 1 : 0));
-    const U = kum[kum.length - 1], pxTag = (x1 - x0) / U;
+    const U = kum[kum.length - 1], x0 = XS + SP_S + 4;
+    // Einheit nach verfügbarer Breite – Tage (Kopf dreizeilig: KW, Wochentag, Tag), Kalenderwochen oder Monate
+    const pxTag0 = (breite - 14 - x0) / U;
+    const einheit = pxTag0 >= 24 ? "tag" : pxTag0 * (at ? 5 : 7) >= 18 ? "woche" : "monat";
+    const KOPF_H = einheit === "tag" ? 53 : 36, kopfY = KOPF_H - 7;
+    const H = rows.length * ZH, scroll = !DK.PRINT && KOPF_H + H > hoehe;
+    const W = scroll ? breite - 12 : breite;
+    const x1 = W - 2, pxTag = (x1 - x0) / U;
     const X = t => x0 + kum[Math.min(Math.max(t, T0), T1) - T0] * pxTag;
     const box = el("div", { style: `position:absolute;inset:0;overflow-x:hidden;overflow-y:${scroll ? "auto" : "hidden"};scrollbar-width:thin` }, ziel);
     const kopf = sv("svg", { width: W, height: KOPF_H, style: "position:sticky;top:0;background:#FFFFFF;z-index:1;display:block" }, box);
     const svg = sv("svg", { width: W, height: H + 1, role: "img", "aria-label": CFG.aria, style: "display:block" }, box);
 
     // Spaltenköpfe
-    const kopfY = 29;
     sv("text", { x: 0, y: kopfY, class: "muted", id: "sp-vorgang" }, kopf, "Vorgang");
     sv("text", { x: XD, y: kopfY, class: "muted", id: "sp-dauer", "text-anchor": "end" }, kopf, "Dauer");
     sv("text", { x: XA, y: kopfY, class: "muted", id: "sp-anfang" }, kopf, "Anfang");
@@ -189,7 +194,6 @@
     const HALO = "paint-order:stroke;stroke:#FFFFFF;stroke-width:4px;stroke-linejoin:round";
     const achse = sv("g", { id: "kal-achse", style: HALO }, kopf);
     const mehrjahr = D(T0).getUTCFullYear() !== D(T1 - 1).getUTCFullYear();
-    const einheit = pxTag >= 34 ? "tag" : pxTag * (at ? 5 : 7) >= 18 ? "woche" : "monat";
     const oben = [];                                   // Beschriftungen der oberen Zeile [links, rechts]
     const obenText = (x, text) => { const w = tw(text); if (x + w > x1) return; oben.push([x, x + w, sv("text", { x, y: 12 }, achse, text)]); };
     const linie = (x, y1, farbe, beide = true, y2 = KOPF_H) => {
@@ -206,7 +210,8 @@
         const wochenanfang = t === T0 || D(t).getUTCDay() === 1;
         if (t > T0) linie(X(t), wochenanfang ? 0 : 17, wochenanfang ? "#C9C9C9" : "#E3E3E3");
         if (wochenanfang) obenText(X(t) + 4, "KW " + kw(t));
-        sv("text", { x: (X(t) + X(t + 1)) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, `${wt(t)} ${D(t).getUTCDate()}`);
+        sv("text", { x: (X(t) + X(t + 1)) / 2, y: 29, "text-anchor": "middle", class: "muted" }, achse, wt(t));
+        sv("text", { x: (X(t) + X(t + 1)) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, D(t).getUTCDate() + ".");
       }
     } else if (einheit === "woche") {
       for (let t = T0; t < T1; t++) {
@@ -233,7 +238,8 @@
         if (t > T0) linie(X(t), 17, "#E3E3E3");
         if (d.getUTCMonth() === 0 || t === T0) obenText(X(t) + 4, String(d.getUTCFullYear()));
         const e = tag(d.getUTCMonth() === 11 ? `${d.getUTCFullYear() + 1}-01-01` : `${d.getUTCFullYear()}-${p2(d.getUTCMonth() + 2)}-01`);
-        sv("text", { x: (X(t) + X(Math.min(e, T1))) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, MONATE[d.getUTCMonth()]);
+        const mw = X(Math.min(e, T1)) - X(t), mt = mw >= tw("Mär") + 10 ? MONATE[d.getUTCMonth()] : MONATE[d.getUTCMonth()][0];
+        sv("text", { x: (X(t) + X(Math.min(e, T1))) / 2, y: kopfY, "text-anchor": "middle", class: "muted" }, achse, mt);
       }
     }
     sv("line", { x1: 0, x2: W, y1: KOPF_H - 0.5, y2: KOPF_H - 0.5, stroke: "#3A3F44", "stroke-width": 1 }, kopf);
@@ -280,7 +286,7 @@
       if (i > 0) sv("line", { x1: 0, x2: W, y1: y - 0.5, y2: y - 0.5, stroke: k.ebene === 0 ? "#9A9A9A" : "#EFEFEF", "stroke-width": 1 }, svg);
       const sel = S.auswahl && M.get(S.auswahl);
       const blass = sel && !(unter(k, sel) || unter(sel, k));
-      const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), id: "z-" + k.id }, svg);
+      const g = sv("g", { class: (nurKlappen(k) ? "" : "dk-klick") + (blass ? " dk-blass" : ""), id: "z-" + k.id }, svg);
       const fett = k.ebene === 0 ? "font-weight:bold" : "";
       sv("text", { x: k.ebene * EINZUG + TEXT_X, y: cy, dy: "0.35em", id: "t-" + k.id, style: fett }, g, k.name);
       sv("text", { x: XD, y: cy, dy: "0.35em", "text-anchor": "end" }, g, String(anzahlAT(k.b, k.e)));
@@ -291,8 +297,8 @@
       if (!gruppe(k)) balken(g, k, cy);
       else if (k.serie && !auf) bl.forEach(b => balken(g, b, cy));
       else klammer(g, bl, cy);
-      const hit = sv("rect", { x: 0, y, width: W, height: ZH, fill: "transparent" }, g);
-      hit.addEventListener("click", () => auswaehlen(k.id));
+      const hit = sv("rect", { x: 0, y, width: W, height: ZH, fill: "transparent", style: "cursor:pointer" }, g);
+      hit.addEventListener("click", () => (nurKlappen(k) ? umschalten(k.id) : auswaehlen(k.id)));
       tooltip(hit, () => tooltipZeile(k, bl, auf));
       if (gruppe(k)) {
         const ix = k.ebene * EINZUG + 0.5, iy = Math.round(cy - 4.5) + 0.5;
@@ -315,7 +321,7 @@
       .filter(([, v]) => v).map(([t, v]) => `${v} ${t}`).join(", ");
   }
   function tooltipZeile(k, bl, auf) {
-    const klick = gruppe(k) ? ["+/− klappt auf und zu", "Klick hebt hervor"] : ["Klick hebt hervor"];
+    const klick = nurKlappen(k) ? ["Klick klappt auf und zu"] : gruppe(k) ? ["+/− klappt auf und zu", "Klick hebt hervor"] : ["Klick hebt hervor"];
     const ort = k.eltern ? [pfad(k).slice(0, -1).join(" › ")] : [];
     const plan = `Plan: ${wt(k.b)} ${dmy(k.b)} bis ${wt(k.e)} ${dmy(k.e)} (${atText(anzahlAT(k.b, k.e))})`;
     if (gruppe(k)) return [k.name, ...ort, plan, `${bl.length} ${bl.length === 1 ? "Vorgang" : "Vorgänge"}: ${zaehlen(bl)}`, ...klick];
@@ -356,7 +362,7 @@
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
     const legende = [["#FFFFFF", "Plan", PLAN_RAND], [FARBE.ist, "Ist"], [FARBE.schlecht, "Verzug"]];
-    if (CFG.arbeitsfrei) legende.push(["#EFEFEF", "arbeitsfrei"]);
+    if (CFG.arbeitsfrei && S.achse !== "arbeit") legende.push(["#EFEFEF", "arbeitsfrei"]);
     DK.kopf(bKopf, { titel: CFG.titel, untertitel: CFG.untertitel(dmy(STICH)), quelle: "", legende });
     const v = DK.visual(bKal, { titel: CFG.visualTitel, einheit: CFG.einheit(S), botschaft: botschaft(bKal.clientWidth || 992) });
     kalender(v.flaeche, v.breite, v.hoehe, zeilen());

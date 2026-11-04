@@ -226,6 +226,46 @@
     }
    ]
   },
+  "Tab. 3.1": {
+   "status": "pruefung",
+   "datei": "Flache_Tabelle",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen, Werte geprüft",
+    "Kopfzeile ohne Einheiten – „Preis (€)“ und „Umsatz (€)“ ergänzen?",
+    "zusätzlich als interaktives Visual für die Lernplattform; Druck weiter als LaTeX-Tabelle (tabellen/Flache_Tabelle.tex unverändert)",
+    "Visual 110 mm breit mit denselben fünf Positionen; Einheiten im Titel („Menge in Stück, Preis und Umsatz in €“) – Annahme wie oben",
+    "Schlüssel (Auftrags-, Artikelnummer) linksbündig, Werte rechtsbündig; Klick auf eine Auftrags- bzw. Artikelnummer hebt alle zugehörigen Positionen hervor, Tooltip mit Rechnung Menge × Preis und Anteilen",
+    "Neu: Ansicht „Pivotiert: Auftrag × Artikel“ (Wertfeld Umsatz oder Menge, Summen am Rand, leere Kombination „–“) als Brücke zu Tab. 3.2 – Preis bewusst nicht als Wertfeld (nicht additiv)",
+    "Hinweis: Tab. 3.1 und Tab. 3.2 haben im Original keinen gemeinsamen Datensatz (Aufträge/Artikel bzw. Kunden/Produkte); die Werte bleiben getrennt wie im Original"
+   ],
+   "alt": "Flache Tabelle mit fünf Auftragspositionen und den Spalten Auftragsnummer, Artikelnummer, Menge, Preis und Umsatz: Auftrag 10001 mit Artikel 20101 (2 × 10 = 20 €) und 20201 (1 × 20 = 20 €), Auftrag 10002 mit Artikel 20101 (3 × 10 = 30 €), 20201 (4 × 20 = 80 €) und 20203 (1 × 15 = 15 €). Jede Zeile ist ein Datensatz; zusammen ergeben sich 165 € Umsatz."
+  },
+  "Tab. 3.2": {
+   "status": "pruefung",
+   "datei": "Einfache_Kreuztabelle",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
+    "Eckzelle „Absatz“ ohne Einheit – „Absatz (Stück)“?",
+    "zusätzlich als interaktives Visual für die Lernplattform; Druck weiter als LaTeX-Tabelle (tabellen/Einfache_Kreuztabelle.tex unverändert)",
+    "Visual mit Titel „Absatz nach Kunden und Produkten, Stück“, zweizeiligem Kopf (Dimension „Produkt“ über den Spalten) und fetten Randsummen; Werte des Originals, Summen vom Visual gerechnet (400/450/200/550 bzw. 450/550/450/150, gesamt 1.600)",
+    "Interaktion: Fadenkreuz (Klick auf eine Zelle hebt Zeile und Spalte hervor), Sortierung per Spaltenkopf, Tooltip mit Anteilen an Zeile, Spalte und Gesamt",
+    "Datenschnitte „Zeilen: Kunden | Produkte“ (Rotation wie Abb. 3.34) und „Werte anzeigen als: Stück | % Zeile | % Spalte | % Gesamt“; CSV in flacher Form (16 Datensätze) als Brücke zu Tab. 3.1"
+   ],
+   "alt": "Kreuztabelle des Absatzes in Stück mit den Kunden 1 bis 4 in den Zeilen und den Produkten 1 bis 4 in den Spalten, dazu Zeilen- und Spaltensummen. Kunde 1: 200, 100, 100, 0 (400); Kunde 2: 100, 50, 200, 100 (450); Kunde 3: 50, 100, 50, 0 (200); Kunde 4: 100, 300, 100, 50 (550); Summen je Produkt 450, 550, 450 und 150, insgesamt 1.600 Stück. Größter Kunde ist Kunde 4, stärkstes Produkt Produkt 2 (je 34 %)."
+  },
+  "Tab. 3.3": {
+   "status": "pruefung",
+   "datei": "Erweiterte_Kreuztabelle",
+   "kommentare": [
+    "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
+    "„Zwischensumme“ (Summe je Produkt) und „Summe“ (Summe je Produktgruppe) sind missverständlich benannt – z. B. „Summe Produkt“ und „Summe Produktgruppe“",
+    "zusätzlich als interaktives Visual für die Lernplattform; Druck weiter als LaTeX-Tabelle (tabellen/Erweiterte_Kreuztabelle.tex unverändert)",
+    "Im Visual Teilsummen je Produktgruppe als eigene Spalte („Teilsumme“, 300/150/150/400 bzw. 100/300/50/150) statt der zweiten Summenzeile; die Gruppensummen 1.000 und 600 stehen in der Summenzeile unter „Teilsumme“ – löst die Benennungsfrage oben; für die LaTeX-Tabelle so übernehmen?",
+    "Interaktion: Klick auf den Gruppenkopf klappt die Produktgruppe zu bzw. auf (Roll-Up/Drill-Down wie Abb. 3.37), Datenschnitt für alle Gruppen; Fadenkreuz, Sortierung, „Werte anzeigen als“ und Tooltip mit Anteilen wie in Tab. 3.2",
+    "Kundenbezeichnung im Excel-Objekt teils „Kunden 1“ – einheitlich „Kunde 1“ bis „Kunde 4“"
+   ],
+   "alt": "Erweiterte Kreuztabelle des Absatzes in Stück: Kunden 1 bis 4 in den Zeilen, in den Spalten Produktgruppe A mit Produkt 1 und 2 und Produktgruppe B mit Produkt 3 und 4, jeweils mit Teilsumme, dazu die Gesamtsumme. Produktgruppe A kommt auf 1.000 Stück (Kunden 300, 150, 150, 400), Produktgruppe B auf 600 Stück (100, 300, 50, 150), zusammen 1.600 Stück; schwächstes Produkt ist Produkt 4 mit 150 Stück."
+  },
   "3.193": {
    "status": "klaerung",
    "kommentare": [
@@ -366,29 +406,18 @@
     }
    ]
   },
-  "Tab. 3.1": {
-   "status": "latex",
+  "3.32": {
+   "status": "pruefung",
+   "datei": "Pivottabelle_MS_Excel",
    "kommentare": [
-    "Aus dem eingebetteten Excel-Objekt übernommen, Werte geprüft",
-    "Kopfzeile ohne Einheiten – „Preis (€)“ und „Umsatz (€)“ ergänzen?"
+    "Produktscreenshot softwareneutral als bedienbares Visual nachgebaut (Bauweg V statt M): Pivottabelle mit Feldliste, ohne Fensterrahmen, Menüband, Programmname und Logos; Querformat 155 × 62 mm wegen der Feldliste neben der Tabelle",
+    "Werte des Originals unverändert (Summe von Umsatz je Produktgruppe und Verkaufsorganisation, gesamt 39.907.036 €); die Summen des Originals enthalten Cent-Rundungen (z. B. Rennrad 12.661.619 statt 12.661.618) – genau so übernommen",
+    "Feldnamen deutsch; Codes GER1–GER3 → Nord, Mitte, Süd und City/Kids/Mountain/Racing/Trekking bike → Citybike, Kinderrad, Mountainbike, Rennrad, Trekkingrad (Annahme); Feldliste von 16 auf 7 Felder gekürzt",
+    "Für die Bedienung erfunden: Aufteilung auf Material (2 je Produktgruppe), Vertriebsweg und Jahr, Absatz in Stück sowie das nicht gewählte Jahr 2025 – mit dem Standardfilter „2026 und 2027“ ergibt sich exakt das Original",
+    "„€“ an jeder Zahl → Einheit im Titel; „Gesamtergebnis“ → „Gesamt“ (fett); „(Mehrere Elemente)“ → „2026 und 2027“; Felder lassen sich ankreuzen, in Filter/Spalten/Zeilen/Werte ziehen oder per Menü verschieben, mehrere Zeilenfelder mit Teilsummen auf- und zuklappbar",
+    "Caption ohne Produktnamen? z. B. „Pivottabelle mit Feldliste“ (im Text ggf. „in Anlehnung an MS Excel“)"
    ],
-   "datei": "Flache_Tabelle"
-  },
-  "Tab. 3.2": {
-   "status": "latex",
-   "kommentare": [
-    "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
-    "Eckzelle „Absatz“ ohne Einheit – „Absatz (Stück)“?"
-   ],
-   "datei": "Einfache_Kreuztabelle"
-  },
-  "Tab. 3.3": {
-   "status": "latex",
-   "kommentare": [
-    "Aus dem eingebetteten Excel-Objekt übernommen, Summen nachgerechnet",
-    "„Zwischensumme“ (Summe je Produkt) und „Summe“ (Summe je Produktgruppe) sind missverständlich benannt – z. B. „Summe Produkt“ und „Summe Produktgruppe“"
-   ],
-   "datei": "Erweiterte_Kreuztabelle"
+   "alt": "Pivottabelle „Umsatz nach Produktgruppe und Verkaufsorganisation“ in € mit den Berichtsfiltern Jahr (2026 und 2027), Material und Vertriebsweg (je alle) über der Tabelle und einer Feldliste rechts. Umsatz je Produktgruppe: Citybike 6.838.088, Kinderrad 1.634.116, Mountainbike 13.241.404, Rennrad 12.661.619, Trekkingrad 5.531.809; je Verkaufsorganisation Nord 13.376.856, Mitte 10.631.169, Süd 15.899.010; gesamt 39.907.036 €. Die Feldliste zeigt die angekreuzten Felder und ihre Zuordnung zu den Bereichen Filter, Spalten, Zeilen und Werte (Summe von Umsatz)."
   },
   "Tab. 4.6": {
    "status": "latex",
@@ -1067,6 +1096,19 @@
     "Rote Spaltenköpfe und gelbe Wertefelder entfallen; 110 mm hochkant (nicht Querformat), „Dimension Produkt“ steht dafür über dem Pfeil"
    ],
    "alt": "Links ein Datenwürfel mit den Dimensionen Region, Produkt und Zeit und einem zusätzlichen roten Pfeil „Dimension Filiale“ von der Oberseite nach links oben. Rechts die Tabelle „Umsatz in €“ für Januar bis März und das 1. Quartal mit den Spalten Summe, Filiale A und Filiale B: Januar 20.000 = 11.000 + 9.000, Februar 15.000 = 6.000 + 9.000, März 22.000 = 10.000 + 12.000, 1. Quartal 57.000 = 27.000 + 30.000. Durchgezogene Pfeile führen von den Filialen zur Summe (Merge), ein gestrichelter Pfeil in der Quartalszeile von der Summe zu den Filialen (Split)."
+  },
+  "3.41": {
+   "status": "pruefung",
+   "datei": "Vermeidung_von_Visualisierungsfehlern",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 × 89,6 mm); Aufbau wie im Original – oben die fehlerhafte, unten die korrigierte Darstellung, jetzt mit a) und b) gekennzeichnet",
+    "Negativbeispiel bleibt sichtbar: alle acht Fehler des Originals in a) erhalten (Skala bis 9.000.000, grauer Hintergrund, Gitterlinien, keine Werte, Rahmen, breite Säulen mit Rahmen, Legende, alphabetische Sortierung); nur Schrift und Farben im Buchstil – blaue Säulen → mittelgrau mit schwarzem Rahmen, damit der Rahmenfehler erkennbar bleibt",
+    "Pfeile mit Beschriftung → rote nummerierte Punkte am Fehler und Liste darunter; Listentexte gekürzt (Originaltext im Tooltip), „besseren Grafiktyp wählen“ → „Diagrammtyp“; Rot hier nur für die Fehlermarken",
+    "Werte des Originals (Standardmodelle 8,53, Luxusmodelle 6,12, Sondermodelle 3,82 Mio. €); b) ohne Achse 0–9,0, Werte direkt am Balken, Titel mit Einheit „Umsatz je Produktgruppe in Mio. €“",
+    "Neu für die Lernplattform: Fehler einzeln per Kästchen beheben, „Alle behoben“ verwandelt a) in b); Klick auf einen Fehler hebt die Stelle rot gestrichelt hervor",
+    "Hinweis für die Caption/den Text: ggf. „a) fehlerhafte, b) korrigierte Darstellung“ ergänzen"
+   ],
+   "alt": "Zwei Diagramme mit demselben Umsatz je Produktgruppe. a) Ein Säulendiagramm mit acht rot nummerierten Gestaltungsfehlern: übergenaue Skala von 0 bis 9.000.000, grauer Hintergrund, dunkle Gitterlinien, fehlende Zahlenwerte, Rahmen um das Diagramm, breite Säulen mit Rahmen, Legende für eine einzige Reihe und alphabetische Reihenfolge (Luxus-, Sonder-, Standardmodelle). b) Die korrigierte Fassung als waagerechte, absteigend sortierte und direkt beschriftete Balken: Standardmodelle 8,53, Luxusmodelle 6,12, Sondermodelle 3,82 Mio. € – Standardmodelle bringen 46 % des Umsatzes."
   },
   "3.42": {
    "status": "pruefung",

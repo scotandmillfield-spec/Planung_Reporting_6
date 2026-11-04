@@ -1,0 +1,33 @@
+﻿Berichtszeile;Gruppe;Vorzeichen;Szenario;Zeitraum;Jahr;Wert_Mio_EUR
+Umsatzerlöse;Leistung;1;Plan;Monat August;2027;118
+Umsatzerlöse;Leistung;1;Ist;Monat August;2027;133
+Umsatzerlöse;Leistung;1;Plan;kumuliert Januar–August;2027;1000
+Umsatzerlöse;Leistung;1;Ist;kumuliert Januar–August;2027;1000
+Sonstige Erträge;Leistung;1;Plan;Monat August;2027;19
+Sonstige Erträge;Leistung;1;Ist;Monat August;2027;17
+Sonstige Erträge;Leistung;1;Plan;kumuliert Januar–August;2027;250
+Sonstige Erträge;Leistung;1;Ist;kumuliert Januar–August;2027;200
+Bestandsveränderungen;Leistung;1;Plan;Monat August;2027;33
+Bestandsveränderungen;Leistung;1;Ist;Monat August;2027;37
+Bestandsveränderungen;Leistung;1;Plan;kumuliert Januar–August;2027;400
+Bestandsveränderungen;Leistung;1;Ist;kumuliert Januar–August;2027;400
+Materialkosten;Kosten;-1;Plan;Monat August;2027;46
+Materialkosten;Kosten;-1;Ist;Monat August;2027;42
+Materialkosten;Kosten;-1;Plan;kumuliert Januar–August;2027;500
+Materialkosten;Kosten;-1;Ist;kumuliert Januar–August;2027;500
+Fremdleistungen;Kosten;-1;Plan;Monat August;2027;13
+Fremdleistungen;Kosten;-1;Ist;Monat August;2027;8
+Fremdleistungen;Kosten;-1;Plan;kumuliert Januar–August;2027;150
+Fremdleistungen;Kosten;-1;Ist;kumuliert Januar–August;2027;100
+Personalkosten;Kosten;-1;Plan;Monat August;2027;38
+Personalkosten;Kosten;-1;Ist;Monat August;2027;50
+Personalkosten;Kosten;-1;Plan;kumuliert Januar–August;2027;450
+Personalkosten;Kosten;-1;Ist;kumuliert Januar–August;2027;600
+Abschreibungen;Kosten;-1;Plan;Monat August;2027;8
+Abschreibungen;Kosten;-1;Ist;Monat August;2027;9
+Abschreibungen;Kosten;-1;Plan;kumuliert Januar–August;2027;100
+Abschreibungen;Kosten;-1;Ist;kumuliert Januar–August;2027;100
+Sonstige Kosten;Kosten;-1;Plan;Monat August;2027;6
+Sonstige Kosten;Kosten;-1;Ist;Monat August;2027;8
+Sonstige Kosten;Kosten;-1;Plan;kumuliert Januar–August;2027;100
+Sonstige Kosten;Kosten;-1;Ist;kumuliert Januar–August;2027;100

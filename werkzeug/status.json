@@ -1087,6 +1087,19 @@
    ],
    "alt": "Zwei Balkendiagramme mit denselben Umsätzen je Region in Mio. €: Europa 57,7, Asien 59,8, Nordamerika 58,8, Südamerika 58,2, Afrika 56,3, Ozeanien 55,6. a) Die Achse beginnt bei 52 (rot gestrichelt markiert), dadurch wirkt der Balken von Asien 2,2-mal so lang wie der von Ozeanien. b) Die Achse beginnt bei 0, die Balken sind fast gleich lang – Asien liegt nur 8 % über Ozeanien."
   },
+  "3.54": {
+   "status": "pruefung",
+   "datei": "Bullet-Chart",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48 ff.",
+    "Statt derselben Kennzahl „Evaluation“ zweimal (Bereiche einzeln und als Farbverlauf) jetzt vier Kennzahlen untereinander – so zeigt sich der Vorteil des Bullet-Charts; die erste mit den Werten des Originals (Kundenzufriedenheit 65, Ziel 78, Skala 0–100), die übrigen erfunden",
+    "Bewertungsbereiche als Grautöne nach Stephen Few (dunkel = schlecht, hell = gut) statt Ampel- bzw. Regenbogenverlauf von Grün bis Rot; Ist als anthrazitfarbener Balken, Ziel als senkrechter Strich",
+    "Neu: Ist, Ziel und Abweichung als Zahlen rechts, Abweichung farbig nach Wirkung; Sprechblase und Skala mit Teilstrichen entfallen",
+    "Bitte prüfen: Das Original zeigte zwei Varianten (diskrete Bereiche und Verlauf); falls der Text auf den Verlauf eingeht, Hinweis ergänzen, dass Verläufe die Bereichsgrenzen verwischen",
+    "Caption: Daten und Gestaltung neu – „In Anlehnung an Online Chart Makers – amCharts 2017b“ kann bleiben oder entfallen"
+   ],
+   "alt": "Vier Bullet-Charts untereinander für Kennzahlen 2027, jeweils mit grauen Bewertungsbereichen (dunkel schlecht, mittel befriedigend, hell gut), einem dunklen Ist-Balken und einem Zielstrich; rechts Ist, Ziel und Abweichung. Kundenzufriedenheit 65 bei Ziel 78 (−13), Umsatz 460 bei Ziel 440 Mio. € (+20), Deckungsbeitragsquote 31,4 bei Ziel 35,0 % (−3,6), Liefertreue 93,8 bei Ziel 95,0 % (−1,2). Kernaussage: Nur der Umsatz liegt über dem Ziel, die Kundenzufriedenheit am weitesten darunter."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

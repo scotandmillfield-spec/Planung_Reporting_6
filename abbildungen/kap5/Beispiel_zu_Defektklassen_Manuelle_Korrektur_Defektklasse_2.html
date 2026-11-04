@@ -733,13 +733,13 @@ const DK = (() => {
 
   /* ---------- Tabelle (Schritte 1–4) ---------- */
   const SPALTEN = [
-    { c: 0, titel: "Kunden_ID", id: "sp-kunde", breite: 70, slot: true },
+    { c: 0, titel: "Kunden_ID", id: "sp-kunde", breite: 81, slot: true },
     { c: 1, titel: "Name", id: "sp-name", breite: 110, slot: true },
     { c: 2, titel: "Geburtsdatum", id: "sp-geburt", breite: 92, slot: true },
-    { c: 3, titel: "Alter", id: "sp-alter", breite: 40, slot: true, re: true },
+    { c: 3, titel: "Alter", id: "sp-alter", breite: 37, slot: true, re: true },
     { c: 4, titel: "Bestelldatum", id: "sp-bestelldatum", breite: 92, slot: true },
-    { c: 5, titel: "Bestellung", id: "sp-bestellung", breite: 169 },        // Summe der Spalten = 695 px
-    { c: 6, titel: "Betrag", id: "sp-betrag", breite: 44, re: true, kopfRe: true },
+    { c: 5, titel: "Bestellung", id: "sp-bestellung", breite: 162 },        // Summe mit Abständen = 695 px
+    { c: 6, titel: "Betrag", id: "sp-betrag", breite: 43, re: true, kopfRe: true },
   ];
   function zeilen(s) {
     const liste = stand(s).map((w, r) => {
@@ -962,65 +962,67 @@ const DK = (() => {
   }
 
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
+  // Marke an der Fokuszelle: links daneben im leeren Markenplatz der Nachbarspalte, in der ersten Spalte zwischen Wert und Marke
+  const zellVersatz = () => { const td = document.getElementById("m-zelle"); return td && td.dataset.c === "0" ? [65, 6] : [12, 6]; };
   const REGELN_TABELLE = [
-    { nr: 1, ziel: "v-titel", anker: "links", versatz: [0, 0], regel: "SAY – Botschaft vermitteln", titel: "Aussage zum Schritt",
+    { nr: 1, ziel: "v-titel", anker: "links", versatz: [672, 23], regel: "SAY – Botschaft vermitteln", titel: "Aussage zum Schritt",
       text: "Unter dem Titel steht in einem Satz, was der gewählte Schritt bewirkt: wie viele Werte welcher Klasse fehlerhaft, korrigiert oder noch offen sind – aus der Defektliste berechnet. Das Original zeigte vier Tabellen ohne Titel und Aussage; was sich geändert hatte, musste man durch Vergleich der Abbildungen suchen." },
-    { nr: 2, ziel: "filter", anker: "links", versatz: [0, 0], regel: "STRUCTURE – Inhalte ordnen", titel: "Ein Datensatz, fünf Schritte",
+    { nr: 2, ziel: "filter", anker: "links", versatz: [640, 28], regel: "STRUCTURE – Inhalte ordnen", titel: "Ein Datensatz, fünf Schritte",
       text: "Der Schalter führt in der Reihenfolge der Bereinigung durch die Serie: Rohdaten, automatische Korrektur der Klasse 1, manuelle Korrektur der Klassen 2 und 3, Ergebnis. Die Abbildungen 5.11 bis 5.15 zeigen dieselben sieben Datensätze im selben Layout; jede startet in ihrem Schritt." },
-    { nr: 3, ziel: "m-zelle", versatz: [0, 0], regel: "UNIFY – Semantische Notation", titel: "Marke am fehlerhaften Wert",
+    { nr: 3, ziel: "m-zelle", anker: "links", get versatz() { return zellVersatz(); }, regel: "UNIFY – Semantische Notation", titel: "Marke am fehlerhaften Wert",
       text: "Jeder fehlerhafte Wert trägt eine Marke mit der Ziffer seiner Defektklasse: rot gefüllt und rot gewellt unterstrichen, solange er offen ist; blaugrün umrandet und unterstrichen im Schritt seiner Korrektur; grau umrandet danach. Rot steht nur für Defekte. Das Original markierte nichts." },
-    { nr: 4, ziel: "legende", anker: "links", versatz: [0, 0], regel: "CHECK – Visuelle Integrität", titel: "Lesbar ohne Farbe",
+    { nr: 4, ziel: "legende", anker: "links", versatz: [692, 5], regel: "CHECK – Visuelle Integrität", titel: "Lesbar ohne Farbe",
       text: "Rot und Blaugrün haben fast denselben Grauwert. Deshalb tragen Form und Linie die Bedeutung: gefüllte gegen umrandete Marke, gewellte gegen gerade Unterstreichung, dazu die Ziffer der Klasse. So bleibt die Abbildung im Schwarzweißdruck und bei Farbsehschwäche eindeutig." },
-    { nr: 5, ziel: "sp-bestellung", anker: "links", versatz: [0, 0], regel: "CONDENSE – Details im Tooltip", titel: "Regel im Tooltip",
+    { nr: 5, ziel: "sp-bestellung", anker: "links", versatz: [114, 2], regel: "CONDENSE – Details im Tooltip", titel: "Regel im Tooltip",
       text: "Der Tooltip eines markierten Werts nennt Klasse, Erkennung und Korrektur, die Beschreibung des Defekts, die Prüf- oder Korrekturregel sowie Rohwert und korrigierten Wert – statt einer zweiten Tabelle. Ein Klick auf einen markierten Wert hebt alle Defekte derselben Klasse hervor." },
-    { nr: 6, ziel: "sp-betrag", versatz: [0, 0], regel: "SIMPLIFY – Einheitliche Zahlen", titel: "Dezimalkomma, Einheit im Titel",
+    { nr: 6, ziel: "sp-betrag", versatz: [-49, 2], regel: "SIMPLIFY – Einheitliche Zahlen", titel: "Dezimalkomma, Einheit im Titel",
       text: "Der Betrag steht mit Dezimalkomma und zwei Nachkommastellen (Original: 4.50), die Einheit einmal im Titel. Texte links-, Zahlen rechtsbündig. Die Datumsangaben bleiben in ihren Rohformaten, denn sie sind Gegenstand der Korrektur. Blaue Kopfzeile und Rahmen des Originals entfallen." },
-    { nr: 7, ziel: "sp-bestelldatum", versatz: [0, 0], regel: "EXPRESS – Fehler sichtbar machen", titel: "Sortieren zeigt den Formatfehler",
+    { nr: 7, ziel: "sp-name", anker: "links", versatz: [91, 2], regel: "EXPRESS – Fehler sichtbar machen", titel: "Sortieren zeigt den Formatfehler",
       text: "Ein Klick auf einen Spaltenkopf sortiert. Nach Bestelldatum sortiert, ordnen die Rohdaten falsch (01-05-2023 vor 2023-04-05); nach der Korrektur der Klasse 1 stimmt die Reihenfolge. Standard ist die Reihenfolge der Kundennummer – nach der Zusammenführung steht die Espresso-Bestellung bei 1001 wie im Original." },
   ];
   const REGELN_DIAGRAMM = [
-    { nr: 1, ziel: "v-titel", anker: "links", versatz: [0, 0], regel: "SAY – Botschaft vermitteln", titel: "Wirkung der Korrektur in einem Satz",
+    { nr: 1, ziel: "v-titel", anker: "links", versatz: [672, 23], regel: "SAY – Botschaft vermitteln", titel: "Wirkung der Korrektur in einem Satz",
       text: "Die Aussage nennt, was die Zusammenführung der Dublette in der Auswertung ändert: Meyer, Sofia (1001) kommt auf 7,00 € statt 4,50 € und rückt von Rang 4 auf Rang 3; der Gesamtumsatz bleibt gleich. Das Original hatte nur den Titel „Umsatzanalyse (€)“." },
-    { nr: 2, ziel: "p-vor", anker: "links", versatz: [0, 0], regel: "STRUCTURE – Inhalte ordnen", titel: "Vorher und nachher nebeneinander",
+    { nr: 2, ziel: "p-vor", anker: "links", versatz: [117, 6], regel: "STRUCTURE – Inhalte ordnen", titel: "Vorher und nachher nebeneinander",
       text: "Wie im Original stehen die Auswertungen vor und nach der Korrektur nebeneinander – jetzt mit allen Kunden in der Reihenfolge der Kundennummer wie in der Tabelle der Abbildungen 5.11 bis 5.14. Das Original zeigte nur die drei Einträge „Sofia“, „Sofiá“ und „Sofía“." },
-    { nr: 3, ziel: "p-nach", versatz: [0, 0], regel: "CHECK – Visuelle Integrität", titel: "Ein Maßstab für beide Seiten",
+    { nr: 3, ziel: "p-nach", anker: "links", versatz: [124, 6], regel: "CHECK – Visuelle Integrität", titel: "Ein Maßstab für beide Seiten",
       text: "Beide Seiten haben denselben Maßstab und beginnen bei null. Im Original waren 5 € links rund ein Viertel länger als rechts; der Zuwachs von 4,50 € auf 7,00 € wirkte dadurch kleiner, als er ist." },
-    { nr: 4, ziel: "p-vor", versatz: [0, 0], regel: "UNIFY – Semantische Notation", titel: "Vorher hellgrau, nachher anthrazit",
+    { nr: 4, ziel: "p-vor", versatz: [-29, 56], regel: "UNIFY – Semantische Notation", titel: "Vorher hellgrau, nachher anthrazit",
       text: "Der frühere Stand ist hellgrau, der bereinigte anthrazit – dieselbe Notation wie Vorjahr und Ist in den Abbildungen des Buchs. Im Original hatten beide Diagramme dasselbe Blau." },
-    { nr: 5, ziel: "m-geaendert", versatz: [0, 0], regel: "EXPRESS – Hervorheben", titel: "Geänderte Werte markiert",
+    { nr: 5, ziel: "m-geaendert", versatz: [27, 2], regel: "EXPRESS – Hervorheben", titel: "Geänderte Werte markiert",
       text: "Die blaugrün umrandete Marke mit der Ziffer 3 zeigt die beiden Kunden, deren Umsatz sich durch die Korrektur der Klasse 3 ändert – dieselbe Marke wie für die korrigierte Kundennummer in der Tabelle." },
-    { nr: 6, ziel: "p-nach", anker: "links", versatz: [0, 0], regel: "CONDENSE – Richtig verdichten", titel: "Je Kundennummer statt je Namensvariante",
+    { nr: 6, ziel: "p-nach", anker: "links", versatz: [212, 134], regel: "CONDENSE – Richtig verdichten", titel: "Je Kundennummer statt je Namensvariante",
       text: "Der Umsatz ist je Kundennummer verdichtet, der Name steht dabei. Das Original verdichtete nach Schreibweisen des Vornamens; entscheidend ist aber die Kundennummer: 1004 (Meyer, Sofía) bleibt trotz ähnlichen Namens eine eigene Kundin mit anderem Geburtsdatum." },
-    { nr: 7, ziel: "legende", anker: "links", versatz: [0, 0], regel: "SIMPLIFY – Weglassen", titel: "Werte statt Achse",
+    { nr: 7, ziel: "p-vor", versatz: [-29, 134], regel: "SIMPLIFY – Weglassen", titel: "Werte statt Achse",
       text: "Die Werte stehen direkt an den Balken. Achse, gepunktete Gitterlinien, Achsentitel „Name“ sowie Kacheln mit runden Ecken und Schatten des Originals entfallen." },
   ];
   const NACHBAU_TABELLE = [
-    { id: "A", ziel: "v-haupt", versatz: [0, 0], titel: "Kundenbestellungen", visual: "Tabelle",
+    { id: "A", ziel: "sp-name", anker: "links", versatz: [91, 2], titel: "Kundenbestellungen", visual: "Tabelle",
       felder: "Bestellungen[Datensatz] (ausgeblendet), je Spalte ein Measure „Wert im Schritt“, z. B. Bestelldatum angezeigt = VAR s = SELECTEDVALUE(Schritte[Nr]; 1) VAR k = MAX(Defekte[Klasse]) RETURN IF(NOT ISBLANK(k) && s > k; MAX(Defekte[Korrigiert]); MAX(Bestellungen[Bestelldatum])) über die Beziehung Datensatz und Spalte",
       format: "Schrift 10,5 pt; bedingte Formatierung je Spalte über ein Status-Measure (1 offen, 2 in diesem Schritt korrigiert, 3 zuvor korrigiert): Schriftfarbe #C62828 bei offen; Klassenziffer als Präfix im Measure („❶“ offen, „①“ korrigiert); Kopf mit Unterstrich #3A3F44, Zeilenraster #EFEFEF",
       hinweis: "Gewellte Unterstreichung gibt es in Power BI nicht – Symbol und Ziffer tragen die Bedeutung. Die Bereinigung selbst gehört in Power Query: Klasse 1 als feste Transformationsschritte, Klassen 2 und 3 als gepflegte Korrekturtabelle." },
-    { id: "B", ziel: "filter", versatz: [0, 0], titel: "Schritt-Schalter", visual: "Datenschnitt",
+    { id: "B", ziel: "filter", anker: "links", versatz: [640, 28], titel: "Schritt-Schalter", visual: "Datenschnitt",
       felder: "Schritte[Name], sortiert nach Schritte[Nr] (1 Rohdaten … 5 Ergebnis)",
       format: "Kacheln, Einzelauswahl erzwingen; ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A",
       hinweis: "Startschritt je Abbildung über ein Lesezeichen." },
-    { id: "C", ziel: "m-zelle", versatz: [0, 0], titel: "Tooltip mit Regel", visual: "Berichtsseite als QuickInfo",
+    { id: "C", ziel: "m-zelle", anker: "links", get versatz() { return zellVersatz(); }, titel: "Tooltip mit Regel", visual: "Berichtsseite als QuickInfo",
       felder: "Defekte[Klasse], Defektklassen[Erkennung und Korrektur], Defekte[Beschreibung], Defekte[Regel], Defekte[Rohwert], Defekte[Korrigiert]",
       format: "QuickInfo-Seite 320 × 180 px, Textfelder 10,5 pt" },
-    { id: "D", ziel: "v-titel", versatz: [0, 0], titel: "Aussage", visual: "Textfeld mit dynamischem Wert",
+    { id: "D", ziel: "v-titel", anker: "links", versatz: [672, 23], titel: "Aussage", visual: "Textfeld mit dynamischem Wert",
       felder: "Text-Measure, z. B. COUNTROWS(FILTER(Defekte; Defekte[Klasse] = s − 1)) & \" Werte korrigiert – offen: \" & COUNTROWS(FILTER(Defekte; Defekte[Klasse] >= s))",
       format: "10,5 pt, #4D4D4D" },
-    { id: "E", ziel: "legende", versatz: [0, 0], titel: "Legende", visual: "Textfeld", felder: "statischer Text mit den Symbolen ❶ ① und der Erklärung", format: "10,5 pt, #4D4D4D" },
+    { id: "E", ziel: "legende", anker: "links", versatz: [692, 5], titel: "Legende", visual: "Textfeld", felder: "statischer Text mit den Symbolen ❶ ① und der Erklärung", format: "10,5 pt, #4D4D4D" },
   ];
   const NACHBAU_DIAGRAMM = [
-    { id: "A", ziel: "p-vor", versatz: [0, 0], titel: "Umsatz je Kunde vor und nach der Korrektur", visual: "Gruppiertes Balkendiagramm mit kleinen Vielfachen",
+    { id: "A", ziel: "p-vor", anker: "links", versatz: [117, 6], titel: "Umsatz je Kunde vor und nach der Korrektur", visual: "Gruppiertes Balkendiagramm mit kleinen Vielfachen",
       felder: "Y-Achse: Kunden[Kunde] (Kundennummer und Name); X-Achse: Measure Umsatz = SUM(Bestellungen[Betrag]); kleine Vielfache und Legende: Zustand (vor/nach der Korrektur der Klasse 3) aus einer Tabelle Bestellungen_Stand mit Kunden_ID je Zustand",
       format: "Datenfarben #C9C9C9 (vor) und #3A3F44 (nach); Datenbeschriftungen an, X-Achse und Gitternetz aus; Y-Achse nach Kundennummer sortiert",
       hinweis: "Kleine Vielfache teilen sich die Achse – so haben beide Seiten automatisch denselben Maßstab. Zwei getrennte Balkendiagramme nur mit fest eingestelltem X-Bereich 0–9." },
-    { id: "B", ziel: "m-geaendert", versatz: [0, 0], titel: "Marke für geänderte Werte", visual: "Datenbeschriftung über Measure",
+    { id: "B", ziel: "m-geaendert", versatz: [27, 2], titel: "Marke für geänderte Werte", visual: "Datenbeschriftung über Measure",
       felder: "Measure Geändert = IF([Umsatz nach] <> [Umsatz vor]; \"③\")", format: "Schriftfarbe #00806B" },
-    { id: "C", ziel: "filter", versatz: [0, 0], titel: "Schritt-Schalter", visual: "Datenschnitt",
+    { id: "C", ziel: "filter", anker: "links", versatz: [640, 28], titel: "Schritt-Schalter", visual: "Datenschnitt",
       felder: "Schritte[Name]; der Schritt „Ergebnis“ schaltet per Lesezeichen von der Tabelle auf das Balkendiagramm", format: "wie in den Schritten 1–4" },
-    { id: "D", ziel: "v-titel", versatz: [0, 0], titel: "Aussage", visual: "Textfeld mit dynamischem Wert",
+    { id: "D", ziel: "v-titel", anker: "links", versatz: [672, 23], titel: "Aussage", visual: "Textfeld mit dynamischem Wert",
       felder: "Text-Measure mit RANKX(ALL(Kunden); [Umsatz]) für den Rang vor und nach der Korrektur", format: "10,5 pt, #4D4D4D" },
   ];
   DK.ebenen({

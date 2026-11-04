@@ -740,6 +740,67 @@
    ],
    "alt": "ETL-Prozess in drei Phasen von links nach rechts. Extract fasst die Quellen Databases, API, JSON, XML, Flatfiles, Cloud und On-Premises zusammen; ein zeitgesteuerter Pfeil führt zu Transform mit Staging und Cleansing, ein weiterer Pfeil zu Load mit dem Core Data Warehouse."
   },
+  "5.11": {
+   "status": "pruefung",
+   "datei": "Beispiel_zu_Defektklassen_Ausgangspunkt_Rohdaten",
+   "kommentare": [
+    "Datentabelle als interaktives Einzelvisual umgesetzt (Bauweg V statt D, 110 × 56,9 mm): Serie Abb. 5.11–5.15 aus einem Datensatz und mit gleichem Layout, Schritt-Schalter auf der Seite, Start im Schritt „Rohdaten“",
+    "Werte und Spaltennamen unverändert aus dem Original; Betrag mit Dezimalkomma (4.50 → 4,50), Einheit € im Titel ergänzt; hellblaue Kopfzeile und Rahmen entfallen",
+    "Neu: 13 fehlerhafte Werte am Wert markiert – rote Marke mit Ziffer der Defektklasse und rot gewellte Unterstreichung (8 × Klasse 1, 4 × Klasse 2, 1 × Klasse 3); Tooltip mit Beschreibung, Regel, Rohwert und korrigiertem Wert",
+    "Klassenzuordnung aus Abb. 5.12–5.14 abgeleitet (1 automatisch erkannt und korrigiert, 2 automatisch erkannt/manuell korrigiert, 3 manuell erkannt und korrigiert); Regeltexte im Tooltip formuliert – bitte mit dem Buchtext abgleichen",
+    "Datumsregel angenommen: ISO 8601, Tag vor Monat, außer der zweite Teil ist größer als 12 – nur so ergeben sich alle Werte der Abb. 5.12 (06/15/2023 → 2023-06-15, aber 03/05/2023 → 2023-05-03); 03/05/2023 wäre im US-Format der 5. März – beabsichtigt?",
+    "Alter im Original zu keinem gemeinsamen Stichtag passend (1001 geb. 1985-07-12: 39 Jahre, 1002 geb. 1985-10-06: 37 Jahre nach Korrektur) – Werte übernommen; Stichtag nennen oder angleichen?"
+   ],
+   "alt": "Tabelle „Kundenbestellungen: Rohdaten mit Defekten“ mit sieben Bestellungen (Kunden_ID, Name, Geburtsdatum, Alter, Bestelldatum, Bestellung, Betrag in €). 13 fehlerhafte Werte tragen eine rote Marke mit der Ziffer ihrer Defektklasse: uneinheitliche Datumsformate und Schreibweisen (Klasse 1), unplausible Geburtsdaten mit falschem Alter (Klasse 2) und die doppelt angelegte Kundin 1005 (Klasse 3)."
+  },
+  "5.12": {
+   "status": "pruefung",
+   "datei": "Beispiel_zu_Defektklassen_Automatische_Korrektur_Defektklasse_1",
+   "kommentare": [
+    "Bauweg V statt D: gleiche Seite und gleicher Datensatz wie Abb. 5.11, Start im Schritt „Klasse 1: automatisch“",
+    "Korrekturen wie im Original: sechs Bestelldaten nach ISO 8601, „MÜLLER, Karl“ → „Müller, Karl“, „Meyer, Sofíá“ → „Meyer, Sofía“; korrigierte Werte blaugrün umrandet und unterstrichen, offene Defekte der Klassen 2 und 3 bleiben rot",
+    "Original zeigte nur die korrigierte Tabelle ohne Markierung – jetzt ist jede Änderung am Wert sichtbar, die Botschaft zählt korrigierte und offene Werte",
+    "„Sofíá“ → „Sofía“ als Klasse 1 gedeutet (Abgleich mit Vornamensverzeichnis); Abb. 5.13/5.14 zeigen im Original wieder „Sofíá“ – serienweit auf „Sofía“ vereinheitlicht, bitte bestätigen",
+    "Online: Sortierung per Spaltenkopf – nach Bestelldatum ordnen die Rohdaten falsch, nach der Korrektur chronologisch"
+   ],
+   "alt": "Dieselbe Tabelle nach der automatischen Korrektur der Klasse 1: alle Bestelldaten stehen im Format JJJJ-MM-TT, „MÜLLER, Karl“ ist zu „Müller, Karl“ und „Meyer, Sofíá“ zu „Meyer, Sofía“ korrigiert; diese acht Werte tragen eine blaugrün umrandete Marke. Rot markiert und offen bleiben die Geburtsdaten 1205-10-06 und 1992-02-30 mit ihrem Alter sowie die Dublette 1005."
+  },
+  "5.13": {
+   "status": "pruefung",
+   "datei": "Beispiel_zu_Defektklassen_Manuelle_Korrektur_Defektklasse_2",
+   "kommentare": [
+    "Bauweg V statt D: gleiche Seite und gleicher Datensatz wie Abb. 5.11, Start im Schritt „Klasse 2: manuell“",
+    "Korrekturen wie im Original: 1002 Geburtsdatum 1205-10-06 → 1985-10-06, Alter 32 → 37; 1004 1992-02-30 → 1992-02-28, Alter 32 → 31 (Alter als Folgefehler mitgezählt: 4 Werte der Klasse 2)",
+    "Name 1004 im Original hier wieder „Meyer, Sofíá“ – an Abb. 5.12 angeglichen („Meyer, Sofía“)",
+    "Drei Markenzustände: blaugrün = in diesem Schritt korrigiert, grau umrandet = zuvor korrigiert (Klasse 1), rot = offen (Dublette 1005); in Graustufen über Füllung, Rahmen und Linienform unterscheidbar",
+    "Prüfregeln im Tooltip angenommen (Geburtsjahr zwischen 1900 und Bestelljahr, Datum muss existieren, richtiger Wert durch Rückfrage) – bitte mit dem Buchtext abgleichen"
+   ],
+   "alt": "Dieselbe Tabelle nach der manuellen Korrektur der Klasse 2: die Geburtsdaten sind zu 1985-10-06 und 1992-02-28 korrigiert, das Alter zu 37 und 31 Jahren; diese Werte sind blaugrün markiert, die Korrekturen der Klasse 1 grau. Offen bleibt nur die Kundennummer 1005 als Dublette (Klasse 3)."
+  },
+  "5.14": {
+   "status": "pruefung",
+   "datei": "Beispiel_zu_Defektklassen_Manuelle_Korrektur_Defektklasse_3",
+   "kommentare": [
+    "Bauweg V statt D: gleiche Seite und gleicher Datensatz wie Abb. 5.11, Start im Schritt „Klasse 3: manuell“; Original war breiter (256 mm) als 5.11–5.13, jetzt gleiches Format",
+    "Dublette wie im Original: Kundennummer 1005 → 1001, Zeile nach Kundennummer einsortiert (1001 zweimal); 1004 „Meyer, Sofía“ bleibt wegen anderen Geburtsdatums eigenständig (im Tooltip erklärt)",
+    "Korrektur: Espresso-Bestellung behält ihr Bestelldatum 2023-06-01 – im Original hier 2023-04-05 (Datum von 1004, vermutlich Übertragungsfehler)",
+    "Name 1004 an Abb. 5.12 angeglichen („Sofía“ statt „Sofíá“ im Original)",
+    "Botschaft: Dublette zusammengeführt, keine offenen Defekte; Korrekturen der Klassen 1 und 2 grau als „zuvor korrigiert“"
+   ],
+   "alt": "Dieselbe Tabelle nach der manuellen Korrektur der Klasse 3: die Bestellung „Espresso“ der doppelt angelegten Kundennummer 1005 ist der Kundin 1001 (Meyer, Sofia) zugeordnet und steht direkt unter deren erster Bestellung. Alle Defekte sind korrigiert; die Kundin 1004 (Meyer, Sofía) bleibt wegen ihres anderen Geburtsdatums eigenständig."
+  },
+  "5.15": {
+   "status": "pruefung",
+   "datei": "Ergebnis_der_manuellen_Korrektur_eines_Defekts_der_Defektklasse_3",
+   "kommentare": [
+    "Einzelvisual in der Serie Abb. 5.11–5.15 (gleiche Seite und Daten, Start im Schritt „Ergebnis“): Umsatz je Kunde vor und nach der Korrektur der Klasse 3 nebeneinander, wie im Original zwei Diagramme",
+    "Werte des Originals (vorher 4,50 / 3,50 / 2,50, nachher 7,00 / 3,50) – jetzt alle sieben Kunden je Kundennummer statt der Namensvarianten „Sofia/Sofiá/Sofía“, die den Tabellen widersprachen (dort heißt 1005 „Sofia“, 1004 „Sofíá“)",
+    "Ein Maßstab für beide Seiten (im Original waren 5 € links rund ein Viertel länger als rechts); Achse, Gitterlinien, Achsentitel „Name“, Kacheln mit Schatten entfallen, Werte direkt am Balken",
+    "Blau → vorher hellgrau, nachher anthrazit; geänderte Werte (1001, 1005) mit derselben blaugrünen Marke „3“ wie in Abb. 5.14",
+    "Botschaft aus den Daten: Meyer, Sofia (1001) 7,00 € statt 4,50 €, Rang 3 statt 4, Gesamtumsatz unverändert 37,00 €"
+   ],
+   "alt": "Zwei Balkendiagramme im selben Maßstab zeigen den Umsatz je Kunde in € vor (hellgrau) und nach (anthrazit) der Korrektur der Klasse 3. Durch die Zusammenführung der Dublette steigt der Umsatz von Meyer, Sofia (1001) von 4,50 € auf 7,00 € (Rang 3 statt 4), die Kundennummer 1005 entfällt; der Gesamtumsatz bleibt bei 37,00 €."
+  },
   "5.16": {
    "status": "pruefung",
    "datei": "Drei_Ebenen_der_Data-Warehouse-Architektur",

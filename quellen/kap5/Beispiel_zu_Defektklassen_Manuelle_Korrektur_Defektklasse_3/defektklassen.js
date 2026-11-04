@@ -328,7 +328,7 @@
 
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   // Marke an der Fokuszelle: links daneben im leeren Markenplatz der Nachbarspalte, in der ersten Spalte zwischen Wert und Marke
-  const zellVersatz = () => { const td = document.getElementById("m-zelle"); return td && td.dataset.c === "0" ? [65, 6] : [10, 6]; };
+  const zellVersatz = () => { const td = document.getElementById("m-zelle"); return td && td.dataset.c === "0" ? [65, 6] : [12, 6]; };
   const REGELN_TABELLE = [
     { nr: 1, ziel: "v-titel", anker: "links", versatz: [672, 23], regel: "SAY – Botschaft vermitteln", titel: "Aussage zum Schritt",
       text: "Unter dem Titel steht in einem Satz, was der gewählte Schritt bewirkt: wie viele Werte welcher Klasse fehlerhaft, korrigiert oder noch offen sind – aus der Defektliste berechnet. Das Original zeigte vier Tabellen ohne Titel und Aussage; was sich geändert hatte, musste man durch Vergleich der Abbildungen suchen." },
@@ -338,11 +338,11 @@
       text: "Jeder fehlerhafte Wert trägt eine Marke mit der Ziffer seiner Defektklasse: rot gefüllt und rot gewellt unterstrichen, solange er offen ist; blaugrün umrandet und unterstrichen im Schritt seiner Korrektur; grau umrandet danach. Rot steht nur für Defekte. Das Original markierte nichts." },
     { nr: 4, ziel: "legende", anker: "links", versatz: [692, 5], regel: "CHECK – Visuelle Integrität", titel: "Lesbar ohne Farbe",
       text: "Rot und Blaugrün haben fast denselben Grauwert. Deshalb tragen Form und Linie die Bedeutung: gefüllte gegen umrandete Marke, gewellte gegen gerade Unterstreichung, dazu die Ziffer der Klasse. So bleibt die Abbildung im Schwarzweißdruck und bei Farbsehschwäche eindeutig." },
-    { nr: 5, ziel: "sp-bestellung", anker: "links", versatz: [114, 6], regel: "CONDENSE – Details im Tooltip", titel: "Regel im Tooltip",
+    { nr: 5, ziel: "sp-bestellung", anker: "links", versatz: [114, 2], regel: "CONDENSE – Details im Tooltip", titel: "Regel im Tooltip",
       text: "Der Tooltip eines markierten Werts nennt Klasse, Erkennung und Korrektur, die Beschreibung des Defekts, die Prüf- oder Korrekturregel sowie Rohwert und korrigierten Wert – statt einer zweiten Tabelle. Ein Klick auf einen markierten Wert hebt alle Defekte derselben Klasse hervor." },
-    { nr: 6, ziel: "sp-betrag", versatz: [-49, 6], regel: "SIMPLIFY – Einheitliche Zahlen", titel: "Dezimalkomma, Einheit im Titel",
+    { nr: 6, ziel: "sp-betrag", versatz: [-49, 2], regel: "SIMPLIFY – Einheitliche Zahlen", titel: "Dezimalkomma, Einheit im Titel",
       text: "Der Betrag steht mit Dezimalkomma und zwei Nachkommastellen (Original: 4.50), die Einheit einmal im Titel. Texte links-, Zahlen rechtsbündig. Die Datumsangaben bleiben in ihren Rohformaten, denn sie sind Gegenstand der Korrektur. Blaue Kopfzeile und Rahmen des Originals entfallen." },
-    { nr: 7, ziel: "sp-name", anker: "links", versatz: [91, 6], regel: "EXPRESS – Fehler sichtbar machen", titel: "Sortieren zeigt den Formatfehler",
+    { nr: 7, ziel: "sp-name", anker: "links", versatz: [91, 2], regel: "EXPRESS – Fehler sichtbar machen", titel: "Sortieren zeigt den Formatfehler",
       text: "Ein Klick auf einen Spaltenkopf sortiert. Nach Bestelldatum sortiert, ordnen die Rohdaten falsch (01-05-2023 vor 2023-04-05); nach der Korrektur der Klasse 1 stimmt die Reihenfolge. Standard ist die Reihenfolge der Kundennummer – nach der Zusammenführung steht die Espresso-Bestellung bei 1001 wie im Original." },
   ];
   const REGELN_DIAGRAMM = [
@@ -362,7 +362,7 @@
       text: "Die Werte stehen direkt an den Balken. Achse, gepunktete Gitterlinien, Achsentitel „Name“ sowie Kacheln mit runden Ecken und Schatten des Originals entfallen." },
   ];
   const NACHBAU_TABELLE = [
-    { id: "A", ziel: "sp-name", anker: "links", versatz: [91, 6], titel: "Kundenbestellungen", visual: "Tabelle",
+    { id: "A", ziel: "sp-name", anker: "links", versatz: [91, 2], titel: "Kundenbestellungen", visual: "Tabelle",
       felder: "Bestellungen[Datensatz] (ausgeblendet), je Spalte ein Measure „Wert im Schritt“, z. B. Bestelldatum angezeigt = VAR s = SELECTEDVALUE(Schritte[Nr]; 1) VAR k = MAX(Defekte[Klasse]) RETURN IF(NOT ISBLANK(k) && s > k; MAX(Defekte[Korrigiert]); MAX(Bestellungen[Bestelldatum])) über die Beziehung Datensatz und Spalte",
       format: "Schrift 10,5 pt; bedingte Formatierung je Spalte über ein Status-Measure (1 offen, 2 in diesem Schritt korrigiert, 3 zuvor korrigiert): Schriftfarbe #C62828 bei offen; Klassenziffer als Präfix im Measure („❶“ offen, „①“ korrigiert); Kopf mit Unterstrich #3A3F44, Zeilenraster #EFEFEF",
       hinweis: "Gewellte Unterstreichung gibt es in Power BI nicht – Symbol und Ziffer tragen die Bedeutung. Die Bereinigung selbst gehört in Power Query: Klasse 1 als feste Transformationsschritte, Klassen 2 und 3 als gepflegte Korrekturtabelle." },

@@ -1240,6 +1240,56 @@
    ],
    "alt": "Wasserfalldiagramm des Monatsumsatzes in Mio. €: Startsäule Dezember 2026 mit 110, danach schwebende Säulen für die Veränderungen Januar +70, Februar +20, März −10, April −60, Mai +10 und Juni +60 (Zuwächse blaugrün, Rückgänge rot), Endsäule Juni 2027 mit 200. Kernaussage: Der Umsatz steigt von 110 auf 200 Mio. €, der stärkste Rückgang liegt im April."
   },
+  "3.61": {
+   "status": "pruefung",
+   "datei": "Punktdiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48: Titel mit Einheit, Kernaussage, Diagramm, Abweichungszeile",
+    "Werte des Originals übernommen (Plan 100/120/90/130, Ist 120/130/100/110 Mio. €) – dieselben wie im Säulendiagramm Abb. 3.48; Jahr 2027 ergänzt",
+    "Diagrammtyp bleibt: je Quartal ein Punkt für Plan und Ist; Ist anthrazit gefüllt, Plan weiß mit Kontur statt dunkelblauer Rauten und pinkfarbener Quadrate",
+    "Neu: senkrechte Verbindungslinie Plan–Ist, farbig nach Wirkung (Blaugrün/Rot), und ΔPL-Zeile unter den Quartalen",
+    "Größenachse 80–140 statt 0–140 (Punkte zeigen Lage, nicht Länge – in den Designregeln begründet); Gitternetz hell, Achsentitel und Legende unten entfallen",
+    "Fehler im Original behoben: Beschriftungen im 4. Quartal überlagerten die Punkte und waren am Rand abgeschnitten"
+   ],
+   "alt": "Punktdiagramm des Umsatzes der SGE A 2027 je Quartal in Mio. €, Achse von 80 bis 140. Je Quartal ein weißer Planpunkt und ein dunkler Ist-Punkt, verbunden durch eine senkrechte Linie: Q1 Ist 120 bei Plan 100, Q2 130 bei 120, Q3 100 bei 90 (Linien blaugrün), Q4 110 bei 130 (Linie rot); darunter die Abweichungen +20, +10, +10 und −20. Kernaussage: Ist über Plan in Q1 bis Q3, Q4 20 Mio. € unter Plan; im Jahr +20 Mio. € (+4,5 %)."
+  },
+  "3.62": {
+   "status": "pruefung",
+   "datei": "Koordinatensystem_mit_vier_Quadranten",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48 ff.: Titel mit Vergleichsbasis, Kernaussage, Diagramm",
+    "Lage der Geschäftsfelder wie im Original (Wachstumsrate | Gewinnanstieg: PKW +10 | +11 %, LKW +5 | +4 %, Motorrad −10 | −5 %, Sonstige +3 | −7 %); Jahr 2014 → 2027; Umsatz und Gewinn 2026/2027 in Mio. € erfunden, so dass genau diese Raten entstehen (im Tooltip und in „Werte als Tabelle“)",
+    "Diagrammtyp bleibt: Achsenkreuz bei null, beide Achsen −15 % bis +15 %; neu sind die Namen der Quadranten in den Ecken („Umsatz und Gewinn steigen“ hervorgehoben) – bitte prüfen, ob das zum Buchtext passt",
+    "Vier Farben und Formen (Raute, Quadrat, Dreieck, Kreis) → einheitliche anthrazitfarbene Punkte; Name und beide Werte am Punkt",
+    "Achsenwerte mit Vorzeichen; Rahmen entfällt, Gitter hellgrau; Achsentitel „Wachstumsrate (Umsatz)“ statt „Wachstumsrate“"
+   ],
+   "alt": "Koordinatensystem mit vier Quadranten zur Entwicklung der Geschäftsfelder 2027 gegenüber dem Vorjahr: waagerecht die Wachstumsrate des Umsatzes, senkrecht der Gewinnanstieg, beide von −15 % bis +15 %, Achsenkreuz bei null. Oben rechts (Umsatz und Gewinn steigen) liegen PKW (+10 %, +11 %) und LKW (+5 %, +4 %), unten rechts Sonstige (+3 %, −7 %), unten links Motorrad (−10 %, −5 %). Kernaussage: PKW und LKW steigern Umsatz und Gewinn, Motorrad verliert beides, Sonstige wächst bei sinkendem Gewinn."
+  },
+  "3.63": {
+   "status": "pruefung",
+   "datei": "Flaechendiagramm",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48 und 3.61: Titel mit Einheit, Kernaussage, Diagramm, Abweichungszeile",
+    "Werte aus der eingebetteten Excel-Tabelle des Originals (Plan 110/120/110/120 t, Ist 80/100/70/70 t); Jahr 2011 → 2027",
+    "Diagrammtyp bleibt: Flächen über die Quartale; Ist anthrazitfarbene Fläche, Plan als Kontur darüber statt fliederfarbener und bordeauxroter Fläche (die Planfläche wirkte im Original wie ein gestapelter Anteil)",
+    "Neu: Fläche zwischen Ist und Plan hellrot getönt (Wirkung), Abweichung je Quartal darunter; Werte direkt beschriftet, Größenachse und Legende rechts entfallen",
+    "Annahme: Ist unter Plan ist ungünstig (Kapazität nicht wie geplant genutzt) – bitte prüfen, ob der Buchtext „Kapazität“ so meint; Titel jetzt „Kapazität 2027 je Quartal, t“"
+   ],
+   "alt": "Flächendiagramm der Kapazität 2027 je Quartal in Tonnen. Eine dunkle Ist-Fläche verläuft über 80, 100, 70 und 70 t, darüber eine Plankontur mit 110, 120, 110 und 120 t; die Fläche dazwischen ist hellrot getönt. Darunter die Abweichungen −30, −20, −40 und −50 t. Kernaussage: Ist liegt in allen Quartalen unter Plan, die größte Lücke im vierten Quartal; im Jahr −140 t (−30,4 %)."
+  },
+  "3.65": {
+   "status": "pruefung",
+   "datei": "Tachos_und_Thermometer",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit, HTML mit Ebenen); Diagrammtypen bleiben: Tacho, Ring und Thermometer nebeneinander, gleicher Aufbau (Name, Zeitraum und Einheit, Instrument mit Wert, Ziel und Abweichung)",
+    "Werte des Originals bleiben (5.348, 85 %, 51 %); ergänzt und erfunden: Kennzahl, Einheit, Skala, Ziel und Bereiche – Auftragseingang Juni 2027 in Tsd. € (Skala 0–9.000, Zeiger wie im Original bei 59 %), Kapazitätsauslastung, Budgetausschöpfung 1. Halbjahr (mehr ist ungünstig)",
+    "Rot-Gelb-Grün- bzw. Grün-Rot-Verläufe → drei Grautöne mit festen Grenzen wie im Bullet-Chart Abb. 3.54 (barrierearm, graustufentauglich); Ist anthrazit, Ziel als schwarze Marke; Ring anthrazit statt hellblau",
+    "Neu: Ziel und Abweichung je Instrument, farbig nach Wirkung; Kasten und zehn Skalenstriche des Thermometers entfallen (Skala 0/50/100)",
+    "Designregeln nennen die Grenzen (viel Fläche für eine Zahl, Winkel schwer vergleichbar) und das Bullet-Chart als bessere Alternative",
+    "Bitte prüfen: Falls der Buchtext die Werte des Originals ohne Bedeutung zitiert, passen die ergänzten Kennzahlen; falls er Farbverläufe beschreibt, Hinweis auf die Grautöne ergänzen"
+   ],
+   "alt": "Drei Kennzahlen für Juni 2027 nebeneinander, jeweils mit grauen Bewertungsbereichen (dunkel schlecht, hell gut) und schwarzer Zielmarke. Links ein Tacho: Auftragseingang 5.348 Tsd. € auf einer Skala bis 9.000, Ziel 5.000 (+348). Mitte ein Ring: Kapazitätsauslastung 85 % bei Ziel 90 % (−5 %-Punkte). Rechts ein Thermometer: Budgetausschöpfung im 1. Halbjahr 51 % bei Ziel höchstens 50 % (+1 %-Punkt, ungünstig). Kernaussage: Der Auftragseingang liegt über dem Ziel, Auslastung und Budgetausschöpfung verfehlen es knapp."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

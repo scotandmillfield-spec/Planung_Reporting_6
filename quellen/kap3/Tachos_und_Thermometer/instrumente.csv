@@ -1,0 +1,4 @@
+﻿Darstellung;Kennzahl;Zeitraum;Einheit;Skala_bis;Grenze_1;Grenze_2;Ist;Ziel;Richtung
+tacho;Auftragseingang;Juni 2027;Tsd. €;9000;4000;5000;5348;5000;1
+ring;Kapazitätsauslastung;Juni 2027;%;100;;;85;90;1
+thermometer;Budgetausschöpfung;1. Halbjahr 2027;%;100;50;60;51;50;-1

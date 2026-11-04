@@ -99,7 +99,7 @@ def build(theme):
 
     XV = W - 2.2                                   # Achse vertikale Integration
     links(yt + 10.4, ["Planungs- und", "Kontrollsysteme"], "Planungs- und Kontrollsysteme")
-    links(yM0 + 2.9, ["Administrations-", "und Dispositions-", "systeme"], "Administrations- und Dispositionssysteme")
+    links(yM0 + 2.4, ["Administrations-", "und Dispositions-", "systeme"], "Administrations- und Dispositionssysteme")
     rechts(yt + 8.6, ["Management-", "unterstützungs-", "systeme (MUS)"], "Managementunterstützungssysteme")
     rechts(yM0 + 0.2, ["Büro-", "informations-", "systeme"], "Büroinformationssysteme")
     rechts(yB0 + 3.2, ["ERP-", "Systeme"], "ERP-Systeme")

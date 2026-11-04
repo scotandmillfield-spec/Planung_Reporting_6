@@ -1,0 +1,95 @@
+<!-- Abb. 3.187 „Detail-Planungsmaske für die Einkaufspreisplanung“: Maske „Materialpreisplanung“, Reiter „Preisplanung“
+     (softwareneutral nachgebaut). Querformat 1024 px = 155 mm; Inhalt 992 px. Gleiche Gestaltung und Daten wie Abb. 3.186
+     (Reiter „Zuschläge“): Zuschlag Brutto 1,020 und MTZ 1,000 kommen von dort, die Summenzeile entspricht dem dortigen Ergebnis.
+     Gleichbleibende Spalten des Originals (Werk, Commodity, NB-Kennzeichen, Kond. gültig, Basis-ME, Preiseinheit) als Kopfdaten.
+     Raster: Material 70 · Bezeichnung 200 · Menge 66 · Konditionen 72/46/72 · Zuschlag 56/56 · Ø-Preis 78 · Planpreis 78 ·
+     Volumen 74 · Abweichung 66/54 = 988 px. Zellen wie Abb. 3.179/3.183. -->
+<style>
+  #preisplanung { width: 1024px; }
+  #preisplanung .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #preisplanung .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #preisplanung .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #preisplanung .mk-reiter > span { cursor: pointer; }
+  /* Auswahl: drei Felder nebeneinander; Kopfdaten als Anzeigefelder */
+  #preisplanung .auswahl { display: grid; grid-template-columns: repeat(3, 318px); column-gap: 19px; --sp-label: 90px; --sp-feld: 220px; }
+  #preisplanung .auswahl .mk-zeile + .mk-zeile { margin-top: 0; }
+  #preisplanung .kopfdaten { display: flex; align-items: center; margin: 4px 0 16px; }
+  #preisplanung .kopfdaten .mk-label { flex: 0 0 auto; margin-right: 8px; }
+  #preisplanung .kopfdaten .mk-feld { flex: 0 0 auto; width: 70px; margin-right: 28px; }
+  #preisplanung .kopfdaten .mk-feld:last-child { margin-right: 0; }
+  /* Raster */
+  #preisplanung .mx { display: grid; grid-template-columns: 70px 200px 66px 72px 46px 72px 56px 56px 78px 78px 74px 66px 54px; }
+  #preisplanung .mx-k { height: 21px; line-height: 21px; padding: 0 4px; text-align: right; color: var(--muted);
+    white-space: nowrap; overflow: hidden; }
+  #preisplanung .mx-k.links { text-align: left; }
+  #preisplanung .mx-k.gruppe { text-align: left; color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen); margin-left: 4px; }
+  #preisplanung .mx-k.k2 { border-bottom: 1px solid var(--ac); }
+  #preisplanung .mx-k.unten { height: 42px; padding-top: 21px; }
+  #preisplanung .mx-l { height: 24px; line-height: 23px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #preisplanung .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #preisplanung .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #preisplanung .mx .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #preisplanung .mx .summe { font-weight: bold; }
+  #preisplanung .mx .mx-l.summe { border-bottom: 0; border-top: 1px solid var(--ac); }
+  #preisplanung .mx .mk-feld.summe { border-top: 1px solid var(--ac); height: 25px; }
+  #preisplanung .mx .leer { border-top: 1px solid var(--ac); height: 25px; }
+</style>
+<form class="mk-maske" id="preisplanung" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Materialpreisplanung</span><span class="kopf-unter" id="kopf-unter">Budget 2028 · Planversion 51 · Mengen in Stück, Preise in € je 100 Stück, Volumen und Abweichung in €</span></div>
+  <div class="mk-inhalt">
+    <div class="mk-reiter" id="reiter"><span id="reiter-zuschlaege">Zuschläge</span><span class="aktiv" id="reiter-preis">Preisplanung</span></div>
+
+    <div class="auswahl" id="auswahl">
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-wg">Warengruppe</label>
+        <select class="mk-feld" id="f-wg"><option value="3" selected>3 Polster</option></select>
+      </div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-lief">Lieferant</label>
+        <select class="mk-feld" id="f-lief"><option value="55654" selected>55654 Polsterwerk Ost</option></select>
+      </div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-mat">Material</label>
+        <select class="mk-feld" id="f-mat"></select>
+      </div>
+    </div>
+    <div class="kopfdaten" id="kopfdaten">
+      <span class="mk-label">Werk</span><div class="mk-feld mk-anzeige" id="f-werk">1010</div>
+      <span class="mk-label">Mengeneinheit</span><div class="mk-feld mk-anzeige" id="f-me">Stück</div>
+      <span class="mk-label">Preiseinheit</span><div class="mk-feld mk-anzeige" id="f-pe">100</div>
+      <span class="mk-label">Konditionen gültig</span><div class="mk-feld mk-anzeige" id="f-kond">frei</div>
+      <span class="mk-label">NB-Kennzeichen</span><div class="mk-feld mk-anzeige" id="f-nb">nein</div>
+    </div>
+
+    <div class="mx" id="raster">
+      <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:1">Material</div>
+      <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:2">Bezeichnung</div>
+      <div class="mx-k" style="grid-row:1;grid-column:3">Menge</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:3">in Stück</div>
+      <div class="mx-k gruppe" id="h-kond" style="grid-row:1;grid-column:4 / span 3">Konditionen</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:4">Brutto</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:5">MTZ</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:6">Summe</div>
+      <div class="mx-k gruppe" id="h-zuschlag" style="grid-row:1;grid-column:7 / span 2">Zuschlag</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:7">Brutto</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:8">MTZ</div>
+      <div class="mx-k" style="grid-row:1;grid-column:9">Ø-Preis</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:9">lfd. Jahr</div>
+      <div class="mx-k" style="grid-row:1;grid-column:10">Planpreis</div>
+      <div class="mx-k k2" id="h-pp2" style="grid-row:2;grid-column:10"></div>
+      <div class="mx-k" style="grid-row:1;grid-column:11">Volumen</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:11">in €</div>
+      <div class="mx-k gruppe" id="h-abw" style="grid-row:1;grid-column:12 / span 2">Abweichung</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:12">in €</div>
+      <div class="mx-k k2" style="grid-row:2;grid-column:13">in %</div>
+      <!-- Zeilen erzeugt preisplanung.js -->
+    </div>
+
+    <div class="mk-knopfleiste">
+      <button type="button" class="mk-knopf" id="k-sichern">Sichern</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+    </div>
+  </div>
+</form>

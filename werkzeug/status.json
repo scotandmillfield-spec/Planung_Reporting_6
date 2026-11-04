@@ -300,6 +300,32 @@
    "caption": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (in Anlehnung an Gleißner 2016, S. 16–23)",
    "datei": "Risiko-_und_Bandbreitenplanung_mit_der_Monte-Carlo-Simulation"
   },
+  "3.194": {
+   "status": "pruefung",
+   "datei": "Liniendiagramm_mit_Prognosewerten_sowie_Prognoseintervallen_mit_der_SAP_Analytics_Cloud",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Einzelvisual (110 × 60,5 mm) nachgebaut; Navigationsleiste, Symbole, Zoom-Knöpfe, Produktname und Legendeneintrag „Ausreißer“ entfernt",
+    "Daten erfunden, Modell gerechnet: Ist Jan 2024–Jun 2027 (Absatz in Stück, Einheit angenommen), saisonale Regression (Trend + Monatseffekte), Prognose Jul 2027–Dez 2028 mit 80-/95-%-Prognoseintervall (t-Verteilung, 29 Freiheitsgrade); MAPE 9,4 % (Original 9,13 %), R² 0,83",
+    "Ist anthrazit (Original hellblau), Modellwerte dünn grau, Prognose grau gestrichelt (Original dunkelblau), Intervall als helles Band statt zweier gestrichelter Linien; MAPE im Diagramm statt eigenem Kasten „Modellgüte“",
+    "Das Band wird nach rechts nur leicht breiter (Eigenschaft der Regression; im Original vermutlich exponentielle Glättung mit stark öffnendem Trichter) – in den Designregeln erklärt",
+    "Online: Schalter 80 %/95 %, Klick auf einen Monat zeigt seine Werte, Tooltip mit Ist/Modell bzw. beiden Intervallen",
+    "Caption ohne Produktnamen? z. B. „Liniendiagramm mit Prognosewerten sowie Prognoseintervallen“ – Dateiname enthält „SAP_Analytics_Cloud“"
+   ],
+   "alt": "Liniendiagramm des monatlichen Absatzes in Stück von Januar 2024 bis Dezember 2028. Bis Juni 2027 zeigen eine anthrazitfarbene Linie die Istwerte und eine dünne graue Linie die Modellwerte (MAPE 9,4 %); ab Juli 2027 folgt die grau gestrichelte Prognose in einem hellgrauen 95-%-Prognoseintervall von rund ±250 Stück je Monat. Das Saisonmuster mit schwachem Januar und März setzt sich fort; für 2028 werden 10.569 Stück prognostiziert (+4,0 % zu 2027)."
+  },
+  "3.195": {
+   "status": "pruefung",
+   "datei": "Prognosemodelle_mit_R-Studio",
+   "kommentare": [
+    "Produktscreenshot (R-Oberfläche Rattle) softwareneutral als Einzelvisual (110 × 72,6 mm) nachgebaut; Fenster, Menüs, Reiter, Optionsfelder, englischer Hilfetext, Dateiname, Zeitstempel und Benutzername entfernt",
+    "Daten erfunden (48 Monate, Treiber Preis und Werbung), drei lineare Modelle gerechnet: Preis R² 0,32, + Werbung R² 0,85 (Standard, entspricht dem Pseudo-R² 0,8456 des Originals), + Quartal R² 0,89; Ausgleichsgerade = Regression Modellwert auf Ist (Steigung = R²)",
+    "Beide Achsen im gleichen Maßstab 500–3.000 (Original: verschiedene Bereiche, Diagonale verzerrt); hohle blaue Kreise → gefüllte anthrazitfarbene Punkte; Legende → Linienschlüssel im leeren Feld",
+    "Neu als Text rechts: Modellgleichung, R²/korrigiertes R², MAPE, Standardfehler, R² der drei Modelle als Balken; größte Abweichung (Jul 2024, −20 %) beschriftet",
+    "Online: Schalter wechselt das Modell, Klick auf einen Punkt zeigt die Abweichung zur Diagonale; R-Code zur Gegenprobe in der Ebene „Nachbau“",
+    "Caption: Der Screenshot zeigt Rattle (R Data Miner), nicht RStudio – ohne Produktnamen? z. B. „Prognosemodelle mit R (in Anlehnung an Oehler 2019, S. 111)“; Dateiname enthält „R-Studio“"
+   ],
+   "alt": "Streudiagramm des monatlichen Absatzes in Stück: waagerecht die Istwerte, senkrecht die Modellwerte einer linearen Regression mit Preis und Werbung, beide Achsen von 500 bis 3.000. Die Punkte liegen eng um die gestrichelte Diagonale „Modell = Ist“, die etwas flachere Ausgleichsgerade hat die Steigung 0,85. Rechts stehen die Modellgleichung (Absatz = 3.473 − 45,1 × Preis + 17,0 × Werbung), R² 0,85, MAPE 7,0 % und der Vergleich der drei Modelle (R² 0,32, 0,85 und 0,89)."
+  },
   "4.1": {
    "status": "pruefung",
    "datei": "Einfluss_der_Holding-Art_auf_Planung_und_Reporting",
@@ -556,6 +582,54 @@
    "kommentare": [
     "Abb. 3.79–3.177 (Kap. 3.9) liegen in einer eigenen PowerPoint-Datei – noch nicht geliefert"
    ]
+  },
+  "3.178": {
+   "status": "pruefung",
+   "datei": "Verteilungs-_und_Verdichtungsfunktionen",
+   "kommentare": [
+    "Excel-Objekt mit sieben Tabellen als Einzelvisual (110 × 44,8 mm) neu gebaut: die vier Verfahren als Spalten einer Tabelle mit gemeinsamen Zeilen (Top-down, Bottom-up, Gegenstrom mit Vorgabe/Rückmeldung, Verteilung mit fixiertem Wert)",
+    "Werte des Originals übernommen und nachgerechnet: Vorjahr 250/300/200/250; Top-down 1.200 → 300/360/240/300; Bottom-up 1.150; Gegenstrom-Rückmeldung 1.140 (−60 zur Vorgabe); West fixiert 220 → Rest 980 nach Vorjahresanteil: 306,25/367,50/306,25",
+    "Gelbe Eingabezellen → umrandete Felder (erfasst), Pfeile ↓ verteilen/↑ verdichten in jeder Spalte, Zeichenschlüssel unter der Tabelle; „Vertrieb Region …“ → „Region …“; „Verteilung ohne fixierte Werte zu überschreiben“ → „Mit Fixierung – West fixiert“, „fixiert (manuell geplant)“ im Tooltip",
+    "Spalte „Mit Fixierung“ mit zwei Nachkommastellen (306,25), übrige Spalten ganzzahlig; Original hatte „1200,00“ ohne Tausenderpunkt",
+    "Online: erfasste Werte sind Eingabefelder (rechnet neu), Schalter Verteilschlüssel nach Vorjahr/gleichmäßig, Sortierung per Spaltenkopf, Klick hebt eine Region hervor",
+    "Einheit Tsd. € angenommen (Original ohne Einheit) – bitte prüfen"
+   ],
+   "alt": "Tabelle des Planumsatzes in Tsd. € für das Unternehmen und vier Regionen nach vier Verfahren: Top-down verteilt die Vorgabe 1.200 nach Vorjahresanteil (300, 360, 240, 300), Bottom-up verdichtet die erfassten Regionalwerte zu 1.150, im Gegenstrom melden die Regionen auf die verteilte Vorgabe 1.140 zurück (−60). Bei der Verteilung mit fixiertem Wert bleibt West bei 220, der Rest von 980 geht nach Vorjahresanteil an Nord und Ost (je 306,25) und Süd (367,50). Erfasste Werte sind umrandet, Pfeile zeigen Verteilen (nach unten) und Verdichten (nach oben)."
+  },
+  "3.181": {
+   "status": "pruefung",
+   "datei": "Abstimmung_von_Planungs-_und_Reportinginhalten",
+   "kommentare": [
+    "Blaue Schrift und Pfeile (Planebene) → roter Kasten „Planebene“, geplante Zeile grau hinterlegt (oben Kontengruppe 472, unten Planungskonto 472090)",
+    "Senkrechte Beschriftung „Planverteilung“ waagerecht gestellt; Pfeile orthogonal, gestrichelt wie im Original",
+    "Neu: waagerechter Pfeil von der unteren Planebene zum Planungskonto 472090 (analog oben; im Original stand der Kasten nur daneben)",
+    "Frage: Unten zeigt der Pfeil nach oben (Planungskonto geht in die Kontengruppe ein), ist aber wie oben mit „Planverteilung“ beschriftet – gemeint „Planverdichtung“? Unverändert übernommen",
+    "Kursiver Kopf der unteren Kontengruppe übernommen (verdichtete, nicht geplante Ebene); Idee, nicht umgesetzt: kurze Überschriften „Planung auf der Kontengruppe“ / „Planung auf einem Planungskonto“"
+   ],
+   "alt": "Zwei Blöcke der Kontengruppe 472 Beiträge und Gebühren mit den Konten 472010 bis 472050. Oben ist die Kontengruppe die Planebene; der Planwert wird nach unten auf die Konten verteilt. Unten wird auf dem zusätzlichen Planungskonto 472090 Plan Beiträge und Gebühren geplant, das nach oben in die Kontengruppe eingeht."
+  },
+  "3.188": {
+   "status": "pruefung",
+   "datei": "Abstimmung_der_Personalplanung",
+   "kommentare": [
+    "Hellblauer Blockpfeil und Drehpfeile → orthogonale Pfeile; der Kreislauf zwischen Kapazitätsabgleich und möglicher Stundenleistung bleibt (links abwärts, rechts aufwärts)",
+    "Kapazitätsabgleich als Schlüsselelement rot, Bedarf (Absatzplanung) und Kapazität (mögliche Stundenleistung) grau hervorgehoben; geschweifte Klammern „Maßnahmen“/„Projekte“ als schmale Klammern",
+    "Abkürzungen aufgelöst: Std. → Stunden, KST → „Kostenstelle (KST)“ beim ersten Auftreten, techn. → technisches, MA → Mitarbeiter (Mitarbeiterstammdaten, Mitarbeiter- oder KST-Prämissen); „Rationalisierungsvorgabe (%)“ → „in %“",
+    "Frage: „NN plus oder minus“ unverändert – gemeint NN-Stellen (noch nicht namentlich besetzte Planstellen)? Dann ausschreiben",
+    "Caption steht bereits auf „In Anlehnung an Schön und Irmer 2009, S. 301“ – passt zur Neuzeichnung"
+   ],
+   "alt": "Ablauf der Abstimmung der Personalplanung: Aus der Absatzplanung ergibt sich die benötigte Leistungsmenge in Stunden je Kostenstelle und Leistungsart; davon geht die Rationalisierungsvorgabe ab, Aufschläge für technisches Risiko/Ausschuss (Maßnahmen) und Mehrbedarf für Neuanläufe (Projekte) kommen hinzu. Im Kapazitätsabgleich je Kostenstelle und Monat wird dieser Bedarf in einem Kreislauf mit der möglichen Stundenleistung aus Mitarbeiterstammdaten und Prämissen abgestimmt; angepasst wird über NN plus oder minus bzw. Mitarbeiter- oder KST-Prämissen."
+  },
+  "3.192": {
+   "status": "pruefung",
+   "datei": "Stufen_der_Absatz--Umsatzplanung",
+   "kommentare": [
+    "Bildtitel entfernt; 3D-Rahmen und Blautöne → flache Kästen: analytische Stufen grau hervorgehoben, stochastische Stufe hell, Gesamtabsatz/-umsatz anthrazit; Bänder unten in denselben Tönen",
+    "Treppe als Wasserfall: Höhen der Stufen wie im Original, ihre Summe ergibt genau die Höhe der Gesamtsäule",
+    "Rot-grüne Pfeile der Zielvorgabe → zwei rote Pfeile von oben und unten auf die Ziellinie (Abgleich nach oben oder unten), Beschriftung „Zielvorgabe“ rot über der Linie",
+    "Schreibweisen: „Restl. Kundenbedarf“ → „Restlicher Kundenbedarf“, „Gesamt-Absatz/-Umsatz“ → „Gesamtabsatz/-umsatz“"
+   ],
+   "alt": "Treppe der Absatz- und Umsatzplanung: Auftragsbestand, Rahmenverträge, Angebote und Verkaufschancen (analytische Planung) sowie der restliche Kundenbedarf (stochastische Planung) addieren sich stufenweise zum Gesamtabsatz/-umsatz. Die Gesamtsäule reicht bis zur Linie der Zielvorgabe; zwei Pfeile von oben und unten zeigen den Abgleich mit der Zielvorgabe."
   },
   "3.3": {
    "status": "pruefung",

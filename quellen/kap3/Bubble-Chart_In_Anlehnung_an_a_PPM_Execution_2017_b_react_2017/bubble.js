@@ -240,7 +240,7 @@
         text: "Die Kreisfläche ist proportional zum Kapitalwert; die Legende zeigt Referenzkreise für 1, 3 und 6 Mio. €. Das Original teilte die Projekte in vier Größenklassen ein (unter 1 Mio. $ bis über 5 Mio. $) – ein Projekt mit 5,1 Mio. $ sah dort aus wie eines mit 20 Mio. $." },
       { nr: 4, ziel: "pa-quadranten", anker: "links", versatz: [46, 32], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Farbverlauf und Glanz",
         text: "Die grünen und roten Farbverläufe in den Ecken und der 3D-Glanz der Kreise entfallen; die Namen der vier Felder stehen außen an den Ecken, damit sie keinen Kreis verdecken, das günstige Feld fett." },
-      { nr: 5, ziel: "pa-achsen", anker: "links", versatz: [3, 186], regel: "STRUCTURE – Inhalte ordnen", titel: "Risikoachse beschriftet",
+      { nr: 5, ziel: "pa-achsen", anker: "links", versatz: [7, 186], regel: "STRUCTURE – Inhalte ordnen", titel: "Risikoachse beschriftet",
         text: "Wie im Original steht geringes Risiko oben, damit das günstige Feld oben rechts liegt. Beide Achsen sind an den Enden mit „gering“ und „hoch“ beschriftet; im Original fehlte jede Angabe, Teilstriche hatten keine Werte." },
       { nr: 6, ziel: "pb-legende", anker: "links", versatz: [254, 4], regel: "UNIFY – Semantische Notation", titel: "Farbe nur für die Stimmung",
         text: "Rot sind negative, Blaugrün positive, Grau neutrale Begriffe – dieselbe Bedeutung wie bei Abweichungen. Negative Begriffe sind kräftig gefärbt, damit sie auch im Schwarz-Weiß-Druck dunkler erscheinen als positive. Im Original war die Bedeutung von Blau, Orange und Rot nicht erklärt." },

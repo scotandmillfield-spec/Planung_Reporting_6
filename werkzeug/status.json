@@ -260,6 +260,84 @@
    "caption": "Risiko- und Bandbreitenplanung mit der Monte-Carlo-Simulation (in Anlehnung an Gleißner 2016, S. 16–23)",
    "datei": "Risiko-_und_Bandbreitenplanung_mit_der_Monte-Carlo-Simulation"
   },
+  "4.1": {
+   "status": "pruefung",
+   "datei": "Einfluss_der_Holding-Art_auf_Planung_und_Reporting",
+   "kommentare": [
+    "Gesamtrahmen entfernt; Ebenen strategisch, taktisch, operativ als fette Spaltenköpfe mit gestrichelten Trennlinien",
+    "Holding-Arten als graue Kästen mit fettem Titel links; Reichweite der Kästen wie im Original (Finanz-Holding bis knapp vor „operativ“, strategische Holding etwa ein Viertel in „operativ“, Management-Holding über alle drei Ebenen) – bitte prüfen, ob eine glatte Stufung (eine, zwei, drei Ebenen) gemeint ist",
+    "Steuerungsinhalte zeilenweise gesetzt, sodass jede Holding-Art eine Zeile mehr hat als die vorige; doppelte Leerzeichen „Steuerung  über“ entfernt",
+    "Kein Rot, da kein Element als zentral markiert ist",
+    "Caption: „Leicht abgeändert im Vgl. zu“ → „In Anlehnung an“ (neu gezeichnet)"
+   ],
+   "alt": "Drei Spalten für die Steuerungsebenen strategisch, taktisch und operativ. Darunter drei Kästen für die Holding-Arten, deren Breite zeigt, wie weit die Steuerung reicht: Die Finanz-Holding steuert über wertorientierte Ziele und Größen, die strategische Holding zusätzlich über strategische Ziele mit Maßnahmen und Kennzahlen, die Management-Holding darüber hinaus operativ über monetäre und nicht-monetäre Kennzahlen und reicht damit über alle drei Ebenen."
+  },
+  "4.2": {
+   "status": "pruefung",
+   "datei": "Moegliche_Konzernverflechtungen_hinsichtlich_SGE-_und_Gesellschaftsbeziehungen",
+   "kommentare": [
+    "Organigramm mit orthogonalen Sammelleitungen; Konzern gestrichelt wie im Original (falls das Strichmuster keine Bedeutung hat, durchgezogen wie die übrigen Kästen?)",
+    "Gekreuzte Diagonalen der Mehrfachzuordnungen ersetzt durch je eine gemeinsame Sammelleitung: TK 1 und TK 2 sind beide mit SGE 1 und SGE 2 verbunden, EG 5 und EG 6 beide mit SGE 3 und SGE 4 – jede Verbindung des Originals bleibt erhalten",
+    "Alle Einheiten gleich groß, Einzelgesellschaften als drei Paare auf einer Achse, SGE und TK mittig darüber",
+    "Abkürzungsliste unten links beibehalten (6,5 pt, Grau), da die Kästen für ausgeschriebene Begriffe zu schmal wären",
+    "Kein Rot, da kein Element als zentral markiert ist"
+   ],
+   "alt": "Organigramm eines Konzerns mit drei Teilkonzernen (TK). TK 1 und TK 2 sind gemeinsam mit den strategischen Geschäftseinheiten SGE 1 und SGE 2 verflochten, denen die Einzelgesellschaften EG 1 bis EG 4 zugeordnet sind; unter TK 3 stehen EG 5 und EG 6, die gemeinsam den Geschäftseinheiten SGE 3 und SGE 4 zugeordnet sind. Die Abbildung zeigt, dass Gesellschafts- und Geschäftseinheitenstruktur nicht deckungsgleich sein müssen."
+  },
+  "4.3": {
+   "status": "pruefung",
+   "datei": "Funktionale_Organisation",
+   "kommentare": [
+    "Serie mit Abb. 4.4 und 4.5: gleiches Raster (Kastengröße, Abstände, Linienführung, linke Spalte), Abb. 4.4 unterscheidet sich nur in den Texten",
+    "Doppelrahmen-Kasten „Reporting/Planung ist primär funktional ausgerichtet“ (Text lief im Original aus dem Kasten) als rote Klammer unter den vier Funktionsbereichen mit roter Beschriftung",
+    "Großer gepunkteter Blockpfeil durch gestrichelten Pfeil zum Kasten „Andere Geschäftsausrichtungen“ ersetzt, Aussage darüber",
+    "„1-n“ → „1–n“ (Bis-Strich), „BU“ → „Business Unit“; unterschiedliche Schriftgrößen im linken Kasten vereinheitlicht"
+   ],
+   "alt": "Organigramm: Unter der Unternehmensleitung stehen die Funktionsbereiche Vertrieb, Produktion, Einkauf und weitere. Eine rote Klammer fasst sie zusammen: Reporting und Planung sind primär funktional ausgerichtet. Ein gestrichelter Pfeil zeigt auf den Kasten anderer Geschäftsausrichtungen (Sparte, Region, Business Unit); die Sicht darauf fehlt oder ist wenig ausgeprägt."
+  },
+  "4.4": {
+   "status": "pruefung",
+   "datei": "Divisionale_Organisation",
+   "kommentare": [
+    "Serie mit Abb. 4.3 und 4.5: gleiches Raster (Kastengröße, Abstände, Linienführung, linke Spalte), Aufbau identisch mit Abb. 4.3",
+    "Doppelrahmen-Kasten „Reporting/Planung ist primär divisional ausgerichtet“ (Text lief im Original aus dem Kasten) als rote Klammer unter den Sparten mit roter Beschriftung",
+    "Großer gepunkteter Blockpfeil durch gestrichelten Pfeil zum Kasten „Andere Geschäftsausrichtungen“ ersetzt, Aussage darüber",
+    "„1-n“ → „1–n“ (Bis-Strich); unterschiedliche Schriftgrößen im linken Kasten vereinheitlicht"
+   ],
+   "alt": "Organigramm: Unter der Unternehmensleitung stehen Sparte 1, Sparte 2, Sparte 3 und weitere. Eine rote Klammer fasst sie zusammen: Reporting und Planung sind primär divisional ausgerichtet. Ein gestrichelter Pfeil zeigt auf den Kasten anderer Geschäftsausrichtungen (Funktionsbereiche, Region); die Sicht darauf fehlt oder ist wenig ausgeprägt."
+  },
+  "4.5": {
+   "status": "pruefung",
+   "datei": "Matrixorganisation",
+   "kommentare": [
+    "Tabelle mit Rahmenlinien als Kastenraster der Serie Abb. 4.3–4.5: Spalten exakt unter den Einheiten der Organigramme, Kopffelder grau, Schnittfelder weiß",
+    "Dimensionsnamen „Divisional/Regional“ und „Funktional“ kursiv über Spalten- bzw. Zeilenköpfen, „Matrix“ fett in der Ecke",
+    "„NL 1 ..n,“ → „Niederlassung 1–n“ (Abkürzung aufgelöst, überzähliges Komma und Punkte entfernt), eigene Kopfzeile unter den Sparten",
+    "Kein Rot, da kein Element als zentral markiert ist"
+   ],
+   "alt": "Matrix aus zwei Dimensionen: In den Spalten stehen divisional bzw. regional die Sparten 1 bis n mit jeweils den Niederlassungen 1 bis n, in den Zeilen funktional Vertrieb, Einkauf und weitere Funktionen. Die leeren Schnittfelder stehen für die Einheiten, die beiden Dimensionen zugleich unterstellt sind."
+  },
+  "4.6": {
+   "status": "pruefung",
+   "datei": "Hierarchische_Beziehung_im_Unternehmen",
+   "kommentare": [
+    "Aufbau und Pfeilrichtungen wie im Original: Führungsebenen als fette Beschriftung, Pläne/Berichte als gleich große graue Kästen",
+    "Schriftgröße vereinheitlicht (Original sehr groß und durchgehend fett), Kästen-Text normal",
+    "Kein Rot, da kein Element als zentral markiert ist"
+   ],
+   "alt": "Senkrechte Stufenfolge von oben nach unten: Management, komprimierter Plan/Bericht, Niederlassungsleiter, komprimierter Plan/Bericht, Abteilungsleiter, Detailplan/-bericht. Jede Führungsebene ist mit dem Plan bzw. Bericht über und unter ihr durch Pfeile verbunden; nach oben werden die Pläne und Berichte von Ebene zu Ebene stärker verdichtet."
+  },
+  "4.7": {
+   "status": "pruefung",
+   "datei": "Controlling_in_groesseren_mittelstaendischen_Unternehmen",
+   "kommentare": [
+    "Korrektur: zweite Sparte „Sparte 1“ → „Sparte n“ (zwischen beiden stehen Auslassungspunkte)",
+    "„Rewe/Fin.“ → „Rechnungswesen/Finanzen“ (Abkürzung aufgelöst)",
+    "Blau hinterlegtes Controlling → Rot (drei Kästen, ein Schlüsselelement); falls zu viel Rot: nur das zentrale Controlling rot, die dezentralen grau",
+    "Gruppen als gestrichelte Container, Spartenbäume mit Stamm unter dem Spartenkasten und eingerückten Funktionen; linke und rechte Gruppe auf gemeinsamem Zeilenraster"
+   ],
+   "alt": "Organigramm: Unter Geschäftsführung/Vorstand stehen links die dezentralen Einheiten – Sparte 1 bis Sparte n mit jeweils Vertrieb, Produktion, Einkauf, Controlling und weiteren Funktionen – und rechts die zentralen Einheiten Controlling, Rechnungswesen/Finanzen, Einkauf, Personal, IT und weitere. Controlling ist rot hervorgehoben und kommt sowohl zentral als auch dezentral in jeder Sparte vor."
+  },
   "5.39": {
    "status": "latex",
    "latex": "tabellen/Beispiel_zur_freien_Datenrecherche_z_B_SELECT-Anweisung.tex",

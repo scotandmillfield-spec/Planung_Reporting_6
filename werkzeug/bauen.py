@@ -102,6 +102,7 @@ def main():
     x = finde(a.nr)
     art, kap, stem = a.art or x["art"], x["kap"], x["stem"]
     ziel = os.path.join(ROOT, "abbildungen", f"kap{kap}")
+    os.makedirs(ziel, exist_ok=True)
     tmp = os.path.join("/tmp/bauen", stem)
     shutil.rmtree(tmp, ignore_errors=True)
     os.makedirs(tmp)

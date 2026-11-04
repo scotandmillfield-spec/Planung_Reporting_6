@@ -191,7 +191,7 @@
     const gl = sv("g", { id: "zeit-linien", style: "pointer-events:none" }, svg);
     reihen.slice().reverse().forEach(r => {
       const eigen = r.a === EIGEN, gew = r.a === S.anb, blass = S.anb !== null && !eigen && !gew;
-      sv("path", { id: eigen ? "zeit-eigen" : null, d: pfad(r.w), fill: "none", class: blass ? "dk-blass" : "",
+      sv("path", { ...(eigen ? { id: "zeit-eigen" } : {}), d: pfad(r.w), fill: "none", class: blass ? "dk-blass" : "",
                    stroke: eigen ? "#3A3F44" : gew ? "#6E747A" : "#A9A9A9", "stroke-width": eigen ? 3 : gew ? 2.5 : 1.5,
                    "stroke-linejoin": "round" }, gl);
     });

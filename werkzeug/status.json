@@ -995,6 +995,87 @@
    ],
    "alt": "Links eine Tabelle mit vier Zeilen und drei Spalten, deren Werte A, B und C lauten. Rechts oben die zeilenorientierte Speicherung als Folge A B C je Zeile, rechts unten die spaltenorientierte Speicherung als Folge aller A, dann aller B, dann aller C. Die hervorgehobenen Werte der Spalte 1 liegen zeilenorientiert verstreut und spaltenorientiert hintereinander."
   },
+  "5.32": {
+   "status": "pruefung",
+   "datei": "Traditionelle_und_explorative_BI-Architektur",
+   "kommentare": [
+    "Ebenen als Bänder mit Titel oben links wie Abb. 5.16; Blockpfeil „Self-Service BI“ → gestrichelte Querschnittsspalte über alle Ebenen; Blockpfeil „Big Data“ → Pfeil unter beiden Spalten; Trennlinie Traditionelle | Explorative BI bleibt",
+    "blau verlaufender Bereich → gestrichelter Container „Daten-Virtualisierung“; Würfel und Zylinder → beschriftete Boxen; Rollen Kap. 5: Quellen box, Datenhaltung (Data Marts, Core DWH, ODS, CMS/DMS, Speicher im Data Lake) box_hi, kein Rot (Rot erst für Sandboxing in Abb. 5.38)",
+    "Verbindungen nach der Folie, orthogonal und ohne Knotenpunkte; ODS und CMS/DMS zur Analyse als Sammelleitung (eine Kreuzung mit dem Zweig zum Data Mart statt zwei); Data Marts rechts vom Bandtitel, damit die Pfeile frei bleiben",
+    "Korrekturen: „Daten - Virtualisierung“ → „Daten-Virtualisierung“, „Core DWH“ → „Core Data Warehouse“, „Analytische DB“ → „Analytische Datenbank“, „Sensor-Daten“ → „Sensordaten“, „Portal etc.“ → „Portale etc.“ (wie Abb. 5.16), „Excel“ → „Tabellenkalkulation“ (softwareneutral); „…“ bei den Quellen entfallen",
+    "Frage: Die ETL-Leitung führt in der Folie auch direkt zum zweiten Data Mart (rechts hoch) – so übernommen; gemeint vielleicht Data Lake → Data Mart?",
+    "Frage: „Hadoop HDFS“ (Open-Source-Technik) belassen – oder neutral „verteiltes Dateisystem“?"
+   ],
+   "alt": "BI-Architektur in drei Ebenen, links traditionelle, rechts explorative BI. Traditionell laden ETL-Prozesse Daten aus internen Quellsystemen (ERP, CRM, Tabellenkalkulation) in Core Data Warehouse, ODS, CMS/DMS und Data Marts; explorativ gelangen externe Daten (Sensordaten, Web-Logs, Web-Dokumente) per ELT in den Data Lake mit analytischer Datenbank, Hadoop HDFS und NoSQL oder per Streaming direkt in die Analyse- und Planungswerkzeuge. Die Datenhaltung ist als Daten-Virtualisierung zusammengefasst, Self-Service BI reicht über alle Ebenen, Big Data nimmt zur explorativen Seite hin zu."
+  },
+  "5.33": {
+   "status": "pruefung",
+   "datei": "Architektur_Lambda-Architektur_zur_Echtzeitdatenverarbeitung",
+   "kommentare": [
+    "Aufbau der Folie bleibt; Schichten als Karten mit Kopfleiste (wie Abb. 5.10), Master Dataset und Views box_hi, Abfrage und neue Daten als Ellipsen; kein Rot",
+    "Schrägpfeile → senkrechte Pfeile, die an der Ellipse enden",
+    "Übertragen: „Query“ → „Abfrage“, „New Data“ → „Neue Daten“; Schichtnamen, Master Dataset und Views als Fachbegriffe englisch, „Batch view“/„Realtime view“ → „Batch View“/„Realtime View“ – ganz eindeutschen?",
+    "Fachlich prüfen: Bei Marz liegt das Master Dataset im Batch Layer und die Batch Views im Serving Layer – in der Folie vertauscht, so übernommen",
+    "Caption: „λ-Architektur (Lambda-Architektur) …“ – Dateiname beginnt mit „Architektur_“, weil „λ“ entfällt"
+   ],
+   "alt": "Lambda-Architektur: Neue Daten fließen parallel in den Batch Layer mit drei Batch Views und in den Speed Layer mit drei Realtime Views. Der Batch Layer speist den Serving Layer mit dem Master Dataset; Serving Layer und Speed Layer beantworten gemeinsam die Abfrage."
+  },
+  "5.34": {
+   "status": "pruefung",
+   "datei": "Technologien_sowie_Analyse-_und_Prognosemethoden_im_Einsatz_von_Business_Intelligence_bzw_Business_Analytics",
+   "kommentare": [
+    "Aufbau bleibt: gestrichelter Rahmen „Business Intelligence“ (Titel oben), darin durchgezogener Rahmen mit „Business Analytics“ unten rechts, darin zwei Spalten als Karten mit Kopfleiste",
+    "blaue Umrandung der explorativen Spalte (Hervorhebung) → Kartenrumpf grau (box_hi); Unterstreichungen und Serifenschrift entfallen; Unterpunkte mit „–“",
+    "Korrekturen: „DWH-Technologien“ → „Data-Warehouse-Technologien“, „KDD“ aufgelöst (Knowledge Discovery in Databases), „Deskriptive“ nach Doppelpunkt klein, „(Budget-, Mittelfrist-, Strategischer Planung …)“ → „(Budget-, Mittelfrist- und strategische Planung …)“, „Machine und Deep Learning“ → „Machine Learning und Deep Learning“, Trennstriche aus Zeilenumbrüchen entfernt",
+    "Frage: Bezieht sich „Business Analytics“ auf den inneren Rahmen (beide Spalten) oder nur auf die explorative Spalte? Lage wie im Original übernommen"
+   ],
+   "alt": "Zwei Spalten innerhalb der Rahmen Business Intelligence und Business Analytics. Traditionelle Business Intelligence umfasst Data-Warehouse-Technologien, Dashboards und Cockpits, Data Mining, OLAP-Analysen, Kommentierung, integrierte Unternehmensplanung und unternehmensweite Maßnahmenableitung; explorative Business Intelligence umfasst In-Memory-Technik, NoSQL-Datenbanken, Hadoop und Big-Data-Analytics mit modellbasierten, prädiktiven, präskriptiven und KI-gestützten Analysen, Data Discovery und Data Visualization sowie modellbasierter Maßnahmenableitung."
+  },
+  "5.35": {
+   "status": "pruefung",
+   "datei": "BI-Analysespektrum",
+   "kommentare": [
+    "Rot-Rosa-Ringe → Grauabstufung (innen dunkel, außen hell, weiße Fugen wie im Original); Achsentitel „Komplexität“ waagerecht an der Pfeilspitze",
+    "Übertragen: Prescription/Prediction → Präskription/Prädiktion; Descriptive/Diagnostic/Real-time Analytics → Deskriptive/Diagnostische Analyse, Real-Time-Analyse; Predictive/Prescriptive Analytics → Prädiktive/Präskriptive Prognose – Begriffe aus Abb. 5.36 (dort mit denselben Grundfragen), damit die Serie 5.35–5.37 einheitlich ist; bitte bestätigen oder englische Begriffe der Quelle zurück",
+    "Reihenfolge wie Abb. 5.36/5.37: von Reporting (innen/einfach) bis Präskription (außen/komplex)",
+    "Caption: Notiz enthielt zwei Fassungen und Vollzitate – Kurzbeleg „In Anlehnung an Lanquillon und Mallow 2015, S. 56, nach Eckerson 2007“, Vollzitate ins Literaturverzeichnis"
+   ],
+   "alt": "Viertelkreis aus fünf Ringen über den Achsen Wert für ein Unternehmen und Komplexität, jeweils von gering bis hoch. Von innen nach außen folgen Reporting, OLAP, Monitoring, Prädiktion und Präskription; ihnen sind die Analysearten mit ihrer Grundfrage zugeordnet: deskriptive Analyse (Was ist geschehen?), diagnostische Analyse (Warum ist es geschehen?), Real-Time-Analyse (Was geschieht gerade?), prädiktive Prognose (Was könnte geschehen?) und präskriptive Prognose (Was soll geschehen?)."
+  },
+  "5.36": {
+   "status": "pruefung",
+   "datei": "Phasenzuordnung_von_Analyse-_und_Prognosetypen",
+   "kommentare": [
+    "Querformat 155 mm (sieben Phasenspalten würden bei 110 mm unter 6 pt fallen); Werte aus dem Excel-Objekt der Folie, ausgeblendete Zeilen 5–9 bleiben weg",
+    "zugeordnete Felder dunkelgrau → grau (box_hi), übrige weiß; Spalten- und Zeilenköpfe hellgrau, Titelleisten Anthrazit – gleiche Rollen wie Abb. 5.37",
+    "Korrekturen: „trad. Planung/ Prognose“ → „Traditionelle Planung/Prognose“, „Real-Time Analyse“ → „Real-Time-Analyse“, „Zusam-menhänge“/„Prognose-methoden“ ohne Trennstrich, „Prognosemethoden/-modellen“ → „-modelle“ (Genitiv Plural), Doppelpunkt nach „Analyse- und Prognosetypen“ entfällt",
+    "Reihenfolge der Typen (unten einfach, oben komplex) passt zu Abb. 5.35 (innen → außen) und Abb. 5.37 (links → rechts)"
+   ],
+   "alt": "Matrix mit sieben Analyse- und Prognosetypen in den Zeilen und sieben Analyse- bzw. Prognosephasen in den Spalten, jeweils mit Zeitraum und Grundfrage. Traditionelle Planung und relationales Reporting sowie OLAP-gestützte Planung und Analyse gehören zur deskriptiven und diagnostischen Analyse und zur traditionellen Planung, Monitoring mit Streamingdaten zur Real-Time-Analyse; Radar-/Scan-Analysen, Forecasts und Simulationen zur prädiktiven Analyse, die beiden letzten zusätzlich zur prädiktiven Prognose, Optimierung durch Maßnahmen zur präskriptiven Prognose."
+  },
+  "5.37": {
+   "status": "pruefung",
+   "datei": "Aufwand-_und_Nutzeneinschaetzung_von_Analyse-_und_Prognosetypen",
+   "kommentare": [
+    "kein Achsendiagramm: Das Original zeigt Einstufungen (+/++/+++), keine Lage – als Bewertungsmatrix im Stil von Abb. 5.36 gezeichnet, Querformat 155 mm; Werte aus dem Excel-Objekt der Folie (Bereich A38:H57)",
+    "Blocküberschriften Komplexität und Nutzenstiftung als graue Leisten, Spalten-/Zeilenköpfe hellgrau, Titelleiste Anthrazit; leere Felder bleiben leer wie im Original",
+    "Korrekturen: „Trad. Planung und Reporting“ → „Traditionelle Planung und Reporting“, „(DWH)“ → „(Data Warehouse)“, „Forecasts/ Prognosen“, „Optimierung/ Maßnahmen“ ohne Leerzeichen, „Web-Mining/ Predictive-Analytics“ → „Web-Mining/Predictive Analytics“",
+    "Frage: Caption sagt „Aufwand“, der Block heißt „Komplexität“ – angleichen (Block „Aufwand“ oder Caption „Komplexitäts- und Nutzeneinschätzung“)?",
+    "Hinweis: Eine Graustufung der Felder nach +/++/+++ würde das Muster schneller lesbar machen – nicht umgesetzt"
+   ],
+   "alt": "Bewertungsmatrix für sieben Analyse- und Prognosetypen von traditioneller Planung und Reporting bis Optimierung/Maßnahmen. Die Komplexität – Tools und Know-how für den Technologieeinsatz sowie für statistische Methoden – steigt von + bei der traditionellen Planung auf +++ bei den Big-Data-Verfahren. Bei der Nutzenstiftung punkten Planung und OLAP vor allem bei Dokumentation, Koordination, Zielsetzung und Gesamtsteuerung, die explorativen Verfahren bei Prognose, selektiver Steuerung, Innovation und Reaktionsvorteil."
+  },
+  "5.38": {
+   "status": "pruefung",
+   "datei": "Explorative_BI_Cloud_Computing_Sandboxing_und_Self-Service_BI",
+   "kommentare": [
+    "deckungsgleich mit Abb. 5.32 (dieselbe Zeichenfunktion, gleiche Geometrie, Texte, Rollen und Korrekturen); Unterschied wie in der Folie: linker Data Mart → Sandboxing, zusätzlich Sandboxing im Data Lake",
+    "Sandboxing rot (das Neue der Abbildung); Doppelrahmen und Blaufüllung entfallen",
+    "Wolken „Cloud“ → beschriftete Boxen, Gedankenblasen → gestrichelte Zuordnungslinie; linke Cloud neben statt über dem Sandboxing, damit der Pfeil zur Analyse frei bleibt (im Original von der Wolke verdeckt)",
+    "Caption: „Self-Service BI“ – Durchkopplung „Self-Service-BI“ (Duden) im ganzen Kapitel? Dann auch im Bild"
+   ],
+   "alt": "Dieselbe BI-Architektur wie in Abbildung 5.32, ergänzt um Sandboxing: Auf der traditionellen Seite tritt eine Sandbox an die Stelle eines Data Marts, im Data Lake kommt eine zweite Sandbox hinzu; beide können in der Cloud betrieben werden. Self-Service BI reicht über alle Ebenen von der Datenanbindung bis zur Auswertung."
+  },
   "Folie 5": {
    "status": "entfaellt",
    "kommentare": [

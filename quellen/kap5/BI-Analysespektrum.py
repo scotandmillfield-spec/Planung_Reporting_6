@@ -50,7 +50,7 @@ def build(theme):
     f.arrow([(X0, Y0), (xtip, Y0)], name="Achse Wert")
     lab = dict(size=6.5)
     f.text(0.3, 0.3, 30.0, 3.4, [P("Komplexität", size=6.5, bold=True)], anchor="m", name="Titel Komplexität")
-    f.text(0.3, ytip, X0 - 1.0 - 0.3, 3.2, [P("hoch", **lab)], align="r", anchor="t", name="Komplexität hoch")
+    f.text(0.3, ytip + 1.2, X0 - 2.0 - 0.3, 3.2, [P("hoch", **lab)], align="r", anchor="t", name="Komplexität hoch")
     f.text(0.3, Y0 + 0.6, X0 + 4.0, 3.2, [P("gering", **lab)], align="l", anchor="t", name="gering")
     f.text(X0 + 12.0, Y0 + 0.6, R - 18.0, 3.2, [P("Wert für ein Unternehmen", size=6.5, bold=True)], align="c",
            anchor="t", name="Titel Wert")

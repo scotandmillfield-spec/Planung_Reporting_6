@@ -1100,6 +1100,18 @@
    ],
    "alt": "Vier Bullet-Charts untereinander für Kennzahlen 2027, jeweils mit grauen Bewertungsbereichen (dunkel schlecht, mittel befriedigend, hell gut), einem dunklen Ist-Balken und einem Zielstrich; rechts Ist, Ziel und Abweichung. Kundenzufriedenheit 65 bei Ziel 78 (−13), Umsatz 460 bei Ziel 440 Mio. € (+20), Deckungsbeitragsquote 31,4 bei Ziel 35,0 % (−3,6), Liefertreue 93,8 bei Ziel 95,0 % (−1,2). Kernaussage: Nur der Umsatz liegt über dem Ziel, die Kundenzufriedenheit am weitesten darunter."
   },
+  "3.55": {
+   "status": "pruefung",
+   "datei": "Wasserfalldiagramm_mit_MS_Excel",
+   "kommentare": [
+    "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit), Aufbau wie Abb. 3.48 ff.",
+    "Werte des Originals (Ausgangsniveau 110, Januar +70, Februar +20, März −10, April −60, Mai +10, Juni +60, Endniveau 200 Mio. €); Ausgangsniveau als Monatsumsatz Dezember 2026 gedeutet, Monate 2027",
+    "Neu: Anfangs- und Endsäule (Dez 2026: 110, Jun 2027: 200) – das Original zeigte nur die Veränderungen, Anfang und Ende musste man an der Achse ablesen",
+    "Blaugrün/Rot nach Wirkung statt reinem Grün/Rot; Werte mit Vorzeichen über bzw. unter den Säulen statt in den Säulen; Achse und Rahmen entfallen",
+    "Bitte prüfen: Titel jetzt „Monatsumsatz und Veränderung zum Vormonat“; falls der Text „Wasserfalldiagramm mit MS Excel“ betont, kann die Caption bleiben – Excel bietet den Typ seit 2016 (Hinweis in der Ebene Nachbau)"
+   ],
+   "alt": "Wasserfalldiagramm des Monatsumsatzes in Mio. €: Startsäule Dezember 2026 mit 110, danach schwebende Säulen für die Veränderungen Januar +70, Februar +20, März −10, April −60, Mai +10 und Juni +60 (Zuwächse blaugrün, Rückgänge rot), Endsäule Juni 2027 mit 200. Kernaussage: Der Umsatz steigt von 110 auf 200 Mio. €, der stärkste Rückgang liegt im April."
+  },
   "3.28": {
    "status": "pruefung",
    "datei": "Exemplarisches_Grundraster_eines_Berichtes",

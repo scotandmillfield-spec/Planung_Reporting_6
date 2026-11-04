@@ -1,0 +1,37 @@
+﻿Verkäufe (Faktentabelle);;;;;
+KundenID;ProduktID;VerkaufsdatumID;VerkaufsortID;Menge;Umsatz_EUR
+1;1;01.10.2024;1;1;3,50
+1;3;01.10.2024;1;2;3,00
+2;2;01.10.2024;2;1;3,00
+3;6;02.10.2024;3;1;4,00
+1;1;02.10.2024;1;1;3,50
+2;5;03.10.2024;2;1;2,80
+3;3;03.10.2024;1;1;1,50
+
+Produkt (Dimension);;;
+ProduktID;ProduktName;Preis_EUR;VeganeOption
+1;Latte Macchiato;3,50;Ja
+2;Cappuccino;3,00;Ja
+3;Schokoladenkeks;1,50;Ja
+4;Mandelkuchen;2,50;Nein
+5;Americano;2,80;Nein
+6;Cold Brew;4,00;Ja
+
+Kunde (Dimension);;;
+KundenID;Name;DreamCardNr;VeganePraeferenz
+1;Max;1001;Ja
+2;Anna;1002;Nein
+3;Lisa-Marie;1003;Ja
+
+Datum (Dimension);;;;;
+DatumID;Tag;Monat;Quartal;Halbjahr;Jahr
+01.10.2024;1;10;4;2;2024
+02.10.2024;2;10;4;2;2024
+03.10.2024;3;10;4;2;2024
+
+Verkaufsort (Dimension);
+VerkaufsortID;Verkaufsort
+1;Kaffeehaus 1
+2;Kaffeehaus 2
+3;Coffeebike
+

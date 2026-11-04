@@ -813,6 +813,79 @@
    ],
    "alt": "Data-Warehouse-Architektur in drei Ebenen. Unten die Datenanbindung mit internen Quellsystemen (ERP, CRM, Tabellenkalkulation) und externen Quellen; in der Mitte die Datenverwaltung mit Administration und Metadaten sowie den Schichten Staging, Cleansing, Core und Marts: ETL-Prozesse laden die Daten in Core Data Warehouse, ODS und CMS/DMS, das Core Data Warehouse versorgt drei Data Marts, alles umschlossen von der Daten-Virtualisierung. Oben greifen Analyse- und Planungswerkzeuge auf Data Marts, Core Data Warehouse, ODS und CMS/DMS zu."
   },
+  "5.17": {
+   "status": "pruefung",
+   "datei": "Datenbankschema_in_3NF",
+   "kommentare": [
+    "Produktscreenshot (Modellansicht) softwareneutral als Datenmodell-Diagramm nachgebaut, Anordnung wie im Original; Tabellen-, Σ- und Kalendersymbole, „…“, „Collapse“, Bildlaufleisten und Filterrichtungssymbole entfallen",
+    "Tabellen als Karten mit Kopfleiste wie Abb. 5.19–5.22; Schlüssel als „PK“/„FK“ ergänzt (in Abb. 5.18 nur unterstrichen), Verkaufsdetails mit zusammengesetztem Schlüssel VerkaufsID + ProduktID (zugleich Fremdschlüssel)",
+    "Felder in der Reihenfolge von Abb. 5.18 (Schlüssel zuerst) statt alphabetisch; „Produktname“ → „ProduktName“ wie in 5.18–5.22",
+    "Kardinalität „*“ → „n“ (1:n-Notation); Beziehungen orthogonal, Kardinalität als Text an den Linienenden",
+    "Kein Rot, alle Tabellen gleich (im 3NF-Schema keine Fakten-/Dimensionsrollen)"
+   ],
+   "alt": "Datenbankschema in dritter Normalform aus vier Tabellen: Produkte (ProduktID, ProduktName, Preis, VeganeOption), Verkaufsdetails (VerkaufsID und ProduktID als zusammengesetzter Schlüssel, Menge, Vegan), Kunden (KundenID, Name, DreamCardNr, VeganePraeferenz) und Verkäufe (VerkaufsID, KundenID, Verkaufsdatum, Verkaufsort). Produkte und Verkäufe stehen jeweils in einer 1:n-Beziehung zu Verkaufsdetails, Kunden in einer 1:n-Beziehung zu Verkäufe."
+  },
+  "5.18": {
+   "status": "pruefung",
+   "datei": "Normalisierte_Tabellenstruktur_in_der_3_Normalform",
+   "kommentare": [
+    "Datentabellen mit Beispieldaten als interaktives Einzelvisual (727 × 500 px = 110 × 75,6 mm) statt Bild: Klick auf eine Zeile hebt in allen vier Tabellen die über Schlüssel verknüpften Zeilen hervor (Schlüsselwerte fett, Rest blass), Tooltip, sortierbar; Titel und berechnete Aussage ergänzt; Druck ohne Auswahl",
+    "Werte unverändert aus dem Original; Anordnung wie im Original (Stammdaten oben, Bewegungsdaten unten); Schlüssel als „PK“/„FK“ über den Spalten statt fett/unterstrichen",
+    "Hellblaue Kopfzeilen und Rahmen entfallen; Text linksbündig, Zahlen rechtsbündig (Original: alles rechtsbündig); Datum „2024-10-01“ → „01.10.2024“; „VerkaufsDatum“/„VerkaufsOrt“ → „Verkaufsdatum“/„Verkaufsort“ wie in 5.17 und 5.19–5.22",
+    "Frage: „Vegan“ in Verkaufsdetails als Merkmal der Position gedeutet (Verkauf 2, Cappuccino: Nein, obwohl VeganeOption = Ja) – hinge es nur von ProduktID ab, verletzte die Tabelle die 2NF; im Text klarstellen?",
+    "Frage: „Coffeebike“ ist auch ein Markenname – ggf. neutral „Kaffeefahrrad“? (unverändert übernommen, ebenso in 5.20)"
+   ],
+   "alt": "Vier verknüpfte Tabellen mit Beispieldaten in dritter Normalform: Produkte mit sechs Artikeln von Latte Macchiato bis Cold Brew samt Preis und veganer Option, Kunden mit Max, Anna und Lisa-Marie, Verkaufsdetails mit sieben Positionen (VerkaufsID, ProduktID, Menge, Vegan) und Verkäufe mit sechs Verkäufen vom 01. bis 03.10.2024 an drei Verkaufsorten. Primär- und Fremdschlüssel sind über den Spalten gekennzeichnet; jeder Produkt- und Kundendatensatz steht nur einmal, die Schlüssel verbinden die Tabellen."
+  },
+  "5.19": {
+   "status": "pruefung",
+   "datei": "Star-Schema_mit_Fakten-_und_Dimensionstabellen",
+   "kommentare": [
+    "Produktscreenshot (Modellansicht) softwareneutral als Datenmodell-Diagramm; Tabellen-, Σ- und Kalendersymbole, „…“, „Collapse“, Bildlaufleisten und Filterrichtungssymbole entfallen",
+    "Korrektur: Kardinalität im Original durchgehend 1:1 → n:1 (Faktentabelle n, Dimension 1) wie in Abb. 5.21/5.22 – bitte bestätigen",
+    "Präfixe „dm_Dimension_“/„dm_Fakten_“ → Kurznamen wie in 5.20–5.22 (Verkäufe, Produkt, Kunde, Datum, Verkaufsort), Rolle „Faktentabelle“/„Dimensionstabelle“ als zweite Zeile im Kopf, Faktentabelle grau hinterlegt – Präfixe zurück, falls der Text sie nennt?",
+    "Anordnung an 5.21/5.22 angeglichen (Datum oben, Produkt links, Kunde rechts, Verkaufsort unten; Original: Produkt oben, Kunde links, Datum rechts), damit die Serie Star → Galaxy → Snowflake vergleichbar ist",
+    "Felder: Schlüssel (PK/FK) zuerst, Datum in der Hierarchie Tag → Jahr statt alphabetisch; Kardinalität als „1“/„n“"
+   ],
+   "alt": "Star-Schema mit der Faktentabelle Verkäufe in der Mitte (Fremdschlüssel KundenID, ProduktID, VerkaufsdatumID, VerkaufsortID sowie Menge und Umsatz) und vier Dimensionstabellen ringsum: Datum oben, Produkt links, Kunde rechts und Verkaufsort unten. Jede Dimension steht in einer 1:n-Beziehung zur Faktentabelle."
+  },
+  "5.20": {
+   "status": "pruefung",
+   "datei": "Analyse_gemaess_einem_Star-Schema_in_Power_BI",
+   "kommentare": [
+    "Produktscreenshot (Datenbereich und zwei Berichtszustände mit Blockpfeilen) softwareneutral als interaktives Einzelvisual (727 × 464 px = 110 × 70,2 mm): Datenschnitt „Produktfilter“, Absatzmenge je Kunde ohne und mit Filter nebeneinander, darunter die Felder des Star-Schemas mit ihrer Rolle (Wert, Achse, Filter, Tooltip); Druck mit Filter Latte Macchiato wie im Original",
+    "Korrektur: Titel „Verkäufe je Produkt“ und Achse „Produktname“ passten nicht zu den Balken (Kunden) → „Absatzmenge je Kunde, Stück“",
+    "Ein Maßstab für beide Diagramme (Original: gefilterter Balken 2 so lang wie 4); Anna und Lisa-Marie bleiben mit „–“ stehen statt zu verschwinden",
+    "Daten aus Abb. 5.18 abgeleitet, Faktentabelle wie Abb. 5.19 (je Position eine Zeile, Umsatz = Menge × Preis): Max 4, Anna 2, Lisa-Marie 2 Stück, Latte Macchiato nur Max 2 – wie im Original; VerkaufsortID ergänzt",
+    "Rahmen, Symbolleiste, Suchfeld, Kontrollkästchen und Blockpfeile entfallen; Datumsfelder aufgeführt (im Original zugeklappt)",
+    "Caption nennt Power BI – softwareneutral fassen? z. B. „Analyse gemäß einem Star-Schema (Filterwirkung über die Faktentabelle)“"
+   ],
+   "alt": "Bericht zur Absatzmenge je Kunde in Stück mit einem Produktfilter: Links ohne Filter kauft Max 4, Anna 2 und Lisa-Marie 2 von 8 Stück, rechts mit dem Filter Latte Macchiato bleibt nur Max mit 2 Stück. Darunter sind die Felder des Star-Schemas aufgeführt – Menge aus der Faktentabelle Verkäufe als Wert, Name aus der Dimension Kunde als Achse, ProduktName aus der Dimension Produkt als Filter; der Filter auf das Produkt wirkt über die Faktentabelle auf die Kunden."
+  },
+  "5.21": {
+   "status": "pruefung",
+   "datei": "Galaxy-Schema",
+   "kommentare": [
+    "Produktscreenshot (Modellansicht) softwareneutral als Datenmodell-Diagramm; Tabellen gleich wie Abb. 5.19 in gleicher Lage, ergänzt um die zweite Faktentabelle oben rechts wie im Original; rote Kopfleiste markiert, was gegenüber 5.19 neu ist",
+    "„Dreamcardnutzung“ → „DreamCardNutzung“ (Schreibweise wie das Feld DreamCardNr)",
+    "Beziehung Datum–DreamCardNutzung bleibt gestrichelt (im Original gepunktet = inaktive Beziehung des Werkzeugs) – im Text erklären oder durchgezogen zeichnen?",
+    "Kunde neben Verkäufe statt tiefer gesetzt, beide Beziehungen zum Kunden enden getrennt; Augensymbole (ausgeblendete Felder), Σ-, Kalender- und Filterrichtungssymbole, „…“, „Collapse“ entfallen; „*“ → „n“",
+    "Felder: Schlüssel zuerst, Datum Tag → Jahr wie in 5.19"
+   ],
+   "alt": "Galaxy-Schema mit zwei Faktentabellen: Verkäufe in der Mitte mit den Dimensionen Datum, Produkt, Kunde und Verkaufsort sowie DreamCardNutzung (DatumID, KundenID, Anzahl) oben rechts, hervorgehoben. Beide Faktentabellen teilen sich die Dimensionen Datum und Kunde; alle Beziehungen sind 1:n, die Beziehung von Datum zu DreamCardNutzung ist gestrichelt."
+  },
+  "5.22": {
+   "status": "pruefung",
+   "datei": "Snowflake-Schema",
+   "kommentare": [
+    "Produktscreenshot (Modellansicht) softwareneutral als Datenmodell-Diagramm; Tabellen und Lage wie Abb. 5.19/5.21, ergänzt um Postleitzahlen; rote Kopfleiste markiert, was gegenüber 5.21 neu ist",
+    "Postleitzahlen unter Kunde statt rechts daneben (110 mm Breite reicht nicht für eine vierte Spalte); Kunde mit Fremdschlüssel PLZ",
+    "„Dreamcardnutzung“ → „DreamCardNutzung“; Beziehung Datum–DreamCardNutzung gestrichelt wie in 5.21",
+    "Augen-, Σ-, Kalender- und Filterrichtungssymbole, Auswahlmarkierung an PLZID, „…“, „Collapse“ entfallen; „*“ → „n“; Felder Schlüssel zuerst",
+    "Frage: Kunde.PLZ verweist auf Postleitzahlen.PLZID – Feldnamen wie im Original unterschiedlich; vereinheitlichen (z. B. beide „PLZID“)?"
+   ],
+   "alt": "Snowflake-Schema auf Basis des Galaxy-Schemas: Die Faktentabellen Verkäufe und DreamCardNutzung mit den Dimensionen Datum, Produkt, Kunde und Verkaufsort; die Dimension Kunde ist normalisiert und verweist über den Fremdschlüssel PLZ auf die hervorgehobene Tabelle Postleitzahlen (PLZID, Stadt, Stadtteil, Einwohnerzahl). Alle Beziehungen sind 1:n."
+  },
   "5.28": {
    "status": "pruefung",
    "datei": "Stufenorientiertes_Erloesschema",

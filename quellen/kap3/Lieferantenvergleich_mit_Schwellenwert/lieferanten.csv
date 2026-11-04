@@ -1,0 +1,13 @@
+﻿Jahr;Lieferant;Kriterium;Punkte_0_bis_10;Schwellenwert
+2027;Lieferant A;Qualität;4,5;4
+2027;Lieferant A;Preis;6,7;4
+2027;Lieferant A;Liefergenauigkeit;5,0;4
+2027;Lieferant A;Liefersicherheit;5,7;4
+2027;Lieferant A;Kulanz;4,0;4
+2027;Lieferant A;Kapazität;3,5;4
+2027;Lieferant B;Qualität;3,7;4
+2027;Lieferant B;Preis;4,5;4
+2027;Lieferant B;Liefergenauigkeit;3,7;4
+2027;Lieferant B;Liefersicherheit;4,7;4
+2027;Lieferant B;Kulanz;5,5;4
+2027;Lieferant B;Kapazität;4,3;4

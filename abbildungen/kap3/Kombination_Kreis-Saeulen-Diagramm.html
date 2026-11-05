@@ -637,7 +637,7 @@ const DK = (() => {
    das Segment der Kundengruppe A als gestapelte Säule nach Kunden aufgeschlüsselt.
    Seite 727 x 420 px = 110 x 63,6 mm. Daten: kreis_saeule.json (daten_kreis_saeule.py), Anteile des Originals.
    Diagrammtyp bleibt: Kreis mit herausgelöstem Segment, daneben die Säule, Verbindungslinien vom Segment zur Säule.
-   Grautöne statt Gelb und Blau, Segment A und Säule anthrazit (eine Gruppe), Beschriftung direkt statt Legende.
+   Kontrastfarben des Buchs statt Gelb und Blau: Segment A und Säule rot (eine Gruppe), übrige Gruppen Petrol abgestuft, Beschriftung direkt statt Legende.
    Klick auf ein Segment oder einen Säulenabschnitt hebt ihn hervor. */
 (() => {
   "use strict";
@@ -652,8 +652,8 @@ const DK = (() => {
   const TAU = 2 * Math.PI;
   // Kreis: Segment A zeigt zur Säule (Mitte bei 3 Uhr), danach die übrigen Gruppen im Uhrzeigersinn nach Größe
   const REST = GR.slice(1).sort((a, b) => b.wert - a.wert);
-  const FUELL = { [A.key]: "#3A3F44" };
-  ["#6E747A", "#A9A9A9", "#D4D4D4"].forEach((f, i) => { FUELL[REST[i].key] = f; });
+  const FUELL = { [A.key]: "#C62828" };
+  ["#00806B", "#7FBFB5", "#BDE0DA"].forEach((f, i) => { FUELL[REST[i].key] = f; });
   // Säule: Kunden absteigend von oben, „sonstige“ zuletzt (unten)
   const SAEULE = KA.filter(k => !k.name.startsWith("sonstige")).sort((a, b) => b.wert - a.wert)
     .concat(KA.filter(k => k.name.startsWith("sonstige")));
@@ -777,7 +777,7 @@ const DK = (() => {
     SAEULE.forEach((kd, i) => {
       const h = kd.wert * k;
       const gg = sv("g", { class: "dk-klick" + (blass(kd.key) ? " dk-blass" : ""), "data-name": kd.name }, gS);
-      sv("rect", { x: sx, y, width: sb, height: h, fill: "#3A3F44" }, gg);
+      sv("rect", { x: sx, y, width: sb, height: h, fill: "#C62828" }, gg);
       if (i) sv("line", { x1: sx - 1, x2: sx + sb + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, gg);
       const hit = sv("rect", { x: sx - 4, y, width: sb + 8, height: h, fill: "transparent" }, gg);
       hit.addEventListener("click", () => auswaehlen(kd.key));
@@ -811,7 +811,7 @@ const DK = (() => {
       { nr: 2, ziel: "ks-verbinder", anker: "links", versatz: [56, -16], regel: "STRUCTURE – Inhalte ordnen", titel: "Segment zeigt zur Säule",
         text: "Das aufgeschlüsselte Segment steht bei 3 Uhr, direkt vor der Säule; zwei Linien verbinden seine Kanten mit Ober- und Unterkante der Säule. So ist klar, dass die Säule nur dieses Segment zerlegt – das ist der Kern des Diagrammtyps, er bleibt erhalten." },
       { nr: 3, ziel: "ks-saeule", anker: "links", versatz: [40, 24], regel: "UNIFY – Semantische Notation", titel: "Eine Farbe für eine Gruppe",
-        text: "Segment A und alle Säulenabschnitte sind anthrazit – sie gehören zusammen; die übrigen Gruppen sind grau abgestuft. Das Original nutzte Gelbtöne für den Kreis und fünf Blautöne für die Säule ohne weitere Bedeutung." },
+        text: "Segment A und alle Säulenabschnitte sind rot – sie gehören zusammen und sind der Fokus; die übrigen Gruppen sind in abgestuften Petrol-Tönen gehalten, wie die Kontrastfarben der Blasendiagramme (Abb. 3.47). Das Original nutzte Gelbtöne für den Kreis und fünf Blautöne für die Säule ohne weitere Bedeutung." },
       { nr: 4, ziel: "ks-lab-rechts", anker: "links", versatz: [140, 0], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Beschriftung statt Legende",
         text: "Name, Wert und Anteil stehen direkt an Segment und Abschnitt; die Legende mit acht Farbfeldern unter dem Diagramm entfällt, ebenso der Rahmen." },
       { nr: 5, ziel: "ks-kreis", anker: "links", versatz: [68, 130], regel: "STRUCTURE – Inhalte ordnen", titel: "Nach Größe geordnet",
@@ -824,10 +824,10 @@ const DK = (() => {
     nachbauIntro: "Seitengröße benutzerdefiniert 727 × 420 px. Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt. Datenmodell: Tabelle Umsatz (Jahr, Kundengruppe, Kunde, Umsatz in Mio. €) wie in der CSV-Datei; Kunde nur für Gruppe A gefüllt.",
     nachbau: [
       { id: "A", ziel: "ks-kreis", anker: "links", versatz: [140, 0], titel: "Kreis", visual: "Kreisdiagramm (Standardvisual)",
-        felder: "Legende: Kundengruppe; Werte: Umsatz", format: "Farben A #3A3F44, C #6E747A, B #A9A9A9, D #D4D4D4; Trennlinien weiß; Drehung so, dass A bei 3 Uhr liegt; Detailbeschriftung Kategorie, Datenwert, Prozentsatz; Legende aus",
+        felder: "Legende: Kundengruppe; Werte: Umsatz", format: "Farben A #C62828, C #00806B, B #7FBFB5, D #BDE0DA; Trennlinien weiß; Drehung so, dass A bei 3 Uhr liegt; Detailbeschriftung Kategorie, Datenwert, Prozentsatz; Legende aus",
         hinweis: "Ein Kreis-aus-Säule-Diagramm (Excel: „Balken aus Kreis“) gibt es in Power BI nicht als Standardvisual; Kreis und Säule werden als zwei Visuals nebeneinandergesetzt." },
       { id: "B", ziel: "ks-saeule", anker: "links", versatz: [40, 24], titel: "Säule der Gruppe A", visual: "Gestapeltes Säulendiagramm (Standardvisual)",
-        felder: "Legende: Kunde; Werte: Umsatz; Filter Kundengruppe = A", format: "Alle Reihen #3A3F44, Rahmen weiß 1 px; Achsen und Gitternetz aus; Datenbeschriftung aus (Beschriftung über Textfelder oder Tooltip)" },
+        felder: "Legende: Kunde; Werte: Umsatz; Filter Kundengruppe = A", format: "Alle Reihen #C62828, Rahmen weiß 1 px; Achsen und Gitternetz aus; Datenbeschriftung aus (Beschriftung über Textfelder oder Tooltip)" },
       { id: "C", ziel: "ks-verbinder", anker: "links", versatz: [56, -16], titel: "Verbindungslinien", visual: "Form › Linie (2×)",
         felder: "–", format: "#8C8C8C, 1 pt", hinweis: "Statische Formen; sie passen nur, solange Gruppe A bei 3 Uhr liegt." },
     ],

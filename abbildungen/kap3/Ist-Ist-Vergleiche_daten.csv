@@ -1,33 +1,385 @@
-﻿Berichtszeile;Gruppe;Vorzeichen;Szenario;Zeitraum;Jahr;Wert_Mio_EUR
-Umsatzerlöse;Leistung;1;Vorjahr;Monat August;2026;110
-Umsatzerlöse;Leistung;1;Ist;Monat August;2027;133
-Umsatzerlöse;Leistung;1;Vorjahr;kumuliert Januar–August;2026;900
-Umsatzerlöse;Leistung;1;Ist;kumuliert Januar–August;2027;1000
-Sonstige Erträge;Leistung;1;Vorjahr;Monat August;2026;19
-Sonstige Erträge;Leistung;1;Ist;Monat August;2027;17
-Sonstige Erträge;Leistung;1;Vorjahr;kumuliert Januar–August;2026;250
-Sonstige Erträge;Leistung;1;Ist;kumuliert Januar–August;2027;200
-Bestandsveränderungen;Leistung;1;Vorjahr;Monat August;2026;33
-Bestandsveränderungen;Leistung;1;Ist;Monat August;2027;37
-Bestandsveränderungen;Leistung;1;Vorjahr;kumuliert Januar–August;2026;400
-Bestandsveränderungen;Leistung;1;Ist;kumuliert Januar–August;2027;400
-Materialkosten;Kosten;-1;Vorjahr;Monat August;2026;54
-Materialkosten;Kosten;-1;Ist;Monat August;2027;42
-Materialkosten;Kosten;-1;Vorjahr;kumuliert Januar–August;2026;600
-Materialkosten;Kosten;-1;Ist;kumuliert Januar–August;2027;500
-Fremdleistungen;Kosten;-1;Vorjahr;Monat August;2026;17
-Fremdleistungen;Kosten;-1;Ist;Monat August;2027;8
-Fremdleistungen;Kosten;-1;Vorjahr;kumuliert Januar–August;2026;200
-Fremdleistungen;Kosten;-1;Ist;kumuliert Januar–August;2027;100
-Personalkosten;Kosten;-1;Vorjahr;Monat August;2026;42
-Personalkosten;Kosten;-1;Ist;Monat August;2027;50
-Personalkosten;Kosten;-1;Vorjahr;kumuliert Januar–August;2026;500
-Personalkosten;Kosten;-1;Ist;kumuliert Januar–August;2027;600
-Abschreibungen;Kosten;-1;Vorjahr;Monat August;2026;4
-Abschreibungen;Kosten;-1;Ist;Monat August;2027;9
-Abschreibungen;Kosten;-1;Vorjahr;kumuliert Januar–August;2026;50
-Abschreibungen;Kosten;-1;Ist;kumuliert Januar–August;2027;100
-Sonstige Kosten;Kosten;-1;Vorjahr;Monat August;2026;11
-Sonstige Kosten;Kosten;-1;Ist;Monat August;2027;8
-Sonstige Kosten;Kosten;-1;Vorjahr;kumuliert Januar–August;2026;150
-Sonstige Kosten;Kosten;-1;Ist;kumuliert Januar–August;2027;100
+﻿Berichtszeile;Gruppe;Vorzeichen;Segment;Szenario;Monat;Jahr;Wert_Mio_EUR
+Umsatzerlöse;Leistung;1;Antriebe;Ist;Januar;2027;52
+Umsatzerlöse;Leistung;1;Antriebe;Ist;Februar;2027;57
+Umsatzerlöse;Leistung;1;Antriebe;Ist;März;2027;67
+Umsatzerlöse;Leistung;1;Antriebe;Ist;April;2027;71
+Umsatzerlöse;Leistung;1;Antriebe;Ist;Mai;2027;75
+Umsatzerlöse;Leistung;1;Antriebe;Ist;Juni;2027;59
+Umsatzerlöse;Leistung;1;Antriebe;Ist;Juli;2027;70
+Umsatzerlöse;Leistung;1;Antriebe;Ist;August;2027;69
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;Januar;2026;51
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;Februar;2026;55
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;März;2026;60
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;April;2026;63
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;Mai;2026;66
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;Juni;2026;55
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;Juli;2026;61
+Umsatzerlöse;Leistung;1;Antriebe;Vorjahr;August;2026;57
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;Januar;2027;7
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;Februar;2027;8
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;März;2027;7
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;April;2027;8
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;Mai;2027;8
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;Juni;2027;8
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;Juli;2027;9
+Sonstige Erlöse;Leistung;1;Antriebe;Ist;August;2027;5
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;Januar;2026;9
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;Februar;2026;10
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;März;2026;9
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;April;2026;10
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;Mai;2026;10
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;Juni;2026;10
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;Juli;2026;11
+Sonstige Erlöse;Leistung;1;Antriebe;Vorjahr;August;2026;6
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;Januar;2027;20
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;Februar;2027;21
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;März;2027;25
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;April;2027;26
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;Mai;2027;23
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;Juni;2027;22
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;Juli;2027;26
+Bestandsveränderungen;Leistung;1;Antriebe;Ist;August;2027;17
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;Januar;2026;21
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;Februar;2026;23
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;März;2026;25
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;April;2026;26
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;Mai;2026;23
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;Juni;2026;23
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;Juli;2026;25
+Bestandsveränderungen;Leistung;1;Antriebe;Vorjahr;August;2026;15
+Materialkosten;Kosten;-1;Antriebe;Ist;Januar;2027;31
+Materialkosten;Kosten;-1;Antriebe;Ist;Februar;2027;27
+Materialkosten;Kosten;-1;Antriebe;Ist;März;2027;32
+Materialkosten;Kosten;-1;Antriebe;Ist;April;2027;34
+Materialkosten;Kosten;-1;Antriebe;Ist;Mai;2027;37
+Materialkosten;Kosten;-1;Antriebe;Ist;Juni;2027;34
+Materialkosten;Kosten;-1;Antriebe;Ist;Juli;2027;34
+Materialkosten;Kosten;-1;Antriebe;Ist;August;2027;21
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;Januar;2026;39
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;Februar;2026;35
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;März;2026;38
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;April;2026;40
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;Mai;2026;42
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;Juni;2026;42
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;Juli;2026;38
+Materialkosten;Kosten;-1;Antriebe;Vorjahr;August;2026;27
+Fremdleistungen;Kosten;-1;Antriebe;Ist;Januar;2027;4
+Fremdleistungen;Kosten;-1;Antriebe;Ist;Februar;2027;5
+Fremdleistungen;Kosten;-1;Antriebe;Ist;März;2027;6
+Fremdleistungen;Kosten;-1;Antriebe;Ist;April;2027;5
+Fremdleistungen;Kosten;-1;Antriebe;Ist;Mai;2027;6
+Fremdleistungen;Kosten;-1;Antriebe;Ist;Juni;2027;5
+Fremdleistungen;Kosten;-1;Antriebe;Ist;Juli;2027;6
+Fremdleistungen;Kosten;-1;Antriebe;Ist;August;2027;3
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;Januar;2026;10
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;Februar;2026;10
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;März;2026;11
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;April;2026;10
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;Mai;2026;10
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;Juni;2026;10
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;Juli;2026;12
+Fremdleistungen;Kosten;-1;Antriebe;Vorjahr;August;2026;7
+Personalkosten;Kosten;-1;Antriebe;Ist;Januar;2027;31
+Personalkosten;Kosten;-1;Antriebe;Ist;Februar;2027;33
+Personalkosten;Kosten;-1;Antriebe;Ist;März;2027;39
+Personalkosten;Kosten;-1;Antriebe;Ist;April;2027;41
+Personalkosten;Kosten;-1;Antriebe;Ist;Mai;2027;44
+Personalkosten;Kosten;-1;Antriebe;Ist;Juni;2027;35
+Personalkosten;Kosten;-1;Antriebe;Ist;Juli;2027;41
+Personalkosten;Kosten;-1;Antriebe;Ist;August;2027;24
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;Januar;2026;27
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;Februar;2026;29
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;März;2026;32
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;April;2026;34
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;Mai;2026;35
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;Juni;2026;30
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;Juli;2026;33
+Personalkosten;Kosten;-1;Antriebe;Vorjahr;August;2026;20
+Abschreibungen;Kosten;-1;Antriebe;Ist;Januar;2027;6
+Abschreibungen;Kosten;-1;Antriebe;Ist;Februar;2027;6
+Abschreibungen;Kosten;-1;Antriebe;Ist;März;2027;6
+Abschreibungen;Kosten;-1;Antriebe;Ist;April;2027;7
+Abschreibungen;Kosten;-1;Antriebe;Ist;Mai;2027;8
+Abschreibungen;Kosten;-1;Antriebe;Ist;Juni;2027;7
+Abschreibungen;Kosten;-1;Antriebe;Ist;Juli;2027;8
+Abschreibungen;Kosten;-1;Antriebe;Ist;August;2027;5
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;Januar;2026;3
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;Februar;2026;4
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;März;2026;3
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;April;2026;3
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;Mai;2026;4
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;Juni;2026;4
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;Juli;2026;4
+Abschreibungen;Kosten;-1;Antriebe;Vorjahr;August;2026;2
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;Januar;2027;4
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;Februar;2027;4
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;März;2027;5
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;April;2027;5
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;Mai;2027;5
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;Juni;2027;4
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;Juli;2027;5
+Sonstige Kosten;Kosten;-1;Antriebe;Ist;August;2027;3
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;Januar;2026;6
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;Februar;2026;7
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;März;2026;7
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;April;2026;8
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;Mai;2026;7
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;Juni;2026;7
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;Juli;2026;7
+Sonstige Kosten;Kosten;-1;Antriebe;Vorjahr;August;2026;4
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;Januar;2027;30
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;Februar;2027;33
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;März;2027;38
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;April;2027;41
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;Mai;2027;44
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;Juni;2027;34
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;Juli;2027;41
+Umsatzerlöse;Leistung;1;Steuerungen;Ist;August;2027;40
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;Januar;2026;29
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;Februar;2026;31
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;März;2026;34
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;April;2026;36
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;Mai;2026;38
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;Juni;2026;32
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;Juli;2026;36
+Umsatzerlöse;Leistung;1;Steuerungen;Vorjahr;August;2026;33
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;Januar;2027;6
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;Februar;2027;6
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;März;2027;6
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;April;2027;6
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;Mai;2027;7
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;Juni;2027;6
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;Juli;2027;8
+Sonstige Erlöse;Leistung;1;Steuerungen;Ist;August;2027;4
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;Januar;2026;8
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;Februar;2026;8
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;März;2026;8
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;April;2026;8
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;Mai;2026;9
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;Juni;2026;9
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;Juli;2026;9
+Sonstige Erlöse;Leistung;1;Steuerungen;Vorjahr;August;2026;5
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;Januar;2027;15
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;Februar;2027;17
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;März;2027;19
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;April;2027;20
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;Mai;2027;18
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;Juni;2027;17
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;Juli;2027;20
+Bestandsveränderungen;Leistung;1;Steuerungen;Ist;August;2027;13
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;Januar;2026;17
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;Februar;2026;17
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;März;2026;19
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;April;2026;20
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;Mai;2026;18
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;Juni;2026;18
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;Juli;2026;20
+Bestandsveränderungen;Leistung;1;Steuerungen;Vorjahr;August;2026;11
+Materialkosten;Kosten;-1;Steuerungen;Ist;Januar;2027;20
+Materialkosten;Kosten;-1;Steuerungen;Ist;Februar;2027;18
+Materialkosten;Kosten;-1;Steuerungen;Ist;März;2027;20
+Materialkosten;Kosten;-1;Steuerungen;Ist;April;2027;22
+Materialkosten;Kosten;-1;Steuerungen;Ist;Mai;2027;23
+Materialkosten;Kosten;-1;Steuerungen;Ist;Juni;2027;22
+Materialkosten;Kosten;-1;Steuerungen;Ist;Juli;2027;22
+Materialkosten;Kosten;-1;Steuerungen;Ist;August;2027;13
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;Januar;2026;25
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;Februar;2026;22
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;März;2026;24
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;April;2026;25
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;Mai;2026;27
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;Juni;2026;27
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;Juli;2026;25
+Materialkosten;Kosten;-1;Steuerungen;Vorjahr;August;2026;17
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;Januar;2027;3
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;Februar;2027;3
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;März;2027;3
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;April;2027;3
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;Mai;2027;3
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;Juni;2027;3
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;Juli;2027;4
+Fremdleistungen;Kosten;-1;Steuerungen;Ist;August;2027;2
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;Januar;2026;6
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;Februar;2026;7
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;März;2026;7
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;April;2026;6
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;Mai;2026;7
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;Juni;2026;7
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;Juli;2026;7
+Fremdleistungen;Kosten;-1;Steuerungen;Vorjahr;August;2026;4
+Personalkosten;Kosten;-1;Steuerungen;Ist;Januar;2027;20
+Personalkosten;Kosten;-1;Steuerungen;Ist;Februar;2027;22
+Personalkosten;Kosten;-1;Steuerungen;Ist;März;2027;26
+Personalkosten;Kosten;-1;Steuerungen;Ist;April;2027;28
+Personalkosten;Kosten;-1;Steuerungen;Ist;Mai;2027;30
+Personalkosten;Kosten;-1;Steuerungen;Ist;Juni;2027;23
+Personalkosten;Kosten;-1;Steuerungen;Ist;Juli;2027;28
+Personalkosten;Kosten;-1;Steuerungen;Ist;August;2027;16
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;Januar;2026;18
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;Februar;2026;20
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;März;2026;21
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;April;2026;22
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;Mai;2026;24
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;Juni;2026;20
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;Juli;2026;22
+Personalkosten;Kosten;-1;Steuerungen;Vorjahr;August;2026;14
+Abschreibungen;Kosten;-1;Steuerungen;Ist;Januar;2027;4
+Abschreibungen;Kosten;-1;Steuerungen;Ist;Februar;2027;4
+Abschreibungen;Kosten;-1;Steuerungen;Ist;März;2027;4
+Abschreibungen;Kosten;-1;Steuerungen;Ist;April;2027;4
+Abschreibungen;Kosten;-1;Steuerungen;Ist;Mai;2027;4
+Abschreibungen;Kosten;-1;Steuerungen;Ist;Juni;2027;4
+Abschreibungen;Kosten;-1;Steuerungen;Ist;Juli;2027;5
+Abschreibungen;Kosten;-1;Steuerungen;Ist;August;2027;3
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;Januar;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;Februar;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;März;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;April;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;Mai;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;Juni;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;Juli;2026;2
+Abschreibungen;Kosten;-1;Steuerungen;Vorjahr;August;2026;1
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;Januar;2027;3
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;Februar;2027;3
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;März;2027;3
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;April;2027;4
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;Mai;2027;3
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;Juni;2027;3
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;Juli;2027;4
+Sonstige Kosten;Kosten;-1;Steuerungen;Ist;August;2027;2
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;Januar;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;Februar;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;März;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;April;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;Mai;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;Juni;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;Juli;2026;5
+Sonstige Kosten;Kosten;-1;Steuerungen;Vorjahr;August;2026;3
+Umsatzerlöse;Leistung;1;Service;Ist;Januar;2027;18
+Umsatzerlöse;Leistung;1;Service;Ist;Februar;2027;20
+Umsatzerlöse;Leistung;1;Service;Ist;März;2027;23
+Umsatzerlöse;Leistung;1;Service;Ist;April;2027;24
+Umsatzerlöse;Leistung;1;Service;Ist;Mai;2027;26
+Umsatzerlöse;Leistung;1;Service;Ist;Juni;2027;20
+Umsatzerlöse;Leistung;1;Service;Ist;Juli;2027;24
+Umsatzerlöse;Leistung;1;Service;Ist;August;2027;24
+Umsatzerlöse;Leistung;1;Service;Vorjahr;Januar;2026;18
+Umsatzerlöse;Leistung;1;Service;Vorjahr;Februar;2026;19
+Umsatzerlöse;Leistung;1;Service;Vorjahr;März;2026;21
+Umsatzerlöse;Leistung;1;Service;Vorjahr;April;2026;22
+Umsatzerlöse;Leistung;1;Service;Vorjahr;Mai;2026;23
+Umsatzerlöse;Leistung;1;Service;Vorjahr;Juni;2026;19
+Umsatzerlöse;Leistung;1;Service;Vorjahr;Juli;2026;21
+Umsatzerlöse;Leistung;1;Service;Vorjahr;August;2026;20
+Sonstige Erlöse;Leistung;1;Service;Ist;Januar;2027;10
+Sonstige Erlöse;Leistung;1;Service;Ist;Februar;2027;11
+Sonstige Erlöse;Leistung;1;Service;Ist;März;2027;11
+Sonstige Erlöse;Leistung;1;Service;Ist;April;2027;12
+Sonstige Erlöse;Leistung;1;Service;Ist;Mai;2027;13
+Sonstige Erlöse;Leistung;1;Service;Ist;Juni;2027;12
+Sonstige Erlöse;Leistung;1;Service;Ist;Juli;2027;14
+Sonstige Erlöse;Leistung;1;Service;Ist;August;2027;8
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;Januar;2026;14
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;Februar;2026;15
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;März;2026;13
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;April;2026;14
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;Mai;2026;15
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;Juni;2026;15
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;Juli;2026;17
+Sonstige Erlöse;Leistung;1;Service;Vorjahr;August;2026;8
+Bestandsveränderungen;Leistung;1;Service;Ist;Januar;2027;9
+Bestandsveränderungen;Leistung;1;Service;Ist;Februar;2027;9
+Bestandsveränderungen;Leistung;1;Service;Ist;März;2027;11
+Bestandsveränderungen;Leistung;1;Service;Ist;April;2027;12
+Bestandsveränderungen;Leistung;1;Service;Ist;Mai;2027;11
+Bestandsveränderungen;Leistung;1;Service;Ist;Juni;2027;10
+Bestandsveränderungen;Leistung;1;Service;Ist;Juli;2027;12
+Bestandsveränderungen;Leistung;1;Service;Ist;August;2027;7
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;Januar;2026;9
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;Februar;2026;10
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;März;2026;11
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;April;2026;11
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;Mai;2026;10
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;Juni;2026;10
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;Juli;2026;11
+Bestandsveränderungen;Leistung;1;Service;Vorjahr;August;2026;7
+Materialkosten;Kosten;-1;Service;Ist;Januar;2027;11
+Materialkosten;Kosten;-1;Service;Ist;Februar;2027;10
+Materialkosten;Kosten;-1;Service;Ist;März;2027;12
+Materialkosten;Kosten;-1;Service;Ist;April;2027;12
+Materialkosten;Kosten;-1;Service;Ist;Mai;2027;13
+Materialkosten;Kosten;-1;Service;Ist;Juni;2027;12
+Materialkosten;Kosten;-1;Service;Ist;Juli;2027;12
+Materialkosten;Kosten;-1;Service;Ist;August;2027;8
+Materialkosten;Kosten;-1;Service;Vorjahr;Januar;2026;14
+Materialkosten;Kosten;-1;Service;Vorjahr;Februar;2026;12
+Materialkosten;Kosten;-1;Service;Vorjahr;März;2026;13
+Materialkosten;Kosten;-1;Service;Vorjahr;April;2026;14
+Materialkosten;Kosten;-1;Service;Vorjahr;Mai;2026;15
+Materialkosten;Kosten;-1;Service;Vorjahr;Juni;2026;15
+Materialkosten;Kosten;-1;Service;Vorjahr;Juli;2026;14
+Materialkosten;Kosten;-1;Service;Vorjahr;August;2026;10
+Fremdleistungen;Kosten;-1;Service;Ist;Januar;2027;4
+Fremdleistungen;Kosten;-1;Service;Ist;Februar;2027;4
+Fremdleistungen;Kosten;-1;Service;Ist;März;2027;5
+Fremdleistungen;Kosten;-1;Service;Ist;April;2027;5
+Fremdleistungen;Kosten;-1;Service;Ist;Mai;2027;5
+Fremdleistungen;Kosten;-1;Service;Ist;Juni;2027;5
+Fremdleistungen;Kosten;-1;Service;Ist;Juli;2027;5
+Fremdleistungen;Kosten;-1;Service;Ist;August;2027;3
+Fremdleistungen;Kosten;-1;Service;Vorjahr;Januar;2026;8
+Fremdleistungen;Kosten;-1;Service;Vorjahr;Februar;2026;9
+Fremdleistungen;Kosten;-1;Service;Vorjahr;März;2026;10
+Fremdleistungen;Kosten;-1;Service;Vorjahr;April;2026;8
+Fremdleistungen;Kosten;-1;Service;Vorjahr;Mai;2026;9
+Fremdleistungen;Kosten;-1;Service;Vorjahr;Juni;2026;9
+Fremdleistungen;Kosten;-1;Service;Vorjahr;Juli;2026;10
+Fremdleistungen;Kosten;-1;Service;Vorjahr;August;2026;6
+Personalkosten;Kosten;-1;Service;Ist;Januar;2027;13
+Personalkosten;Kosten;-1;Service;Ist;Februar;2027;14
+Personalkosten;Kosten;-1;Service;Ist;März;2027;16
+Personalkosten;Kosten;-1;Service;Ist;April;2027;17
+Personalkosten;Kosten;-1;Service;Ist;Mai;2027;18
+Personalkosten;Kosten;-1;Service;Ist;Juni;2027;14
+Personalkosten;Kosten;-1;Service;Ist;Juli;2027;17
+Personalkosten;Kosten;-1;Service;Ist;August;2027;10
+Personalkosten;Kosten;-1;Service;Vorjahr;Januar;2026;12
+Personalkosten;Kosten;-1;Service;Vorjahr;Februar;2026;12
+Personalkosten;Kosten;-1;Service;Vorjahr;März;2026;13
+Personalkosten;Kosten;-1;Service;Vorjahr;April;2026;14
+Personalkosten;Kosten;-1;Service;Vorjahr;Mai;2026;15
+Personalkosten;Kosten;-1;Service;Vorjahr;Juni;2026;12
+Personalkosten;Kosten;-1;Service;Vorjahr;Juli;2026;13
+Personalkosten;Kosten;-1;Service;Vorjahr;August;2026;8
+Abschreibungen;Kosten;-1;Service;Ist;Januar;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;Februar;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;März;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;April;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;Mai;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;Juni;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;Juli;2027;2
+Abschreibungen;Kosten;-1;Service;Ist;August;2027;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;Januar;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;Februar;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;März;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;April;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;Mai;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;Juni;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;Juli;2026;1
+Abschreibungen;Kosten;-1;Service;Vorjahr;August;2026;1
+Sonstige Kosten;Kosten;-1;Service;Ist;Januar;2027;4
+Sonstige Kosten;Kosten;-1;Service;Ist;Februar;2027;5
+Sonstige Kosten;Kosten;-1;Service;Ist;März;2027;6
+Sonstige Kosten;Kosten;-1;Service;Ist;April;2027;6
+Sonstige Kosten;Kosten;-1;Service;Ist;Mai;2027;5
+Sonstige Kosten;Kosten;-1;Service;Ist;Juni;2027;5
+Sonstige Kosten;Kosten;-1;Service;Ist;Juli;2027;6
+Sonstige Kosten;Kosten;-1;Service;Ist;August;2027;3
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;Januar;2026;7
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;Februar;2026;7
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;März;2026;9
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;April;2026;9
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;Mai;2026;7
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;Juni;2026;7
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;Juli;2026;9
+Sonstige Kosten;Kosten;-1;Service;Vorjahr;August;2026;4

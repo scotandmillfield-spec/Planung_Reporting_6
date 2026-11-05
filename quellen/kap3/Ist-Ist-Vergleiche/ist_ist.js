@@ -8,28 +8,43 @@
 (() => {
   "use strict";
   const { zahl, delta, NBSP, el, wirkung } = DK;
-  const JAHR = DATA.jahr, EINHEIT = DATA.einheit, W = DATA.werte;
+  const JAHR = DATA.jahr, EINHEIT = DATA.einheit, MW = DATA.monatswerte, SEG = DATA.segmente;
+  const W = {};                                          // Werte je Zeile für den gewählten Berichtsmonat und das Segment
   const MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober",
                   "November", "Dezember"];
-  const MON = MONATE[DATA.monat - 1];
+  const NMON = DATA.monat;                               // letzter Monat mit Ist-Daten
+  let MON = MONATE[NMON - 1];
+  const kumText = () => (S.monat === 1 ? MON : `Januar–${MON}`);
   const BASIS = DATA.zeilen.map(([name, gruppe], i) => ({ i, name, gruppe, r: gruppe === "L" ? 1 : -1 }));
   const pz = v => (v == null ? "–" : delta(v * 100, 1, NBSP + "%"));
 
   /* ---------- Vergleich: zwei Spaltengruppen ---------- */
   const BLOECKE = [
-    { id: "m", titel: `${MON} ${JAHR}`, lang: `im ${MON}`, ref: "VJ_M", ist: "IST_M" },
-    { id: "k", titel: `Januar–${MON} ${JAHR}`, lang: `Januar–${MON}`, ref: "VJ_K", ist: "IST_K" },
+    { id: "m", titel: "", lang: "", ref: "VJ_M", ist: "IST_M" },
+    { id: "k", titel: "", lang: "", ref: "VJ_K", ist: "IST_K" },
   ];
+  function zeitraumSetzen() {
+    MON = MONATE[S.monat - 1];
+    BLOECKE[0].titel = `${MON} ${JAHR}`; BLOECKE[0].lang = `im ${MON}`;
+    BLOECKE[1].titel = `${kumText()} ${JAHR}`; BLOECKE[1].lang = kumText();
+    const segs = S.seg == null ? [0, 1, 2] : [S.seg];
+    const summ = (sz, von, bis) => BASIS.map(b => segs.reduce((a, g) => {
+      for (let m = von; m < bis; m++) a += MW[sz][g][b.i][m];
+      return a; }, 0));
+    W.VJ_M = summ("VJ", S.monat - 1, S.monat); W.IST_M = summ("IST", S.monat - 1, S.monat);
+    W.VJ_K = summ("VJ", 0, S.monat); W.IST_K = summ("IST", 0, S.monat);
+  }
   const REF = { kurz: "VJ", lang: "Vorjahr", sz: "vj" }, IST = { kurz: "IST", lang: "Ist", sz: "ist" };
   const DK_ = "ΔVJ";
 
   /* ---------- Zustand ---------- */
-  const S = { sort: null, auswahl: null };
+  const S = { sort: null, auswahl: null, monat: NMON, seg: null };
   addEventListener("keydown", e => { if (e.key === "Escape" && S.auswahl != null) { S.auswahl = null; zeichnen(); } });
 
   /* ---------- Layout ---------- */
-  DK.init({ titel: "Ist-Ist-Vergleiche", breite: 727, hoehe: 360 });
-  const bTab = DK.box("v-tabelle", 16, 10, 695, 342);
+  DK.init({ titel: "Ist-Ist-Vergleiche", breite: 727, hoehe: 412 });
+  const bFilter = DK.box("filter", 16, 8, 695, 50, "dk-filter");
+  const bTab = DK.box("v-tabelle", 16, 68, 695, 336);
   DK.el("style", {}, document.head, `
     #v-tabelle .dk-matrix tr.gk-gruppe th { border-bottom: none; padding: 0 0 2px 14px; text-align: center; color: var(--text); }
     #v-tabelle .dk-matrix tr.gk-gruppe th span { display: block; border-bottom: 1px solid #9A9A9A; padding-bottom: 3px; }
@@ -42,6 +57,14 @@
     #v-tabelle .dk-matrix th.sz-fc::after { background: var(--fc); }
     #v-tabelle .dk-matrix tr.dk-summe td { height: 23px; }
     #v-tabelle .dk-matrix tr.vor-summe td { border-bottom: 1px solid var(--ac); }`);
+
+  /* ---------- Datenschnitte: Zeit (Berichtsmonat) und Segment ---------- */
+  DK.schnitt(bFilter, "Berichtsmonat " + JAHR, "dropdown", { breite: 120, wert: String(S.monat),
+    optionen: MONATE.slice(0, NMON).map((n, i) => [String(i + 1), n]),
+    onChange: v => { S.monat = Number(v); zeichnen(); } });
+  DK.schnitt(bFilter, "Segment", "knoepfe", { wert: "alle",
+    optionen: [["alle", "Alle"], ...SEG.map((n, i) => [String(i), n])],
+    onChange: v => { S.seg = v === "alle" ? null : Number(v); zeichnen(); } });
 
   /* ---------- Berechnungen ---------- */
   function werte(z) {
@@ -133,7 +156,9 @@
   /* ---------- Kernaussage ---------- */
   function botschaft(d, breite) {
     const [bm, bk] = BLOECKE, e = d.erfolg.v;
-    const anfang = `Erfolg zum Vorjahr: ${MON} ${delta(e[bm.id + "_d"], 0)}, Januar–${MON} ${delta(e[bk.id + "_d"], 0)} ${EINHEIT}`;
+    const sg = S.seg == null ? "" : ` (${SEG[S.seg]})`;
+    const anfang = S.monat === 1 ? `Erfolg zum Vorjahr${sg}: ${MON} ${delta(e[bm.id + "_d"], 0)} ${EINHEIT}`
+      : `Erfolg zum Vorjahr${sg}: ${MON} ${delta(e[bm.id + "_d"], 0)}, ${kumText()} ${delta(e[bk.id + "_d"], 0)} ${EINHEIT}`;
     const last = [...d.L, ...d.K].filter(z => effekt(z, bk.id + "_d") < 0)
       .sort((a, b) => effekt(a, bk.id + "_d") - effekt(b, bk.id + "_d"))[0];
     const lang = last ? `${anfang} – größte Belastung: ${last.name} (${delta(last.v[bk.id + "_d"], 0)})` : anfang;
@@ -142,6 +167,7 @@
 
   /* ---------- Zeichnen ---------- */
   function zeichnen() {
+    zeitraumSetzen();
     const d = daten();
     const v = DK.visual(bTab, { titel: "Erfolgsrechnung im Vorjahresvergleich", einheit: EINHEIT,
       botschaft: botschaft(d, bTab.clientWidth || 695) });
@@ -194,8 +220,10 @@
         text: "Die Zeilen folgen dem Schema der Erfolgsrechnung. Ein Klick auf einen Spaltenkopf sortiert Leistungs- und Kostenzeilen jeweils in ihrem Block – Abweichungen mit der ungünstigsten zuerst –, die Summenzeilen bleiben stehen. Ein Klick auf „Berichtszeile“ stellt das Schema wieder her." },
       { nr: 8, ziel: "v-tabelle", anker: "links", versatz: [388, 2], regel: "EXPRESS – Passende Darstellung", titel: "Tabelle für den Vergleich",
         text: "Für elf Zeilen und zwei Zeiträume ist die Tabelle die genaueste Form; der Tooltip ergänzt Anteile an Gesamtleistung bzw. Gesamtkosten. Wie Abweichungsbalken die Tabelle grafisch unterstützen, zeigt Abb. 3.16." },
+      { nr: 9, ziel: "filter", anker: "links", versatz: [350, 20], regel: "STRUCTURE – Filter sichtbar", titel: "Zeit und Segment wählen",
+        text: "Zwei Datenschnitte über der Tabelle steuern die Auswahl: der Berichtsmonat (Januar bis August) und das Segment (alle oder eines der drei Segmente). Monat und kumulierter Zeitraum, Summen und Kernaussage passen sich an." },
     ],
-    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 727 × 360 px. Schrift Arial: Tabelle 10,5 pt, Visualtitel 12 pt. Das Berichtsdesign (JSON) setzt Farben und Schriften. Datenmodell: Faktentabelle GuV (Berichtszeile, Gruppe, Vorzeichen, Szenario, Zeitraum, Jahr, Wert) wie in der CSV-Datei; Dimension Berichtszeile mit Sortierschlüssel.",
+    nachbauIntro: "Standard-Visuals von Power BI Desktop. Seitengröße benutzerdefiniert 727 × 360 px. Schrift Arial: Tabelle 10,5 pt, Visualtitel 12 pt. Das Berichtsdesign (JSON) setzt Farben und Schriften. Datenmodell: Faktentabelle GuV (Berichtszeile, Gruppe, Vorzeichen, Segment, Szenario, Monat, Jahr, Wert) wie in der CSV-Datei; Dimension Berichtszeile mit Sortierschlüssel, Monatstabelle mit Sortierschlüssel. Monat und kumuliert werden als Measures über den im Datenschnitt gewählten Berichtsmonat gerechnet.",
     nachbau: [
       { id: "A", ziel: "v-tabelle", versatz: [0, 0], titel: "Erfolgsrechnung im Vorjahresvergleich", visual: "Matrix",
         felder: "Zeilen: Gruppe (Gesamtleistung, Gesamtkosten) > Berichtszeile; Spalten: Zeitraum (Monat, kumuliert); Werte: VJ = CALCULATE(SUM(GuV[Wert]); GuV[Szenario] = \"Vorjahr\"), IST = CALCULATE(SUM(GuV[Wert]); GuV[Szenario] = \"Ist\"), ΔVJ = [IST] − [VJ], ΔVJ % = DIVIDE([ΔVJ]; [VJ])",
@@ -204,15 +232,16 @@
       { id: "B", ziel: "v-tabelle", anker: "links", versatz: [678, 23], titel: "Kernaussage", visual: "Textfeld mit dynamischem Wert",
         felder: "Text-Measure aus [ΔVJ] des Erfolgs je Zeitraum und TOPN(1; …; [ΔVJ] × Vorzeichen; ASC) für die größte Belastung",
         format: "10,5 pt, #4D4D4D" },
+      { id: "C", ziel: "filter", anker: "links", versatz: [0, 0], titel: "Datenschnitte", visual: "Datenschnitt (2×)",
+        felder: "Berichtsmonat (Monatstabelle) als Dropdown mit Einzelauswahl, Segment als Kacheln (Einzelauswahl, „Alle“ ohne Auswahl)", format: "Ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A",
+        hinweis: "Measures: Monat = CALCULATE(SUM(GuV[Wert]); GuV[Monat] = [Berichtsmonat]); kumuliert = CALCULATE(SUM(GuV[Wert]); GuV[Monatsnr] <= [Berichtsmonat])." },
     ],
     theme: DK.thema(),
     csv: { name: "erfolgsrechnung_vorjahr_daten.csv", text: () => {
-      const k = ["Berichtszeile;Gruppe;Vorzeichen;Szenario;Zeitraum;Jahr;Wert_Mio_EUR"];
-      const ZR = { M: `Monat ${MON}`, K: `kumuliert Januar–${MON}` }, SZ = { IST: "Ist", VJ: "Vorjahr" };
-      BASIS.forEach(z => Object.keys(W).forEach(key => {
-        const [sz, zr] = key.split("_");
-        k.push([z.name, z.gruppe === "L" ? "Leistung" : "Kosten", z.r, SZ[sz], ZR[zr], sz === "VJ" ? JAHR - 1 : JAHR, W[key][z.i]].join(";"));
-      }));
+      const k = ["Berichtszeile;Gruppe;Vorzeichen;Segment;Szenario;Monat;Jahr;Wert_Mio_EUR"];
+      const SZ = { IST: "Ist", VJ: "Vorjahr" };
+      SEG.forEach((sg, g) => BASIS.forEach(z => ["IST", "VJ"].forEach(sz => MONATE.slice(0, NMON).forEach((mn, m) =>
+        k.push([z.name, z.gruppe === "L" ? "Leistung" : "Kosten", z.r, sg, SZ[sz], mn, sz === "VJ" ? JAHR - 1 : JAHR, MW[sz][g][z.i][m]].join(";"))))));
       return k.join("\r\n"); } },
     tabellen: () => {
       const d = daten(), reihe = [...geordnet(d.L), d.gl, ...geordnet(d.K), d.gk, d.erfolg];

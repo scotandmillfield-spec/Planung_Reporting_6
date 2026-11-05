@@ -351,6 +351,33 @@
    "kommentar": "Die Zeile „Zielniveau …“ sitzt jetzt direkt über dem roten Pfeil. Die Y-Achse des freien Cashflows trägt Zahlen (400 bis –400) statt + und –. Die Bandbreiten bei Finanzrating und freiem Cashflow sind dem Original angenähert: Verlauf 2008–2010 mit Einbruch, ab 2010 sich öffnende äußere und innere Bandbreite; die Kurven bleiben schematisch.",
    "auftrag": "53ee6bf539c1",
    "zeit": "2026-10-15T10:59"
+  },
+  {
+   "id": "2026-11-05-abb-4-24-1",
+   "schluessel": "abb-4-24",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Für ein Prozessschaubild brauche ich die Logik zwischen den fünf Teilschritten, denn das Original zeigte nur eine Aufzählung ohne Reihenfolge: Sollen die Schritte in der aktuellen Reihenfolge (Informationsbedarf → Prozess → Organisation → Daten → Informationssystem) nacheinander laufen, mit oder ohne Rückkopplung zum Informationsbedarf als Kreislauf – oder ist eine andere Anordnung gemeint (z. B. Informationsbedarfsanalyse als Auslöser, die vier Prüfungen parallel)?",
+   "auftrag": "83bb03a4702e",
+   "zeit": "2026-11-05T10:59"
+  },
+  {
+   "id": "2026-11-05-abb-3-14-1",
+   "schluessel": "abb-3-14",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Zeile heißt jetzt „Sonstige Erlöse“. Über der Tabelle stehen zwei Filter: Berichtsmonat (Januar bis August 2027) und Segment (Alle, Antriebe, Steuerungen, Service); Monats- und kumulierte Spalten, Summen und Kernaussage passen sich an. Dafür gibt es Beispieldaten je Monat und Segment, die für „Alle“ im August und kumuliert die bisherigen Werte ergeben.",
+   "auftrag": "b85a1c9af3d1",
+   "zeit": "2026-11-05T10:59"
+  },
+  {
+   "id": "2026-11-05-abb-3-72-1",
+   "schluessel": "abb-3-72",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Segment A und die Säule sind jetzt in Rot gehalten, die übrigen Kundengruppen in abgestuften Petrol-Tönen – wie die Kontrastfarben in Abb. 3.47. Aufbau und Beschriftung sind unverändert.",
+   "auftrag": "bca3e5e83cac",
+   "zeit": "2026-11-05T10:59"
   }
  ]
 }

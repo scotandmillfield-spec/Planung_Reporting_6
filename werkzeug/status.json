@@ -697,7 +697,17 @@
     "Bildtitel „Qualitätssicherungsprozess:“ und Rahmen entfernt (Caption)",
     "Kastenbreite wie Abb. 4.9; Texte unverändert, kein Rot"
    ],
-   "alt": "Fünf Bestandteile des Qualitätssicherungsprozesses untereinander: Informationsbedarfsanalyse und -änderungen, Prozessqualitätsprüfung und -änderungen, organisatorische Qualitätsprüfung und -änderungen, Datenqualitätsprüfung und -steuerung sowie Informationssystem-Qualitätsprüfung und -steuerung."
+   "alt": "Fünf Bestandteile des Qualitätssicherungsprozesses untereinander: Informationsbedarfsanalyse und -änderungen, Prozessqualitätsprüfung und -änderungen, organisatorische Qualitätsprüfung und -änderungen, Datenqualitätsprüfung und -steuerung sowie Informationssystem-Qualitätsprüfung und -steuerung.",
+   "revisionen": [
+    {
+     "datum": "05.11.2026",
+     "wunsch": [
+      "04.11.2026 MD: Mach daraus lieber ein Prozessschaubild."
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Für ein Prozessschaubild brauche ich die Logik zwischen den fünf Teilschritten, denn das Original zeigte nur eine Aufzählung ohne Reihenfolge: Sollen die Schritte in der aktuellen Reihenfolge (Informationsbedarf → Prozess → Organisation → Daten → Informationssystem) nacheinander laufen, mit oder ohne Rückkopplung zum Informationsbedarf als Kreislauf – oder ist eine andere Anordnung gemeint (z. B. Informationsbedarfsanalyse als Auslöser, die vier Prüfungen parallel)?"
+    }
+   ]
   },
   "5.1": {
    "status": "pruefung",
@@ -1780,7 +1790,17 @@
     "Szenario-Marken unter den Spaltenköpfen (VJ hellgrau, IST anthrazit) wie Abb. 3.16; bewusst ohne Abweichungsbalken, damit Abb. 3.16 den Unterschied zeigt",
     "„sonstige Einnahmen“ → „Sonstige Erträge“ (Erfolgsrechnung, Einnahmen sind eine Zahlungsgröße) – bitte bestätigen; Buchtext prüfen, falls er Monatswerte des Originals zitiert"
    ],
-   "alt": "Tabelle „Erfolgsrechnung im Vorjahresvergleich“ in Mio. € mit acht Berichtszeilen, den Summen Gesamtleistung, Gesamtkosten und Erfolg sowie zwei Spaltengruppen für August 2027 und Januar–August 2027, jeweils mit Vorjahr (hellgrau markiert), Ist (anthrazit markiert), absoluter und prozentualer Abweichung. Der Erfolg liegt im August mit 70 um 36 und kumuliert mit 200 um 150 Mio. € über dem Vorjahr; größte Belastung sind die Personalkosten (+100 kumuliert). Abweichungen sind nach Wirkung gefärbt: günstige blaugrün, ungünstige rot, bei Kosten ist ein Anstieg ungünstig."
+   "alt": "Tabelle „Erfolgsrechnung im Vorjahresvergleich“ in Mio. € mit acht Berichtszeilen, den Summen Gesamtleistung, Gesamtkosten und Erfolg sowie zwei Spaltengruppen für August 2027 und Januar–August 2027, jeweils mit Vorjahr (hellgrau markiert), Ist (anthrazit markiert), absoluter und prozentualer Abweichung. Der Erfolg liegt im August mit 70 um 36 und kumuliert mit 200 um 150 Mio. € über dem Vorjahr; größte Belastung sind die Personalkosten (+100 kumuliert). Abweichungen sind nach Wirkung gefärbt: günstige blaugrün, ungünstige rot, bei Kosten ist ein Anstieg ungünstig.",
+   "revisionen": [
+    {
+     "datum": "05.11.2026",
+     "wunsch": [
+      "05.11.2026 DS: Sonstige Einnahmen durch sonstige Erlöse ersetzen. Zudem bitte zwei Filter einbauen Zeitauswahl und Segmentauswahl und dafür passende Beispieldatensätze entwickeln."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Zeile heißt jetzt „Sonstige Erlöse“. Über der Tabelle stehen zwei Filter: Berichtsmonat (Januar bis August 2027) und Segment (Alle, Antriebe, Steuerungen, Service); Monats- und kumulierte Spalten, Summen und Kernaussage passen sich an. Dafür gibt es Beispieldaten je Monat und Segment, die für „Alle“ im August und kumuliert die bisherigen Werte ergeben."
+    }
+   ]
   },
   "3.15": {
    "status": "pruefung",
@@ -2442,7 +2462,17 @@
     "Reihenfolge geordnet: Gruppen im Uhrzeigersinn nach Größe (C, B, D statt D, B, C), Kunden in der Säule absteigend, „sonstige A-Kunden“ zuletzt",
     "Power BI hat kein Kreis-aus-Säule-Standardvisual – Nachbau aus Kreis, gestapelter Säule und zwei Linienformen (Ebene „Nachbau“)"
    ],
-   "alt": "Kreisdiagramm des Umsatzes 2027 von 50 Mio. € nach vier Kundengruppen: Kundengruppe A 15,0 Mio. € (30 %), C 12,5 Mio. € (25 %), B 12,0 Mio. € (24 %) und D 10,5 Mio. € (21 %). Das dunkle Segment A zeigt nach rechts und ist über zwei Linien mit einer gestapelten Säule verbunden, die es nach Kunden aufschlüsselt: Kunde A4 9 %, A3 8 %, A1 6 %, A2 3 % und sonstige A-Kunden 4 % des Gesamtumsatzes. Kernaussage: Kundengruppe A ist mit 30 % die größte Gruppe, die Kunden A4 und A3 bringen allein 17 % des Umsatzes."
+   "alt": "Kreisdiagramm des Umsatzes 2027 von 50 Mio. € nach vier Kundengruppen: Kundengruppe A 15,0 Mio. € (30 %), C 12,5 Mio. € (25 %), B 12,0 Mio. € (24 %) und D 10,5 Mio. € (21 %). Das dunkle Segment A zeigt nach rechts und ist über zwei Linien mit einer gestapelten Säule verbunden, die es nach Kunden aufschlüsselt: Kunde A4 9 %, A3 8 %, A1 6 %, A2 3 % und sonstige A-Kunden 4 % des Gesamtumsatzes. Kernaussage: Kundengruppe A ist mit 30 % die größte Gruppe, die Kunden A4 und A3 bringen allein 17 % des Umsatzes.",
+   "revisionen": [
+    {
+     "datum": "05.11.2026",
+     "wunsch": [
+      "04.11.2026 MD: Arbeite hier lieber auch mit den Kontrastfarben, die wir definiert haben. Siehe hierzu abbildung 3.47 fort hast du ein rot und einen petrolton im bubblechart genutzt. damit kannst du hier auch arbeiten. das ist etwas zu grau in grau"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Segment A und die Säule sind jetzt in Rot gehalten, die übrigen Kundengruppen in abgestuften Petrol-Tönen – wie die Kontrastfarben in Abb. 3.47. Aufbau und Beschriftung sind unverändert."
+    }
+   ]
   },
   "3.73": {
    "status": "pruefung",

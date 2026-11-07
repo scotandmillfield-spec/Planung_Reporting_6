@@ -144,7 +144,7 @@ table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
 </style>
 </head>
 <body>
-<script>const DATA = {"jahr":2027,"quartale":["Q1","Q2","Q3","Q4"],"plan":[110,120,110,120],"ist":[80,100,70,70]};</script>
+<script>const DATA = {"jahr":2027,"quartale":["Q1","Q2","Q3","Q4"],"plan":[110,120,110,120],"ist":[80,100,125,70]};</script>
 <script>
 /* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
    Jeder Baustein entspricht einem Standard-Visual von Power BI.
@@ -704,7 +704,7 @@ const DK = (() => {
     // Legende rechts oben
     const gl = sv("g", { id: "fl-legende" }, svg);
     const eintraege = [["Ist", { fill: "#3A3F44" }], ["Plan", { fill: "#FFFFFF", stroke: "#3A3F44", "stroke-width": 1.5 }],
-      ["Ist unter Plan", { fill: TOENUNG.schlecht }]];
+      ["Ist unter Plan", { fill: TOENUNG.schlecht }], ...(IST.some((v, i) => v > PL[i]) ? [["Ist über Plan", { fill: TOENUNG.gut }]] : [])];
     let lx = breite - eintraege.reduce((s, [n]) => s + 18 + DK.tw(n) + 16, 0) + 16;
     eintraege.forEach(([n, st]) => {
       sv("rect", { x: lx + 0.75, y: 2.75, width: 11.5, height: 11.5, ...st }, gl);
@@ -724,6 +724,7 @@ const DK = (() => {
     const istPkt = xs.map((x, i) => `${x},${sy(IST[i])}`).join(" ");
     sv("polygon", { points: `${xs[0]},${basis} ${istPkt} ${xs[xs.length - 1]},${basis}`, fill: "#3A3F44" }, gf);
     // Plan als Kontur
+    sv("polyline", { points: xs.map((x, i) => `${x},${sy(PL[i])}`).join(" "), fill: "none", stroke: "#FFFFFF", "stroke-width": 4, "stroke-linejoin": "round" }, svg);
     sv("polyline", { id: "fl-plan", points: xs.map((x, i) => `${x},${sy(PL[i])}`).join(" "), fill: "none", stroke: "#3A3F44", "stroke-width": 1.5 }, svg);
     sv("line", { x1: links, x2: breite, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
     // Beschriftung, Abweichungszeile, Klickflächen
@@ -733,10 +734,10 @@ const DK = (() => {
       const x = xs[i], d = dpl(i), blass = S.auswahl !== null && S.auswahl !== i;
       if (S.auswahl === i) sv("line", { x1: x, x2: x, y1: sy(Math.max(PL[i], IST[i])) - 4, y2: basis, stroke: "#1A1A1A", "stroke-width": 1, "stroke-dasharray": "3 3" }, gf);
       const g = sv("g", { class: blass ? "dk-blass" : "" }, gw);
-      sv("text", { x, y: sy(PL[i]) - 10, "text-anchor": "middle", class: "muted" }, g, zahl(PL[i]));
+      sv("text", { x, y: sy(Math.max(PL[i], IST[i])) - 10, "text-anchor": "middle", class: "muted" }, g, zahl(PL[i]));
       // Ist-Wert weiß in der Fläche; am ersten und letzten Punkt nach innen gerückt, damit er in der Fläche bleibt
       const rand = i === 0 ? ["start", x + 8] : i === Q.length - 1 ? ["end", x - 8] : ["middle", x];
-      sv("text", { x: rand[1], y: sy(IST[i]) + 18, dy: "0.35em", "text-anchor": rand[0], style: "font-weight:bold;fill:#FFFFFF" }, g, zahl(IST[i]));
+      sv("text", { x: rand[1], y: sy(Math.min(IST[i], PL[i])) + 18, dy: "0.35em", "text-anchor": rand[0], style: "font-weight:bold;fill:#FFFFFF" }, g, zahl(IST[i]));
       sv("text", { x, y: basis + 20, dy: "0.35em", "text-anchor": "middle" }, g, q);
       sv("text", { x, y: basis + 52, dy: "0.35em", "text-anchor": "middle", class: blass ? "dk-blass" : "",
         style: `font-weight:bold;fill:${FARBE[klasse(d)]}` }, ga, delta(d, 0));

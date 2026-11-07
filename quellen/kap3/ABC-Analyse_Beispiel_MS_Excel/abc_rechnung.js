@@ -4,7 +4,7 @@
    Daten: abc_rechnung.json (daten_abc_rechnung.py) = dieselben Produkte und Werte wie Abb. 3.22 „ABC-Analyse“
    (Jahr 2027, alle Kunden; Klassengrenzen A bis 80 %, B weitere 10 %, Regel wie dort). Schalter Absatz/Umsatz.
    Druckfassung: je Klasse die ersten Ränge und die Ränge an der Klassengrenze, die mittleren Ränge zusammengefasst;
-   die interaktive Fassung zeigt alle 49 Produkte. */
+   die interaktive Fassung zeigt alle 51 Produkte. */
 (() => {
   "use strict";
   const { zahl, prozent, sv, el, tw, NBSP } = DK;
@@ -238,13 +238,13 @@
   DK.ebenen({
     regeln: [
       { nr: 1, ziel: "v-titel", anker: "links", versatz: [482, 26], regel: "SAY – Botschaft vermitteln", titel: "Ergebnis als Satz",
-        text: "Titel mit Kennzahl, Jahr und Einheit, darunter das Ergebnis der Rechnung: 21 von 49 Produkten (43 %) bringen 80 % des Absatzes. Das Original zeigte Tabelle und Diagramm ohne Titel und ohne Aussage." },
+        text: "Titel mit Kennzahl, Jahr und Einheit, darunter das Ergebnis der Rechnung: 5 von 51 Produkten (10 %) bringen 80 % des Absatzes. Das Original zeigte Tabelle und Diagramm ohne Titel und ohne Aussage." },
       { nr: 2, ziel: "sp-klasse", anker: "links", versatz: [64, 26], regel: "UNIFY – Semantische Notation", titel: "Klasse als Buchstabe, nicht als Ampel",
         text: "Das Original färbte die Klassen grün, gelb und rot. Das liest sich als gut, mittel, schlecht – C-Produkte sind aber nicht schlecht, nur weniger bedeutend – und ist bei Rot-Grün-Sehschwäche kaum unterscheidbar. Jetzt stehen Buchstabe und Zwischensumme je Klasse; Farbe bleibt Abweichungen vorbehalten." },
       { nr: 3, ziel: "sp-kum", anker: "links", versatz: [150, 0], regel: "EXPRESS – Passende Darstellung", titel: "Kumulierter Anteil als Balken",
         text: "Die Balken des kumulierten Anteils zeichnen die Konzentrationskurve in die Tabelle: steil bei den ersten Rängen, flach bei C. Die gestrichelten Linien markieren die Klassengrenzen 80 % und 90 %. Das separate Diagramm des Originals entfällt; die Kurve selbst zeigt das Dashboard ABC-Analyse (Abb. 3.22)." },
       { nr: 4, ziel: "sp-produkt", anker: "links", versatz: [132, 0], regel: "CONDENSE – Informationsdichte", titel: "Klassengrenzen statt aller Zeilen",
-        text: "Die Druckfassung zeigt je Klasse die ersten Ränge und die Ränge an der Klassengrenze, die mittleren Ränge stehen in einer Zeile „… weitere Produkte“. Die interaktive Fassung zeigt alle 49 Produkte mit Bildlauf." },
+        text: "Die Druckfassung zeigt je Klasse die ersten Ränge und die Ränge an der Klassengrenze, die mittleren Ränge stehen in einer Zeile „… weitere Produkte“. Die interaktive Fassung zeigt alle 51 Produkte mit Bildlauf." },
       { nr: 5, ziel: "sp-wert", anker: "links", versatz: [28, 0], regel: "UNIFY – Einheitliche Zahlen", titel: "Einheit im Kopf, ein Format je Spalte",
         text: "Die Einheit steht im Titel und im Spaltenkopf, Anteile mit einer Nachkommastelle, Tausenderpunkt, ohne Prozentzeichen an jeder Zahl. Das Original wiederholte „%“ in jeder Zelle." },
       { nr: 6, ziel: "fussnote", anker: "links", versatz: [432, 23], regel: "CHECK – Visuelle Integrität", titel: "Rechenweg offenlegen",

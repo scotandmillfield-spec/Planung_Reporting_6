@@ -238,7 +238,17 @@
     "Neu: Ansicht „Pivotiert: Auftrag × Artikel“ (Wertfeld Umsatz oder Menge, Summen am Rand, leere Kombination „–“) als Brücke zu Tab. 3.2 – Preis bewusst nicht als Wertfeld (nicht additiv)",
     "Hinweis: Tab. 3.1 und Tab. 3.2 haben im Original keinen gemeinsamen Datensatz (Aufträge/Artikel bzw. Kunden/Produkte); die Werte bleiben getrennt wie im Original"
    ],
-   "alt": "Flache Tabelle mit fünf Auftragspositionen und den Spalten Auftragsnummer, Artikelnummer, Menge, Preis und Umsatz: Auftrag 10001 mit Artikel 20101 (2 × 10 = 20 €) und 20201 (1 × 20 = 20 €), Auftrag 10002 mit Artikel 20101 (3 × 10 = 30 €), 20201 (4 × 20 = 80 €) und 20203 (1 × 15 = 15 €). Jede Zeile ist ein Datensatz; zusammen ergeben sich 165 € Umsatz."
+   "alt": "Flache Tabelle mit fünf Auftragspositionen und den Spalten Auftragsnummer, Artikelnummer, Menge, Preis und Umsatz: Auftrag 10001 mit Artikel 20101 (2 × 10 = 20 €) und 20201 (1 × 20 = 20 €), Auftrag 10002 mit Artikel 20101 (3 × 10 = 30 €), 20201 (4 × 20 = 80 €) und 20203 (1 × 15 = 15 €). Jede Zeile ist ein Datensatz; zusammen ergeben sich 165 € Umsatz.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 MD: Du hast LateX Code für eine Tabelle geschrieben. Wir betten hier aber eine Abbildung ein"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?"
+    }
+   ]
   },
   "Tab. 3.2": {
    "status": "pruefung",
@@ -251,7 +261,17 @@
     "Interaktion: Fadenkreuz (Klick auf eine Zelle hebt Zeile und Spalte hervor), Sortierung per Spaltenkopf, Tooltip mit Anteilen an Zeile, Spalte und Gesamt",
     "Datenschnitte „Zeilen: Kunden | Produkte“ (Rotation wie Abb. 3.34) und „Werte anzeigen als: Stück | % Zeile | % Spalte | % Gesamt“; CSV in flacher Form (16 Datensätze) als Brücke zu Tab. 3.1"
    ],
-   "alt": "Kreuztabelle des Absatzes in Stück mit den Kunden 1 bis 4 in den Zeilen und den Produkten 1 bis 4 in den Spalten, dazu Zeilen- und Spaltensummen. Kunde 1: 200, 100, 100, 0 (400); Kunde 2: 100, 50, 200, 100 (450); Kunde 3: 50, 100, 50, 0 (200); Kunde 4: 100, 300, 100, 50 (550); Summen je Produkt 450, 550, 450 und 150, insgesamt 1.600 Stück. Größter Kunde ist Kunde 4, stärkstes Produkt Produkt 2 (je 34 %)."
+   "alt": "Kreuztabelle des Absatzes in Stück mit den Kunden 1 bis 4 in den Zeilen und den Produkten 1 bis 4 in den Spalten, dazu Zeilen- und Spaltensummen. Kunde 1: 200, 100, 100, 0 (400); Kunde 2: 100, 50, 200, 100 (450); Kunde 3: 50, 100, 50, 0 (200); Kunde 4: 100, 300, 100, 50 (550); Summen je Produkt 450, 550, 450 und 150, insgesamt 1.600 Stück. Größter Kunde ist Kunde 4, stärkstes Produkt Produkt 2 (je 34 %).",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 MD: Du hast LateX Code für eine Tabelle geschrieben. Wir betten hier aber eine Abbildung ein"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?"
+    }
+   ]
   },
   "Tab. 3.3": {
    "status": "pruefung",
@@ -264,7 +284,17 @@
     "Interaktion: Klick auf den Gruppenkopf klappt die Produktgruppe zu bzw. auf (Roll-Up/Drill-Down wie Abb. 3.37), Datenschnitt für alle Gruppen; Fadenkreuz, Sortierung, „Werte anzeigen als“ und Tooltip mit Anteilen wie in Tab. 3.2",
     "Kundenbezeichnung im Excel-Objekt teils „Kunden 1“ – einheitlich „Kunde 1“ bis „Kunde 4“"
    ],
-   "alt": "Erweiterte Kreuztabelle des Absatzes in Stück: Kunden 1 bis 4 in den Zeilen, in den Spalten Produktgruppe A mit Produkt 1 und 2 und Produktgruppe B mit Produkt 3 und 4, jeweils mit Teilsumme, dazu die Gesamtsumme. Produktgruppe A kommt auf 1.000 Stück (Kunden 300, 150, 150, 400), Produktgruppe B auf 600 Stück (100, 300, 50, 150), zusammen 1.600 Stück; schwächstes Produkt ist Produkt 4 mit 150 Stück."
+   "alt": "Erweiterte Kreuztabelle des Absatzes in Stück: Kunden 1 bis 4 in den Zeilen, in den Spalten Produktgruppe A mit Produkt 1 und 2 und Produktgruppe B mit Produkt 3 und 4, jeweils mit Teilsumme, dazu die Gesamtsumme. Produktgruppe A kommt auf 1.000 Stück (Kunden 300, 150, 150, 400), Produktgruppe B auf 600 Stück (100, 300, 50, 150), zusammen 1.600 Stück; schwächstes Produkt ist Produkt 4 mit 150 Stück.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 MD: Du hast LateX Code für eine Tabelle geschrieben. Wir betten hier aber eine Abbildung ein"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?"
+    }
+   ]
   },
   "3.193": {
    "status": "klaerung",
@@ -1754,7 +1784,18 @@
     "Bitte prüfen: Bedeutung von „FK-Bericht“ und „CPU-Übersicht“ unklar – unverändert übernommen, ggf. ausschreiben",
     "Bauweg M beibehalten (reine Navigation ohne Daten); Ebenen Erläuterungen/Gestaltung fachlich prüfen"
    ],
-   "alt": "Startseite „Berichtsnavigation“ eines Berichtsportals mit den Berichten nach sechs Unternehmensbereichen in zwei Reihen zu drei Spalten: Geschäftsleitung, Vertrieb, Produkterstellung, Produktentwicklung, Kundenservice und Controlling. Jede Gruppe beginnt mit einem Cockpit, darunter folgen Planvergleiche, Kostenträger- und Kostenstellenanalysen sowie PDF-Standardberichte, alle als Links. Eine Hinweiszeile erklärt, dass interaktive Berichte auf den Bereich vorselektiert öffnen und Einträge mit (PDF) Druckberichte sind."
+   "alt": "Startseite „Berichtsnavigation“ eines Berichtsportals mit den Berichten nach sechs Unternehmensbereichen in zwei Reihen zu drei Spalten: Geschäftsleitung, Vertrieb, Produkterstellung, Produktentwicklung, Kundenservice und Controlling. Jede Gruppe beginnt mit einem Cockpit, darunter folgen Planvergleiche, Kostenträger- und Kostenstellenanalysen sowie PDF-Standardberichte, alle als Links. Eine Hinweiszeile erklärt, dass interaktive Berichte auf den Bereich vorselektiert öffnen und Einträge mit (PDF) Druckberichte sind.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "07.10.2026 DS: Screenshot aus 5. Auflage belassen.",
+      "06.11.2026 DS: FK-Bericht“ und „CPU-Übersicht“ aus dem Bild löschen!"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Einträge „FK-Bericht (PDF)“ und „CPU-Übersicht (PDF)“ sind aus der Berichtsnavigation entfernt."
+    }
+   ]
   },
   "3.13": {
    "status": "pruefung",
@@ -1913,7 +1954,17 @@
     "Druck-PNG zeigt je Klasse die ersten Ränge und die Ränge an der Klassengrenze, mittlere Ränge zusammengefasst; HTML zeigt alle 49 Produkte, Tooltip mit dem Rechenweg jeder Zeile",
     "Caption ohne Produktnamen? z. B. „ABC-Analyse (Rechentabelle)“ oder „ABC-Analyse in einer Tabellenkalkulation“"
    ],
-   "alt": "Rechentabelle einer ABC-Analyse von 49 Produkten nach Absatz 2027 in Stück mit Rang, Produkt, Absatz, Anteil, kumuliertem Absatz, kumuliertem Anteil als Balken und Klasse, gegliedert nach Klassen mit Zwischensummen. Die 21 A-Produkte (43 % der Produkte) bringen 80,0 % des Absatzes, die 7 B-Produkte 9,7 % und die 21 C-Produkte 10,3 %; gestrichelte Linien markieren die Klassengrenzen bei 80 und 90 % kumuliert, die Summe beträgt 5.521 Stück."
+   "alt": "Rechentabelle einer ABC-Analyse von 49 Produkten nach Absatz 2027 in Stück mit Rang, Produkt, Absatz, Anteil, kumuliertem Absatz, kumuliertem Anteil als Balken und Klasse, gegliedert nach Klassen mit Zwischensummen. Die 21 A-Produkte (43 % der Produkte) bringen 80,0 % des Absatzes, die 7 B-Produkte 9,7 % und die 21 C-Produkte 10,3 %; gestrichelte Linien markieren die Klassengrenzen bei 80 und 90 % kumuliert, die Summe beträgt 5.521 Stück.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Bitte die Anzahl der A-Produkte reduzieren und die der B- und C-Produkte erhöhen. A-Produkte z.B. 5, B 16 C 30"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die ABC-Analyse zeigt jetzt 51 Produkte, davon 5 A-Produkte, 16 B-Produkte und 30 C-Produkte (A bis 80 %, B bis 90 % des Absatzes). Die Daten sind dafür neu verteilt und stimmen nicht mehr mit Abb. 3.22 überein."
+    }
+   ]
   },
   "3.27": {
    "status": "pruefung",
@@ -1972,7 +2023,17 @@
     "Sicht als Kasten mit gestricheltem Pfeil auf den Teilwürfel: „Sicht Produktmanager – Detailanalyse“ fett, die Erläuterung darunter",
     "Hinweis: Die Jahre 2010 und 2011 stammen aus dem Original – aktualisieren (z. B. 2024 und 2025)? Dann auch im Buchtext"
    ],
-   "alt": "Datenwürfel mit den Dimensionen Produkt (nach links), Zeit (nach unten) und Region (nach hinten). Ein kleiner Teilwürfel – zwei Produkte, zwei Jahre und zwei Regionen – ist rot hervorgehoben. Ein gestrichelter Pfeil verbindet ihn mit dem Kasten „Sicht Produktmanager – Detailanalyse: Produktumsatz selektierter Produkte in den Jahren 2010 und 2011 in den Regionen Deutschland und Frankreich“."
+   "alt": "Datenwürfel mit den Dimensionen Produkt (nach links), Zeit (nach unten) und Region (nach hinten). Ein kleiner Teilwürfel – zwei Produkte, zwei Jahre und zwei Regionen – ist rot hervorgehoben. Ein gestrichelter Pfeil verbindet ihn mit dem Kasten „Sicht Produktmanager – Detailanalyse: Produktumsatz selektierter Produkte in den Jahren 2010 und 2011 in den Regionen Deutschland und Frankreich“.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Statt \"in den Jahren 2010 und 2011\" \"in ausgewählten Jahren\""
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Im Text des Hinweiskastens steht jetzt „in ausgewählten Jahren“ statt „in den Jahren 2010 und 2011“."
+    }
+   ]
   },
   "3.37": {
    "status": "pruefung",
@@ -2130,7 +2191,17 @@
     "Online: Klick auf einen Kreis zeigt gestrichelt die Lage im Vorjahr",
     "Caption: Statt „Bildauszug entnommen aus Schön et al. 2001, S. 386“ besser „In Anlehnung an Schön et al. 2001, S. 386“"
    ],
-   "alt": "Portfolio der sieben Geschäftsfelder des Bereichs Blechverarbeitung für 2027 mit der Wettbewerbsstärke auf der x-Achse und der Marktattraktivität auf der y-Achse, jeweils von 0 bis 15, aufgeteilt in neun Felder. Die Kreisfläche entspricht dem Umsatz. Hohe Marktattraktivität bei mittlerer Wettbewerbsstärke haben Laserzuschnitte (9,6 Mio. €), Brennzuschnitte (11,3 Mio. €), Plasmaschneiden (6,7 Mio. €) und CNC-Blechbearbeitung (7,0 Mio. €); Blechzuschnitte (2,8 Mio. €) haben die höchste Wettbewerbsstärke. Im Feld zum Abschöpfen liegen Feinblechverarbeitung (8,5 Mio. €) und Stahlblechverarbeitung (1,8 Mio. €), zusammen 22 % des Umsatzes."
+   "alt": "Portfolio der sieben Geschäftsfelder des Bereichs Blechverarbeitung für 2027 mit der Wettbewerbsstärke auf der x-Achse und der Marktattraktivität auf der y-Achse, jeweils von 0 bis 15, aufgeteilt in neun Felder. Die Kreisfläche entspricht dem Umsatz. Hohe Marktattraktivität bei mittlerer Wettbewerbsstärke haben Laserzuschnitte (9,6 Mio. €), Brennzuschnitte (11,3 Mio. €), Plasmaschneiden (6,7 Mio. €) und CNC-Blechbearbeitung (7,0 Mio. €); Blechzuschnitte (2,8 Mio. €) haben die höchste Wettbewerbsstärke. Im Feld zum Abschöpfen liegen Feinblechverarbeitung (8,5 Mio. €) und Stahlblechverarbeitung (1,8 Mio. €), zusammen 22 % des Umsatzes.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Die Normstrategien bitte in die Ecke platzieren und kursiv darstellen, z.B. Abschöpfen und desinvestieren. Die Ecke unten rechts auch Selektives vorgehen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Normstrategien stehen jetzt kursiv in den Ecken des Portfolios: oben links „Selektiv vorgehen“, oben rechts „Investieren und wachsen“, unten links „Abschöpfen oder desinvestieren“, unten rechts zusätzlich „Selektiv vorgehen“. Die Feinblechverarbeitung ist leicht nach oben verschoben, damit sie die Beschriftung in der Ecke nicht überdeckt."
+    }
+   ]
   },
   "3.47": {
    "status": "pruefung",
@@ -2169,7 +2240,17 @@
     "Rechnung geht auf: Mit ganzen Tagen ergäbe sie 65 statt 64 – Werte mit einer Nachkommastelle hinterlegt (62,6 + 10,2 + 30,8 − 39,4 = 64,2), gerundet wie im Original. Bitte prüfen, ob der Buchtext die Rechnung erläutert",
     "Flieder als Balkenfarbe, Größenachse und Gitternetz entfallen; Einheit „Tage“ im Titel"
    ],
-   "alt": "Balkendiagramm des Cash-to-Cash Cycle 2027 in Tagen, in der Reihenfolge der Rechnung: Materialumschlag 63 Tage, plus Erzeugnisumschlag 10 Tage, plus Debitorenziel 31 Tage, minus Kreditorenziel 39 Tage (als Kontur gezeichnet), gleich Cash-to-Cash Cycle 64 Tage (fett, durch eine Linie abgesetzt). Kernaussage: 64 Tage Kapitalbindung, größter Treiber ist der Materialumschlag."
+   "alt": "Balkendiagramm des Cash-to-Cash Cycle 2027 in Tagen, in der Reihenfolge der Rechnung: Materialumschlag 63 Tage, plus Erzeugnisumschlag 10 Tage, plus Debitorenziel 31 Tage, minus Kreditorenziel 39 Tage (als Kontur gezeichnet), gleich Cash-to-Cash Cycle 64 Tage (fett, durch eine Linie abgesetzt). Kernaussage: 64 Tage Kapitalbindung, größter Treiber ist der Materialumschlag.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Zahlen mit ganzzahligen Werten durchführen, Cash-to-chash-cycle = 65 statt 64"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Alle Werte sind ganzzahlig (Materialumschlag 63, Erzeugnisumschlag 10, Debitorenziel 31, Kreditorenziel 39 Tage); der Cash-to-Cash Cycle beträgt 65 statt 64 Tage."
+    }
+   ]
   },
   "3.50": {
    "status": "pruefung",
@@ -2267,7 +2348,17 @@
     "Bitte prüfen: Soll Teil b) „diastolischer Blutdruck“ heißen? Titel aus Platzgründen „Blutdruck in mmHg“, „diastolisch“ steht im Alternativtext und in der CSV",
     "Caption: Dateiname enthält die Quellenangabe (Stem „…_In_Anlehnung_an_a_XLSTAT_2017_b_Sullivan_und_LaMorte_2017“) – Caption-Format prüfen"
    ],
-   "alt": "Zwei Diagramme nebeneinander. a) Histogramm der Körpergröße von 237 Personen in 2,5-cm-Klassen von 130 bis 190 cm mit grauen Säulen, einer Normalverteilungskurve und einer gestrichelten Linie beim Mittelwert 159,5 cm; die höchste Klasse 157,5 bis 160 cm umfasst 30 Personen, 65 % liegen zwischen 149 und 170 cm. b) Box-Plot des diastolischen Blutdrucks in mmHg mit hellgrauem Kasten vom 1. Quartil (64) bis zum 3. Quartil (77), Medianlinie bei 71 und Antennen bis Minimum 62 und Maximum 81; eine Klammer kennzeichnet den Kasten als mittlere 50 % der Werte."
+   "alt": "Zwei Diagramme nebeneinander. a) Histogramm der Körpergröße von 237 Personen in 2,5-cm-Klassen von 130 bis 190 cm mit grauen Säulen, einer Normalverteilungskurve und einer gestrichelten Linie beim Mittelwert 159,5 cm; die höchste Klasse 157,5 bis 160 cm umfasst 30 Personen, 65 % liegen zwischen 149 und 170 cm. b) Box-Plot des diastolischen Blutdrucks in mmHg mit hellgrauem Kasten vom 1. Quartil (64) bis zum 3. Quartil (77), Medianlinie bei 71 und Antennen bis Minimum 62 und Maximum 81; eine Klammer kennzeichnet den Kasten als mittlere 50 % der Werte.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Bitte das medizinische Beispiel auf ein geeignetes Unternehmensbeispiel der Betriebswirtschaft übertragen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das medizinische Beispiel ist durch ein betriebswirtschaftliches ersetzt: Histogramm der Bearbeitungsdauer von 237 Kundenaufträgen (Minuten), Box-Plot der Lieferzeit (Tage). Die Zahlen des Histogramms bleiben unverändert. Die Bildunterschrift (Quellenangabe Sullivan und LaMorte) ist nicht angepasst und müsste vom Autor geändert werden."
+    }
+   ]
   },
   "3.58": {
    "status": "pruefung",
@@ -2342,7 +2433,17 @@
     "Neu: Fläche zwischen Ist und Plan hellrot getönt (Wirkung), Abweichung je Quartal darunter; Werte direkt beschriftet, Größenachse und Legende rechts entfallen",
     "Annahme: Ist unter Plan ist ungünstig (Kapazität nicht wie geplant genutzt) – bitte prüfen, ob der Buchtext „Kapazität“ so meint; Titel jetzt „Kapazität 2027 je Quartal, t“"
    ],
-   "alt": "Flächendiagramm der Kapazität 2027 je Quartal in Tonnen. Eine dunkle Ist-Fläche verläuft über 80, 100, 70 und 70 t, darüber eine Plankontur mit 110, 120, 110 und 120 t; die Fläche dazwischen ist hellrot getönt. Darunter die Abweichungen −30, −20, −40 und −50 t. Kernaussage: Ist liegt in allen Quartalen unter Plan, die größte Lücke im vierten Quartal; im Jahr −140 t (−30,4 %)."
+   "alt": "Flächendiagramm der Kapazität 2027 je Quartal in Tonnen. Eine dunkle Ist-Fläche verläuft über 80, 100, 70 und 70 t, darüber eine Plankontur mit 110, 120, 110 und 120 t; die Fläche dazwischen ist hellrot getönt. Darunter die Abweichungen −30, −20, −40 und −50 t. Kernaussage: Ist liegt in allen Quartalen unter Plan, die größte Lücke im vierten Quartal; im Jahr −140 t (−30,4 %).",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Bitte in Grafik auch einen Wert Ist über Plan anzeigen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Im dritten Quartal liegt das Ist jetzt über dem Plan (125 t bei Plan 110 t, +15 t). Die Fläche ist dort blaugrün getönt, in der Legende steht „Ist über Plan“."
+    }
+   ]
   },
   "3.64": {
    "status": "pruefung",
@@ -2356,7 +2457,17 @@
     "Nachbesserung: ABC-Klassen in Tabelle, Karte und Legende in Grautönen statt Ampelfarben (A Kreis anthrazit, B Dreieck mittelgrau, C Quadrat hell mit Kontur) – eine ABC-Klasse ist keine Bewertung; Ampelfarben nur noch in der Kennzahlenliste",
     "Designregeln nennen Grenzen und Alternativen: Abweichungsbalken (Abb. 3.16), Bullet-Chart (Abb. 3.54), Konzentrationskurve (Abb. 3.22) – ABC-Klasse ist keine Bewertung; Caption „… in Anlehnung an Schön und Müller 2010 … und Schön 2004b“ kann bleiben (Inhalt übernommen, Gestaltung neu)"
    ],
-   "alt": "Vier Berichtselemente mit Signalfarben. Oben links eine Kennzahlenliste für Juni 2027 in den Bereichen Marketing, Vertrieb und Entwicklung mit Ampelzeichen je Kennzahl (Kreis mit Häkchen = im Ziel, gelbes Dreieck mit Ausrufezeichen = beobachten, rotes Quadrat mit Kreuz = kritisch); kritisch sind Aufträge und Budget Zentrale. Oben rechts eine Heatmap des Monatsumsatzes 2025 bis 2027 in Tsd. €, je höher der Wert, desto dunkler die Zelle; der Jahresumsatz steigt von 8.345 auf 9.819 (+17,7 %). Unten eine ABC-Tabelle von 13 PLZ-Regionen mit grauen Klassenzeichen (A dunkler Kreis, B graues Dreieck, C helles Quadrat) – 5 Regionen bringen 69 % des Umsatzes (Klasse A) – und daneben eine Deutschlandkarte mit denselben Zeichen an der Lage der Regionen, alle im Westen und Süden, sieben in Nordrhein-Westfalen."
+   "alt": "Vier Berichtselemente mit Signalfarben. Oben links eine Kennzahlenliste für Juni 2027 in den Bereichen Marketing, Vertrieb und Entwicklung mit Ampelzeichen je Kennzahl (Kreis mit Häkchen = im Ziel, gelbes Dreieck mit Ausrufezeichen = beobachten, rotes Quadrat mit Kreuz = kritisch); kritisch sind Aufträge und Budget Zentrale. Oben rechts eine Heatmap des Monatsumsatzes 2025 bis 2027 in Tsd. €, je höher der Wert, desto dunkler die Zelle; der Jahresumsatz steigt von 8.345 auf 9.819 (+17,7 %). Unten eine ABC-Tabelle von 13 PLZ-Regionen mit grauen Klassenzeichen (A dunkler Kreis, B graues Dreieck, C helles Quadrat) – 5 Regionen bringen 69 % des Umsatzes (Klasse A) – und daneben eine Deutschlandkarte mit denselben Zeichen an der Lage der Regionen, alle im Westen und Süden, sieben in Nordrhein-Westfalen.",
+   "revisionen": [
+    {
+     "datum": "07.11.2026",
+     "wunsch": [
+      "06.11.2026 DS: Bitte in dieser Grafik einmal die richtigen Ampelfarben rot, gelb und grün zulassen und nicht in Graustufen zeigen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Grafik verwendet jetzt Ampelfarben statt Graustufen: Kennzahlen-Ampel in Grün, Gelb und Rot, ABC-Klassen in Tabelle und Karte grün, gelb und rot, Heatmap als Farbskala von Rot über Gelb nach Grün. Die Formen (Kreis, Dreieck, Quadrat) bleiben zusätzlich erhalten."
+    }
+   ]
   },
   "3.65": {
    "status": "pruefung",

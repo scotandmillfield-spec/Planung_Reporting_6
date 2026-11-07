@@ -1,7 +1,7 @@
 """Daten für Abb. 3.21 „ABC-Analyse (Beispiel MS Excel)“ (6. Auflage) – die Rechentabelle zur ABC-Analyse.
 
-Dieselben Daten wie Abb. 3.22 „ABC-Analyse“: Der Generator von Abb. 3.22 (quellen/kap3/ABC-Analyse/daten_abc.py,
-Seed 20261006) wird hier unverändert nachgerechnet; ausgegeben werden Absatz (Stück) und Umsatz (€) je Produkt im
+Revision 6. Auflage: 51 Produkte mit 5 A-, 16 B- und 30 C-Produkten (Vorgabe Autor); die Daten sind damit eigenständig
+und nicht mehr identisch mit Abb. 3.22. Ausgegeben werden Absatz (Stück) und Umsatz (€) je Produkt im
 Jahr 2027 über alle Kundengruppen – genau die Werte, die Abb. 3.22 in ihrer Standardansicht (Stück, 2027, alle Kunden)
 klassifiziert. Absatz 2027 über alle Kunden = Stückzahlen des Cubeware-Originals (A 21 / B 7 / C 21 Produkte bei den
 Grenzen A 80 %, B weitere 10 %).
@@ -15,17 +15,16 @@ import random
 HIER = os.path.dirname(os.path.abspath(__file__))
 rng = random.Random(20261006)
 
-# ---------- unverändert aus daten_abc.py (Abb. 3.22) ----------
-OBEN = [732, 591, 417, 311, 242, 212, 185, 167, 157, 149, 139,
-        137, 132, 122, 115, 113, 106, 100, 98, 95, 95,
-        95, 93, 88, 71, 69, 61, 58, 56]
-REST = 5521 - sum(OBEN)
-roh = [54 * 0.912 ** i for i in range(20)]
-f = REST / sum(roh)
-UNTEN = [round(v * f) for v in roh]
-UNTEN[-1] += REST - sum(UNTEN)
-STUECK_2027 = OBEN + UNTEN
-assert sum(STUECK_2027) == 5521 and all(a >= b for a, b in zip(STUECK_2027, STUECK_2027[1:])), STUECK_2027
+# ---------- Absatz 2027 je Produkt: 51 Produkte, Klassen 5 A / 16 B / 30 C (Vorgabe Autor, Revision 6. Auflage) ----------
+GESAMT = 5521
+A_WERTE = [1370, 1040, 830, 630, 510]                       # zusammen 4.380 Stück = 79,3 % (A bis 80 %)
+B_WERTE = [round(46 + (26 - 46) * i / 15) for i in range(16)]   # 46 … 26, zusammen 576 Stück (bis 90 %)
+REST = GESAMT - sum(A_WERTE) - sum(B_WERTE)
+C_WERTE = [round(25 + (12 - 25) * i / 29) for i in range(30)]
+for i in range(abs(REST - sum(C_WERTE))):                    # Rest gleichmäßig auf die ersten C-Produkte verteilen
+    C_WERTE[i % 24] += 1 if REST > sum(C_WERTE) else -1
+STUECK_2027 = A_WERTE + B_WERTE + C_WERTE
+assert sum(STUECK_2027) == GESAMT and len(STUECK_2027) == 51 and all(x >= y for x, y in zip(STUECK_2027, STUECK_2027[1:])), STUECK_2027
 
 FAMILIEN = [("Kupplung", "KU", 70), ("Kugelgewindetrieb", "KG", 240), ("Getriebemotor", "GM", 420),
             ("Frequenzumrichter", "FU", 380), ("Planetengetriebe", "PG", 560), ("Servomotor", "SM", 690),
@@ -36,6 +35,7 @@ RABATT = [0.00, 0.03, 0.06, 0.12]
 JAHRE = [2026, 2027]
 
 kandidaten = [(fam, kz, preis, g) for fam, kz, preis in FAMILIEN for g in GROESSEN]
+kandidaten += [("Servomotor", "SM", 690, 100), ("Linearachse", "LA", 980, 100)]   # 51 Produkte
 
 
 def score(k):
@@ -75,7 +75,7 @@ for pid, p in enumerate(produkte):
 
 # Abgleich mit Abb. 3.22, falls deren Daten vorliegen
 ref = os.path.join(HIER, "..", "ABC-Analyse", "abc.json")
-if os.path.exists(ref):
+if False and os.path.exists(ref):   # seit der Revision bewusst eigene Daten (51 Produkte, 5 A / 16 B / 30 C)
     r = json.load(open(ref, encoding="utf-8"))
     assert r["zeilen"] == zeilen and r["produkte"] == [p["name"] for p in produkte], "Daten weichen von Abb. 3.22 ab"
     print("Einzelsätze identisch mit Abb. 3.22 (ABC-Analyse/abc.json)")

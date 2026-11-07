@@ -16,7 +16,7 @@ JAHRE = [2026, 2027]
 FELDER = {   # Name: {Jahr: (Wettbewerbsstärke, Marktattraktivität, Umsatz Tsd. €)}
     "Brennzuschnitte":        {2026: (8.2, 9.4, 10930), 2027: (8.6, 9.6, 11280)},
     "Laserzuschnitte":        {2026: (6.0, 10.0, 8870), 2027: (6.6, 10.4, 9609)},
-    "Feinblechverarbeitung":  {2026: (1.9, 1.9, 9140), 2027: (1.6, 1.6, 8452)},
+    "Feinblechverarbeitung":  {2026: (2.4, 4.1, 9140), 2027: (2.1, 3.9, 8452)},
     "CNC-Blechbearbeitung":   {2026: (7.0, 8.0, 7210), 2027: (7.2, 7.8, 6982)},
     "Plasmaschneiden":        {2026: (4.6, 9.0, 6080), 2027: (5.2, 9.2, 6682)},
     "Blechzuschnitte":        {2026: (10.0, 5.6, 2990), 2027: (10.2, 5.2, 2761)},

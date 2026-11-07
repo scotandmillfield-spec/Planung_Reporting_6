@@ -144,7 +144,7 @@ table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
 </style>
 </head>
 <body>
-<script>const DATA = {"jahre":[2026,2027],"felder":["Brennzuschnitte","Laserzuschnitte","Feinblechverarbeitung","CNC-Blechbearbeitung","Plasmaschneiden","Blechzuschnitte","Stahlblechverarbeitung"],"werte":[[[8.2,9.4,10930],[8.6,9.6,11280]],[[6.0,10.0,8870],[6.6,10.4,9609]],[[1.9,1.9,9140],[1.6,1.6,8452]],[[7.0,8.0,7210],[7.2,7.8,6982]],[[4.6,9.0,6080],[5.2,9.2,6682]],[[10.0,5.6,2990],[10.2,5.2,2761]],[[7.2,1.5,1990],[7.0,1.2,1824]]]};</script>
+<script>const DATA = {"jahre":[2026,2027],"felder":["Brennzuschnitte","Laserzuschnitte","Feinblechverarbeitung","CNC-Blechbearbeitung","Plasmaschneiden","Blechzuschnitte","Stahlblechverarbeitung"],"werte":[[[8.2,9.4,10930],[8.6,9.6,11280]],[[6.0,10.0,8870],[6.6,10.4,9609]],[[2.4,4.1,9140],[2.1,3.9,8452]],[[7.0,8.0,7210],[7.2,7.8,6982]],[[4.6,9.0,6080],[5.2,9.2,6682]],[[10.0,5.6,2990],[10.2,5.2,2761]],[[7.2,1.5,1990],[7.0,1.2,1824]]]};</script>
 <script>
 /* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
    Jeder Baustein entspricht einem Standard-Visual von Power BI.
@@ -728,9 +728,9 @@ const DK = (() => {
       sv("line", { x1: sx(t), x2: sx(t), y1: oben, y2: oben + PH, stroke: "#C9C9C9", "stroke-width": 1 }, gz);
       sv("line", { x1: links, x2: links + PW, y1: sy(t), y2: sy(t), stroke: "#C9C9C9", "stroke-width": 1 }, gz);
     });
-    // Beschriftung der Normstrategien: je Zone ein Feld (oben rechts, oben links, unten links), jeweils oben im Feld
-    [[2, 10, 15, "start", 0], [1, 0, 15, "start", 0], [0, 0, 5, "start", 0]].forEach(([k, x, y, a, unten_]) =>
-      sv("text", { x: sx(x) + 6, y: unten_ ? sy(y) - 8 : sy(y) + 14, "text-anchor": a, class: "muted" }, gz, ZONEN[k].lang));
+    // Beschriftung der Normstrategien jeweils in der Ecke des Feldes, kursiv: [Zone, x, y, Anker, unten]
+    [[2, 15, 15, "end", 0], [1, 0, 15, "start", 0], [0, 0, 0, "start", 1], [1, 15, 0, "end", 1]].forEach(([k, x, y, a, unten_]) =>
+      sv("text", { x: sx(x) + (a === "end" ? -6 : 6), y: unten_ ? sy(y) - 8 : sy(y) + 14, "text-anchor": a, class: "muted", style: "font-style:italic" }, gz, ZONEN[k].lang));
     // Achsen
     sv("text", { x: 0, y: 12, class: "muted" }, svg, "Marktattraktivität");
     sv("text", { x: links + PW, y: hoehe - 3, "text-anchor": "end", class: "muted" }, svg, "Wettbewerbsstärke");

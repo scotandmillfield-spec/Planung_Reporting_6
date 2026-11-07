@@ -11,9 +11,9 @@ import os
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 POSTEN = [  # Name, Tage, Vorzeichen in der Rechnung
-    ("Materialumschlag", 62.6, 1), ("Erzeugnisumschlag", 10.2, 1), ("Debitorenziel", 30.8, 1), ("Kreditorenziel", 39.4, -1),
+    ("Materialumschlag", 63, 1), ("Erzeugnisumschlag", 10, 1), ("Debitorenziel", 31, 1), ("Kreditorenziel", 39, -1),
 ]
-ccc = round(sum(t * v for _, t, v in POSTEN), 1)
+ccc = round(sum(t * v for _, t, v in POSTEN))
 json.dump({"jahr": 2027, "posten": [list(p) for p in POSTEN], "ccc": ccc},
           open(os.path.join(HIER, "balken.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 with open(os.path.join(HIER, "balken.csv"), "w", newline="", encoding="utf-8-sig") as fh:

@@ -378,6 +378,105 @@
    "kommentar": "Segment A und die Säule sind jetzt in Rot gehalten, die übrigen Kundengruppen in abgestuften Petrol-Tönen – wie die Kontrastfarben in Abb. 3.47. Aufbau und Beschriftung sind unverändert.",
    "auftrag": "bca3e5e83cac",
    "zeit": "2026-11-05T10:59"
+  },
+  {
+   "id": "2026-11-07-abb-3-11-1",
+   "schluessel": "abb-3-11",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Einträge „FK-Bericht (PDF)“ und „CPU-Übersicht (PDF)“ sind aus der Berichtsnavigation entfernt.",
+   "auftrag": "a4e2f711d539",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-21-1",
+   "schluessel": "abb-3-21",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die ABC-Analyse zeigt jetzt 51 Produkte, davon 5 A-Produkte, 16 B-Produkte und 30 C-Produkte (A bis 80 %, B bis 90 % des Absatzes). Die Daten sind dafür neu verteilt und stimmen nicht mehr mit Abb. 3.22 überein.",
+   "auftrag": "604d458358d8",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-tab-3-1-1",
+   "schluessel": "tab-3-1",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?",
+   "auftrag": "b5a50eacb92f",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-tab-3-2-1",
+   "schluessel": "tab-3-2",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?",
+   "auftrag": "b5a50eacb92f",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-tab-3-3-1",
+   "schluessel": "tab-3-3",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?",
+   "auftrag": "b5a50eacb92f",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-36-1",
+   "schluessel": "abb-3-36",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Im Text des Hinweiskastens steht jetzt „in ausgewählten Jahren“ statt „in den Jahren 2010 und 2011“.",
+   "auftrag": "da35a1f5d6ab",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-46-1",
+   "schluessel": "abb-3-46",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Normstrategien stehen jetzt kursiv in den Ecken des Portfolios: oben links „Selektiv vorgehen“, oben rechts „Investieren und wachsen“, unten links „Abschöpfen oder desinvestieren“, unten rechts zusätzlich „Selektiv vorgehen“. Die Feinblechverarbeitung ist leicht nach oben verschoben, damit sie die Beschriftung in der Ecke nicht überdeckt.",
+   "auftrag": "d41ce09794f0",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-49-1",
+   "schluessel": "abb-3-49",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Alle Werte sind ganzzahlig (Materialumschlag 63, Erzeugnisumschlag 10, Debitorenziel 31, Kreditorenziel 39 Tage); der Cash-to-Cash Cycle beträgt 65 statt 64 Tage.",
+   "auftrag": "944ee4f37a40",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-57-1",
+   "schluessel": "abb-3-57",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das medizinische Beispiel ist durch ein betriebswirtschaftliches ersetzt: Histogramm der Bearbeitungsdauer von 237 Kundenaufträgen (Minuten), Box-Plot der Lieferzeit (Tage). Die Zahlen des Histogramms bleiben unverändert. Die Bildunterschrift (Quellenangabe Sullivan und LaMorte) ist nicht angepasst und müsste vom Autor geändert werden.",
+   "auftrag": "d7d3b2c48c23",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-63-1",
+   "schluessel": "abb-3-63",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Im dritten Quartal liegt das Ist jetzt über dem Plan (125 t bei Plan 110 t, +15 t). Die Fläche ist dort blaugrün getönt, in der Legende steht „Ist über Plan“.",
+   "auftrag": "08d25f9774a1",
+   "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-07-abb-3-64-1",
+   "schluessel": "abb-3-64",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Grafik verwendet jetzt Ampelfarben statt Graustufen: Kennzahlen-Ampel in Grün, Gelb und Rot, ABC-Klassen in Tabelle und Karte grün, gelb und rot, Heatmap als Farbskala von Rot über Gelb nach Grün. Die Formen (Kreis, Dreieck, Quadrat) bleiben zusätzlich erhalten.",
+   "auftrag": "fd50d2512b21",
+   "zeit": "2026-11-07T11:04"
   }
  ]
 }

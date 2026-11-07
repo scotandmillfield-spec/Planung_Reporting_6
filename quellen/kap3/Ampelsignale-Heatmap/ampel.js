@@ -9,7 +9,7 @@
 (() => {
   "use strict";
   const { zahl, delta, NBSP, sv, el, PRINT } = DK;
-  const AMBER = "#E8A317", AMBER_D = "#8A6100", ROT = "#C62828", GRAU = "#8F8F8F";
+  const GRUEN = "#2E7D32", AMBER = "#E8A317", AMBER_D = "#8A6100", ROT = "#C62828", GRAU = "#8F8F8F";
   const STUFEN = { gut: "im Ziel", warn: "beobachten", krit: "kritisch", leer: "ohne Wert" };
   const ORDNUNG = ["gut", "warn", "krit", "leer"];
   const pz = (v, nk = 1) => zahl(v, nk) + NBSP + "%";
@@ -75,9 +75,9 @@
     const s = o.gr || 1, zeichen = o.zeichen !== false, g = sv("g", {}, p);
     const linie = (x1, y1, x2, y2, farbe) => sv("line", { x1, y1, x2, y2, style: `stroke:${farbe};stroke-width:2;stroke-linecap:round` }, g);
     if (stufe === "gut") {
-      sv("circle", { cx, cy, r: 7.2 * s, style: "fill:#FFFFFF;stroke:var(--gut);stroke-width:2" }, g);
+      sv("circle", { cx, cy, r: 7.2 * s, style: `fill:#FFFFFF;stroke:${GRUEN};stroke-width:2` }, g);
       if (zeichen) sv("polyline", { points: `${cx - 3.6 * s},${cy + 0.3 * s} ${cx - 1 * s},${cy + 2.9 * s} ${cx + 3.8 * s},${cy - 2.8 * s}`,
-        style: "fill:none;stroke:var(--gut);stroke-width:2;stroke-linecap:round;stroke-linejoin:round" }, g);
+        style: `fill:none;stroke:${GRUEN};stroke-width:2;stroke-linecap:round;stroke-linejoin:round` }, g);
     } else if (stufe === "warn") {
       sv("polygon", { points: `${cx},${cy - 8.8 * s} ${cx + 9 * s},${cy + 6.8 * s} ${cx - 9 * s},${cy + 6.8 * s}`,
         style: `fill:${AMBER};stroke:${AMBER_D};stroke-width:1;stroke-linejoin:round` }, g);
@@ -94,10 +94,10 @@
 
   /* ---------- ABC-Klassenzeichen: Grautöne und Form, keine Ampelfarben (Klasse ist keine Bewertung) ---------- */
   function klassenZeichen(p, cx, cy, kl, s = 1) {
-    if (kl === "A") return sv("circle", { cx, cy, r: 7.2 * s, style: "fill:#3A3F44" }, p);
+    if (kl === "A") return sv("circle", { cx, cy, r: 7.2 * s, style: `fill:${GRUEN}` }, p);
     if (kl === "B") return sv("polygon", { points: `${cx},${cy - 8.8 * s} ${cx + 9 * s},${cy + 6.8 * s} ${cx - 9 * s},${cy + 6.8 * s}`,
-      style: "fill:#8F8F8F;stroke-linejoin:round" }, p);
-    return sv("rect", { x: cx - 6.5 * s, y: cy - 6.5 * s, width: 13 * s, height: 13 * s, style: "fill:#D4D4D4;stroke:#6E747A;stroke-width:1" }, p);
+      style: `fill:${AMBER};stroke:${AMBER_D};stroke-width:1;stroke-linejoin:round` }, p);
+    return sv("rect", { x: cx - 6.5 * s, y: cy - 6.5 * s, width: 13 * s, height: 13 * s, style: `fill:${ROT}` }, p);
   }
 
   /* ---------- A: Kennzahlenliste mit Ampel ---------- */
@@ -145,9 +145,9 @@
   }
 
   /* ---------- B: Heatmap ---------- */
-  const mische = t => {
-    const a = [242, 242, 242], z = [58, 63, 68];
-    return "#" + a.map((v, n) => Math.round(v + (z[n] - v) * t).toString(16).padStart(2, "0")).join("").toUpperCase();
+  const mische = t => {   // Rot (niedrig) – Gelb – Grün (hoch), helle Töne, damit dunkle Schrift lesbar bleibt
+    const P = [[229, 115, 115], [255, 224, 130], [129, 199, 132]], u = t < 0.5 ? 0 : 1, f = t < 0.5 ? t * 2 : (t - 0.5) * 2;
+    return "#" + P[u].map((v, n) => Math.round(v + (P[u + 1][n] - v) * f).toString(16).padStart(2, "0")).join("").toUpperCase();
   };
   function botschaftB(b) {
     const n = JAHRE.length - 1;
@@ -174,7 +174,7 @@
         const t = (v - HMIN) / (HMAX - HMIN), x = lw + cw * n;
         const c = sv("g", { class: "dk-klick", "data-name": `${m} ${JAHRE[n]}` }, g);
         sv("rect", { x: x + 1, y: y + 0.5, width: cw - 2, height: zh - 1, fill: mische(t) }, c);
-        sv("text", { x: x + cw - 9, y: y + zh / 2, dy: "0.35em", "text-anchor": "end", style: t > 0.5 ? "fill:#FFFFFF" : "" }, c, zahl(v));
+        sv("text", { x: x + cw - 9, y: y + zh / 2, dy: "0.35em", "text-anchor": "end" }, c, zahl(v));
         const hit = sv("rect", { x: x + 1, y: y + 0.5, width: cw - 2, height: zh - 1, fill: "transparent" }, c);
         hit.addEventListener("click", () => setze("monat", r));
         tooltip(hit, () => {

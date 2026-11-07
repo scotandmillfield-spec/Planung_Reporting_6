@@ -93,9 +93,9 @@
       sv("line", { x1: sx(t), x2: sx(t), y1: oben, y2: oben + PH, stroke: "#C9C9C9", "stroke-width": 1 }, gz);
       sv("line", { x1: links, x2: links + PW, y1: sy(t), y2: sy(t), stroke: "#C9C9C9", "stroke-width": 1 }, gz);
     });
-    // Beschriftung der Normstrategien: je Zone ein Feld (oben rechts, oben links, unten links), jeweils oben im Feld
-    [[2, 10, 15, "start", 0], [1, 0, 15, "start", 0], [0, 0, 5, "start", 0]].forEach(([k, x, y, a, unten_]) =>
-      sv("text", { x: sx(x) + 6, y: unten_ ? sy(y) - 8 : sy(y) + 14, "text-anchor": a, class: "muted" }, gz, ZONEN[k].lang));
+    // Beschriftung der Normstrategien jeweils in der Ecke des Feldes, kursiv: [Zone, x, y, Anker, unten]
+    [[2, 15, 15, "end", 0], [1, 0, 15, "start", 0], [0, 0, 0, "start", 1], [1, 15, 0, "end", 1]].forEach(([k, x, y, a, unten_]) =>
+      sv("text", { x: sx(x) + (a === "end" ? -6 : 6), y: unten_ ? sy(y) - 8 : sy(y) + 14, "text-anchor": a, class: "muted", style: "font-style:italic" }, gz, ZONEN[k].lang));
     // Achsen
     sv("text", { x: 0, y: 12, class: "muted" }, svg, "Marktattraktivität");
     sv("text", { x: links + PW, y: hoehe - 3, "text-anchor": "end", class: "muted" }, svg, "Wettbewerbsstärke");

@@ -22,7 +22,7 @@ def build(theme):
     zy = w["fy"] + 1.0 * w["z"] + 1.0 * dy
     bx, bb = 72.0, 38.0
     paras = [P(f"Sicht Produktmanager – Detailanalyse", size=7.5, bold=True),
-             P(f"Produktumsatz selektierter Produkte in den Jahren 2010 und 2011 in den Regionen Deutschland "
+             P(f"Produktumsatz selektierter Produkte in ausgewählten Jahren in den Regionen Deutschland "
                f"und Frankreich", size=7.0, space_before=1.0)]
     bh = f.measure(paras, bb) + 0.4
     by = zy - 3.0

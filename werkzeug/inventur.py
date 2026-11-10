@@ -747,11 +747,21 @@ function eintragZeigen(id,v){
 async function laden(){
   if(!WEBAPP){info('Abstimmung noch nicht verbunden – angezeigt wird der Stand der Inventur');return;}
   try{
-    const r=await fetch(WEBAPP,{cache:'no-store'}); const j=await r.json();
-    if(!j.ok) throw new Error(j.fehler||'Fehler');
+    let r;
+    try{r=await fetch(WEBAPP,{cache:'no-store'});}
+    catch(e){throw new Error('Web-App antwortet nicht oder verlangt Anmeldung/Autorisierung');}
+    if(!r.ok) throw new Error('Web-App meldet HTTP '+r.status);
+    const t=await r.text(); let j;
+    try{j=JSON.parse(t);}catch(e){throw new Error('Web-App liefert kein JSON (vermutlich Google-Fehlerseite)');}
+    if(!j.ok) throw new Error('Web-App meldet: '+(j.fehler||'Fehler'));
     for(const [id,v] of Object.entries(j.eintraege||{})) eintragZeigen(id,v);
     zuletztGeladen=Date.now(); info('Abstimmung verbunden · Stand '+(j.stand||''),'verbunden'); zaehlen(); filtern();
-  }catch(e){info('Abstimmung nicht erreichbar – angezeigt wird der Stand der Inventur','fehler');}
+  }catch(e){
+    info('Abstimmung nicht erreichbar – angezeigt wird der Stand der Inventur. Grund: '+(e&&e.message||e)+' · ','fehler');
+    const a=el('a','Web-App direkt öffnen'); a.href=WEBAPP; a.target='_blank'; a.rel='noopener';
+    a.title='Zeigt die Antwort bzw. Fehlermeldung von Google'; $('#abst-stand').appendChild(a);
+    console.warn('Abstimmung:',e);
+  }
 }
 async function senden(obj){
   const r=await fetch(WEBAPP,{method:'POST',body:JSON.stringify(obj),headers:{'Content-Type':'text/plain;charset=utf-8'}});

@@ -89,7 +89,7 @@ for t in range(NEU):
     w = DATUM[ALT + t].weekday() < 5
     ram = round(31 + 9 * s_neu[t] / max(s_neu) + rnd.uniform(-1.5, 1.5))
     cpu = round(5 + 9 * s_neu[t] / max(s_neu) + rnd.uniform(-1, 1))
-    server.append([warn[t], 0, ram, cpu, 2 if w and s_neu[t] > 40 else 1, max(1, round(s_neu[t] / 12 + rnd.uniform(0, 1.5)))])
+    server.append([warn[t], 0, ram, cpu, 2 if w and s_neu[t] > 40 else 1, max(1, round(s_neu[t] / 16 + rnd.uniform(0, 1.2)))])
 imax = max(range(NEU), key=lambda t: s_neu[t])
 server[imax][2], server[imax][3], server[imax][5] = 43, 16, 6
 for r in server:

@@ -37,11 +37,11 @@ LAENDER = [
 ]
 # Name, Anteil am Umsatz, Wachstum je Jahr, Marge %, ΔBU Linie
 LINIEN = [
-    ["Kompakt", 0.25, -0.06, 3.2, -0.035],
+    ["Kompakt", 0.25, -0.10, 3.2, -0.035],
     ["Limousine", 0.26, -0.02, 6.0, -0.005],
-    ["SUV", 0.28, 0.08, 8.2, 0.025],
-    ["Sport", 0.07, -0.01, 11.0, -0.060],
-    ["Elektro", 0.14, 0.32, -1.5, 0.090],
+    ["SUV", 0.28, 0.10, 8.2, 0.025],
+    ["Sport", 0.07, -0.08, 11.0, -0.060],
+    ["Elektro", 0.14, 0.45, -1.5, 0.090],
 ]
 SAISON = {1: 0.86, 2: 0.92, 3: 1.14, 4: 1.0, 5: 1.0, 6: 1.10, 7: 0.98, 8: 0.84, 9: 1.12, 10: 1.02, 11: 0.98, 12: 0.92}
 
@@ -62,7 +62,7 @@ for li, (lk, ln, reg, ziel, zuschlag, dbu_land) in enumerate(LAENDER):
     for pi, (pn, anteil, wachstum, marge, dbu) in enumerate(LINIEN):
         for m, mon in enumerate(MONATE):
             t = (m - (len(MONATE) - 1)) / 12                     # Jahre vor August 2027
-            roh[pi, m] = mix[pi] * (1 + wachstum) ** t * SAISON[int(mon[5:])] * rnd.uniform(0.93, 1.07)
+            roh[pi, m] = mix[pi] * (1 + wachstum) ** t * (1 + (SAISON[int(mon[5:])] - 1) * 0.45) * rnd.uniform(0.95, 1.05)
     fenster = [(pi, m) for pi in range(len(LINIEN)) for m in FENSTER]
     g = verteilen([roh[k] for k in fenster], ziel)
     f = ziel / sum(roh[k] for k in fenster)

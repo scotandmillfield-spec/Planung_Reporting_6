@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertrieb Europa (Tablet)</title>
+<style>
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }
+
+</style>
+</head>
+<body>
+<script>const DATA = {"monate":["2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10","2026-11","2026-12","2027-01","2027-02","2027-03","2027-04","2027-05","2027-06","2027-07","2027-08"],"laender":[["GB","Großbritannien","uebrige"],["DE","Deutschland","dach"],["CH","Schweiz","dach"],["AT","Österreich","dach"],["IT","Italien","uebrige"],["ES","Spanien","uebrige"],["NL","Niederlande","uebrige"],["PL","Polen","uebrige"]],"linien":["Kompakt","Limousine","SUV","Sport","Elektro"],"regionen":[["dach","DACH"],["uebrige","Übrige"]],"abc":[0.65,0.8],"zeilen":[[0,0,0,8506,9211,-210,-193],[0,0,1,9028,9743,-325,-205],[0,0,2,9801,10717,-260,-225],[0,0,3,9363,10196,-291,-214],[0,0,4,9538,10431,-286,-219],[0,0,5,9082,9947,-308,-209],[0,0,6,8415,9162,-204,-192],[0,0,7,8099,8741,-255,-184],[0,0,8,9415,10327,-318,-217],[0,0,9,8709,9488,-305,-199],[0,0,10,8690,9519,-279,-200],[0,0,11,8473,9266,-249,-195],[0,0,12,7603,8423,-199,-177],[0,0,13,8255,9118,-226,-191],[0,0,14,8861,9611,-349,-202],[0,0,15,8569,9487,-261,-199],[0,0,16,8541,9436,-312,-198],[0,0,17,8357,9167,-229,-193],[0,0,18,8064,8817,-223,-185],[0,0,19,7119,7692,-231,-162],[0,1,0,11124,11629,-96,81],[0,1,1,12269,12934,-37,91],[0,1,2,12659,13243,-151,93],[0,1,3,12126,12907,-95,90],[0,1,4,11867,12624,-78,88],[0,1,5,12192,12835,-13,90],[0,1,6,12512,13375,-19,94],[0,1,7,11444,12110,-35,85],[0,1,8,12596,13511,-109,95],[0,1,9,12725,13540,-147,95],[0,1,10,12496,13155,-72,92],[0,1,11,12138,13003,-31,91],[0,1,12,11703,12354,-135,86],[0,1,13,11975,12714,-53,89],[0,1,14,13382,14322,-64,100],[0,1,15,11464,12202,-70,85],[0,1,16,12299,13018,-62,91],[0,1,17,12196,13000,-76,91],[0,1,18,11674,12528,-37,88],[0,1,19,10795,11371,-19,80],[0,2,0,9895,10049,110,291],[0,2,1,10004,10177,163,295],[0,2,2,11649,12040,129,349],[0,2,3,10999,11159,241,324],[0,2,4,10454,10653,229,309],[0,2,5,11377,11760,168,341],[0,2,6,11170,11441,117,332],[0,2,7,10777,11076,227,321],[0,2,8,11799,12200,154,354],[0,2,9,11765,12076,222,350],[0,2,10,11365,11489,186,333],[0,2,11,11099,11514,215,334],[0,2,12,11189,11409,153,331],[0,2,13,11293,11714,200,340],[0,2,14,12836,12991,161,377],[0,2,15,11743,12119,251,351],[0,2,16,12288,12525,236,363],[0,2,17,12515,12763,185,370],[0,2,18,12590,13074,283,379],[0,2,19,11436,11870,145,344],[0,3,0,3386,3821,164,218],[0,3,1,3799,4249,201,242],[0,3,2,3774,4276,145,244],[0,3,3,3602,4024,181,229],[0,3,4,3715,4151,148,237],[0,3,5,3751,4173,201,238],[0,3,6,3570,4038,167,230],[0,3,7,3270,3673,164,209],[0,3,8,3677,4174,188,238],[0,3,9,3600,4090,164,233],[0,3,10,3458,3897,185,222],[0,3,11,3447,3885,143,221],[0,3,12,3168,3564,142,203],[0,3,13,3248,3668,154,209],[0,3,14,3566,4014,184,229],[0,3,15,3274,3679,135,210],[0,3,16,3536,4005,143,228],[0,3,17,3494,3870,135,221],[0,3,18,3322,3754,152,214],[0,3,19,2928,3337,144,190],[0,4,0,2658,2586,-211,-176],[0,4,1,2896,2743,-207,-187],[0,4,2,3290,3200,-237,-218],[0,4,3,3224,3117,-264,-212],[0,4,4,3145,3024,-259,-206],[0,4,5,3435,3312,-274,-225],[0,4,6,3428,3300,-256,-224],[0,4,7,3437,3306,-285,-225],[0,4,8,3871,3763,-286,-256],[0,4,9,4031,3915,-292,-266],[0,4,10,3881,3786,-336,-257],[0,4,11,4129,3943,-309,-268],[0,4,12,3877,3676,-302,-250],[0,4,13,4268,4066,-313,-276],[0,4,14,4589,4411,-388,-300],[0,4,15,4669,4446,-376,-302],[0,4,16,4763,4518,-374,-307],[0,4,17,5238,5111,-433,-348],[0,4,18,4803,4628,-394,-315],[0,4,19,4638,4496,-376,-306],[1,0,0,10965,11060,426,453],[1,0,1,10777,11078,473,454],[1,0,2,11795,12086,530,496],[1,0,3,11394,11491,388,471],[1,0,4,12018,12341,362,506],[1,0,5,11745,12080,488,495],[1,0,6,10955,11074,347,454],[1,0,7,10102,10261,337,421],[1,0,8,12100,12362,531,507],[1,0,9,11614,11743,429,481],[1,0,10,10953,11220,370,460],[1,0,11,10063,10401,453,426],[1,0,12,10093,10255,456,420],[1,0,13,9816,10042,363,412],[1,0,14,10878,11010,476,451],[1,0,15,10141,10409,337,427],[1,0,16,10120,10205,370,418],[1,0,17,10321,10397,317,426],[1,0,18,10017,10108,404,414],[1,0,19,9760,10028,330,411],[1,1,0,9614,9463,640,653],[1,1,1,9665,9699,657,669],[1,1,2,11228,11111,783,767],[1,1,3,9631,9517,665,657],[1,1,4,9642,9580,695,661],[1,1,5,10480,10383,724,716],[1,1,6,10280,10170,660,702],[1,1,7,9024,8817,652,608],[1,1,8,10165,9955,675,687],[1,1,9,10154,10185,676,703],[1,1,10,10321,10163,747,701],[1,1,11,9656,9442,674,651],[1,1,12,9550,9364,697,646],[1,1,13,9735,9722,586,671],[1,1,14,10691,10432,770,720],[1,1,15,10057,10046,692,693],[1,1,16,9669,9494,686,655],[1,1,17,10381,10260,619,708],[1,1,18,10196,10116,716,698],[1,1,19,8686,8561,625,591],[1,2,0,9125,8789,850,800],[1,2,1,9689,9193,898,837],[1,2,2,10715,10366,926,943],[1,2,3,10634,10273,872,935],[1,2,4,10690,10330,999,940],[1,2,5,11059,10728,961,976],[1,2,6,10906,10501,1043,956],[1,2,7,9966,9609,888,874],[1,2,8,11915,11375,1037,1035],[1,2,9,11328,10871,909,989],[1,2,10,10519,10182,993,927],[1,2,11,11209,10778,958,981],[1,2,12,10319,9964,905,907],[1,2,13,11438,10908,1037,993],[1,2,14,12137,11592,1151,1055],[1,2,15,11137,10590,1037,964],[1,2,16,11057,10723,1029,976],[1,2,17,12560,12052,1047,1097],[1,2,18,11287,10786,981,982],[1,2,19,10494,10025,888,912],[1,3,0,3375,3482,410,414],[1,3,1,3489,3637,406,433],[1,3,2,3659,3829,430,456],[1,3,3,3541,3663,436,436],[1,3,4,3327,3465,370,412],[1,3,5,3565,3679,424,438],[1,3,6,3254,3426,386,408],[1,3,7,3136,3260,371,388],[1,3,8,3639,3762,397,448],[1,3,9,3192,3304,385,393],[1,3,10,3130,3232,353,385],[1,3,11,3054,3166,336,377],[1,3,12,2935,3048,319,363],[1,3,13,3172,3344,348,398],[1,3,14,3318,3522,377,419],[1,3,15,3017,3166,339,377],[1,3,16,3027,3187,363,379],[1,3,17,3103,3241,341,386],[1,3,18,3203,3354,364,399],[1,3,19,2788,2920,338,347],[1,4,0,2620,2350,-33,-14],[1,4,1,2697,2475,-35,-15],[1,4,2,3040,2765,-42,-17],[1,4,3,2823,2536,-18,-15],[1,4,4,2983,2671,-39,-16],[1,4,5,3112,2816,-18,-17],[1,4,6,3244,2901,-43,-17],[1,4,7,3173,2913,-44,-17],[1,4,8,3524,3234,-33,-19],[1,4,9,3664,3357,-11,-20],[1,4,10,3621,3323,-25,-20],[1,4,11,3688,3355,-18,-20],[1,4,12,3576,3221,-58,-19],[1,4,13,3952,3525,-38,-21],[1,4,14,4492,4099,-12,-25],[1,4,15,4179,3832,-19,-23],[1,4,16,4407,4002,-59,-24],[1,4,17,4853,4440,-33,-27],[1,4,18,4442,4014,-6,-24],[1,4,19,4277,3859,-12,-23],[2,0,0,4134,4250,226,238],[2,0,1,4154,4200,229,235],[2,0,2,4494,4672,260,262],[2,0,3,4279,4368,256,245],[2,0,4,4168,4279,188,240],[2,0,5,4182,4283,232,240],[2,0,6,3783,3886,216,218],[2,0,7,3742,3844,193,215],[2,0,8,4078,4233,205,237],[2,0,9,3762,3869,200,217],[2,0,10,3880,4035,196,226],[2,0,11,3804,3850,186,216],[2,0,12,3563,3635,214,204],[2,0,13,3552,3667,167,205],[2,0,14,3953,4084,188,229],[2,0,15,3768,3821,222,214],[2,0,16,3656,3742,212,210],[2,0,17,3931,4035,180,226],[2,0,18,3493,3595,167,201],[2,0,19,3441,3525,189,197],[2,1,0,3179,3195,251,268],[2,1,1,3145,3121,246,262],[2,1,2,3500,3472,270,292],[2,1,3,3253,3280,275,276],[2,1,4,3409,3366,251,283],[2,1,5,3386,3324,265,279],[2,1,6,3214,3187,239,268],[2,1,7,3238,3265,244,274],[2,1,8,3357,3373,293,283],[2,1,9,3371,3389,269,285],[2,1,10,3173,3146,277,264],[2,1,11,3174,3182,274,267],[2,1,12,2995,2977,221,250],[2,1,13,3212,3241,264,272],[2,1,14,3430,3400,303,286],[2,1,15,3140,3156,261,265],[2,1,16,3364,3306,285,278],[2,1,17,3469,3459,257,291],[2,1,18,3107,3135,233,263],[2,1,19,3062,3057,255,257],[2,2,0,3005,2867,320,304],[2,2,1,3000,2864,320,304],[2,2,2,3230,3113,338,330],[2,2,3,3145,3011,302,319],[2,2,4,3329,3182,354,337],[2,2,5,3362,3258,327,345],[2,2,6,3144,3026,308,321],[2,2,7,3028,2924,311,310],[2,2,8,3502,3394,344,360],[2,2,9,3489,3383,376,359],[2,2,10,3486,3320,348,352],[2,2,11,3155,3083,340,327],[2,2,12,3155,3048,338,323],[2,2,13,3336,3262,362,346],[2,2,14,3724,3596,386,381],[2,2,15,3604,3502,355,371],[2,2,16,3603,3460,370,367],[2,2,17,3803,3651,378,387],[2,2,18,3387,3247,345,344],[2,2,19,3495,3374,361,358],[2,3,0,789,823,99,110],[2,3,1,756,787,104,105],[2,3,2,904,941,118,126],[2,3,3,822,856,114,115],[2,3,4,828,868,103,116],[2,3,5,829,865,113,116],[2,3,6,791,841,108,113],[2,3,7,731,777,92,104],[2,3,8,842,877,115,118],[2,3,9,767,796,106,107],[2,3,10,787,824,105,110],[2,3,11,766,807,102,108],[2,3,12,727,765,91,103],[2,3,13,700,738,97,99],[2,3,14,778,827,97,111],[2,3,15,736,781,91,105],[2,3,16,734,761,99,102],[2,3,17,756,798,95,107],[2,3,18,747,798,94,107],[2,3,19,658,687,87,92],[2,4,0,1052,951,3,9],[2,4,1,1187,1082,-2,10],[2,4,2,1347,1221,4,11],[2,4,3,1290,1157,16,10],[2,4,4,1270,1142,4,10],[2,4,5,1333,1203,8,11],[2,4,6,1353,1228,12,11],[2,4,7,1306,1179,6,11],[2,4,8,1471,1348,17,12],[2,4,9,1541,1389,16,13],[2,4,10,1584,1435,8,13],[2,4,11,1604,1439,21,13],[2,4,12,1506,1363,7,12],[2,4,13,1617,1491,-3,13],[2,4,14,1875,1699,23,15],[2,4,15,1826,1639,10,15],[2,4,16,1823,1672,10,15],[2,4,17,2108,1911,11,17],[2,4,18,2021,1852,4,17],[2,4,19,1848,1668,21,15],[3,0,0,3105,3195,123,144],[3,0,1,3172,3186,158,143],[3,0,2,3292,3384,122,152],[3,0,3,3273,3305,143,149],[3,0,4,3046,3110,137,140],[3,0,5,3246,3338,139,150],[3,0,6,3096,3165,107,142],[3,0,7,2933,3007,111,135],[3,0,8,3389,3392,149,153],[3,0,9,3211,3276,118,147],[3,0,10,3059,3068,112,138],[3,0,11,2807,2865,115,129],[3,0,12,2731,2790,98,126],[3,0,13,2774,2820,133,127],[3,0,14,3063,3149,148,142],[3,0,15,2889,2949,118,133],[3,0,16,2939,2940,102,132],[3,0,17,2837,2844,129,128],[3,0,18,2880,2907,136,131],[3,0,19,2543,2547,102,115],[3,1,0,3536,3436,250,251],[3,1,1,3777,3777,251,276],[3,1,2,4063,4011,302,293],[3,1,3,3681,3584,257,262],[3,1,4,3615,3609,275,263],[3,1,5,4031,3989,250,291],[3,1,6,3827,3795,271,277],[3,1,7,3507,3436,268,251],[3,1,8,3854,3829,257,280],[3,1,9,3840,3819,293,279],[3,1,10,3753,3745,275,273],[3,1,11,3618,3617,255,264],[3,1,12,3540,3515,223,257],[3,1,13,3664,3648,286,266],[3,1,14,3889,3781,268,276],[3,1,15,3681,3592,280,262],[3,1,16,3790,3718,251,271],[3,1,17,3977,3888,262,284],[3,1,18,3499,3472,260,253],[3,1,19,3256,3233,207,236],[3,2,0,3121,2976,288,283],[3,2,1,3276,3118,325,296],[3,2,2,3597,3427,355,326],[3,2,3,3503,3387,350,322],[3,2,4,3334,3235,289,307],[3,2,5,3580,3465,336,329],[3,2,6,3572,3401,353,323],[3,2,7,3346,3156,326,300],[3,2,8,3643,3536,356,336],[3,2,9,3707,3521,356,334],[3,2,10,3577,3454,308,328],[3,2,11,3571,3370,309,320],[3,2,12,3418,3259,324,310],[3,2,13,3677,3514,329,334],[3,2,14,4181,3979,358,378],[3,2,15,3953,3750,355,356],[3,2,16,3651,3500,335,332],[3,2,17,4055,3850,397,366],[3,2,18,3958,3796,363,361],[3,2,19,3620,3454,354,328],[3,3,0,765,801,92,99],[3,3,1,764,786,93,97],[3,3,2,884,922,111,113],[3,3,3,802,837,91,103],[3,3,4,770,796,93,98],[3,3,5,794,815,95,100],[3,3,6,760,780,91,96],[3,3,7,745,781,92,96],[3,3,8,801,837,94,103],[3,3,9,761,790,95,97],[3,3,10,730,762,92,94],[3,3,11,728,750,89,92],[3,3,12,691,711,82,87],[3,3,13,746,779,92,96],[3,3,14,770,806,90,99],[3,3,15,746,777,93,96],[3,3,16,725,765,89,94],[3,3,17,796,832,90,102],[3,3,18,730,758,88,93],[3,3,19,672,695,81,85],[3,4,0,993,899,-9,-2],[3,4,1,1008,917,-4,-2],[3,4,2,1169,1061,-8,-2],[3,4,3,1154,1037,-4,-2],[3,4,4,1241,1110,1,-2],[3,4,5,1243,1133,-3,-2],[3,4,6,1186,1073,-12,-2],[3,4,7,1239,1132,-3,-2],[3,4,8,1370,1226,-2,-2],[3,4,9,1370,1218,-2,-2],[3,4,10,1410,1265,-18,-3],[3,4,11,1364,1225,-17,-2],[3,4,12,1473,1329,-18,-3],[3,4,13,1459,1321,-1,-3],[3,4,14,1722,1529,-12,-3],[3,4,15,1633,1458,-3,-3],[3,4,16,1720,1539,-7,-3],[3,4,17,1829,1641,0,-3],[3,4,18,1794,1599,-12,-3],[3,4,19,1741,1572,3,-3],[4,0,0,3494,3652,91,84],[4,0,1,3667,3890,60,89],[4,0,2,4250,4488,92,103],[4,0,3,3762,3947,75,91],[4,0,4,3863,4132,68,95],[4,0,5,3717,3927,62,90],[4,0,6,3586,3752,75,86],[4,0,7,3392,3550,91,82],[4,0,8,3681,3920,71,90],[4,0,9,3561,3810,58,88],[4,0,10,3535,3772,70,87],[4,0,11,3362,3528,78,81],[4,0,12,3126,3284,72,76],[4,0,13,3290,3457,70,80],[4,0,14,3613,3860,85,89],[4,0,15,3266,3489,50,80],[4,0,16,3247,3468,63,80],[4,0,17,3508,3756,52,86],[4,0,18,3427,3669,86,84],[4,0,19,3133,3342,54,77],[4,1,0,3008,3054,126,156],[4,1,1,3250,3310,172,169],[4,1,2,3369,3409,151,174],[4,1,3,3311,3374,177,172],[4,1,4,3350,3448,159,176],[4,1,5,3249,3290,151,168],[4,1,6,3055,3125,137,159],[4,1,7,2971,3049,129,155],[4,1,8,3310,3358,155,171],[4,1,9,3264,3360,181,171],[4,1,10,3041,3092,160,158],[4,1,11,2931,3013,154,154],[4,1,12,3061,3115,170,159],[4,1,13,2892,2985,157,152],[4,1,14,3326,3461,172,177],[4,1,15,3084,3205,144,163],[4,1,16,3048,3140,160,160],[4,1,17,3328,3369,135,172],[4,1,18,2955,3035,134,155],[4,1,19,2808,2875,136,147],[4,2,0,2599,2555,195,187],[4,2,1,2913,2867,186,209],[4,2,2,2957,2974,202,217],[4,2,3,2785,2805,203,205],[4,2,4,2859,2828,186,206],[4,2,5,3215,3170,204,231],[4,2,6,2985,2994,215,219],[4,2,7,2862,2879,196,210],[4,2,8,3329,3279,223,239],[4,2,9,3208,3205,245,234],[4,2,10,3176,3173,232,232],[4,2,11,2943,2892,184,211],[4,2,12,2819,2794,183,204],[4,2,13,3010,3015,206,220],[4,2,14,3276,3268,228,239],[4,2,15,3133,3081,237,225],[4,2,16,3253,3227,237,236],[4,2,17,3355,3304,253,241],[4,2,18,3367,3338,256,244],[4,2,19,3204,3162,209,231],[4,3,0,969,1040,94,105],[4,3,1,1027,1122,100,113],[4,3,2,1121,1226,101,124],[4,3,3,1040,1139,95,115],[4,3,4,1055,1150,104,116],[4,3,5,1096,1208,101,122],[4,3,6,989,1082,90,109],[4,3,7,982,1056,100,107],[4,3,8,1044,1124,98,114],[4,3,9,974,1044,90,105],[4,3,10,982,1056,90,107],[4,3,11,952,1022,87,103],[4,3,12,906,988,83,100],[4,3,13,962,1048,98,106],[4,3,14,1042,1145,106,116],[4,3,15,913,991,93,100],[4,3,16,936,1031,94,104],[4,3,17,984,1080,89,109],[4,3,18,945,1032,89,104],[4,3,19,856,936,86,95],[4,4,0,1178,1115,-35,-27],[4,4,1,1198,1124,-36,-27],[4,4,2,1364,1270,-31,-30],[4,4,3,1339,1266,-34,-30],[4,4,4,1415,1314,-43,-32],[4,4,5,1444,1339,-33,-32],[4,4,6,1466,1354,-44,-32],[4,4,7,1444,1352,-28,-32],[4,4,8,1600,1506,-38,-36],[4,4,9,1667,1569,-50,-38],[4,4,10,1560,1466,-46,-35],[4,4,11,1556,1455,-43,-35],[4,4,12,1556,1471,-39,-35],[4,4,13,1719,1585,-36,-38],[4,4,14,1876,1754,-47,-42],[4,4,15,1911,1811,-38,-43],[4,4,16,1935,1796,-47,-43],[4,4,17,2166,2053,-52,-49],[4,4,18,2083,1957,-43,-47],[4,4,19,2008,1894,-56,-45],[5,0,0,2594,2576,72,80],[5,0,1,2574,2573,79,80],[5,0,2,2939,2910,64,90],[5,0,3,2682,2732,68,85],[5,0,4,2774,2817,98,87],[5,0,5,2736,2781,87,86],[5,0,6,2700,2746,70,85],[5,0,7,2454,2446,73,76],[5,0,8,2772,2788,68,86],[5,0,9,2527,2542,62,79],[5,0,10,2407,2424,73,75],[5,0,11,2321,2337,58,72],[5,0,12,2362,2373,52,74],[5,0,13,2473,2497,73,77],[5,0,14,2701,2695,81,84],[5,0,15,2445,2435,68,75],[5,0,16,2482,2481,50,77],[5,0,17,2460,2476,82,77],[5,0,18,2376,2385,65,74],[5,0,19,2069,2106,69,65],[5,1,0,2741,2634,162,155],[5,1,1,2575,2511,143,148],[5,1,2,2965,2922,169,172],[5,1,3,2650,2555,138,151],[5,1,4,2864,2805,174,165],[5,1,5,3021,2927,163,173],[5,1,6,2841,2803,143,165],[5,1,7,2493,2410,143,142],[5,1,8,2796,2723,143,161],[5,1,9,2638,2608,165,154],[5,1,10,2781,2678,155,158],[5,1,11,2636,2590,164,153],[5,1,12,2442,2351,156,139],[5,1,13,2689,2591,140,153],[5,1,14,2847,2797,160,165],[5,1,15,2588,2532,140,149],[5,1,16,2692,2607,163,154],[5,1,17,2947,2879,186,170],[5,1,18,2680,2636,167,156],[5,1,19,2386,2342,130,138],[5,2,0,2701,2567,198,208],[5,2,1,2876,2724,240,221],[5,2,2,3142,2950,235,239],[5,2,3,3123,2998,261,243],[5,2,4,2958,2795,235,226],[5,2,5,3048,2890,247,234],[5,2,6,2879,2690,220,218],[5,2,7,2935,2757,239,223],[5,2,8,3322,3143,253,255],[5,2,9,3149,3025,237,245],[5,2,10,3061,2901,251,235],[5,2,11,3034,2847,226,231],[5,2,12,3083,2936,258,238],[5,2,13,3132,2983,240,242],[5,2,14,3420,3226,280,261],[5,2,15,3319,3147,272,255],[5,2,16,3247,3095,272,251],[5,2,17,3492,3281,292,266],[5,2,18,3304,3178,283,257],[5,2,19,3078,2884,237,234],[5,3,0,883,917,98,100],[5,3,1,851,878,91,96],[5,3,2,976,1012,107,110],[5,3,3,922,955,105,104],[5,3,4,903,942,95,103],[5,3,5,961,1005,97,110],[5,3,6,876,902,93,98],[5,3,7,844,876,94,95],[5,3,8,904,924,99,101],[5,3,9,872,898,94,98],[5,3,10,844,867,90,95],[5,3,11,815,843,83,92],[5,3,12,772,786,87,86],[5,3,13,821,842,93,92],[5,3,14,892,907,95,99],[5,3,15,862,899,85,98],[5,3,16,856,879,89,96],[5,3,17,828,863,90,94],[5,3,18,794,821,85,89],[5,3,19,756,769,81,84],[5,4,0,677,605,-11,-10],[5,4,1,711,638,-10,-10],[5,4,2,833,739,-15,-12],[5,4,3,798,714,-21,-11],[5,4,4,796,717,-21,-11],[5,4,5,831,731,-14,-12],[5,4,6,808,727,-16,-12],[5,4,7,829,743,-10,-12],[5,4,8,955,856,-12,-14],[5,4,9,937,849,-18,-14],[5,4,10,956,863,-14,-14],[5,4,11,997,883,-20,-14],[5,4,12,954,861,-12,-14],[5,4,13,970,875,-21,-14],[5,4,14,1214,1084,-19,-17],[5,4,15,1131,1009,-30,-16],[5,4,16,1191,1056,-30,-17],[5,4,17,1217,1078,-28,-17],[5,4,18,1176,1050,-24,-17],[5,4,19,1207,1074,-14,-17],[6,0,0,1810,1878,67,88],[6,0,1,1880,1933,70,91],[6,0,2,1969,2060,97,97],[6,0,3,1901,1931,94,91],[6,0,4,1834,1868,67,88],[6,0,5,1897,1939,80,91],[6,0,6,1683,1711,74,80],[6,0,7,1586,1646,70,77],[6,0,8,1785,1826,89,86],[6,0,9,1822,1900,87,89],[6,0,10,1667,1742,86,82],[6,0,11,1691,1739,68,82],[6,0,12,1659,1733,66,81],[6,0,13,1552,1616,75,76],[6,0,14,1793,1871,86,88],[6,0,15,1676,1711,61,80],[6,0,16,1560,1619,81,76],[6,0,17,1724,1755,79,82],[6,0,18,1595,1632,65,77],[6,0,19,1537,1598,65,75],[6,1,0,1349,1345,101,101],[6,1,1,1460,1461,110,110],[6,1,2,1658,1674,122,126],[6,1,3,1561,1550,119,116],[6,1,4,1420,1433,94,107],[6,1,5,1589,1594,103,120],[6,1,6,1460,1443,114,108],[6,1,7,1313,1307,86,98],[6,1,8,1537,1552,101,116],[6,1,9,1477,1477,102,111],[6,1,10,1525,1508,110,113],[6,1,11,1448,1441,99,108],[6,1,12,1380,1381,98,104],[6,1,13,1466,1445,94,108],[6,1,14,1510,1524,112,114],[6,1,15,1478,1473,118,110],[6,1,16,1521,1533,110,115],[6,1,17,1562,1578,110,118],[6,1,18,1405,1407,107,106],[6,1,19,1319,1309,101,98],[6,2,0,1161,1140,118,111],[6,2,1,1197,1177,121,114],[6,2,2,1328,1302,128,126],[6,2,3,1299,1264,121,123],[6,2,4,1311,1265,118,123],[6,2,5,1329,1285,133,125],[6,2,6,1302,1276,120,124],[6,2,7,1264,1231,122,119],[6,2,8,1377,1330,125,129],[6,2,9,1325,1284,127,125],[6,2,10,1346,1317,136,128],[6,2,11,1234,1216,119,118],[6,2,12,1242,1193,112,116],[6,2,13,1345,1310,131,127],[6,2,14,1530,1504,140,146],[6,2,15,1418,1377,138,134],[6,2,16,1341,1293,117,125],[6,2,17,1539,1509,139,146],[6,2,18,1401,1350,130,131],[6,2,19,1329,1291,122,125],[6,3,0,409,436,47,54],[6,3,1,441,463,56,58],[6,3,2,463,492,56,62],[6,3,3,436,464,51,58],[6,3,4,438,466,57,58],[6,3,5,477,509,60,64],[6,3,6,421,440,53,55],[6,3,7,393,410,47,51],[6,3,8,441,462,53,58],[6,3,9,445,467,55,58],[6,3,10,430,451,52,56],[6,3,11,423,450,54,56],[6,3,12,410,433,52,54],[6,3,13,421,444,52,56],[6,3,14,449,482,52,60],[6,3,15,428,456,49,57],[6,3,16,401,421,52,53],[6,3,17,418,442,51,55],[6,3,18,397,422,49,53],[6,3,19,363,383,46,48],[6,4,0,409,375,-4,0],[6,4,1,454,417,0,0],[6,4,2,497,448,-2,0],[6,4,3,505,458,-2,0],[6,4,4,524,484,-3,0],[6,4,5,540,494,-3,0],[6,4,6,553,511,-2,0],[6,4,7,510,472,-3,0],[6,4,8,616,570,1,0],[6,4,9,634,587,-2,0],[6,4,10,622,562,-1,0],[6,4,11,617,565,-3,0],[6,4,12,617,564,2,0],[6,4,13,629,569,-4,0],[6,4,14,708,655,-1,0],[6,4,15,750,685,-4,0],[6,4,16,730,676,-6,0],[6,4,17,826,759,-9,0],[6,4,18,814,747,-6,0],[6,4,19,749,684,0,0],[7,0,0,915,882,34,33],[7,0,1,959,942,26,35],[7,0,2,1024,1006,39,37],[7,0,3,896,862,25,32],[7,0,4,955,943,32,35],[7,0,5,945,930,38,34],[7,0,6,879,852,33,32],[7,0,7,800,787,27,29],[7,0,8,905,882,27,33],[7,0,9,912,880,31,33],[7,0,10,841,823,33,30],[7,0,11,852,820,33,30],[7,0,12,835,817,24,30],[7,0,13,843,823,23,30],[7,0,14,860,850,27,31],[7,0,15,831,816,26,30],[7,0,16,817,791,31,29],[7,0,17,879,870,34,32],[7,0,18,774,746,31,28],[7,0,19,753,736,31,27],[7,1,0,681,637,43,41],[7,1,1,687,645,43,42],[7,1,2,770,739,43,48],[7,1,3,717,672,39,44],[7,1,4,713,683,49,44],[7,1,5,705,674,41,44],[7,1,6,668,640,38,42],[7,1,7,683,657,37,43],[7,1,8,770,726,51,47],[7,1,9,721,681,46,44],[7,1,10,674,630,40,41],[7,1,11,697,658,48,43],[7,1,12,684,652,39,42],[7,1,13,701,662,39,43],[7,1,14,707,666,47,43],[7,1,15,688,658,39,43],[7,1,16,697,669,40,43],[7,1,17,710,664,44,43],[7,1,18,673,634,42,41],[7,1,19,627,594,39,39],[7,2,0,727,680,62,59],[7,2,1,754,686,58,60],[7,2,2,791,729,65,63],[7,2,3,793,736,62,64],[7,2,4,800,742,69,65],[7,2,5,800,738,65,64],[7,2,6,816,745,63,65],[7,2,7,772,715,65,62],[7,2,8,852,795,70,69],[7,2,9,802,732,68,64],[7,2,10,841,782,73,68],[7,2,11,766,712,62,62],[7,2,12,791,729,68,63],[7,2,13,795,723,71,63],[7,2,14,899,828,74,72],[7,2,15,889,812,75,71],[7,2,16,838,773,73,67],[7,2,17,867,808,78,70],[7,2,18,829,760,66,66],[7,2,19,801,735,70,64],[7,3,0,213,211,25,24],[7,3,1,201,199,22,23],[7,3,2,239,235,27,27],[7,3,3,220,222,25,26],[7,3,4,214,215,24,25],[7,3,5,222,220,26,25],[7,3,6,214,216,26,25],[7,3,7,198,196,23,23],[7,3,8,213,211,25,24],[7,3,9,204,202,24,23],[7,3,10,209,208,24,24],[7,3,11,204,202,24,23],[7,3,12,187,185,21,21],[7,3,13,189,188,22,22],[7,3,14,208,206,23,24],[7,3,15,193,190,22,22],[7,3,16,205,203,23,23],[7,3,17,204,204,23,23],[7,3,18,201,203,22,23],[7,3,19,174,176,20,20],[7,4,0,264,232,-3,-2],[7,4,1,285,247,-3,-2],[7,4,2,312,274,-6,-3],[7,4,3,315,276,-2,-3],[7,4,4,328,289,-4,-3],[7,4,5,346,298,-7,-3],[7,4,6,347,298,-3,-3],[7,4,7,328,284,-5,-3],[7,4,8,370,323,-2,-3],[7,4,9,366,322,-5,-3],[7,4,10,376,322,-3,-3],[7,4,11,395,344,-7,-3],[7,4,12,405,356,-3,-4],[7,4,13,411,361,-5,-4],[7,4,14,448,388,-3,-4],[7,4,15,435,378,-4,-4],[7,4,16,488,419,-7,-4],[7,4,17,510,441,-7,-4],[7,4,18,481,415,-7,-4],[7,4,19,495,434,-8,-4]]};</script>
+<script>
+/* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
+   Jeder Baustein entspricht einem Standard-Visual von Power BI.
+   Seite: 1024 x 646 px. Parameter: ?print (Druckansicht ohne Leiste), ?gut=gruen (Farbvariante). */
+const DK = (() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  let SEITE_B = 1024, SEITE_H = 646;          // Dashboard; Einzelvisual: init({breite: 727, hoehe: …})
+  if (Q.get("gut") === "gruen") document.body.dataset.gut = "gruen";
+  if (PRINT) document.body.classList.add("print");
+
+  /* ---------------- Format ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  const MINUS = "−", NBSP = String.fromCharCode(0xA0);
+  function zahl(v, nk = 0) { return (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function delta(v, nk = 0, einheit = "") {
+    const r = Number(v.toFixed(nk));
+    const vz = r > 0 ? "+" : r < 0 ? MINUS : "±";
+    return vz + nf(nk).format(Math.abs(r)) + einheit;
+  }
+  function prozent(v, nk = 1) { return zahl(v * 100, nk) + NBSP + "%"; }
+  /* Wirkung: richtung +1 = Anstieg günstig, -1 = Anstieg ungünstig, 0 = neutral */
+  function wirkung(d, richtung, nk = 1) {
+    if (!richtung || Number(d.toFixed(nk)) === 0) return "neutral";
+    return d * richtung > 0 ? "gut" : "schlecht";
+  }
+  const FARBE = { gut: "var(--gut)", schlecht: "var(--schlecht)", neutral: "var(--ac)",
+                  ist: "var(--ac)", fc: "var(--fc)", vj: "var(--py)" };
+
+  /* ---------------- Textmessung ---------------- */
+  const ctx = document.createElement("canvas").getContext("2d");
+  function tw(t, px = 14, bold = false) {
+    ctx.font = (bold ? "bold " : "") + px + "px Arial, 'Liberation Sans', Helvetica, sans-serif";
+    return ctx.measureText(String(t)).width;
+  }
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------------- Tooltip ---------------- */
+  let tip;
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      const zeilen = zeilenFn();
+      tip.textContent = "";
+      zeilen.forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel;
+  function init(o) {
+    document.title = o.titel;
+    if (o.breite) SEITE_B = o.breite;
+    if (o.hoehe) SEITE_H = o.hoehe;
+    if (!PRINT) {
+      const leiste = el("div", { class: "dk-leiste" }, document.body);
+      el("div", { class: "dk-leiste-titel" }, leiste, o.titel);
+      o.knoepfe = leiste;
+    }
+    buehne = el("div", { class: "dk-buehne" }, document.body);
+    rahmen = el("div", { class: "dk-rahmen" }, buehne);
+    seite = el("div", { class: "dk-seite", id: "seite", style: `width:${SEITE_B}px;height:${SEITE_H}px` }, rahmen);
+    panel = el("div", { class: "dk-panel" }, document.body);
+    tip = el("div", { class: "dk-tooltip" }, document.body);
+    const skalieren = () => {
+      if (PRINT) { rahmen.style.width = SEITE_B + "px"; rahmen.style.height = SEITE_H + "px"; return; }
+      const frei = panel.style.display === "block" ? 380 : 0;
+      const s = Math.max(0.4, Math.min((innerWidth - frei - 32) / SEITE_B, (innerHeight - 44 - 32) / SEITE_H));
+      seite.style.transform = `scale(${s})`;
+      rahmen.style.width = SEITE_B * s + "px"; rahmen.style.height = SEITE_H * s + "px";
+      rahmen.style.marginLeft = frei ? "16px" : "auto";
+    };
+    addEventListener("resize", skalieren);
+    DK._skalieren = skalieren;
+    skalieren();
+    return seite;
+  }
+  function box(id, x, y, w, h, cls = "") {
+    return el("div", { id, class: "dk-abs " + cls, style: `left:${x}px;top:${y}px;width:${w}px;height:${h}px` }, seite);
+  }
+  function haarlinie(y, links = 16, rechts = 16) {
+    el("div", { class: "dk-haar", style: `top:${y}px;left:${links}px;right:${rechts}px` }, seite);
+  }
+
+  /* ---------------- Kopf ---------------- */
+  function kopf(ziel, o) {
+    ziel.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0" }, ziel);
+    el("div", { class: "dk-titel" }, l, o.titel);
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, o.untertitel);
+    const r = el("div", { style: "position:absolute;right:0;top:2px;text-align:right" }, ziel);
+    el("div", { class: "dk-quelle" }, r, o.quelle);
+    const lg = el("div", { id: "kopf-legende", class: "dk-legende", style: "margin-top:8px" }, r);
+    o.legende.forEach(([farbe, text, rahmenFarbe]) => {
+      const s = el("span", {}, lg);
+      el("i", { style: `background:${farbe};${rahmenFarbe ? "outline:1px solid " + rahmenFarbe + ";outline-offset:-1px" : ""}` }, s);
+      s.appendChild(document.createTextNode(text));
+    });
+  }
+
+  /* ---------------- Datenschnitte (Slicer) ---------------- */
+  function knoepfe(ziel, o) {
+    const g = el("div", { class: "dk-knoepfe", role: "group" }, ziel);
+    const bs = o.optionen.map(([wert, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(wert === o.wert) }, g, text);
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); o.onChange(wert); });
+      return b;
+    });
+    return g;
+  }
+  function schnitt(ziel, label, typ, o) {
+    const s = el("div", { class: "dk-schnitt" }, ziel);
+    el("label", {}, s, label);
+    if (typ === "knoepfe") return knoepfe(s, o);
+    const sel = el("select", { "aria-label": label, style: o.breite ? `width:${o.breite}px` : "" }, s);
+    o.optionen.forEach(([wert, text]) => { const op = el("option", { value: wert }, sel, text); if (wert === o.wert) op.selected = true; });
+    sel.addEventListener("change", () => o.onChange(sel.value));
+    return sel;
+  }
+
+  /* ---------------- KPI-Leiste (Karte mit Referenzbeschriftung) ---------------- */
+  function kpis(ziel, items) {
+    ziel.textContent = "";
+    const w = el("div", { class: "dk-kpis" }, ziel);
+    items.forEach(k => {
+      const c = el("div", { class: "dk-kpi" }, w);
+      el("div", { class: "dk-kpi-label" }, c, k.label);
+      const wz = el("div", { class: "dk-kpi-wert" + (k.wertKlasse ? " " + k.wertKlasse : "") }, c, k.wert);
+      if (k.einheit) el("span", { class: "dk-kpi-einheit" }, wz, k.einheit);
+      const d = el("div", { class: "dk-kpi-delta" }, c, (k.bezug ?? "ΔVJ") + " ");
+      el("b", { class: k.klasse }, d, k.delta);
+    });
+  }
+
+  /* ---------------- Visual-Rahmen: Titel + Botschaft ---------------- */
+  function visual(ziel, o) {
+    ziel.textContent = "";
+    ziel.classList.add("dk-visual");
+    const tz = el("div", { class: "dk-titelzeile" }, ziel);
+    const t = el("div", { class: "dk-visual-titel" }, tz, o.titel);
+    if (o.einheit) { t.appendChild(document.createTextNode(", ")); el("span", { class: "dk-einheit" }, t, o.einheit); }
+    if (o.schalter) knoepfe(tz, o.schalter);
+    if (o.botschaft !== undefined) el("div", { class: "dk-botschaft", title: o.botschaft }, ziel, o.botschaft);
+    const top = (o.botschaft !== undefined ? 42 : 24) + (o.abstand || 6);
+    return { flaeche: el("div", { style: `position:absolute;left:0;top:${top}px;right:0;bottom:0` }, ziel),
+             breite: ziel.clientWidth, hoehe: ziel.clientHeight - top };
+  }
+
+  /* ---------------- Balkendiagramm (gruppiertes Balkendiagramm) ---------------- */
+  function balken(ziel, o) {
+    const W = o.breite, n = o.zeilen.length;
+    const rh = o.zeilenhoehe || Math.floor(o.hoehe / n), bh = Math.round(rh * 0.7);
+    const H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = o.labelBreite || Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9);
+    const pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bw = Math.max(z.wert > 0 ? 1 : 0, z.wert / max * pw);
+      if (z.kontur) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: Math.max(0, bw - 1), height: bh - 1,
+                                 fill: "#FFFFFF", stroke: z.kontur, "stroke-width": 1 }, g);
+      else sv("rect", { x: lw, y: y + (rh - bh) / 2, width: bw, height: bh, fill: z.farbe || FARBE.ist }, g);
+      sv("text", { x: lw + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    return svg;
+  }
+
+  /* ---------------- Bevölkerungspyramide (gestapeltes Balkendiagramm, Männer negativ) ---------------- */
+  function pyramide(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, kopfH = 18;
+    const rh = o.zeilenhoehe || Math.floor((o.hoehe - kopfH) / n), bh = Math.round(rh * 0.72);
+    const H = kopfH + rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vl = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.m))))) + 7;
+    const vr = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.w))))) + 7;
+    const maxM = Math.max(...o.zeilen.map(z => z.m), 1e-9), maxW = Math.max(...o.zeilen.map(z => z.w), 1e-9);
+    const k = (W - lw - vl - vr - 2) / (maxM + maxW);      // ein Maßstab für beide Seiten
+    const x0 = lw + vl + maxM * k + 1;
+    sv("text", { x: x0 - 6, y: 12, "text-anchor": "end", class: "muted" }, svg, o.kopf[0]);
+    sv("text", { x: x0 + 6, y: 12, class: "muted" }, svg, o.kopf[1]);
+    o.zeilen.forEach((z, i) => {
+      const y = kopfH + i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, z.label);
+      const bm = z.m * k, bw = z.w * k;
+      sv("rect", { x: x0 - 1 - bm, y: y + (rh - bh) / 2, width: bm, height: bh, fill: FARBE.ist }, g);
+      sv("rect", { x: x0 + 1, y: y + (rh - bh) / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: x0 - 1 - bm - 5, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, o.fmt(z.m));
+      sv("text", { x: x0 + 1 + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.w));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: x0, x2: x0, y1: kopfH - 2, y2: H, stroke: "#FFFFFF", "stroke-width": 2 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Gestapeltes Säulendiagramm ---------------- */
+  function saeulen(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.segNamen.map(t => tw(t)))) + 10;
+    const oben = 20, unten = 20, PH = H - oben - unten;
+    const slot = (W - lw) / n, bw = Math.min(26, slot * 0.72);
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9);
+    const k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = lw + slot * i + slot / 2, x = cx - bw / 2;
+      const g = sv("g", {}, svg);
+      let y = basis, summe = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        sv("rect", { x, y: y - h, width: bw, height: Math.max(0, h - (j < s.segs.length - 1 ? 0 : 0)),
+                     fill: FARBE[s.szenario] }, g);
+        if (j > 0) sv("line", { x1: x - 1, x2: x + bw + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, g);
+        if (i === 0 && h >= 15) sv("text", { x: lw - 10, y: y - h / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, o.segNamen[j]);
+        y -= h; summe += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(summe));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: lw + slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      if (o.tooltip) tooltip(hit, () => o.tooltip(s, summe));
+    });
+    sv("line", { x1: lw - 2, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Matrix / Tabelle mit Datenbalken ----------------
+     Spaltentypen: (leer) Zahl rechtsbündig über s.fmt · "text" linksbündig · "delta" Abweichung mit Balken
+     an einer Mittellinie, gefärbt nach Wirkung (s.richtung) · "anteil" Fortschritt 0..1 als Balken ab Null.
+     null-Werte erscheinen als „–“ ohne Balken. o.zeilenhoehe (Standard 21), o.onSort(key) macht Köpfe klickbar. */
+  function matrix(ziel, o) {
+    ziel.textContent = "";
+    const zh = o.zeilenhoehe || 21, H = zh - 3;
+    const t = el("table", { class: "dk-matrix" }, ziel);
+    const kopf = el("tr", {}, el("thead", {}, t));
+    o.spalten.forEach(s => {
+      const st = (s.breite ? `width:${s.breite}px;` : "") + (s.typ === "delta" || s.typ === "anteil" ? "text-align:center;" : "") +
+                 (s.typ === "text" ? "text-align:left;" : "");
+      const th = el("th", s.id ? { style: st, id: s.id } : { style: st }, kopf, s.titel);
+      if (o.onSort && !PRINT) {
+        th.classList.add("dk-sortierbar");
+        th.title = "Klick sortiert";
+        th.addEventListener("click", () => o.onSort(s.key));
+        if (o.sortierung && o.sortierung.key === s.key) th.appendChild(document.createTextNode(o.sortierung.ab ? " ▾" : " ▴"));
+      }
+    });
+    const tb = el("tbody", {}, t);
+    // Achse der Abweichungsbalken proportional (wie „Achse: automatisch“ bei Datenbalken in Power BI)
+    const spanne = {};
+    o.spalten.filter(s => s.typ === "delta").forEach(s => {
+      const w = o.zeilen.filter(z => !z.summe && z.werte[s.key] != null).map(z => z.werte[s.key]);
+      spanne[s.key] = { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) };
+    });
+    const hoehe = o.zeilenhoehe ? `height:${zh}px` : "";
+    o.zeilen.forEach(z => {
+      const blass = !z.summe && o.auswahl != null && o.auswahl !== z.key;
+      // Trennlinie über einer neuen Gruppe: an der Vorzeile setzen (im border-collapse gewinnt die obere Zelle)
+      if (z.trenner && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
+      const tr = el("tr", { class: (z.summe ? "dk-summe" : "dk-zeile") + (blass ? " dk-blass" : "") }, tb);
+      o.spalten.forEach((s, j) => {
+        if (j === 0) { el("td", { style: hoehe }, tr, z.label); return; }
+        const v = z.werte[s.key];
+        if (s.typ === "text") { el("td", { style: "text-align:left;" + hoehe }, tr, v); return; }
+        if (s.typ !== "delta" && s.typ !== "anteil") { el("td", { style: hoehe }, tr, v == null ? "–" : s.fmt(v)); return; }
+        const td = el("td", { class: "dk-dbalken", style: hoehe }, tr);
+        const W = s.breite - 8, svg = sv("svg", { width: W, height: H, style: "display:block" }, td);
+        if (s.typ === "anteil") {
+          const txtW = s.textBreite || 48, pw = W - txtW - 2;
+          sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end", style: "font-size:14px" }, svg,
+             v == null ? "–" : zahl(v * 100, 0) + NBSP + "%");
+          if (v != null) sv("rect", { x: txtW, y: (H - 10) / 2, width: Math.max(v > 0 ? 1 : 0, Math.min(1, v) * pw), height: 10, fill: FARBE.ist }, svg);
+          sv("line", { x1: txtW, x2: txtW, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+          return;
+        }
+        const txtW = s.textBreite || 50, sp = spanne[s.key];
+        const k = (W - txtW - 4) / Math.max(sp.neg + sp.pos, 1e-9), mitte = txtW + 2 + sp.neg * k;
+        const kl = v == null ? "neutral" : wirkung(v, s.richtung, s.nk ?? 1);
+        sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end",
+                     style: `font-size:14px;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};font-weight:${z.summe ? "bold" : "normal"}` },
+           svg, v == null ? "–" : delta(v, s.nk ?? 1));
+        if (!z.summe && v != null) {
+          const bwid = Math.abs(v) * k;
+          sv("rect", { x: v >= 0 ? mitte : mitte - bwid, y: (H - 10) / 2, width: bwid, height: 10, fill: FARBE[kl] }, svg);
+        }
+        sv("line", { x1: mitte, x2: mitte, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+      });
+      if (!z.summe && o.onClick) tr.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip && !z.summe) tooltip(tr, () => o.tooltip(z));
+    });
+    return t;
+  }
+
+  /* ---------------- Streudiagramm (Punktdiagramm mit Größe) ----------------
+     o.punkte: [{key, x, y, g}] – g bestimmt die Kreisfläche. o.x / o.y: {min, max, ticks, titel, fmt}.
+     o.linien: {x, y} Konstantenlinien; o.felder: [{ecke: "ol"|"or"|"ul"|"ur", text}] Beschriftung der Quadranten. */
+  function streuung(ziel, o) {
+    const W = o.breite, H = o.hoehe;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const fx = o.x.fmt || String, fy = o.y.fmt || String;
+    const links = Math.ceil(Math.max(...o.y.ticks.map(t => tw(fy(t))))) + 8;
+    const rechts = Math.ceil(tw(fx(o.x.ticks[o.x.ticks.length - 1])) / 2) + 2;
+    const oben = 22, unten = 38, PW = W - links - rechts, PH = H - oben - unten;
+    const sx = v => links + (v - o.x.min) / (o.x.max - o.x.min) * PW;
+    const sy = v => oben + PH - (v - o.y.min) / (o.y.max - o.y.min) * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, o.y.titel);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, o.x.titel);
+    o.y.ticks.forEach(t => sv("text", { x: links - 6, y: sy(t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, fy(t)));
+    o.x.ticks.forEach(t => sv("text", { x: sx(t), y: oben + PH + 16, "text-anchor": "middle", class: "muted" }, svg, fx(t)));
+    if (o.linien) {
+      const st = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+      if (o.linien.x != null) sv("line", { x1: sx(o.linien.x), x2: sx(o.linien.x), y1: oben, y2: oben + PH, ...st }, svg);
+      if (o.linien.y != null) sv("line", { x1: links, x2: links + PW, y1: sy(o.linien.y), y2: sy(o.linien.y), ...st }, svg);
+    }
+    (o.felder || []).forEach(f => {
+      const l = f.ecke[1] === "l", ob = f.ecke[0] === "o";
+      sv("text", { x: l ? links + 6 : links + PW - 6, y: ob ? oben + 13 : oben + PH - 6, "text-anchor": l ? "start" : "end",
+                   class: "muted" }, svg, f.text);
+    });
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    const gMax = Math.max(...o.punkte.map(p => p.g || 0), 1e-9), rMax = o.rMax || 13, rMin = o.rMin || 3;
+    const kreise = o.punkte.slice().sort((a, b) => (b.g || 0) - (a.g || 0))
+      .map(p => ({ p, cx: sx(p.x), cy: sy(p.y), r: Math.max(rMin, Math.sqrt((p.g || 0) / gMax) * rMax) }));
+    const gruppen = new Map();
+    kreise.forEach(({ p, cx, cy, r }) => {
+      const blass = o.auswahl && !o.auswahl(p);
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("circle", { cx, cy, r, fill: p.farbe || FARBE.ist, "fill-opacity": 0.8, stroke: "#FFFFFF", "stroke-width": 1 }, g);
+      const hit = sv("circle", { cx, cy, r: Math.max(r, 6), fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(p.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(p));
+      gruppen.set(p, g);
+    });
+    // Beschriftungen nach allen Kreisen: rechts, links, oben, unten – erste Lage ohne Überdeckung
+    const belegt = [];
+    const schneidetKreis = (b, k) => {
+      const nx = Math.max(b.x, Math.min(k.cx, b.x + b.w)), ny = Math.max(b.y, Math.min(k.cy, b.y + b.h));
+      return (nx - k.cx) ** 2 + (ny - k.cy) ** 2 < (k.r + 1) ** 2;
+    };
+    const schneidet = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    kreise.filter(k => k.p.label).forEach(k => {
+      const w = tw(k.p.label), h = 16, { cx, cy, r } = k;
+      const lagen = [[cx + r + 4, cy - h / 2], [cx - r - 4 - w, cy - h / 2], [cx - w / 2, cy - r - 2 - h], [cx - w / 2, cy + r + 2]];
+      const frei = b => b.x >= links && b.x + b.w <= links + PW && b.y >= oben && b.y + b.h <= oben + PH &&
+        !kreise.some(a => a !== k && schneidetKreis(b, a)) && !belegt.some(c => schneidet(b, c));
+      const b = lagen.map(([x, y]) => ({ x, y, w, h })).find(frei) || { x: lagen[0][0], y: lagen[0][1], w, h };
+      belegt.push(b);
+      sv("text", { x: b.x, y: b.y + h / 2, dy: "0.35em" }, gruppen.get(k.p), k.p.label);
+    });
+    return svg;
+  }
+
+  /* ---------------- Berichtsdesign für Power BI (Theme-JSON) ---------------- */
+  function thema() {
+    const GUT = getComputedStyle(document.body).getPropertyValue("--gut").trim() || "#00806B";
+    return { name: "6. Auflage – Buchstil", dataColors: ["#3A3F44", "#8F8F8F", "#C9C9C9", GUT, "#C62828"],
+      background: "#FFFFFF", foreground: "#1A1A1A", tableAccent: "#3A3F44", good: GUT, neutral: "#8F8F8F", bad: "#C62828",
+      maximum: "#3A3F44", center: "#C9C9C9", minimum: "#F6F6F6",
+      textClasses: { callout: { fontSize: 19.5, fontFace: "Arial", color: "#1A1A1A" },
+                     title: { fontSize: 12, fontFace: "Arial", color: "#1A1A1A" },
+                     header: { fontSize: 10.5, fontFace: "Arial", color: "#4D4D4D" },
+                     label: { fontSize: 10.5, fontFace: "Arial", color: "#1A1A1A" } },
+      visualStyles: { "*": { "*": { border: [{ show: false }], dropShadow: [{ show: false }], background: [{ show: false }] } } } };
+  }
+
+  /* ---------------- Ebenen der Lernplattform ---------------- */
+  function download(name, inhalt, typ = "text/csv;charset=utf-8") {
+    const blob = new Blob([String.fromCharCode(0xFEFF) + inhalt], { type: typ });
+    const a = el("a", { href: URL.createObjectURL(blob), download: name }, document.body);
+    a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function ebenen(o) {
+    if (PRINT) return;
+    const leiste = document.querySelector(".dk-leiste");
+    let modus = null;
+    const marken = [];
+    const knopf = (text, fn) => { const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text); b.addEventListener("click", fn); return b; };
+    const kRegeln = knopf("Designregeln", () => umschalten("regeln"));
+    const kNachbau = knopf("Nachbau in Power BI", () => umschalten("nachbau"));
+    const kTab = knopf("Werte als Tabelle", () => umschalten("tabelle"));
+    knopf("Daten (CSV)", () => download(o.csv.name, o.csv.text()));
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; }
+    function markeSetzen(eintrag, text, cls) {
+      const z = document.getElementById(eintrag.ziel);
+      if (!z) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / SEITE_B;
+      // anker "rechts" (Standard): Marke auf der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "dk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text));
+      marken.push(m);
+    }
+    function aktiv(text) {
+      panel.querySelectorAll(".dk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      const e = panel.querySelector(`.dk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(m) {
+      modus = modus === m ? null : m;
+      [kRegeln, kNachbau, kTab].forEach((b, i) => b.setAttribute("aria-pressed", String(modus === ["regeln", "nachbau", "tabelle"][i])));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      DK._skalieren();
+      if (modus === "regeln") {
+        el("h2", {}, panel, "Designregeln (SUCCESS)");
+        el("div", { class: "dk-panel-intro" }, panel, "SUCCESS-Formel nach Hichert/Faisst (IBCS): Say, Unify, Condense, Check, Express, Simplify, Structure. Die Nummern im Dashboard zeigen, wo eine Regel angewendet ist.");
+        o.regeln.forEach(r => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": String(r.nr) }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, r.nr + "."); el("span", {}, k, r.titel);
+          el("div", { class: "dk-regel" }, e, r.regel);
+          el("div", {}, e, r.text);
+          markeSetzen(r, String(r.nr), "");
+        });
+      } else if (modus === "nachbau") {
+        el("h2", {}, panel, "Nachbau in Power BI");
+        el("div", { class: "dk-panel-intro" }, panel, o.nachbauIntro);
+        if (o.theme) { const b = el("button", { type: "button", style: "margin-bottom:10px;font:inherit;padding:5px 10px;border:1px solid #9A9A9A;background:#fff;border-radius:3px;cursor:pointer" }, panel, "Berichtsdesign (JSON) herunterladen");
+          b.addEventListener("click", () => download("berichtsdesign.json", JSON.stringify(o.theme, null, 2), "application/json")); }
+        o.nachbau.forEach(n => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": n.id }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, n.id); el("span", {}, k, n.titel);
+          const dl = el("dl", {}, e);
+          [["Visual", n.visual], ["Felder", n.felder], ["Format", n.format], ["Hinweis", n.hinweis]].forEach(([a, b]) => {
+            if (!b) return; el("dt", {}, dl, a); el("dd", {}, dl, b);
+          });
+          markeSetzen(n, n.id, "nachbau");
+        });
+      } else if (modus === "tabelle") {
+        el("h2", {}, panel, "Werte als Tabelle");
+        el("div", { class: "dk-panel-intro" }, panel, "Alle Werte der Visuals in der aktuellen Filterung (entspricht „Als Tabelle anzeigen“ in Power BI).");
+        o.tabellen().forEach(tab => {
+          el("div", { style: "font-weight:bold;margin:12px 0 4px" }, panel, tab.titel);
+          const t = el("table", { class: "dk-matrix" }, panel);
+          const hr = el("tr", {}, el("thead", {}, t));
+          tab.kopf.forEach(h => el("th", {}, hr, h));
+          const tb = el("tbody", {}, t);
+          tab.zeilen.forEach(z => { const tr = el("tr", {}, tb); z.forEach(c => el("td", {}, tr, c)); });
+        });
+      }
+    }
+    DK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+  }
+
+  return { PRINT, NBSP, zahl, delta, prozent, wirkung, FARBE, tw, el, sv, init, box, haarlinie, kopf, schnitt, knoepfe,
+           kpis, visual, balken, pyramide, saeulen, matrix, streuung, thema, ebenen, download };
+})();
+
+</script>
+<script>
+/* Mobiler Bericht „Vertrieb Europa“ – Abb. 5.59 (Smartphone, hochkant, eine Spalte) und Abb. 5.60 (Tablet, quer,
+   zwei Spalten). Derselbe Bericht, dieselben Daten (mobil.json aus daten_mobil.py), nur das Layout folgt dem Gerät.
+   Smartphone: Seite 376 x 796 px (Anzeigefläche 360 x 780 px im angedeuteten Gerät); Tablet: 1024 x 646 px.
+   Inhalte aus beiden Originalen: Umsatz nach Produktlinie mit 12-Monats-Verlauf und Budgetvergleich (5.59) und
+   ABC-Analyse der Länder mit kumuliertem Anteil (5.60), Ergebnis nach Land. Bedienung für Touch: große Trefferflächen,
+   Tippen auf eine Zeile filtert den Bericht, „✕ Auswahl“ (oder Esc) hebt auf.
+   Abb. 5.59 und 5.60 verwenden diese Datei unverändert bis auf GERAET. */
+(() => {
+  "use strict";
+  const GERAET = "tablet";                       // Abb. 5.59: "smartphone" · Abb. 5.60: "tablet"
+  const PHONE = GERAET === "smartphone";
+  const { zahl, delta, wirkung, FARBE, NBSP, sv, el, tw } = DK;
+  const MON = DATA.monate, NM = MON.length, LA = DATA.laender, LIN = DATA.linien, [GRENZE_A, GRENZE_B] = DATA.abc;
+  const MNAME = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const mName = m => MNAME[Number(MON[m].slice(5)) - 1];
+  const mKurz = m => `${mName(m).slice(0, 3)} ${MON[m].slice(0, 4)}`;
+  const mLang = m => `${mName(m)} ${MON[m].slice(0, 4)}`;
+  const REGION = { dach: "DACH", uebrige: "übrige Länder" };
+
+  /* ---------- Würfel: [land][linie][monat] in Tsd. € ---------- */
+  const leer = () => LA.map(() => LIN.map(() => Array(NM).fill(0)));
+  const U = leer(), B = leer(), E = leer(), EB = leer();
+  DATA.zeilen.forEach(([l, p, m, u, b, e, eb]) => { U[l][p][m] = u; B[l][p][m] = b; E[l][p][m] = e; EB[l][p][m] = eb; });
+
+  /* ---------- Zustand ---------- */
+  const ENDEN = [...Array(8).keys()].map(i => NM - 8 + i);           // 12 Monate bis Januar … August 2027
+  const S = { ende: NM - 1, region: "alle", sel: null };
+  addEventListener("keydown", e => { if (e.key === "Escape" && S.sel) { S.sel = null; zeichnen(); } });
+  const waehlen = (typ, key) => { S.sel = S.sel && S.sel.typ === typ && S.sel.key === key ? null : { typ, key }; zeichnen(); };
+
+  /* ---------- Berechnung ---------- */
+  const fenster = () => [...Array(12).keys()].map(i => S.ende - 11 + i);
+  const laender = ohne => LA.map((_, i) => i).filter(i => (S.region === "alle" || LA[i][2] === S.region) &&
+                                                       (ohne === "land" || !S.sel || S.sel.typ !== "land" || S.sel.key === i));
+  const linien = ohne => LIN.map((_, i) => i).filter(i => ohne === "linie" || !S.sel || S.sel.typ !== "linie" || S.sel.key === i);
+  const summe = (W, ls, ps, ms) => { let s = 0; ls.forEach(l => ps.forEach(p => ms.forEach(m => { s += W[l][p][m]; }))); return s; };
+  const mio = t => zahl(t / 1000, 1);
+  const pd = (a, b) => (b ? delta((a / b - 1) * 100, 1, NBSP + "%") : "–");
+  const pz = (a, b, nk = 1) => (b ? zahl(a / b * 100, nk) : "–") + NBSP + "%";
+  const passt = (k, breite, px = 14, fett = false) => k.find(t => tw(t, px, fett) <= breite) || k[k.length - 1];
+
+  function kennzahlen() {
+    const ls = laender(), ps = linien(), ms = fenster();
+    return { u: summe(U, ls, ps, ms), b: summe(B, ls, ps, ms), e: summe(E, ls, ps, ms), eb: summe(EB, ls, ps, ms) };
+  }
+  function datenLinien() {
+    const ls = laender(), ms = fenster();
+    return LIN.map((name, p) => {
+      const u = summe(U, ls, [p], ms), b = summe(B, ls, [p], ms), e = summe(E, ls, [p], ms);
+      return { key: p, label: name, u, b, e, d: (u / b - 1) * 100, spark: ms.map(m => summe(U, ls, [p], [m])) };
+    });
+  }
+  function datenLaender() {
+    const ps = linien(), ms = fenster();
+    const z = laender("land").map(l => ({ key: l, label: LA[l][1], region: LA[l][2], u: summe(U, [l], ps, ms), b: summe(B, [l], ps, ms),
+                                          e: summe(E, [l], ps, ms), eb: summe(EB, [l], ps, ms) }))
+      .sort((a, b) => b.u - a.u);
+    const ges = z.reduce((s, x) => s + x.u, 0);
+    let kum = 0;
+    z.forEach((x, i) => { kum += x.u; x.anteil = x.u / ges; x.kum = kum / ges;
+                          x.klasse = i === 0 || x.kum <= GRENZE_A + 1e-9 ? "A" : x.kum <= GRENZE_B + 1e-9 ? "B" : "C"; });
+    return { zeilen: z, ges };
+  }
+
+  /* ---------- Seite, Gerät, Raster ---------- */
+  const SEITE = PHONE ? [376, 796] : [1024, 646];
+  DK.init({ titel: PHONE ? "Vertrieb Europa (Smartphone)" : "Vertrieb Europa (Tablet)", breite: SEITE[0], hoehe: SEITE[1] });
+  DK.el("style", {}, document.head, `
+    .mb-rahmen { position: absolute; inset: 4px; border: 1.5px solid #9A9A9A; border-radius: ${PHONE ? 26 : 22}px; pointer-events: none; }
+    #seite .dk-knoepfe button { height: 40px; min-width: 0; padding: 0 ${PHONE ? 10 : 14}px; }
+    #seite select { height: 40px; font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF; border: 1px solid #9A9A9A;
+      border-radius: 3px; padding: 0 8px; }
+    .mb-titel { font-size: 20px; font-weight: bold; }
+    .mb-chip { height: 36px; padding: 0 12px; border: 1px solid #9A9A9A; border-radius: 18px; background: #FFFFFF; color: var(--text);
+      font: inherit; font-size: 14px; cursor: pointer; white-space: nowrap; }
+    body.print .mb-chip { display: none; }`);
+  const seite = document.getElementById("seite");
+  el("div", { class: "mb-rahmen", id: "geraet" }, seite);
+  const R = PHONE
+    ? { kopf: [24, 18, 328, 44], filter: [24, 70, 328, 40], h1: 120, kpis: [24, 128, 328, 66], h2: 202,
+        v1: [24, 210, 328, 254], h3: 470, v2: [24, 478, 328, 306] }
+    : { kopf: [24, 18, 976, 46], h1: 72, filter: [24, 80, 470, 60], kpis: [514, 80, 486, 66], h2: 154,
+        v1: [24, 164, 466, 466], v2: [510, 164, 490, 466] };
+  const bKopf = DK.box("kopf", ...R.kopf);
+  DK.haarlinie(R.h1, 24, 24);
+  const bFilter = DK.box("filter", ...R.filter, "dk-filter");
+  const bKpi = DK.box("kpis", ...R.kpis);
+  DK.haarlinie(R.h2, 24, 24);
+  const bV1 = DK.box("v-linien", ...R.v1);
+  if (PHONE) DK.haarlinie(R.h3, 24, 24);
+  const bV2 = DK.box("v-laender", ...R.v2);
+
+  /* ---------- Tooltip: Maus über pointermove, Touch über Tippen (verschwindet nach 2,5 s) ---------- */
+  const tip = document.querySelector(".dk-tooltip");
+  let tipUhr = null;
+  function tooltip(ziel, zeilenFn) {
+    const zeigen = ev => {
+      tip.textContent = "";
+      zeilenFn().filter(Boolean).forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
+    };
+    ziel.addEventListener("pointermove", ev => { if (ev.pointerType !== "touch") zeigen(ev); });
+    ziel.addEventListener("pointerdown", ev => {
+      if (ev.pointerType !== "touch") return;
+      zeigen(ev); clearTimeout(tipUhr); tipUhr = setTimeout(() => { tip.style.display = "none"; }, 2500);
+    });
+    ziel.addEventListener("pointerleave", ev => { if (ev.pointerType !== "touch") tip.style.display = "none"; });
+  }
+
+  /* ---------- Datenschnitte (40 px hoch); Smartphone ohne Beschriftung, Tablet mit ---------- */
+  let selMonat, knopfRegion, chip;
+  const monatOpt = ENDEN.map(m => [String(m), PHONE ? `bis ${mKurz(m)}` : mLang(m)]);
+  const regionOpt = [["alle", "Alle"], ["dach", "DACH"], ["uebrige", "Übrige"]];
+  const regionWahl = v => { S.region = v; if (S.sel && S.sel.typ === "land" && S.region !== "alle" && LA[S.sel.key][2] !== S.region) S.sel = null; zeichnen(); };
+  if (PHONE) {
+    bFilter.style.gap = "10px";
+    selMonat = el("select", { "aria-label": "12 Monate bis", style: "width:118px" }, bFilter);
+    monatOpt.forEach(([w, t]) => { const o = el("option", { value: w }, selMonat, t); if (Number(w) === S.ende) o.selected = true; });
+    selMonat.addEventListener("change", () => { S.ende = Number(selMonat.value); zeichnen(); });
+    knopfRegion = DK.knoepfe(bFilter, { optionen: regionOpt, wert: "alle", onChange: regionWahl });
+    knopfRegion.id = "region";
+    knopfRegion.style.flex = "1 1 auto";
+    [...knopfRegion.children].forEach(b => { b.style.flex = "1 1 0"; });
+  } else {
+    selMonat = DK.schnitt(bFilter, "12 Monate bis", "dropdown", { optionen: monatOpt, wert: String(S.ende), breite: 150,
+                                                                 onChange: v => { S.ende = Number(v); zeichnen(); } });
+    knopfRegion = DK.schnitt(bFilter, "Region", "knoepfe", { optionen: regionOpt, wert: "alle", onChange: regionWahl });
+    knopfRegion.id = "region";
+    chip = el("button", { type: "button", class: "mb-chip", style: "margin-left:auto;visibility:hidden" }, bFilter, "✕ Auswahl");
+    chip.addEventListener("click", () => { S.sel = null; zeichnen(); });
+  }
+
+  /* ---------- Kopf ---------- */
+  function kopf(sub) {
+    if (!PHONE) {
+      DK.kopf(bKopf, { titel: "Vertrieb Europa", untertitel: sub, quelle: "Quelle: Vertriebscontrolling",
+                       legende: [[FARBE.ist, "Ist"], [FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
+      return;
+    }
+    bKopf.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0;white-space:nowrap" }, bKopf);
+    el("div", { class: "mb-titel" }, l, "Vertrieb Europa");
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, sub);
+    chip = el("button", { type: "button", class: "mb-chip", style: `position:absolute;right:0;top:2px;visibility:${S.sel ? "visible" : "hidden"}` }, bKopf, "✕ Auswahl");
+    chip.addEventListener("click", () => { S.sel = null; zeichnen(); });
+  }
+
+  /* ---------- V1: Umsatz nach Produktlinie – Verlauf, Ist, (Budget), ΔBU ---------- */
+  const SP1 = PHONE ? { l: 74, s: 78, i: 52, b: 0, d: 124, rh: 37, sh: 22 } : { l: 96, s: 130, i: 60, b: 60, d: 120, rh: 76, sh: 44 };
+  function linienVisual(f, d) {
+    const n = d.length, kopfH = 18, Wd = f.breite, Hd = kopfH + n * SP1.rh;
+    const svg = sv("svg", { width: Wd, height: Hd, role: "img", "aria-label": "Umsatz nach Produktlinie", id: "li-svg" }, f.flaeche);
+    const xs = SP1.l, xi = xs + SP1.s, xb = xi + SP1.i, xd = xb + SP1.b, TXT = 50;
+    const neg = Math.max(0, ...d.map(z => -z.d)), pos = Math.max(0, ...d.map(z => z.d));
+    const k = (SP1.d - TXT - 6) / Math.max(neg + pos, 1e-9), mitte = xd + TXT + 2 + neg * k;
+    sv("text", { x: xs, y: 12, class: "muted" }, svg, PHONE ? "12 Monate" : "Verlauf 12 Monate");
+    sv("text", { x: xi + SP1.i - 4, y: 12, "text-anchor": "end", class: "muted" }, svg, "Ist");
+    if (SP1.b) sv("text", { x: xb + SP1.b - 4, y: 12, "text-anchor": "end", class: "muted" }, svg, "Budget");
+    sv("text", { x: xd + SP1.d / 2 + 6, y: 12, "text-anchor": "middle", class: "muted", id: "li-kopf-dbu" }, svg, "ΔBU");
+    sv("line", { x1: 0, x2: Wd, y1: kopfH - 0.5, y2: kopfH - 0.5, stroke: "#3A3F44", "stroke-width": 1 }, svg);
+    d.forEach((z, i) => {
+      const y = kopfH + i * SP1.rh, ym = y + SP1.rh / 2;
+      const blass = S.sel && S.sel.typ === "linie" && S.sel.key !== z.key;
+      const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), id: "li-" + i }, svg);
+      sv("text", { x: 0, y: ym, dy: "0.35em" }, g, z.label);
+      const mn = Math.min(...z.spark), mx = Math.max(...z.spark), sw = SP1.s - 14;
+      const px = j => xs + 2 + j * sw / (z.spark.length - 1), py = v => ym + SP1.sh / 2 - (mx > mn ? (v - mn) / (mx - mn) : 0.5) * SP1.sh;
+      sv("polyline", { points: z.spark.map((v, j) => `${px(j).toFixed(1)},${py(v).toFixed(1)}`).join(" "), fill: "none", stroke: "#3A3F44",
+                       "stroke-width": 1.5, "stroke-linejoin": "round" }, g);
+      sv("circle", { cx: px(z.spark.length - 1), cy: py(z.spark[z.spark.length - 1]), r: 2.5, fill: "#3A3F44" }, g);
+      sv("text", { x: xi + SP1.i - 4, y: ym, dy: "0.35em", "text-anchor": "end" }, g, mio(z.u));
+      if (SP1.b) sv("text", { x: xb + SP1.b - 4, y: ym, dy: "0.35em", "text-anchor": "end", class: "muted" }, g, mio(z.b));
+      const kl = wirkung(z.d, 1, 1);
+      sv("text", { x: xd + TXT - 2, y: ym, dy: "0.35em", "text-anchor": "end", style: `fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]}` }, g,
+         delta(z.d, 1, NBSP + "%"));
+      const bw = Math.abs(z.d) * k;
+      if (bw > 0) sv("rect", { x: z.d >= 0 ? mitte : mitte - bw, y: ym - 6, width: bw, height: 12, fill: FARBE[kl] }, g);
+      sv("line", { x1: mitte, x2: mitte, y1: y + 4, y2: y + SP1.rh - 4, stroke: "#8C8C8C", "stroke-width": 1 }, g);
+      if (i < n - 1) sv("line", { x1: 0, x2: Wd, y1: y + SP1.rh - 0.5, y2: y + SP1.rh - 0.5, stroke: "#EFEFEF", "stroke-width": 1 }, g);
+      const hit = sv("rect", { x: 0, y, width: Wd, height: SP1.rh, fill: "transparent" }, g);
+      hit.addEventListener("click", () => waehlen("linie", z.key));
+      const ms = fenster();
+      tooltip(hit, () => [z.label, `Umsatz ${mio(z.u)} Mio. € · Budget ${mio(z.b)} Mio. €`, `ΔBU ${delta((z.u - z.b) / 1000, 1, NBSP + "Mio. €")} (${pd(z.u, z.b)})`,
+        `Ergebnis ${mio(z.e)} Mio. € · Umsatzrendite ${pz(z.e, z.u)}`,
+        `Verlauf ${mKurz(ms[0])} bis ${mKurz(ms[11])}: ${mio(mn)}–${mio(mx)} Mio. € je Monat`, PHONE ? "Tippen filtert den Bericht" : "Tippen oder Klick filtert den Bericht"]);
+    });
+  }
+
+  /* ---------- V2: ABC-Analyse nach Land – Umsatz (Balken), (Anteil), kum. Anteil, Klasse, (Ergebnis) ---------- */
+  const SP2 = PHONE ? { l: 101, u: 141, a: 0, k: 52, c: 34, e: 0, rh: 29 } : { l: 116, u: 150, a: 58, k: 62, c: 40, e: 64, rh: 48 };
+  function laenderVisual(f, d) {
+    const z = d.zeilen, n = z.length, kopfH = 18, Wd = f.breite, Hd = kopfH + Math.max(1, n) * SP2.rh;
+    const svg = sv("svg", { width: Wd, height: Hd, role: "img", "aria-label": "ABC-Analyse nach Land", id: "la-svg" }, f.flaeche);
+    const xa = SP2.l + SP2.u, xk = xa + SP2.a, xc = xk + SP2.k, xe = xc + SP2.c;
+    const vw = Math.ceil(Math.max(...z.map(x => tw(mio(x.u))), 10)) + 6, max = Math.max(...z.map(x => x.u), 1);
+    sv("text", { x: SP2.l, y: 12, class: "muted" }, svg, "Umsatz");
+    if (SP2.a) sv("text", { x: xa + SP2.a - 4, y: 12, "text-anchor": "end", class: "muted" }, svg, "Anteil");
+    sv("text", { x: xk + SP2.k - 4, y: 12, "text-anchor": "end", class: "muted" }, svg, PHONE ? "kum." : "kum. Anteil");
+    sv("text", { x: xc + SP2.c / 2 + 2, y: 12, "text-anchor": "middle", class: "muted", id: "la-kopf-abc" }, svg, "ABC");
+    if (SP2.e) sv("text", { x: xe + SP2.e, y: 12, "text-anchor": "end", class: "muted" }, svg, "Ergebnis");
+    sv("line", { x1: 0, x2: Wd, y1: kopfH - 0.5, y2: kopfH - 0.5, stroke: "#3A3F44", "stroke-width": 1 }, svg);
+    z.forEach((x, i) => {
+      const y = kopfH + i * SP2.rh, ym = y + SP2.rh / 2;
+      const blass = S.sel && S.sel.typ === "land" && S.sel.key !== x.key;
+      const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), id: "la-" + i }, svg);
+      sv("text", { x: 0, y: ym, dy: "0.35em" }, g, x.label);
+      const bw = Math.max(1, x.u / max * (SP2.u - vw - 6)), bh = Math.min(16, Math.round(SP2.rh * 0.55));
+      sv("rect", { x: SP2.l, y: ym - bh / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: SP2.l + bw + 5, y: ym, dy: "0.35em" }, g, mio(x.u));
+      if (SP2.a) sv("text", { x: xa + SP2.a - 4, y: ym, dy: "0.35em", "text-anchor": "end" }, g, pz(x.anteil, 1));
+      sv("text", { x: xk + SP2.k - 4, y: ym, dy: "0.35em", "text-anchor": "end" }, g, pz(x.kum, 1).replace(NBSP + "%", PHONE ? NBSP + "%" : NBSP + "%"));
+      sv("text", { x: xc + SP2.c / 2 + 2, y: ym, dy: "0.35em", "text-anchor": "middle", style: "font-weight:bold" }, g, x.klasse);
+      if (SP2.e) sv("text", { x: xe + SP2.e, y: ym, dy: "0.35em", "text-anchor": "end" }, g, mio(x.e));
+      const naechste = z[i + 1];
+      if (naechste) {
+        const grenze = naechste.klasse !== x.klasse;
+        sv("line", { x1: 0, x2: Wd, y1: y + SP2.rh - 0.5, y2: y + SP2.rh - 0.5, stroke: grenze ? "#6E747A" : "#EFEFEF", "stroke-width": 1 }, g);
+      }
+      const hit = sv("rect", { x: 0, y, width: Wd, height: SP2.rh, fill: "transparent" }, g);
+      hit.addEventListener("click", () => waehlen("land", x.key));
+      tooltip(hit, () => [`${x.label} (${REGION[x.region]})`, `Umsatz ${zahl(x.u)} Tsd. € · ΔBU ${pd(x.u, x.b)}`,
+        `Anteil ${pz(x.anteil, 2)} · kumuliert ${pz(x.kum, 2)} · Klasse ${x.klasse}`,
+        `Ergebnis ${mio(x.e)} Mio. € (Budget ${mio(x.eb)}) · Rendite ${pz(x.e, x.u)}`, PHONE ? "Tippen filtert den Bericht" : "Tippen oder Klick filtert den Bericht"]);
+    });
+    if (!n) sv("text", { x: 0, y: kopfH + 18, class: "muted" }, svg, "Keine Länder in der Auswahl");
+  }
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    selMonat.value = String(S.ende);
+    [...knopfRegion.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(regionOpt[i][0] === S.region)));
+    const ms = fenster();
+    const auswahl = S.sel ? (S.sel.typ === "land" ? LA[S.sel.key][1] : LIN[S.sel.key]) : null;
+    const reg = S.region === "alle" ? "alle Länder" : REGION[S.region];
+    const zeit = `12 Monate bis ${mKurz(S.ende)}`;
+    kopf(PHONE ? passt([`${zeit} · ${auswahl || reg}`, `bis ${mKurz(S.ende)} · ${auswahl || reg}`], S.sel ? 230 : 328)
+               : passt([`Umsatz und Ergebnis · ${zeit} (${mKurz(ms[0])} bis ${mKurz(S.ende)}) · ${reg}${auswahl ? " · " + auswahl : ""} · Vergleich zum Budget (ΔBU)`,
+                        `${zeit} · ${reg}${auswahl ? " · " + auswahl : ""} · ΔBU`], 600));
+    if (chip) chip.style.visibility = S.sel ? "visible" : "hidden";
+
+    const k = kennzahlen();
+    DK.kpis(bKpi, [
+      { label: "Umsatz, Mio. €", wert: mio(k.u), bezug: "ΔBU", delta: pd(k.u, k.b), klasse: wirkung((k.u / k.b - 1) * 100, 1, 1) },
+      { label: "Ergebnis, Mio. €", wert: mio(k.e), bezug: "ΔBU", delta: k.eb > 0 ? pd(k.e, k.eb) : delta((k.e - k.eb) / 1000, 1),
+        klasse: wirkung(k.e - k.eb, 1, 0) },
+    ]);
+    [...bKpi.querySelectorAll(".dk-kpi")].forEach((c, i) => { c.id = "kpi-" + i; });
+
+    // V1
+    const d1 = datenLinien(), s1 = S.sel && S.sel.typ === "linie" ? d1[S.sel.key] : null;
+    const sort = d1.slice().sort((a, b) => b.d - a.d), best = sort[0], worst = sort[sort.length - 1];
+    const vor = S.sel && S.sel.typ === "land" ? `${LA[S.sel.key][1]}: ` : "";
+    let f = DK.visual(bV1, { titel: "Umsatz nach Produktlinie", einheit: "Mio. €",
+      botschaft: s1 ? passt([`${s1.label}: ${mio(s1.u)} Mio. €, ${pd(s1.u, s1.b)} zum Budget`, `${s1.label}: ΔBU ${pd(s1.u, s1.b)}`], R.v1[2])
+        : passt([`${vor}${best.label} ${pd(best.u, best.b)} über Budget, ${worst.label} ${pd(worst.u, worst.b)}`,
+                 `${vor}${best.label} ${pd(best.u, best.b)}, ${worst.label} ${pd(worst.u, worst.b)} zum Budget`,
+                 `${best.label} ${pd(best.u, best.b)}, ${worst.label} ${pd(worst.u, worst.b)} zum Budget`], R.v1[2]) });
+    linienVisual(f, d1);
+
+    // V2
+    const d2 = datenLaender(), z2 = d2.zeilen, nA = z2.filter(x => x.klasse === "A"), uA = nA.reduce((s, x) => s + x.u, 0);
+    const verlust = z2.filter(x => x.e < 0).sort((a, b) => a.e - b.e)[0];
+    const s2 = S.sel && S.sel.typ === "land" ? z2.find(x => x.key === S.sel.key) : null;
+    const nachLinie = S.sel && S.sel.typ === "linie" ? `${LIN[S.sel.key]}: ` : "";
+    f = DK.visual(bV2, { titel: "ABC-Analyse nach Land", einheit: "Umsatz in Mio. €",
+      botschaft: s2 ? passt([`${s2.label}: Klasse ${s2.klasse}, ${pz(s2.anteil, 1)} des Umsatzes, Ergebnis ${mio(s2.e)} Mio. €`,
+                             `${s2.label}: Klasse ${s2.klasse}, ${pz(s2.anteil, 1)} des Umsatzes`], R.v2[2])
+        : !z2.length ? "Keine Länder in der Auswahl"
+        : passt([`${nachLinie}${nA.length} von ${z2.length} Ländern bringen ${pz(uA, d2.ges, 0)} des Umsatzes${verlust ? ` – ${verlust.label} mit Verlust` : ""}`,
+                 `${nachLinie}${nA.length} von ${z2.length} Ländern bringen ${pz(uA, d2.ges, 0)} des Umsatzes`,
+                 `${nA.length} von ${z2.length} Ländern: ${pz(uA, d2.ges, 0)} des Umsatzes`], R.v2[2]) });
+    laenderVisual(f, d2);
+
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
+  const regeln = [
+    { nr: 1, ziel: "v-linien", anker: "links", versatz: PHONE ? [282, 2] : [278, 2], regel: "SAY – Botschaft vermitteln", titel: "Eine Aussage je Visual",
+      text: "Unter jedem Titel steht ein aus den Daten berechneter Satz – welche Produktlinie am weitesten über bzw. unter Budget liegt, wie viele Länder den Großteil des Umsatzes bringen. Er ändert sich mit Zeitraum, Region und Auswahl. Das Original hatte nur englische Überschriften." },
+    { nr: 2, ziel: "geraet", anker: "links", versatz: PHONE ? [26, 30] : [40, 26], regel: "STRUCTURE – Layout je Gerät", titel: PHONE ? "Eine Spalte im Hochformat" : "Zwei Spalten im Querformat",
+      text: PHONE
+        ? "Derselbe Bericht wie auf dem Tablet (Abb. 5.60), aber in einer Spalte: Kopf, Datenschnitte, Kennzahlen und zwei Visuals untereinander, in voller Breite lesbar. Nebenspalten (Budget, Anteil, Ergebnis) stehen im Tooltip. Das Original zeigte einen verkleinerten Desktop-Bericht mit vier Diagrammen in zwei Spalten, senkrechter Achsenbeschriftung und kaum lesbarer Schrift."
+        : "Derselbe Bericht wie auf dem Smartphone (Abb. 5.59), aber in zwei Spalten: links die Produktlinien, rechts die Länder; die Nebenspalten Budget, Anteil und Ergebnis sind sichtbar. Das Original zeigte eine kleine Tabelle neben einer großen Karte; die Rangfolge der Länder war nur in der Tabelle ablesbar." },
+    { nr: 3, ziel: "region", anker: "links", versatz: PHONE ? [-2, 34] : [-4, -22], regel: "SIMPLIFY – Für Touch bedienbar", titel: "Große Trefferflächen",
+      text: `Knöpfe und Auswahlliste sind 40 px hoch, jede Zeile ist ganz antippbar (${PHONE ? "37 bzw. 29 px" : "76 bzw. 48 px"} hoch). Tippen filtert den Bericht, „✕ Auswahl“ hebt die Auswahl auf (am Rechner auch Esc), ein Tooltip erscheint beim Tippen für 2,5 Sekunden. Das Original hatte kleine Pfeilknöpfe für die Klassengrenzen und eine Symbolleiste.` },
+    { nr: 4, ziel: "li-kopf-dbu", anker: "links", versatz: [-14, -4], regel: "EXPRESS – Abweichung zeigen", titel: "ΔBU statt Dreiecken",
+      text: "Die Abweichung zum Budget steht als Zahl mit Vorzeichen und als Balken nach Wirkung (blaugrün über, rot unter Budget). Das Original zeigte das Budget als orangefarbene Dreiecke auf roten Balken ohne Abweichungswert und stapelte Ist und Budget bei den Händlern; ein Verlust von −193.742,91 erschien als langer Balken nach rechts." },
+    { nr: 5, ziel: "kpis", anker: "links", versatz: PHONE ? [282, 22] : [440, 22], regel: "UNIFY – Einheitliche Zahlen", titel: "Mio. € mit einer Nachkommastelle",
+      text: "Alle Beträge in Mio. € mit einer Nachkommastelle, Einheit im Titel; exakte Werte in Tsd. € im Tooltip. Das Original mischte „6.761.734,26“, „414“ und „-193.742,91“ (US$) mit T€-Werten und Prozenten mit zwei Nachkommastellen." },
+    { nr: 6, ziel: "la-kopf-abc", anker: "links", versatz: [-20, -4], regel: "CONDENSE – ABC als Rangfolge", titel: "Balken, kumulierter Anteil, Klassen",
+      text: "Die Länder stehen nach Umsatz geordnet, mit kumuliertem Anteil und Klasse; Linien trennen die Klassen A (bis 65 %), B (bis 80 %) und C wie die Klassengrenzen des Originals. Ampelfarben in Tabelle und Karte entfallen – die Klasse steht als Buchstabe." },
+    { nr: 7, ziel: "v-laender", anker: "links", versatz: PHONE ? [256, 2] : [254, 2], regel: "CHECK – Titel und Inhalt stimmig", titel: "Region als Datenschnitt",
+      text: "Das Original hieß „ABC-Analyse DACH“, zeigte aber acht europäische Länder. Jetzt wählt der Datenschnitt Region alle Länder, DACH oder die übrigen; die Klassen werden für die Auswahl neu gebildet. Werte des Originals (T€) für die 12 Monate bis August 2027 übernommen." },
+    { nr: 8, ziel: "kopf", anker: "links", versatz: PHONE ? [200, 0] : [260, 0], regel: "SIMPLIFY – Ohne App-Rahmen", titel: "Gerät nur angedeutet",
+      text: "Statusleiste, Symbolleisten, Navigationsknöpfe („Car Sales“, „Arena“, „Back“), Markennamen und Logos entfallen; das Gerät ist nur durch einen dünnen Rahmen angedeutet. Marken wurden zu Produktlinien, englische Begriffe zu deutschen." },
+  ];
+  DK.ebenen({
+    regeln,
+    nachbauIntro: (PHONE
+      ? "Smartphone: In Power BI Desktop Ansicht › Mobiles Layout öffnen und die Visuals der Berichtsseite untereinander auf die Hochformat-Zeichenfläche ziehen (Breite der Anzeigefläche hier 360 px); Schriftgrade im mobilen Layout getrennt einstellbar. "
+      : "Tablet: Seitengröße benutzerdefiniert 1024 × 646 px (Querformat); die Power-BI-App zeigt die Seite auf dem Tablet so an. Für das Smartphone (Abb. 5.59) dieselben Visuals im mobilen Layout untereinander. ") +
+      "Schrift Arial: Beschriftungen 10,5 pt, Titel 12 pt, Kennzahlen 19,5 pt. Datenmodell: Faktentabelle Vertrieb (Monat, Land, Produktlinie, Umsatz und Ergebnis, Ist und Budget), Tabellen Land (mit Region) und Datum. " +
+      "Measures: Umsatz 12M = CALCULATE([Umsatz]; DATESINPERIOD(Datum[Datum]; MAX(Datum[Datum]); −12; MONTH)); ΔBU % = DIVIDE([Umsatz 12M]; [Budget 12M]) − 1.",
+    nachbau: [
+      { id: "A", ziel: "filter", anker: "links", versatz: PHONE ? [294, -22] : [430, -2], titel: "Datenschnitte", visual: "Datenschnitt (2×)",
+        felder: "Monat (Dropdown, Einzelauswahl; bestimmt das Ende der 12 Monate); Region als Kacheln (Alle, DACH, Übrige)",
+        format: "Höhe mind. 40 px (Touch); ausgewählt #3A3F44 mit weißer Schrift" },
+      { id: "B", ziel: "kpis", anker: "links", versatz: PHONE ? [282, 22] : [440, 22], titel: "Kennzahlen", visual: "Karte (neu) mit zwei Kennzahlen",
+        felder: "Umsatz 12M, Ergebnis 12M; Referenzbeschriftung ΔBU %", format: "Wert 19,5 pt fett; ΔBU über bedingte Formatierung #00806B / #C62828" },
+      { id: "C", ziel: "v-linien", versatz: [0, 0], titel: "Umsatz nach Produktlinie", visual: "Tabelle mit Sparklines",
+        felder: `Zeilen: Produktlinie; Werte: Umsatz 12M (Sparkline über Monat), Umsatz 12M${PHONE ? "" : ", Budget 12M"}, ΔBU %`,
+        format: "Sparkline Linie #3A3F44, Markierung „Letzter“; ΔBU %: Datenbalken (Achse Mitte, positiv #00806B, negativ #C62828); Zeilenabstand groß (Raster › Zeilenabstand)",
+        hinweis: PHONE ? "Die Spalte Budget steht nur auf dem Tablet: für das Smartphone eine schmalere Kopie der Tabelle anlegen, im Weblayout ausblenden und nur ins mobile Layout ziehen." : "" },
+      { id: "D", ziel: "v-laender", versatz: [0, 0], titel: "ABC-Analyse nach Land", visual: "Tabelle",
+        felder: `Land; Umsatz 12M (Datenbalken)${PHONE ? "" : "; Anteil = DIVIDE([Umsatz 12M]; CALCULATE([Umsatz 12M]; ALLSELECTED(Land)))"}; kum. Anteil = Summe der Umsätze aller Länder mit Umsatz ≥ dem eigenen (FILTER(ALLSELECTED(Land[Land]); …)) / Gesamt; Klasse = SWITCH(TRUE(); [kum. Anteil] <= 0,65; "A"; [kum. Anteil] <= 0,8; "B"; "C")${PHONE ? "" : "; Ergebnis 12M"}`,
+        format: "Sortierung nach Umsatz absteigend; Datenbalken #3A3F44 ab 0; Klasse fett",
+        hinweis: "Das größte Land ist immer A, auch wenn es allein mehr als 65 % hat (eigene Regel im Measure)." },
+    ],
+    theme: DK.thema(),
+    csv: { name: "vertrieb_europa.csv", text: () => ["Monat;Land;Region;Produktlinie;Umsatz_Ist_TEUR;Umsatz_Budget_TEUR;Ergebnis_Ist_TEUR;Ergebnis_Budget_TEUR",
+      ...DATA.zeilen.map(([l, p, m, u, b, e, eb]) => [MON[m], LA[l][1], LA[l][2] === "dach" ? "DACH" : "Übrige", LIN[p], u, b, e, eb].join(";"))].join("\r\n") },
+    tabellen: () => {
+      const k = kennzahlen(), ms = fenster();
+      return [
+        { titel: `Kennzahlen, 12 Monate bis ${mKurz(S.ende)}`, kopf: ["Kennzahl", "Ist", "Budget", "ΔBU"],
+          zeilen: [["Umsatz, Mio. €", mio(k.u), mio(k.b), pd(k.u, k.b)], ["Ergebnis, Mio. €", mio(k.e), mio(k.eb), pd(k.e, k.eb)]] },
+        { titel: "Umsatz nach Produktlinie, Mio. €", kopf: ["Produktlinie", "Ist", "Budget", "ΔBU", ...ms.map(m => mName(m).slice(0, 3))],
+          zeilen: datenLinien().map(z => [z.label, mio(z.u), mio(z.b), pd(z.u, z.b), ...z.spark.map(v => mio(v))]) },
+        { titel: "ABC-Analyse nach Land", kopf: ["Land", "Umsatz Tsd. €", "Anteil", "kum. Anteil", "Klasse", "Ergebnis Tsd. €"],
+          zeilen: datenLaender().zeilen.map(x => [x.label, zahl(x.u), pz(x.anteil, 2), pz(x.kum, 2), x.klasse, zahl(x.e)]) },
+      ];
+    },
+  });
+  zeichnen();
+})();
+
+</script>
+</body>
+</html>

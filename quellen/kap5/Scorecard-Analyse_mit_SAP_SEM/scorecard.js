@@ -206,12 +206,15 @@
   function botschaftKarte() {
     if (S.auswahl && S.auswahl.typ === "ziel") {
       const z = ZI[S.auswahl.wert], u = z.ursachen.length, w = z.wirkungen.length;
-      const teile = [u ? `${u} ${u === 1 ? "Ursache" : "Ursachen"}` : "ohne Ursache in der Karte", w ? `wirkt auf ${w === 1 ? ZI[z.wirkungen[0]].name : w + " Ziele"}` : "Endziel"];
-      return passt([`${z.name} (${ST[z.st]}): ${teile.join(", ")}`, `${z.name}: ${teile.join(", ")}`], 412);
+      const ur = u ? `${u} ${u === 1 ? "Ursache" : "Ursachen"}` : "Ausgangsziel";
+      const wi = w ? `wirkt auf ${w === 1 ? ZI[z.wirkungen[0]].name : w + " Ziele"}` : "Endziel";
+      const wk = w ? `wirkt auf ${w} ${w === 1 ? "Ziel" : "Ziele"}` : "Endziel";
+      return passt([`${z.name} (${ST[z.st]}): ${ur}, ${wi}`, `${z.name}: ${ur}, ${wi}`, `${z.name} (${ST[z.st]}): ${ur}, ${wk}`, `${z.name}: ${ur}, ${wk}`], 412);
     }
     const zs = S.auswahl ? ZI.filter(z => z.p === S.auswahl.wert) : ZI, vor = S.auswahl ? P[S.auswahl.wert] + ": " : "";
     const krit = zs.filter(z => z.st === 0);
-    if (!krit.length) return passt([`${vor}kein Ziel kritisch, ${zs.filter(z => z.st >= 2).length} von ${zs.length} erreicht oder übertroffen`, `${vor}kein Ziel kritisch`], 412);
+    if (!krit.length) return passt([zs.length === 1 ? `${vor}kein Ziel kritisch, ${zs[0].name} ${ST[zs[0].st]}`
+      : `${vor}kein Ziel kritisch, ${zs.filter(z => z.st >= 2).length} von ${zs.length} erreicht oder übertroffen`, `${vor}kein Ziel kritisch`], 412);
     const alle = FIN.length && krit.every(z => fuehrtZu(z.i, FIN));
     return passt([`${vor}${krit.length} von ${zs.length} Zielen kritisch: ${krit.map(z => z.name).join(", ")}`,
       `${vor}${krit.length} von ${zs.length} Zielen kritisch${alle && !S.auswahl ? ", alle wirken aufs Ergebnis" : ""}`,

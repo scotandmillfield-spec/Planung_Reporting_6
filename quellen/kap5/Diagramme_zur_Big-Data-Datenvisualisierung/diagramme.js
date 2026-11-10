@@ -330,8 +330,12 @@
   }
   let BLASEN = null;
   function blasen(g) {
-    const sum = D.themen.reduce((a, t) => a + t[1], 0), k = Math.sqrt(W * H * 0.53 / (Math.PI * sum));
-    if (!BLASEN) BLASEN = packen(D.themen.map(([n, v], i) => ({ n, v, i, r: k * Math.sqrt(v) })), W, H);
+    const sum = D.themen.reduce((a, t) => a + t[1], 0);
+    // Dichte 53 %; passt eine Blase nicht, alle Radien um 3 % verkleinern und neu packen
+    for (let dichte = 0.53; !BLASEN || BLASEN.length < D.themen.length; dichte *= 0.94) {
+      const k = Math.sqrt(W * H * dichte / (Math.PI * sum));
+      BLASEN = packen(D.themen.map(([n, v], i) => ({ n, v, i, r: k * Math.sqrt(v) })), W, H);
+    }
     BLASEN.forEach(b => {
       const f = b.i < 2 ? AC : "#D4D4D4", gz = sv("g", {}, g);
       T(sv("circle", { cx: b.x, cy: b.y, r: b.r, fill: f }, gz), [b.n, `${zahl(b.v)} Nennungen · ${pz(b.v / sum, 1)} · Rang ${b.i + 1}`]);
@@ -456,7 +460,7 @@
   function zeichnen() {
     const sel = TYPEN.find(t => t.key === S.typ);
     let unter;
-    if (sel) unter = passt([`${sel.name}: geeignet für ${sel.geeignet}`, `${sel.name}: ${KAT[sel.kat][1]}`], 700);
+    if (sel) unter = passt([`${sel.name}: geeignet für ${sel.geeignet}`, `${sel.name}: ${KAT[sel.kat][1]}`], 960);
     else if (S.kat !== "alle") { const n = TYPEN.filter(t => t.kat === S.kat).length;
       unter = `${KAT[S.kat][0]}: ${n} ${n === 1 ? "Diagrammart" : "Diagrammarten"} für ${KAT[S.kat][1]}`; }
     else unter = "Zwölf Diagrammarten nach Analyseaufgabe · Beispiel eines Online-Händlers, Daten erfunden";

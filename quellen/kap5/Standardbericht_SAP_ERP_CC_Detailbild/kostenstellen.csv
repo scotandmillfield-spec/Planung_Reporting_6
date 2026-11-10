@@ -1,0 +1,745 @@
+﻿Kostenrechnungskreis;Geschaeftsjahr;Version;Kostenstelle;Kostenstelle_Text;Kostenart;Kostenart_Text;Kostenartengruppe;Periode;Istkosten_EUR;Sollkosten_EUR
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;1;20842,26;19874,16
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;2;18268,02;19874,16
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;3;14197,77;19874,16
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;4;16702,31;19874,16
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;5;13112,24;19874,16
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;6;16083,40;19874,16
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;7;15414,83;19874,15
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;8;15013,03;19874,15
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;9;14326,93;19874,15
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;10;17547,54;19874,15
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;11;18795,26;19874,15
+1000;2026;0;1000;Zentrale Dienste;430000;Gehälter;Primärkosten;12;18077,79;19874,15
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;1;0,00;1489,57
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;2;0,00;1489,57
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;3;0,00;1489,57
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;4;0,00;1489,57
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;5;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;6;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;7;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;8;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;9;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;10;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;11;17674,56;1489,56
+1000;2026;0;1000;Zentrale Dienste;435000;Tarifliche Jahresleistung;Primärkosten;12;0,00;1489,56
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;1;3849,59;4084,95
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;2;4274,64;4084,95
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;3;3705,64;4084,95
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;4;3949,04;4084,95
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;5;3280,54;4084,95
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;6;3478,19;4084,94
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;7;4283,92;4084,94
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;8;4154,20;4084,94
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;9;3428,66;4084,94
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;10;3948,72;4084,94
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;11;4282,29;4084,94
+1000;2026;0;1000;Zentrale Dienste;440000;Gesetzliche Sozialaufwendungen;Primärkosten;12;4301,33;4084,94
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;1;53,30;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;2;57,52;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;3;49,70;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;4;51,52;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;5;60,18;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;6;57,81;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;7;39,85;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;8;55,22;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;9;44,73;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;10;43,59;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;11;49,29;53,17
+1000;2026;0;1000;Zentrale Dienste;449000;Sonstige Personalkosten;Primärkosten;12;56,42;53,17
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;1;1926,22;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;2;1677,58;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;3;1982,88;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;4;2318,14;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;5;1912,04;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;6;2357,41;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;7;2055,58;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;8;2394,30;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;9;2352,87;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;10;1861,25;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;11;1812,23;2141,03
+1000;2026;0;1000;Zentrale Dienste;451000;Instandhaltung Gebäude;Primärkosten;12;1870,28;2141,03
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;1;7269,92;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;2;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;3;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;4;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;5;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;6;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;7;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;8;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;9;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;10;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;11;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;466000;Versicherungen;Primärkosten;12;0,00;642,31
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;1;2987,27;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;2;3175,50;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;3;3132,11;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;4;2511,22;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;5;1880,33;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;6;2271,64;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;7;2413,45;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;8;2409,76;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;9;1936,41;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;10;2486,14;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;11;2544,49;2569,24
+1000;2026;0;1000;Zentrale Dienste;470000;Raumkosten;Primärkosten;12;2243,97;2569,24
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;1;2124,59;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;2;1880,05;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;3;1816,46;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;4;2048,60;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;5;2147,14;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;6;2080,37;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;7;1652,87;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;8;2205,98;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;9;2200,12;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;10;2257,41;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;11;2025,93;2141,03
+1000;2026;0;1000;Zentrale Dienste;471000;Maschinenmieten;Primärkosten;12;2163,47;2141,03
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;1;1793,59;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;2;1523,38;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;3;1728,93;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;4;1316,63;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;5;1909,85;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;6;1671,73;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;7;1737,60;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;8;1634,86;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;9;2023,92;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;10;2469,72;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;11;2261,32;1926,93
+1000;2026;0;1000;Zentrale Dienste;473000;Postkosten (ohne Telefon);Primärkosten;12;2256,20;1926,93
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;1;1615,02;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;2;2043,68;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;3;1560,16;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;4;1668,97;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;5;1363,92;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;6;1672,00;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;7;1725,34;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;8;1354,58;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;9;1635,96;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;10;1629,20;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;11;1718,34;1712,83
+1000;2026;0;1000;Zentrale Dienste;476000;Büromaterial;Primärkosten;12;1563,77;1712,83
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;1;466,06;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;2;546,78;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;3;505,30;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;4;403,00;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;5;516,05;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;6;447,50;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;7;457,06;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;8;523,73;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;9;558,65;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;10;535,86;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;11;504,09;513,85
+1000;2026;0;1000;Zentrale Dienste;476100;EDV-Material;Primärkosten;12;386,41;513,85
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;1;725,78;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;2;848,35;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;3;812,90;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;4;764,50;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;5;968,83;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;6;1019,57;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;7;809,29;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;8;748,85;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;9;810,75;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;10;569,36;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;11;833,57;856,41
+1000;2026;0;1000;Zentrale Dienste;476500;Sonstige Verwaltungskosten;Primärkosten;12;1036,31;856,41
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;1;501,26;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;2;507,15;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;3;460,47;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;4;468,46;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;5;560,37;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;6;409,59;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;7;517,88;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;8;473,28;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;9;423,48;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;10;503,22;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;11;533,29;513,85
+1000;2026;0;1000;Zentrale Dienste;476900;Sonstige Kosten;Primärkosten;12;600,56;513,85
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;1;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;2;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;3;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;4;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;5;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;6;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;7;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;8;10670,42;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;9;10670,41;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;10;10670,41;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;11;10670,41;45860,96
+1000;2026;0;1000;Zentrale Dienste;481000;Kalkulatorische Abschreibungen;Primärkosten;12;10670,41;45860,96
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;1;5958,09;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;2;5958,09;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;3;5958,09;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;4;5958,09;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;5;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;6;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;7;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;8;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;9;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;10;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;11;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;483000;Kalkulatorische Zinsen;Primärkosten;12;5958,08;90434,75
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;1;;634,09
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;2;;634,09
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;3;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;4;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;5;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;6;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;7;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;8;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;9;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;10;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;11;;634,08
+1000;2026;0;1000;Zentrale Dienste;618000;Verrechnung EDV (direkt);Sekundärkosten;12;;634,08
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;1;-104970,47;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;2;-133597,00;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;3;-100994,28;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;4;-115027,40;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;5;-115103,23;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;6;-97190,19;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;7;-125009,98;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;8;-109452,12;-117152,47
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;9;-137148,47;-117152,46
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;10;-118736,27;-117152,46
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;11;-134812,15;-117152,46
+1000;2026;0;1000;Zentrale Dienste;632000;Verrechnung Dienstleistungen;Sekundärkosten;12;-113788,04;-117152,46
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;1;342,19;407,94
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;2;279,15;407,94
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;3;262,29;407,94
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;4;278,75;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;5;219,80;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;6;258,40;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;7;260,52;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;8;292,21;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;9;246,85;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;10;242,68;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;11;246,21;407,93
+1000;2026;0;1000;Zentrale Dienste;633000;Verrechnung Kantine;Sekundärkosten;12;270,73;407,93
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;1;6,21;9,55
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;2;7,09;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;3;5,92;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;4;5,62;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;5;5,06;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;6;6,60;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;7;5,34;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;8;8,28;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;9;6,14;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;10;6,89;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;11;6,61;9,54
+1000;2026;0;1000;Zentrale Dienste;634000;Verrechnung Telefoneinheiten;Sekundärkosten;12;5,82;9,54
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;1;93,42;143,88
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;2;103,67;143,88
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;3;97,68;143,88
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;4;103,20;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;5;98,90;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;6;95,42;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;7;74,51;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;8;111,80;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;9;94,20;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;10;92,45;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;11;77,73;143,87
+1000;2026;0;1000;Zentrale Dienste;635000;Verrechnung Telefone;Sekundärkosten;12;96,57;143,87
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;1;15,71;31,83
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;2;20,20;31,83
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;3;22,77;31,83
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;4;23,45;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;5;22,50;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;6;21,74;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;7;20,09;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;8;20,05;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;9;22,32;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;10;21,06;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;11;21,09;31,82
+1000;2026;0;1000;Zentrale Dienste;636000;Verrechnung Fuhrpark;Sekundärkosten;12;19,83;31,82
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;1;716,81;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;2;954,85;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;3;669,96;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;4;710,57;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;5;763,52;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;6;899,69;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;7;674,50;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;8;772,05;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;9;892,02;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;10;845,75;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;11;783,36;1241,25
+1000;2026;0;1000;Zentrale Dienste;637000;Verrechnung Personal;Sekundärkosten;12;744,44;1241,25
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;1;8338,76;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;2;7555,11;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;3;7547,01;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;4;6028,74;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;5;7751,40;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;6;8112,64;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;7;7555,55;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;8;7463,68;8166,67
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;9;9399,16;8166,66
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;10;6863,37;8166,66
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;11;10095,91;8166,66
+1000;2026;0;1100;Personalwesen;430000;Gehälter;Primärkosten;12;9688,67;8166,66
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;1;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;2;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;3;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;4;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;5;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;6;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;7;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;8;0,00;829,17
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;9;0,00;829,16
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;10;0,00;829,16
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;11;9812,40;829,16
+1000;2026;0;1100;Personalwesen;435000;Tarifliche Jahresleistung;Primärkosten;12;0,00;829,16
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;1;3050,63;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;2;2357,52;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;3;2426,99;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;4;2106,31;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;5;2322,08;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;6;2546,07;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;7;3033,31;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;8;3033,63;2571,67
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;9;2702,09;2571,66
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;10;2606,72;2571,66
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;11;2371,37;2571,66
+1000;2026;0;1100;Personalwesen;440000;Gesetzliche Sozialaufwendungen;Primärkosten;12;2648,46;2571,66
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;1;313,66;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;2;322,61;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;3;445,04;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;4;312,13;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;5;400,62;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;6;391,60;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;7;383,48;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;8;278,55;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;9;302,49;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;10;305,07;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;11;440,35;325,00
+1000;2026;0;1100;Personalwesen;449000;Sonstige Personalkosten;Primärkosten;12;415,17;325,00
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;1;277,41;283,34
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;2;250,62;283,34
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;3;264,81;283,34
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;4;255,57;283,34
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;5;298,83;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;6;280,43;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;7;293,21;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;8;267,81;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;9;264,07;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;10;262,50;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;11;184,49;283,33
+1000;2026;0;1100;Personalwesen;451000;Instandhaltung Gebäude;Primärkosten;12;219,15;283,33
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;1;2205,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;2;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;3;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;4;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;5;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;6;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;7;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;8;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;9;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;10;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;11;0,00;183,75
+1000;2026;0;1100;Personalwesen;466000;Versicherungen;Primärkosten;12;0,00;183,75
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;1;1653,70;1535,84
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;2;1414,33;1535,84
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;3;1739,59;1535,84
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;4;1344,10;1535,84
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;5;1719,28;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;6;1862,91;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;7;1303,09;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;8;1561,72;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;9;1617,95;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;10;1151,60;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;11;1363,43;1535,83
+1000;2026;0;1100;Personalwesen;470000;Raumkosten;Primärkosten;12;1700,40;1535,83
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;1;660,23;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;2;470,97;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;3;652,02;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;4;647,89;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;5;513,31;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;6;497,64;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;7;537,33;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;8;705,82;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;9;487,96;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;10;484,38;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;11;605,58;600,00
+1000;2026;0;1100;Personalwesen;473000;Postkosten (ohne Telefon);Primärkosten;12;641,42;600,00
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;1;621,51;658,34
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;2;612,54;658,34
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;3;697,72;658,34
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;4;648,20;658,34
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;5;670,79;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;6;789,55;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;7;678,05;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;8;760,08;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;9;781,57;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;10;638,21;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;11;713,37;658,33
+1000;2026;0;1100;Personalwesen;476000;Büromaterial;Primärkosten;12;700,03;658,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;1;232,63;258,34
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;2;208,52;258,34
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;3;229,15;258,34
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;4;235,96;258,34
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;5;238,75;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;6;247,48;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;7;275,81;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;8;227,67;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;9;250,64;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;10;256,56;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;11;235,66;258,33
+1000;2026;0;1100;Personalwesen;476100;EDV-Material;Primärkosten;12;272,47;258,33
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;1;395,77;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;2;336,18;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;3;459,05;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;4;341,33;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;5;406,87;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;6;511,68;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;7;384,00;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;8;439,87;416,67
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;9;399,99;416,66
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;10;467,92;416,66
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;11;469,00;416,66
+1000;2026;0;1100;Personalwesen;476500;Sonstige Verwaltungskosten;Primärkosten;12;515,82;416,66
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;1;193,50;208,34
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;2;198,26;208,34
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;3;218,30;208,34
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;4;181,12;208,34
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;5;220,45;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;6;207,34;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;7;159,03;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;8;192,79;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;9;189,24;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;10;221,89;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;11;179,89;208,33
+1000;2026;0;1100;Personalwesen;476900;Sonstige Kosten;Primärkosten;12;228,34;208,33
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;1;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;2;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;3;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;4;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;5;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;6;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;7;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;8;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;9;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;10;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;11;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;481000;Kalkulatorische Abschreibungen;Primärkosten;12;1790,00;1790,00
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;1;813,34;813,34
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;2;813,34;813,34
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;3;813,34;813,34
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;4;813,34;813,34
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;5;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;6;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;7;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;8;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;9;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;10;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;11;813,33;813,33
+1000;2026;0;1100;Personalwesen;483000;Kalkulatorische Zinsen;Primärkosten;12;813,33;813,33
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;1;761,85;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;2;1285,10;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;3;1267,92;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;4;1222,13;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;5;934,69;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;6;884,10;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;7;1040,40;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;8;1032,05;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;9;1047,93;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;10;835,03;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;11;940,84;1000,00
+1000;2026;0;1100;Personalwesen;618000;Verrechnung EDV (direkt);Sekundärkosten;12;1135,96;1000,00
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;1;166,07;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;2;186,32;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;3;134,67;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;4;127,38;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;5;190,96;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;6;142,38;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;7;139,54;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;8;165,61;154,17
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;9;168,95;154,16
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;10;175,61;154,16
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;11;138,73;154,16
+1000;2026;0;1100;Personalwesen;633000;Verrechnung Kantine;Sekundärkosten;12;166,13;154,16
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;1;5,41;5,84
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;2;4,89;5,84
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;3;4,99;5,84
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;4;5,01;5,84
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;5;5,22;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;6;5,49;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;7;4,91;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;8;4,73;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;9;3,35;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;10;5,75;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;11;5,87;5,83
+1000;2026;0;1100;Personalwesen;634000;Verrechnung Telefoneinheiten;Sekundärkosten;12;5,58;5,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;1;68,49;65,84
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;2;63,21;65,84
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;3;69,57;65,84
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;4;72,47;65,84
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;5;93,18;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;6;71,22;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;7;72,53;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;8;74,22;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;9;64,85;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;10;55,28;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;11;53,76;65,83
+1000;2026;0;1100;Personalwesen;635000;Verrechnung Telefone;Sekundärkosten;12;59,62;65,83
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;1;-20998,48;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;2;-16531,11;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;3;-17529,90;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;4;-20616,14;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;5;-20081,28;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;6;-16502,75;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;7;-18403,60;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;8;-19861,17;-20032,92
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;9;-17614,57;-20032,91
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;10;-20834,67;-20032,91
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;11;-21791,35;-20032,91
+1000;2026;0;1100;Personalwesen;637000;Verrechnung Personal;Sekundärkosten;12;-24234,98;-20032,91
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;1;13426,84;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;2;9799,74;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;3;15724,02;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;4;9938,33;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;5;12681,08;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;6;14278,21;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;7;11474,77;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;8;10103,55;11666,67
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;9;11456,26;11666,66
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;10;12882,42;11666,66
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;11;12381,08;11666,66
+1000;2026;0;1200;Informationstechnik;430000;Gehälter;Primärkosten;12;8653,70;11666,66
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;1;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;2;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;3;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;4;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;5;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;6;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;7;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;8;0,00;1191,67
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;9;0,00;1191,66
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;10;0,00;1191,66
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;11;14220,00;1191,66
+1000;2026;0;1200;Informationstechnik;435000;Tarifliche Jahresleistung;Primärkosten;12;0,00;1191,66
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;1;3712,54;3283,34
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;2;2722,94;3283,34
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;3;3362,65;3283,34
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;4;3196,75;3283,34
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;5;3093,38;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;6;3460,97;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;7;3719,42;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;8;3806,10;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;9;2939,85;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;10;2662,58;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;11;2875,88;3283,33
+1000;2026;0;1200;Informationstechnik;440000;Gesetzliche Sozialaufwendungen;Primärkosten;12;3397,60;3283,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;1;237,40;208,34
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;2;235,52;208,34
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;3;239,55;208,34
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;4;189,39;208,34
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;5;224,66;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;6;284,54;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;7;254,89;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;8;221,42;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;9;298,23;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;10;237,92;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;11;202,14;208,33
+1000;2026;0;1200;Informationstechnik;449000;Sonstige Personalkosten;Primärkosten;12;254,44;208,33
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;1;358,20;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;2;350,51;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;3;306,54;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;4;341,68;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;5;404,32;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;6;284,32;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;7;342,81;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;8;347,38;366,67
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;9;320,58;366,66
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;10;309,02;366,66
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;11;376,03;366,66
+1000;2026;0;1200;Informationstechnik;451000;Instandhaltung Gebäude;Primärkosten;12;278,61;366,66
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;1;6400,00;533,34
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;2;0,00;533,34
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;3;0,00;533,34
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;4;0,00;533,34
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;5;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;6;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;7;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;8;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;9;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;10;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;11;0,00;533,33
+1000;2026;0;1200;Informationstechnik;466000;Versicherungen;Primärkosten;12;0,00;533,33
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;1;1709,49;1845,84
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;2;1815,50;1845,84
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;3;1731,81;1845,84
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;4;2156,99;1845,84
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;5;2092,90;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;6;1757,63;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;7;1933,88;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;8;1776,96;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;9;1930,77;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;10;1714,42;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;11;1419,88;1845,83
+1000;2026;0;1200;Informationstechnik;470000;Raumkosten;Primärkosten;12;2110,17;1845,83
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;1;4406,87;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;2;3667,99;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;3;3912,38;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;4;4316,48;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;5;3966,58;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;6;4829,78;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;7;4340,66;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;8;3700,57;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;9;3504,11;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;10;4851,66;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;11;3797,23;3900,00
+1000;2026;0;1200;Informationstechnik;471000;Maschinenmieten;Primärkosten;12;3475,94;3900,00
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;1;103,23;108,34
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;2;89,04;108,34
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;3;106,39;108,34
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;4;92,82;108,34
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;5;99,68;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;6;107,25;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;7;93,44;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;8;97,71;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;9;98,41;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;10;78,31;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;11;125,91;108,33
+1000;2026;0;1200;Informationstechnik;473000;Postkosten (ohne Telefon);Primärkosten;12;112,11;108,33
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;1;253,53;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;2;256,82;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;3;227,25;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;4;238,45;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;5;292,50;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;6;290,64;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;7;249,13;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;8;263,48;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;9;259,26;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;10;281,92;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;11;237,69;275,00
+1000;2026;0;1200;Informationstechnik;476000;Büromaterial;Primärkosten;12;270,13;275,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;1;2981,27;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;2;4311,18;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;3;3142,55;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;4;3270,16;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;5;3978,35;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;6;3314,19;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;7;3422,41;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;8;3493,89;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;9;3419,46;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;10;3418,21;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;11;3162,22;3000,00
+1000;2026;0;1200;Informationstechnik;476100;EDV-Material;Primärkosten;12;3471,71;3000,00
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;1;386,93;383,34
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;2;384,13;383,34
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;3;445,45;383,34
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;4;321,27;383,34
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;5;391,65;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;6;410,46;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;7;327,07;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;8;372,81;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;9;268,68;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;10;416,78;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;11;329,41;383,33
+1000;2026;0;1200;Informationstechnik;476500;Sonstige Verwaltungskosten;Primärkosten;12;355,36;383,33
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;1;164,71;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;2;154,01;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;3;166,18;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;4;171,61;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;5;161,01;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;6;145,50;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;7;167,68;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;8;177,79;166,67
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;9;139,55;166,66
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;10;110,54;166,66
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;11;141,26;166,66
+1000;2026;0;1200;Informationstechnik;476900;Sonstige Kosten;Primärkosten;12;180,41;166,66
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;1;8033,34;8033,34
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;2;8033,34;8033,34
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;3;8033,34;8033,34
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;4;8033,34;8033,34
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;5;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;6;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;7;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;8;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;9;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;10;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;11;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;481000;Kalkulatorische Abschreibungen;Primärkosten;12;8033,33;8033,33
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;1;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;2;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;3;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;4;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;5;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;6;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;7;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;8;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;9;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;10;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;11;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;483000;Kalkulatorische Zinsen;Primärkosten;12;1525,00;1525,00
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;1;-42884,10;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;2;-32148,27;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;3;-39669,13;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;4;-32642,41;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;5;-38595,65;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;6;-34936,63;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;7;-36172,42;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;8;-33478,53;-37724,17
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;9;-39198,94;-37724,16
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;10;-44215,09;-37724,16
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;11;-41071,52;-37724,16
+1000;2026;0;1200;Informationstechnik;618000;Verrechnung EDV (direkt);Sekundärkosten;12;-36987,31;-37724,16
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;1;115,62;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;2;119,12;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;3;120,27;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;4;122,62;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;5;118,36;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;6;120,79;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;7;125,17;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;8;96,04;116,67
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;9;123,26;116,66
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;10;110,25;116,66
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;11;97,15;116,66
+1000;2026;0;1200;Informationstechnik;633000;Verrechnung Kantine;Sekundärkosten;12;141,35;116,66
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;1;14,74;15,84
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;2;18,68;15,84
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;3;17,67;15,84
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;4;17,97;15,84
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;5;15,53;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;6;19,08;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;7;17,00;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;8;15,32;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;9;17,75;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;10;19,33;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;11;18,63;15,83
+1000;2026;0;1200;Informationstechnik;634000;Verrechnung Telefoneinheiten;Sekundärkosten;12;18,70;15,83
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;1;179,42;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;2;181,42;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;3;209,99;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;4;174,20;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;5;180,72;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;6;183,22;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;7;157,97;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;8;152,16;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;9;194,48;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;10;156,00;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;11;186,04;162,50
+1000;2026;0;1200;Informationstechnik;635000;Verrechnung Telefone;Sekundärkosten;12;160,28;162,50
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;1;78,89;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;2;78,58;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;3;102,82;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;4;61,80;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;5;83,30;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;6;84,92;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;7;93,30;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;8;86,76;91,67
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;9;75,62;91,66
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;10;75,88;91,66
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;11;75,03;91,66
+1000;2026;0;1200;Informationstechnik;636000;Verrechnung Fuhrpark;Sekundärkosten;12;83,10;91,66
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;1;445,70;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;2;558,72;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;3;546,51;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;4;539,47;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;5;480,19;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;6;512,25;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;7;390,72;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;8;429,18;516,67
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;9;492,64;516,66
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;10;513,13;516,66
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;11;512,20;516,66
+1000;2026;0;1200;Informationstechnik;637000;Verrechnung Personal;Sekundärkosten;12;589,29;516,66

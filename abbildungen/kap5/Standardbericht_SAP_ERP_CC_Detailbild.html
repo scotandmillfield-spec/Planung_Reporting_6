@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kostenstellen: Ist/Soll/Abweichung</title>
+<style>
+/* dashkit.css – einheitliche Buch-Dashboards (6. Auflage)
+   Seite 1024 x 646 px = 155 x 97,8 mm im Druck; 14 px entsprechen dort 6,0 pt (Untergrenze). */
+:root {
+  --ac: #3A3F44;          /* Ist (Actual) – Anthrazit wie in den Abbildungen */
+  --fc: #8F8F8F;          /* Vorschau/Forecast – Mittelgrau (Schraffur ist in Standard-Visuals nicht möglich) */
+  --py: #C9C9C9;          /* Vorjahr – Hellgrau */
+  --pl: #FFFFFF;          /* Plan – weiß mit Anthrazit-Kontur */
+  --gut: #00806B;         /* günstige Abweichung – Blaugrün */
+  --schlecht: #C62828;    /* ungünstige Abweichung – Rot der Abbildungen */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --linie: #D9D9D9;       /* Haarlinien */
+  --flaeche: #F6F6F6;     /* Bandfläche der Abbildungen */
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+body[data-gut="gruen"] { --gut: #2E7D32; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste (nicht im Druck) ---------- */
+.dk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.dk-leiste .dk-leiste-titel { font-weight: bold; margin-right: auto; }
+.dk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid #9A9A9A; border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.dk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .dk-leiste, body.print .dk-panel { display: none !important; }
+
+.dk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .dk-buehne { position: static; overflow: visible; }
+.dk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .dk-rahmen { margin: 0; box-shadow: none; }
+
+/* ---------- Berichtsseite ---------- */
+.dk-seite { position: relative; width: 1024px; height: 646px; background: #FFFFFF; transform-origin: 0 0;
+  font-size: 14px; line-height: 1.2; overflow: hidden; }
+.dk-abs { position: absolute; }
+.dk-haar { position: absolute; left: 16px; right: 16px; height: 0; border-top: 1px solid var(--linie); }
+
+/* Kopf */
+.dk-titel { font-size: 22px; font-weight: bold; }
+.dk-untertitel, .dk-quelle { font-size: 14px; color: var(--muted); }
+.dk-legende { display: flex; gap: 14px; justify-content: flex-end; font-size: 14px; color: var(--muted); }
+.dk-legende span { display: inline-flex; align-items: center; gap: 5px; }
+.dk-legende i { display: inline-block; width: 12px; height: 12px; }
+
+/* Datenschnitte */
+.dk-filter { display: flex; align-items: flex-end; gap: 24px; }
+.dk-filter .dk-schnitt { display: flex; flex-direction: column; gap: 3px; }
+.dk-filter .dk-schnitt > label { font-size: 14px; color: var(--muted); }
+.dk-filter .dk-rechts { margin-left: auto; }
+.dk-knoepfe { display: flex; }
+.dk-knoepfe button { font: inherit; font-size: 14px; height: 30px; min-width: 54px; padding: 0 12px;
+  background: #FFFFFF; color: var(--text); border: 1px solid #9A9A9A; margin-left: -1px; cursor: pointer; }
+.dk-knoepfe button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.dk-knoepfe button:last-child { border-radius: 0 3px 3px 0; }
+.dk-knoepfe button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF;
+  position: relative; z-index: 1; }
+.dk-filter select { font: inherit; font-size: 14px; height: 30px; padding: 0 8px; color: var(--text);
+  background: #FFFFFF; border: 1px solid #9A9A9A; border-radius: 3px; }
+
+/* KPI-Leiste (Karte mit Referenzbeschriftung) */
+.dk-kpis { display: flex; }
+.dk-kpi { flex: 1 1 0; padding: 0 12px; border-left: 1px solid var(--linie); }
+.dk-kpi:first-child { border-left: none; padding-left: 0; }
+.dk-kpi-label { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.dk-kpi-wert { font-size: 26px; font-weight: bold; margin: 3px 0 2px; white-space: nowrap; }
+.dk-kpi-delta { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.gut { color: var(--gut); } .schlecht { color: var(--schlecht); } .neutral { color: var(--text); }
+.dk-kpi-delta b { font-weight: bold; }
+.dk-kpi-einheit { font-size: 14px; font-weight: normal; color: var(--muted); margin-left: 4px; }
+
+/* Visual */
+.dk-visual-titel { font-size: 16px; font-weight: bold; white-space: nowrap; }
+.dk-visual-titel .dk-einheit { font-weight: normal; color: var(--muted); }
+.dk-botschaft { font-size: 14px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+.dk-visual svg { display: block; overflow: visible; }
+.dk-visual svg text { font-family: var(--schrift); font-size: 14px; fill: var(--text); }
+.dk-visual svg text.muted { fill: var(--muted); }
+.dk-klick { cursor: pointer; }
+.dk-blass { opacity: .32; }
+.dk-titelzeile { display: flex; align-items: baseline; gap: 10px; }
+.dk-titelzeile .dk-knoepfe { margin-left: auto; }
+.dk-titelzeile .dk-knoepfe button { height: 24px; min-width: 0; padding: 0 8px; }
+
+/* Matrix */
+table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
+.dk-matrix th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 8px 4px;
+  border-bottom: 1px solid var(--ac); white-space: nowrap; }
+.dk-matrix th:first-child, .dk-matrix td:first-child { text-align: left; padding-left: 0; }
+.dk-matrix td { text-align: right; padding: 0 8px; height: 21px; white-space: nowrap;
+  font-variant-numeric: tabular-nums; border-bottom: 1px solid #EFEFEF; }
+.dk-matrix tr.dk-summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+.dk-matrix tbody tr.dk-zeile { cursor: pointer; }
+.dk-matrix tbody tr.dk-zeile:hover td { background: var(--flaeche); }
+.dk-matrix tr.dk-blass td { opacity: .32; }
+.dk-matrix tr.dk-trenner td { border-bottom-color: #9A9A9A; }
+.dk-matrix td.dk-dbalken { padding: 0 4px; }
+.dk-matrix th.dk-sortierbar { cursor: pointer; }
+.dk-matrix th.dk-sortierbar:hover { color: var(--text); text-decoration: underline; }
+
+/* Tooltip */
+.dk-tooltip { position: fixed; pointer-events: none; background: #FFFFFF; border: 1px solid #9A9A9A;
+  border-radius: 3px; padding: 6px 8px; font-size: 13px; line-height: 1.35; color: var(--text); z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15); display: none; max-width: 280px; }
+.dk-tooltip b { font-size: 14px; display: block; margin-bottom: 2px; }
+
+/* Ebenen der Lernplattform */
+.dk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.dk-marke.nachbau { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.dk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.dk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.dk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.dk-panel .dk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.dk-panel .dk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); }
+.dk-panel .dk-eintrag.aktiv { background: var(--flaeche); margin: 0 -18px; padding: 10px 18px; }
+.dk-panel .dk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.dk-panel .dk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.dk-panel dl { margin: 6px 0 0; display: grid; grid-template-columns: 92px 1fr; gap: 3px 8px; }
+.dk-panel dt { color: var(--muted); }
+.dk-panel dd { margin: 0; }
+.dk-panel code { font-size: 12.5px; background: var(--flaeche); padding: 0 3px; }
+.dk-tabelle-ansicht { position: absolute; inset: 44px 0 0 0; overflow: auto; background: #FFFFFF; }
+.dk-tabelle-ansicht table { border-collapse: collapse; font-size: 14px; }
+.dk-tabelle-ansicht td, .dk-tabelle-ansicht th { padding: 2px 8px; text-align: right; border-bottom: 1px solid #EFEFEF; }
+.dk-tabelle-ansicht th { font-weight: normal; color: var(--muted); border-bottom: 1px solid var(--ac); }
+.dk-tabelle-ansicht td:first-child, .dk-tabelle-ansicht th:first-child { text-align: left; }
+
+</style>
+</head>
+<body>
+<script>const DATA = {"jahr":2026,"stand":"15.01.2027","krk":["1000","Inland"],"version":["0","Plan/Ist-Version"],"kostenstellen":[["1000","Zentrale Dienste","Frau Brandt"],["1100","Personalwesen","Herr Tal"],["1200","Informationstechnik","Frau Wendt"]],"kostenarten":[["430000","Gehälter","P","im Original auf der nicht gezeigten Seite 1 des Berichts"],["435000","Tarifliche Jahresleistung","P","Jahressonderzahlung nach Tarif"],["440000","Gesetzliche Sozialaufwendungen","P","Arbeitgeberanteile zur Sozialversicherung"],["449000","Sonstige Personalkosten","P","z. B. Weiterbildung, Zuschüsse"],["451000","Instandhaltung Gebäude","P",""],["466000","Versicherungen","P","Jahresprämie, im Januar gebucht"],["470000","Raumkosten","P",""],["471000","Maschinenmieten","P",""],["473000","Postkosten (ohne Telefon)","P",""],["476000","Büromaterial","P",""],["476100","EDV-Material","P",""],["476500","Sonstige Verwaltungskosten","P",""],["476900","Sonstige Kosten","P",""],["481000","Kalkulatorische Abschreibungen","P","kalkulatorische Kosten, monatlich abgegrenzt"],["483000","Kalkulatorische Zinsen","P","kalkulatorische Kosten, monatlich abgegrenzt"],["618000","Verrechnung EDV (direkt)","S","direkte innerbetriebliche Leistungsverrechnung"],["632000","Verrechnung Dienstleistungen","S","indirekte innerbetriebliche Leistungsverrechnung"],["633000","Verrechnung Kantine","S","indirekte innerbetriebliche Leistungsverrechnung"],["634000","Verrechnung Telefoneinheiten","S","indirekte innerbetriebliche Leistungsverrechnung"],["635000","Verrechnung Telefone","S","indirekte innerbetriebliche Leistungsverrechnung"],["636000","Verrechnung Fuhrpark","S","indirekte innerbetriebliche Leistungsverrechnung"],["637000","Verrechnung Personal","S","indirekte innerbetriebliche Leistungsverrechnung"]],"werte":[[0,0,1,2084226,1987416],[0,0,2,1826802,1987416],[0,0,3,1419777,1987416],[0,0,4,1670231,1987416],[0,0,5,1311224,1987416],[0,0,6,1608340,1987416],[0,0,7,1541483,1987415],[0,0,8,1501303,1987415],[0,0,9,1432693,1987415],[0,0,10,1754754,1987415],[0,0,11,1879526,1987415],[0,0,12,1807779,1987415],[0,1,1,0,148957],[0,1,2,0,148957],[0,1,3,0,148957],[0,1,4,0,148957],[0,1,5,0,148956],[0,1,6,0,148956],[0,1,7,0,148956],[0,1,8,0,148956],[0,1,9,0,148956],[0,1,10,0,148956],[0,1,11,1767456,148956],[0,1,12,0,148956],[0,2,1,384959,408495],[0,2,2,427464,408495],[0,2,3,370564,408495],[0,2,4,394904,408495],[0,2,5,328054,408495],[0,2,6,347819,408494],[0,2,7,428392,408494],[0,2,8,415420,408494],[0,2,9,342866,408494],[0,2,10,394872,408494],[0,2,11,428229,408494],[0,2,12,430133,408494],[0,3,1,5330,5317],[0,3,2,5752,5317],[0,3,3,4970,5317],[0,3,4,5152,5317],[0,3,5,6018,5317],[0,3,6,5781,5317],[0,3,7,3985,5317],[0,3,8,5522,5317],[0,3,9,4473,5317],[0,3,10,4359,5317],[0,3,11,4929,5317],[0,3,12,5642,5317],[0,4,1,192622,214103],[0,4,2,167758,214103],[0,4,3,198288,214103],[0,4,4,231814,214103],[0,4,5,191204,214103],[0,4,6,235741,214103],[0,4,7,205558,214103],[0,4,8,239430,214103],[0,4,9,235287,214103],[0,4,10,186125,214103],[0,4,11,181223,214103],[0,4,12,187028,214103],[0,5,1,726992,64231],[0,5,2,0,64231],[0,5,3,0,64231],[0,5,4,0,64231],[0,5,5,0,64231],[0,5,6,0,64231],[0,5,7,0,64231],[0,5,8,0,64231],[0,5,9,0,64231],[0,5,10,0,64231],[0,5,11,0,64231],[0,5,12,0,64231],[0,6,1,298727,256924],[0,6,2,317550,256924],[0,6,3,313211,256924],[0,6,4,251122,256924],[0,6,5,188033,256924],[0,6,6,227164,256924],[0,6,7,241345,256924],[0,6,8,240976,256924],[0,6,9,193641,256924],[0,6,10,248614,256924],[0,6,11,254449,256924],[0,6,12,224397,256924],[0,7,1,212459,214103],[0,7,2,188005,214103],[0,7,3,181646,214103],[0,7,4,204860,214103],[0,7,5,214714,214103],[0,7,6,208037,214103],[0,7,7,165287,214103],[0,7,8,220598,214103],[0,7,9,220012,214103],[0,7,10,225741,214103],[0,7,11,202593,214103],[0,7,12,216347,214103],[0,8,1,179359,192693],[0,8,2,152338,192693],[0,8,3,172893,192693],[0,8,4,131663,192693],[0,8,5,190985,192693],[0,8,6,167173,192693],[0,8,7,173760,192693],[0,8,8,163486,192693],[0,8,9,202392,192693],[0,8,10,246972,192693],[0,8,11,226132,192693],[0,8,12,225620,192693],[0,9,1,161502,171283],[0,9,2,204368,171283],[0,9,3,156016,171283],[0,9,4,166897,171283],[0,9,5,136392,171283],[0,9,6,167200,171283],[0,9,7,172534,171283],[0,9,8,135458,171283],[0,9,9,163596,171283],[0,9,10,162920,171283],[0,9,11,171834,171283],[0,9,12,156377,171283],[0,10,1,46606,51385],[0,10,2,54678,51385],[0,10,3,50530,51385],[0,10,4,40300,51385],[0,10,5,51605,51385],[0,10,6,44750,51385],[0,10,7,45706,51385],[0,10,8,52373,51385],[0,10,9,55865,51385],[0,10,10,53586,51385],[0,10,11,50409,51385],[0,10,12,38641,51385],[0,11,1,72578,85641],[0,11,2,84835,85641],[0,11,3,81290,85641],[0,11,4,76450,85641],[0,11,5,96883,85641],[0,11,6,101957,85641],[0,11,7,80929,85641],[0,11,8,74885,85641],[0,11,9,81075,85641],[0,11,10,56936,85641],[0,11,11,83357,85641],[0,11,12,103631,85641],[0,12,1,50126,51385],[0,12,2,50715,51385],[0,12,3,46047,51385],[0,12,4,46846,51385],[0,12,5,56037,51385],[0,12,6,40959,51385],[0,12,7,51788,51385],[0,12,8,47328,51385],[0,12,9,42348,51385],[0,12,10,50322,51385],[0,12,11,53329,51385],[0,12,12,60056,51385],[0,13,1,1067042,4586096],[0,13,2,1067042,4586096],[0,13,3,1067042,4586096],[0,13,4,1067042,4586096],[0,13,5,1067042,4586096],[0,13,6,1067042,4586096],[0,13,7,1067042,4586096],[0,13,8,1067042,4586096],[0,13,9,1067041,4586096],[0,13,10,1067041,4586096],[0,13,11,1067041,4586096],[0,13,12,1067041,4586096],[0,14,1,595809,9043475],[0,14,2,595809,9043475],[0,14,3,595809,9043475],[0,14,4,595809,9043475],[0,14,5,595808,9043475],[0,14,6,595808,9043475],[0,14,7,595808,9043475],[0,14,8,595808,9043475],[0,14,9,595808,9043475],[0,14,10,595808,9043475],[0,14,11,595808,9043475],[0,14,12,595808,9043475],[0,15,1,null,63409],[0,15,2,null,63409],[0,15,3,null,63408],[0,15,4,null,63408],[0,15,5,null,63408],[0,15,6,null,63408],[0,15,7,null,63408],[0,15,8,null,63408],[0,15,9,null,63408],[0,15,10,null,63408],[0,15,11,null,63408],[0,15,12,null,63408],[0,16,1,-10497047,-11715247],[0,16,2,-13359700,-11715247],[0,16,3,-10099428,-11715247],[0,16,4,-11502740,-11715247],[0,16,5,-11510323,-11715247],[0,16,6,-9719019,-11715247],[0,16,7,-12500998,-11715247],[0,16,8,-10945212,-11715247],[0,16,9,-13714847,-11715246],[0,16,10,-11873627,-11715246],[0,16,11,-13481215,-11715246],[0,16,12,-11378804,-11715246],[0,17,1,34219,40794],[0,17,2,27915,40794],[0,17,3,26229,40794],[0,17,4,27875,40793],[0,17,5,21980,40793],[0,17,6,25840,40793],[0,17,7,26052,40793],[0,17,8,29221,40793],[0,17,9,24685,40793],[0,17,10,24268,40793],[0,17,11,24621,40793],[0,17,12,27073,40793],[0,18,1,621,955],[0,18,2,709,954],[0,18,3,592,954],[0,18,4,562,954],[0,18,5,506,954],[0,18,6,660,954],[0,18,7,534,954],[0,18,8,828,954],[0,18,9,614,954],[0,18,10,689,954],[0,18,11,661,954],[0,18,12,582,954],[0,19,1,9342,14388],[0,19,2,10367,14388],[0,19,3,9768,14388],[0,19,4,10320,14387],[0,19,5,9890,14387],[0,19,6,9542,14387],[0,19,7,7451,14387],[0,19,8,11180,14387],[0,19,9,9420,14387],[0,19,10,9245,14387],[0,19,11,7773,14387],[0,19,12,9657,14387],[0,20,1,1571,3183],[0,20,2,2020,3183],[0,20,3,2277,3183],[0,20,4,2345,3182],[0,20,5,2250,3182],[0,20,6,2174,3182],[0,20,7,2009,3182],[0,20,8,2005,3182],[0,20,9,2232,3182],[0,20,10,2106,3182],[0,20,11,2109,3182],[0,20,12,1983,3182],[0,21,1,71681,124125],[0,21,2,95485,124125],[0,21,3,66996,124125],[0,21,4,71057,124125],[0,21,5,76352,124125],[0,21,6,89969,124125],[0,21,7,67450,124125],[0,21,8,77205,124125],[0,21,9,89202,124125],[0,21,10,84575,124125],[0,21,11,78336,124125],[0,21,12,74444,124125],[1,0,1,833876,816667],[1,0,2,755511,816667],[1,0,3,754701,816667],[1,0,4,602874,816667],[1,0,5,775140,816667],[1,0,6,811264,816667],[1,0,7,755555,816667],[1,0,8,746368,816667],[1,0,9,939916,816666],[1,0,10,686337,816666],[1,0,11,1009591,816666],[1,0,12,968867,816666],[1,1,1,0,82917],[1,1,2,0,82917],[1,1,3,0,82917],[1,1,4,0,82917],[1,1,5,0,82917],[1,1,6,0,82917],[1,1,7,0,82917],[1,1,8,0,82917],[1,1,9,0,82916],[1,1,10,0,82916],[1,1,11,981240,82916],[1,1,12,0,82916],[1,2,1,305063,257167],[1,2,2,235752,257167],[1,2,3,242699,257167],[1,2,4,210631,257167],[1,2,5,232208,257167],[1,2,6,254607,257167],[1,2,7,303331,257167],[1,2,8,303363,257167],[1,2,9,270209,257166],[1,2,10,260672,257166],[1,2,11,237137,257166],[1,2,12,264846,257166],[1,3,1,31366,32500],[1,3,2,32261,32500],[1,3,3,44504,32500],[1,3,4,31213,32500],[1,3,5,40062,32500],[1,3,6,39160,32500],[1,3,7,38348,32500],[1,3,8,27855,32500],[1,3,9,30249,32500],[1,3,10,30507,32500],[1,3,11,44035,32500],[1,3,12,41517,32500],[1,4,1,27741,28334],[1,4,2,25062,28334],[1,4,3,26481,28334],[1,4,4,25557,28334],[1,4,5,29883,28333],[1,4,6,28043,28333],[1,4,7,29321,28333],[1,4,8,26781,28333],[1,4,9,26407,28333],[1,4,10,26250,28333],[1,4,11,18449,28333],[1,4,12,21915,28333],[1,5,1,220500,18375],[1,5,2,0,18375],[1,5,3,0,18375],[1,5,4,0,18375],[1,5,5,0,18375],[1,5,6,0,18375],[1,5,7,0,18375],[1,5,8,0,18375],[1,5,9,0,18375],[1,5,10,0,18375],[1,5,11,0,18375],[1,5,12,0,18375],[1,6,1,165370,153584],[1,6,2,141433,153584],[1,6,3,173959,153584],[1,6,4,134410,153584],[1,6,5,171928,153583],[1,6,6,186291,153583],[1,6,7,130309,153583],[1,6,8,156172,153583],[1,6,9,161795,153583],[1,6,10,115160,153583],[1,6,11,136343,153583],[1,6,12,170040,153583],[1,8,1,66023,60000],[1,8,2,47097,60000],[1,8,3,65202,60000],[1,8,4,64789,60000],[1,8,5,51331,60000],[1,8,6,49764,60000],[1,8,7,53733,60000],[1,8,8,70582,60000],[1,8,9,48796,60000],[1,8,10,48438,60000],[1,8,11,60558,60000],[1,8,12,64142,60000],[1,9,1,62151,65834],[1,9,2,61254,65834],[1,9,3,69772,65834],[1,9,4,64820,65834],[1,9,5,67079,65833],[1,9,6,78955,65833],[1,9,7,67805,65833],[1,9,8,76008,65833],[1,9,9,78157,65833],[1,9,10,63821,65833],[1,9,11,71337,65833],[1,9,12,70003,65833],[1,10,1,23263,25834],[1,10,2,20852,25834],[1,10,3,22915,25834],[1,10,4,23596,25834],[1,10,5,23875,25833],[1,10,6,24748,25833],[1,10,7,27581,25833],[1,10,8,22767,25833],[1,10,9,25064,25833],[1,10,10,25656,25833],[1,10,11,23566,25833],[1,10,12,27247,25833],[1,11,1,39577,41667],[1,11,2,33618,41667],[1,11,3,45905,41667],[1,11,4,34133,41667],[1,11,5,40687,41667],[1,11,6,51168,41667],[1,11,7,38400,41667],[1,11,8,43987,41667],[1,11,9,39999,41666],[1,11,10,46792,41666],[1,11,11,46900,41666],[1,11,12,51582,41666],[1,12,1,19350,20834],[1,12,2,19826,20834],[1,12,3,21830,20834],[1,12,4,18112,20834],[1,12,5,22045,20833],[1,12,6,20734,20833],[1,12,7,15903,20833],[1,12,8,19279,20833],[1,12,9,18924,20833],[1,12,10,22189,20833],[1,12,11,17989,20833],[1,12,12,22834,20833],[1,13,1,179000,179000],[1,13,2,179000,179000],[1,13,3,179000,179000],[1,13,4,179000,179000],[1,13,5,179000,179000],[1,13,6,179000,179000],[1,13,7,179000,179000],[1,13,8,179000,179000],[1,13,9,179000,179000],[1,13,10,179000,179000],[1,13,11,179000,179000],[1,13,12,179000,179000],[1,14,1,81334,81334],[1,14,2,81334,81334],[1,14,3,81334,81334],[1,14,4,81334,81334],[1,14,5,81333,81333],[1,14,6,81333,81333],[1,14,7,81333,81333],[1,14,8,81333,81333],[1,14,9,81333,81333],[1,14,10,81333,81333],[1,14,11,81333,81333],[1,14,12,81333,81333],[1,15,1,76185,100000],[1,15,2,128510,100000],[1,15,3,126792,100000],[1,15,4,122213,100000],[1,15,5,93469,100000],[1,15,6,88410,100000],[1,15,7,104040,100000],[1,15,8,103205,100000],[1,15,9,104793,100000],[1,15,10,83503,100000],[1,15,11,94084,100000],[1,15,12,113596,100000],[1,17,1,16607,15417],[1,17,2,18632,15417],[1,17,3,13467,15417],[1,17,4,12738,15417],[1,17,5,19096,15417],[1,17,6,14238,15417],[1,17,7,13954,15417],[1,17,8,16561,15417],[1,17,9,16895,15416],[1,17,10,17561,15416],[1,17,11,13873,15416],[1,17,12,16613,15416],[1,18,1,541,584],[1,18,2,489,584],[1,18,3,499,584],[1,18,4,501,584],[1,18,5,522,583],[1,18,6,549,583],[1,18,7,491,583],[1,18,8,473,583],[1,18,9,335,583],[1,18,10,575,583],[1,18,11,587,583],[1,18,12,558,583],[1,19,1,6849,6584],[1,19,2,6321,6584],[1,19,3,6957,6584],[1,19,4,7247,6584],[1,19,5,9318,6583],[1,19,6,7122,6583],[1,19,7,7253,6583],[1,19,8,7422,6583],[1,19,9,6485,6583],[1,19,10,5528,6583],[1,19,11,5376,6583],[1,19,12,5962,6583],[1,21,1,-2099848,-2003292],[1,21,2,-1653111,-2003292],[1,21,3,-1752990,-2003292],[1,21,4,-2061614,-2003292],[1,21,5,-2008128,-2003292],[1,21,6,-1650275,-2003292],[1,21,7,-1840360,-2003292],[1,21,8,-1986117,-2003292],[1,21,9,-1761457,-2003291],[1,21,10,-2083467,-2003291],[1,21,11,-2179135,-2003291],[1,21,12,-2423498,-2003291],[2,0,1,1342684,1166667],[2,0,2,979974,1166667],[2,0,3,1572402,1166667],[2,0,4,993833,1166667],[2,0,5,1268108,1166667],[2,0,6,1427821,1166667],[2,0,7,1147477,1166667],[2,0,8,1010355,1166667],[2,0,9,1145626,1166666],[2,0,10,1288242,1166666],[2,0,11,1238108,1166666],[2,0,12,865370,1166666],[2,1,1,0,119167],[2,1,2,0,119167],[2,1,3,0,119167],[2,1,4,0,119167],[2,1,5,0,119167],[2,1,6,0,119167],[2,1,7,0,119167],[2,1,8,0,119167],[2,1,9,0,119166],[2,1,10,0,119166],[2,1,11,1422000,119166],[2,1,12,0,119166],[2,2,1,371254,328334],[2,2,2,272294,328334],[2,2,3,336265,328334],[2,2,4,319675,328334],[2,2,5,309338,328333],[2,2,6,346097,328333],[2,2,7,371942,328333],[2,2,8,380610,328333],[2,2,9,293985,328333],[2,2,10,266258,328333],[2,2,11,287588,328333],[2,2,12,339760,328333],[2,3,1,23740,20834],[2,3,2,23552,20834],[2,3,3,23955,20834],[2,3,4,18939,20834],[2,3,5,22466,20833],[2,3,6,28454,20833],[2,3,7,25489,20833],[2,3,8,22142,20833],[2,3,9,29823,20833],[2,3,10,23792,20833],[2,3,11,20214,20833],[2,3,12,25444,20833],[2,4,1,35820,36667],[2,4,2,35051,36667],[2,4,3,30654,36667],[2,4,4,34168,36667],[2,4,5,40432,36667],[2,4,6,28432,36667],[2,4,7,34281,36667],[2,4,8,34738,36667],[2,4,9,32058,36666],[2,4,10,30902,36666],[2,4,11,37603,36666],[2,4,12,27861,36666],[2,5,1,640000,53334],[2,5,2,0,53334],[2,5,3,0,53334],[2,5,4,0,53334],[2,5,5,0,53333],[2,5,6,0,53333],[2,5,7,0,53333],[2,5,8,0,53333],[2,5,9,0,53333],[2,5,10,0,53333],[2,5,11,0,53333],[2,5,12,0,53333],[2,6,1,170949,184584],[2,6,2,181550,184584],[2,6,3,173181,184584],[2,6,4,215699,184584],[2,6,5,209290,184583],[2,6,6,175763,184583],[2,6,7,193388,184583],[2,6,8,177696,184583],[2,6,9,193077,184583],[2,6,10,171442,184583],[2,6,11,141988,184583],[2,6,12,211017,184583],[2,7,1,440687,390000],[2,7,2,366799,390000],[2,7,3,391238,390000],[2,7,4,431648,390000],[2,7,5,396658,390000],[2,7,6,482978,390000],[2,7,7,434066,390000],[2,7,8,370057,390000],[2,7,9,350411,390000],[2,7,10,485166,390000],[2,7,11,379723,390000],[2,7,12,347594,390000],[2,8,1,10323,10834],[2,8,2,8904,10834],[2,8,3,10639,10834],[2,8,4,9282,10834],[2,8,5,9968,10833],[2,8,6,10725,10833],[2,8,7,9344,10833],[2,8,8,9771,10833],[2,8,9,9841,10833],[2,8,10,7831,10833],[2,8,11,12591,10833],[2,8,12,11211,10833],[2,9,1,25353,27500],[2,9,2,25682,27500],[2,9,3,22725,27500],[2,9,4,23845,27500],[2,9,5,29250,27500],[2,9,6,29064,27500],[2,9,7,24913,27500],[2,9,8,26348,27500],[2,9,9,25926,27500],[2,9,10,28192,27500],[2,9,11,23769,27500],[2,9,12,27013,27500],[2,10,1,298127,300000],[2,10,2,431118,300000],[2,10,3,314255,300000],[2,10,4,327016,300000],[2,10,5,397835,300000],[2,10,6,331419,300000],[2,10,7,342241,300000],[2,10,8,349389,300000],[2,10,9,341946,300000],[2,10,10,341821,300000],[2,10,11,316222,300000],[2,10,12,347171,300000],[2,11,1,38693,38334],[2,11,2,38413,38334],[2,11,3,44545,38334],[2,11,4,32127,38334],[2,11,5,39165,38333],[2,11,6,41046,38333],[2,11,7,32707,38333],[2,11,8,37281,38333],[2,11,9,26868,38333],[2,11,10,41678,38333],[2,11,11,32941,38333],[2,11,12,35536,38333],[2,12,1,16471,16667],[2,12,2,15401,16667],[2,12,3,16618,16667],[2,12,4,17161,16667],[2,12,5,16101,16667],[2,12,6,14550,16667],[2,12,7,16768,16667],[2,12,8,17779,16667],[2,12,9,13955,16666],[2,12,10,11054,16666],[2,12,11,14126,16666],[2,12,12,18041,16666],[2,13,1,803334,803334],[2,13,2,803334,803334],[2,13,3,803334,803334],[2,13,4,803334,803334],[2,13,5,803333,803333],[2,13,6,803333,803333],[2,13,7,803333,803333],[2,13,8,803333,803333],[2,13,9,803333,803333],[2,13,10,803333,803333],[2,13,11,803333,803333],[2,13,12,803333,803333],[2,14,1,152500,152500],[2,14,2,152500,152500],[2,14,3,152500,152500],[2,14,4,152500,152500],[2,14,5,152500,152500],[2,14,6,152500,152500],[2,14,7,152500,152500],[2,14,8,152500,152500],[2,14,9,152500,152500],[2,14,10,152500,152500],[2,14,11,152500,152500],[2,14,12,152500,152500],[2,15,1,-4288410,-3772417],[2,15,2,-3214827,-3772417],[2,15,3,-3966913,-3772417],[2,15,4,-3264241,-3772417],[2,15,5,-3859565,-3772417],[2,15,6,-3493663,-3772417],[2,15,7,-3617242,-3772417],[2,15,8,-3347853,-3772417],[2,15,9,-3919894,-3772416],[2,15,10,-4421509,-3772416],[2,15,11,-4107152,-3772416],[2,15,12,-3698731,-3772416],[2,17,1,11562,11667],[2,17,2,11912,11667],[2,17,3,12027,11667],[2,17,4,12262,11667],[2,17,5,11836,11667],[2,17,6,12079,11667],[2,17,7,12517,11667],[2,17,8,9604,11667],[2,17,9,12326,11666],[2,17,10,11025,11666],[2,17,11,9715,11666],[2,17,12,14135,11666],[2,18,1,1474,1584],[2,18,2,1868,1584],[2,18,3,1767,1584],[2,18,4,1797,1584],[2,18,5,1553,1583],[2,18,6,1908,1583],[2,18,7,1700,1583],[2,18,8,1532,1583],[2,18,9,1775,1583],[2,18,10,1933,1583],[2,18,11,1863,1583],[2,18,12,1870,1583],[2,19,1,17942,16250],[2,19,2,18142,16250],[2,19,3,20999,16250],[2,19,4,17420,16250],[2,19,5,18072,16250],[2,19,6,18322,16250],[2,19,7,15797,16250],[2,19,8,15216,16250],[2,19,9,19448,16250],[2,19,10,15600,16250],[2,19,11,18604,16250],[2,19,12,16028,16250],[2,20,1,7889,9167],[2,20,2,7858,9167],[2,20,3,10282,9167],[2,20,4,6180,9167],[2,20,5,8330,9167],[2,20,6,8492,9167],[2,20,7,9330,9167],[2,20,8,8676,9167],[2,20,9,7562,9166],[2,20,10,7588,9166],[2,20,11,7503,9166],[2,20,12,8310,9166],[2,21,1,44570,51667],[2,21,2,55872,51667],[2,21,3,54651,51667],[2,21,4,53947,51667],[2,21,5,48019,51667],[2,21,6,51225,51667],[2,21,7,39072,51667],[2,21,8,42918,51667],[2,21,9,49264,51666],[2,21,10,51313,51666],[2,21,11,51220,51666],[2,21,12,58929,51666]]};</script>
+<script>
+/* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
+   Jeder Baustein entspricht einem Standard-Visual von Power BI.
+   Seite: 1024 x 646 px. Parameter: ?print (Druckansicht ohne Leiste), ?gut=gruen (Farbvariante). */
+const DK = (() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  let SEITE_B = 1024, SEITE_H = 646;          // Dashboard; Einzelvisual: init({breite: 727, hoehe: …})
+  if (Q.get("gut") === "gruen") document.body.dataset.gut = "gruen";
+  if (PRINT) document.body.classList.add("print");
+
+  /* ---------------- Format ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  const MINUS = "−", NBSP = String.fromCharCode(0xA0);
+  function zahl(v, nk = 0) { return (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function delta(v, nk = 0, einheit = "") {
+    const r = Number(v.toFixed(nk));
+    const vz = r > 0 ? "+" : r < 0 ? MINUS : "±";
+    return vz + nf(nk).format(Math.abs(r)) + einheit;
+  }
+  function prozent(v, nk = 1) { return zahl(v * 100, nk) + NBSP + "%"; }
+  /* Wirkung: richtung +1 = Anstieg günstig, -1 = Anstieg ungünstig, 0 = neutral */
+  function wirkung(d, richtung, nk = 1) {
+    if (!richtung || Number(d.toFixed(nk)) === 0) return "neutral";
+    return d * richtung > 0 ? "gut" : "schlecht";
+  }
+  const FARBE = { gut: "var(--gut)", schlecht: "var(--schlecht)", neutral: "var(--ac)",
+                  ist: "var(--ac)", fc: "var(--fc)", vj: "var(--py)" };
+
+  /* ---------------- Textmessung ---------------- */
+  const ctx = document.createElement("canvas").getContext("2d");
+  function tw(t, px = 14, bold = false) {
+    ctx.font = (bold ? "bold " : "") + px + "px Arial, 'Liberation Sans', Helvetica, sans-serif";
+    return ctx.measureText(String(t)).width;
+  }
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* ---------------- Tooltip ---------------- */
+  let tip;
+  function tooltip(ziel, zeilenFn) {
+    ziel.addEventListener("pointermove", ev => {
+      const zeilen = zeilenFn();
+      tip.textContent = "";
+      zeilen.forEach((z, i) => el(i === 0 ? "b" : "div", {}, tip, z));
+      tip.style.display = "block";
+      const r = tip.getBoundingClientRect();
+      let x = ev.clientX + 14, y = ev.clientY + 14;
+      if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+      if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    ziel.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel;
+  function init(o) {
+    document.title = o.titel;
+    if (o.breite) SEITE_B = o.breite;
+    if (o.hoehe) SEITE_H = o.hoehe;
+    if (!PRINT) {
+      const leiste = el("div", { class: "dk-leiste" }, document.body);
+      el("div", { class: "dk-leiste-titel" }, leiste, o.titel);
+      o.knoepfe = leiste;
+    }
+    buehne = el("div", { class: "dk-buehne" }, document.body);
+    rahmen = el("div", { class: "dk-rahmen" }, buehne);
+    seite = el("div", { class: "dk-seite", id: "seite", style: `width:${SEITE_B}px;height:${SEITE_H}px` }, rahmen);
+    panel = el("div", { class: "dk-panel" }, document.body);
+    tip = el("div", { class: "dk-tooltip" }, document.body);
+    const skalieren = () => {
+      if (PRINT) { rahmen.style.width = SEITE_B + "px"; rahmen.style.height = SEITE_H + "px"; return; }
+      const frei = panel.style.display === "block" ? 380 : 0;
+      const s = Math.max(0.4, Math.min((innerWidth - frei - 32) / SEITE_B, (innerHeight - 44 - 32) / SEITE_H));
+      seite.style.transform = `scale(${s})`;
+      rahmen.style.width = SEITE_B * s + "px"; rahmen.style.height = SEITE_H * s + "px";
+      rahmen.style.marginLeft = frei ? "16px" : "auto";
+    };
+    addEventListener("resize", skalieren);
+    DK._skalieren = skalieren;
+    skalieren();
+    return seite;
+  }
+  function box(id, x, y, w, h, cls = "") {
+    return el("div", { id, class: "dk-abs " + cls, style: `left:${x}px;top:${y}px;width:${w}px;height:${h}px` }, seite);
+  }
+  function haarlinie(y, links = 16, rechts = 16) {
+    el("div", { class: "dk-haar", style: `top:${y}px;left:${links}px;right:${rechts}px` }, seite);
+  }
+
+  /* ---------------- Kopf ---------------- */
+  function kopf(ziel, o) {
+    ziel.textContent = "";
+    const l = el("div", { id: "kopf-titel", style: "position:absolute;left:0;top:0" }, ziel);
+    el("div", { class: "dk-titel" }, l, o.titel);
+    el("div", { class: "dk-untertitel", style: "margin-top:3px" }, l, o.untertitel);
+    const r = el("div", { style: "position:absolute;right:0;top:2px;text-align:right" }, ziel);
+    el("div", { class: "dk-quelle" }, r, o.quelle);
+    const lg = el("div", { id: "kopf-legende", class: "dk-legende", style: "margin-top:8px" }, r);
+    o.legende.forEach(([farbe, text, rahmenFarbe]) => {
+      const s = el("span", {}, lg);
+      el("i", { style: `background:${farbe};${rahmenFarbe ? "outline:1px solid " + rahmenFarbe + ";outline-offset:-1px" : ""}` }, s);
+      s.appendChild(document.createTextNode(text));
+    });
+  }
+
+  /* ---------------- Datenschnitte (Slicer) ---------------- */
+  function knoepfe(ziel, o) {
+    const g = el("div", { class: "dk-knoepfe", role: "group" }, ziel);
+    const bs = o.optionen.map(([wert, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(wert === o.wert) }, g, text);
+      b.addEventListener("click", () => { bs.forEach(x => x.setAttribute("aria-pressed", String(x === b))); o.onChange(wert); });
+      return b;
+    });
+    return g;
+  }
+  function schnitt(ziel, label, typ, o) {
+    const s = el("div", { class: "dk-schnitt" }, ziel);
+    el("label", {}, s, label);
+    if (typ === "knoepfe") return knoepfe(s, o);
+    const sel = el("select", { "aria-label": label, style: o.breite ? `width:${o.breite}px` : "" }, s);
+    o.optionen.forEach(([wert, text]) => { const op = el("option", { value: wert }, sel, text); if (wert === o.wert) op.selected = true; });
+    sel.addEventListener("change", () => o.onChange(sel.value));
+    return sel;
+  }
+
+  /* ---------------- KPI-Leiste (Karte mit Referenzbeschriftung) ---------------- */
+  function kpis(ziel, items) {
+    ziel.textContent = "";
+    const w = el("div", { class: "dk-kpis" }, ziel);
+    items.forEach(k => {
+      const c = el("div", { class: "dk-kpi" }, w);
+      el("div", { class: "dk-kpi-label" }, c, k.label);
+      const wz = el("div", { class: "dk-kpi-wert" + (k.wertKlasse ? " " + k.wertKlasse : "") }, c, k.wert);
+      if (k.einheit) el("span", { class: "dk-kpi-einheit" }, wz, k.einheit);
+      const d = el("div", { class: "dk-kpi-delta" }, c, (k.bezug ?? "ΔVJ") + " ");
+      el("b", { class: k.klasse }, d, k.delta);
+    });
+  }
+
+  /* ---------------- Visual-Rahmen: Titel + Botschaft ---------------- */
+  function visual(ziel, o) {
+    ziel.textContent = "";
+    ziel.classList.add("dk-visual");
+    const tz = el("div", { class: "dk-titelzeile" }, ziel);
+    const t = el("div", { class: "dk-visual-titel" }, tz, o.titel);
+    if (o.einheit) { t.appendChild(document.createTextNode(", ")); el("span", { class: "dk-einheit" }, t, o.einheit); }
+    if (o.schalter) knoepfe(tz, o.schalter);
+    if (o.botschaft !== undefined) el("div", { class: "dk-botschaft", title: o.botschaft }, ziel, o.botschaft);
+    const top = (o.botschaft !== undefined ? 42 : 24) + (o.abstand || 6);
+    return { flaeche: el("div", { style: `position:absolute;left:0;top:${top}px;right:0;bottom:0` }, ziel),
+             breite: ziel.clientWidth, hoehe: ziel.clientHeight - top };
+  }
+
+  /* ---------------- Balkendiagramm (gruppiertes Balkendiagramm) ---------------- */
+  function balken(ziel, o) {
+    const W = o.breite, n = o.zeilen.length;
+    const rh = o.zeilenhoehe || Math.floor(o.hoehe / n), bh = Math.round(rh * 0.7);
+    const H = rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = o.labelBreite || Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vw = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.wert))))) + 8;
+    const max = Math.max(...o.zeilen.map(z => z.wert), 1e-9);
+    const pw = W - lw - vw;
+    o.zeilen.forEach((z, i) => {
+      const y = i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: lw - 10, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, z.label);
+      const bw = Math.max(z.wert > 0 ? 1 : 0, z.wert / max * pw);
+      if (z.kontur) sv("rect", { x: lw + 0.5, y: y + (rh - bh) / 2 + 0.5, width: Math.max(0, bw - 1), height: bh - 1,
+                                 fill: "#FFFFFF", stroke: z.kontur, "stroke-width": 1 }, g);
+      else sv("rect", { x: lw, y: y + (rh - bh) / 2, width: bw, height: bh, fill: z.farbe || FARBE.ist }, g);
+      sv("text", { x: lw + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.wert));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    return svg;
+  }
+
+  /* ---------------- Bevölkerungspyramide (gestapeltes Balkendiagramm, Männer negativ) ---------------- */
+  function pyramide(ziel, o) {
+    const W = o.breite, n = o.zeilen.length, kopfH = 18;
+    const rh = o.zeilenhoehe || Math.floor((o.hoehe - kopfH) / n), bh = Math.round(rh * 0.72);
+    const H = kopfH + rh * n;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.zeilen.map(z => tw(z.label)))) + 10;
+    const vl = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.m))))) + 7;
+    const vr = Math.ceil(Math.max(...o.zeilen.map(z => tw(o.fmt(z.w))))) + 7;
+    const maxM = Math.max(...o.zeilen.map(z => z.m), 1e-9), maxW = Math.max(...o.zeilen.map(z => z.w), 1e-9);
+    const k = (W - lw - vl - vr - 2) / (maxM + maxW);      // ein Maßstab für beide Seiten
+    const x0 = lw + vl + maxM * k + 1;
+    sv("text", { x: x0 - 6, y: 12, "text-anchor": "end", class: "muted" }, svg, o.kopf[0]);
+    sv("text", { x: x0 + 6, y: 12, class: "muted" }, svg, o.kopf[1]);
+    o.zeilen.forEach((z, i) => {
+      const y = kopfH + i * rh, blass = o.auswahl != null && o.auswahl !== z.key;
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, z.label);
+      const bm = z.m * k, bw = z.w * k;
+      sv("rect", { x: x0 - 1 - bm, y: y + (rh - bh) / 2, width: bm, height: bh, fill: FARBE.ist }, g);
+      sv("rect", { x: x0 + 1, y: y + (rh - bh) / 2, width: bw, height: bh, fill: FARBE.ist }, g);
+      sv("text", { x: x0 - 1 - bm - 5, y: y + rh / 2, dy: "0.35em", "text-anchor": "end" }, g, o.fmt(z.m));
+      sv("text", { x: x0 + 1 + bw + 5, y: y + rh / 2, dy: "0.35em" }, g, o.fmt(z.w));
+      const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(z));
+    });
+    sv("line", { x1: x0, x2: x0, y1: kopfH - 2, y2: H, stroke: "#FFFFFF", "stroke-width": 2 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Gestapeltes Säulendiagramm ---------------- */
+  function saeulen(ziel, o) {
+    const W = o.breite, H = o.hoehe, n = o.spalten.length;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const lw = Math.ceil(Math.max(...o.segNamen.map(t => tw(t)))) + 10;
+    const oben = 20, unten = 20, PH = H - oben - unten;
+    const slot = (W - lw) / n, bw = Math.min(26, slot * 0.72);
+    const max = Math.max(...o.spalten.map(s => s.segs.reduce((a, b) => a + b, 0)), 1e-9);
+    const k = PH / max, basis = oben + PH;
+    o.spalten.forEach((s, i) => {
+      const cx = lw + slot * i + slot / 2, x = cx - bw / 2;
+      const g = sv("g", {}, svg);
+      let y = basis, summe = 0;
+      s.segs.forEach((v, j) => {
+        const h = v * k;
+        sv("rect", { x, y: y - h, width: bw, height: Math.max(0, h - (j < s.segs.length - 1 ? 0 : 0)),
+                     fill: FARBE[s.szenario] }, g);
+        if (j > 0) sv("line", { x1: x - 1, x2: x + bw + 1, y1: y, y2: y, stroke: "#FFFFFF", "stroke-width": 2 }, g);
+        if (i === 0 && h >= 15) sv("text", { x: lw - 10, y: y - h / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, o.segNamen[j]);
+        y -= h; summe += v;
+      });
+      sv("text", { x: cx, y: y - 5, "text-anchor": "middle" }, g, o.fmt(summe));
+      sv("text", { x: cx, y: H - 3, "text-anchor": "middle" }, g, s.label);
+      const hit = sv("rect", { x: lw + slot * i, y: 0, width: slot, height: H, fill: "transparent" }, g);
+      if (o.tooltip) tooltip(hit, () => o.tooltip(s, summe));
+    });
+    sv("line", { x1: lw - 2, x2: W, y1: basis + 0.5, y2: basis + 0.5, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    return svg;
+  }
+
+  /* ---------------- Matrix / Tabelle mit Datenbalken ----------------
+     Spaltentypen: (leer) Zahl rechtsbündig über s.fmt · "text" linksbündig · "delta" Abweichung mit Balken
+     an einer Mittellinie, gefärbt nach Wirkung (s.richtung) · "anteil" Fortschritt 0..1 als Balken ab Null.
+     null-Werte erscheinen als „–“ ohne Balken. o.zeilenhoehe (Standard 21), o.onSort(key) macht Köpfe klickbar. */
+  function matrix(ziel, o) {
+    ziel.textContent = "";
+    const zh = o.zeilenhoehe || 21, H = zh - 3;
+    const t = el("table", { class: "dk-matrix" }, ziel);
+    const kopf = el("tr", {}, el("thead", {}, t));
+    o.spalten.forEach(s => {
+      const st = (s.breite ? `width:${s.breite}px;` : "") + (s.typ === "delta" || s.typ === "anteil" ? "text-align:center;" : "") +
+                 (s.typ === "text" ? "text-align:left;" : "");
+      const th = el("th", s.id ? { style: st, id: s.id } : { style: st }, kopf, s.titel);
+      if (o.onSort && !PRINT) {
+        th.classList.add("dk-sortierbar");
+        th.title = "Klick sortiert";
+        th.addEventListener("click", () => o.onSort(s.key));
+        if (o.sortierung && o.sortierung.key === s.key) th.appendChild(document.createTextNode(o.sortierung.ab ? " ▾" : " ▴"));
+      }
+    });
+    const tb = el("tbody", {}, t);
+    // Achse der Abweichungsbalken proportional (wie „Achse: automatisch“ bei Datenbalken in Power BI)
+    const spanne = {};
+    o.spalten.filter(s => s.typ === "delta").forEach(s => {
+      const w = o.zeilen.filter(z => !z.summe && z.werte[s.key] != null).map(z => z.werte[s.key]);
+      spanne[s.key] = { neg: Math.max(0, ...w.map(v => -v)), pos: Math.max(0, ...w) };
+    });
+    const hoehe = o.zeilenhoehe ? `height:${zh}px` : "";
+    o.zeilen.forEach(z => {
+      const blass = !z.summe && o.auswahl != null && o.auswahl !== z.key;
+      // Trennlinie über einer neuen Gruppe: an der Vorzeile setzen (im border-collapse gewinnt die obere Zelle)
+      if (z.trenner && tb.lastChild) tb.lastChild.classList.add("dk-trenner");
+      const tr = el("tr", { class: (z.summe ? "dk-summe" : "dk-zeile") + (blass ? " dk-blass" : "") }, tb);
+      o.spalten.forEach((s, j) => {
+        if (j === 0) { el("td", { style: hoehe }, tr, z.label); return; }
+        const v = z.werte[s.key];
+        if (s.typ === "text") { el("td", { style: "text-align:left;" + hoehe }, tr, v); return; }
+        if (s.typ !== "delta" && s.typ !== "anteil") { el("td", { style: hoehe }, tr, v == null ? "–" : s.fmt(v)); return; }
+        const td = el("td", { class: "dk-dbalken", style: hoehe }, tr);
+        const W = s.breite - 8, svg = sv("svg", { width: W, height: H, style: "display:block" }, td);
+        if (s.typ === "anteil") {
+          const txtW = s.textBreite || 48, pw = W - txtW - 2;
+          sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end", style: "font-size:14px" }, svg,
+             v == null ? "–" : zahl(v * 100, 0) + NBSP + "%");
+          if (v != null) sv("rect", { x: txtW, y: (H - 10) / 2, width: Math.max(v > 0 ? 1 : 0, Math.min(1, v) * pw), height: 10, fill: FARBE.ist }, svg);
+          sv("line", { x1: txtW, x2: txtW, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+          return;
+        }
+        const txtW = s.textBreite || 50, sp = spanne[s.key];
+        const k = (W - txtW - 4) / Math.max(sp.neg + sp.pos, 1e-9), mitte = txtW + 2 + sp.neg * k;
+        const kl = v == null ? "neutral" : wirkung(v, s.richtung, s.nk ?? 1);
+        sv("text", { x: txtW - 6, y: H / 2, dy: "0.35em", "text-anchor": "end",
+                     style: `font-size:14px;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]};font-weight:${z.summe ? "bold" : "normal"}` },
+           svg, v == null ? "–" : delta(v, s.nk ?? 1));
+        if (!z.summe && v != null) {
+          const bwid = Math.abs(v) * k;
+          sv("rect", { x: v >= 0 ? mitte : mitte - bwid, y: (H - 10) / 2, width: bwid, height: 10, fill: FARBE[kl] }, svg);
+        }
+        sv("line", { x1: mitte, x2: mitte, y1: 1, y2: H - 1, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+      });
+      if (!z.summe && o.onClick) tr.addEventListener("click", () => o.onClick(z.key));
+      if (o.tooltip && !z.summe) tooltip(tr, () => o.tooltip(z));
+    });
+    return t;
+  }
+
+  /* ---------------- Streudiagramm (Punktdiagramm mit Größe) ----------------
+     o.punkte: [{key, x, y, g}] – g bestimmt die Kreisfläche. o.x / o.y: {min, max, ticks, titel, fmt}.
+     o.linien: {x, y} Konstantenlinien; o.felder: [{ecke: "ol"|"or"|"ul"|"ur", text}] Beschriftung der Quadranten. */
+  function streuung(ziel, o) {
+    const W = o.breite, H = o.hoehe;
+    const svg = sv("svg", { width: W, height: H, role: "img", "aria-label": o.aria || "" }, ziel);
+    const fx = o.x.fmt || String, fy = o.y.fmt || String;
+    const links = Math.ceil(Math.max(...o.y.ticks.map(t => tw(fy(t))))) + 8;
+    const rechts = Math.ceil(tw(fx(o.x.ticks[o.x.ticks.length - 1])) / 2) + 2;
+    const oben = 22, unten = 38, PW = W - links - rechts, PH = H - oben - unten;
+    const sx = v => links + (v - o.x.min) / (o.x.max - o.x.min) * PW;
+    const sy = v => oben + PH - (v - o.y.min) / (o.y.max - o.y.min) * PH;
+    sv("text", { x: 0, y: 12, class: "muted" }, svg, o.y.titel);
+    sv("text", { x: links + PW, y: H - 3, "text-anchor": "end", class: "muted" }, svg, o.x.titel);
+    o.y.ticks.forEach(t => sv("text", { x: links - 6, y: sy(t), dy: "0.35em", "text-anchor": "end", class: "muted" }, svg, fy(t)));
+    o.x.ticks.forEach(t => sv("text", { x: sx(t), y: oben + PH + 16, "text-anchor": "middle", class: "muted" }, svg, fx(t)));
+    if (o.linien) {
+      const st = { stroke: "#9A9A9A", "stroke-width": 1, "stroke-dasharray": "3 3" };
+      if (o.linien.x != null) sv("line", { x1: sx(o.linien.x), x2: sx(o.linien.x), y1: oben, y2: oben + PH, ...st }, svg);
+      if (o.linien.y != null) sv("line", { x1: links, x2: links + PW, y1: sy(o.linien.y), y2: sy(o.linien.y), ...st }, svg);
+    }
+    (o.felder || []).forEach(f => {
+      const l = f.ecke[1] === "l", ob = f.ecke[0] === "o";
+      sv("text", { x: l ? links + 6 : links + PW - 6, y: ob ? oben + 13 : oben + PH - 6, "text-anchor": l ? "start" : "end",
+                   class: "muted" }, svg, f.text);
+    });
+    sv("line", { x1: links, x2: links, y1: oben, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    sv("line", { x1: links, x2: links + PW, y1: oben + PH, y2: oben + PH, stroke: "#8C8C8C", "stroke-width": 1 }, svg);
+    const gMax = Math.max(...o.punkte.map(p => p.g || 0), 1e-9), rMax = o.rMax || 13, rMin = o.rMin || 3;
+    const kreise = o.punkte.slice().sort((a, b) => (b.g || 0) - (a.g || 0))
+      .map(p => ({ p, cx: sx(p.x), cy: sy(p.y), r: Math.max(rMin, Math.sqrt((p.g || 0) / gMax) * rMax) }));
+    const gruppen = new Map();
+    kreise.forEach(({ p, cx, cy, r }) => {
+      const blass = o.auswahl && !o.auswahl(p);
+      const g = sv("g", { class: (blass ? "dk-blass " : "") + (o.onClick ? "dk-klick" : "") }, svg);
+      sv("circle", { cx, cy, r, fill: p.farbe || FARBE.ist, "fill-opacity": 0.8, stroke: "#FFFFFF", "stroke-width": 1 }, g);
+      const hit = sv("circle", { cx, cy, r: Math.max(r, 6), fill: "transparent" }, g);
+      if (o.onClick) hit.addEventListener("click", () => o.onClick(p.key));
+      if (o.tooltip) tooltip(hit, () => o.tooltip(p));
+      gruppen.set(p, g);
+    });
+    // Beschriftungen nach allen Kreisen: rechts, links, oben, unten – erste Lage ohne Überdeckung
+    const belegt = [];
+    const schneidetKreis = (b, k) => {
+      const nx = Math.max(b.x, Math.min(k.cx, b.x + b.w)), ny = Math.max(b.y, Math.min(k.cy, b.y + b.h));
+      return (nx - k.cx) ** 2 + (ny - k.cy) ** 2 < (k.r + 1) ** 2;
+    };
+    const schneidet = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    kreise.filter(k => k.p.label).forEach(k => {
+      const w = tw(k.p.label), h = 16, { cx, cy, r } = k;
+      const lagen = [[cx + r + 4, cy - h / 2], [cx - r - 4 - w, cy - h / 2], [cx - w / 2, cy - r - 2 - h], [cx - w / 2, cy + r + 2]];
+      const frei = b => b.x >= links && b.x + b.w <= links + PW && b.y >= oben && b.y + b.h <= oben + PH &&
+        !kreise.some(a => a !== k && schneidetKreis(b, a)) && !belegt.some(c => schneidet(b, c));
+      const b = lagen.map(([x, y]) => ({ x, y, w, h })).find(frei) || { x: lagen[0][0], y: lagen[0][1], w, h };
+      belegt.push(b);
+      sv("text", { x: b.x, y: b.y + h / 2, dy: "0.35em" }, gruppen.get(k.p), k.p.label);
+    });
+    return svg;
+  }
+
+  /* ---------------- Berichtsdesign für Power BI (Theme-JSON) ---------------- */
+  function thema() {
+    const GUT = getComputedStyle(document.body).getPropertyValue("--gut").trim() || "#00806B";
+    return { name: "6. Auflage – Buchstil", dataColors: ["#3A3F44", "#8F8F8F", "#C9C9C9", GUT, "#C62828"],
+      background: "#FFFFFF", foreground: "#1A1A1A", tableAccent: "#3A3F44", good: GUT, neutral: "#8F8F8F", bad: "#C62828",
+      maximum: "#3A3F44", center: "#C9C9C9", minimum: "#F6F6F6",
+      textClasses: { callout: { fontSize: 19.5, fontFace: "Arial", color: "#1A1A1A" },
+                     title: { fontSize: 12, fontFace: "Arial", color: "#1A1A1A" },
+                     header: { fontSize: 10.5, fontFace: "Arial", color: "#4D4D4D" },
+                     label: { fontSize: 10.5, fontFace: "Arial", color: "#1A1A1A" } },
+      visualStyles: { "*": { "*": { border: [{ show: false }], dropShadow: [{ show: false }], background: [{ show: false }] } } } };
+  }
+
+  /* ---------------- Ebenen der Lernplattform ---------------- */
+  function download(name, inhalt, typ = "text/csv;charset=utf-8") {
+    const blob = new Blob([String.fromCharCode(0xFEFF) + inhalt], { type: typ });
+    const a = el("a", { href: URL.createObjectURL(blob), download: name }, document.body);
+    a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function ebenen(o) {
+    if (PRINT) return;
+    const leiste = document.querySelector(".dk-leiste");
+    let modus = null;
+    const marken = [];
+    const knopf = (text, fn) => { const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text); b.addEventListener("click", fn); return b; };
+    const kRegeln = knopf("Designregeln", () => umschalten("regeln"));
+    const kNachbau = knopf("Nachbau in Power BI", () => umschalten("nachbau"));
+    const kTab = knopf("Werte als Tabelle", () => umschalten("tabelle"));
+    knopf("Daten (CSV)", () => download(o.csv.name, o.csv.text()));
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; }
+    function markeSetzen(eintrag, text, cls) {
+      const z = document.getElementById(eintrag.ziel);
+      if (!z) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / SEITE_B;
+      // anker "rechts" (Standard): Marke auf der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "dk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text));
+      marken.push(m);
+    }
+    function aktiv(text) {
+      panel.querySelectorAll(".dk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      const e = panel.querySelector(`.dk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(m) {
+      modus = modus === m ? null : m;
+      [kRegeln, kNachbau, kTab].forEach((b, i) => b.setAttribute("aria-pressed", String(modus === ["regeln", "nachbau", "tabelle"][i])));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      DK._skalieren();
+      if (modus === "regeln") {
+        el("h2", {}, panel, "Designregeln (SUCCESS)");
+        el("div", { class: "dk-panel-intro" }, panel, "SUCCESS-Formel nach Hichert/Faisst (IBCS): Say, Unify, Condense, Check, Express, Simplify, Structure. Die Nummern im Dashboard zeigen, wo eine Regel angewendet ist.");
+        o.regeln.forEach(r => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": String(r.nr) }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, r.nr + "."); el("span", {}, k, r.titel);
+          el("div", { class: "dk-regel" }, e, r.regel);
+          el("div", {}, e, r.text);
+          markeSetzen(r, String(r.nr), "");
+        });
+      } else if (modus === "nachbau") {
+        el("h2", {}, panel, "Nachbau in Power BI");
+        el("div", { class: "dk-panel-intro" }, panel, o.nachbauIntro);
+        if (o.theme) { const b = el("button", { type: "button", style: "margin-bottom:10px;font:inherit;padding:5px 10px;border:1px solid #9A9A9A;background:#fff;border-radius:3px;cursor:pointer" }, panel, "Berichtsdesign (JSON) herunterladen");
+          b.addEventListener("click", () => download("berichtsdesign.json", JSON.stringify(o.theme, null, 2), "application/json")); }
+        o.nachbau.forEach(n => {
+          const e = el("div", { class: "dk-eintrag", "data-marke": n.id }, panel);
+          const k = el("div", { class: "dk-eintrag-kopf" }, e);
+          el("span", {}, k, n.id); el("span", {}, k, n.titel);
+          const dl = el("dl", {}, e);
+          [["Visual", n.visual], ["Felder", n.felder], ["Format", n.format], ["Hinweis", n.hinweis]].forEach(([a, b]) => {
+            if (!b) return; el("dt", {}, dl, a); el("dd", {}, dl, b);
+          });
+          markeSetzen(n, n.id, "nachbau");
+        });
+      } else if (modus === "tabelle") {
+        el("h2", {}, panel, "Werte als Tabelle");
+        el("div", { class: "dk-panel-intro" }, panel, "Alle Werte der Visuals in der aktuellen Filterung (entspricht „Als Tabelle anzeigen“ in Power BI).");
+        o.tabellen().forEach(tab => {
+          el("div", { style: "font-weight:bold;margin:12px 0 4px" }, panel, tab.titel);
+          const t = el("table", { class: "dk-matrix" }, panel);
+          const hr = el("tr", {}, el("thead", {}, t));
+          tab.kopf.forEach(h => el("th", {}, hr, h));
+          const tb = el("tbody", {}, t);
+          tab.zeilen.forEach(z => { const tr = el("tr", {}, tb); z.forEach(c => el("td", {}, tr, c)); });
+        });
+      }
+    }
+    DK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+  }
+
+  return { PRINT, NBSP, zahl, delta, prozent, wirkung, FARBE, tw, el, sv, init, box, haarlinie, kopf, schnitt, knoepfe,
+           kpis, visual, balken, pyramide, saeulen, matrix, streuung, thema, ebenen, download };
+})();
+
+</script>
+<script>
+/* Abb. 5.73 „Standardbericht SAP ERP CC (Detailbild)“: Bericht „Kostenstellen: Ist/Soll/Abweichung“, softwareneutral
+   nachgebaut. Einzelvisual 727 x 726 px = 110 x 109,8 mm. Daten: kostenstellen.json (daten_kostenstellen.py).
+   Gehört zur Selektionsmaske Abb. 5.72: Startzustand = deren Vorbelegung (Kostenrechnungskreis 1000, Geschäftsjahr 2026,
+   Perioden 1 bis 12, Version 0, Kostenstelle 1000, alle Kostenarten); die Datenschnitte entsprechen den Feldern der Maske.
+   Aufbau wie im Original: Berichtskopf mit der Selektion, Liste der Kostenarten mit Ist- und Sollkosten, Abweichung absolut
+   und in %, Summen Belastung, Entlastung und Über-/Unterdeckung. Abweichung = Ist − Soll; negativ = unter Soll = günstig.
+   Klick auf eine Zeile hebt sie hervor, Klick auf einen Spaltenkopf sortiert die Belastung, Esc hebt auf. */
+(() => {
+  "use strict";
+  const { zahl, delta, NBSP, el, tw } = DK;
+  const D = DATA, J = D.jahr;
+  const KST = D.kostenstellen, KA = D.kostenarten;
+  const MLANG = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const eur = c => zahl(c / 100, 0), eur2 = c => zahl(c / 100, 2);
+  const pz = v => delta(v, 1) + NBSP + "%";
+  const passt = (k, breite) => k.find(t => tw(t) <= breite) || k[k.length - 1];
+  const GRUPPEN = [["alle", "Alle"], ["P", "Primärkosten"], ["S", "Sekundärkosten"]];
+  const PLAN_574 = ["470000", "471000", "473000", "476000", "476100", "476500", "476900"];   // Plankosten fix in Abb. 5.74
+
+  /* ---------- Zustand (Start = Vorbelegung der Selektionsmaske Abb. 5.72) ---------- */
+  const S = { kst: 0, von: 1, bis: 12, gruppe: "alle", auswahl: null, sort: null };
+  addEventListener("keydown", e => { if (e.key === "Escape" && S.auswahl !== null) { S.auswahl = null; zeichnen(); } });
+
+  /* ---------- Layout ---------- */
+  const H = 726;
+  DK.init({ titel: "Kostenstellen: Ist/Soll/Abweichung", breite: 727, hoehe: H });
+  const bTitel = DK.box("v-titel", 16, 8, 695, 46);
+  const bFilter = DK.box("filter", 16, 60, 695, 50, "dk-filter");
+  DK.haarlinie(116);
+  const bKopf = DK.box("berichtskopf", 16, 124, 695, 38);
+  const bTab = DK.box("v-tabelle", 16, 170, 695, H - 178);
+  el("style", {}, document.head, `
+    #berichtskopf { display: grid; grid-template-columns: 300px 1fr; row-gap: 2px; line-height: 18px; }
+    #berichtskopf .bk-l { color: var(--muted); }
+    #berichtskopf b { font-weight: normal; color: var(--text); }
+    #v-tabelle .dk-matrix td:nth-child(2) { color: var(--text); }
+    #v-tabelle tr.dk-summe td:nth-child(2) { font-weight: bold; }`);
+
+  /* ---------- Berechnung ---------- */
+  function zeilen() {
+    const rows = KA.map((k, i) => ({ i, nr: k[0], name: k[1], gruppe: k[2], info: k[3], ist: 0, soll: 0, istGebucht: false, vorhanden: false, per: [] }));
+    D.werte.forEach(([kst, ka, p, ist, soll]) => {
+      if (kst !== S.kst) return;
+      const r = rows[ka];
+      r.vorhanden = true;
+      if (p < S.von || p > S.bis) return;
+      if (ist !== null) { r.ist += ist; r.istGebucht = true; }
+      r.soll += soll;
+      r.per.push([p, ist, soll]);
+    });
+    return rows.filter(r => r.vorhanden && (S.gruppe === "alle" || r.gruppe === S.gruppe)).map(r => {
+      r.abw = r.ist - r.soll; r.proz = r.soll ? r.abw / Math.abs(r.soll) * 100 : null;
+      r.entlastung = r.soll < 0 || r.ist < 0;
+      return r;
+    });
+  }
+  const summe = rows => { const s = { ist: 0, soll: 0 }; rows.forEach(r => { s.ist += r.ist; s.soll += r.soll; });
+    s.abw = s.ist - s.soll; s.proz = s.soll ? s.abw / Math.abs(s.soll) * 100 : null; return s; };
+  function bloecke() {
+    const rows = zeilen(), bel = rows.filter(r => !r.entlastung), ent = rows.filter(r => r.entlastung);
+    if (S.sort) {
+      const k = S.sort.key, f = r => (k === "nr" ? r.nr : k === "name" ? r.name : r[k] ?? -Infinity);
+      bel.sort((a, b) => { const x = f(a), y = f(b); const c = typeof x === "string" ? x.localeCompare(y, "de") : x - y; return (S.sort.ab ? -c : c) || a.i - b.i; });
+    }
+    return { bel, ent, sBel: summe(bel), sEnt: summe(ent), sGes: summe(rows) };
+  }
+
+  /* ---------- Datenschnitte (Felder der Selektionsmaske Abb. 5.72) ---------- */
+  DK.schnitt(bFilter, "Kostenstelle", "dropdown", { optionen: KST.map((k, i) => [String(i), k[0] + " " + k[1]]), wert: "0", breite: 210,
+    onChange: v => { S.kst = Number(v); S.auswahl = null; zeichnen(); } });
+  const perOpt = Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]);
+  const selVon = DK.schnitt(bFilter, "Von Periode", "dropdown", { optionen: perOpt, wert: "1", breite: 76,
+    onChange: v => { S.von = Number(v); if (S.von > S.bis) { S.bis = S.von; selBis.value = String(S.bis); } zeichnen(); } });
+  const selBis = DK.schnitt(bFilter, "Bis Periode", "dropdown", { optionen: perOpt, wert: "12", breite: 76,
+    onChange: v => { S.bis = Number(v); if (S.bis < S.von) { S.von = S.bis; selVon.value = String(S.von); } zeichnen(); } });
+  DK.schnitt(bFilter, "Kostenartengruppe", "dropdown", { optionen: GRUPPEN, wert: "alle", breite: 150,
+    onChange: v => { S.gruppe = v; S.auswahl = null; zeichnen(); } });
+
+  /* ---------- Tabelle ---------- */
+  const SPALTEN = [
+    { key: "nr", titel: "Kostenart", breite: 62 },
+    { key: "name", titel: "Bezeichnung", typ: "text", breite: 222 },
+    { key: "ist", titel: "Istkosten", id: "sp-ist", breite: 90, fmt: eur },
+    { key: "soll", titel: "Sollkosten", id: "sp-soll", breite: 92, fmt: eur },
+    { key: "abw", titel: "Abweichung", id: "sp-abw", typ: "delta", richtung: -1, nk: 0, breite: 158, textBreite: 80 },
+    { key: "proz", titel: "Abw. in %", id: "sp-proz", breite: 71, fmt: v => delta(v, 1) },
+  ];
+  const zeitraum = () => (S.von === S.bis ? `Periode ${S.von}/${J}` : `Perioden ${S.von} bis ${S.bis}/${J}`);
+  function tipZeile(r) {
+    const k = KST[S.kst], w = r.abw === 0 ? "keine Abweichung" : (r.abw < 0) ? "unter Soll – günstig" : "über Soll – ungünstig";
+    const z = [`${r.nr} ${r.name}`, `${k[0]} ${k[1]}, ${zeitraum()}`,
+      `Ist ${r.istGebucht ? eur2(r.ist) + " €" : "keine Buchung"} · Soll ${eur2(r.soll)} €`,
+      `Abweichung ${delta(r.abw / 100, 2)} €${r.proz === null ? "" : " (" + pz(r.proz) + ")"}, ${w}`];
+    if (r.info) z.push(r.info);
+    if (S.kst === 0 && PLAN_574.includes(r.nr)) z.push("Soll = Plankosten fix der Kostenartenplanung (Abb. 5.74), anteilig je Periode");
+    z.push(S.auswahl === r.nr ? "Klick hebt die Hervorhebung auf" : "Klick hebt die Kostenart hervor");
+    return z;
+  }
+  function tabelle(B) {
+    const z = [];
+    const zeile = r => ({ key: r.nr, label: r.nr, r, werte: { name: r.name, ist: r.istGebucht ? r.ist : null, soll: r.soll, abw: r.abw / 100, proz: r.proz } });
+    const sum = (key, name, s) => ({ key, label: "", summe: true, trenner: true, werte: { name, ist: s.ist, soll: s.soll, abw: s.abw / 100, proz: s.proz } });
+    B.bel.forEach(r => z.push(zeile(r)));
+    if (B.bel.length) z.push(sum("s-bel", "Belastung", B.sBel));
+    B.ent.forEach(r => z.push(zeile(r)));
+    if (B.ent.length) z.push(sum("s-ent", "Entlastung", B.sEnt));
+    if (B.bel.length && B.ent.length) z.push(sum("s-ges", "Über-/Unterdeckung", B.sGes));
+    DK.matrix(bTab, { spalten: SPALTEN, zeilen: z, auswahl: S.auswahl,
+      onClick: key => { S.auswahl = S.auswahl === key ? null : key; zeichnen(); },
+      tooltip: zz => tipZeile(zz.r),
+      sortierung: S.sort, onSort: key => { S.sort = S.sort && S.sort.key === key ? (S.sort.ab ? { key, ab: false } : null) : { key, ab: true }; zeichnen(); } });
+  }
+
+  /* ---------- Botschaft ---------- */
+  function botschaft(B) {
+    if (S.auswahl !== null) {
+      const r = [...B.bel, ...B.ent].find(x => x.nr === S.auswahl);
+      if (r) return passt([`${r.nr} ${r.name}: Ist ${eur(r.ist)} €, Soll ${eur(r.soll)} €, Abweichung ${delta(r.abw / 100, 0)} €${r.proz === null ? "" : " (" + pz(r.proz) + ")"}`,
+        `${r.name}: Abweichung ${delta(r.abw / 100, 0)} €`], 690);
+    }
+    const s = B.sBel;
+    if (!B.bel.length) return "Keine Belastung in dieser Auswahl";
+    const top = B.bel.slice().sort((a, b) => Math.abs(b.abw) - Math.abs(a.abw))[0];
+    const lage = s.abw <= 0 ? "unter" : "über";
+    return passt([`Istkosten ${eur(s.ist)} € liegen ${eur(Math.abs(s.abw))} € (${zahl(Math.abs(s.proz), 1)} %) ${lage} Soll, größter Beitrag: ${top.name}`,
+      `Istkosten ${eur(Math.abs(s.abw))} € (${zahl(Math.abs(s.proz), 1)} %) ${lage} Soll, größter Beitrag: ${top.name}`,
+      `Istkosten ${eur(Math.abs(s.abw))} € ${lage} Soll`], 690);
+  }
+
+  /* ---------- Zeichnen ---------- */
+  function zeichnen() {
+    const B = bloecke(), k = KST[S.kst];
+    DK.visual(bTitel, { titel: "Kostenstellen: Ist/Soll/Abweichung", einheit: "€", botschaft: botschaft(B) });
+    bKopf.textContent = "";
+    [["Kostenrechnungskreis", `${D.krk[0]} ${D.krk[1]}`], ["Verantwortlich", k[2]], ["Version", `${D.version[0]} ${D.version[1]}`],
+     ["Berichtszeitraum", `${zeitraum()} · Stand ${D.stand}`]].forEach(([l, w]) => {
+      const d = el("div", { class: "bk-l" }, bKopf, l + " ");
+      el("b", {}, d, w);
+    });
+    tabelle(B);
+    if (DK._ebenenNeu) DK._ebenenNeu();
+  }
+
+  /* ---------- Lernplattform ---------- */
+  DK.ebenen({
+    regeln: [
+      { nr: 1, ziel: "v-titel", anker: "links", versatz: [355, 0], regel: "SAY – Botschaft vermitteln", titel: "Aussage über der Liste",
+        text: "Unter dem Berichtsnamen steht, wie weit die Istkosten vom Soll abweichen und welche Kostenart am meisten beiträgt – bei den Zentralen Diensten die kalkulatorischen Zinsen. Das Original zeigte nur die Liste." },
+      { nr: 2, ziel: "sp-abw", anker: "links", versatz: [156, 45], regel: "EXPRESS – Abweichung nach Wirkung", titel: "Balken statt Zahlenkolonne",
+        text: "Die Abweichung Ist − Soll steht als Zahl mit Balken: Blaugrün, wenn die Istkosten unter dem Soll liegen, Rot darüber. Das Original schrieb das Minus nachgestellt („200,20-“) und hob nichts hervor." },
+      { nr: 3, ziel: "v-tabelle", anker: "links", versatz: [272, 3], regel: "UNIFY – Klartext", titel: "Lesbare Kostenarten",
+        text: "Abgeschnittene Texte sind ausgeschrieben („Tarifl. Jahresleist“ → Tarifliche Jahresleistung, „Postkosten ohne Tel“ → Postkosten (ohne Telefon)); „DILV“ und „IILV“ heißen „Verrechnung …“ – direkte bzw. indirekte innerbetriebliche Leistungsverrechnung, erklärt im Tooltip." },
+      { nr: 4, ziel: "berichtskopf", anker: "links", versatz: [640, -4], regel: "STRUCTURE – Selektion im Kopf", titel: "Berichtskopf aus der Selektion",
+        text: "Kopf und Datenschnitte zeigen die Selektion aus Abb. 5.72: Kostenrechnungskreis, Kostenstelle mit Verantwortlicher, Version und Berichtszeitraum. Seiten- und Spaltenzähler („Seiten 2/4“, „Spalte 1/6“) des Listenformats entfallen; der Bericht steht vollständig auf einer Seite." },
+      { nr: 5, ziel: "v-tabelle", anker: "links", versatz: [52, 465], regel: "CHECK – Summen aus den Zeilen", titel: "Belastung vollständig",
+        text: "Das Original zeigte Seite 2 von 4: Die Belastung von 627.269 € enthielt Kostenarten der Seite 1. Die Differenz steht jetzt als 430000 Gehälter, damit Belastung, Entlastung und Über-/Unterdeckung aus den Zeilen folgen. Zeilen ohne Werte entfallen." },
+      { nr: 6, ziel: "v-tabelle", anker: "links", versatz: [52, 507], regel: "CONDENSE – Ganze Euro", titel: "Cent im Tooltip",
+        text: "Die Liste zeigt ganze Euro; die Werte auf den Cent stehen im Tooltip. Das Original führte zwei Nachkommastellen bei Beträgen bis über eine Million." },
+      { nr: 7, ziel: "filter", anker: "links", versatz: [600, -2], regel: "CONDENSE – Selektion ändern", titel: "Datenschnitte statt neuer Selektion",
+        text: "Kostenstelle, Perioden und Kostenartengruppe lassen sich direkt im Bericht ändern – im Original führte jede Änderung über die Selektionsmaske. Klick auf eine Zeile hebt sie hervor, Klick auf einen Spaltenkopf sortiert die Belastung." },
+      { nr: 8, ziel: "v-titel", anker: "links", versatz: [702, 4], regel: "SIMPLIFY – Softwareneutral", titel: "Ohne Programmoberfläche",
+        text: "Menü- und Symbolleisten, Statuszeile, Taskleiste, Bildlaufleiste, Logo sowie die blauen und gelben Flächen entfallen. Kostenstelle „Corporate Services“ heißt Zentrale Dienste, der Name des Verantwortlichen ist ersetzt, das Jahr 2008 wird zu 2026." },
+    ],
+    nachbauIntro: "Seitengröße 727 × 726 px (110 mm breit), Schrift Arial: Tabelle 10,5 pt, Titel 12 pt. Datenmodell: Faktentabelle Kostenstellenrechnung (Kostenrechnungskreis, Geschäftsjahr, Version, Kostenstelle, Kostenart, Periode, Istkosten, Sollkosten) mit Dimensionen Kostenstelle (Text, Verantwortlich) und Kostenart (Text, Gruppe primär/sekundär); Spalte „Block“ (Belastung/Entlastung) aus dem Vorzeichen.",
+    nachbau: [
+      { id: "A", ziel: "v-tabelle", anker: "links", versatz: [272, 3], titel: "Kostenartenliste", visual: "Matrix",
+        felder: "Zeilen: Block, Kostenart, Bezeichnung; Werte: Istkosten = SUM(KSt[Istkosten]); Sollkosten = SUM(KSt[Sollkosten]); Abweichung = [Istkosten] − [Sollkosten]; Abw. in % = DIVIDE([Abweichung]; ABS([Sollkosten]))",
+        format: "Layout tabellarisch, Zwischensummen je Block („Belastung“, „Entlastung“), Gesamtsumme „Über-/Unterdeckung“; Abweichung mit Datenbalken (negativ #00806B, positiv #C62828, Achse Mitte); Zahlenformat #.##0",
+        hinweis: "Leere Istwerte erscheinen als „–“ (Measure mit IF(ISBLANK(…); BLANK(); …) und Formatzeichenfolge)." },
+      { id: "B", ziel: "filter", anker: "links", versatz: [130, -2], titel: "Selektion", visual: "Datenschnitt (4×)",
+        felder: "Kostenstelle (Dropdown, Einzelauswahl), Periode von/bis (Datenschnitt „Zwischen“ oder zwei Dropdowns), Kostenartengruppe",
+        format: "Ausgewählt #3A3F44; Vorbelegung wie die Selektionsmaske (Abb. 5.72) über gespeicherte Lesezeichen oder Berichts-URL-Filter" },
+      { id: "C", ziel: "berichtskopf", anker: "links", versatz: [640, -4], titel: "Berichtskopf", visual: "Karte (neu) bzw. Textfeld mit dynamischem Wert",
+        felder: "Text = \"Verantwortlich \" & SELECTEDVALUE(Kostenstelle[Verantwortlich]); Berichtszeitraum aus MIN/MAX(Periode)",
+        format: "Beschriftung #4D4D4D, Wert #1A1A1A, 10,5 pt, ohne Hintergrund und Rahmen" },
+    ],
+    theme: DK.thema(),
+    csv: { name: "kostenstellen_ist_soll.csv", text: () => {
+      const z = ["Kostenrechnungskreis;Geschaeftsjahr;Version;Kostenstelle;Kostenstelle_Text;Kostenart;Kostenart_Text;Kostenartengruppe;Periode;Istkosten_EUR;Sollkosten_EUR"];
+      D.werte.forEach(([kst, ka, p, ist, soll]) => z.push([D.krk[0], J, D.version[0], KST[kst][0], KST[kst][1], KA[ka][0], KA[ka][1],
+        KA[ka][2] === "P" ? "Primärkosten" : "Sekundärkosten", p, ist === null ? "" : (ist / 100).toFixed(2).replace(".", ","), (soll / 100).toFixed(2).replace(".", ",")].join(";")));
+      return z.join("\r\n"); } },
+    tabellen: () => {
+      const B = bloecke(), k = KST[S.kst];
+      const z = r => [r.nr, r.name, r.istGebucht ? eur2(r.ist) : "–", eur2(r.soll), delta(r.abw / 100, 2), r.proz === null ? "–" : delta(r.proz, 2)];
+      const s = (n, x) => ["", n, eur2(x.ist), eur2(x.soll), delta(x.abw / 100, 2), x.proz === null ? "–" : delta(x.proz, 2)];
+      const rows = [...B.bel.map(z), s("Belastung", B.sBel), ...B.ent.map(z)];
+      if (B.ent.length) rows.push(s("Entlastung", B.sEnt), s("Über-/Unterdeckung", B.sGes));
+      const per = Array.from({ length: S.bis - S.von + 1 }, (_, i) => S.von + i);
+      const perZeilen = per.map(p => { let ist = 0, soll = 0; D.werte.forEach(w => { if (w[0] === S.kst && w[2] === p && !(w[4] < 0)) { ist += w[3] || 0; soll += w[4]; } });
+        return [String(p), MLANG[p - 1], eur2(ist), eur2(soll), delta((ist - soll) / 100, 2)]; });
+      return [
+        { titel: `${k[0]} ${k[1]}, ${zeitraum()}, Werte in €`, kopf: ["Kostenart", "Bezeichnung", "Istkosten", "Sollkosten", "Abweichung", "Abw. in %"], zeilen: rows },
+        { titel: "Belastung je Periode in € (alle Kostenarten der Kostenstelle)", kopf: ["Periode", "Monat", "Istkosten", "Sollkosten", "Abweichung"], zeilen: perZeilen },
+      ];
+    },
+  });
+  zeichnen();
+})();
+
+</script>
+</body>
+</html>

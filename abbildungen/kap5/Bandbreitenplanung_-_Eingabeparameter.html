@@ -816,7 +816,7 @@ const DK = (() => {
     let lo = Math.min(0, ...pr[0]), hi = Math.max(0, ...pr[2]);
     const roh = (hi - lo) / 4, mag = 10 ** Math.floor(Math.log10(Math.max(roh, 1e-9)));
     const schritt = [1, 2, 2.5, 5, 10].map(x => x * mag).find(x => x >= roh) || mag * 10;
-    lo = Math.floor(lo / schritt - 1e-9) * schritt; hi = Math.ceil(hi / schritt + 1e-9) * schritt;
+    lo = Math.floor(lo / schritt + 1e-9) * schritt; hi = Math.ceil(hi / schritt - 1e-9) * schritt;
     if (hi - lo < 1e-9) { hi = 1; }
     const ticks = []; for (let v = lo; v <= hi + 1e-9; v += schritt) ticks.push(Math.round(v * 100) / 100);
     const yl = Math.ceil(Math.max(...ticks.map(v => tw(zahl(v, 0))))) + 8;

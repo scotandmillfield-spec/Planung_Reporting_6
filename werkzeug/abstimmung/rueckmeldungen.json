@@ -478,5 +478,37 @@
    "auftrag": "fd50d2512b21",
    "zeit": "2026-11-07T11:04"
   }
+ ],
+ "neue_zeilen": [
+  {
+   "schluessel": "abb-3-9-8-a",
+   "nach": "folie-092",
+   "kapitel": "3",
+   "abbildung": "Abb. 3.9.8.a",
+   "titel": "Balanced Chance and Cyber-Risk Card mit Kennzahlen je Perspektive und Führungsebene",
+   "art": "Diagramm",
+   "status": "zur Prüfung",
+   "kommentar": "Neue Abbildung zu Abschnitt 3.9.8 (BCCR-Card) nach Vorlage des Autors (SECURWARE 2025), im Buchstil neu gezeichnet und ins Deutsche übertragen. Rückfragen stehen in der Inventur."
+  },
+  {
+   "schluessel": "abb-3-9-8-b",
+   "nach": "abb-3-9-8-a",
+   "kapitel": "3",
+   "abbildung": "Abb. 3.9.8.b",
+   "titel": "Strategien der Risikobehandlung in der Risikomatrix",
+   "art": "Diagramm",
+   "status": "zur Prüfung",
+   "kommentar": "Neue Abbildung zu Abschnitt 3.9.8 (BCCR-Card) nach Vorlage des Autors (SECURWARE 2025), im Buchstil neu gezeichnet und ins Deutsche übertragen. Rückfragen stehen in der Inventur."
+  },
+  {
+   "schluessel": "abb-3-9-8-c",
+   "nach": "abb-3-9-8-b",
+   "kapitel": "3",
+   "abbildung": "Abb. 3.9.8.c",
+   "titel": "Integriertes Steuerungskonzept mit Cybersecurity",
+   "art": "Diagramm",
+   "status": "zur Prüfung",
+   "kommentar": "Neue Abbildung zu Abschnitt 3.9.8 (BCCR-Card) nach Vorlage des Autors (SECURWARE 2025), im Buchstil neu gezeichnet und ins Deutsche übertragen. Rückfragen stehen in der Inventur."
+  }
  ]
 }

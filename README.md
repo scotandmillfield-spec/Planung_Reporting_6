@@ -4,6 +4,8 @@ Planung und Reporting im BI-gestützten Controlling – alle Abbildungen und Tab
 
 Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 
+Wie Inventur, Repository, Claude Code und die Google-Tabelle zusammenhängen (Schaubild, Fundorte, Fehlerhilfe): **`zusammenhang.html`**, online unter `https://scotandmillfield-spec.github.io/Planung_Reporting_6/zusammenhang.html`.
+
 ## Ordner
 
 | Ordner | Inhalt |

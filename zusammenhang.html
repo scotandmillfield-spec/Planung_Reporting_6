@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abbildungsinventur Zusammenspiel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Kopf, großes Schaubild mit nummerierter Legende daneben, darunter Abläufe, Fundorte, Fehlerhilfe.
+   Farben aus dem Buchstil der Inventur: Anthrazit und Grau, Rot als einzige Kontrastfarbe. */
+:root{
+  --bg:#ffffff; --fg:#1A1A1A; --muted:#5A5F64; --line:#8A9096; --rule:#D9D9D9;
+  --zone:#F4F5F6; --node:#ffffff; --node-b:#3A3F44; --ac:#3A3F44; --rot:#C62828; --rot-soft:#FBEAEA; --gut:#00806B;
+  --f-text:Arial,"Liberation Sans",Helvetica,sans-serif;
+  --f-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17191B; --fg:#ECEDEE; --muted:#A3A8AD; --line:#7C8389; --rule:#33373B;
+  --zone:#202326; --node:#2A2E32; --node-b:#9AA1A7; --ac:#C9CDD1; --rot:#FF6B63; --rot-soft:#3A2222; --gut:#4FC3A8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17191B; --fg:#ECEDEE; --muted:#A3A8AD; --line:#7C8389; --rule:#33373B;
+  --zone:#202326; --node:#2A2E32; --node-b:#9AA1A7; --ac:#C9CDD1; --rot:#FF6B63; --rot-soft:#3A2222; --gut:#4FC3A8; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--f-text);margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+h2{font-size:20px;margin:0 0 12px;text-wrap:balance}
+.unter{color:var(--muted);margin:0;max-width:75ch}
+section{margin-top:40px}
+code{font-family:var(--f-mono);font-size:.88em;background:var(--zone);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+a{color:inherit}
+
+/* Abläufe */
+.ablaeufe{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 12px}
+.ablaeufe button{font:inherit;font-size:14px;border:1px solid var(--node-b);background:var(--bg);color:var(--fg);
+  padding:6px 12px;border-radius:999px;cursor:pointer}
+.ablaeufe button[aria-pressed="true"]{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.ablaeufe button:focus-visible,.legende li:focus-visible,.node:focus-visible{outline:2px solid var(--rot);outline-offset:2px}
+.ablauf-text{min-height:3em;color:var(--muted);max-width:90ch;margin:0}
+.ablauf-text b{color:var(--fg)}
+
+/* Schaubild + Legende */
+.buehne{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:28px;align-items:start;margin-top:14px}
+.svgbox{overflow-x:auto;min-width:0}
+svg{display:block;width:100%;min-width:760px;height:auto}
+.zone rect{fill:var(--zone);stroke:none}
+.zone text{fill:var(--muted);font:700 12px var(--f-text);letter-spacing:.08em;text-transform:uppercase}
+.node{cursor:pointer}
+.node rect{fill:var(--node);stroke:var(--node-b);stroke-width:1.4}
+.node .t{fill:var(--fg);font:700 16px var(--f-text)}
+.node .s{fill:var(--muted);font:12.5px var(--f-text)}
+.node:hover rect,.node.gewaehlt rect{stroke:var(--rot);stroke-width:2.2}
+.edge path.l{fill:none;stroke:var(--line);stroke-width:1.8}
+.edge.auto path.l{stroke-dasharray:6 5}
+.halo{fill:none;stroke:var(--bg);stroke-width:9}
+.badge circle{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.badge text{fill:var(--fg);font:700 12px var(--f-text);text-anchor:middle;dominant-baseline:central}
+.mk{fill:var(--line)} .mk-an{fill:var(--rot)}
+.edge{cursor:pointer}
+svg.fokus .edge,svg.fokus .node{opacity:.22;transition:opacity .2s}
+svg.fokus .edge.an,svg.fokus .node.an{opacity:1}
+.edge.an path.l{stroke:var(--rot);stroke-width:2.6}
+.edge.an .badge circle{stroke:var(--rot);fill:var(--rot)}
+.edge.an .badge text{fill:var(--bg)}
+.zeichen{display:flex;flex-wrap:wrap;gap:18px;color:var(--muted);font-size:13px;margin-top:8px}
+.zeichen span{display:inline-flex;align-items:center;gap:6px}
+.zeichen svg{min-width:0;width:34px;height:10px}
+
+.legende{list-style:none;margin:0;padding:0;display:grid;gap:2px;font-size:14px}
+.legende li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer}
+.legende li .n{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;
+  font-weight:700;font-size:12px;font-variant-numeric:tabular-nums}
+.legende li.an{background:var(--rot-soft)}
+.legende li.an .n{background:var(--rot);border-color:var(--rot);color:var(--bg)}
+.legende li.aus{opacity:.4}
+
+/* Detailfeld */
+.detail{margin-top:18px;border-left:3px solid var(--rot);padding:4px 0 4px 16px;max-width:90ch}
+.detail h3{margin:0 0 6px;font-size:17px}
+.detail dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 14px;margin:0}
+.detail dt{color:var(--muted);font-size:13px;padding-top:2px}
+.detail dd{margin:0}
+
+/* Tabellen */
+.tab{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px 9px 0;border-bottom:1px solid var(--rule)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td:first-child{font-weight:700;width:28%}
+.wichtig{color:var(--rot);font-weight:700}
+.merke{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.merke div{border-top:2px solid var(--ac);padding-top:10px}
+.merke h3{margin:0 0 4px;font-size:15px}
+.merke p{margin:0;color:var(--muted);font-size:14px}
+.fuss{margin-top:44px;color:var(--muted);font-size:13px}
+@media (max-width:980px){.buehne{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<div class="wrap">
+<header>
+  <h1>Abbildungsinventur 6. Auflage: wie alles zusammenhängt</h1>
+  <p class="unter">Inventur-Seite, GitHub-Repository, Claude Code und die Google-Tabelle mit ihrem Apps-Script. Ablauf wählen, um den Weg im Schaubild hervorzuheben. Kästen und Nummern anklicken für Details.</p>
+</header>
+
+<div class="ablaeufe" role="group" aria-label="Ablauf hervorheben">
+  <button type="button" data-ablauf="alle" aria-pressed="true">Alles</button>
+  <button type="button" data-ablauf="status" aria-pressed="false">Status setzen in der Inventur</button>
+  <button type="button" data-ablauf="revision" aria-pressed="false">Revision durch Claude</button>
+  <button type="button" data-ablauf="neu" aria-pressed="false">Neue Abbildung bis Overleaf</button>
+  <button type="button" data-ablauf="direkt" aria-pressed="false">Direkt in der Tabelle</button>
+</div>
+<p class="ablauf-text" id="ablauf-text" aria-live="polite"></p>
+
+<div class="buehne">
+<div style="min-width:0">
+<div class="svgbox">
+<svg id="bild" viewBox="0 0 1060 630" role="img" aria-labelledby="bild-titel">
+  <title id="bild-titel">Schaubild: Autoren, Inventur-Seite, Repository, Claude Code, Google-Tabelle mit Web-App, Zeit-Trigger und Mail sowie Overleaf, verbunden durch 13 nummerierte Datenflüsse.</title>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="ah-an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-an" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+  <g class="zone"><rect x="20" y="30" width="250" height="330" rx="10"/><text x="36" y="56">Team</text></g>
+  <g class="zone"><rect x="20" y="436" width="250" height="174" rx="10"/><text x="36" y="462">Manuskript</text></g>
+  <g class="zone"><rect x="330" y="30" width="290" height="330" rx="10"/><text x="346" y="56">GitHub</text></g>
+  <g class="zone"><rect x="330" y="436" width="290" height="174" rx="10"/><text x="346" y="462">Claude</text></g>
+  <g class="zone"><rect x="745" y="30" width="295" height="580" rx="10"/><text x="761" y="56">Google</text></g>
+
+  <!-- Kanten -->
+  <g class="edge" data-e="1"><path class="l" d="M250 112 H351" marker-end="url(#ah)"/><g class="badge"><circle cx="300" cy="112" r="11"/><text x="300" y="112">1</text></g></g>
+  <g class="edge" data-e="2"><path class="l" d="M756 108 H599" marker-end="url(#ah)"/><g class="badge"><circle cx="680" cy="108" r="11"/><text x="680" y="108">2</text></g></g>
+  <g class="edge" data-e="3"><path class="l" d="M599 140 H756" marker-end="url(#ah)"/><g class="badge"><circle cx="680" cy="140" r="11"/><text x="680" y="140">3</text></g></g>
+  <g class="edge" data-e="4"><path class="l" d="M890 168 V246" marker-start="url(#ah)" marker-end="url(#ah)"/><g class="badge"><circle cx="890" cy="207" r="11"/><text x="890" y="207">4</text></g></g>
+  <g class="edge" data-e="5"><path class="l" d="M145 80 V14 H1050 V292 H1024" marker-end="url(#ah)"/><g class="badge"><circle cx="600" cy="14" r="11"/><text x="600" y="14">5</text></g></g>
+  <g class="edge" data-e="6"><path class="l" d="M756 318 H735 V528 H599" marker-end="url(#ah)"/><g class="badge"><circle cx="667" cy="528" r="11"/><text x="667" y="528">6</text></g></g>
+  <g class="edge" data-e="7"><path class="l" d="M475 486 V338" marker-end="url(#ah)"/><g class="badge"><circle cx="475" cy="412" r="11"/><text x="475" y="412">7</text></g></g>
+  <g class="edge auto" data-e="8"><path class="l" d="M475 250 V168" marker-end="url(#ah)"/><g class="badge"><circle cx="475" cy="209" r="11"/><text x="475" y="209">8</text></g></g>
+  <g class="edge auto" data-e="9"><path class="halo" d="M710 435 H750"/><path class="l" d="M599 305 H700 V435 H756" marker-end="url(#ah)"/><g class="badge"><circle cx="700" cy="370" r="11"/><text x="700" y="370">9</text></g></g>
+  <g class="edge auto" data-e="10"><path class="l" d="M890 400 V338" marker-end="url(#ah)"/><g class="badge"><circle cx="890" cy="369" r="11"/><text x="890" y="369">10</text></g></g>
+  <g class="edge auto" data-e="11"><path class="l" d="M890 470 V526" marker-end="url(#ah)"/><g class="badge"><circle cx="890" cy="498" r="11"/><text x="890" y="498">11</text></g></g>
+  <g class="edge" data-e="12"><path class="l" d="M355 318 H300 V528 H254" marker-end="url(#ah)"/><g class="badge"><circle cx="300" cy="400" r="11"/><text x="300" y="400">12</text></g></g>
+  <g class="edge" data-e="13"><path class="halo" d="M315 330 V306"/><path class="l" d="M230 164 V200 H315 V506 H351" marker-end="url(#ah)"/><g class="badge"><circle cx="315" cy="250" r="11"/><text x="315" y="250">13</text></g></g>
+
+  <!-- Knoten -->
+  <g class="node" data-n="team" tabindex="0" role="button" aria-label="Autoren"><rect x="40" y="80" width="210" height="84" rx="8"/><text class="t" x="58" y="114">Autoren</text><text class="s" x="58" y="138">im Browser · Chat mit Claude</text></g>
+  <g class="node" data-n="overleaf" tabindex="0" role="button" aria-label="Overleaf"><rect x="40" y="486" width="210" height="84" rx="8"/><text class="t" x="58" y="520">Overleaf</text><text class="s" x="58" y="544">LaTeX-Manuskript</text></g>
+  <g class="node" data-n="pages" tabindex="0" role="button" aria-label="Inventur-Seite"><rect x="355" y="80" width="240" height="84" rx="8"/><text class="t" x="373" y="114">Inventur-Seite</text><text class="s" x="373" y="138">GitHub Pages · index.html</text></g>
+  <g class="node" data-n="repo" tabindex="0" role="button" aria-label="Repository"><rect x="355" y="250" width="240" height="84" rx="8"/><text class="t" x="373" y="284">Repository</text><text class="s" x="373" y="308">Planung_Reporting_6 · main</text></g>
+  <g class="node" data-n="claude" tabindex="0" role="button" aria-label="Claude Code"><rect x="355" y="486" width="240" height="84" rx="8"/><text class="t" x="373" y="520">Claude Code</text><text class="s" x="373" y="544">Cloud-Sitzung · Skills</text></g>
+  <g class="node" data-n="webapp" tabindex="0" role="button" aria-label="Web-App"><rect x="760" y="80" width="260" height="84" rx="8"/><text class="t" x="778" y="114">Web-App</text><text class="s" x="778" y="138">Apps Script · Code.gs · /exec</text></g>
+  <g class="node" data-n="sheet" tabindex="0" role="button" aria-label="Google-Tabelle"><rect x="760" y="250" width="260" height="84" rx="8"/><text class="t" x="778" y="284">Google-Tabelle</text><text class="s" x="778" y="308">Blatt „Status“ · die Datenbank</text></g>
+  <g class="node" data-n="trigger" tabindex="0" role="button" aria-label="Zeit-Trigger"><rect x="760" y="400" width="260" height="70" rx="8"/><text class="t" x="778" y="429">Zeit-Trigger</text><text class="s" x="778" y="451">alle 5 Minuten · regelmaessig</text></g>
+  <g class="node" data-n="mail" tabindex="0" role="button" aria-label="Mail an Autoren"><rect x="760" y="530" width="260" height="62" rx="8"/><text class="t" x="778" y="556">Mail an Autoren</text><text class="s" x="778" y="577">gesammelt, nach 15 Min Ruhe</text></g>
+</svg>
+</div>
+<div class="zeichen">
+  <span><svg viewBox="0 0 34 10" aria-hidden="true"><path d="M0 5 H34" stroke="var(--line)" stroke-width="2"/></svg>von Hand ausgelöst</span>
+  <span><svg viewBox="0 0 34 10" aria-hidden="true"><path d="M0 5 H34" stroke="var(--line)" stroke-width="2" stroke-dasharray="6 5"/></svg>läuft automatisch</span>
+</div>
+<div class="detail" id="detail" aria-live="polite"></div>
+</div>
+
+<ol class="legende" id="legende" aria-label="Datenflüsse"></ol>
+</div>
+
+<section>
+  <h2>Drei Dinge zum Merken</h2>
+  <div class="merke">
+    <div><h3>Die Tabelle ist die Datenbank</h3><p>Status und Kommentare stehen nur in der Google-Tabelle. Die Inventur-Seite zeigt sie über die Web-App an. Ist die Web-App gestört, zeigt die Seite den letzten Stand aus dem Repository.</p></div>
+    <div><h3>Claude schreibt nie direkt nach Google</h3><p>Claude liest die Tabelle über den Drive-Connector und schreibt Rückmeldungen in eine Datei im Repository. Der Zeit-Trigger der Tabelle holt sie von dort ab.</p></div>
+    <div><h3>Code.gs gibt es zweimal</h3><p>Die Vorlage liegt im Repository, die laufende Fassung in Apps Script. Änderungen müssen von Hand in Apps Script eingefügt und als neue Version bereitgestellt werden.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Wo liegt was</h2>
+  <div class="tab"><table>
+    <thead><tr><th>Was</th><th>Wo</th><th>Hinweis</th></tr></thead>
+    <tbody>
+      <tr><td>Inventur-Seite</td><td><a href="https://scotandmillfield-spec.github.io/Planung_Reporting_6/" target="_blank" rel="noopener">scotandmillfield-spec.github.io/Planung_Reporting_6</a></td><td>Wird aus <code>index.html</code> auf dem Zweig <code>main</code> erzeugt, 1–2 Minuten nach jedem Push.</td></tr>
+      <tr><td>Repository</td><td><a href="https://github.com/scotandmillfield-spec/Planung_Reporting_6" target="_blank" rel="noopener">github.com/scotandmillfield-spec/Planung_Reporting_6</a></td><td>Abbildungen, Quellen, Werkzeuge, README mit allen Befehlen.</td></tr>
+      <tr><td>Google-Tabelle</td><td><a href="https://docs.google.com/spreadsheets/d/1EO9x7mX5hfWnU4760OqhwzuH82uesbD7LPkUpzMcxCg/edit" target="_blank" rel="noopener">„Abbildungsinventur 6. Auflage – Status“</a></td><td>Blätter „Status“ (eine Zeile je Abbildung) und „Hinweise“.</td></tr>
+      <tr><td>Apps Script</td><td>In der Tabelle: <b>Erweiterungen → Apps Script</b></td><td>Projekt heißt „Untitled project“. Funktionen oben in der Auswahl neben „Fehlerbehebung“, z. B. <code>einrichten</code>, <code>testmail</code>.</td></tr>
+      <tr><td>Web-App-URL</td><td><code>werkzeug/abstimmung.json</code> → <code>webapp</code></td><td>Endet auf <code>/exec</code>. Zum Testen im privaten Fenster öffnen: Es muss JSON mit <code>"ok":true</code> erscheinen.</td></tr>
+      <tr><td>Vorlage Code.gs</td><td><code>werkzeug/abstimmung/Code.gs</code></td><td>Im Repository steht <code>bitte-aendern</code> statt Passwort. Das echte Passwort und die Mail-Empfänger liegen nur in Apps Script.</td></tr>
+      <tr><td>Claudes Rückmeldungen</td><td><code>werkzeug/abstimmung/rueckmeldungen.json</code></td><td>Schreibt <code>revision.py melden</code>, liest der Zeit-Trigger.</td></tr>
+      <tr><td>Hinweise aus der Umsetzung</td><td><code>werkzeug/status.json</code></td><td>Anmerkungen, Alternativtexte, Revisionsverlauf je Abbildung.</td></tr>
+      <tr><td>Werkzeuge</td><td><code>werkzeug/</code></td><td><code>bauen.py</code> (Abbildung neu bauen), <code>vorschau.py</code>, <code>inventur.py</code> (schreibt <code>index.html</code>), <code>revision.py</code> (lesen / melden).</td></tr>
+      <tr><td>Skills von Claude</td><td>Claude-Konto</td><td><code>sechste-auflage-abbildungen</code>, <code>-dashboard</code>, <code>-eingabemasken</code>, <code>-revision</code>.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Wenn etwas hakt</h2>
+  <div class="tab"><table>
+    <thead><tr><th>Anzeichen</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+    <tbody>
+      <tr><td>„Abstimmung nicht erreichbar“ oben in der Inventur</td><td>Die Web-App liefert kein JSON. Meist fehlt eine Berechtigung, so war es am 10.11.2026.</td><td>Link „Web-App direkt öffnen“ anklicken. Erscheint „Autorisierung erforderlich“: In Apps Script <code>einrichten</code> auswählen, <b>Ausführen</b>, <b>Berechtigungen überprüfen</b>, Konto wählen, <b>Erweitert → Untitled project öffnen (unsicher)</b>, zulassen. Danach <b>Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Neue Version</b>.</td></tr>
+      <tr><td>Web-App zeigt eine Google-Anmeldeseite</td><td>Zugriff steht nicht auf „Jeder“, oder „Ausführen als“ steht auf dem Besucher.</td><td>Bereitstellungen verwalten → Bearbeiten: <b>Ausführen als: Ich</b>, <b>Zugriff: Jeder</b>.</td></tr>
+      <tr><td>Code.gs geändert</td><td>Apps Script nutzt weiter die alte Version.</td><td>Code einfügen, speichern, <code>einrichten</code> ausführen, dann <b>Bereitstellungen verwalten → Bearbeiten → Neue Version</b>. <span class="wichtig">Nicht „Neue Bereitstellung“</span>, sonst ändert sich die URL und muss in <code>abstimmung.json</code> nachgetragen werden.</td></tr>
+      <tr><td>„Passwort falsch“ beim Speichern</td><td>Das gespeicherte Passwort weicht ab.</td><td>In Apps Script oben bei <code>PASSWORT</code> eintragen und <code>einrichten</code> ausführen.</td></tr>
+      <tr><td>Claudes Umsetzung steht nicht in der Tabelle</td><td>Noch nicht gepusht, Trigger läuft nicht, oder der Status stand nicht mehr auf „Revision“.</td><td>5–10 Minuten warten. In Apps Script links das Wecker-Symbol (Trigger): <code>regelmaessig</code> muss dort stehen, sonst <code>einrichten</code> ausführen. Status von Hand prüfen.</td></tr>
+      <tr><td>Keine Mail</td><td>Kein Empfänger gespeichert, oder die Änderung kam direkt in der Tabelle.</td><td><code>MAIL_AN</code> in Apps Script eintragen, <code>einrichten</code>, <code>testmail</code>. Direkte Tabellen-Änderungen lösen bewusst keine Mail aus.</td></tr>
+      <tr><td>Inventur zeigt die alte Fassung</td><td>Änderung liegt noch auf einem Arbeitszweig, oder Pages baut noch.</td><td>Nur <code>main</code> wird veröffentlicht. Claude bitten, den Zweig zu mergen. 1–2 Minuten warten, Seite neu laden.</td></tr>
+      <tr><td>Claude „erreicht Google nicht“</td><td>Die Shell der Cloud-Sitzung darf Google nicht aufrufen. Das ist so gewollt.</td><td>Claude liest über den Drive-Connector. Prüfungen an der Web-App machst du im Browser und schickst Claude einen Screenshot.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<p class="fuss">Stand 10.11.2026. Ausführliche Anleitung: <code>README.md</code> im Repository, Abschnitt „Abstimmung: Status und Kommentare“.</p>
+</div>
+
+<script>
+(function(){
+const KANTEN={
+ 1:['Autoren öffnen die Inventur-Seite im Browser.',['team','pages']],
+ 2:['Beim Öffnen lädt die Seite Status und Kommentare von der Web-App. Klappt das nicht, steht oben „Abstimmung nicht erreichbar“.',['pages','webapp']],
+ 3:['Nach „Bearbeiten“ (Name + Passwort) speichert die Seite Status und Kommentar über die Web-App.',['pages','webapp']],
+ 4:['Die Web-App liest und schreibt das Blatt „Status“. Sie läuft mit den Rechten des Inhabers.',['webapp','sheet']],
+ 5:['Status und Kommentare lassen sich auch direkt in der Tabelle ändern. Datum wird vermerkt, eine Mail geht nicht raus.',['team','sheet']],
+ 6:['Claude liest die Tabelle über den Google-Drive-Connector als CSV. Nur lesen.',['sheet','claude']],
+ 7:['Claude baut Abbildungen und Inventur und pusht ins Repository, samt Rückmeldungen in rueckmeldungen.json.',['claude','repo']],
+ 8:['GitHub Pages veröffentlicht den Zweig main automatisch, nach 1–2 Minuten.',['repo','pages']],
+ 9:['Der Zeit-Trigger holt alle 5 Minuten rueckmeldungen.json vom Repository.',['repo','trigger']],
+ 10:['… und trägt Claudes Rückmeldung ein: Kommentar „Claude: …“, Status „Nächste Version“ (nur wenn noch „Revision“).',['trigger','sheet']],
+ 11:['Neue Fassungen („zur Prüfung“, „Nächste Version“) lösen eine gesammelte Mail aus, sobald 15 Minuten nichts Neues kam.',['trigger','mail']],
+ 12:['Fertige Dateien aus abbildungen/kapN/ nach Overleaf hochladen, LaTeX-Code in der Inventur kopieren.',['repo','overleaf']],
+ 13:['Du gibst Claude den Auftrag im Chat, z. B. „Revisionen abarbeiten“ oder „mach Abb. 4.3 neu“.',['team','claude']]
+};
+const ABLAEUFE={
+ alle:{k:[],t:''},
+ status:{k:[1,2,3,4,11],t:'<b>Status setzen:</b> Inventur öffnen (1), Stand wird geladen (2). „Bearbeiten“, Status wählen, Speichern (3). Die Web-App schreibt in die Tabelle (4). Bei „zur Prüfung“ oder „Nächste Version“ verschickt der Trigger später eine Mail (11).'},
+ revision:{k:[3,4,13,6,7,8,9,10,11],t:'<b>Revision:</b> Kommentar schreiben, Status „Revision“ (3, 4). Claude beauftragen (13). Claude liest die Aufträge aus der Tabelle (6), setzt sie um und pusht (7). Pages veröffentlicht (8). Der Trigger holt die Rückmeldung (9), setzt „Nächste Version“ (10) und mailt (11).'},
+ neu:{k:[13,7,8,1,12],t:'<b>Neue Abbildung:</b> Auftrag an Claude (13). Claude baut im Buchstil und pusht (7). Pages veröffentlicht (8), du prüfst in der Inventur (1). Fertig: Dateien nach Overleaf, LaTeX kopieren (12).'},
+ direkt:{k:[5],t:'<b>Direkt in der Tabelle:</b> Status oder Kommentar in der Google-Tabelle ändern (5). Die Inventur zeigt es beim nächsten Laden. Keine Mail.'}
+};
+const KNOTEN={
+ team:['Autoren','Du und Mitautoren (MD, DS). Ihr seht die Inventur im Browser, setzt Status, schreibt Kommentare und gebt Claude Aufträge im Chat.','claude.ai/code oder die Claude-App','Passwort zum Bearbeiten bleibt im Browser gespeichert. Abmelden oben in der Inventur.'],
+ pages:['Inventur-Seite','Eine statische Seite (index.html) mit allen Abbildungen alt/neu, Dateien, LaTeX-Code und dem Abschnitt „Abstimmung“.','scotandmillfield-spec.github.io/Planung_Reporting_6','Öffentlich. Wird nie von Hand bearbeitet, sondern von werkzeug/inventur.py erzeugt.'],
+ repo:['Repository','Alle Dateien: abbildungen/, quellen/, tabellen/, vorschau/, werkzeug/. Nur der Zweig main wird veröffentlicht.','github.com/scotandmillfield-spec/Planung_Reporting_6','Claude arbeitet auf einem Arbeitszweig und mergt nach main, wenn du es sagst.'],
+ claude:['Claude Code','Cloud-Sitzung mit dem Repository. Baut Abbildungen mit den Skills „sechste-auflage-…“, erzeugt die Inventur neu, pusht.','neue Sitzung auf claude.ai/code mit diesem Repository','Die Shell erreicht Google nicht. Lesen geht über den Drive-Connector, Schreiben über rueckmeldungen.json.'],
+ webapp:['Web-App (Apps Script)','Kleines Programm an der Tabelle: liefert Status als JSON (doGet), speichert mit Passwort (doPost).','Tabelle → Erweiterungen → Apps Script · URL in werkzeug/abstimmung.json','Nach Code-Änderungen: einrichten ausführen, dann „Bereitstellungen verwalten → Bearbeiten → Neue Version“.'],
+ sheet:['Google-Tabelle','Die eigentliche Datenbank: eine Zeile je Abbildung mit Status, Kommentaren, geändert von/am.','„Abbildungsinventur 6. Auflage – Status“ in Google Drive','Spalten nicht umsortieren: die Web-App erwartet Schlüssel in A, Status in F, Kommentare in G.'],
+ trigger:['Zeit-Trigger','Läuft alle 5 Minuten (Funktion regelmaessig): übernimmt Claudes Rückmeldungen und verschickt fällige Mails.','Apps Script → links Wecker-Symbol „Trigger“','Wird von einrichten angelegt. Fehlt er, passiert nach Claudes Push nichts in der Tabelle.'],
+ mail:['Mail an Autoren','Gesammelte Benachrichtigung mit Links auf die neuen Fassungen.','Empfänger: MAIL_AN in Apps Script (nicht im Repository)','Test mit testmail, sofort senden mit mailJetztSenden.'],
+ overleaf:['Overleaf','Das LaTeX-Manuskript. Abbildungen liegen dort unter author/content/abbildungen/kapN/.','Projekt „6. Auflage“ in Overleaf','Status „Overleaf überführt“ setzen, sobald die Abbildung eingebunden ist.']
+};
+const svg=document.getElementById('bild'), leg=document.getElementById('legende'),
+      det=document.getElementById('detail'), at=document.getElementById('ablauf-text');
+const kanten=[...svg.querySelectorAll('.edge')], knoten=[...svg.querySelectorAll('.node')];
+for(const [n,[txt]] of Object.entries(KANTEN)){
+  const li=document.createElement('li'); li.dataset.e=n; li.tabIndex=0;
+  li.innerHTML='<span class="n">'+n+'</span><span></span>'; li.lastChild.textContent=txt;
+  li.addEventListener('click',()=>zeigen([+n])); li.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();zeigen([+n]);}});
+  leg.appendChild(li);
+}
+function marker(p,an){for(const a of ['marker-start','marker-end']) if(p.hasAttribute(a)) p.setAttribute(a,an?'url(#ah-an)':'url(#ah)');}
+function zeigen(ks){
+  const an=new Set(ks.map(String)), nodes=new Set();
+  ks.forEach(k=>KANTEN[k][1].forEach(n=>nodes.add(n)));
+  svg.classList.toggle('fokus',ks.length>0);
+  for(const g of kanten){const on=an.has(g.dataset.e); g.classList.toggle('an',on); marker(g.querySelector('path.l'),on);}
+  for(const g of knoten) g.classList.toggle('an',nodes.has(g.dataset.n));
+  for(const li of leg.children){li.classList.toggle('an',an.has(li.dataset.e)); li.classList.toggle('aus',ks.length>0&&!an.has(li.dataset.e));}
+}
+function ablauf(name){
+  for(const b of document.querySelectorAll('[data-ablauf]')) b.setAttribute('aria-pressed',String(b.dataset.ablauf===name));
+  zeigen(ABLAEUFE[name].k); at.innerHTML=ABLAEUFE[name].t||'Alle Datenflüsse. Durchgezogen: von Hand ausgelöst, gestrichelt: läuft automatisch.';
+}
+document.querySelectorAll('[data-ablauf]').forEach(b=>b.addEventListener('click',()=>ablauf(b.dataset.ablauf)));
+kanten.forEach(g=>g.addEventListener('click',()=>zeigen([+g.dataset.e])));
+function knotenDetail(id){
+  const [t,was,wo,achtung]=KNOTEN[id];
+  knoten.forEach(g=>g.classList.toggle('gewaehlt',g.dataset.n===id));
+  det.innerHTML='<h3></h3><dl><dt>Was</dt><dd></dd><dt>Wo</dt><dd></dd><dt>Achtung</dt><dd></dd></dl>';
+  det.querySelector('h3').textContent=t; const dd=det.querySelectorAll('dd');
+  dd[0].textContent=was; dd[1].textContent=wo; dd[2].textContent=achtung;
+  const ks=Object.entries(KANTEN).filter(([,v])=>v[1].includes(id)).map(([k])=>+k); zeigen(ks);
+  for(const b of document.querySelectorAll('[data-ablauf]')) b.setAttribute('aria-pressed','false');
+  at.textContent='Datenflüsse von und zu „'+t+'“.';
+}
+knoten.forEach(g=>{g.addEventListener('click',()=>knotenDetail(g.dataset.n));
+  g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();knotenDetail(g.dataset.n);}});});
+ablauf('alle'); knotenDetail('sheet'); ablauf('alle');
+})();
+</script>
+</body></html>

@@ -46,10 +46,10 @@ def build(theme):
         f.band(x, 0.0, w, H, lab)
     XE, WE_ = 2.4, 23.0                  # Eingabe
     XB, WB = 32.5, 17.0                  # Berechnung
-    XG, WG, WGN = 56.5, 25.0, 28.0       # GuV (schmale Boxen lassen rechts Platz für die Sammelleitung)
+    XG, WG, WGN = 56.5, 25.0, 29.0       # GuV (schmale Boxen lassen rechts Platz für die Sammelleitung)
     XBI, WBI = 91.5, 27.0                # Bilanz
     XC, WC = 125.5, 28.0                 # Cash-Flow
-    BUS = 83.6                           # Sammelleitung zum Deckungsbeitrag (im GuV-Band)
+    BUS = 85.0                           # Sammelleitung zum Deckungsbeitrag (im GuV-Band)
     KANAL = 0.9                          # Leitung links von den Eingaben (Absatz → Wareneinsatz, Zugang Produktion)
     XFK, XMK = 27.6, 29.0                # Abzweige der Standardkosten nach unten
 

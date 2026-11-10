@@ -1,0 +1,22 @@
+﻿Kostenartennummer;Kostenart;Kostenstelle;Betrag_EUR
+1011;Fertigungslohn;4533;11450
+1050;Gemeinkostenlohn;2111;1120
+1050;Gemeinkostenlohn;4533;9130
+1050;Gemeinkostenlohn;6715;5770
+1060;Personalnebenkosten-Lohn;3455;13540
+1060;Personalnebenkosten-Lohn;6715;9020
+2025;Gemeinkostenmaterial;2111;2230
+2025;Gemeinkostenmaterial;3455;6196
+2025;Gemeinkostenmaterial;4544;6695
+3038;Energie;3455;1385
+3038;Energie;4533;1280
+3038;Energie;4544;3370
+3038;Energie;7832;800
+4015;Gehalt;3455;6700
+4033;Personalnebenkosten-Gehalt;3455;3360
+5012;Fremdreparaturen;2111;835
+6018;Kalk. Abschreibungen;2111;500
+6018;Kalk. Abschreibungen;5625;3630
+6033;Kalk. Zinsen;2111;1120
+8044;Sonstige Kosten;2111;3903
+8044;Sonstige Kosten;4544;14070

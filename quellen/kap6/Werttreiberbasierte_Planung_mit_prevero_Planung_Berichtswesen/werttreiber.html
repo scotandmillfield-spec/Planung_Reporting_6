@@ -1,0 +1,131 @@
+<!-- Abb. 6.1 „Werttreiberbasierte Planung“: Maske „Werttreiberbasierte Planung“ mit Werttreiberbaum Personalkosten
+     (Produktscreenshot, softwareneutral nachgebaut; Caption nennt das Produkt – Caption ohne Produktnamen fassen).
+     Raster: Maske 727 px = 110 mm; Inhalt 695 px. Baum wie im Original von links (Treiber) nach rechts (Spitzenkennzahl):
+     fünf Spalten, Knoten 119 px, Spalten x = 0 · 131 · 300 · 443 · 576 (Lücken 12 · 50 · 24 · 14 px, je nach Platzbedarf
+     von Sammelleitung und Rechenzeichen), fünf Zeilen y = 0 · 93 · 186 · 279 · 372, Knotenhöhe 79 px.
+     Verbindungen und Rechenzeichen wie im Du-Pont-Baum (Abb. 5.50): Linie #6E747A 1,5 px, Kreis mit Rechenzeichen;
+     das Zeichen steht am Ast des Eingangs, für den es gilt (erster Operand ohne Zeichen). -->
+<style>
+  #wtb { --sp-label: 160px; --sp-feld: 192px; }
+  /* Titelzeile wie Abb. 3.7/3.8: kein Balken, Titel fett, Untertitel grau, Haarlinie darunter */
+  #wtb .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #wtb .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #wtb .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  /* Baum */
+  #wtb .baum { position: relative; height: 451px; margin-top: 14px; }
+  #wtb .baum > svg { position: absolute; left: 0; top: 0; }
+  #wtb .knoten { position: absolute; width: 119px; height: 79px; border: 1px solid var(--rahmen); border-radius: 2px;
+    padding: 5px 5px 6px; background: #FFFFFF; }
+  #wtb .knoten.spitze { border: 2px solid var(--ac); padding: 4px 4px 5px; }
+  #wtb .knoten > .mk-label { display: block; height: 18px; line-height: 18px; }
+  #wtb .knoten > .mk-feld { margin-top: 4px; }
+  /* Rechenzeichen: Kreis wie im Du-Pont-Baum */
+  #wtb .op { position: absolute; width: 20px; height: 20px; margin: -10px 0 0 -10px; border: 1.5px solid #6E747A;
+    border-radius: 10px; background: #FFFFFF; font-size: 14px; font-weight: bold; line-height: 17px; text-align: center; }
+  /* Legende */
+  #wtb .legende { display: flex; align-items: center; gap: 6px; margin-top: 14px; color: var(--muted); white-space: nowrap; }
+  #wtb .legende .lg { display: inline-block; width: 22px; height: 14px; border: 1px solid var(--rahmen); border-radius: 2px; background: #FFFFFF; }
+  #wtb .legende .lg.grau { background: var(--anzeige); border-color: var(--anzeige); }
+  #wtb .legende .lg-op { display: inline-block; width: 20px; height: 20px; border: 1.5px solid #6E747A; border-radius: 10px;
+    background: #FFFFFF; color: var(--text); font-weight: bold; line-height: 17px; text-align: center; }
+  #wtb .legende .abst { width: 18px; }
+</style>
+<form class="mk-maske" id="wtb" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Werttreiberbasierte Planung</span><span class="kopf-unter" id="kopf-unter">Werttreiberbaum Personalkosten · Plan 2028 · Stand 06.12.2027</span></div>
+  <div class="mk-inhalt">
+    <section class="mk-abschnitt" id="abschnitt-baum">
+      <div class="mk-band" id="band-baum" data-klappbar="nein">Werttreiberbaum Personalkosten</div>
+      <div class="mk-zeile" id="z-bereich">
+        <label class="mk-label" for="f-bereich">Unternehmensbereich</label>
+        <select class="mk-feld" id="f-bereich"></select>
+      </div>
+
+      <div class="baum" id="baum">
+        <svg width="695" height="451" viewBox="0 0 695 451" aria-hidden="true">
+          <g stroke="#6E747A" stroke-width="1.5" fill="none">
+            <!-- Ungeplante Abgänge = Mitarbeitende Vorperiode × Fluktuationsrate -->
+            <line x1="59.5" y1="132.5" x2="131" y2="132.5"/>
+            <line x1="59.5" y1="132.5" x2="59.5" y2="372"/>
+            <line x1="59.5" y1="318.5" x2="131" y2="318.5"/>
+            <!-- Mitarbeitende Planperiode = Vorperiode + Neuaufnahmen − ungeplante − geplante Abgänge -->
+            <line x1="250" y1="132.5" x2="286" y2="132.5"/>
+            <line x1="250" y1="225.5" x2="286" y2="225.5"/>
+            <line x1="250" y1="318.5" x2="300" y2="318.5"/>
+            <line x1="250" y1="411.5" x2="286" y2="411.5"/>
+            <line x1="286" y1="132.5" x2="286" y2="411.5"/>
+            <!-- Ø Kosten je MA Planperiode = Ø Kosten Vorperiode × (1 + Steigerung) -->
+            <line x1="419" y1="39.5" x2="431" y2="39.5"/>
+            <line x1="431" y1="39.5" x2="431" y2="132.5"/>
+            <line x1="419" y1="132.5" x2="443" y2="132.5"/>
+            <!-- Personalkosten gesamt = Ø Kosten je MA × Mitarbeitende + Einmalzahlung -->
+            <line x1="502.5" y1="172" x2="502.5" y2="372"/>
+            <line x1="359.5" y1="279" x2="359.5" y2="225.5"/>
+            <line x1="359.5" y1="225.5" x2="576" y2="225.5"/>
+          </g>
+        </svg>
+
+        <div class="knoten" id="k-steig" style="left:300px;top:0">
+          <span class="mk-label">Personalkosten-</span><label class="mk-label" for="f-steig">steigerung in %</label>
+          <input class="mk-feld mk-zahl treiber" id="f-steig" inputmode="decimal" data-hilfe="Prozentwert mit Dezimalkomma, z. B. 3,5">
+        </div>
+        <div class="knoten" id="k-mavor" style="left:131px;top:93px">
+          <span class="mk-label">Mitarbeitende</span><label class="mk-label" for="f-mavor">Vorperiode</label>
+          <input class="mk-feld mk-zahl treiber" id="f-mavor" inputmode="numeric" data-hilfe="Anzahl, ganze Zahl">
+        </div>
+        <div class="knoten" id="k-kvor" style="left:300px;top:93px">
+          <span class="mk-label">Ø Kosten je MA</span><label class="mk-label" for="f-kvor">Vorperiode in €</label>
+          <input class="mk-feld mk-zahl treiber" id="f-kvor" inputmode="decimal" data-hilfe="Betrag in €">
+        </div>
+        <div class="knoten" id="k-kplan" style="left:443px;top:93px">
+          <span class="mk-label">Ø Kosten je MA</span><span class="mk-label">Planperiode in €</span>
+          <div class="mk-feld mk-anzeige mk-zahl" id="f-kplan"></div>
+        </div>
+        <div class="knoten" id="k-neu" style="left:131px;top:186px">
+          <span class="mk-label">Neuaufnahmen</span><label class="mk-label" for="f-neu">Planperiode</label>
+          <input class="mk-feld mk-zahl treiber" id="f-neu" inputmode="numeric" data-hilfe="Anzahl, ganze Zahl">
+        </div>
+        <div class="knoten spitze" id="k-pk" style="left:576px;top:186px">
+          <span class="mk-label">Personalkosten</span><span class="mk-label">gesamt in €</span>
+          <div class="mk-feld mk-anzeige mk-zahl" id="f-pk"></div>
+        </div>
+        <div class="knoten" id="k-ungepl" style="left:131px;top:279px">
+          <span class="mk-label">Ungeplante</span><span class="mk-label">Abgänge</span>
+          <div class="mk-feld mk-anzeige mk-zahl" id="f-ungepl"></div>
+        </div>
+        <div class="knoten" id="k-maplan" style="left:300px;top:279px">
+          <span class="mk-label">Mitarbeitende</span><span class="mk-label">Planperiode</span>
+          <div class="mk-feld mk-anzeige mk-zahl" id="f-maplan"></div>
+        </div>
+        <div class="knoten" id="k-fluk" style="left:0;top:372px">
+          <span class="mk-label">Fluktuationsrate</span><label class="mk-label" for="f-fluk">in %</label>
+          <input class="mk-feld mk-zahl treiber" id="f-fluk" inputmode="decimal" data-hilfe="Prozentwert mit Dezimalkomma, z. B. 10,0">
+        </div>
+        <div class="knoten" id="k-gepl" style="left:131px;top:372px">
+          <span class="mk-label">Geplante</span><label class="mk-label" for="f-gepl">Abgänge</label>
+          <input class="mk-feld mk-zahl treiber" id="f-gepl" inputmode="numeric" data-hilfe="Anzahl, ganze Zahl">
+        </div>
+        <div class="knoten" id="k-einmal" style="left:443px;top:372px">
+          <span class="mk-label">Einmalzahlung</span><label class="mk-label" for="f-einmal">in €</label>
+          <input class="mk-feld mk-zahl treiber" id="f-einmal" inputmode="decimal" data-hilfe="Betrag in €">
+        </div>
+
+        <div class="op" id="op-fluk" style="left:59.5px;top:345px">×</div>
+        <div class="op" id="op-neu" style="left:268px;top:225.5px">+</div>
+        <div class="op" id="op-ungepl" style="left:268px;top:318.5px">−</div>
+        <div class="op" id="op-gepl" style="left:268px;top:411.5px">−</div>
+        <div class="op" id="op-steig" style="left:431px;top:86px">×</div>
+        <div class="op" id="op-maplan" style="left:431px;top:225.5px">×</div>
+        <div class="op" id="op-einmal" style="left:502.5px;top:299px">+</div>
+        <!-- nur Lernplattform: im leeren Feld oben links -->
+        <a class="mk-link mk-nur-interaktiv" id="l-zurueck" tabindex="0" role="button" style="position:absolute;left:0;top:30px">Ausgangswerte wiederherstellen</a>
+      </div>
+
+      <div class="legende" id="legende">
+        <span class="lg"></span><span>Werttreiber (Eingabe)</span><span class="abst"></span>
+        <span class="lg grau"></span><span>berechnet</span><span class="abst"></span>
+        <span class="lg-op">×</span><span>Rechenzeichen gilt für den Ast, an dem es steht</span>
+      </div>
+    </section>
+  </div>
+</form>

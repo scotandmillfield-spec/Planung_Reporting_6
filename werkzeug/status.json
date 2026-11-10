@@ -854,6 +854,59 @@
    ],
    "alt": "Dialogfenster eines KI-Assistenten im Rechnungswesen: Auf die Frage, wie sich die Umsatzerlöse entwickeln werden, fragt der Assistent nach der Basisgröße (BWA oder HGB). Nach der Wahl „BWA-Basisgrößen“ antwortet er mit einer Prognose für Mai bis Juli 2027 – im Juli voraussichtlich 7,23 bis 7,95 Mio. € – und einer kleinen Tabelle mit Vorjahr, Vorschau, Bandbreite und Abweichung; kumuliert liegen die Umsatzerlöse 2,9 % über dem Vorjahr. Unten stehen das Eingabefeld, Knöpfe für Spracheingabe und Senden sowie eine Auswahl vorgeschlagener Fragen."
   },
+  "5.75": {
+   "status": "pruefung",
+   "datei": "Planung_eines_Projektfertigers_mit_MS_Excel",
+   "kommentare": [
+    "Tabellenblatt softwareneutral als Planungsmaske im Querformat (1024 px) nachgebaut; Fenster, Menü-/Bearbeitungsleiste, Zeilen-/Spaltenköpfe, Taskleiste entfernt",
+    "Alle Zeilen, Spalten und Werte übernommen und nachgerechnet (Rechenlogik vollständig nachgebildet, interaktiv); Anzeige in Tsd. € mit 1 Nachkommastelle statt €, sonst passen 14 Spalten nicht",
+    "„NL Erfurt“ → Niederlassung Mitte, Projekt „Uni Klinik Halle“ → „OP-Trakt“ (reale Einrichtung); Jahre +24 (GJ 2027/28); Projektbeginn/-ende Mrz 1999/Sep 2000 lagen vor dem Ist-Stichtag → 03/2027 bzw. 09/2028",
+    "Chancen-Block als Spalte zwischen Projektliste und Prognose nach Chancen; Materialchance 150.000 stand im Original in ausgeblendeter Zeile (aus Summe 195.000 erschlossen); Sozialzuschlag 80 % (im Original verborgen) sichtbar gemacht",
+    "MOR-Schema verdichtet (Wiederholung von Umsatz, Bestandsveränderung und 7 Kostenzeilen durch Abschnittssummen ersetzt); Fußnote zum Bestand nur noch in den Erläuterungen",
+    "Farbcodes (gelb/weiß/grün/türkis) → Eingabe weiß, Anzeige grau; rote Negativwerte → Minuszeichen; Übernahme-Schaltflächen und Pfeile → Links in den Bändern",
+    "Caption ohne Produktnamen? z. B. „Planung eines Projektfertigers mit einer Tabellenkalkulation“; Frage: Bedeutung von „MOR-Schema“ im Text erläutert?"
+   ],
+   "alt": "Planungsmaske „Projektplanung“ eines Projektfertigers für ein einzelnes Projekt in Tsd. €. Spalten führen vom Ist über die Prognose lt. Projektliste, Chancen und neue Prognose des Gesamtprojekts zu den Restbeträgen, den vier Quartalen des Geschäftsjahrs 2027/28 und dem Folgejahr; Zeilen enthalten fremdbezogene Leistungen, Personalkosten, die Fertigstellungsgradplanung und ein stufiges MOR-Schema. Nach der neuen Prognose ergibt sich für das Projekt ein Projektvollkostenergebnis von −206,9 Tsd. €; nach dem Geschäftsjahr bleibt ein Arbeitsvorrat von 534,3 Tsd. €."
+  },
+  "5.76": {
+   "status": "pruefung",
+   "datei": "Reporting_mit_MS_Access",
+   "kommentare": [
+    "Produktscreenshot (Datenbankbericht) softwareneutral als interaktive Kreuztabelle nachgebaut: Menüband, Navigationsbereich, Reiter, Statusleiste, blaue Kopffläche mit Symbol und Formularkästen je Zelle entfernt",
+    "Werte des Originals übernommen (11 Kostenarten × 7 Kostenstellen, Gesamt 106.104 € nachgerechnet); Summenzeile je Kostenstelle ergänzt, Gesamtspalte mit Balken",
+    "Einheit € ergänzt (im Original keine), Tausenderpunkt, leere Zellen als „–“; „sonstige Kosten“ → „Sonstige Kosten“",
+    "Botschaft aus den Daten (Kostenstelle 3455 trägt 29 %); Klick auf Zeile/Betrag/Spaltensumme hebt hervor, Spaltenköpfe sortieren",
+    "Datum „Freitag, 20. Februar 2015“ → „Stand 19.02.2027“ (ebenfalls Freitag); Kostenstellen ohne Namen wie im Original",
+    "Caption ohne Produktnamen? z. B. „Kostenartenübersicht nach Kostenstellen aus einer Datenbankanwendung“"
+   ],
+   "alt": "Kreuztabelle „Kostenarten nach Kostenstellen“ in Euro mit elf Kostenarten in den Zeilen und sieben Kostenstellen in den Spalten, dazu eine Gesamtspalte mit Balken und eine Summenzeile. Die Gesamtkosten betragen 106.104 €; Kostenstelle 3455 trägt mit 31.181 € rund 29 %, größte Kostenart ist Personalnebenkosten-Lohn mit 22.560 €."
+  },
+  "5.77": {
+   "status": "pruefung",
+   "datei": "Star-Schema_fuer_den_Einkauf_mit_Microsoft_Visual_Studio",
+   "kommentare": [
+    "Produktscreenshot der Würfel-Entwurfsansicht als Diagramm im Stil von Abb. 5.19 (Tabellenkarten, PK/FK, Kardinalität n:1); Fakten box_hi, kein Rot",
+    "Anordnung wie im Original (Lieferant oben, Datum links, Einkäufer rechts, Region/Artikel unten); Pfeile Fakten → Dimension → Linien mit Kardinalität",
+    "Präfixe TC_/TD_ entfernt, englische Feldnamen übersetzt (City → Ort, vendor posting group → Buchungsgruppe, country_name/code → Ländername/-code, Inventory posting group → Lagerbuchungsgruppe); Schlüssel zuerst",
+    "Lieferant im Original abgeschnitten („vendor posting g…“, „Countr…“) – aus der Attributliste ergänzt (Ländercode), bitte prüfen",
+    "Seitenleisten auf zwei gestrichelte Gruppen „Würfel: Measures“ (Menge, Wert, Anzahl) und „Würfel: Hierarchien“ verdichtet; Projektmappen-Explorer, Menüs, Symbole entfallen – Gruppen ggf. ganz streichen?",
+    "Caption ohne Produktnamen? z. B. „Star-Schema für den Einkauf (Würfelentwurf)“"
+   ],
+   "alt": "Star-Schema für den Einkauf mit der Faktentabelle Einkauf in der Mitte, die Fremdschlüssel zu Artikel, Einkäufer, Lieferant, Datum und Region sowie die Kennzahlen Menge und Wert enthält. Die fünf Dimensionstabellen sind sternförmig angeordnet und jeweils n:1 mit der Faktentabelle verbunden. Zwei gestrichelte Gruppen nennen die Measures des Würfels (Menge, Wert, Anzahl Einkäufe) und die Hierarchien Produktgruppe › Artikel und Region › Lieferant."
+  },
+  "6.1": {
+   "status": "pruefung",
+   "datei": "Werttreiberbasierte_Planung_mit_prevero_Planung_Berichtswesen",
+   "kommentare": [
+    "Produktscreenshot softwareneutral nachgebaut: Fenster, Menü, Logo, Navigationsleiste (Prozess/Planung/Simulation/Reporting) und Statuszeilen (Datum, User, Server) entfernt",
+    "Tippfehler im Titel korrigiert: „Wertreiberbasierte Planunug“ → „Werttreiberbasierte Planung“",
+    "Werte und Baumaufbau des Originals übernommen (Treiber links, Personalkosten gesamt rechts); Treiber weiß (Eingabe), berechnete Knoten grau, Rechenzeichen im Kreis am Ast wie im Du-Pont-Baum (Abb. 5.50)",
+    "Abkürzungen aufgelöst (MA → Mitarbeitende, durchschn. → Ø), Einheiten ergänzt; Ø Kosten je MA Planperiode 4.062,5 € als 4.063 angezeigt; ungeplante Abgänge auf ganze Köpfe gerundet",
+    "Interaktiv: Eingabe eines Treibers rechnet bis zur Spitzenkennzahl durch; Bereiche Fahrräder/Ersatzteile erfunden; Stand 05.12.2011 → 06.12.2027, Plan 2028",
+    "Caption ohne Produktnamen? z. B. „Werttreiberbasierte Planung der Personalkosten (in Anlehnung an …)“"
+   ],
+   "alt": "Eingabemaske „Werttreiberbasierte Planung“ mit einem Werttreiberbaum der Personalkosten für den Unternehmensbereich Motorräder. Von links nach rechts errechnen sich aus Fluktuationsrate, Mitarbeitenden der Vorperiode, Neuaufnahmen und Abgängen die 18 Mitarbeitenden der Planperiode und aus 3.250 € Vorperiodenkosten und 25 % Steigerung Ø Kosten von 4.063 € je Mitarbeitendem. Daraus und aus einer Einmalzahlung von 45.000 € ergibt sich die Spitzenkennzahl Personalkosten gesamt von 118.125 €."
+  },
   "3.32": {
    "status": "pruefung",
    "datei": "Pivottabelle_MS_Excel",

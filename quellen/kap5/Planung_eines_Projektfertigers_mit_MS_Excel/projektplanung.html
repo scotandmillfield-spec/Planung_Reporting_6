@@ -1,0 +1,77 @@
+<!-- Abb. 5.75 „Planung eines Projektfertigers“: Tabellenblatt „Projektplanung“ einer Tabellenkalkulation
+     (Produktscreenshot, softwareneutral nachgebaut; Caption nennt das Produkt – Caption ohne Produktnamen fassen).
+     Querformat 1024 px = 155 mm; Inhalt 992 px; Höhe ≤ 727 px.
+     Raster (Kopfblock und Tabelle): Zeile 192 · Ist 56 · Projektliste 56 · Chancen 60 · nach Chancen 60 ·
+     neue Prognose 56 · Rest 56 · bis 30.06. 56 · Rest 56 · GJ 56 · Q1–Q4 je 56 · Folgejahr 64 = 992 px.
+     Zellen wie Abb. 3.183: Eingabe weiß mit Gitterlinie, Anzeige grau, Summen fett; Zeilen 18 px, Bänder 20 px.
+     Werte in Tsd. € mit einer Nachkommastelle (im Original €), damit 14 Wertspalten in die Breite passen. -->
+<style>
+  #pp { width: 1024px; }
+  /* Titelzeile in einer Zeile (Titel fett, Untertitel grau, Haarlinie) – das Raster braucht die Höhe */
+  #pp .mk-kopf { display: flex; align-items: baseline; gap: 14px; height: auto; background: none; color: var(--text);
+    padding: 10px 0 8px; margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px;
+    font-weight: normal; justify-content: flex-start; }
+  #pp .mk-kopf .kopf-titel { font-size: 22px; line-height: 26px; font-weight: bold; }
+  #pp .mk-kopf .kopf-unter { line-height: 18px; color: var(--muted); }
+  #pp .mk-inhalt { padding: 10px 15px 12px; }
+  /* gemeinsames Spaltenraster */
+  #pp .kb, #pp .mx { display: grid; grid-template-columns: 192px 56px 56px 60px 60px repeat(9, 56px) 64px; }
+  /* Kopfblock: Projektdaten links, Parameter rechts */
+  #pp .kb { row-gap: 3px; margin-bottom: 10px; }
+  #pp .kb .mk-label { height: 20px; line-height: 20px; }
+  #pp .kb .mk-label.rechts { text-align: right; padding-right: 6px; }
+  #pp .kb .mk-feld { height: 20px; line-height: 18px; padding: 0 4px; margin-left: 2px; width: calc(100% - 2px); }
+  #pp .kb .mk-feld.mk-zahl { padding: 0 3px 0 2px; }
+  #pp .kb .mk-feld.mk-datum { text-align: center; }
+  /* Tabelle */
+  #pp .mx-k { height: 49px; padding: 0 3px 3px 0; text-align: right; color: var(--muted); border-bottom: 1px solid var(--ac);
+    white-space: nowrap; overflow: hidden; line-height: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
+  #pp .mx-k.links { text-align: left; }
+  #pp .mx-k.eng { padding-right: 1px; }
+  #pp .mx-k span { display: block; height: 16px; }
+  #pp .mx-l { height: 18px; line-height: 17px; padding: 0 4px 0 0; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #pp .mx-l.neben { color: var(--muted); }
+  #pp .mx .mk-feld { height: 18px; line-height: 17px; padding: 0 3px 0 2px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #pp .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #pp .mx .mk-feld.mk-fehler, #pp .kb .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #pp .mx .leer { height: 18px; border-bottom: 1px solid #EFEFEF; }
+  #pp .mx .trenn { border-left: 1px solid #9A9A9A !important; }
+  #pp .mx .summe { font-weight: bold; }
+  #pp .mx .abstand { margin-top: 4px; }
+  #pp .mx .pp-band { grid-column: 1 / -1; height: 20px; line-height: 20px; margin: 0; padding: 0 6px; position: relative; }
+  #pp .pp-band .mk-link, #pp .pp-band .band-notiz { position: absolute; top: 0; text-transform: none; letter-spacing: 0;
+    font-weight: normal; white-space: nowrap; }
+  #pp .pp-band .band-notiz { right: 6px; color: var(--muted); }
+</style>
+<form class="mk-maske" id="pp" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Projektplanung</span><span class="kopf-unter" id="kopf-unter">Niederlassung Mitte · Ist bis 31.03.2027 · Geschäftsjahr 2027/28 (Juli bis Juni) · Werte in Tsd. €</span></div>
+  <div class="mk-inhalt">
+
+    <div class="kb" id="kopfblock">
+      <label class="mk-label" for="f-nr" style="grid-column:1">Projektnummer, Name</label>
+      <input class="mk-feld" id="f-nr" value="1992" style="grid-column:2" data-hilfe="Projektnummer">
+      <input class="mk-feld" id="f-name" value="OP-Trakt" style="grid-column:3 / 6" aria-label="Projektbezeichnung" data-hilfe="Projektbezeichnung">
+      <label class="mk-label rechts" for="f-deck" style="grid-column:6 / 10">Deckungsbedarf, % Eigenleistung</label>
+      <input class="mk-feld mk-zahl" id="f-deck" style="grid-column:10" inputmode="decimal" data-hilfe="Prozentwert mit Dezimalkomma, z. B. 40,00">
+      <label class="mk-label rechts" for="f-soz" style="grid-column:11 / 15">Sozialzuschlag, % Lohn</label>
+      <input class="mk-feld mk-zahl" id="f-soz" style="grid-column:15" inputmode="decimal" data-hilfe="Zuschlag für Sozial- und Personalnebenkosten in % des produktiven Lohns">
+
+      <label class="mk-label" for="f-beg-plan" style="grid-column:1">Projektbeginn Plan, Prognose</label>
+      <input class="mk-feld mk-datum" id="f-beg-plan" value="03/2027" style="grid-column:2 / 4" data-hilfe="Monat MM/JJJJ">
+      <input class="mk-feld mk-datum" id="f-beg-prog" value="03/2027" style="grid-column:4 / 6" aria-label="Projektbeginn Prognose" data-hilfe="Monat MM/JJJJ">
+      <span class="mk-label rechts" style="grid-column:6 / 10" id="l-vu">Quartalsverteilung Umsatz in %</span>
+      <div class="mk-feld mk-anzeige mk-zahl" id="f-vu-sum" style="grid-column:10"></div>
+      <!-- Felder f-vu-N … f-vu-Q erzeugt projektplanung.js -->
+
+      <label class="mk-label" for="f-fer-plan" style="grid-column:1">Fertigstellung Plan, Prognose</label>
+      <input class="mk-feld mk-datum" id="f-fer-plan" value="09/2028" style="grid-column:2 / 4" data-hilfe="Monat MM/JJJJ">
+      <input class="mk-feld mk-datum" id="f-fer-prog" value="09/2028" style="grid-column:4 / 6" aria-label="Fertigstellung Prognose" data-hilfe="Monat MM/JJJJ">
+      <span class="mk-label rechts" style="grid-column:6 / 10" id="l-vk">Quartalsverteilung Kosten in %</span>
+      <div class="mk-feld mk-anzeige mk-zahl" id="f-vk-sum" style="grid-column:10"></div>
+    </div>
+
+    <div class="mx" id="raster"><!-- Spaltenköpfe, Bänder und Zeilen erzeugt projektplanung.js --></div>
+
+  </div>
+</form>

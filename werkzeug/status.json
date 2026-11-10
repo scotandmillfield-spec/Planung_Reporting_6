@@ -597,6 +597,19 @@
    ],
    "alt": "Maßstäblich ineinanderliegende Bildschirmflächen: Ein PC-Bildschirm mit z. B. 1.280 × 1.024 Pixeln und 17 Zoll umfasst unten links ein Tablet mit z. B. 1.280 × 768 Pixeln und 9,7 Zoll. Darin liegen ein Smartphone (320 × 480 Pixel, 3,5 Zoll) und ein Smartphone mit Tastatur (480 × 320 Pixel, 2,6 Zoll); die Abbildung zeigt, wie stark Auflösung und Größe der Endgeräte voneinander abweichen."
   },
+  "5.52": {
+   "status": "pruefung",
+   "datei": "SAP_Fiori_Launchpad_Homepage_im_Editiermodus",
+   "quer": true,
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Maske nachgebaut, Querformat 1024 px = 155 × 110 mm (Kachelraster mit fünf Einheiten plus Benachrichtigungen rechts): Kopfleiste mit Profilfoto, Logo und Symbolen, Hintergrundverlauf und dunkle Fußleiste entfallen; Texte übersetzt („Home“ → Startseite, „Done“ → Fertig)",
+    "Kacheln schlicht im Buchstil ohne Icons, Anordnung wie im Original (Gruppe „Meine Startseite“, Link-Gruppe, drei Benachrichtigungen); Editiermodus bedienbar: Kacheln per Drag & Drop oder Pfeiltasten verschieben, „Entfernen“, „Kachel hinzufügen“ (holt Entferntes zurück bzw. Apps aus einem Katalog), „Fertig“/„Bearbeiten“ wechselt den Modus",
+    "Symbole → Text: × → „Entfernen“, + → „Kachel hinzufügen“, „…“ entfällt; Foto und Abspielknopf der Nachrichtenkachel entfallen; Ampelfarben der Umsatzbalken → anthrazit, „234M“ → „234 Mio.“; Überschrift „Benachrichtigungen“ ergänzt",
+    "Annahmen: Zahlen der Kacheln mit Einheit ergänzt („1 heute“, „35 offen“); Prioritätsstreifen rot/grün → „Hohe Priorität“; Blindtext und Vorlagenname „Donna Moore“ → Frau Brandt/Herr Tal mit fiktiven Urlaubsdaten 2027 – bitte prüfen",
+    "Caption ohne Produktnamen? z. B. ‚Launchpad-Startseite im Editiermodus (in Anlehnung an SAP Fiori 2017a)‘; Dateiname folgt dann der neuen Caption"
+   ],
+   "alt": "Startseite eines Launchpads im Editiermodus: Unter den Reitern Meine Startseite, Nützliche Apps und Innendienst Vertrieb stehen Kacheln wie Kunden verwalten, eine Nachrichtenkachel, ein kleines Balkendiagramm der Jahresumsätze nach Region und Kacheln mit Kennzahlen (35 offene Reiseanträge), jede mit der Aktion „Entfernen“, dazu eine Kachel „Kachel hinzufügen“ und eine Gruppe mit Link-Kacheln. Rechts stehen drei Benachrichtigungen, unten beendet „Fertig“ den Editiermodus."
+  },
   "5.53": {
    "status": "pruefung",
    "datei": "SAP_Fiori_Responsive_Design_fuer_verschiedene_Endgeraete",

@@ -92,12 +92,12 @@
   const bFilter = DK.box("filter", 16, 68, 992, 50, "dk-filter");
   const bKpi = DK.box("kpis", 16, 128, 992, 68);
   DK.haarlinie(206);
-  const bBwa = DK.box("v-bwa", 16, 216, 470, 426);
-  const bMon = DK.box("v-monat", 506, 216, 241, 200);
-  const bAus = DK.box("v-auslastung", 767, 216, 241, 200);
-  DK.haarlinie(426, 506, 16);
-  const bQuo = DK.box("v-quoten", 506, 436, 241, 206);
-  const bKos = DK.box("v-kosten", 767, 436, 241, 206);
+  const bBwa = DK.box("v-bwa", 16, 216, 450, 426);
+  const bMon = DK.box("v-monat", 486, 216, 241, 200);
+  const bAus = DK.box("v-auslastung", 747, 216, 261, 200);
+  DK.haarlinie(426, 486, 16);
+  const bQuo = DK.box("v-quoten", 486, 436, 241, 206);
+  const bKos = DK.box("v-kosten", 747, 436, 261, 206);
 
   /* ---------- lokaler Tooltip (wie DK, leere Zeilen entfallen) ---------- */
   const tip = document.querySelector(".dk-tooltip");
@@ -175,9 +175,9 @@
   }
 
   /* ---------- BWA-Matrix (eigene Funktion: Wirkungsrichtung je Zeile, Gruppen und Ergebniszeilen) ---------- */
-  const SP = { pos: 238, ist: 56, plan: 56, d: 120 }, DTXT = 46;
+  const SP = { pos: 238, ist: 54, plan: 54, d: 104 }, DTXT = 46;
   function bwaTabelle(f, daten) {
-    const t = el("table", { class: "dk-matrix", id: "bwa-tabelle", style: "table-layout:fixed;width:470px" }, f.flaeche);
+    const t = el("table", { class: "dk-matrix", id: "bwa-tabelle", style: "table-layout:fixed;width:450px" }, f.flaeche);
     const cg = el("colgroup", {}, t);
     Object.values(SP).forEach(w => el("col", { style: `width:${w}px` }, cg));
     const kopf = el("tr", {}, el("thead", {}, t));
@@ -186,8 +186,9 @@
     el("th", {}, kopf, "Plan");
     el("th", { id: "bwa-delta-kopf", style: "text-align:center" }, kopf, "ΔPL");
     const tb = el("tbody", {}, t);
-    const max = Math.max(...daten.map(x => Math.abs(x.d)), 1), mitte = DTXT + 2 + (SP.d - 8 - DTXT - 4) / 2;
-    const k = (SP.d - 8 - DTXT - 4) / 2 / max;
+    // ein Maßstab für alle Zeilen, Nulllinie nach Spannweite (wie Datenbalken mit automatischer Achse)
+    const neg = Math.max(0, ...daten.map(x => -x.d)), pos = Math.max(0, ...daten.map(x => x.d));
+    const k = (SP.d - 8 - DTXT - 6) / Math.max(neg + pos, 1), mitte = DTXT + 2 + neg * k;
     daten.forEach(x => {
       const z = x.z, fett = z.stufe === "gruppe" || z.stufe === "ergebnis";
       const blass = S.pos && S.pos !== z.key;
@@ -298,9 +299,12 @@
       .map(x => ({ x, w: x.d * x.z.r })).sort((p, q) => p.w - q.w);
     const sel = S.pos ? b.find(x => x.z.key === S.pos) : null;
     const bBwa_ = sel ? passt([`${sel.z.label}: ${tsd(sel.ist)} Tsd. €, ΔPL ${delta(sel.d, 0)} Tsd. € (${pd(sel.ist, sel.plan)})`,
-                               `${sel.z.kurz}: ΔPL ${delta(sel.d, 0)} Tsd. € (${pd(sel.ist, sel.plan)})`], 470)
+                               `${sel.z.kurz}: ΔPL ${delta(sel.d, 0)} Tsd. € (${pd(sel.ist, sel.plan)})`], 450)
       : passt([`Betriebsergebnis ${zahl(Math.abs(be.d))} Tsd. € ${be.d < 0 ? "unter" : "über"} Plan, v. a. durch ${tr[0].x.z.kurz} und ${tr[1].x.z.kurz}`,
-                `Betriebsergebnis ${zahl(Math.abs(be.d))} Tsd. € ${be.d < 0 ? "unter" : "über"} Plan (${pd(be.ist, be.plan)})`], 470);
+                `Betriebsergebnis ${zahl(Math.abs(be.d))} Tsd. € ${be.d < 0 ? "unter" : "über"} Plan, v. a. ${tr[0].x.z.kurz} und ${tr[1].x.z.kurz}`,
+                `Ergebnis ${zahl(Math.abs(be.d))} Tsd. € ${be.d < 0 ? "unter" : "über"} Plan, v. a. ${tr[0].x.z.kurz} und ${tr[1].x.z.kurz}`,
+                `Betriebsergebnis ${pd(be.ist, be.plan)}, v. a. ${tr[0].x.z.kurz} und ${tr[1].x.z.kurz}`,
+                `Betriebsergebnis ${zahl(Math.abs(be.d))} Tsd. € ${be.d < 0 ? "unter" : "über"} Plan (${pd(be.ist, be.plan)})`], 450);
     let f = DK.visual(bBwa, { titel: "BWA: Plan-Ist-Vergleich", einheit: `Tsd. €, ${zeitraum(true)}`, botschaft: bBwa_ });
     bwaTabelle(f, b);
 
@@ -323,19 +327,20 @@
         : passt([`${schw.label} ${zahl(Math.abs(schw.werte.dpl), 1)} %-Pkt. ${schw.werte.dpl < 0 ? "unter" : "über"} Plan`, `Gesamt ${zahl(aGes.ist, 1)} %`], 241) });
     const tabA = el("div", { id: "auslastung-tabelle" }, f.flaeche);
     DK.matrix(tabA, {
-      spalten: [{ key: "label", titel: "Haus", breite: 86 }, { key: "ist", titel: "Ist", breite: 46, fmt: v => zahl(v, 1) },
-                { key: "dpl", titel: "ΔPL", typ: "delta", breite: 54, richtung: 1, nk: 1, textBreite: 32, id: "aus-dpl" },
-                { key: "dvg", titel: "ΔBM", typ: "delta", breite: 54, richtung: 1, nk: 1, textBreite: 32, id: "aus-dvg" }],
+      spalten: [{ key: "label", titel: "Haus", breite: 80 }, { key: "ist", titel: "Ist", breite: 44, fmt: v => zahl(v, 1) },
+                { key: "dpl", titel: "ΔPL", typ: "delta", breite: 68, richtung: 1, nk: 1, textBreite: 32, id: "aus-dpl" },
+                { key: "dvg", titel: "ΔBM", typ: "delta", breite: 68, richtung: 1, nk: 1, textBreite: 32, id: "aus-dvg" }],
       zeilen: a.zeilen, zeilenhoehe: 26, auswahl: S.haus, onClick: key => hausSetzen(key),
       tooltip: z => [H[z.key][1], `${zahl(z.pl)} Plätze · ${zahl(z.bi)} Belegungstage`, `Auslastungsgrad ${zahl(z.ist, 1)} % · Plan ${zahl(z.plan, 1)} %`,
                      `ΔPL ${delta(z.werte.dpl, 1)} %-Pkt. · Benchmark (Vergleichsgruppe) ${zahl(z.vg, 1)} %`, "Klick filtert das Dashboard"] });
-    el("div", { class: "dk-botschaft", style: "margin-top:6px", id: "auslastung-bm" }, f.flaeche, `ΔPL, ΔBM in %-Pkt.; Benchmark ${zahl(a.vg, 1)} %`);
+    el("div", { style: "margin-top:6px;color:var(--muted);white-space:nowrap", id: "auslastung-bm" }, f.flaeche,
+      passt([`Δ in %-Pkt.; Benchmark (Vergleichsgruppe) ${zahl(a.vg, 1)} %`, `Δ in %-Pkt.; Benchmark ${zahl(a.vg, 1)} %`], 261));
 
     // Quoten
-    const q = datenQuoten(), q0 = q[0], q1 = q[q.length - 1];
-    f = DK.visual(bQuo, { titel: "Krankheit und Überstunden", einheit: "%",
-      botschaft: passt([`Krankheitsquote ${zahl(q1.kq - q0.kq >= 0 ? q1.kq - q0.kq : q0.kq - q1.kq, 1)} %-Pkt. ${q1.kq >= q0.kq ? "über" : "unter"} ${pmKurz(q0.i)}`,
-                        `Krankheitsquote ${zahl(q1.kq, 1)} %`], 241) });
+    const q = datenQuoten(), q1 = q[q.length - 1], hlq = hs(), ivj = q1.i - 12;
+    const kqVj = pers("krank", ivj, hlq) / pers("soll", ivj, hlq) * 100, dkq = Number(q1.kq.toFixed(1)) - Number(kqVj.toFixed(1));
+    f = DK.visual(bQuo, { titel: "Krankheit, Überstunden", einheit: "%",
+      botschaft: passt([`Krankheitsquote ${delta(dkq, 1)} %-Pkt. zum Vorjahr`, `Krankheit ${delta(dkq, 1)} %-Pkt. zum Vorjahr`, `Krankheit ΔVJ ${delta(dkq, 1)} %-Pkt.`], 241) });
     quotenLinien(f, q);
 
     // Kosten je Berechnungstag
@@ -358,19 +363,19 @@
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "v-bwa", anker: "links", versatz: [460, 2], regel: "SAY – Botschaft vermitteln", titel: "Eine Aussage je Visual",
+      { nr: 1, ziel: "v-bwa", anker: "links", versatz: [440, 2], regel: "SAY – Botschaft vermitteln", titel: "Eine Aussage je Visual",
         text: "Unter jedem Titel steht ein aus den Daten berechneter Satz, der sich mit Berichtsmonat, Haus und Auswahl ändert – etwa wie weit das Betriebsergebnis unter Plan liegt und welche Positionen das verursachen. Das Original hatte nur Überschriften („BWA“, „Meine Kennzahlen“, „Auslastung“)." },
       { nr: 2, ziel: "kopf-legende", anker: "links", versatz: [-6, -2], regel: "UNIFY – Semantische Notation", titel: "Ist, Plan und Wirkung einheitlich",
         text: "Ist ist anthrazit gefüllt, Plan weiß mit Kontur; Abweichungen sind blaugrün (günstig) oder rot (ungünstig) nach ihrer Wirkung – Kosten über Plan sind rot, Erlöse über Plan blaugrün. Das Original nutzte Orange ohne feste Bedeutung (Kennzahlen, ein hervorgehobener Monat) und graue Säulen ohne Szenario." },
-      { nr: 3, ziel: "bwa-delta-kopf", anker: "links", versatz: [-8, 0], regel: "EXPRESS – Abweichung zeigen", titel: "ΔPL als Balken nach Wirkung",
+      { nr: 3, ziel: "bwa-delta-kopf", versatz: [0, 0], regel: "EXPRESS – Abweichung zeigen", titel: "ΔPL als Balken nach Wirkung",
         text: "Die Abweichung zum Plan steht als Zahl mit echtem Vorzeichen und als Balken an einer Nulllinie, ein Maßstab für alle Zeilen. Das Original zeigte Beträge mit nachgestelltem Minus („13.063.338,84−“) und ohne Farbe, ob die Abweichung gut oder schlecht ist." },
       { nr: 4, ziel: "kpi-3", anker: "links", versatz: [190, 22], regel: "CHECK – Stimmige Zahlen", titel: "Eine Datenbasis für alle Werte",
         text: "Kennzahlen, BWA und Visuals rechnen aus denselben Monatswerten: Erlöse und Betriebsergebnis der Kacheln sind die Zeilen der BWA, das Ergebnis je Belegungstag ist Betriebsergebnis durch Belegungstage. Im Original passte das Ergebnis je Belegungstag (−39) nicht zum positiven Betriebsergebnis, der Plan für März kumuliert (28,1 Mio. € Erlöse) nicht zum Ist (15,0 Mio. €), und die Erlössäule „Ist-Daten 15.007.921 EUR“ stand beim Mai." },
-      { nr: 5, ziel: "v-kosten", anker: "links", versatz: [214, 2], regel: "CONDENSE – Verdichten", titel: "Ein Visual statt zwei",
+      { nr: 5, ziel: "v-kosten", anker: "links", versatz: [254, 2], regel: "CONDENSE – Verdichten", titel: "Ein Visual statt zwei",
         text: "Kostenstrukturanalyse und Sachkosten je Berechnungstag des Originals teilen dieselbe Bezugsgröße – die Balkenlängen wären gleich. Ein Visual zeigt jetzt die Kosten je Berechnungstag nach Kostenart, der Anteil an den Kosten steht im Tooltip. Ebenso gehen Auslastungsgrad und Benchmark in einer Tabelle mit ΔPL und ΔBM auf." },
-      { nr: 6, ziel: "v-auslastung", anker: "links", versatz: [214, 2], regel: "SIMPLIFY – Klar beschriften", titel: "Namen statt Buchstaben",
+      { nr: 6, ziel: "v-auslastung", anker: "links", versatz: [248, 2], regel: "SIMPLIFY – Klar beschriften", titel: "Namen statt Buchstaben",
         text: "Häuser, Kostenarten und Monate sind ausgeschrieben, Werte stehen direkt an Balken und Säulen. Im Original trugen die Säulen nur Kürzel (B, F, M; M, P, G, V, L; W, A, A, V, L) ohne Erläuterung und ohne Werte; auch die Einheit „€“ beim Ergebnis je Belegungstag fehlte." },
-      { nr: 7, ziel: "quoten-kq", anker: "links", versatz: [-4, -18], regel: "EXPRESS – Passende Darstellung", titel: "Linien mit Beschriftung am Ende",
+      { nr: 7, ziel: "v-quoten", anker: "links", versatz: [244, 2], regel: "EXPRESS – Passende Darstellung", titel: "Linien mit Beschriftung am Ende",
         text: "Krankheits- und Überstundenquote über zwölf Monate als Linien, Werte des Berichtsmonats direkt am Linienende, Monate chronologisch. Das Original zeigte eine blaue gestrichelte und eine orangefarbene Linie ohne Werte und ohne Achse, die Legende stand unter dem Diagramm." },
       { nr: 8, ziel: "filter", anker: "links", versatz: [700, -2], regel: "STRUCTURE – Gliederung", titel: "Ohne Programmrahmen, mit Datenschnitten",
         text: "Programmleiste, Navigationsspalte, Logo, Kachelrahmen, Bildlaufleiste und „Dashboard bearbeiten“ entfallen. Berichtsmonat und Haus filtern das Dashboard; ein Klick auf eine BWA-Zeile oder eine Kostenart zeigt deren Monatsverlauf, ein Klick auf ein Haus filtert, Esc hebt die Auswahl auf." },
@@ -379,7 +384,7 @@
       "Datenmodell: Faktentabelle BWA (Monat, Haus, Position, Ist, Plan), Tabelle Positionen (Gruppe, Sortierung, Richtung +1/−1), Belegung (Belegungs-, Abwesenheits-, Platztage), Personal (Stunden, Vollkräfte, Köpfe) und eine Datumstabelle. " +
       "Measures: Ist kum = CALCULATE(SUM(BWA[Ist]); DATESYTD(Datum[Datum])); Plan kum analog; ΔPL = [Ist kum] − [Plan kum]; Wirkung = [ΔPL] * SELECTEDVALUE(Positionen[Richtung]); Zwischen- und Betriebsergebnis als Measures über die Positionsgruppen (Vorzeichen über Richtung).",
     nachbau: [
-      { id: "A", ziel: "kpis", anker: "links", versatz: [400, 4], titel: "Kennzahlen", visual: "Karte (neu) mit sechs Kennzahlen und Referenzbeschriftungen",
+      { id: "A", ziel: "kpi-5", versatz: [0, 0], titel: "Kennzahlen", visual: "Karte (neu) mit sechs Kennzahlen und Referenzbeschriftungen",
         felder: "Erlöse, Personalkosten, Betriebsergebnis (je Ist kum mit ΔPL %), Ergebnis je Belegungstag = DIVIDE([Betriebsergebnis]; [Belegungstage]), Fachkraftquote = DIVIDE([VK Fach]; [VK Fach] + [VK Assistenz]) gegen 50 %, Teilzeitquote mit ΔVJ über SAMEPERIODLASTYEAR",
         format: "Wert 19,5 pt fett; Referenzbeschriftung 10,5 pt; Farbe über bedingte Formatierung (#00806B günstig, #C62828 ungünstig), Teilzeitquote neutral" },
       { id: "B", ziel: "v-bwa", versatz: [0, 0], titel: "BWA: Plan-Ist-Vergleich", visual: "Matrix",
@@ -392,7 +397,7 @@
       { id: "D", ziel: "v-auslastung", versatz: [0, 0], titel: "Auslastungsgrad je Haus", visual: "Tabelle",
         felder: "Haus; Auslastungsgrad = DIVIDE([Belegungstage]; [Platztage]); ΔPL und ΔBM in %-Pkt. (Benchmark als Measure aus der Vergleichstabelle)",
         format: "ΔPL und ΔBM mit Datenbalken (Achse Mitte, positiv #00806B, negativ #C62828); Gesamtzeile fett" },
-      { id: "E", ziel: "v-quoten", versatz: [0, 0], titel: "Krankheit und Überstunden", visual: "Liniendiagramm",
+      { id: "E", ziel: "v-quoten", versatz: [0, 0], titel: "Krankheit, Überstunden", visual: "Liniendiagramm",
         felder: "X-Achse: Monat (Filter: letzte 12 Monate bis Berichtsmonat, DATESINPERIOD); Y-Achse: Krankheitsquote = DIVIDE([Krankheitsstunden]; [Sollstunden]), Überstundenquote analog",
         format: "Krankheit #3A3F44, Überstunden #A9A9A9, je 2 px; Reihenbeschriftung am Linienende; Markierung nur letzter Punkt; Legende und Gitternetz aus" },
       { id: "F", ziel: "v-kosten", versatz: [0, 0], titel: "Kosten je Berechnungstag", visual: "Gruppiertes Balkendiagramm",

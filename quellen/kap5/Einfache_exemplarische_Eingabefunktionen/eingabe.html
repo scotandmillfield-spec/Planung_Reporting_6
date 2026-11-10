@@ -1,0 +1,111 @@
+<!-- Abb. 5.61 „Einfache exemplarische Eingabefunktionen“: vier Bedienelemente für Touch-Oberflächen
+     (softwareneutral nachgebaut; Original: Smartphone-Bedienelemente mit englischer Beschriftung).
+     Raster wie Abb. 3.7: Maske 727 px = 110 mm; Inhalt 695 px = linke Spalte 360 · Abstand 20 · rechte Spalte 315.
+     Links Kalenderauswahl, rechts Zylinder-Zeitauswahl, An- und Ausschalter, Plus- und Minusschalter wie im Original.
+     Kalendertage und Walzenzeilen erzeugt eingabe.js. Titelzeile wie Abb. 3.7/5.40. -->
+<style>
+  #eingabe { --sp-links: 360px; --sp-rechts: 315px; --sp-label: 135px; --sp-feld: 172px; }
+  #eingabe .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #eingabe .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #eingabe .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #eingabe .rechts .mk-abschnitt + .mk-abschnitt { margin-top: 18px; }
+  /* Kalender */
+  #eingabe .kal-nav { display: grid; grid-template-columns: 30px 1fr 30px; align-items: center; height: 26px; margin-bottom: 6px; }
+  #eingabe .kal-nav .mk-knopf { width: 30px; height: 26px; line-height: 24px; padding: 0; text-align: center; font-size: 16px; }
+  #eingabe .kal-monat { text-align: center; font-weight: bold; font-size: 16px; line-height: 20px; }
+  #eingabe .kal-kopf { display: grid; grid-template-columns: repeat(7, 1fr); height: 22px; line-height: 22px; color: var(--muted); text-align: center; }
+  #eingabe .kal { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid #D4D4D4; border-left: 1px solid #D4D4D4; }
+  #eingabe .tag { height: 42px; line-height: 41px; text-align: center; border-right: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4;
+    background: #FFFFFF; color: var(--text); user-select: none; }
+  #eingabe .tag.fremd { color: #6E747A; }
+  #eingabe .tag.gewaehlt { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+  body:not(.print) #eingabe .tag { cursor: pointer; }
+  body:not(.print) #eingabe .tag:hover:not(.gewaehlt), #eingabe .tag:focus:not(.gewaehlt) { background: var(--band); outline: none; }
+  /* Zylinder-Zeitauswahl: drei Walzen, gültige Zeile in der Mitte */
+  #eingabe .walze-kopf { display: grid; grid-template-columns: 150px 80px 85px; height: 22px; line-height: 22px; color: var(--muted); }
+  #eingabe .walze-kopf span { padding-left: 10px; }
+  #eingabe .walze-kopf span + span { padding-left: 0; padding-right: 22px; text-align: right; }
+  #eingabe .walze { position: relative; display: grid; grid-template-columns: 150px 80px 85px; height: 132px;
+    border: 1px solid var(--rahmen); border-radius: 2px; background: #FFFFFF; }
+  #eingabe .walze-band { position: absolute; left: 0; right: 0; top: 52px; height: 26px; background: var(--anzeige);
+    border-top: 1px solid var(--ac); border-bottom: 1px solid var(--ac); }
+  #eingabe .rolle { position: relative; border-left: 1px solid #D4D4D4; }
+  #eingabe .rolle:first-of-type { border-left: none; }
+  #eingabe .zeile-w { height: 26px; line-height: 26px; padding: 0 10px; white-space: nowrap; user-select: none; }
+  #eingabe .zeile-w.r0, #eingabe .zeile-w.r4 { color: #6E747A; }
+  #eingabe .zeile-w.r1, #eingabe .zeile-w.r3 { color: var(--muted); }
+  #eingabe .zeile-w.r2 { color: var(--text); font-weight: bold; }
+  #eingabe .rolle.zahl .zeile-w { text-align: right; padding-right: 22px; }
+  body:not(.print) #eingabe .zeile-w { cursor: pointer; }
+  #eingabe .rolle:focus { outline: none; }
+  body:not(.print) #eingabe .rolle:focus .zeile-w.r2 { text-decoration: underline; }
+  /* An- und Ausschalter */
+  #eingabe .schalter { position: relative; width: 64px; height: 26px; border: 1px solid var(--rahmen); border-radius: 13px;
+    background: #FFFFFF; justify-self: start; }
+  #eingabe .schalter .knopf { position: absolute; left: 2px; top: 2px; width: 20px; height: 20px; border-radius: 10px;
+    border: 1px solid var(--rahmen); background: #FFFFFF; }
+  #eingabe .schalter .zustand { position: absolute; right: 9px; top: 0; line-height: 24px; color: var(--text); }
+  #eingabe .schalter.an { background: var(--ac); border-color: var(--ac); }
+  #eingabe .schalter.an .knopf { left: 40px; border-color: #FFFFFF; }
+  #eingabe .schalter.an .zustand { right: auto; left: 10px; color: #FFFFFF; }
+  body:not(.print) #eingabe .schalter { cursor: pointer; }
+  #eingabe .schalter:focus { outline: none; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 3px var(--ac); }
+  /* Plus- und Minusschalter */
+  #eingabe .stepper { display: grid; grid-template-columns: 30px 80px 30px; column-gap: 4px; justify-self: start; }
+  #eingabe .stepper .mk-knopf { width: 30px; height: 26px; line-height: 24px; padding: 0; text-align: center; font-size: 16px; }
+</style>
+<form class="mk-maske" id="eingabe" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Eingabefunktionen</span><span class="kopf-unter" id="kopf-unter">Bedienelemente für die Eingabe per Touch auf Tablet und Smartphone</span></div>
+  <div class="mk-inhalt">
+    <div class="mk-spalten">
+
+      <section class="mk-abschnitt links" id="abschnitt-kalender">
+        <div class="mk-band" id="band-kalender" data-klappbar="nein">Kalenderauswahl</div>
+        <div class="kal-nav" id="kal-nav">
+          <button type="button" class="mk-knopf mk-zweit" id="k-zurueck" aria-label="Vormonat">‹</button>
+          <span class="kal-monat" id="kal-monat" aria-live="polite">Januar 2027</span>
+          <button type="button" class="mk-knopf mk-zweit" id="k-vor" aria-label="Folgemonat">›</button>
+        </div>
+        <div class="kal-kopf" id="kal-kopf"><span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span></div>
+        <div class="kal" id="kal" role="grid" aria-label="Tage auswählen"></div>
+      </section>
+
+      <div class="rechts">
+        <section class="mk-abschnitt" id="abschnitt-walze">
+          <div class="mk-band" id="band-walze" data-klappbar="nein">Zylinder-Zeitauswahl</div>
+          <div class="walze-kopf" id="walze-kopf"><span>Datum</span><span>Stunde</span><span>Minute</span></div>
+          <div class="walze" id="walze">
+            <div class="walze-band" aria-hidden="true"></div>
+            <div class="rolle" id="walze-datum" data-rolle="datum" tabindex="0" role="listbox" aria-label="Datum"></div>
+            <div class="rolle zahl" id="walze-stunde" data-rolle="stunde" tabindex="0" role="listbox" aria-label="Stunde"></div>
+            <div class="rolle zahl" id="walze-minute" data-rolle="minute" tabindex="0" role="listbox" aria-label="Minute"></div>
+          </div>
+        </section>
+
+        <section class="mk-abschnitt" id="abschnitt-schalter">
+          <div class="mk-band" id="band-schalter" data-klappbar="nein">An- und Ausschalter</div>
+          <div class="mk-zeile" id="z-schalter">
+            <span class="mk-label" id="l-schalter">Vorjahr einblenden</span>
+            <div class="schalter" id="f-schalter" role="switch" tabindex="0" aria-checked="false" aria-labelledby="l-schalter">
+              <span class="knopf"></span><span class="zustand" id="schalter-text">Aus</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="mk-abschnitt" id="abschnitt-stepper">
+          <div class="mk-band" id="band-stepper" data-klappbar="nein">Plus- und Minusschalter</div>
+          <div class="mk-zeile" id="z-jahr">
+            <label class="mk-label" for="f-jahr">Jahr</label>
+            <div class="stepper" id="stepper">
+              <button type="button" class="mk-knopf mk-zweit" id="k-minus" aria-label="Jahr verringern">−</button>
+              <input class="mk-feld mk-mitte" id="f-jahr" value="2026" inputmode="numeric" data-hilfe="Jahr zwischen 2000 und 2099">
+              <button type="button" class="mk-knopf mk-zweit" id="k-plus" aria-label="Jahr erhöhen">+</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+</form>

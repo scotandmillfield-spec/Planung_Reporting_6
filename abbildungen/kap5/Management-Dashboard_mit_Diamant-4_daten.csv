@@ -1,0 +1,673 @@
+﻿Bereich;Monat;Haus;Kennzahl;Ist;Plan
+BWA (EUR);2027-01;Haus Birkenhof;Allgemeine Pflegeleistungen;2071508,34;2066337,51
+BWA (EUR);2027-02;Haus Birkenhof;Allgemeine Pflegeleistungen;1880783,79;1866465,36
+BWA (EUR);2027-03;Haus Birkenhof;Allgemeine Pflegeleistungen;2073671,88;2066337,51
+BWA (EUR);2027-04;Haus Birkenhof;Allgemeine Pflegeleistungen;2013092,71;1999713,46
+BWA (EUR);2027-05;Haus Birkenhof;Allgemeine Pflegeleistungen;2086653,14;2066337,51
+BWA (EUR);2027-06;Haus Birkenhof;Allgemeine Pflegeleistungen;2017253,36;1999713,46
+BWA (EUR);2027-01;Haus Fliederhof;Allgemeine Pflegeleistungen;1653070,48;1710490,71
+BWA (EUR);2027-02;Haus Fliederhof;Allgemeine Pflegeleistungen;1475062,50;1544959,35
+BWA (EUR);2027-03;Haus Fliederhof;Allgemeine Pflegeleistungen;1640402,03;1710490,71
+BWA (EUR);2027-04;Haus Fliederhof;Allgemeine Pflegeleistungen;1610192,64;1655313,59
+BWA (EUR);2027-05;Haus Fliederhof;Allgemeine Pflegeleistungen;1683929,53;1710490,71
+BWA (EUR);2027-06;Haus Fliederhof;Allgemeine Pflegeleistungen;1641863,77;1655313,59
+BWA (EUR);2027-01;Haus Mühlenhof;Allgemeine Pflegeleistungen;1446134,39;1451805,38
+BWA (EUR);2027-02;Haus Mühlenhof;Allgemeine Pflegeleistungen;1313133,70;1311308,09
+BWA (EUR);2027-03;Haus Mühlenhof;Allgemeine Pflegeleistungen;1447623,21;1451805,38
+BWA (EUR);2027-04;Haus Mühlenhof;Allgemeine Pflegeleistungen;1408417,78;1404972,95
+BWA (EUR);2027-05;Haus Mühlenhof;Allgemeine Pflegeleistungen;1460029,99;1451805,38
+BWA (EUR);2027-06;Haus Mühlenhof;Allgemeine Pflegeleistungen;1415861,85;1404972,95
+BWA (EUR);2027-01;Haus Birkenhof;Unterkunft und Verpflegung;491,34;777,78
+BWA (EUR);2027-02;Haus Birkenhof;Unterkunft und Verpflegung;1016,40;777,78
+BWA (EUR);2027-03;Haus Birkenhof;Unterkunft und Verpflegung;702,50;777,78
+BWA (EUR);2027-04;Haus Birkenhof;Unterkunft und Verpflegung;800,99;777,78
+BWA (EUR);2027-05;Haus Birkenhof;Unterkunft und Verpflegung;1014,31;777,78
+BWA (EUR);2027-06;Haus Birkenhof;Unterkunft und Verpflegung;507,88;777,78
+BWA (EUR);2027-01;Haus Fliederhof;Unterkunft und Verpflegung;735,02;666,67
+BWA (EUR);2027-02;Haus Fliederhof;Unterkunft und Verpflegung;527,63;666,67
+BWA (EUR);2027-03;Haus Fliederhof;Unterkunft und Verpflegung;922,01;666,67
+BWA (EUR);2027-04;Haus Fliederhof;Unterkunft und Verpflegung;761,83;666,67
+BWA (EUR);2027-05;Haus Fliederhof;Unterkunft und Verpflegung;446,30;666,67
+BWA (EUR);2027-06;Haus Fliederhof;Unterkunft und Verpflegung;985,63;666,67
+BWA (EUR);2027-01;Haus Mühlenhof;Unterkunft und Verpflegung;557,25;555,55
+BWA (EUR);2027-02;Haus Mühlenhof;Unterkunft und Verpflegung;845,01;555,55
+BWA (EUR);2027-03;Haus Mühlenhof;Unterkunft und Verpflegung;733,93;555,55
+BWA (EUR);2027-04;Haus Mühlenhof;Unterkunft und Verpflegung;477,81;555,56
+BWA (EUR);2027-05;Haus Mühlenhof;Unterkunft und Verpflegung;649,08;555,56
+BWA (EUR);2027-06;Haus Mühlenhof;Unterkunft und Verpflegung;523,07;555,56
+BWA (EUR);2027-01;Haus Birkenhof;Sachbedarf;284537,19;275005,50
+BWA (EUR);2027-02;Haus Birkenhof;Sachbedarf;267080,58;248404,84
+BWA (EUR);2027-03;Haus Birkenhof;Sachbedarf;289362,31;275005,50
+BWA (EUR);2027-04;Haus Birkenhof;Sachbedarf;284260,29;266138,61
+BWA (EUR);2027-05;Haus Birkenhof;Sachbedarf;295344,21;275005,50
+BWA (EUR);2027-06;Haus Birkenhof;Sachbedarf;278860,61;266138,61
+BWA (EUR);2027-01;Haus Fliederhof;Sachbedarf;238773,06;233267,33
+BWA (EUR);2027-02;Haus Fliederhof;Sachbedarf;212771,39;210693,07
+BWA (EUR);2027-03;Haus Fliederhof;Sachbedarf;239444,39;233267,32
+BWA (EUR);2027-04;Haus Fliederhof;Sachbedarf;229374,00;225742,57
+BWA (EUR);2027-05;Haus Fliederhof;Sachbedarf;251399,04;233267,33
+BWA (EUR);2027-06;Haus Fliederhof;Sachbedarf;238746,52;225742,57
+BWA (EUR);2027-01;Haus Mühlenhof;Sachbedarf;206303,48;194389,44
+BWA (EUR);2027-02;Haus Mühlenhof;Sachbedarf;184263,92;175577,56
+BWA (EUR);2027-03;Haus Mühlenhof;Sachbedarf;203348,85;194389,44
+BWA (EUR);2027-04;Haus Mühlenhof;Sachbedarf;194809,44;188118,81
+BWA (EUR);2027-05;Haus Mühlenhof;Sachbedarf;200906,89;194389,44
+BWA (EUR);2027-06;Haus Mühlenhof;Sachbedarf;200939,79;188118,81
+BWA (EUR);2027-01;Haus Birkenhof;Wasser, Energie, Brennstoffe;42107,11;41907,88
+BWA (EUR);2027-02;Haus Birkenhof;Wasser, Energie, Brennstoffe;36903,73;36500,41
+BWA (EUR);2027-03;Haus Birkenhof;Wasser, Energie, Brennstoffe;37311,49;37417,75
+BWA (EUR);2027-04;Haus Birkenhof;Wasser, Energie, Brennstoffe;32627,59;32589,65
+BWA (EUR);2027-05;Haus Birkenhof;Wasser, Energie, Brennstoffe;31330,75;30682,55
+BWA (EUR);2027-06;Haus Birkenhof;Wasser, Energie, Brennstoffe;28367,92;28244,37
+BWA (EUR);2027-01;Haus Fliederhof;Wasser, Energie, Brennstoffe;35239,74;35921,04
+BWA (EUR);2027-02;Haus Fliederhof;Wasser, Energie, Brennstoffe;30388,24;31286,07
+BWA (EUR);2027-03;Haus Fliederhof;Wasser, Energie, Brennstoffe;32761,55;32072,36
+BWA (EUR);2027-04;Haus Fliederhof;Wasser, Energie, Brennstoffe;28537,48;27933,99
+BWA (EUR);2027-05;Haus Fliederhof;Wasser, Energie, Brennstoffe;26306,23;26299,33
+BWA (EUR);2027-06;Haus Fliederhof;Wasser, Energie, Brennstoffe;24317,81;24209,46
+BWA (EUR);2027-01;Haus Mühlenhof;Wasser, Energie, Brennstoffe;29929,60;29934,20
+BWA (EUR);2027-02;Haus Mühlenhof;Wasser, Energie, Brennstoffe;25930,87;26071,72
+BWA (EUR);2027-03;Haus Mühlenhof;Wasser, Energie, Brennstoffe;26511,94;26726,96
+BWA (EUR);2027-04;Haus Mühlenhof;Wasser, Energie, Brennstoffe;23680,17;23278,32
+BWA (EUR);2027-05;Haus Mühlenhof;Wasser, Energie, Brennstoffe;21460,32;21916,11
+BWA (EUR);2027-06;Haus Mühlenhof;Wasser, Energie, Brennstoffe;19784,61;20174,55
+BWA (EUR);2027-01;Haus Birkenhof;Wirtschafts-/Verwaltungsbedarf;15759,58;15002,47
+BWA (EUR);2027-02;Haus Birkenhof;Wirtschafts-/Verwaltungsbedarf;13810,33;13550,62
+BWA (EUR);2027-03;Haus Birkenhof;Wirtschafts-/Verwaltungsbedarf;15982,55;15002,47
+BWA (EUR);2027-04;Haus Birkenhof;Wirtschafts-/Verwaltungsbedarf;15270,18;14518,52
+BWA (EUR);2027-05;Haus Birkenhof;Wirtschafts-/Verwaltungsbedarf;15217,22;15002,47
+BWA (EUR);2027-06;Haus Birkenhof;Wirtschafts-/Verwaltungsbedarf;15191,46;14518,52
+BWA (EUR);2027-01;Haus Fliederhof;Wirtschafts-/Verwaltungsbedarf;13000,04;12859,26
+BWA (EUR);2027-02;Haus Fliederhof;Wirtschafts-/Verwaltungsbedarf;11995,04;11614,81
+BWA (EUR);2027-03;Haus Fliederhof;Wirtschafts-/Verwaltungsbedarf;13498,97;12859,26
+BWA (EUR);2027-04;Haus Fliederhof;Wirtschafts-/Verwaltungsbedarf;13004,19;12444,44
+BWA (EUR);2027-05;Haus Fliederhof;Wirtschafts-/Verwaltungsbedarf;12927,09;12859,26
+BWA (EUR);2027-06;Haus Fliederhof;Wirtschafts-/Verwaltungsbedarf;13005,06;12444,44
+BWA (EUR);2027-01;Haus Mühlenhof;Wirtschafts-/Verwaltungsbedarf;10819,21;10716,05
+BWA (EUR);2027-02;Haus Mühlenhof;Wirtschafts-/Verwaltungsbedarf;10266,13;9679,01
+BWA (EUR);2027-03;Haus Mühlenhof;Wirtschafts-/Verwaltungsbedarf;11072,76;10716,05
+BWA (EUR);2027-04;Haus Mühlenhof;Wirtschafts-/Verwaltungsbedarf;10592,76;10370,37
+BWA (EUR);2027-05;Haus Mühlenhof;Wirtschafts-/Verwaltungsbedarf;11173,60;10716,05
+BWA (EUR);2027-06;Haus Mühlenhof;Wirtschafts-/Verwaltungsbedarf;10887,77;10370,37
+BWA (EUR);2027-01;Haus Birkenhof;Personalkosten;1326649,03;1293703,70
+BWA (EUR);2027-02;Haus Birkenhof;Personalkosten;1289302,18;1293703,70
+BWA (EUR);2027-03;Haus Birkenhof;Personalkosten;1331714,52;1293703,70
+BWA (EUR);2027-04;Haus Birkenhof;Personalkosten;1327254,98;1293703,70
+BWA (EUR);2027-05;Haus Birkenhof;Personalkosten;1323035,30;1293703,70
+BWA (EUR);2027-06;Haus Birkenhof;Personalkosten;1327666,83;1293703,70
+BWA (EUR);2027-01;Haus Fliederhof;Personalkosten;1124701,15;1108888,89
+BWA (EUR);2027-02;Haus Fliederhof;Personalkosten;1171093,12;1108888,89
+BWA (EUR);2027-03;Haus Fliederhof;Personalkosten;1124037,66;1108888,89
+BWA (EUR);2027-04;Haus Fliederhof;Personalkosten;1188754,38;1108888,89
+BWA (EUR);2027-05;Haus Fliederhof;Personalkosten;1161301,08;1108888,89
+BWA (EUR);2027-06;Haus Fliederhof;Personalkosten;1194261,12;1108888,89
+BWA (EUR);2027-01;Haus Mühlenhof;Personalkosten;936216,50;924074,08
+BWA (EUR);2027-02;Haus Mühlenhof;Personalkosten;898780,07;924074,08
+BWA (EUR);2027-03;Haus Mühlenhof;Personalkosten;919675,41;924074,07
+BWA (EUR);2027-04;Haus Mühlenhof;Personalkosten;914134,47;924074,07
+BWA (EUR);2027-05;Haus Mühlenhof;Personalkosten;949181,50;924074,07
+BWA (EUR);2027-06;Haus Mühlenhof;Personalkosten;924386,83;924074,07
+BWA (EUR);2027-01;Haus Birkenhof;Lebensmittel;57797,41;57292,81
+BWA (EUR);2027-02;Haus Birkenhof;Lebensmittel;50728,23;51751,01
+BWA (EUR);2027-03;Haus Birkenhof;Lebensmittel;59029,41;57292,81
+BWA (EUR);2027-04;Haus Birkenhof;Lebensmittel;56557,65;55445,54
+BWA (EUR);2027-05;Haus Birkenhof;Lebensmittel;57676,70;57292,81
+BWA (EUR);2027-06;Haus Birkenhof;Lebensmittel;57032,03;55445,54
+BWA (EUR);2027-01;Haus Fliederhof;Lebensmittel;47898,64;48597,36
+BWA (EUR);2027-02;Haus Fliederhof;Lebensmittel;43039,63;43894,39
+BWA (EUR);2027-03;Haus Fliederhof;Lebensmittel;45555,27;48597,36
+BWA (EUR);2027-04;Haus Fliederhof;Lebensmittel;44669,99;47029,70
+BWA (EUR);2027-05;Haus Fliederhof;Lebensmittel;49158,46;48597,36
+BWA (EUR);2027-06;Haus Fliederhof;Lebensmittel;47277,23;47029,70
+BWA (EUR);2027-01;Haus Mühlenhof;Lebensmittel;39486,03;40497,80
+BWA (EUR);2027-02;Haus Mühlenhof;Lebensmittel;36264,38;36578,66
+BWA (EUR);2027-03;Haus Mühlenhof;Lebensmittel;39760,00;40497,80
+BWA (EUR);2027-04;Haus Mühlenhof;Lebensmittel;39590,41;39191,42
+BWA (EUR);2027-05;Haus Mühlenhof;Lebensmittel;40985,40;40497,80
+BWA (EUR);2027-06;Haus Mühlenhof;Lebensmittel;38624,69;39191,42
+BWA (EUR);2027-01;Haus Birkenhof;Steuern, Abgaben, Versicherungen;18661,37;18925,93
+BWA (EUR);2027-02;Haus Birkenhof;Steuern, Abgaben, Versicherungen;18974,30;18925,93
+BWA (EUR);2027-03;Haus Birkenhof;Steuern, Abgaben, Versicherungen;18562,11;18925,92
+BWA (EUR);2027-04;Haus Birkenhof;Steuern, Abgaben, Versicherungen;19114,97;18925,93
+BWA (EUR);2027-05;Haus Birkenhof;Steuern, Abgaben, Versicherungen;18831,32;18925,93
+BWA (EUR);2027-06;Haus Birkenhof;Steuern, Abgaben, Versicherungen;18464,22;18925,93
+BWA (EUR);2027-01;Haus Fliederhof;Steuern, Abgaben, Versicherungen;16135,68;16222,22
+BWA (EUR);2027-02;Haus Fliederhof;Steuern, Abgaben, Versicherungen;16041,55;16222,22
+BWA (EUR);2027-03;Haus Fliederhof;Steuern, Abgaben, Versicherungen;15638,39;16222,22
+BWA (EUR);2027-04;Haus Fliederhof;Steuern, Abgaben, Versicherungen;16163,12;16222,22
+BWA (EUR);2027-05;Haus Fliederhof;Steuern, Abgaben, Versicherungen;15626,13;16222,22
+BWA (EUR);2027-06;Haus Fliederhof;Steuern, Abgaben, Versicherungen;16407,83;16222,22
+BWA (EUR);2027-01;Haus Mühlenhof;Steuern, Abgaben, Versicherungen;13200,47;13518,52
+BWA (EUR);2027-02;Haus Mühlenhof;Steuern, Abgaben, Versicherungen;13560,80;13518,52
+BWA (EUR);2027-03;Haus Mühlenhof;Steuern, Abgaben, Versicherungen;13169,99;13518,52
+BWA (EUR);2027-04;Haus Mühlenhof;Steuern, Abgaben, Versicherungen;13084,98;13518,52
+BWA (EUR);2027-05;Haus Mühlenhof;Steuern, Abgaben, Versicherungen;13058,82;13518,52
+BWA (EUR);2027-06;Haus Mühlenhof;Steuern, Abgaben, Versicherungen;13205,70;13518,52
+BWA (EUR);2027-01;Haus Birkenhof;Abschreibungen;5649,85;4050,93
+BWA (EUR);2027-02;Haus Birkenhof;Abschreibungen;6327,84;4050,93
+BWA (EUR);2027-03;Haus Birkenhof;Abschreibungen;6327,83;4050,92
+BWA (EUR);2027-04;Haus Birkenhof;Abschreibungen;6327,83;4050,93
+BWA (EUR);2027-05;Haus Birkenhof;Abschreibungen;6327,83;4050,93
+BWA (EUR);2027-06;Haus Birkenhof;Abschreibungen;6327,83;4050,93
+BWA (EUR);2027-01;Haus Fliederhof;Abschreibungen;4842,73;3472,22
+BWA (EUR);2027-02;Haus Fliederhof;Abschreibungen;5423,86;3472,22
+BWA (EUR);2027-03;Haus Fliederhof;Abschreibungen;5423,86;3472,22
+BWA (EUR);2027-04;Haus Fliederhof;Abschreibungen;5423,86;3472,22
+BWA (EUR);2027-05;Haus Fliederhof;Abschreibungen;5423,86;3472,22
+BWA (EUR);2027-06;Haus Fliederhof;Abschreibungen;5423,86;3472,22
+BWA (EUR);2027-01;Haus Mühlenhof;Abschreibungen;4035,61;2893,52
+BWA (EUR);2027-02;Haus Mühlenhof;Abschreibungen;4519,88;2893,52
+BWA (EUR);2027-03;Haus Mühlenhof;Abschreibungen;4519,88;2893,52
+BWA (EUR);2027-04;Haus Mühlenhof;Abschreibungen;4519,88;2893,52
+BWA (EUR);2027-05;Haus Mühlenhof;Abschreibungen;4519,88;2893,52
+BWA (EUR);2027-06;Haus Mühlenhof;Abschreibungen;4519,88;2893,52
+BWA (EUR);2027-01;Haus Birkenhof;Sonstige Erträge;2353,94;1944,44
+BWA (EUR);2027-02;Haus Birkenhof;Sonstige Erträge;2978,56;1944,44
+BWA (EUR);2027-03;Haus Birkenhof;Sonstige Erträge;3214,73;1944,44
+BWA (EUR);2027-04;Haus Birkenhof;Sonstige Erträge;2974,09;1944,44
+BWA (EUR);2027-05;Haus Birkenhof;Sonstige Erträge;2452,90;1944,44
+BWA (EUR);2027-06;Haus Birkenhof;Sonstige Erträge;1784,63;1944,44
+BWA (EUR);2027-01;Haus Fliederhof;Sonstige Erträge;2985,30;1666,67
+BWA (EUR);2027-02;Haus Fliederhof;Sonstige Erträge;1266,10;1666,67
+BWA (EUR);2027-03;Haus Fliederhof;Sonstige Erträge;3391,14;1666,67
+BWA (EUR);2027-04;Haus Fliederhof;Sonstige Erträge;1864,11;1666,67
+BWA (EUR);2027-05;Haus Fliederhof;Sonstige Erträge;1651,91;1666,67
+BWA (EUR);2027-06;Haus Fliederhof;Sonstige Erträge;2239,76;1666,67
+BWA (EUR);2027-01;Haus Mühlenhof;Sonstige Erträge;1517,18;1388,89
+BWA (EUR);2027-02;Haus Mühlenhof;Sonstige Erträge;997,01;1388,89
+BWA (EUR);2027-03;Haus Mühlenhof;Sonstige Erträge;2184,32;1388,89
+BWA (EUR);2027-04;Haus Mühlenhof;Sonstige Erträge;1157,31;1388,89
+BWA (EUR);2027-05;Haus Mühlenhof;Sonstige Erträge;2362,54;1388,89
+BWA (EUR);2027-06;Haus Mühlenhof;Sonstige Erträge;1062,06;1388,89
+Belegung (Tage);2027-01;Haus Birkenhof;Platztage;13020;13020
+Belegung (Tage);2027-01;Haus Birkenhof;Belegungstage;12447;12499
+Belegung (Tage);2027-01;Haus Birkenhof;Abwesenheitstage;200;187
+Belegung (Tage);2027-02;Haus Birkenhof;Platztage;11760;11760
+Belegung (Tage);2027-02;Haus Birkenhof;Belegungstage;11301;11290
+Belegung (Tage);2027-02;Haus Birkenhof;Abwesenheitstage;159;169
+Belegung (Tage);2027-03;Haus Birkenhof;Platztage;13020;13020
+Belegung (Tage);2027-03;Haus Birkenhof;Belegungstage;12460;12499
+Belegung (Tage);2027-03;Haus Birkenhof;Abwesenheitstage;189;187
+Belegung (Tage);2027-04;Haus Birkenhof;Platztage;12600;12600
+Belegung (Tage);2027-04;Haus Birkenhof;Belegungstage;12096;12096
+Belegung (Tage);2027-04;Haus Birkenhof;Abwesenheitstage;172;181
+Belegung (Tage);2027-05;Haus Birkenhof;Platztage;13020;13020
+Belegung (Tage);2027-05;Haus Birkenhof;Belegungstage;12538;12499
+Belegung (Tage);2027-05;Haus Birkenhof;Abwesenheitstage;229;187
+Belegung (Tage);2027-06;Haus Birkenhof;Platztage;12600;12600
+Belegung (Tage);2027-06;Haus Birkenhof;Belegungstage;12121;12096
+Belegung (Tage);2027-06;Haus Birkenhof;Abwesenheitstage;168;181
+Belegung (Tage);2027-01;Haus Fliederhof;Platztage;11160;11160
+Belegung (Tage);2027-01;Haus Fliederhof;Belegungstage;10178;10602
+Belegung (Tage);2027-01;Haus Fliederhof;Abwesenheitstage;148;159
+Belegung (Tage);2027-02;Haus Fliederhof;Platztage;10080;10080
+Belegung (Tage);2027-02;Haus Fliederhof;Belegungstage;9082;9576
+Belegung (Tage);2027-02;Haus Fliederhof;Abwesenheitstage;134;144
+Belegung (Tage);2027-03;Haus Fliederhof;Platztage;11160;11160
+Belegung (Tage);2027-03;Haus Fliederhof;Belegungstage;10100;10602
+Belegung (Tage);2027-03;Haus Fliederhof;Abwesenheitstage;184;159
+Belegung (Tage);2027-04;Haus Fliederhof;Platztage;10800;10800
+Belegung (Tage);2027-04;Haus Fliederhof;Belegungstage;9914;10260
+Belegung (Tage);2027-04;Haus Fliederhof;Abwesenheitstage;133;154
+Belegung (Tage);2027-05;Haus Fliederhof;Platztage;11160;11160
+Belegung (Tage);2027-05;Haus Fliederhof;Belegungstage;10368;10602
+Belegung (Tage);2027-05;Haus Fliederhof;Abwesenheitstage;189;159
+Belegung (Tage);2027-06;Haus Fliederhof;Platztage;10800;10800
+Belegung (Tage);2027-06;Haus Fliederhof;Belegungstage;10109;10260
+Belegung (Tage);2027-06;Haus Fliederhof;Abwesenheitstage;134;154
+Belegung (Tage);2027-01;Haus Mühlenhof;Platztage;9300;9300
+Belegung (Tage);2027-01;Haus Mühlenhof;Belegungstage;8742;8835
+Belegung (Tage);2027-01;Haus Mühlenhof;Abwesenheitstage;149;133
+Belegung (Tage);2027-02;Haus Mühlenhof;Platztage;8400;8400
+Belegung (Tage);2027-02;Haus Mühlenhof;Belegungstage;7938;7980
+Belegung (Tage);2027-02;Haus Mühlenhof;Abwesenheitstage;112;120
+Belegung (Tage);2027-03;Haus Mühlenhof;Platztage;9300;9300
+Belegung (Tage);2027-03;Haus Mühlenhof;Belegungstage;8751;8835
+Belegung (Tage);2027-03;Haus Mühlenhof;Abwesenheitstage;145;133
+Belegung (Tage);2027-04;Haus Mühlenhof;Platztage;9000;9000
+Belegung (Tage);2027-04;Haus Mühlenhof;Belegungstage;8514;8550
+Belegung (Tage);2027-04;Haus Mühlenhof;Abwesenheitstage;115;128
+Belegung (Tage);2027-05;Haus Mühlenhof;Platztage;9300;9300
+Belegung (Tage);2027-05;Haus Mühlenhof;Belegungstage;8826;8835
+Belegung (Tage);2027-05;Haus Mühlenhof;Abwesenheitstage;125;133
+Belegung (Tage);2027-06;Haus Mühlenhof;Platztage;9000;9000
+Belegung (Tage);2027-06;Haus Mühlenhof;Belegungstage;8559;8550
+Belegung (Tage);2027-06;Haus Mühlenhof;Abwesenheitstage;151;128
+Belegung (%);2027-01;Vergleichsgruppe;Auslastungsgrad;93,4;
+Belegung (%);2027-02;Vergleichsgruppe;Auslastungsgrad;93,1;
+Belegung (%);2027-03;Vergleichsgruppe;Auslastungsgrad;93,6;
+Belegung (%);2027-04;Vergleichsgruppe;Auslastungsgrad;93,8;
+Belegung (%);2027-05;Vergleichsgruppe;Auslastungsgrad;94,0;
+Belegung (%);2027-06;Vergleichsgruppe;Auslastungsgrad;94,1;
+Personal;2026-01;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;78,5;
+Personal;2026-01;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;86,5;
+Personal;2026-01;Haus Birkenhof;Vollkräfte gesamt;275,0;
+Personal;2026-01;Haus Birkenhof;Köpfe;344;
+Personal;2026-01;Haus Birkenhof;Köpfe Teilzeit;166;
+Personal;2026-01;Haus Birkenhof;Sollstunden;45100;
+Personal;2026-01;Haus Birkenhof;Krankheitsstunden;3188;
+Personal;2026-01;Haus Birkenhof;Überstunden;1084;
+Personal;2026-02;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;78,4;
+Personal;2026-02;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;86,4;
+Personal;2026-02;Haus Birkenhof;Vollkräfte gesamt;274,6;
+Personal;2026-02;Haus Birkenhof;Köpfe;343;
+Personal;2026-02;Haus Birkenhof;Köpfe Teilzeit;165;
+Personal;2026-02;Haus Birkenhof;Sollstunden;45034;
+Personal;2026-02;Haus Birkenhof;Krankheitsstunden;3441;
+Personal;2026-02;Haus Birkenhof;Überstunden;1190;
+Personal;2026-03;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;79,0;
+Personal;2026-03;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;87,1;
+Personal;2026-03;Haus Birkenhof;Vollkräfte gesamt;276,8;
+Personal;2026-03;Haus Birkenhof;Köpfe;346;
+Personal;2026-03;Haus Birkenhof;Köpfe Teilzeit;167;
+Personal;2026-03;Haus Birkenhof;Sollstunden;45395;
+Personal;2026-03;Haus Birkenhof;Krankheitsstunden;3201;
+Personal;2026-03;Haus Birkenhof;Überstunden;1033;
+Personal;2026-04;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;79,6;
+Personal;2026-04;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;86,9;
+Personal;2026-04;Haus Birkenhof;Vollkräfte gesamt;277,5;
+Personal;2026-04;Haus Birkenhof;Köpfe;347;
+Personal;2026-04;Haus Birkenhof;Köpfe Teilzeit;167;
+Personal;2026-04;Haus Birkenhof;Sollstunden;45510;
+Personal;2026-04;Haus Birkenhof;Krankheitsstunden;2775;
+Personal;2026-04;Haus Birkenhof;Überstunden;955;
+Personal;2026-05;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;79,5;
+Personal;2026-05;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;87,8;
+Personal;2026-05;Haus Birkenhof;Vollkräfte gesamt;278,8;
+Personal;2026-05;Haus Birkenhof;Köpfe;348;
+Personal;2026-05;Haus Birkenhof;Köpfe Teilzeit;167;
+Personal;2026-05;Haus Birkenhof;Sollstunden;45723;
+Personal;2026-05;Haus Birkenhof;Krankheitsstunden;2327;
+Personal;2026-05;Haus Birkenhof;Überstunden;680;
+Personal;2026-06;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;79,6;
+Personal;2026-06;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;87,2;
+Personal;2026-06;Haus Birkenhof;Vollkräfte gesamt;278,0;
+Personal;2026-06;Haus Birkenhof;Köpfe;348;
+Personal;2026-06;Haus Birkenhof;Köpfe Teilzeit;168;
+Personal;2026-06;Haus Birkenhof;Sollstunden;45592;
+Personal;2026-06;Haus Birkenhof;Krankheitsstunden;2182;
+Personal;2026-06;Haus Birkenhof;Überstunden;616;
+Personal;2026-07;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;79,8;
+Personal;2026-07;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,2;
+Personal;2026-07;Haus Birkenhof;Vollkräfte gesamt;280,0;
+Personal;2026-07;Haus Birkenhof;Köpfe;350;
+Personal;2026-07;Haus Birkenhof;Köpfe Teilzeit;169;
+Personal;2026-07;Haus Birkenhof;Sollstunden;45920;
+Personal;2026-07;Haus Birkenhof;Krankheitsstunden;2171;
+Personal;2026-07;Haus Birkenhof;Überstunden;642;
+Personal;2026-08;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;80,2;
+Personal;2026-08;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,6;
+Personal;2026-08;Haus Birkenhof;Vollkräfte gesamt;281,3;
+Personal;2026-08;Haus Birkenhof;Köpfe;352;
+Personal;2026-08;Haus Birkenhof;Köpfe Teilzeit;170;
+Personal;2026-08;Haus Birkenhof;Sollstunden;46133;
+Personal;2026-08;Haus Birkenhof;Krankheitsstunden;2282;
+Personal;2026-08;Haus Birkenhof;Überstunden;670;
+Personal;2026-09;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;80,4;
+Personal;2026-09;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;87,8;
+Personal;2026-09;Haus Birkenhof;Vollkräfte gesamt;280,4;
+Personal;2026-09;Haus Birkenhof;Köpfe;350;
+Personal;2026-09;Haus Birkenhof;Köpfe Teilzeit;169;
+Personal;2026-09;Haus Birkenhof;Sollstunden;45986;
+Personal;2026-09;Haus Birkenhof;Krankheitsstunden;2615;
+Personal;2026-09;Haus Birkenhof;Überstunden;846;
+Personal;2026-10;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;80,9;
+Personal;2026-10;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,1;
+Personal;2026-10;Haus Birkenhof;Vollkräfte gesamt;281,6;
+Personal;2026-10;Haus Birkenhof;Köpfe;352;
+Personal;2026-10;Haus Birkenhof;Köpfe Teilzeit;169;
+Personal;2026-10;Haus Birkenhof;Sollstunden;46182;
+Personal;2026-10;Haus Birkenhof;Krankheitsstunden;2837;
+Personal;2026-10;Haus Birkenhof;Überstunden;1051;
+Personal;2026-11;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;81,1;
+Personal;2026-11;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,6;
+Personal;2026-11;Haus Birkenhof;Vollkräfte gesamt;282,8;
+Personal;2026-11;Haus Birkenhof;Köpfe;354;
+Personal;2026-11;Haus Birkenhof;Köpfe Teilzeit;170;
+Personal;2026-11;Haus Birkenhof;Sollstunden;46379;
+Personal;2026-11;Haus Birkenhof;Krankheitsstunden;3090;
+Personal;2026-11;Haus Birkenhof;Überstunden;981;
+Personal;2026-12;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;80,4;
+Personal;2026-12;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;89,0;
+Personal;2026-12;Haus Birkenhof;Vollkräfte gesamt;282,4;
+Personal;2026-12;Haus Birkenhof;Köpfe;353;
+Personal;2026-12;Haus Birkenhof;Köpfe Teilzeit;170;
+Personal;2026-12;Haus Birkenhof;Sollstunden;46314;
+Personal;2026-12;Haus Birkenhof;Krankheitsstunden;3193;
+Personal;2026-12;Haus Birkenhof;Überstunden;1120;
+Personal;2027-01;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;82,2;
+Personal;2027-01;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,0;
+Personal;2027-01;Haus Birkenhof;Vollkräfte gesamt;283,6;
+Personal;2027-01;Haus Birkenhof;Köpfe;354;
+Personal;2027-01;Haus Birkenhof;Köpfe Teilzeit;176;
+Personal;2027-01;Haus Birkenhof;Sollstunden;46510;
+Personal;2027-01;Haus Birkenhof;Krankheitsstunden;3431;
+Personal;2027-01;Haus Birkenhof;Überstunden;1144;
+Personal;2027-02;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;82,8;
+Personal;2027-02;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,2;
+Personal;2027-02;Haus Birkenhof;Vollkräfte gesamt;285,0;
+Personal;2027-02;Haus Birkenhof;Köpfe;356;
+Personal;2027-02;Haus Birkenhof;Köpfe Teilzeit;177;
+Personal;2027-02;Haus Birkenhof;Sollstunden;46740;
+Personal;2027-02;Haus Birkenhof;Krankheitsstunden;3805;
+Personal;2027-02;Haus Birkenhof;Überstunden;1361;
+Personal;2027-03;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;83,8;
+Personal;2027-03;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,3;
+Personal;2027-03;Haus Birkenhof;Vollkräfte gesamt;286,8;
+Personal;2027-03;Haus Birkenhof;Köpfe;358;
+Personal;2027-03;Haus Birkenhof;Köpfe Teilzeit;178;
+Personal;2027-03;Haus Birkenhof;Sollstunden;47035;
+Personal;2027-03;Haus Birkenhof;Krankheitsstunden;3615;
+Personal;2027-03;Haus Birkenhof;Überstunden;1189;
+Personal;2027-04;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;83,9;
+Personal;2027-04;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,8;
+Personal;2027-04;Haus Birkenhof;Vollkräfte gesamt;287,9;
+Personal;2027-04;Haus Birkenhof;Köpfe;360;
+Personal;2027-04;Haus Birkenhof;Köpfe Teilzeit;179;
+Personal;2027-04;Haus Birkenhof;Sollstunden;47216;
+Personal;2027-04;Haus Birkenhof;Krankheitsstunden;2919;
+Personal;2027-04;Haus Birkenhof;Überstunden;1006;
+Personal;2027-05;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;84,4;
+Personal;2027-05;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,8;
+Personal;2027-05;Haus Birkenhof;Vollkräfte gesamt;288,6;
+Personal;2027-05;Haus Birkenhof;Köpfe;361;
+Personal;2027-05;Haus Birkenhof;Köpfe Teilzeit;179;
+Personal;2027-05;Haus Birkenhof;Sollstunden;47330;
+Personal;2027-05;Haus Birkenhof;Krankheitsstunden;2566;
+Personal;2027-05;Haus Birkenhof;Überstunden;820;
+Personal;2027-06;Haus Birkenhof;Vollkräfte Fachkräfte Pflege;84,1;
+Personal;2027-06;Haus Birkenhof;Vollkräfte Assistenzkräfte Pflege;88,5;
+Personal;2027-06;Haus Birkenhof;Vollkräfte gesamt;287,7;
+Personal;2027-06;Haus Birkenhof;Köpfe;360;
+Personal;2027-06;Haus Birkenhof;Köpfe Teilzeit;179;
+Personal;2027-06;Haus Birkenhof;Sollstunden;47183;
+Personal;2027-06;Haus Birkenhof;Krankheitsstunden;2570;
+Personal;2027-06;Haus Birkenhof;Überstunden;770;
+Personal;2026-01;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;59,6;
+Personal;2026-01;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;81,7;
+Personal;2026-01;Haus Fliederhof;Vollkräfte gesamt;235,5;
+Personal;2026-01;Haus Fliederhof;Köpfe;294;
+Personal;2026-01;Haus Fliederhof;Köpfe Teilzeit;158;
+Personal;2026-01;Haus Fliederhof;Sollstunden;38622;
+Personal;2026-01;Haus Fliederhof;Krankheitsstunden;3363;
+Personal;2026-01;Haus Fliederhof;Überstunden;1418;
+Personal;2026-02;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,1;
+Personal;2026-02;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;80,8;
+Personal;2026-02;Haus Fliederhof;Vollkräfte gesamt;234,9;
+Personal;2026-02;Haus Fliederhof;Köpfe;294;
+Personal;2026-02;Haus Fliederhof;Köpfe Teilzeit;158;
+Personal;2026-02;Haus Fliederhof;Sollstunden;38524;
+Personal;2026-02;Haus Fliederhof;Krankheitsstunden;3584;
+Personal;2026-02;Haus Fliederhof;Überstunden;1521;
+Personal;2026-03;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,1;
+Personal;2026-03;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;81,4;
+Personal;2026-03;Haus Fliederhof;Vollkräfte gesamt;235,9;
+Personal;2026-03;Haus Fliederhof;Köpfe;295;
+Personal;2026-03;Haus Fliederhof;Köpfe Teilzeit;158;
+Personal;2026-03;Haus Fliederhof;Sollstunden;38688;
+Personal;2026-03;Haus Fliederhof;Krankheitsstunden;3343;
+Personal;2026-03;Haus Fliederhof;Überstunden;1336;
+Personal;2026-04;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,7;
+Personal;2026-04;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;81,9;
+Personal;2026-04;Haus Fliederhof;Vollkräfte gesamt;237,7;
+Personal;2026-04;Haus Fliederhof;Köpfe;297;
+Personal;2026-04;Haus Fliederhof;Köpfe Teilzeit;159;
+Personal;2026-04;Haus Fliederhof;Sollstunden;38983;
+Personal;2026-04;Haus Fliederhof;Krankheitsstunden;2948;
+Personal;2026-04;Haus Fliederhof;Überstunden;1212;
+Personal;2026-05;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,2;
+Personal;2026-05;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;82,1;
+Personal;2026-05;Haus Fliederhof;Vollkräfte gesamt;237,2;
+Personal;2026-05;Haus Fliederhof;Köpfe;296;
+Personal;2026-05;Haus Fliederhof;Köpfe Teilzeit;158;
+Personal;2026-05;Haus Fliederhof;Sollstunden;38901;
+Personal;2026-05;Haus Fliederhof;Krankheitsstunden;2641;
+Personal;2026-05;Haus Fliederhof;Überstunden;1093;
+Personal;2026-06;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,6;
+Personal;2026-06;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;82,0;
+Personal;2026-06;Haus Fliederhof;Vollkräfte gesamt;237,7;
+Personal;2026-06;Haus Fliederhof;Köpfe;297;
+Personal;2026-06;Haus Fliederhof;Köpfe Teilzeit;159;
+Personal;2026-06;Haus Fliederhof;Sollstunden;38983;
+Personal;2026-06;Haus Fliederhof;Krankheitsstunden;2621;
+Personal;2026-06;Haus Fliederhof;Überstunden;1146;
+Personal;2026-07;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,8;
+Personal;2026-07;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;82,5;
+Personal;2026-07;Haus Fliederhof;Vollkräfte gesamt;238,8;
+Personal;2026-07;Haus Fliederhof;Köpfe;298;
+Personal;2026-07;Haus Fliederhof;Köpfe Teilzeit;160;
+Personal;2026-07;Haus Fliederhof;Sollstunden;39163;
+Personal;2026-07;Haus Fliederhof;Krankheitsstunden;2585;
+Personal;2026-07;Haus Fliederhof;Überstunden;1090;
+Personal;2026-08;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;61,0;
+Personal;2026-08;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;82,7;
+Personal;2026-08;Haus Fliederhof;Vollkräfte gesamt;239,5;
+Personal;2026-08;Haus Fliederhof;Köpfe;299;
+Personal;2026-08;Haus Fliederhof;Köpfe Teilzeit;160;
+Personal;2026-08;Haus Fliederhof;Sollstunden;39278;
+Personal;2026-08;Haus Fliederhof;Krankheitsstunden;2540;
+Personal;2026-08;Haus Fliederhof;Überstunden;1107;
+Personal;2026-09;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;60,9;
+Personal;2026-09;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,6;
+Personal;2026-09;Haus Fliederhof;Vollkräfte gesamt;240,8;
+Personal;2026-09;Haus Fliederhof;Köpfe;301;
+Personal;2026-09;Haus Fliederhof;Köpfe Teilzeit;162;
+Personal;2026-09;Haus Fliederhof;Sollstunden;39491;
+Personal;2026-09;Haus Fliederhof;Krankheitsstunden;2902;
+Personal;2026-09;Haus Fliederhof;Überstunden;1152;
+Personal;2026-10;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;61,1;
+Personal;2026-10;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,2;
+Personal;2026-10;Haus Fliederhof;Vollkräfte gesamt;240,5;
+Personal;2026-10;Haus Fliederhof;Köpfe;301;
+Personal;2026-10;Haus Fliederhof;Köpfe Teilzeit;161;
+Personal;2026-10;Haus Fliederhof;Sollstunden;39442;
+Personal;2026-10;Haus Fliederhof;Krankheitsstunden;3166;
+Personal;2026-10;Haus Fliederhof;Überstunden;1321;
+Personal;2026-11;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;61,3;
+Personal;2026-11;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,5;
+Personal;2026-11;Haus Fliederhof;Vollkräfte gesamt;241,3;
+Personal;2026-11;Haus Fliederhof;Köpfe;302;
+Personal;2026-11;Haus Fliederhof;Köpfe Teilzeit;163;
+Personal;2026-11;Haus Fliederhof;Sollstunden;39573;
+Personal;2026-11;Haus Fliederhof;Krankheitsstunden;3421;
+Personal;2026-11;Haus Fliederhof;Überstunden;1474;
+Personal;2026-12;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;61,9;
+Personal;2026-12;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,9;
+Personal;2026-12;Haus Fliederhof;Vollkräfte gesamt;243,0;
+Personal;2026-12;Haus Fliederhof;Köpfe;304;
+Personal;2026-12;Haus Fliederhof;Köpfe Teilzeit;164;
+Personal;2026-12;Haus Fliederhof;Sollstunden;39852;
+Personal;2026-12;Haus Fliederhof;Krankheitsstunden;3544;
+Personal;2026-12;Haus Fliederhof;Überstunden;1449;
+Personal;2027-01;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;63,6;
+Personal;2027-01;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,2;
+Personal;2027-01;Haus Fliederhof;Vollkräfte gesamt;244,6;
+Personal;2027-01;Haus Fliederhof;Köpfe;306;
+Personal;2027-01;Haus Fliederhof;Köpfe Teilzeit;170;
+Personal;2027-01;Haus Fliederhof;Sollstunden;40114;
+Personal;2027-01;Haus Fliederhof;Krankheitsstunden;3664;
+Personal;2027-01;Haus Fliederhof;Überstunden;1476;
+Personal;2027-02;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;63,0;
+Personal;2027-02;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,2;
+Personal;2027-02;Haus Fliederhof;Vollkräfte gesamt;243,6;
+Personal;2027-02;Haus Fliederhof;Köpfe;304;
+Personal;2027-02;Haus Fliederhof;Köpfe Teilzeit;169;
+Personal;2027-02;Haus Fliederhof;Sollstunden;39950;
+Personal;2027-02;Haus Fliederhof;Krankheitsstunden;3887;
+Personal;2027-02;Haus Fliederhof;Überstunden;1698;
+Personal;2027-03;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;63,8;
+Personal;2027-03;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,7;
+Personal;2027-03;Haus Fliederhof;Vollkräfte gesamt;245,8;
+Personal;2027-03;Haus Fliederhof;Köpfe;307;
+Personal;2027-03;Haus Fliederhof;Köpfe Teilzeit;170;
+Personal;2027-03;Haus Fliederhof;Sollstunden;40311;
+Personal;2027-03;Haus Fliederhof;Krankheitsstunden;3696;
+Personal;2027-03;Haus Fliederhof;Überstunden;1530;
+Personal;2027-04;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;63,9;
+Personal;2027-04;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,0;
+Personal;2027-04;Haus Fliederhof;Vollkräfte gesamt;244,9;
+Personal;2027-04;Haus Fliederhof;Köpfe;306;
+Personal;2027-04;Haus Fliederhof;Köpfe Teilzeit;169;
+Personal;2027-04;Haus Fliederhof;Sollstunden;40164;
+Personal;2027-04;Haus Fliederhof;Krankheitsstunden;3181;
+Personal;2027-04;Haus Fliederhof;Überstunden;1414;
+Personal;2027-05;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;63,5;
+Personal;2027-05;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;84,3;
+Personal;2027-05;Haus Fliederhof;Vollkräfte gesamt;246,3;
+Personal;2027-05;Haus Fliederhof;Köpfe;308;
+Personal;2027-05;Haus Fliederhof;Köpfe Teilzeit;171;
+Personal;2027-05;Haus Fliederhof;Sollstunden;40393;
+Personal;2027-05;Haus Fliederhof;Krankheitsstunden;2881;
+Personal;2027-05;Haus Fliederhof;Überstunden;1153;
+Personal;2027-06;Haus Fliederhof;Vollkräfte Fachkräfte Pflege;64,4;
+Personal;2027-06;Haus Fliederhof;Vollkräfte Assistenzkräfte Pflege;83,8;
+Personal;2027-06;Haus Fliederhof;Vollkräfte gesamt;247,0;
+Personal;2027-06;Haus Fliederhof;Köpfe;309;
+Personal;2027-06;Haus Fliederhof;Köpfe Teilzeit;171;
+Personal;2027-06;Haus Fliederhof;Sollstunden;40508;
+Personal;2027-06;Haus Fliederhof;Krankheitsstunden;2887;
+Personal;2027-06;Haus Fliederhof;Überstunden;1293;
+Personal;2026-01;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;54,2;
+Personal;2026-01;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;62,7;
+Personal;2026-01;Haus Mühlenhof;Vollkräfte gesamt;194,9;
+Personal;2026-01;Haus Mühlenhof;Köpfe;244;
+Personal;2026-01;Haus Mühlenhof;Köpfe Teilzeit;121;
+Personal;2026-01;Haus Mühlenhof;Sollstunden;31964;
+Personal;2026-01;Haus Mühlenhof;Krankheitsstunden;2358;
+Personal;2026-01;Haus Mühlenhof;Überstunden;804;
+Personal;2026-02;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;54,7;
+Personal;2026-02;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;63,3;
+Personal;2026-02;Haus Mühlenhof;Vollkräfte gesamt;196,7;
+Personal;2026-02;Haus Mühlenhof;Köpfe;246;
+Personal;2026-02;Haus Mühlenhof;Köpfe Teilzeit;122;
+Personal;2026-02;Haus Mühlenhof;Sollstunden;32259;
+Personal;2026-02;Haus Mühlenhof;Krankheitsstunden;2530;
+Personal;2026-02;Haus Mühlenhof;Überstunden;896;
+Personal;2026-03;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;54,6;
+Personal;2026-03;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;63,1;
+Personal;2026-03;Haus Mühlenhof;Vollkräfte gesamt;196,1;
+Personal;2026-03;Haus Mühlenhof;Köpfe;245;
+Personal;2026-03;Haus Mühlenhof;Köpfe Teilzeit;121;
+Personal;2026-03;Haus Mühlenhof;Sollstunden;32160;
+Personal;2026-03;Haus Mühlenhof;Krankheitsstunden;2334;
+Personal;2026-03;Haus Mühlenhof;Überstunden;798;
+Personal;2026-04;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;54,5;
+Personal;2026-04;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;63,9;
+Personal;2026-04;Haus Mühlenhof;Vollkräfte gesamt;197,3;
+Personal;2026-04;Haus Mühlenhof;Köpfe;247;
+Personal;2026-04;Haus Mühlenhof;Köpfe Teilzeit;123;
+Personal;2026-04;Haus Mühlenhof;Sollstunden;32357;
+Personal;2026-04;Haus Mühlenhof;Krankheitsstunden;2031;
+Personal;2026-04;Haus Mühlenhof;Überstunden;643;
+Personal;2026-05;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;54,7;
+Personal;2026-05;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,2;
+Personal;2026-05;Haus Mühlenhof;Vollkräfte gesamt;198,1;
+Personal;2026-05;Haus Mühlenhof;Köpfe;248;
+Personal;2026-05;Haus Mühlenhof;Köpfe Teilzeit;123;
+Personal;2026-05;Haus Mühlenhof;Sollstunden;32488;
+Personal;2026-05;Haus Mühlenhof;Krankheitsstunden;1750;
+Personal;2026-05;Haus Mühlenhof;Überstunden;625;
+Personal;2026-06;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;55,4;
+Personal;2026-06;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,2;
+Personal;2026-06;Haus Mühlenhof;Vollkräfte gesamt;199,4;
+Personal;2026-06;Haus Mühlenhof;Köpfe;249;
+Personal;2026-06;Haus Mühlenhof;Köpfe Teilzeit;123;
+Personal;2026-06;Haus Mühlenhof;Sollstunden;32702;
+Personal;2026-06;Haus Mühlenhof;Krankheitsstunden;1725;
+Personal;2026-06;Haus Mühlenhof;Überstunden;557;
+Personal;2026-07;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;55,3;
+Personal;2026-07;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,0;
+Personal;2026-07;Haus Mühlenhof;Vollkräfte gesamt;198,8;
+Personal;2026-07;Haus Mühlenhof;Köpfe;248;
+Personal;2026-07;Haus Mühlenhof;Köpfe Teilzeit;123;
+Personal;2026-07;Haus Mühlenhof;Sollstunden;32603;
+Personal;2026-07;Haus Mühlenhof;Krankheitsstunden;1571;
+Personal;2026-07;Haus Mühlenhof;Überstunden;441;
+Personal;2026-08;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;55,1;
+Personal;2026-08;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,4;
+Personal;2026-08;Haus Mühlenhof;Vollkräfte gesamt;199,2;
+Personal;2026-08;Haus Mühlenhof;Köpfe;249;
+Personal;2026-08;Haus Mühlenhof;Köpfe Teilzeit;124;
+Personal;2026-08;Haus Mühlenhof;Sollstunden;32669;
+Personal;2026-08;Haus Mühlenhof;Krankheitsstunden;1713;
+Personal;2026-08;Haus Mühlenhof;Überstunden;522;
+Personal;2026-09;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;55,1;
+Personal;2026-09;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,7;
+Personal;2026-09;Haus Mühlenhof;Vollkräfte gesamt;199,7;
+Personal;2026-09;Haus Mühlenhof;Köpfe;250;
+Personal;2026-09;Haus Mühlenhof;Köpfe Teilzeit;124;
+Personal;2026-09;Haus Mühlenhof;Sollstunden;32751;
+Personal;2026-09;Haus Mühlenhof;Krankheitsstunden;1916;
+Personal;2026-09;Haus Mühlenhof;Überstunden;593;
+Personal;2026-10;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;55,5;
+Personal;2026-10;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,7;
+Personal;2026-10;Haus Mühlenhof;Vollkräfte gesamt;200,3;
+Personal;2026-10;Haus Mühlenhof;Köpfe;250;
+Personal;2026-10;Haus Mühlenhof;Köpfe Teilzeit;124;
+Personal;2026-10;Haus Mühlenhof;Sollstunden;32849;
+Personal;2026-10;Haus Mühlenhof;Krankheitsstunden;2169;
+Personal;2026-10;Haus Mühlenhof;Überstunden;785;
+Personal;2026-11;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;56,0;
+Personal;2026-11;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,6;
+Personal;2026-11;Haus Mühlenhof;Vollkräfte gesamt;201,0;
+Personal;2026-11;Haus Mühlenhof;Köpfe;251;
+Personal;2026-11;Haus Mühlenhof;Köpfe Teilzeit;124;
+Personal;2026-11;Haus Mühlenhof;Sollstunden;32964;
+Personal;2026-11;Haus Mühlenhof;Krankheitsstunden;2346;
+Personal;2026-11;Haus Mühlenhof;Überstunden;780;
+Personal;2026-12;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;56,2;
+Personal;2026-12;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;65,4;
+Personal;2026-12;Haus Mühlenhof;Vollkräfte gesamt;202,7;
+Personal;2026-12;Haus Mühlenhof;Köpfe;253;
+Personal;2026-12;Haus Mühlenhof;Köpfe Teilzeit;126;
+Personal;2026-12;Haus Mühlenhof;Sollstunden;33243;
+Personal;2026-12;Haus Mühlenhof;Krankheitsstunden;2387;
+Personal;2026-12;Haus Mühlenhof;Überstunden;846;
+Personal;2027-01;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;57,6;
+Personal;2027-01;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,6;
+Personal;2027-01;Haus Mühlenhof;Vollkräfte gesamt;203,6;
+Personal;2027-01;Haus Mühlenhof;Köpfe;254;
+Personal;2027-01;Haus Mühlenhof;Köpfe Teilzeit;130;
+Personal;2027-01;Haus Mühlenhof;Sollstunden;33390;
+Personal;2027-01;Haus Mühlenhof;Krankheitsstunden;2560;
+Personal;2027-01;Haus Mühlenhof;Überstunden;875;
+Personal;2027-02;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;57,3;
+Personal;2027-02;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,7;
+Personal;2027-02;Haus Mühlenhof;Vollkräfte gesamt;203,3;
+Personal;2027-02;Haus Mühlenhof;Köpfe;254;
+Personal;2027-02;Haus Mühlenhof;Köpfe Teilzeit;130;
+Personal;2027-02;Haus Mühlenhof;Sollstunden;33341;
+Personal;2027-02;Haus Mühlenhof;Krankheitsstunden;2804;
+Personal;2027-02;Haus Mühlenhof;Überstunden;1016;
+Personal;2027-03;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;57,8;
+Personal;2027-03;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;65,0;
+Personal;2027-03;Haus Mühlenhof;Vollkräfte gesamt;204,6;
+Personal;2027-03;Haus Mühlenhof;Köpfe;256;
+Personal;2027-03;Haus Mühlenhof;Köpfe Teilzeit;131;
+Personal;2027-03;Haus Mühlenhof;Sollstunden;33554;
+Personal;2027-03;Haus Mühlenhof;Krankheitsstunden;2691;
+Personal;2027-03;Haus Mühlenhof;Überstunden;905;
+Personal;2027-04;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;57,9;
+Personal;2027-04;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;64,5;
+Personal;2027-04;Haus Mühlenhof;Vollkräfte gesamt;204,0;
+Personal;2027-04;Haus Mühlenhof;Köpfe;255;
+Personal;2027-04;Haus Mühlenhof;Köpfe Teilzeit;131;
+Personal;2027-04;Haus Mühlenhof;Sollstunden;33456;
+Personal;2027-04;Haus Mühlenhof;Krankheitsstunden;2198;
+Personal;2027-04;Haus Mühlenhof;Überstunden;696;
+Personal;2027-05;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;58,1;
+Personal;2027-05;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;65,1;
+Personal;2027-05;Haus Mühlenhof;Vollkräfte gesamt;205,4;
+Personal;2027-05;Haus Mühlenhof;Köpfe;257;
+Personal;2027-05;Haus Mühlenhof;Köpfe Teilzeit;132;
+Personal;2027-05;Haus Mühlenhof;Sollstunden;33686;
+Personal;2027-05;Haus Mühlenhof;Krankheitsstunden;1908;
+Personal;2027-05;Haus Mühlenhof;Überstunden;581;
+Personal;2027-06;Haus Mühlenhof;Vollkräfte Fachkräfte Pflege;58,0;
+Personal;2027-06;Haus Mühlenhof;Vollkräfte Assistenzkräfte Pflege;65,6;
+Personal;2027-06;Haus Mühlenhof;Vollkräfte gesamt;206,0;
+Personal;2027-06;Haus Mühlenhof;Köpfe;258;
+Personal;2027-06;Haus Mühlenhof;Köpfe Teilzeit;133;
+Personal;2027-06;Haus Mühlenhof;Sollstunden;33784;
+Personal;2027-06;Haus Mühlenhof;Krankheitsstunden;1934;
+Personal;2027-06;Haus Mühlenhof;Überstunden;614;

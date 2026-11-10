@@ -1,0 +1,13 @@
+﻿Perspektive;Strategisches_Ziel;Ziel_wirkt_auf;Kennzahl;Einheit;Wirkung;Ist;Ziel;Abweichung_Prozent;Status;Verantwortlich;Periode;Zielperiode;Hinweis
+Finanzen;Ergebnisverbesserung;;EBIT;Tsd. €;Anstieg günstig;180;200;-10,0;im Rahmen;Frau Brandt;2027-02;2028-12;
+Finanzen;Ergebnisverbesserung;;Umsatz;Tsd. €;Anstieg günstig;3650;3550;2,8;übertroffen;Frau Brandt;2027-02;2028-12;
+Finanzen;Ergebnisverbesserung;;Kosten;Tsd. €;Anstieg ungünstig;3470;3350;3,6;im Rahmen;Frau Brandt;2027-02;2028-12;im Original mit negativem Vorzeichen
+Kunden;Marktposition verbessern;Ergebnisverbesserung;Marktanteil;%;Anstieg günstig;10,1;10,1;0,0;erreicht;Herr Tal;2027-02;2028-12;
+Kunden;Kundenbindung;Ergebnisverbesserung, Marktposition verbessern;Kundenzufriedenheit;%;Anstieg günstig;80;95;-15,8;kritisch;Herr Tal;2027-02;2028-12;
+Interne Prozesse;Prozessoptimierung;Marktposition verbessern, Kundenbindung;Verbesserungsvorschläge;Anzahl;Anstieg günstig;6;5;20,0;übertroffen;Frau Kühn;2027-02;2028-12;
+Interne Prozesse;Prozessoptimierung;Marktposition verbessern, Kundenbindung;Lieferfähigkeit;%;Anstieg günstig;80;88;-9,1;im Rahmen;Frau Kühn;2027-02;2028-12;
+Interne Prozesse;Prozessoptimierung;Marktposition verbessern, Kundenbindung;Durchlaufzeit;Tage;Anstieg ungünstig;25;20;25,0;kritisch;Frau Kühn;2027-02;2028-12;"gewichtet; Ziel angenommen (Original 0,000)"
+Interne Prozesse;Mitarbeiterbindung;Prozessoptimierung;MA-Zufriedenheit;%;Anstieg günstig;80;80;0,0;erreicht;Herr Ober;2027-02;2028-12;
+Lernen und Entwicklung;Umsetzung Innovation;Prozessoptimierung;Umsatz neue Produkte;Tsd. €;Anstieg günstig;150;1210;-87,6;kritisch;Frau Lenz;2027-02;2028-12;
+Lernen und Entwicklung;Weiterentwicklung;Prozessoptimierung, Mitarbeiterbindung;Schulungstage;Tage;Anstieg günstig;110;100;10,0;übertroffen;Herr Ober;2027-02;2028-12;gesamt
+Lernen und Entwicklung;Weiterentwicklung;Prozessoptimierung, Mitarbeiterbindung;Verbesserungsvorschläge;Anzahl;Anstieg günstig;6;5;20,0;übertroffen;Herr Ober;2027-02;2028-12;auch unter Prozessoptimierung

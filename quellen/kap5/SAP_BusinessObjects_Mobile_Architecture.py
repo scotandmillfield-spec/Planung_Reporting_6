@@ -18,12 +18,12 @@ SHY = chr(0xAD)
 XU0, XU1 = 0.3, 17.0             # Nutzer
 XF = [18.6, 38.6]                # Firewalls
 XD0, XD1 = 20.2, 37.0            # Komponenten zwischen den Firewalls
-XS0, XS1 = 40.4, 60.8            # mobiler Anwendungsserver
-XW0, XW1 = 43.4, 58.4            # Middleware-Server
-XST = 56.4                       # Zuleitung von oben (Reverse Proxy)
-XSB = 59.4                       # Zuleitung von unten (Middleware)
-XP0, XP1 = 66.0, 87.0            # BI-Plattform
-XR0, XR1 = 92.6, 109.7           # Dateiablageserver
+XS0, XS1 = 40.4, 62.0            # mobiler Anwendungsserver
+XW0, XW1 = 44.8, 59.4            # Middleware-Server
+XST = 57.4                       # Zuleitung von oben (Reverse Proxy)
+XSB = 55.6                       # Leitung Middleware-Server ⇄ Anwendungsserver
+XP0, XP1 = 67.2, 87.8            # BI-Plattform
+XR0, XR1 = 93.0, 109.7           # Dateiablageserver
 XUL = 8.6                        # Abgänge oben/unten am Nutzerkasten
 
 
@@ -50,7 +50,7 @@ def build(theme):
     srv_p = [P("Mobiler", bold=True), P(f"Anwendungs{SHY}server", bold=True),
              P("(Authentifizierung: Basic oder X.509-Zertifikat)", size=6, space_before=1.0)]
     mw_p = [P("Mobile-Middleware-Server", size=sz)]
-    dienste = [[P(f"Verarbeitungs{SHY}server für Ad-hoc-Berichte (mehrere)", size=sz)],
+    dienste = [[P(f"Verarbeitungs{SHY}server für\nAd-hoc-Berichte\n(mehrere)", size=sz)],
                [P("Server für formatierte Berichte", size=sz)],
                [P("Suchdienst", size=sz)],
                [P("Zeitsteuerung (Scheduler)", size=sz)],
@@ -69,10 +69,10 @@ def build(theme):
     uh = tmp.measure(user_p, XU1 - XU0) + 1.6
     U = B(XU0, ymid - uh / 2, XU1 - XU0, uh)
     mwh = tmp.measure(mw_p, XW1 - XW0, ins=(0.5, 0.6))
-    yb = max(U.b, S.b) + 9.2                                  # Route unten
+    yb = max(U.b, S.b) + 10.6                                  # Route unten
     WS = B(XW0, yb - mwh / 2, XW1 - XW0, mwh)
     RS = B(XD0, yb - 2.7, XD1 - XD0, 5.4)
-    OB = B(XD0 - 0.8, WS.y - 4.0, XW1 + 1.8 - (XD0 - 0.8), WS.h + 5.4)   # optional unten
+    OB = B(XD0 - 0.8, WS.y - 4.0, XW1 + 1.6 - (XD0 - 0.8), WS.h + 5.4)   # optional unten
     yfw = OB.b + 1.4                                          # Ende der Firewall-Linien
     H = round(yfw + 3.6, 1)
 
@@ -84,7 +84,7 @@ def build(theme):
     # Dateiablageserver
     fh = tmp.measure(frs_p, XR1 - XR0) + 1.0
     FR = B(XR0, ymid - fh / 2, XR1 - XR0, fh)
-    AB = B(XR0 + 1.0, FR.y - 6.0 - 5.0, XR1 - XR0 - 2.0, 5.0)
+    AB = B(XR0 + 0.6, FR.y - 6.0 - 5.0, XR1 - XR0 - 1.2, 5.0)
     dbh = tmp.measure(db_p, XR1 - XR0) + 0.6
     DB = B(XR0, FR.b + 6.0, XR1 - XR0, dbh)
 
@@ -118,11 +118,11 @@ def build(theme):
     # unten: Nutzer ⇄ Relay-Server ⇄ Middleware-Server ⇄ Anwendungsserver
     A([(XUL, U.b), (XUL, yb), (RS.x, yb)], head=True, size="sm", name="Nutzer ⇄ Relay-Server")
     A([(RS.r, yb), (WS.x, yb)], head=True, size="sm", name="Relay-Server ⇄ Middleware-Server")
-    A([(WS.r, yb), (XSB, yb), (XSB, S.b)], head=True, size="sm", name="Middleware-Server ⇄ Anwendungsserver")
+    A([(XSB, WS.y), (XSB, S.b)], head=True, size="sm", name="Middleware-Server ⇄ Anwendungsserver")
     f.text(XUL + 0.8, yb - 3.0, 8.0, 2.8, [P("HTTPS", **lab)], anchor="b", name="HTTPS unten links")
-    f.text(XF[1] + 0.6, yb - 3.0, WS.x - XF[1] - 0.6, 2.8, [P("TCP", **lab)], align="c", anchor="b",
+    f.text(XF[1] + 0.5, yb - 3.0, WS.x - XF[1] - 0.5, 2.8, [P("TCP", **lab)], align="c", anchor="b",
            name="TCP unten")
-    f.text(XSB - 0.8 - 8.0, S.b + 0.5, 8.0, 2.8, [P("HTTPS", **lab)], align="r", anchor="t", name="HTTPS unten rechts")
+    f.text(XSB + 0.6, S.b + 1.2, 8.0, 2.8, [P("HTTPS", **lab)], align="l", anchor="t", name="HTTPS unten rechts")
     # Anwendungsserver ⇄ BI-Plattform → Dateiablageserver
     A([(S.r, ymid), (P0.x, ymid)], head=True, size="sm", name="Anwendungsserver ⇄ BI-Plattform")
     f.text(S.r, ymid - 3.0, P0.x - S.r, 2.8, [P("TCP", **lab)], align="c", anchor="b", name="TCP Mitte")

@@ -1,0 +1,56 @@
+<!-- Abb. 5.69 Sprach- und Chat-Assistent in einer Rechnungswesen-/BI-Oberfläche (softwareneutral nachgebaut).
+     Original: Startseite einer Rechnungswesensoftware (abgedunkelt) mit eingeblendetem Assistentenfenster.
+     Hier nur das Dialogfenster: Titelzeile wie Abb. 3.7/5.40, Gesprächsverlauf des Originals (Frage nach der
+     Entwicklung der Umsatzerlöse, Rückfrage zur Basisgröße, Antwort mit Prognose) und Eingabezeile.
+     Maske 727 px = 110 mm; Inhalt 695 px. Nachrichten und Bericht erzeugt assistent.js. -->
+<style>
+  #assistent { --sp-label: 90px; }
+  #assistent .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #assistent .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #assistent .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  /* Gesprächsverlauf */
+  #assistent .chat { display: flex; flex-direction: column; gap: 8px; padding: 2px 0 4px; }
+  #assistent .datum { align-self: center; color: var(--muted); line-height: 18px; margin-bottom: 2px; }
+  #assistent .msg { max-width: 620px; padding: 7px 11px; border-radius: 8px; line-height: 18px; }
+  #assistent .msg p { margin: 0 0 6px; }
+  #assistent .msg p:last-child { margin-bottom: 0; }
+  #assistent .msg.nutzer { align-self: flex-end; max-width: 420px; background: #FFFFFF; border: 1px solid var(--rahmen); }
+  #assistent .msg.assistent { align-self: flex-start; background: var(--anzeige); }
+  #assistent .wahl { display: flex; gap: 8px; margin-top: 8px; }
+  /* Kleiner Bericht in der Antwort */
+  #assistent .bericht { background: #FFFFFF; border-radius: 4px; padding: 6px 10px 6px; margin-top: 8px; }
+  #assistent .bericht-titel { font-weight: bold; line-height: 18px; margin-bottom: 2px; }
+  #assistent .bericht-titel span { font-weight: normal; color: var(--muted); }
+  #assistent table.bt { border-collapse: collapse; font-size: 14px; }
+  #assistent .bt th { font-weight: normal; color: var(--muted); text-align: right; padding: 0 0 3px 16px; border-bottom: 1px solid var(--ac);
+    white-space: nowrap; line-height: 18px; }
+  #assistent .bt td { text-align: right; padding: 0 0 0 16px; height: 21px; white-space: nowrap; border-bottom: 1px solid #D9D9D9;
+    font-variant-numeric: tabular-nums; }
+  #assistent .bt th:first-child, #assistent .bt td:first-child { text-align: left; padding-left: 0; }
+  #assistent .bt tr.summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
+  /* Eingabe */
+  #assistent .eingabe { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--linie); }
+  #assistent .frage-zeile { display: grid; grid-template-columns: 90px 1fr auto auto; column-gap: 8px; align-items: center; }
+  #assistent .frage-zeile + .frage-zeile { margin-top: 4px; }
+  #assistent .frage-zeile .mk-knopf { height: 26px; line-height: 24px; }
+  #assistent #f-vorschlag { grid-column: 2 / 5; }
+</style>
+<form class="mk-maske" id="assistent" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Assistent</span><span class="kopf-unter" id="kopf-unter">Mandant 025 · Fragen an Rechnungswesen und Controlling</span></div>
+  <div class="mk-inhalt">
+    <div class="chat" id="chat" aria-live="polite"><!-- Nachrichten erzeugt assistent.js --></div>
+    <div class="eingabe" id="eingabe">
+      <div class="frage-zeile" id="z-frage">
+        <label class="mk-label" for="f-frage">Frage</label>
+        <input class="mk-feld" id="f-frage" value="" data-hilfe="Frage eingeben oder einen Vorschlag wählen">
+        <button type="button" class="mk-knopf mk-zweit" id="k-sprache">Spracheingabe</button>
+        <button type="button" class="mk-knopf" id="k-senden">Senden</button>
+      </div>
+      <div class="frage-zeile" id="z-vorschlag">
+        <label class="mk-label" for="f-vorschlag">Vorschläge</label>
+        <select class="mk-feld" id="f-vorschlag"></select>
+      </div>
+    </div>
+  </div>
+</form>

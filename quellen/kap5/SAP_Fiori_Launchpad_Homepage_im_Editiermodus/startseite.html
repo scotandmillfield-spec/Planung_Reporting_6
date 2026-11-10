@@ -1,0 +1,83 @@
+<!-- Abb. 5.52 „Launchpad-Startseite im Editiermodus“ (softwareneutral nachgebaut).
+     Querformat 1024 px = 155 mm (Kachelraster mit fünf Einheiten und Benachrichtigungen rechts); Inhalt 992 px.
+     Links die Gruppen (720 px: fünf Kachelspalten zu 136 px, Abstand 10, Innenabstand 10), 20 px Abstand,
+     rechts die Benachrichtigungen (252 px). Kacheln schlicht im Buchstil: Titel, ggf. Zahl oder Balken, ohne Icons.
+     Kacheln, Benachrichtigungen und Logik erzeugt startseite.js. Titelzeile wie Abb. 3.7/3.179. -->
+<style>
+  #startseite { width: 1024px; }
+  #startseite .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #startseite .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #startseite .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #startseite .mk-reiter > span { padding: 0 14px; }
+  body:not(.print) #startseite .mk-reiter > span { cursor: pointer; }
+  #startseite .mk-reiter > span:focus { outline: 2px solid var(--ac); outline-offset: -2px; }
+  #startseite .teile { display: grid; grid-template-columns: 720px 252px; column-gap: 20px; align-items: start; }
+  #startseite .gruppe { background: var(--band); padding: 10px; }
+  #startseite .gruppe + .gruppe { margin-top: 12px; }
+  #startseite .g-kopf { height: 24px; line-height: 20px; font-weight: bold; color: var(--ac); margin-bottom: 6px; }
+  #startseite .raster { position: relative; display: grid; grid-template-columns: repeat(5, 136px); grid-auto-rows: 124px; gap: 10px; }
+  #startseite .kachel { position: relative; background: #FFFFFF; border: 1px solid var(--rahmen); border-radius: 3px; padding: 7px 10px; }
+  #startseite .kachel.breit { grid-column: span 2; }
+  body:not(.print) #startseite .bearbeiten .kachel:not(.neu) { cursor: grab; touch-action: none; user-select: none; }
+  body:not(.print) #startseite .kachel:focus { outline: 2px solid var(--ac); outline-offset: 1px; }
+  #startseite .kachel.zieht { opacity: .35; }
+  #startseite .k-titel { font-weight: bold; line-height: 18px; }
+  #startseite .k-unter { color: var(--muted); line-height: 18px; }
+  #startseite .k-text { line-height: 18px; margin-top: 4px; }
+  #startseite .k-zahl { position: absolute; right: 10px; bottom: 6px; font-size: 32px; line-height: 36px; color: var(--ac); }
+  #startseite .k-einheit { position: absolute; right: 10px; bottom: 42px; color: var(--muted); line-height: 18px; }
+  #startseite .k-fuss { position: absolute; left: 10px; bottom: 6px; line-height: 18px; }
+  #startseite .balken { display: grid; grid-template-columns: 64px 170px 1fr; row-gap: 0; margin-top: 4px; align-items: center; }
+  #startseite .balken > div { height: 16px; line-height: 16px; }
+  #startseite .balken .b { height: 10px; background: var(--ac); }
+  #startseite .balken .w { text-align: right; }
+  #startseite .kachel.neu { border-style: dashed; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--ac); font-weight: bold; }
+  body:not(.print) #startseite .kachel.neu { cursor: pointer; }
+  #startseite .normal .kachel.neu, #startseite .normal .k-fuss { display: none; }
+  #startseite .links { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 4px; }
+  #startseite .link-kachel { display: flex; align-items: center; justify-content: space-between; height: 26px; padding: 0 10px;
+    background: #FFFFFF; border: 1px solid var(--rahmen); border-radius: 3px; }
+  #startseite .link-kachel .mk-link.ent { font-size: 14px; }
+  #startseite .normal .link-kachel .ent { display: none; }
+  #startseite .einfuegen { position: absolute; width: 4px; margin-left: -7px; background: var(--ac); display: none; }
+  #startseite .meldungen .mk-gruppenkopf { margin-bottom: 8px; }
+  #startseite .nachricht { background: var(--anzeige); padding: 8px 10px; }
+  #startseite .nachricht + .nachricht { margin-top: 8px; }
+  #startseite .n-titel { font-weight: bold; line-height: 18px; }
+  #startseite .n-text { line-height: 18px; margin-top: 4px; }
+  #startseite .n-meta { line-height: 18px; margin-top: 4px; color: var(--muted); display: flex; justify-content: space-between; }
+  #startseite .fussleiste { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--linie); }
+  #startseite .fussleiste .hinweis { flex: 1 1 auto; color: var(--muted); }
+  .kachel-geist { position: fixed; z-index: 50; pointer-events: none; background: #FFFFFF; border: 1px dashed #3A3F44; border-radius: 3px;
+    padding: 6px 10px; font: bold 14px/18px Arial, "Liberation Sans", sans-serif; color: #1A1A1A; }
+</style>
+<form class="mk-maske" id="startseite" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Startseite</span><span class="kopf-unter" id="kopf-unter">Editiermodus · Gruppen und Kacheln anordnen, entfernen und hinzufügen</span></div>
+  <div class="mk-inhalt">
+    <div class="mk-reiter" id="reiter" role="tablist">
+      <span class="aktiv" role="tab" data-gruppe="g1">Meine Startseite</span>
+      <span role="tab" data-gruppe="nuetzlich">Nützliche Apps</span>
+      <span role="tab" data-gruppe="innendienst">Innendienst Vertrieb</span>
+    </div>
+    <div class="teile bearbeiten" id="teile">
+      <div class="gruppen">
+        <div class="gruppe" id="g1">
+          <div class="g-kopf" id="g1-kopf">Meine Startseite</div>
+          <div class="raster" id="raster1"><!-- Kacheln erzeugt startseite.js --></div>
+        </div>
+        <div class="gruppe" id="g2" aria-label="Link-Kacheln">
+          <div class="links" id="raster2"><!-- Link-Kacheln erzeugt startseite.js --></div>
+        </div>
+      </div>
+      <div class="meldungen" id="benachrichtigungen">
+        <div class="mk-gruppenkopf">Benachrichtigungen</div>
+        <div id="nachrichten"><!-- erzeugt startseite.js --></div>
+      </div>
+    </div>
+    <div class="fussleiste" id="fuss">
+      <span class="hinweis" id="modus-hinweis">Kacheln per Drag &amp; Drop verschieben · „Entfernen“ nimmt eine Kachel aus der Gruppe</span>
+      <button type="button" class="mk-knopf" id="k-fertig">Fertig</button>
+    </div>
+  </div>
+</form>

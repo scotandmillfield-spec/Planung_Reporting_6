@@ -954,6 +954,67 @@
    ],
    "alt": "Star-Schema für den Einkauf mit der Faktentabelle Einkauf in der Mitte, die Fremdschlüssel zu Artikel, Einkäufer, Lieferant, Datum und Region sowie die Kennzahlen Menge und Wert enthält. Die fünf Dimensionstabellen sind sternförmig angeordnet und jeweils n:1 mit der Faktentabelle verbunden. Zwei gestrichelte Gruppen nennen die Measures des Würfels (Menge, Wert, Anzahl Einkäufe) und die Hierarchien Produktgruppe › Artikel und Region › Lieferant."
   },
+  "5.78": {
+   "status": "pruefung",
+   "datei": "Hyperion_Planning_Mehrdimensionale_Planungsformulare",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Planungsformular „Zielvorgaben“ neu gebaut (Querformat 1024 px = 155 × 100 mm, im LaTeX gedreht); Browserfenster, Produktname, Navigations- und Statusleisten entfallen; die Dialoge „Anweisungen“ und „Geschäftsregeln starten“ stehen als feste Bereiche unter dem Raster statt als überlappende Fenster",
+    "Werte des Originals: Ist 4.018/4.521, Vorgabe 10.000 (→ 4.705/5.295), Bottom-up Jan–Jul je Produktgruppe; Aug–Dez ergänzt (alle 12 Monate sichtbar, Original nach August abgeschnitten); Summen gerechnet – das Original zeigte gerundete Linienwerte (Feb 940 statt 443 + 498 = 941)",
+    "Klartext: IST/REALCASE, TOPDOWN, BESTCASE, YearTotal, FY01/FY02 → Ist 2027, Top-down, Bottom-up, Jahr; Point-of-View/Page → Sicht/Seite; Produktlinie 1, Produktgruppe 1.1 … → Fahrräder, Cityräder …; Grosskunde → Großkunde; Gruppe Cityräder bis zu den Produkten aufgeklappt, damit Eingabezeilen sichtbar sind",
+    "HTML rechnet: Vorgabe nach Ist-Anteil auf die Produkte, Regel „Top-down-Vorgabe verteilen“ nach Monats-Ist, Allokation „Kein Produkt“, Summen; neu: Abstimmung Bottom-up gegenüber Vorgabe und Ist; Datengrundlage gemeinsam mit Abb. 5.79–5.82 (daten_planungsmodell.py)",
+    "Caption ohne Produktnamen? z. B. ‚Mehrdimensionales Planungsformular (in Anlehnung an Hyperion Planning)‘"
+   ],
+   "alt": "Planungsformular „Zielvorgaben“ für das Konto Absatzmenge: oben die feste Sicht und die Seitenauswahl Gesellschaft Deutschland, Kunde Großkunde 1, Vertriebsart Normalgeschäft. Das Raster zeigt die aufklappbare Produkthierarchie mit dem Ist 2027 als Jahreswert, der Top-down-Vorgabe 2028 von 10.000 Stück und der Bottom-up-Planung je Monat, die nach dem Verteilen der Vorgabe genau mit ihr übereinstimmt. Darunter stehen die Anweisungen zum Formular und die Auswahl der Geschäftsregeln."
+  },
+  "5.79": {
+   "status": "pruefung",
+   "datei": "Hyperion_Planning_Individuelle_Planungsmodelle_Business_Rules",
+   "kommentare": [
+    "Produktscreenshot (Grafik „Verknüpfungen im Umsatzmodell“ in einem Browserfenster über dem Formular „Umsatzplanung“) als Diagramm im Querformat 155 × 96 mm; Bildtitel, Fenster und das Anweisungsfenster mit dem Link entfallen – die Aussage der Sprechblase (Links in den Anweisungen) gehört in den Text",
+    "Farblegende (blau gestrichelt, grün, orange, rot) durch Spaltenbänder Eingabe | Berechnung | GuV | Bilanz | Cash-Flow ersetzt; Eingaben weiß gestrichelt wie im Original, berechnete Größen weiß, Nettoumsatz als Ausgangsgröße des Modells rot; Zeilenfolge des Originals beibehalten",
+    "Verbindungen fachlich bereinigt – bitte prüfen: Fertigungsmaterial aus Zugang Produktion × Standardmaterialkosten, Fertigungslöhne aus Zugang Produktion × Standardfertigungskosten (Original: nur eine Linie STD MK STK → Fertigungslöhne); Frachtkosten → Deckungsbeitrag und Nettoumsatz → Zugang Verbindlichkeiten Finanzamt ergänzt (im Original nur gekreuzt)",
+    "Abkürzungen aufgelöst: STD MK/FK STK → Standardmaterial-/Standardfertigungskosten je Stück, Vblk. → Verbindlichkeiten, Ust → USt, DB → Deckungsbeitrag, Inkassoraten % → Inkassorate in %; Umsatz → Nettoumsatz (wie GuV Abb. 5.80); „Cash …“ → Einzahlung Forderungen bzw. Auszahlung …",
+    "Caption ohne Produktnamen? z. B. ‚Individuelle Planungsmodelle (Business Rules): Verknüpfungen im Umsatzmodell (in Anlehnung an Hyperion Planning)‘"
+   ],
+   "alt": "Verknüpfungsdiagramm des Umsatzmodells in fünf Spalten: Eingaben (Inkassorate, Absatz, Listenpreis, Rabatt, USt-Satz, Frachtkostensatz, Standardmaterial- und Standardfertigungskosten je Stück), berechnete Größen (Verkaufspreis, Zugang Produktion), GuV-Positionen, Bilanzpositionen und Zahlungen. Pfeile zeigen den Rechenweg vom hervorgehobenen Nettoumsatz über Frachtkosten und Wareneinsatz zum Deckungsbeitrag, vom Zugang Produktion über Bestandsveränderung und Fertigungskosten zum Lagerbestand sowie zu den Einzahlungen und Auszahlungen."
+  },
+  "5.80": {
+   "status": "pruefung",
+   "datei": "Hyperion_Planning_Auswertungen",
+   "kommentare": [
+    "Produktscreenshot (Berichte „Gewinn- & Verlustrechnung“ mit Expansion und „Umsätze nach Produkten“ mit 3D-Torte) softwareneutral als interaktiver Bericht 1024 × 646 px; Browserfenster, Repository-Pfad, zwei Herstellerlogos und Links des Benutzer-POV entfallen, Ausgabe HTML/PDF bleibt als Schalter (PDF öffnet die Druckansicht)",
+    "Werte neu aus dem gemeinsamen Planungsmodell der Serie, weil das Original in sich nicht stimmte (Bilanzergebnis ≠ Betriebsergebnis − AfA − Zinsen, Gesamterlöse ≠ Nettoumsatz + Bestandsveränderungen, Tortenanteil 65,71 % statt 56 %); Nettoumsatz Deutschland enthält die Absatzplanung aus Abb. 5.78, Abschreibungen die Investitionen aus Abb. 5.81",
+    "Gesamterlöse → Gesamtleistung, Bilanzergebnis → Ergebnis vor Steuern, Zwischensumme Deckungsbeitrag ergänzt, „Variable Herstellkosten“ zusätzlich aufklappbar (Fertigungsmaterial, Fertigungslöhne wie Abb. 5.79); GJ 2002 → Plan 2028, neu mit KPI-Leiste und ΔVJ zum Ist 2027 (Abweichungsbalken nach Wirkung)",
+    "3D-Torte (gesprengt, Grün/Gelb/Orange) durch Balken „Anteil am Nettoumsatz“ ersetzt; „Investigation“ als Klick auf den Nettoumsatz eines Quartals (Produktbericht hebt das Quartal hervor), Klick auf ein Produkt filtert die GuV bis zum Deckungsbeitrag",
+    "Produkte erfunden (Fahrräder und Zubehör statt Produkt 1.1.1 …), alle Werte in € zu Planwechselkursen (Original: lokale Währung)",
+    "Caption ohne Produktnamen? z. B. ‚Auswertungen in einer Planungssoftware (in Anlehnung an Hyperion Reports)‘"
+   ],
+   "alt": "Bericht der integrierten Planung für Deutschland, Plan 2028 im Vergleich zum Ist 2027: Kopfzahlen zeigen Nettoumsatz 39,0 Mio. € (+15,7 %), Deckungsbeitrag 11,3 Mio. €, Betriebsergebnis 3,5 Mio. € (+1,3 %) und Ergebnis vor Steuern 2,6 Mio. €. Links steht die GuV nach Quartalen mit aufgeklappten Fixkosten und Abweichungsbalken – die Fixkosten steigen um 26 % und zehren das Umsatzwachstum auf –, rechts der Umsatz nach Produktgruppen und die Anteile der sechs Produkte am Nettoumsatz, angeführt vom E-Trekking-Rad mit 48,7 %."
+  },
+  "5.81": {
+   "status": "pruefung",
+   "datei": "Hyperion_Planning_Kommentarfunktion",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Formular „Investitionsplanung“ mit Positionsanmerkung und Anmerkungen der Planungseinheit (Querformat 1024 px = 155 × 109 mm, im LaTeX gedreht); das überlappende Fenster „Anmerkungen der Planungseinheit“ steht als Abschnitt unter dem Raster, der Knopf „Navigation“ entfällt",
+    "Anschaffungswert 6.000 € im März wie im Original; Nutzungsdauer „20“ (ohne Einheit, rechnerisch Monate) → 5 Jahre und Restwert 100 → 0 €, damit 100 € Abschreibung je Monat (Original 295 €) – bitte prüfen; „Nutzungsdauer in Jahren“, „Durchführung (1 = ja)“, „Cash Investitionen“ → „Auszahlung Investition“",
+    "Personen und Daten fiktiv bzw. aktuell: admin → Herr Albers (Konzerncontrolling), CC Mgr → Herr Roth (Kostenstellenleitung), GES_E1 → Deutschland, PLAN/REALCASE → Plan 2028/Bottom-up, 25.02.2003 → 13.10.2027, BÜROMÖBEL → Büromöbel; Title/Author/Date/Text → Titel, Autor · Datum, Uhrzeit, Text",
+    "HTML rechnet Abschreibung, Wertberichtigung, Nettowert und Auszahlung aus den Eingaben (weitere Investitionen je Gesellschaft und Kostenstelle wählbar); Anmerkungen lassen sich je Planungseinheit mit Autor, Datum und Uhrzeit speichern; die Abschreibungen gehen in die GuV der Abb. 5.80 ein",
+    "Caption ohne Produktnamen? z. B. ‚Kommentarfunktion in einer Planungssoftware (in Anlehnung an Hyperion Planning)‘"
+   ],
+   "alt": "Formular „Investitionsplanung“ für Deutschland, Kostenstelle Sonstige Kostenstellen, Investition 1: Im März sind 6.000 € Anschaffungswert, 5 Jahre Nutzungsdauer, kein Restwert und die Durchführung eingetragen; daraus folgen 100 € Abschreibung je Monat, die kumulierte Wertberichtigung, der Nettowert und die Auszahlung. Zum Anschaffungswert steht die Positionsanmerkung „Büromöbel“. Darunter wird zur Planungseinheit Plan 2028 · Bottom-up · Deutschland eine neue Anmerkung erfasst, und zwei vorhandene Anmerkungen erscheinen mit Autor, Datum und Uhrzeit."
+  },
+  "5.82": {
+   "status": "pruefung",
+   "datei": "Hyperion_Planning_Workflowkomponente",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Maske „Status überprüfen und Prozess verwalten“ nachgebaut (Hochformat 110 × 150 mm, PDF ohne Skalierung); Browserfenster, Produktname, Navigations- und Statusleisten entfallen; die Seite „Details“ (Link in der Spalte Aktion) steht als Abschnitt mit Aktion, nächstem Eigentümer, Anmerkung und Verlauf darunter – Aussage der Sprechblase „Weiterleiten“",
+    "Status und Eigentümer wie im Original; Statusfarben (grün/blau/rot) entfallen, nicht gestartete Einheiten grau; CO_D, CO_USA, admin → Frau Brandt, Frau Kaya, Herr Albers (fiktiv); Summenknoten zeigen den am wenigsten fortgeschrittenen Status der Einheiten darunter (deckt sich mit allen Werten des Originals)",
+    "„Summe Europa“ usw. → Europa, Amerika, Asien (wie Abb. 5.80), Grossbritannien → Großbritannien, New Zealand → Neuseeland; Wurzelknoten „Gesellschaften“ entfällt; Russland als Gesellschaft beibehalten – für ein Planjahr 2028 ersetzen?",
+    "HTML: Planzyklus starten/ausschließen (auch je Region), Aktionen je Status (Weiterleiten, Genehmigen, Zurückweisen) mit Protokoll im Verlauf, Baum- und flache Struktur, Version Top-down (genehmigt); dieselben fünf Gesellschaften im Planzyklus wie in Abb. 5.78–5.81",
+    "Caption ohne Produktnamen? z. B. ‚Workflowkomponente einer Planungssoftware (in Anlehnung an Hyperion Planning)‘"
+   ],
+   "alt": "Maske „Status überprüfen und Prozess verwalten“ für Plan 2028, Version Bottom-up: Ein Raster listet den Gesellschaftsbaum vom Konzern über Europa, Amerika und Asien bis zu den Ländern mit Teilnahme am Planzyklus, Prozessstatus und aktuellem Eigentümer; fünf Gesellschaften sind gestartet, Deutschland und die USA werden überprüft, Großbritannien, Australien und Japan sind genehmigt. Darunter zeigen die Details für Deutschland Status, Eigentümerin Frau Brandt, die Aktion „Weiterleiten“ an Herrn Albers und den Verlauf der bisherigen Aktionen."
+  },
   "6.1": {
    "status": "pruefung",
    "datei": "Werttreiberbasierte_Planung_mit_prevero_Planung_Berichtswesen",

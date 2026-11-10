@@ -1,0 +1,105 @@
+<!-- Abb. 5.81 „Kommentarfunktion“: Planungsformular „Investitionsplanung“ mit Positionsanmerkung und den Anmerkungen der
+     Planungseinheit (softwareneutral nachgebaut). Serie Abb. 5.78–5.82: gleiche Kopfzeile, Seitenauswahl, Knopfleiste und
+     Rasterzellen wie Abb. 5.78; Daten aus dem Planungsmodell (Datenblock in kommentar.js, daten_kommentar.py).
+     Querformat 1024 px = 155 mm; Inhalt 992 px. Raster: Position 188 · Positionsanmerkung 120 · 12 Monate je 57 = 992 px.
+     Das Fenster „Anmerkungen der Planungseinheit“ des Originals steht als Abschnitt unter dem Raster. -->
+<style>
+  #kommentar { width: 1024px; }
+  #kommentar .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #kommentar .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #kommentar .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #kommentar .mk-reiter > span { cursor: pointer; }
+  /* Sicht (fest) und Seite (Auswahl): Beschriftung über dem Feld */
+  #kommentar .auswahl { display: flex; gap: 12px; align-items: flex-end; }
+  #kommentar .stapel { display: flex; flex-direction: column; }
+  #kommentar .stapel .mk-label { height: 18px; line-height: 18px; margin-bottom: 3px; color: var(--muted); }
+  #kommentar .trenner { width: 1px; height: 47px; background: var(--linie); margin: 0 8px; }
+  #kommentar .mk-knopfleiste { margin-top: 10px; margin-bottom: 10px; }
+  #kommentar .mk-knopfleiste .mk-knopf { height: 28px; line-height: 26px; padding: 0 12px; }
+  /* Raster */
+  #kommentar .mx { display: grid; grid-template-columns: 188px 120px repeat(12, 57px); }
+  #kommentar .mx-k { height: 21px; line-height: 21px; padding: 0 4px; text-align: right; color: var(--muted); white-space: nowrap; overflow: hidden; }
+  #kommentar .mx-k.links { text-align: left; }
+  #kommentar .mx-k.gruppe { text-align: left; color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen); margin-left: 4px; }
+  #kommentar .mx-k.k2 { border-bottom: 1px solid var(--ac); }
+  #kommentar .mx-k.doppelt { height: 42px; padding-top: 21px; }
+  #kommentar .mx-k.zwei { height: 42px; white-space: normal; }
+  #kommentar .mx-l { height: 23px; line-height: 22px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #kommentar .mx .mk-feld { height: 23px; line-height: 22px; padding: 0 3px 0 1px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #kommentar .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #kommentar .mx .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #kommentar .mx .mk-feld.trenn { border-left: 1px solid var(--rahmen); }
+  #kommentar .mx input.mk-feld:not(.mk-zahl), #kommentar .mx div.mk-feld:not(.mk-zahl) { padding: 0 4px; }
+  #kommentar .mx .oben { border-top: 1px solid var(--rahmen); height: 24px; }
+  /* Anmerkungen der Planungseinheit */
+  #kommentar .anm { display: grid; grid-template-columns: 220px 370px 362px; column-gap: 20px; }
+  #kommentar .anm .mk-zeile { --sp-label: 70px; --sp-feld: 142px; }
+  #kommentar .anm .neu .mk-zeile { --sp-label: 50px; --sp-feld: 312px; }
+  #kommentar .anm textarea.mk-feld, #kommentar .anm .mk-mehrzeilig { height: 50px; }
+  #kommentar .anm .mk-knopfleiste { margin: 8px 0 0 58px; }
+  #kommentar .liste { height: 132px; padding: 6px 10px; }
+  body:not(.print) #kommentar .liste { overflow-y: auto; }
+  #kommentar .liste p { margin: 0; }
+  #kommentar .liste .eintrag + .eintrag { border-top: 1px solid #D4D4D4; margin-top: 4px; padding-top: 4px; }
+  #kommentar .liste .titel { font-weight: bold; }
+  #kommentar .liste .meta { color: var(--muted); }
+  #kommentar .liste .leer { color: var(--muted); }
+  #kommentar .hervor { outline: 2px solid var(--ac); outline-offset: 3px; }
+</style>
+<form class="mk-maske" id="kommentar" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Investitionsplanung</span><span class="kopf-unter" id="kopf-unter">Formularordner Detaillierte operative Planung · Plan 2028 · Werte in € · Stand 14.10.2027</span></div>
+  <div class="mk-inhalt">
+    <div class="mk-reiter" id="reiter"><span id="reiter-1">I. Umsatzplanung</span><span id="reiter-2">II. Personalkostenplanung</span><span id="reiter-3">III. Gemeinkostenplanung</span><span class="aktiv" id="reiter-4">IV. Investitionsplanung</span></div>
+
+    <div class="auswahl" id="auswahl">
+      <div class="stapel" style="width:84px"><span class="mk-label">Währung</span><div class="mk-feld mk-anzeige" id="f-waehrung">€</div></div>
+      <div class="stapel" style="width:110px"><span class="mk-label">Szenario</span><div class="mk-feld mk-anzeige" id="f-szenario">Plan 2028</div></div>
+      <div class="stapel" style="width:110px"><span class="mk-label">Version</span><div class="mk-feld mk-anzeige" id="f-version">Bottom-up</div></div>
+      <div class="trenner"></div>
+      <div class="stapel" style="width:190px"><label class="mk-label" for="f-ges">Gesellschaft</label><select class="mk-feld" id="f-ges"></select></div>
+      <div class="stapel" style="width:220px"><label class="mk-label" for="f-ks">Kostenstelle</label><select class="mk-feld" id="f-ks"></select></div>
+      <div class="stapel" style="width:180px"><label class="mk-label" for="f-inv">Investition</label><select class="mk-feld" id="f-inv"></select></div>
+    </div>
+
+    <div class="mk-knopfleiste" id="knopfleiste">
+      <button type="button" class="mk-knopf" id="k-speichern">Speichern</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-regeln">Regeln starten</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-anmerkungen">Anmerkungen</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-anweisungen">Anweisungen</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-posanm">Positionsanmerkungen bearbeiten</button>
+    </div>
+
+    <div class="mx" id="raster">
+      <div class="mx-k links k2 doppelt" style="grid-row:1 / span 2;grid-column:1">Position</div>
+      <div class="mx-k links k2 zwei" id="h-posanm" style="grid-row:1 / span 2;grid-column:2">Positions-<br>anmerkung</div>
+      <div class="mx-k gruppe" id="h-plan" style="grid-row:1;grid-column:3 / span 12">Plan 2028</div>
+      <!-- Monatsköpfe und Zeilen erzeugt kommentar.js -->
+    </div>
+
+    <section class="mk-abschnitt" id="abschnitt-anm" style="margin-top:16px">
+      <div class="mk-band" id="band-anm">Anmerkungen der Planungseinheit</div>
+      <div class="anm">
+        <div class="mk-gruppe" id="g-einheit">
+          <div class="mk-gruppenkopf">Planungseinheit</div>
+          <div class="mk-zeile"><label class="mk-label" for="a-szenario">Szenario</label><select class="mk-feld" id="a-szenario"><option value="P2028" selected>Plan 2028</option></select></div>
+          <div class="mk-zeile"><label class="mk-label" for="a-version">Version</label><select class="mk-feld" id="a-version"><option value="BU" selected>Bottom-up</option><option value="TD">Top-down</option></select></div>
+          <div class="mk-zeile"><label class="mk-label" for="a-einheit">Einheit</label><select class="mk-feld" id="a-einheit"></select></div>
+        </div>
+        <div class="mk-gruppe neu" id="g-neu" style="margin-top:0">
+          <div class="mk-gruppenkopf">Anmerkung hinzufügen</div>
+          <div class="mk-zeile"><label class="mk-label" for="a-titel">Titel</label><input class="mk-feld" id="a-titel" value="Daten eingeben – wird überprüft" data-hilfe="Kurzer Titel der Anmerkung, Pflichtfeld"></div>
+          <div class="mk-zeile" style="align-items:start"><label class="mk-label" for="a-text" style="line-height:26px">Text</label><textarea class="mk-feld" id="a-text" rows="2" data-hilfe="Text der Anmerkung, Pflichtfeld">Neuer Schreibtisch, Genehmigung durch Vorgesetzten liegt vor.</textarea></div>
+          <div class="mk-knopfleiste"><button type="button" class="mk-knopf mk-zweit" id="k-anm-speichern">Anmerkung speichern</button></div>
+        </div>
+        <div class="mk-gruppe" id="g-vorhanden" style="margin-top:0">
+          <div class="mk-gruppenkopf" id="kopf-vorhanden">Vorhandene Anmerkungen</div>
+          <div class="mk-textbereich mk-anzeige liste" id="liste" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</form>

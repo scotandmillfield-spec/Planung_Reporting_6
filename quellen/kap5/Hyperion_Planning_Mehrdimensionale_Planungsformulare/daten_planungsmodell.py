@@ -116,8 +116,8 @@ INVESTITIONEN = {
     "Deutschland": {
         "Sonstige Kostenstellen": [["Investition 1", "Büromöbel", 6000, 5, 0, 3, 1],
                                    ["Investition 2", "Medientechnik", 18000, 6, 0, 6, 1]],
-        "Fertigung": [["Investition 1", "Montagelinie E-Bikes", 480000, 10, 0, 4, 1],
-                      ["Investition 2", "Prüfstand Antriebe", 96000, 8, 0, 9, 0]],
+        "Fertigung": [["Investition 1", "Montagelinie", 480000, 10, 0, 4, 1],
+                      ["Investition 2", "Prüfstand", 96000, 8, 0, 9, 0]],
         "Vertrieb": [["Investition 1", "Showroom", 36000, 5, 0, 2, 1]],
     },
     "Großbritannien": {"Sonstige Kostenstellen": [["Investition 1", "Büromöbel", 4800, 5, 0, 5, 1]],
@@ -126,7 +126,7 @@ INVESTITIONEN = {
             "Sonstige Kostenstellen": [["Investition 1", "Server", 21600, 3, 0, 1, 1]]},
     "Australien": {"Vertrieb": [["Investition 1", "Showroom", 24000, 5, 0, 8, 1]]},
     "Japan": {"Sonstige Kostenstellen": [["Investition 1", "Büromöbel", 7200, 5, 0, 4, 1]],
-              "Fertigung": [["Investition 1", "Montagewerkzeuge", 60000, 5, 0, 10, 1]]},
+              "Fertigung": [["Investition 1", "Werkzeuge", 60000, 5, 0, 10, 1]]},
 }
 # Anmerkungen je Planungseinheit (Szenario Plan 2028, Version Bottom-up, Einheit): neueste zuerst
 ANMERKUNGEN = {

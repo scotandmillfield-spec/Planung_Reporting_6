@@ -1,0 +1,91 @@
+<!-- Abb. 5.82 „Workflowkomponente“: Maske „Status überprüfen und Prozess verwalten“ einer Planungs- und
+     Konsolidierungssoftware (softwareneutral nachgebaut). Serie Abb. 5.78–5.82: gleiche Kopfzeile, Auswahl mit Beschriftung
+     über dem Feld und Rasterzellen wie Abb. 5.78/5.81; Gesellschaften, Status und Eigentümer aus dem Planungsmodell
+     (Datenblock in workflow.js, daten_workflow.py). Hochformat 727 px = 110 mm; Inhalt 695 px.
+     Raster: Einheit 214 · Starten 66 · Ausschließen 96 · Prozessstatus 130 · Eigentümer 129 · Aktion 60 = 695 px.
+     Die Seite „Details“ des Originals (Link in der Spalte Aktion) steht als Abschnitt unter dem Raster. -->
+<style>
+  #workflow .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #workflow .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #workflow .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #workflow .auswahl { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 14px; }
+  #workflow .stapel { display: flex; flex-direction: column; }
+  #workflow .stapel .mk-label { height: 18px; line-height: 18px; margin-bottom: 3px; color: var(--muted); }
+  #workflow .trenner { width: 1px; height: 47px; background: var(--linie); margin: 0 8px; }
+  #workflow .optionen { display: flex; gap: 18px; height: 26px; align-items: center; }
+  /* Raster */
+  #workflow .mx { display: grid; grid-template-columns: 214px 66px 96px 130px 129px 60px; }
+  #workflow .mx-k { height: 21px; line-height: 21px; padding: 0 4px; color: var(--muted); white-space: nowrap; overflow: hidden; }
+  #workflow .mx-k.gruppe { color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen); margin: 0 4px; text-align: center; }
+  #workflow .mx-k.k2 { border-bottom: 1px solid var(--ac); }
+  #workflow .mx-k.doppelt { height: 42px; padding-top: 21px; }
+  #workflow .mx-k.zwei { height: 42px; white-space: normal; }
+  #workflow .mx-k.mitte { text-align: center; }
+  #workflow .mx-l { height: 24px; line-height: 23px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #workflow .mx-l.mitte { display: flex; justify-content: center; align-items: center; }
+  #workflow .mx-l .baum { display: inline-block; width: 13px; }
+  #workflow .mx-l .baum svg { display: inline-block; vertical-align: 1px; }
+  body:not(.print) #workflow .mx-l .baum { cursor: pointer; }
+  #workflow .mx-l.summe { font-weight: bold; }
+  #workflow .mx-l.leise { color: var(--muted); }
+  #workflow .mx-l.gewaehlt { background: var(--band); }
+  /* Details */
+  #workflow .details { display: grid; grid-template-columns: 360px 315px; column-gap: 20px; }
+  #workflow .details .mk-zeile { --sp-label: 146px; --sp-feld: 206px; }
+  #workflow .details .mk-knopfleiste { margin: 12px 0 0 154px; }
+  #workflow .verlauf { height: 196px; padding: 6px 10px; }
+  body:not(.print) #workflow .verlauf { overflow-y: auto; }
+  #workflow .verlauf p { margin: 0; }
+  #workflow .verlauf .eintrag + .eintrag { border-top: 1px solid #D4D4D4; margin-top: 4px; padding-top: 4px; }
+  #workflow .verlauf .titel { font-weight: bold; }
+  #workflow .verlauf .meta { color: var(--muted); }
+</style>
+<form class="mk-maske" id="workflow" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Status überprüfen und Prozess verwalten</span><span class="kopf-unter" id="kopf-unter">Workflow der Planungseinheiten · Plan 2028 · Stand 14.10.2027</span></div>
+  <div class="mk-inhalt">
+
+    <div class="auswahl" id="auswahl">
+      <div class="stapel" style="width:150px"><label class="mk-label" for="f-szenario">Szenario</label><select class="mk-feld" id="f-szenario"><option value="P2028" selected>Plan 2028</option></select></div>
+      <div class="stapel" style="width:150px"><label class="mk-label" for="f-version">Version</label><select class="mk-feld" id="f-version"><option value="BU" selected>Bottom-up</option><option value="TD">Top-down</option></select></div>
+      <div class="trenner"></div>
+      <div class="stapel" id="g-anzeige"><span class="mk-label">Anzeige</span>
+        <div class="optionen">
+          <label class="mk-option"><input type="radio" class="mk-check" name="anzeige" value="baum" id="o-baum" checked>Baumstruktur</label>
+          <label class="mk-option"><input type="radio" class="mk-check" name="anzeige" value="flach" id="o-flach">Flache Struktur</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx" id="raster">
+      <div class="mx-k k2 doppelt" style="grid-row:1 / span 2;grid-column:1">Einheit</div>
+      <div class="mx-k gruppe" id="h-zyklus" style="grid-row:1;grid-column:2 / span 2">Planzyklus</div>
+      <div class="mx-k k2 mitte" style="grid-row:2;grid-column:2">Starten</div>
+      <div class="mx-k k2 mitte" style="grid-row:2;grid-column:3">Ausschließen</div>
+      <div class="mx-k k2 doppelt" id="h-status" style="grid-row:1 / span 2;grid-column:4">Prozessstatus</div>
+      <div class="mx-k k2 zwei" id="h-eigner" style="grid-row:1 / span 2;grid-column:5">Aktueller<br>Eigentümer</div>
+      <div class="mx-k k2 doppelt" id="h-aktion" style="grid-row:1 / span 2;grid-column:6">Aktion</div>
+      <!-- Zeilen erzeugt workflow.js -->
+    </div>
+
+    <section class="mk-abschnitt" id="abschnitt-details" style="margin-top:18px">
+      <div class="mk-band" id="band-details">Details der Planungseinheit</div>
+      <div class="details">
+        <div class="links">
+          <div class="mk-zeile"><span class="mk-label">Einheit</span><div class="mk-feld mk-anzeige" id="d-einheit"></div></div>
+          <div class="mk-zeile"><span class="mk-label">Prozessstatus</span><div class="mk-feld mk-anzeige" id="d-status"></div></div>
+          <div class="mk-zeile"><span class="mk-label">Aktueller Eigentümer</span><div class="mk-feld mk-anzeige" id="d-eigner"></div></div>
+          <div class="mk-zeile" style="margin-top:12px"><label class="mk-label" for="d-aktion">Aktion</label><select class="mk-feld" id="d-aktion"></select></div>
+          <div class="mk-zeile"><label class="mk-label" for="d-neu">Nächster Eigentümer</label><select class="mk-feld" id="d-neu"></select></div>
+          <div class="mk-zeile"><label class="mk-label" for="d-anm">Anmerkung</label><input class="mk-feld" id="d-anm" value="Bitte genehmigen." data-hilfe="Anmerkung zur Aktion, erscheint im Verlauf"></div>
+          <div class="mk-knopfleiste"><button type="button" class="mk-knopf" id="k-ausfuehren">Aktion ausführen</button></div>
+        </div>
+        <div class="mk-gruppe" id="g-verlauf">
+          <div class="mk-gruppenkopf" id="kopf-verlauf">Verlauf</div>
+          <div class="mk-textbereich mk-anzeige verlauf" id="verlauf" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</form>

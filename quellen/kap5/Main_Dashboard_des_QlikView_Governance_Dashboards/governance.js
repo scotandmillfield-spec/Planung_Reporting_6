@@ -257,7 +257,7 @@
       { nr: 4, ziel: "v-quellen", anker: "links", versatz: [236, 22], regel: "EXPRESS – Passende Darstellung", titel: "Balken statt Kreis",
         text: "Die Datenquellen stehen als Balken mit Anzahl statt als Kreis mit fünf Segmenten, Verlaufsfarben und Legende; die Anteile stehen in Botschaft und Tooltip. Produktbezeichnungen sind neutral: Zwischendatei, Speichertabelle, Tabellenkalkulation." },
       { nr: 5, ziel: "sp-verlauf-server", anker: "links", versatz: [124, -4], regel: "EXPRESS – Verlauf mit Maß", titel: "Verlauf über 28 Tage, ab null",
-        text: "Der Verlauf deckt denselben Zeitraum ab wie die Spalte „28 Tage“: Summen als Mini-Säulen, Höchstwerte als Linie, jeweils ab null. Im Original zeigten die Verläufe nur zwei Wochen (Dec-01 bis Dec-15) ohne Bezug zu den Spalten." },
+        text: "Der Verlauf deckt denselben Zeitraum ab wie die Spalte „28 Tage“: Summen als Mini-Säulen, Höchst- und Distinktwerte als Linie, jeweils ab null. Im Original zeigten die Verläufe nur zwei Wochen (Dec-01 bis Dec-15) ohne Bezug zu den Spalten." },
       { nr: 6, ziel: "gr-90", anker: "links", versatz: [400, -3], regel: "STRUCTURE – Inhalte ordnen", titel: "Zeiträume als Gruppen",
         text: "Oben stehen Betrieb und Nutzung mit gleichen Spalten (Heute, Gestern, 7 Tage, 28 Tage), rechts die Ladevorgänge, unten die Gruppen „Sitzungen der letzten 90 Tage“ und „Anwendungen am Stichtag“. Der Hinweis „Excludes Anonymous“ steht in der Gruppenüberschrift." },
       { nr: 7, ziel: "kopf-titel", anker: "links", versatz: [400, 2], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Reiter, Logo und Hilfesymbol",

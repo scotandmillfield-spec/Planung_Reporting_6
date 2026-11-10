@@ -854,6 +854,66 @@
    ],
    "alt": "Dialogfenster eines KI-Assistenten im Rechnungswesen: Auf die Frage, wie sich die Umsatzerlöse entwickeln werden, fragt der Assistent nach der Basisgröße (BWA oder HGB). Nach der Wahl „BWA-Basisgrößen“ antwortet er mit einer Prognose für Mai bis Juli 2027 – im Juli voraussichtlich 7,23 bis 7,95 Mio. € – und einer kleinen Tabelle mit Vorjahr, Vorschau, Bandbreite und Abweichung; kumuliert liegen die Umsatzerlöse 2,9 % über dem Vorjahr. Unten stehen das Eingabefeld, Knöpfe für Spracheingabe und Senden sowie eine Auswahl vorgeschlagener Fragen."
   },
+  "5.70": {
+   "status": "pruefung",
+   "datei": "Bandbreitenplanung_-_Eingabeparameter",
+   "kommentare": [
+    "Bericht aus der Tabellenkalkulation softwareneutral als Dashboard 1024 × 646 px (HTML, PNG) nachgebaut; gleicher Kopf, gleiche Datenschnitte und derselbe Datensatz wie Abb. 5.71; Logo „BI-Controlling“, Datumsfeld mit Symbol, Firmenname „BI-C GmbH“, gelbe Eingabezellen und blaue Filterflächen entfallen",
+    "Prämissen des Originals exakt übernommen (BU HB1 → Business Unit „Antriebe“): Worst/Mittel/Best → je Treiber Min/Wahrscheinlich/Max (Dreipunktschätzung) mit Spalte „Szenario“ (bei Einkaufspreisen und Löhnen ist Max der Worst Case); Spalte „Worst“ → „Ø Jahr“ (EKP +10,5/−3,3, Tarif +3,0/+1,0 wie im Original); leere Tarifzellen Jan–Jun → ±0,0",
+    "Ergänzt: Tornado „Wirkung auf den DB Business Unit“ (je Treiber Worst/Best Case in Mio. €, abhängig von Filtern und Zeitraum; „Alle Treiber zusammen“ = Spanne Worst–Best Case in Abb. 5.71) und Bandbreite je Monat für den gewählten Treiber – bitte prüfen, ob gewünscht",
+    "Annahmen: Einheit Mio. € (fehlte im Original), Juni 2018 → Stichtag 30.06.2027; Tarifsteigerung für alle Business Units gleich; Business Units „Steuerungen“, „Sensoren“ sowie Regionen, Produkt- und Kundengruppen erfunden",
+    "Hinweis: Die Dreipunktschätzungen sind in Abb. 5.71 zugleich Dreiecksverteilungen einer Monte-Carlo-Simulation (vgl. Abb. 3.193) – Buchtext ggf. um einen Satz ergänzen"
+   ],
+   "alt": "Dashboard mit den Prämissen einer Bandbreitenplanung der Business Unit Antriebe für 2027. Oben stehen je Treiber – Verkaufspreise, Einkaufspreise, Fertigungslöhne – Minimum, wahrscheinlicher Wert und Maximum je Monat mit Jahresmittel; die Einkaufspreise haben die größte Bandbreite (−6 % bis +16 % im Dezember). Unten zeigt ein Tornado die Wirkung der Bandbreiten auf den DB Business Unit von Januar bis Juni (zusammen −10,4 bis +7,1 Mio. €), daneben die zum Jahresende wachsende Bandbreite der Einkaufspreise als Fläche."
+  },
+  "5.71": {
+   "status": "pruefung",
+   "datei": "Bandbreitenplanung_-_Ergebnisse",
+   "kommentare": [
+    "Bericht softwareneutral als Dashboard 1024 × 646 px (HTML, PNG) nachgebaut, Kopf und Datenschnitte wie Abb. 5.70, ein Datensatz; Gliederungssymbole +/− der Tabellenkalkulation, Logo, Datumsfeld, Firmenname und Rot-Gelb-Grün der DB-Quoten entfallen; Balken „Plan % Gesamtleistung“ → Tooltip",
+    "Plan Jan–Jun exakt wie im Original (Nettoumsatz 140 … DB Business Unit 20; DB-I-Quote 28,2 %, DB-BU-Quote 14,1 %), Ist je Monat aus dem Säulendiagramm (Jan–Jun 19,9); Worst/Best Case jetzt monatsgenau aus den Prämissen gerechnet: DB BU 9,6/27,1 statt 7/29 (das Original nahm für die Halbjahrestabelle Jahresmittel, z. B. EKP +10,5 % statt +7,5 %)",
+    "Korrigiert: ΔWC%/ΔBC% waren auf den Worst Case bezogen (DB BU −204,2 %) → Bezug Plan, Prozent im Tooltip; Best-Case-Linie des Originals (6,1–6,6 je Monat, kumuliert 76) passte nicht zur Tabelle → 4,4–4,9 bzw. 55,9; Skonti und Boni folgen jetzt dem Verkaufspreis (im Original konstant) – bitte bestätigen",
+    "Erfolgsrechnung mit Ergebnisvorzeichen (Kosten negativ), Δ einheitlich nach Wirkung gefärbt; Linien WC rot / BC grün / Plan blau → Fläche Worst bis Best Case; ergänzt: Monte-Carlo-Simulation (5.000 Läufe, Dreiecksverteilungen aus Abb. 5.70, fester Startwert) als Band P5–P95 und Botschaft „Jahresplan nur in 32 % der Läufe erreicht“",
+    "Klick auf eine Zeile zeigt die Position in den Diagrammen (gezeigte Zeile hinterlegt wie der graue DB BU im Original), Klick auf einen Monat dessen Erfolgsrechnung; „Abw. BU-GK“ als BU-Gemeinkosten gedeutet, „NettoNetto-Umsatz“ → Netto-Netto-Umsatz, Einheit Mio. € angenommen – bitte prüfen"
+   ],
+   "alt": "Dashboard mit den Ergebnissen der Bandbreitenplanung der Business Unit Antriebe für Januar bis Juni 2027. Links steht die stufenweise Erfolgsrechnung in Worst Case, Plan und Best Case mit Abweichungsbalken; der DB Business Unit liegt zwischen 9,6 und 27,1 Mio. € bei einem Plan von 20,0 Mio. €. Rechts zeigen zwei Liniendiagramme den DB Business Unit je Monat und kumuliert mit Ist bis Juni, der Fläche zwischen Worst und Best Case und dem Band einer Monte-Carlo-Simulation, nach der der Jahresplan von 39,6 Mio. € nur in 32 % der Läufe erreicht wird."
+  },
+  "5.72": {
+   "status": "pruefung",
+   "datei": "Standardbericht_SAP_ERP_CC_Selektionsmaske",
+   "kommentare": [
+    "Produktscreenshot (Selektionsbild) softwareneutral als Maske 727 px = 110 × 79 mm nachgebaut (HTML, PNG, PDF, PPTX); Menü- und Symbolleiste mit Befehlsfeld, Info- und Ausführen-Symbol entfallen; Fenstertitel als Titel, „: Selektieren“ → Untertitel „Selektion“",
+    "Felder, Reihenfolge und Vorbelegung wie im Original (Kostenrechnungskreis 1000, Perioden 1 bis 12, Planversion 0, Kostenstelle 1000, Gruppen leer); ergänzt: Texte aus den Stammdaten (Inland, Januar/Dezember 2026, Plan/Ist-Version, Zentrale Dienste, alle Kostenarten); gelber Pfeilknopf → Link „Mehrfachauswahl“, Ausführen und „Datenquelle …“ als Knöpfe",
+    "Gehört zu Abb. 5.73: die Vorbelegung ist der Startzustand des Detailberichts, Stammdaten gleichlautend; Geschäftsjahr 2008 → 2026",
+    "HTML bedienbar: Prüfung der Perioden (1–12, Bis nicht vor Von), des Geschäftsjahrs, angelegter Kostenstellen/Kostenarten und „Gruppe oder Werte“; Ausführen fasst die Selektion zusammen",
+    "Caption ohne Produktnamen? z. B. „Selektionsmaske eines Standardberichts der Kostenstellenrechnung“; Bedeutung des Kennzeichens „Istbewertung“ (im Beispiel leer, als Kontrollkästchen) bitte prüfen"
+   ],
+   "alt": "Selektionsmaske des Berichts Kostenstellen: Ist/Soll/Abweichung mit zwei Abschnitten. Unter „Auswahl Werte“ sind Kostenrechnungskreis 1000 (Inland), Geschäftsjahr 2026, Perioden 1 bis 12 und Planversion 0 (Plan/Ist-Version) eingetragen, das Kennzeichen Istbewertung ist leer. Unter „Auswahl Gruppen“ ist statt einer Kostenstellengruppe die Kostenstelle 1000 Zentrale Dienste gewählt, die Kostenarten sind nicht eingeschränkt; darunter stehen die Knöpfe Ausführen und Datenquelle."
+  },
+  "5.73": {
+   "status": "pruefung",
+   "datei": "Standardbericht_SAP_ERP_CC_Detailbild",
+   "kommentare": [
+    "Produktscreenshot (Listenausgabe) softwareneutral als Einzelvisual 727 × 726 px = 110 × 110 mm nachgebaut (HTML, PNG); Menü- und Symbolleisten, Statuszeile, Taskleiste, Bildlauf, blaue und gelbe Flächen sowie Seiten- und Spaltenzähler („Seiten 2/4“, „Spalte 1/6“) entfallen",
+    "Werte des Originals auf den Cent übernommen (Belastung 627.269,28 / 2.127.402,27 €, Entlastung −1.405.829,60 €, Über-/Unterdeckung −778.560,32 / 721.572,67 €, −207,9 %); Liste in ganzen Euro, Cent im Tooltip; nachgestelltes Minus („200,20-“) → echtes Minus, Abweichung als Balken nach Wirkung (unter Soll = günstig)",
+    "Ergänzt: Die Belastung enthielt Kostenarten der nicht gezeigten Seite 1 – die Differenz steht als „430000 Gehälter“ (Ist 198.381,38 €, Soll 238.489,86 €), damit die Summen aus den Zeilen folgen (bitte prüfen); Zeilen ohne Werte (431900, 440100) entfallen",
+    "Klartext statt Kürzel (z. B. „Tarifl. Jahresleist“ → Tarifliche Jahresleistung, DILV/IILV → „Verrechnung …“, erklärt im Tooltip); Corporate Services → Zentrale Dienste, Verantwortlicher „Pfaehler“ → Frau Brandt, 2008 → 2026, Stand 15.01.2027",
+    "Selektion aus Abb. 5.72 im Berichtskopf und als Datenschnitte (Kostenstelle, Perioden, Kostenartengruppe; Kostenstellen 1100/1200 und Periodenverteilung erfunden); Sollkosten 470000–476900 = Plankosten fix in Abb. 5.74. Caption ohne Produktnamen? z. B. „Standardbericht der Kostenstellenrechnung (Detailbericht)“"
+   ],
+   "alt": "Bericht Kostenstellen: Ist/Soll/Abweichung für die Kostenstelle 1000 Zentrale Dienste, Perioden 1 bis 12/2026. Eine Liste zeigt je Kostenart Ist- und Sollkosten sowie die Abweichung als Zahl mit Balken und in Prozent; darunter folgen die Summen Belastung, Entlastung und Über-/Unterdeckung. Die Istkosten liegen mit 627.269 € um 1.500.133 € unter dem Soll, vor allem wegen der kalkulatorischen Zinsen und Abschreibungen."
+  },
+  "5.74": {
+   "status": "pruefung",
+   "datei": "Planungsformular_SAP_ERP_CC",
+   "kommentare": [
+    "Produktscreenshot (Planungsübersicht) softwareneutral als Maske 727 px = 110 × 91 mm nachgebaut (HTML, PNG, PDF, PPTX); Menü- und Symbolleisten, Spaltenauswahl- und Bildlaufsymbole entfallen; „Einzelposten“ und „Werte ändern“ als Knöpfe, Sichern als Hauptaktion",
+    "Werte und Verteilungsschlüssel des Originals übernommen (Plankosten fix 470000–476900, Summe 122.809,68 €; VS 0 bei 471000 und 476500); Spalten gruppiert unter „Plankosten in €“ und „Planverbrauch“ je fix/variabel; Bezeichnung der Kostenarten ergänzt; Kopfdaten grau als Anzeige",
+    "„*Kostenart“ → „Summe“, Planverbrauch nicht summiert (verschiedene Einheiten); leere Spalten E (Einheit), M und L entfallen – bitte prüfen; von den freien Zeilen bleiben zwei (Kostenart eingeben → Bezeichnung aus den Stammdaten)",
+    "Geschäftsjahr 2011 → 2026 und „Corporate Investments (Vormals Services)“ → 1000 Zentrale Dienste, damit Kostenstelle, Version und Jahr zu Abb. 5.72/5.73 passen; die Plankosten fix sind dort die Sollkosten (gleiche Beträge wie im Original)",
+    "Verteilungsschlüssel als Auswahl mit Erklärung (0 manuell je Periode, 1 gleichmäßig, 2 wie die bisherige Verteilung – nach der Herstellerdokumentation, bitte prüfen); Caption ohne Produktnamen? z. B. „Planungsformular der Kostenstellenplanung“"
+   ],
+   "alt": "Planungsformular „Planung Kostenarten/Leistungsaufnahmen ändern“ für die Kostenstelle 1000 Zentrale Dienste, Version 0, Perioden 1 bis 12 des Geschäftsjahres 2026. Ein Raster zeigt je Kostenart Plankosten fix und variabel sowie Planverbrauch fix und variabel mit Verteilungsschlüssel; geplant sind nur fixe Kosten, zusammen 122.809,68 €. Zwei leere Zeilen für weitere Kostenarten und die Knöpfe Sichern, Einzelposten und Werte ändern schließen das Formular ab."
+  },
   "5.75": {
    "status": "pruefung",
    "datei": "Planung_eines_Projektfertigers_mit_MS_Excel",

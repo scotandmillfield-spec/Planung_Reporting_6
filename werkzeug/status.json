@@ -622,6 +622,19 @@
    ],
    "alt": "Dieselbe Übersichtsseite „Einkaufsübersicht“ schematisch auf drei Endgeräten. Auf dem Desktop stehen die neun Karten in vier Spalten, auf dem Tablet in drei Spalten und auf dem Smartphone untereinander in einer Spalte; was nicht auf den Bildschirm passt, wird angeschnitten und ist per Bildlauf erreichbar. Kopf- und Filterleiste passen sich der Breite an."
   },
+  "5.54": {
+   "status": "pruefung",
+   "datei": "Management-Dashboard_mit_Diamant-4",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px nachgebaut (HTML für die Lernplattform, PNG): Programmleiste, Navigationsspalte, Logo, Mandant „225 | Soziale Einrichtung … Bielefeld“, Kachelrahmen, Bildlaufleiste und „Dashboard bearbeiten“ entfallen; Inhaltsgruppen wie im Original (BWA, Meine Kennzahlen, Auslastung, Personalkennzahlen, Kosten)",
+    "Ist-Werte aller sichtbaren BWA-Zeilen (März kum.) centgenau übernommen, Jahr 2021 → 2027; Betriebsergebnis 1.756.891 € wie die Kachel des Originals – dafür Zeile „Sonstige Erträge“ 20.888,28 € ergänzt (im Original vermutlich unterhalb des Bildlaufs). Plan neu: Das Original zeigte für März kum. 28,1 Mio. € Plan-Erlöse bei 15,0 Mio. € Ist (offenbar anderer Zeitraum); Plan Wasser/Energie und Abschreibungen wie im Original",
+    "Korrigiert: Ergebnis je Belegungstag −39 (ohne Einheit) passte nicht zum positiven Betriebsergebnis → 19,31 € = Betriebsergebnis / Belegungstage; Erlössäule „Ist-Daten 15.007.921 EUR“ stand beim Mai → Monatswerte Jan–Jun, Ist bis zum Berichtsmonat, Plan weiß mit Kontur",
+    "Umbau: Auslastungsgrad und Benchmark → eine Tabelle mit ΔPL und ΔBM; Kostenstrukturanalyse und Sachkosten je Berechnungstag → ein Balkenvisual (gleiche Bezugsgröße, Anteil im Tooltip); Verhältnis Fachleistung/Assistenz → Kachel „Fachkraftquote Pflege“ gegen 50 %; ΔPL mit nachgestelltem Minus → Abweichungsbalken nach Wirkung; orange Hervorhebungen entfallen",
+    "Deutungen, bitte prüfen: Kürzel B, F, M = drei Häuser (Birkenhof, Fliederhof, Mühlenhof, erfunden); Benchmark B, P, G = Auslastung einer Vergleichsgruppe; M, P, G, V, L bzw. W, A, A, V, L = Kostenarten der BWA; Erlöse Unterkunft und Verpflegung nur 6.531 € (Plan im Original 0) unverändert übernommen – ungewöhnlich klein",
+    "Caption trägt noch den Produktnamen: z. B. ‚Management-Dashboard einer sozialen Einrichtung (in Anlehnung an Diamant Software 2021)‘?"
+   ],
+   "alt": "Management-Dashboard einer stationären Pflegeeinrichtung mit drei Häusern, Januar bis März 2027 kumuliert. Oben sechs Kennzahlen mit Planabweichung (u. a. Erlöse 15.008 Tsd. €, Betriebsergebnis 1.757 Tsd. € und damit 19 % unter Plan, Ergebnis je Belegungstag 19,31 €, Teilzeitquote 52 %); links die BWA als Plan-Ist-Vergleich mit Abweichungsbalken nach Wirkung, rechts Erlöse je Monat (Ist vor Plan), Auslastungsgrad je Haus mit Abweichung zu Plan und Benchmark, Krankheits- und Überstundenquote über zwölf Monate sowie Kosten je Berechnungstag nach Kostenart. Aussage: Das Ergebnis liegt vor allem wegen geringerer Pflegeerlöse – Haus Fliederhof ist schwach belegt – und höherer Personalkosten unter Plan."
+  },
   "5.55": {
    "status": "pruefung",
    "datei": "Mobile_Computing_Mobile_BI_sowie_mobiles_Reporting_und_mobile_Planung",
@@ -669,6 +682,32 @@
     "Caption ohne Produktnamen? z. B. „Architektur einer mobilen BI-Lösung (in Anlehnung an SAP AG 2016, S. 5)“; Hinweis: GPRS/EDGE/3G-Raten veraltet"
    ],
    "alt": "Architektur einer mobilen BI-Lösung. Nutzer mit mobilem Endgerät greifen über Internet/WLAN direkt oder über optionale Komponenten zwischen zwei Firewalls (Reverse Proxy bzw. Relay-Server mit Middleware-Server) per HTTPS auf den mobilen Anwendungsserver zu. Dieser ist per TCP mit der BI-Plattform und ihren Diensten verbunden, die ihrerseits auf den Dateiablageserver mit Dateiablage sowie Berichts- und Systemdatenbanken zugreift."
+  },
+  "5.59": {
+   "status": "pruefung",
+   "datei": "Mobile_Reporting_mit_einem_Smartphone_C8_Cubeware",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als mobiler Bericht im Hochformat nachgebaut (HTML, PNG; Seite 376 × 796 px = 57 × 120 mm, Anzeigefläche 360 × 780 px im gleichen Maßstab wie die Dashboards); Gerät nur durch dünnen Rahmen mit abgerundeten Ecken angedeutet; Statusleiste, Symbolleiste, Knöpfe „Car Sales/Arena/Back“ und Markennamen entfallen",
+    "Abb. 5.59 und 5.60 zeigen jetzt denselben Bericht „Vertrieb Europa“ aus einem Datensatz (im Original zwei verschiedene Berichte: Market Dashboard bzw. ABC-Analyse); Smartphone eine Spalte, Nebenspalten (Budget, Anteil, Ergebnis) im Tooltip",
+    "Inhalte: Marken → fünf Produktlinien mit 12-Monats-Verlauf (Sparkline), Ist und ΔBU; ABC-Analyse der acht Länder mit den Werten aus Abb. 5.60 (T€, 12 Monate bis Aug 2027). Entfallen: Top-5-Händler nach Umsatz und Ergebnis sowie das Ergebnis je Markt als eigenes Diagramm (Ergebnis je Land im Tooltip) – bitte prüfen",
+    "Korrigiert: Budget als Dreieck auf dem Ist-Balken bzw. gestapelt auf Ist → ΔBU als Abweichungsbalken nach Wirkung; Verlust „UK −193.742,91“ als langer positiver Balken → Ergebnis mit Vorzeichen; gemischte Formate (6.761.734,26 neben 414, US$ neben T€) → Mio. € mit einer Nachkommastelle; Englisch → Deutsch",
+    "Touch-Bedienung: Knöpfe und Auswahlliste 40 px hoch, ganze Zeilen antippbar (37 bzw. 29 px), „✕ Auswahl“ hebt die Auswahl auf, Tooltip beim Tippen; Druckmaß 57 mm breit (Hochformat, nicht gedreht)",
+    "Caption ohne Produktnamen? z. B. ‚Mobiles Reporting auf einem Smartphone (in Anlehnung an Cubeware 2015)‘ (alte Notiz mit Tippfehler „Smarphone“)"
+   ],
+   "alt": "Mobiler Bericht „Vertrieb Europa“ auf einem Smartphone im Hochformat, angedeutet durch einen dünnen Rahmen mit abgerundeten Ecken. Untereinander stehen Zeitraum- und Regionsauswahl, die Kennzahlen Umsatz 1.631,4 Mio. € (−0,6 % zum Budget) und Ergebnis 64,5 Mio. € (−11,4 %), eine Tabelle der fünf Produktlinien mit 12-Monats-Verlauf, Ist und Abweichung zum Budget (Elektro +8,2 %, Sport −6,9 %) sowie die ABC-Analyse der acht Länder mit Umsatzbalken, kumuliertem Anteil und Klasse – Großbritannien und Deutschland bringen als A-Länder 58 % des Umsatzes. Derselbe Bericht erscheint in Abb. 5.60 zweispaltig auf dem Tablet."
+  },
+  "5.60": {
+   "status": "pruefung",
+   "datei": "Mobile_Reporting_mit_einem_Tablet_C8_Cubeware",
+   "kommentare": [
+    "Gleicher Bericht und gleicher Datensatz wie Abb. 5.59 (Generator von 5.59, alle Zahlen identisch); Tablet im Querformat 1024 × 646 px (155 × 98 mm, wird gedreht eingebunden), zwei Spalten, Gerät nur durch dünnen Rahmen angedeutet; Statusleiste (Carrier, Uhrzeit, Akku), Symbolleisten, Präsentations-/Vollbildknöpfe entfallen",
+    "Werte des Originals übernommen: Umsatz der acht Länder in T€ (Großbritannien 481.492 … Polen 35.992), Anteile und kumulierte Anteile identisch (29,51 % … 100,00 %), Klassengrenzen A bis 65 %, B bis 80 % (Original: „A 65 %, B 15 %“) – Klassen wie im Original; Jahr 2012 → 12 Monate bis August 2027",
+    "Korrigiert: Titel „ABC-Analyse DACH“ passte nicht zum Inhalt (acht europäische Länder) → Datenschnitt Region (Alle, DACH, Übrige); Tippfehler „Hierachische“; englische Ländernamen; Rot-Gelb-Grün in Tabelle und Karte → Rangfolge mit Balken, Klassen als Buchstaben und Trennlinien",
+    "Karte entfällt (Rangfolge und Anteile sind ohne sie lesbar) – bitte prüfen, ob der Buchtext die Kartendarstellung erwähnt; ebenso die Pfeilknöpfe für die Klassengrenzen",
+    "Zusätzlich aus Abb. 5.59: Produktlinien mit Verlauf, Budget und ΔBU links; auf dem Tablet sind die Spalten Budget, Anteil und Ergebnis sichtbar (Smartphone: Tooltip); das Ergebnis je Land zeigt den Verlust in Großbritannien wie „UK“ im Original von 5.59",
+    "Caption ohne Produktnamen? z. B. ‚Mobiles Reporting auf einem Tablet (in Anlehnung an Cubeware 2015)‘"
+   ],
+   "alt": "Derselbe mobile Bericht „Vertrieb Europa“ wie in Abb. 5.59, hier auf einem Tablet im Querformat in zwei Spalten. Oben Zeitraum- und Regionsauswahl sowie Umsatz 1.631,4 Mio. € und Ergebnis 64,5 Mio. € mit Abweichung zum Budget; links die fünf Produktlinien mit 12-Monats-Verlauf, Ist, Budget und Abweichung, rechts die ABC-Analyse der acht Länder mit Umsatzbalken, Anteil, kumuliertem Anteil, Klasse und Ergebnis. Aussage: Zwei Länder bringen 58 % des Umsatzes, Großbritannien als größter Markt schreibt Verlust."
   },
   "5.62": {
    "status": "latex",

@@ -151,11 +151,11 @@
   }
 
   /* ---------- V1: Umsatz nach Produktlinie – Verlauf, Ist, (Budget), ΔBU ---------- */
-  const SP1 = PHONE ? { l: 74, s: 78, i: 52, b: 0, d: 124, rh: 37, sh: 22 } : { l: 96, s: 130, i: 60, b: 60, d: 120, rh: 76, sh: 44 };
+  const SP1 = PHONE ? { l: 74, s: 72, i: 52, b: 0, d: 130, rh: 37, sh: 22 } : { l: 96, s: 130, i: 60, b: 60, d: 120, rh: 76, sh: 44 };
   function linienVisual(f, d) {
     const n = d.length, kopfH = 18, Wd = f.breite, Hd = kopfH + n * SP1.rh;
     const svg = sv("svg", { width: Wd, height: Hd, role: "img", "aria-label": "Umsatz nach Produktlinie", id: "li-svg" }, f.flaeche);
-    const xs = SP1.l, xi = xs + SP1.s, xb = xi + SP1.i, xd = xb + SP1.b, TXT = 50;
+    const xs = SP1.l, xi = xs + SP1.s, xb = xi + SP1.i, xd = xb + SP1.b, TXT = 58;
     const neg = Math.max(0, ...d.map(z => -z.d)), pos = Math.max(0, ...d.map(z => z.d));
     const k = (SP1.d - TXT - 6) / Math.max(neg + pos, 1e-9), mitte = xd + TXT + 2 + neg * k;
     sv("text", { x: xs, y: 12, class: "muted" }, svg, PHONE ? "12 Monate" : "Verlauf 12 Monate");
@@ -282,21 +282,21 @@
 
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   const regeln = [
-    { nr: 1, ziel: "v-linien", anker: "links", versatz: PHONE ? [282, 2] : [278, 2], regel: "SAY – Botschaft vermitteln", titel: "Eine Aussage je Visual",
+    { nr: 1, ziel: "v-linien", anker: "links", versatz: PHONE ? [290, 2] : [284, 2], regel: "SAY – Botschaft vermitteln", titel: "Eine Aussage je Visual",
       text: "Unter jedem Titel steht ein aus den Daten berechneter Satz – welche Produktlinie am weitesten über bzw. unter Budget liegt, wie viele Länder den Großteil des Umsatzes bringen. Er ändert sich mit Zeitraum, Region und Auswahl. Das Original hatte nur englische Überschriften." },
-    { nr: 2, ziel: "geraet", anker: "links", versatz: PHONE ? [26, 30] : [40, 26], regel: "STRUCTURE – Layout je Gerät", titel: PHONE ? "Eine Spalte im Hochformat" : "Zwei Spalten im Querformat",
+    { nr: 2, ziel: "geraet", anker: "links", versatz: PHONE ? [24, 64] : [464, 96], regel: "STRUCTURE – Layout je Gerät", titel: PHONE ? "Eine Spalte im Hochformat" : "Zwei Spalten im Querformat",
       text: PHONE
         ? "Derselbe Bericht wie auf dem Tablet (Abb. 5.60), aber in einer Spalte: Kopf, Datenschnitte, Kennzahlen und zwei Visuals untereinander, in voller Breite lesbar. Nebenspalten (Budget, Anteil, Ergebnis) stehen im Tooltip. Das Original zeigte einen verkleinerten Desktop-Bericht mit vier Diagrammen in zwei Spalten, senkrechter Achsenbeschriftung und kaum lesbarer Schrift."
         : "Derselbe Bericht wie auf dem Smartphone (Abb. 5.59), aber in zwei Spalten: links die Produktlinien, rechts die Länder; die Nebenspalten Budget, Anteil und Ergebnis sind sichtbar. Das Original zeigte eine kleine Tabelle neben einer großen Karte; die Rangfolge der Länder war nur in der Tabelle ablesbar." },
-    { nr: 3, ziel: "region", anker: "links", versatz: PHONE ? [-2, 34] : [-4, -22], regel: "SIMPLIFY – Für Touch bedienbar", titel: "Große Trefferflächen",
+    { nr: 3, ziel: PHONE ? "kopf" : "region", anker: "links", versatz: PHONE ? [334, 2] : [-4, -22], regel: "SIMPLIFY – Für Touch bedienbar", titel: "Große Trefferflächen",
       text: `Knöpfe und Auswahlliste sind 40 px hoch, jede Zeile ist ganz antippbar (${PHONE ? "37 bzw. 29 px" : "76 bzw. 48 px"} hoch). Tippen filtert den Bericht, „✕ Auswahl“ hebt die Auswahl auf (am Rechner auch Esc), ein Tooltip erscheint beim Tippen für 2,5 Sekunden. Das Original hatte kleine Pfeilknöpfe für die Klassengrenzen und eine Symbolleiste.` },
     { nr: 4, ziel: "li-kopf-dbu", anker: "links", versatz: [-14, -4], regel: "EXPRESS – Abweichung zeigen", titel: "ΔBU statt Dreiecken",
       text: "Die Abweichung zum Budget steht als Zahl mit Vorzeichen und als Balken nach Wirkung (blaugrün über, rot unter Budget). Das Original zeigte das Budget als orangefarbene Dreiecke auf roten Balken ohne Abweichungswert und stapelte Ist und Budget bei den Händlern; ein Verlust von −193.742,91 erschien als langer Balken nach rechts." },
     { nr: 5, ziel: "kpis", anker: "links", versatz: PHONE ? [282, 22] : [440, 22], regel: "UNIFY – Einheitliche Zahlen", titel: "Mio. € mit einer Nachkommastelle",
       text: "Alle Beträge in Mio. € mit einer Nachkommastelle, Einheit im Titel; exakte Werte in Tsd. € im Tooltip. Das Original mischte „6.761.734,26“, „414“ und „-193.742,91“ (US$) mit T€-Werten und Prozenten mit zwei Nachkommastellen." },
-    { nr: 6, ziel: "la-kopf-abc", anker: "links", versatz: [-20, -4], regel: "CONDENSE – ABC als Rangfolge", titel: "Balken, kumulierter Anteil, Klassen",
+    { nr: 6, ziel: "la-svg", anker: "links", versatz: PHONE ? [96, -2] : [108, -2], regel: "CONDENSE – ABC als Rangfolge", titel: "Balken, kumulierter Anteil, Klassen",
       text: "Die Länder stehen nach Umsatz geordnet, mit kumuliertem Anteil und Klasse; Linien trennen die Klassen A (bis 65 %), B (bis 80 %) und C wie die Klassengrenzen des Originals. Ampelfarben in Tabelle und Karte entfallen – die Klasse steht als Buchstabe." },
-    { nr: 7, ziel: "v-laender", anker: "links", versatz: PHONE ? [256, 2] : [254, 2], regel: "CHECK – Titel und Inhalt stimmig", titel: "Region als Datenschnitt",
+    { nr: 7, ziel: "v-laender", anker: "links", versatz: PHONE ? [330, 22] : [358, 2], regel: "CHECK – Titel und Inhalt stimmig", titel: "Region als Datenschnitt",
       text: "Das Original hieß „ABC-Analyse DACH“, zeigte aber acht europäische Länder. Jetzt wählt der Datenschnitt Region alle Länder, DACH oder die übrigen; die Klassen werden für die Auswahl neu gebildet. Werte des Originals (T€) für die 12 Monate bis August 2027 übernommen." },
     { nr: 8, ziel: "kopf", anker: "links", versatz: PHONE ? [200, 0] : [260, 0], regel: "SIMPLIFY – Ohne App-Rahmen", titel: "Gerät nur angedeutet",
       text: "Statusleiste, Symbolleisten, Navigationsknöpfe („Car Sales“, „Arena“, „Back“), Markennamen und Logos entfallen; das Gerät ist nur durch einen dünnen Rahmen angedeutet. Marken wurden zu Produktlinien, englische Begriffe zu deutschen." },
@@ -318,7 +318,7 @@
         felder: `Zeilen: Produktlinie; Werte: Umsatz 12M (Sparkline über Monat), Umsatz 12M${PHONE ? "" : ", Budget 12M"}, ΔBU %`,
         format: "Sparkline Linie #3A3F44, Markierung „Letzter“; ΔBU %: Datenbalken (Achse Mitte, positiv #00806B, negativ #C62828); Zeilenabstand groß (Raster › Zeilenabstand)",
         hinweis: PHONE ? "Die Spalte Budget steht nur auf dem Tablet: für das Smartphone eine schmalere Kopie der Tabelle anlegen, im Weblayout ausblenden und nur ins mobile Layout ziehen." : "" },
-      { id: "D", ziel: "v-laender", versatz: [0, 0], titel: "ABC-Analyse nach Land", visual: "Tabelle",
+      { id: "D", ziel: "v-laender", versatz: PHONE ? [0, 22] : [0, 0], titel: "ABC-Analyse nach Land", visual: "Tabelle",
         felder: `Land; Umsatz 12M (Datenbalken)${PHONE ? "" : "; Anteil = DIVIDE([Umsatz 12M]; CALCULATE([Umsatz 12M]; ALLSELECTED(Land)))"}; kum. Anteil = Summe der Umsätze aller Länder mit Umsatz ≥ dem eigenen (FILTER(ALLSELECTED(Land[Land]); …)) / Gesamt; Klasse = SWITCH(TRUE(); [kum. Anteil] <= 0,65; "A"; [kum. Anteil] <= 0,8; "B"; "C")${PHONE ? "" : "; Ergebnis 12M"}`,
         format: "Sortierung nach Umsatz absteigend; Datenbalken #3A3F44 ab 0; Klasse fett",
         hinweis: "Das größte Land ist immer A, auch wenn es allein mehr als 65 % hat (eigene Regel im Measure)." },

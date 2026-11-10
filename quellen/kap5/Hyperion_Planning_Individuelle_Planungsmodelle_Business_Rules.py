@@ -15,7 +15,7 @@
 STEM = "Hyperion_Planning_Individuelle_Planungsmodelle_Business_Rules"
 from bookfig import Fig, P, SHY
 
-W, H = 155.0, 95.0
+W, H = 155.0, 96.0
 SZ = 6.5
 H1, H2 = 4.2, 6.6                    # Boxhöhe ein-/zweizeilig
 TOP = 4.4                            # Titelzeile im Band
@@ -46,10 +46,10 @@ def build(theme):
         f.band(x, 0.0, w, H, lab)
     XE, WE_ = 2.4, 23.0                  # Eingabe
     XB, WB = 32.5, 17.0                  # Berechnung
-    XG, WG, WGN = 56.5, 24.0, 28.0       # GuV (schmale Boxen lassen rechts Platz für die Sammelleitung)
+    XG, WG, WGN = 56.5, 25.0, 28.0       # GuV (schmale Boxen lassen rechts Platz für die Sammelleitung)
     XBI, WBI = 91.5, 27.0                # Bilanz
     XC, WC = 125.5, 28.0                 # Cash-Flow
-    BUS = 82.8                           # Sammelleitung zum Deckungsbeitrag (im GuV-Band)
+    BUS = 83.6                           # Sammelleitung zum Deckungsbeitrag (im GuV-Band)
     KANAL = 0.9                          # Leitung links von den Eingaben (Absatz → Wareneinsatz, Zugang Produktion)
     XFK, XMK = 27.6, 29.0                # Abzweige der Standardkosten nach unten
 
@@ -61,7 +61,7 @@ def build(theme):
 
     # ------------------------------------------------------------ Eingabepositionen
     E1 = B(XE, 5.6, WE_, H1); E2 = B(XE, 12.2, WE_, H1); E3 = B(XE, 18.6, WE_, H1); E4 = B(XE, 24.0, WE_, H1)
-    E5 = B(XE, 30.4, WE_, H1); E6 = B(XE, 36.8, WE_, H1); E7 = B(XE, 44.0, WE_, H2); E8 = B(XE, 52.2, WE_, H2)
+    E5 = B(XE, 30.4, WE_, H1); E6 = B(XE, 36.8, WE_, H1); E7 = B(XE, 45.0, WE_, H2); E8 = B(XE, 53.2, WE_, H2)
     eingabe(E1, "Inkassorate in %")
     eingabe(E2, "Absatz")
     eingabe(E3, "Listenpreis")
@@ -73,18 +73,18 @@ def build(theme):
 
     # ------------------------------------------------------------ Berechnete Zwischengrößen
     VK = B(XB, 18.6, WB, 9.6)
-    ZP = B(XB, 67.2, WB, H2)
+    ZP = B(XB, 69.0, WB, H2)
     box(VK, "Verkaufspreis", role="box_plain")
     box(ZP, "Zugang Produktion", role="box_plain")
 
     # ------------------------------------------------------------ GuV
     NU = B(XG, 12.2, WGN, 13.4)
     FR = B(XG, 36.6, WG, 5.0)
-    WE = B(XG, 44.0, WG, 14.8)
-    DB = B(XG, 61.0, WG, H1)
-    BV = B(XG, 68.4, WG, H1)
-    FM = B(XG, 76.0, WG, H2)
-    FL = B(XG, 85.2, WG, 5.6)
+    WE = B(XG, 46.5, WG, 12.6)
+    DB = B(XG, 62.6, WG, H1)
+    BV = B(XG, 70.2, WG, H1)
+    FM = B(XG, 77.8, WG, H2)
+    FL = B(XG, 87.0, WG, 5.6)
     box(NU, "Nettoumsatz", role="box_strong")
     box(FR, "Frachtkosten")
     box(WE, "Wareneinsatz")
@@ -96,7 +96,7 @@ def build(theme):
     # ------------------------------------------------------------ Bilanz
     ZF = B(XBI, 12.2, WBI, H1)
     ZV = B(XBI, 29.0, WBI, H2)
-    LB = B(XBI, 68.4, WBI, H1)
+    LB = B(XBI, 70.2, WBI, H1)
     box(ZF, "Zugang Forderungen")
     box(ZV, f"Zugang Verbindlich{SHY}keiten Finanzamt")
     box(LB, "Lagerbestand")
@@ -105,8 +105,8 @@ def build(theme):
     EF = B(XC, 5.0, WC, H2)
     AF = B(XC, 30.2, WC, H1)
     AR = B(XC, 35.4, WC, H2)
-    AM = B(XC, 76.0, WC, H2)
-    AL = B(XC, 84.6, WC, H2)
+    AM = B(XC, 77.8, WC, H2)
+    AL = B(XC, 86.5, WC, H2)
     box(EF, "Einzahlung Forderungen")
     box(AF, "Auszahlung Finanzamt")
     box(AR, "Auszahlung Frachtkosten")
@@ -133,7 +133,7 @@ def build(theme):
     A([(FR.r, y_fa), (AR.x, y_fa)], name="Frachtkosten → Auszahlung Frachtkosten")
 
     # ------------------------------------------------------------ Wareneinsatz und Deckungsbeitrag
-    y_w = 42.6                                           # zwischen Frachtkostensatz und Standardmaterialkosten
+    y_w = 43.0                                           # zwischen Frachtkostensatz und Standardmaterialkosten
     A([(E2.x, E2.cy), (KANAL, E2.cy), (KANAL, y_w), (62.0, y_w), (62.0, WE.y)], name="Absatz → Wareneinsatz")
     A([(E7.r, E7.cy), (WE.x, E7.cy)], name="Standardmaterialkosten → Wareneinsatz")
     A([(E8.r, E8.cy), (WE.x, E8.cy)], name="Standardfertigungskosten → Wareneinsatz")
@@ -154,5 +154,5 @@ def build(theme):
     A([(XMK, E7.cy), (XMK, y_fm2), (FM.x, y_fm2)], name="Standardmaterialkosten → Fertigungsmaterial")
     A([(XFK, E8.cy), (XFK, y_fl2), (FL.x, y_fl2)], name="Standardfertigungskosten → Fertigungslöhne")
     A([(FM.r, AM.cy), (AM.x, AM.cy)], name="Fertigungsmaterial → Auszahlung")
-    A([(FL.r, 88.0), (AL.x, 88.0)], name="Fertigungslöhne → Auszahlung")
+    A([(FL.r, FL.cy), (AL.x, FL.cy)], name="Fertigungslöhne → Auszahlung")
     return f

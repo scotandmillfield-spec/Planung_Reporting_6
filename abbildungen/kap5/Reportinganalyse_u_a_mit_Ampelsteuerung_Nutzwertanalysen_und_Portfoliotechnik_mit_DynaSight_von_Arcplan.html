@@ -893,7 +893,7 @@ const DK = (() => {
       punkte: PR.map((p, j) => ({ key: j, x: zeitRel(p, i), y: kostenRel(p, i), g: p.pw, label: p.kurz })),
       x: { min: -10, max: 60, ticks: [0, 20, 40, 60], titel: "Terminverzug in % der Dauer", fmt: v => zahl(v) },
       y: { min: -20, max: 70, ticks: [-20, 0, 20, 40, 60], titel: "Kostenabweichung in % des Projektwerts", fmt: v => zahl(v) },
-      linien: { x: 0, y: 0 }, felder: [{ ecke: "or", text: "teurer, später" }, { ecke: "ur", text: "günstiger, später" }],
+      linien: { x: 0, y: 0 }, felder: [{ ecke: "or", text: "teurer und später" }],
       auswahl: pt => aktiv(pt.key), onClick: j => projektWaehlen(j),
       tooltip: pt => { const p = PR[pt.key]; return [`${p.name} · ${MLANG[i]} ${JAHR}`,
         `Kostenabweichung ${delta(pt.y, 1, NBSP + "%")} des Projektwerts (ΔELK ${delta(p.delk[i], 0)}, ΔFLK ${delta(p.dflk[i], 0)}, ΔRisikovorsorge ${delta(p.drisk[i], 0)} Tsd. €)`,

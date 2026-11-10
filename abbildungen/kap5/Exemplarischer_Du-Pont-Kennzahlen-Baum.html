@@ -740,19 +740,19 @@ const DK = (() => {
     // Wert des Jahres, rechts Vorjahr und Abweichung nach Wirkung
     sv("text", { x: x + 8, y: y + 42, style: "font-weight:bold;font-size:22px" }, kn, zahl(k.werte[i], k.nk));
     const d = dlt(k, i), kl = d == null ? "neutral" : wirkung(d, k.richtung, k.nk);
-    const xr = x + 92;
+    const xr = x + 84;
     sv("text", { x: xr, y: y + 30, class: "muted" }, kn, i > 0 ? `VJ ${zahl(k.werte[i - 1], k.nk)}` : "VJ –");
-    const tz = sv("text", { x: xr, y: y + 46, class: "muted" }, kn, "ΔVJ ");
+    const tz = sv("text", { x: xr, y: y + 46, class: "muted" }, kn, "Δ ");
     sv("tspan", { style: `font-weight:bold;fill:${kl === "neutral" ? "var(--text)" : FARBE[kl]}` }, tz, d == null ? "–" : delta(d, k.nk, k.dEinheit));
     const hit = sv("rect", { x, y, width: NB, height: 52, fill: "transparent" }, kn);
-    if (k.kinder) {
+    if (k.kinder && !DK.PRINT) {
       const zu = S.zu.has(id);
       const kx = x + NB, ky = mitteY(y);
       sv("circle", { cx: kx, cy: ky, r: 8, fill: "#FFFFFF", stroke: "#3A3F44", "stroke-width": 1 }, kn);
       sv("line", { x1: kx - 4, x2: kx + 4, y1: ky, y2: ky, stroke: "#3A3F44", "stroke-width": 1.5 }, kn);
       if (zu) sv("line", { x1: kx, x2: kx, y1: ky - 4, y2: ky + 4, stroke: "#3A3F44", "stroke-width": 1.5 }, kn);
-      kn.addEventListener("click", () => klappen(id));
     }
+    if (k.kinder) kn.addEventListener("click", () => klappen(id));
     tooltip(hit, () => [k.name + (k.einheit ? ", " + k.einheit : ""), k.erkl,
       k.formel ? k.formel(i) : `${SZ[i]} ${J[i]}: ${zahl(k.werte[i], k.nk)} ${k.einheit}`,
       i > 0 ? `Vorjahr ${zahl(k.werte[i - 1], k.nk)} · ΔVJ ${delta(d, k.nk, k.dEinheit)}` + (k.richtung < 0 ? " (Anstieg ungünstig)" : "") : "",

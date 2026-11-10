@@ -622,6 +622,54 @@
    ],
    "alt": "Dieselbe Übersichtsseite „Einkaufsübersicht“ schematisch auf drei Endgeräten. Auf dem Desktop stehen die neun Karten in vier Spalten, auf dem Tablet in drei Spalten und auf dem Smartphone untereinander in einer Spalte; was nicht auf den Bildschirm passt, wird angeschnitten und ist per Bildlauf erreichbar. Kopf- und Filterleiste passen sich der Breite an."
   },
+  "5.55": {
+   "status": "pruefung",
+   "datei": "Mobile_Computing_Mobile_BI_sowie_mobiles_Reporting_und_mobile_Planung",
+   "kommentare": [
+    "Verschachtelte Bereiche wie im Original (nach rechts unten eingerückt), Titel oben links; fast deckungsgleiche Ränder des Originals mit einheitlichem Abstand",
+    "Helligkeitsleiter außen → innen: Mobile Computing weiß, Mobile BI grau, mobiles Reporting und mobile Planung rot (Schlüsselelement, Gegenstand des Buches)",
+    "Englisch übertragen: „Mobile Planning and Reporting“ → „Mobiles Reporting und mobile Planung“ (Reihenfolge wie Caption); „Mobile Computing“ und „Mobile BI“ bleiben als Fachbegriffe",
+    "Serie mit Abb. 5.56/5.57: dort ist der Mobile BI-Client das rote Element"
+   ],
+   "alt": "Drei ineinanderliegende Bereiche: Mobile Computing umfasst Mobile BI, Mobile BI umfasst mobiles Reporting und mobile Planung. Die Abbildung zeigt mobiles Reporting und mobile Planung als Teilgebiet von Mobile BI und dieses als Teilgebiet des Mobile Computing."
+  },
+  "5.56": {
+   "status": "pruefung",
+   "datei": "Aufbau_von_mobilen_BI-Systemen",
+   "kommentare": [
+    "Stationärer Teil deckungsgleich mit Abb. 5.32/5.38 (Geometrie, Texte, Rollen, Korrekturen wie dort: Daten-Virtualisierung, Core Data Warehouse, Analytische Datenbank, Sensordaten, Tabellenkalkulation statt Excel, „…“ entfallen)",
+    "Zeilenbeschriftungen → vier Bänder mit Titel oben links; gedrehte Gruppenbeschriftungen „Mobile/Stationäre BI-Komponenten“ → Klammern am linken Rand (keine Querschnittsspalten)",
+    "Rahmen „Mobile BI-Anwendung“ → gestrichelte Gruppe über beide mobilen Bänder; Mobile BI-Client rot (wie Abb. 5.57), Mobile Data Marts und Sandboxing grau (Datenhaltung) – Sandboxing hier nicht rot wie in Abb. 5.38",
+    "Fahne mit Blitz → kursive Beschriftung „Direktverbindung“ am Pfeil Sandboxing → Mobile BI-Client; Wolken → Boxen „Cloud“ mit gestrichelter Zuordnung; Würfel, Zylinder, Blauverlauf entfallen",
+    "Pfeile zur mobilen Datenverwaltung nach der Folie: Data Mart, ODS/CMS-DMS (Sammelleitung), Data Lake, Streaming; im Original endet der Pfeil vom CMS/DMS mit einer Spitze nach rechts – als Zuleitung gedeutet",
+    "Frage: Direktverbindung im Original von der Cloud-Wolke über dem Sandboxing ausgehend – hier vom Sandboxing; so gemeint?"
+   ],
+   "alt": "Schichtenmodell eines mobilen BI-Systems. Unten die stationären BI-Komponenten wie in der traditionellen und explorativen BI-Architektur (Quellsysteme, ETL/ELT, Data Warehouse, Data Marts, Sandboxing, Data Lake), darüber die mobilen BI-Komponenten: Mobile Data Marts mit Replikations-, Synchronisations- und Sicherheitsmechanismen und der Mobile BI-Client. Daten gelangen aus den stationären Speichern in die mobile Datenverwaltung, das Sandboxing ist per Direktverbindung an den Mobile BI-Client angebunden."
+  },
+  "5.57": {
+   "status": "pruefung",
+   "datei": "Mobile_Zugangsarten_und_Endgeraete",
+   "kommentare": [
+    "Mobile BI-Komponenten als derselbe Baustein wie in Abb. 5.56 (gleiche Geometrie, Begriffe, Rollen; Mobile BI-Client rot); dafür die beiden Bandtitel „Mobile Datenauswertung und -nutzung“ / „Mobile Datenverwaltung und -distribution“ aus Abb. 5.56 übernommen – so gewünscht?",
+    "Gedrehte Seitenbeschriftungen → Bänder „Endgeräte“, „Zugangsarten“ mit Titel oben links",
+    "Gerätefotos (Smartphone, Tablet mit Bildschirminhalt) → beschriftete Boxen; Fahne mit Blitz → kursive Beschriftung „Direktverbindung“ (Pfeil kommt von unten aus den stationären Komponenten)",
+    "Zugangsarten → Endgeräte als Sammelleitung ohne Knotenpunkte (jede Zugangsart zu jedem Gerät, wie Folie)",
+    "Korrektur: „(4 bzw. 5G-LTE, UMTS,GPRS)“ → „(LTE/4G bzw. 5G, UMTS, GPRS)“; Hinweis: UMTS in Deutschland seit 2021 abgeschaltet, GPRS veraltet – Text ggf. aktualisieren"
+   ],
+   "alt": "Die mobile BI-Anwendung mit Mobile BI-Client und Mobile Data Marts erreicht die Endgeräte über zwei Zugangsarten: mobilen Zugriff über das Mobilfunknetz und Hotspot-Zugang per WLAN. Beide Zugangsarten führen zu Mobiltelefon/Smartphone und Tablet-PC/Notebook."
+  },
+  "5.58": {
+   "status": "pruefung",
+   "datei": "SAP_BusinessObjects_Mobile_Architecture",
+   "kommentare": [
+    "Produktscreenshot softwareneutral nachgebaut, Anordnung wie Original; Produkt- und Versionsangaben entfernt (SAP BusinessObjects, XI 3.1/4.0, Web Intelligence, Crystal Reports, Sybase SUP 2.1.0, SAP BI app)",
+    "Übertragen: Mobile application server → mobiler Anwendungsserver (rot, Schlüsselelement), BI platform → BI-Plattform, Web Intelligence Processing servers → Verarbeitungsserver für Ad-hoc-Berichte, Crystal Report server → Server für formatierte Berichte, Search service → Suchdienst, File Repository Server → Dateiablageserver, Report and CMS databases → Berichts- und Systemdatenbanken (CMS = Central Management Server), Sybase SUP → Mobile-Middleware-Server, Kbits/sec → kbit/s",
+    "Schnittstellenkreise mit „R“ → Pfeile mit kursivem Protokoll (◄R► Doppelpfeil, R► einfach); grauer Hinweis „Optional“ → gestrichelte Gruppen „optional“",
+    "Entfernt: Personen-/App-Symbol, Lupe, Zahnrad, Datenbanksymbol (→ Box), gestapelte Kästen (→ „mehrere“); Leitung Middleware ⇄ Anwendungsserver senkrecht statt um die Ecke",
+    "Caption ohne Produktnamen? z. B. „Architektur einer mobilen BI-Lösung (in Anlehnung an SAP AG 2016, S. 5)“; Hinweis: GPRS/EDGE/3G-Raten veraltet"
+   ],
+   "alt": "Architektur einer mobilen BI-Lösung. Nutzer mit mobilem Endgerät greifen über Internet/WLAN direkt oder über optionale Komponenten zwischen zwei Firewalls (Reverse Proxy bzw. Relay-Server mit Middleware-Server) per HTTPS auf den mobilen Anwendungsserver zu. Dieser ist per TCP mit der BI-Plattform und ihren Diensten verbunden, die ihrerseits auf den Dateiablageserver mit Dateiablage sowie Berichts- und Systemdatenbanken zugreift."
+  },
   "5.62": {
    "status": "latex",
    "latex": "tabellen/Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart.tex",
@@ -634,6 +682,38 @@
     "„DreamCard“ aus dem Original übernommen – falls Markenname, durch „Kundenkarte“ ersetzen?"
    ],
    "alt": "Metadatenbeschreibung eines Sales Data Mart im Star-Schema. Eine Matrix zeigt, nach welchen Dimensionen die Kennzahlen der Faktentabelle Sales auswertbar sind: Umsatz und Menge nach Kunden, Datum und Produkten, Bonuspunkte nur nach Kunden und Datum. Darunter stehen die Eigenschaften der Dimensionen Kunde, Datum und Produkte sowie ihre Hierarchien, etwa Jahr – Quartal – Monat – Tag und Produktlinie – Produktgruppe."
+  },
+  "5.63": {
+   "status": "pruefung",
+   "datei": "Machine_Learning",
+   "kommentare": [
+    "Eingabe → Machine Learning → Ausgabe in einer Achse wie im Original; Machine Learning als Karte mit Kopfleiste und Aufzählung, Daten als graue Pfeilformen (stehen jetzt vor bzw. hinter der Karte statt den Rahmen zu überlappen)",
+    "Blaue Flächen, Rahmen und Überschrift → Rollen; kein Rot",
+    "Übertragen/korrigiert: „Input-Daten“ → „Eingabedaten“, „Output-Daten“ → „Ausgabedaten“, „wahrscheinl.“ → „wahrscheinliche“, „Beispieldaten …“ → „Beispieldaten etc.“; „Machine Learning“ bleibt (wie Caption)"
+   ],
+   "alt": "Eingabedaten wie Informationen und Beispieldaten fließen in Machine Learning ein, das mit statistischen Methoden und Algorithmen Zusammenhänge, Datenmuster, Abhängigkeiten und verborgene Strukturen erkennt. Ergebnis sind Ausgabedaten wie ein optimales Modell oder eine wahrscheinliche Lösung."
+  },
+  "5.64": {
+   "status": "pruefung",
+   "datei": "Kuenstliche_Neuronale_Netze",
+   "kommentare": [
+    "Aufbau wie Original: Neuronen als Kreise in fünf Spalten (3 – 4 – 5 – 4 – 2), benachbarte Spalten vollständig verbunden, dünne diagonale Linien",
+    "Blau → Helligkeitsleiter: Eingabe hellgrau, verdeckte Schichten grau, Ausgabe anthrazit; kein Rot",
+    "Übertragen: „Input-Layer“ → „Eingabeschicht (Input Layer)“, „Hidden-Layer“ → „Verdeckte Schichten (Hidden Layers)“, „Output-Layer“ → „Ausgabeschicht (Output Layer)“",
+    "„Hidden-Layer“ stand nur über der Mitte – jetzt Klammer über alle drei verdeckten Schichten"
+   ],
+   "alt": "Schema eines künstlichen neuronalen Netzes mit einer Eingabeschicht aus drei Neuronen, drei verdeckten Schichten mit vier, fünf und vier Neuronen und einer Ausgabeschicht mit zwei Neuronen. Jedes Neuron ist mit allen Neuronen der folgenden Schicht verbunden."
+  },
+  "5.65": {
+   "status": "pruefung",
+   "datei": "CRISP-DM-Modell_-_Prozessschritte",
+   "kommentare": [
+    "Kreislauf nach Muster Abb. 2.1: sechs Chevron-Segmente im Uhrzeigersinn an den Positionen des Originals, Kern „Daten“ rot (statt Datenbanksymbol); Liste der Prozessschritte rechts wie im Original",
+    "Rückkopplungen des Originals als Pfeile im Innenring: 2 → 1, 4 → 3 (zusammen mit den Chevrons 1 ⇄ 2, 3 ⇄ 4) und 5 → 1; äußerer Kreis mit Drehpfeilen entfällt – die geschlossene Chevron-Kette zeigt den Neubeginn nach Phase 6",
+    "Listenüberschrift „CRISP DM Modell - Prozessschritte:“ entfällt (= Caption); Blau → Rollen",
+    "Korrekturen: „CRISP DM“ → „CRISP-DM“, „Data“ → „Daten“, „Bewertung und Interpretation der Ereignisse“ → „… der Ergebnisse“ (bitte prüfen); Phasennamen bleiben englisch (Fachbegriffe des Modells)"
+   ],
+   "alt": "Das CRISP-DM-Modell als Kreislauf aus sechs Phasen um den Kern Daten: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation und Deployment. Zwischen den ersten beiden sowie zwischen Data Preparation und Modeling wird hin und her gewechselt, von der Evaluation führt eine Rückkopplung zum Business Understanding. Eine Liste erläutert die Schritte auf Deutsch, von der Aufgabendefinition bis zur Anwendung der Ergebnisse."
   },
   "5.67": {
    "status": "pruefung",

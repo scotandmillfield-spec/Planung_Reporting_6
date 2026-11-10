@@ -14,8 +14,8 @@ from bookfig import Fig, P, arc_pts, polar, text_width_mm
 
 W = 110
 CX, CY = 30.6, 30.6
-R_OUT, R_IN, R_CORE = 30.0, 15.4, 8.2
-R_FB = 11.8                  # Radius der Rückkopplungspfeile
+R_OUT, R_IN, R_CORE = 30.0, 13.8, 7.4
+R_FB = 10.6                  # Radius der Rückkopplungspfeile
 GAP_MM = 1.5
 TIP_MM = 4.0
 SEG = 60.0
@@ -68,7 +68,7 @@ def build(theme):
         f.poly(segment_polygon(ang), fill=rolle.fill, line=rolle.line, lw=rolle.lw, name=f"Phase {zeilen[0]}")
     r_mid = (R_OUT + R_IN) / 2
     for ang, zeilen in PHASEN:
-        x, y = polar(CX, CY, r_mid + 0.2, ang - 1.5)
+        x, y = polar(CX, CY, r_mid, ang - 1.5)
         bw = max(text_width_mm(z, 6.5, bold=True) for z in zeilen) + 1.4
         bh = len(zeilen) * 6.5 * 1.18 * 25.4 / 72 + 0.8
         f.text(x - bw / 2, y - bh / 2, bw, bh, [P(z, size=6.5, bold=True) for z in zeilen], align="c",

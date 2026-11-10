@@ -510,6 +510,19 @@
    ],
    "alt": "Berichtsentwurf eines Reportgenerators: Oben stehen die Werkzeuggruppen Verbindungen, Hierarchie und Formatierung, darunter eine Palette von Berichtsobjekten wie Tabelle, Spalte, Grafik und Menü. Auf der Berichtsfläche entsteht ein Bericht mit einer Auswahlliste „Farbe“ und einer Tabelle mit Umsatz und Rabatt je Kundenbezirk; ein Pfeil zeigt, wie das Feld „Skonto“ aus der Feldliste der Datenbank unten per Drag & Drop als neue Spalte in die Tabelle gezogen wird."
   },
+  "5.42": {
+   "status": "pruefung",
+   "datei": "Reportinganalyse_u_a_mit_Ampelsteuerung_Nutzwertanalysen_und_Portfoliotechnik_mit_DynaSight_von_Arcplan",
+   "kommentare": [
+    "Vier überlappende Programmfenster softwareneutral als ein Dashboard 1024 × 646 px nachgebaut (HTML, PNG): Spitzenkennzahlen mit Ampel, Soft Facts als Nutzwertanalyse, Portfolio Kosten-/Terminabweichung („Strategieabgleich“), Marktportfolio der Produktfelder („Strategie“); Fensterrahmen, Logos, Banner „FRES“ und Zurück-Schaltflächen entfallen, die Sichten sind verbunden (Klick auf ein Projekt wählt es überall)",
+    "Ampel bleibt als Konzept, barrierearm wie Abb. 3.64 (Kreis ✓ / gelbes Dreieck ! / rotes Quadrat ✕, graustufentauglich) statt rot-gelb-grün gefüllter Zellen; Schwellen je Kennzahl so gewählt, dass alle Ampelstufen des Originals im April getroffen werden (rosa Soft-Facts-Zelle Malmö → „beobachten“); Kostenabweichungen relativ zum Projektwert bewertet; doppelte Ampel Projektergebnis/DB-PW → nur DB/PW",
+    "Werte des Originals (April) exakt übernommen, DB/PW = Projektergebnis/Projektwert gerechnet (stimmt mit Original überein); Januar–März für den Datenschnitt Periode erfunden (Malmö kippt im Februar); Projekte ohne „Projekt“-Präfix, in den Portfolios mit dem Ort beschriftet; 1999/2000 → 2027, T€ → Tsd. €",
+    "Soft Facts: Profil Malmö wie im Original, Gewichte und Nutzwert ergänzt (Nutzwertanalyse), Profile der übrigen Projekte erfunden; Korrektur: Skala Projektkomplexität im Original vertauscht (1 = sehr hoch) → 1 = sehr gering",
+    "Korrektur Portfolio Kosten/Termine: im Original passten Lage und Werte nicht zur Tabelle (Hoyerswerda links unten trotz Verzug, 13.655 statt 13.684 T€) – jetzt aus der Tabelle gerechnet, geplante Projektdauer erfunden; Marktportfolio von 25 auf 10 Produktfelder reduziert, Namen neutral, zwei Felder leicht verschoben (Überdeckung) – ok?",
+    "Caption ohne Produktnamen? z. B. ‚Reportinganalyse u. a. mit Ampelsteuerung, Nutzwertanalysen und Portfoliotechnik‘ (Zusatz „mit DynaSight von Arcplan“ streichen oder in Anlehnung an … nennen)"
+   ],
+   "alt": "Dashboard „Frühwarn-, Risiko- und Erfolgsreporting“ für fünf Projekte im April 2027. Oben eine Tabelle der Spitzenkennzahlen (Projektwert, Projektergebnis, Soft Facts, Deckungsbeiträge, Cashflow, Kosten- und Risikoabweichungen, Terminverzug) mit Ampelzeichen, die sich in Form, Zeichen und Farbe unterscheiden; 18 von 40 Signalen sind kritisch, 8 davon beim Projekt Anlagenbau Hoyerswerda. Unten die Soft Facts des Projekts Sensortechnik Malmö als gewichtetes Profil mit Nutzwert 2,85, ein Portfolio der Kosten- und Terminabweichung je Projekt und ein Marktportfolio aus Wettbewerbsstärke und Marktattraktivität, in dem die Produktfelder der Projekte hervorgehoben sind."
+  },
   "5.43": {
    "status": "pruefung",
    "datei": "Cockpit--Dashboard-Beispiel_Diamant-3_IQ",

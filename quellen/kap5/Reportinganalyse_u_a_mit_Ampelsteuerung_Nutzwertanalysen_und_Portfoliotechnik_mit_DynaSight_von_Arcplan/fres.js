@@ -41,6 +41,7 @@
     { key: "tv", g: 2, kopf: ["Termin-", "verzug"], einheit: "Tage", nk: 0, wert: (p, i) => p.tv[i], lang: "Projektfortschritt: Terminverzug gesamt (Prognose)",
       regel: v => (v <= 14 ? "gut" : v <= 60 ? "warn" : "krit"), schwelle: "im Ziel ≤ 14 Tage · beobachten ≤ 60 · kritisch > 60" },
   ];
+  const spName = s => (s.kopf[0].endsWith("-") ? s.kopf[0].slice(0, -1) + s.kopf[1] : s.kopf[0] ? s.kopf[0] + " " + s.kopf[1] : s.kopf[1]);
   const stufe = (s, p, i) => (s.regel ? s.regel(s.wert(p, i), p) : null);
   const signale = (p, i) => SP.filter(s => s.regel).map(s => ({ s, st: stufe(s, p, i) }));
   const kostenRel = (p, i) => (p.delk[i] + p.dflk[i] + p.drisk[i]) / p.pw * 100;
@@ -187,14 +188,14 @@
     const i = S.m, B = 988;
     if (S.projekt !== null) {
       const p = PR[S.projekt], sig = signale(p, i), k = sig.filter(x => x.st === "krit"), w = sig.filter(x => x.st === "warn");
-      return passt([`${p.name}: ${k.length} von ${sig.length} Kennzahlen kritisch${k.length ? " (" + k.map(x => x.s.kopf.join("").replace("-", "")).join(", ") + ")" : ""}, ${w.length} beobachten`,
+      return passt([`${p.name}: ${k.length} von ${sig.length} Kennzahlen kritisch${k.length ? " (" + k.map(x => spName(x.s)).join(", ") + ")" : ""}, ${w.length} beobachten`,
         `${p.name}: ${k.length} kritisch, ${w.length} beobachten`], B);
     }
     const alle = PR.flatMap((p, j) => signale(p, i).map(x => ({ ...x, j })));
     const krit = alle.filter(x => x.st === "krit");
     const je = PR.map((p, j) => krit.filter(x => x.j === j).length), top = je.indexOf(Math.max(...je));
     let neu = [];
-    if (i > 0) neu = PR.flatMap((p, j) => signale(p, i).filter(x => x.st === "krit" && stufe(x.s, p, i - 1) !== "krit").map(x => `${p.kurz} ${x.s.kopf.join("").replace("-", "")}`));
+    if (i > 0) neu = PR.flatMap((p, j) => signale(p, i).filter(x => x.st === "krit" && stufe(x.s, p, i - 1) !== "krit").map(x => `${p.kurz} ${spName(x.s)}`));
     const teil = `${krit.length} von ${alle.length} Signalen kritisch, ${je[top]} davon bei ${PR[top].name}`;
     return passt([neu.length ? `${teil}; neu kritisch seit ${MLANG[i - 1]}: ${neu.join(", ")}` : `${teil}; keine neuen kritischen Signale`, teil], B);
   }
@@ -222,7 +223,7 @@
       const y = kopf + r * rh, s = p.sf[r], st = s <= 2 ? "gut" : s === 3 ? "warn" : "krit";
       const g = sv("g", { class: "dk-klick" + (S.krit !== null && S.krit !== r ? " dk-blass" : ""), "data-name": k[0] }, svg);
       if (r < KR.length - 1) sv("line", { x1: 0, x2: x0 - 6, y1: y + rh - 0.5, y2: y + rh - 0.5, stroke: "#EFEFEF", "stroke-width": 1 }, g);
-      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em", style: st === "krit" ? "font-weight:bold" : "" }, g, k[0]);
+      sv("text", { x: 0, y: y + rh / 2, dy: "0.35em" }, g, k[0]);
       sv("text", { x: xG, y: y + rh / 2, dy: "0.35em", "text-anchor": "end", class: "muted" }, g, k[1] + NBSP + "%");
       signal(g, cx(s), y + rh / 2, st, 0.72);
       const hit = sv("rect", { x: 0, y, width: W, height: rh, fill: "transparent" }, g);
@@ -334,14 +335,14 @@
       { nr: 1, ziel: "kopf-legende", anker: "links", versatz: [-2, 0], regel: "UNIFY – Barrierearme Ampel", titel: "Farbe, Form, Zeichen, Helligkeit",
         text: "Die Ampel bleibt, weil sie hier das Thema ist – aber barrierearm wie in Abb. 3.64: Kreis mit Häkchen (im Ziel), gelbes Dreieck mit Ausrufezeichen (beobachten), rotes Quadrat mit Kreuz (kritisch). Das Original füllte ganze Zellen rot, gelb, grün und rosa – für Farbenfehlsichtige und im Schwarz-Weiß-Druck nicht unterscheidbar." },
       { nr: 2, ziel: "v-ampel", anker: "links", versatz: [968, 22], regel: "SAY – Botschaft vermitteln", titel: "Was ist kritisch, was ist neu?",
-        text: "Die Aussage zählt die kritischen Signale, nennt das Projekt mit den meisten und – als Frühwarnung – die seit dem Vormonat neu kritischen. Wechseln Sie die Periode: Sensortechnik Malmö kippt im Februar von „beobachten“ auf „kritisch“." },
-      { nr: 3, ziel: "fr-kopf-erg", anker: "links", versatz: [40, -2], regel: "CONDENSE – Doppelte Ampel weglassen", titel: "Eine Ampel je Aussage",
+        text: "Die Aussage zählt die kritischen Signale, nennt das Projekt mit den meisten und – als Frühwarnung – die seit dem Vormonat neu kritischen. Wechseln Sie die Periode: Bei Sensortechnik Malmö springt DB/PW im Februar von „beobachten“ auf „kritisch“." },
+      { nr: 3, ziel: "fr-gruppe-0", anker: "links", versatz: [149, 0], regel: "CONDENSE – Doppelte Ampel weglassen", titel: "Eine Ampel je Aussage",
         text: "DB/PW ist Projektergebnis geteilt durch Projektwert; das Original färbte beide Spalten gleich. Hier trägt nur DB/PW die Ampel, Projektwert und -ergebnis stehen als Eckwerte ohne Signal. Werte bleiben in jeder Zelle sichtbar – die Ampel sagt nicht, wie weit eine Kennzahl vom Ziel entfernt ist." },
-      { nr: 4, ziel: "fr-tabelle", anker: "links", versatz: [600, 74], regel: "EXPRESS – Ausnahmen betonen", titel: "Nur Kritisches ist laut",
+      { nr: 4, ziel: "fr-gruppe-2", anker: "links", versatz: [327, 0], regel: "EXPRESS – Ausnahmen betonen", titel: "Nur Kritisches ist laut",
         text: "„Im Ziel“ ist ein heller Ring, „kritisch“ ein dunkles Quadrat mit fetter Zahl. Die Schwellenwerte je Kennzahl stehen im Tooltip; Kostenabweichungen werden relativ zum Projektwert bewertet, damit 47 Tsd. € beim kleinen Projekt Aue und 465 Tsd. € beim großen Projekt Lima vergleichbar sind." },
       { nr: 5, ziel: "sf-kopf", anker: "links", versatz: [190, -6], regel: "STRUCTURE – Nutzwertanalyse vollständig", titel: "Gewichte und Nutzwert ergänzt",
         text: "Die Soft Facts sind eine Nutzwertanalyse: acht Kriterien mit Gewicht, Punkte 1 (günstig) bis 5 (ungünstig), Nutzwert als gewichteter Durchschnitt – er ist der Wert der Spalte „Soft Facts“. Das Original zeigte das Profil ohne Gewichte vor rot-gelb-grünen Bändern; bei der Projektkomplexität war die Skala vertauscht (1 = sehr hoch)." },
-      { nr: 6, ziel: "ab-portfolio", anker: "links", versatz: [260, 26], regel: "CHECK – Eine Zahlenbasis", titel: "Portfolio aus den Kennzahlen gerechnet",
+      { nr: 6, ziel: "ab-portfolio", anker: "links", versatz: [300, 102], regel: "CHECK – Eine Zahlenbasis", titel: "Portfolio aus den Kennzahlen gerechnet",
         text: "Kosten- und Terminabweichung werden aus der Tabelle gerechnet (ΔELK + ΔFLK + ΔRisikovorsorge im Verhältnis zum Projektwert, Terminverzug zur geplanten Dauer). Im Original passten Portfolio und Tabelle nicht zusammen: Hoyerswerda lag trotz 100 Tagen Verzug und Mehrkosten links unten, Malmö trug 13.655 statt 13.684 Tsd. €." },
       { nr: 7, ziel: "st-portfolio", anker: "links", versatz: [200, 30], regel: "SIMPLIFY – Weniger Felder, keine Farblegende", titel: "Projekte im Marktportfolio",
         text: "Das Marktportfolio zeigt zehn Produktfelder; dunkel sind die Felder mit laufendem Projekt, beschriftet mit dem Projektnamen. Das Original hatte 25 bunte Kreise mit einer Farblegende aus 25 Einträgen, grauen Hintergrund und Rahmen." },
@@ -350,7 +351,7 @@
     ],
     nachbauIntro: "Seitengröße benutzerdefiniert 1024 × 646 px. Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle Projektkennzahlen (Projekt, Monat, Kennzahlen wie in der CSV-Datei), Tabelle Soft Facts (Projekt, Kriterium, Gewicht, Punkte) und Tabelle Produktfelder (Feld, Wettbewerbsstärke, Marktattraktivität, Auftragsvolumen), Projekt → Produktfeld.",
     nachbau: [
-      { id: "A", ziel: "fr-tabelle", anker: "links", versatz: [600, 74], titel: "Spitzenkennzahlen mit Ampel", visual: "Matrix",
+      { id: "A", ziel: "fr-kopf-projekt", anker: "links", versatz: [84, 0], titel: "Spitzenkennzahlen mit Ampel", visual: "Matrix",
         felder: "Zeilen: Projekt; Werte: Projektwert, Projektergebnis, Soft Facts (Nutzwert), DB/AW, DB/PW = DIVIDE([Projektergebnis]; [Projektwert]), Cashflow, ΔELK, ΔFLK, ΔRisikovorsorge, Terminverzug",
         format: "Bedingte Formatierung › Symbole nach Regel je Kennzahl (z. B. DB/PW: ≥ 0,10 Häkchen, ≥ 0,05 Ausrufezeichen, sonst Kreuz), Symbol links vom Wert; Symbolsatz „3 Symbole (eingekreist)“ oder eigene SVG-Symbole; Spaltengruppen über Spaltenüberschriften „Eckwerte“, „Angebotsphase“, „Projektphase“ (Textfelder über der Matrix)",
         hinweis: "Kostenabweichungen relativ bewerten: Measure DIVIDE([ΔELK]; [Projektwert]) als Grundlage der Symbolregel." },
@@ -358,7 +359,7 @@
         felder: "Y-Achse: Kriterium (Sortierreihenfolge), X-Achse: Punkte (1–5); Tabelle daneben mit Kriterium und Gewicht; Nutzwert = SUMX(SoftFacts; [Gewicht] * [Punkte]) / 100",
         format: "Markierungen nach Stufe (Form über bedingte Formatierung nicht möglich: Farbe #00806B / #E8A317 / #C62828 und Datenbeschriftung ✓ ! ✕); Konstantenlinie X = Nutzwert gestrichelt #8F8F8F",
         hinweis: "Die verbindende Profillinie bietet das Punktdiagramm nicht; alternativ Liniendiagramm mit Kriterium auf der X-Achse (Profil waagerecht)." },
-      { id: "C", ziel: "ab-portfolio", anker: "links", versatz: [260, 26], titel: "Kosten- und Terminabweichung", visual: "Punktdiagramm",
+      { id: "C", ziel: "ab-portfolio", anker: "links", versatz: [300, 102], titel: "Kosten- und Terminabweichung", visual: "Punktdiagramm",
         felder: "X-Achse: Terminverzug % = DIVIDE([Terminverzug]; [Geplante Dauer]) * 100; Y-Achse: Kostenabweichung % = DIVIDE([ΔELK] + [ΔFLK] + [ΔRisikovorsorge]; [Projektwert]) * 100; Größe: Projektwert; Werte: Projekt",
         format: "Markierung #3A3F44, 80 % Deckkraft; Konstantenlinien X = 0 und Y = 0 gestrichelt; Kategoriebeschriftung ein" },
       { id: "D", ziel: "st-portfolio", anker: "links", versatz: [200, 30], titel: "Marktportfolio", visual: "Punktdiagramm",
@@ -376,7 +377,7 @@
     tabellen: () => {
       const i = S.m, p = PR[sfProjekt()];
       return [
-        { titel: `Spitzenkennzahlen ${MLANG[i]} ${JAHR}`, kopf: ["Projekt", ...SP.map(s => `${s.kopf.join("").replace("-", "")} (${s.einheit})`)],
+        { titel: `Spitzenkennzahlen ${MLANG[i]} ${JAHR}`, kopf: ["Projekt", ...SP.map(s => `${spName(s)} (${s.einheit})`)],
           zeilen: PR.map(q => [q.name, ...SP.map(s => { const st = stufe(s, q, i); return zahl(s.wert(q, i), s.nk) + (st ? ` – ${STUFEN[st]}` : ""); })]) },
         { titel: `Soft Facts ${p.name}`, kopf: ["Kriterium", "Gewicht", "Punkte", "Skala 1 … 5"],
           zeilen: [...KR.map((k, r) => [k[0], k[1] + " %", String(p.sf[r]), `${k[2]} … ${k[3]}`]), ["Nutzwert", "100 %", zahl(nutzwert(p), 2), ""]] },

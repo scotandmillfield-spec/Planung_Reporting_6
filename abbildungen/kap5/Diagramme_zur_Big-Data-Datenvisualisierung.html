@@ -940,43 +940,40 @@ const DK = (() => {
   }
 
   /* ---------- 7 Blasendiagramm (gepackte Kreise) ---------- */
-  function packen(items, w, h, pad = 2) {
-    const cx = w / 2, cy = h / 2, gesetzt = [];
-    const frei = (x, y, r) => x - r >= 0 && x + r <= w && y - r >= 0 && y + r <= h &&
-      gesetzt.every(o => Math.hypot(o.x - x, o.y - y) >= o.r + r + pad - 1e-6);
-    const guete = (x, y) => ((x - cx) / 1.6) ** 2 + (y - cy) ** 2;
-    items.forEach(it => {
-      if (!gesetzt.length) { gesetzt.push({ ...it, x: cx, y: cy }); return; }
-      let best = null;
-      const pruefe = (x, y) => { if (frei(x, y, it.r) && (!best || guete(x, y) < best.q)) best = { x, y, q: guete(x, y) }; };
-      gesetzt.forEach((a, i) => {
-        for (let t = 0; t < 36; t++) { const w_ = t * TAU / 36, d = a.r + it.r + pad; pruefe(a.x + d * Math.cos(w_), a.y + d * Math.sin(w_)); }
-        gesetzt.slice(i + 1).forEach(b => {
-          const ra = a.r + it.r + pad, rb = b.r + it.r + pad, dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
-          if (d > ra + rb || d < Math.abs(ra - rb) || d === 0) return;
-          const l = (ra * ra - rb * rb + d * d) / (2 * d), hh = Math.sqrt(Math.max(0, ra * ra - l * l));
-          const mx = a.x + l * dx / d, my = a.y + l * dy / d;
-          pruefe(mx + hh * dy / d, my - hh * dx / d); pruefe(mx - hh * dy / d, my + hh * dx / d);
-        });
-      });
-      if (best) gesetzt.push({ ...it, x: best.x, y: best.y });
-    });
-    return gesetzt;
+  // Gepackte Kreise durch Entspannung: Start auf einer Spirale, Überlappungen auseinanderschieben, schwacher Zug zur
+  // Mitte (abklingend), Kreise im Feld halten. Liefert die Kreise und die größte verbleibende Überlappung.
+  function packen(items, w, h, pad = 1.5, schritte = 800) {
+    const cx = w / 2, cy = h / 2, n = items.length;
+    const P = items.map((it, i) => ({ ...it, x: cx + 1.8 * 6 * Math.sqrt(i) * Math.cos(i * 2.39996), y: cy + 6 * Math.sqrt(i) * Math.sin(i * 2.39996) }));
+    for (let t = 0; t < schritte; t++) {
+      const k = 0.02 * (1 - t / schritte);
+      P.forEach(p => { p.x += (cx - p.x) * k * 0.5; p.y += (cy - p.y) * k; });
+      for (let rep = 0; rep < 3; rep++) {
+        for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+          const a = P[i], b = P[j], dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1e-3, m = a.r + b.r + pad;
+          if (d < m) { const o = (m - d) / 2, ux = dx / d, uy = dy / d; a.x -= ux * o; a.y -= uy * o; b.x += ux * o; b.y += uy * o; }
+        }
+        P.forEach(p => { p.x = Math.min(Math.max(p.x, p.r), w - p.r); p.y = Math.min(Math.max(p.y, p.r), h - p.r); });
+      }
+    }
+    let rest = 0;
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) rest = Math.max(rest, P[i].r + P[j].r + pad - Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y));
+    return { P, rest };
   }
   let BLASEN = null;
   function blasen(g) {
     const sum = D.themen.reduce((a, t) => a + t[1], 0);
-    // Dichte 53 %; passt eine Blase nicht, alle Radien um 3 % verkleinern und neu packen
-    for (let dichte = 0.53; !BLASEN || BLASEN.length < D.themen.length; dichte *= 0.94) {
+    // Dichte 60 %; bleibt eine Überlappung, Fläche um 6 % verkleinern und neu packen
+    for (let dichte = 0.6; !BLASEN; dichte *= 0.94) {
       const k = Math.sqrt(W * H * dichte / (Math.PI * sum));
-      BLASEN = packen(D.themen.map(([n, v], i) => ({ n, v, i, r: k * Math.sqrt(v) })), W, H);
+      const erg = packen(D.themen.map(([n, v], i) => ({ n, v, i, r: k * Math.sqrt(v) })), W, H);
+      if (erg.rest <= 0.3 || dichte < 0.3) BLASEN = erg.P;
     }
     BLASEN.forEach(b => {
       const f = b.i < 2 ? AC : "#D4D4D4", gz = sv("g", {}, g);
       T(sv("circle", { cx: b.x, cy: b.y, r: b.r, fill: f }, gz), [b.n, `${zahl(b.v)} Nennungen · ${pz(b.v / sum, 1)} · Rang ${b.i + 1}`]);
       if (tw(b.n) <= 2 * b.r - 4) text(gz, b.x, b.y, b.n, { anker: "middle", farbe: schrift(f) }).style.pointerEvents = "none";
     });
-    if (BLASEN.length !== D.themen.length) console.warn("Nicht alle Blasen gesetzt");
   }
 
   /* ---------- 8 Balkendiagramm ---------- */

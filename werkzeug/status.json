@@ -749,6 +749,18 @@
    ],
    "alt": "Derselbe mobile Bericht „Vertrieb Europa“ wie in Abb. 5.59, hier auf einem Tablet im Querformat in zwei Spalten. Oben Zeitraum- und Regionsauswahl sowie Umsatz 1.631,4 Mio. € und Ergebnis 64,5 Mio. € mit Abweichung zum Budget; links die fünf Produktlinien mit 12-Monats-Verlauf, Ist, Budget und Abweichung, rechts die ABC-Analyse der acht Länder mit Umsatzbalken, Anteil, kumuliertem Anteil, Klasse und Ergebnis. Aussage: Zwei Länder bringen 58 % des Umsatzes, Großbritannien als größter Markt schreibt Verlust."
   },
+  "5.61": {
+   "status": "pruefung",
+   "datei": "Einfache_exemplarische_Eingabefunktionen",
+   "kommentare": [
+    "Vier Smartphone-Bedienelemente (Produktscreenshots) softwareneutral als eine Maske „Eingabefunktionen“ nachgebaut, Anordnung und Namen wie im Original; Navigationsleiste „Back/Select Days“, Glanz, Verläufe und 3D-Walze entfallen, blaue Flächen → Grau/Anthrazit",
+    "Englisch → deutsch: Woche ab Montag, Mo–So, „Januar“; Walze im 24-Stunden-Format (Mon Jan 25 8:00 PM → Mo 25.01. 20:00, AM/PM-Walze entfällt), OFF → Aus; Spaltenköpfe Datum/Stunde/Minute ergänzt",
+    "Jahre aktualisiert: Januar 2010 → Januar 2027, 2009 → 2026 (gleiche Wochentage, 2027 beginnt wie 2010 an einem Freitag)",
+    "Beschriftungen ergänzt: Schalter „Vorjahr einblenden“ (erfundenes BI-Beispiel), Plus-/Minusschalter „Jahr“ – bitte prüfen, ob gewünscht",
+    "HTML bedienbar: Tage mehrfach wählbar, Monat blättern, Walzen per Klick/Mausrad/Pfeiltasten, Schalter, Jahr mit Prüfung (2000–2099)"
+   ],
+   "alt": "Maske mit vier einfachen Eingabefunktionen für Touch-Oberflächen: links eine Kalenderauswahl für Januar 2027 mit Pfeilen zum Monatswechsel, rechts eine Zylinder-Zeitauswahl mit drei Walzen für Datum, Stunde und Minute (gewählt Mo 25.01., 20:00), darunter ein An- und Ausschalter im Zustand „Aus“ und ein Plus- und Minusschalter für das Jahr 2026."
+  },
   "5.62": {
    "status": "latex",
    "latex": "tabellen/Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart.tex",
@@ -794,6 +806,18 @@
    ],
    "alt": "Das CRISP-DM-Modell als Kreislauf aus sechs Phasen um den Kern Daten: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation und Deployment. Zwischen den ersten beiden sowie zwischen Data Preparation und Modeling wird hin und her gewechselt, von der Evaluation führt eine Rückkopplung zum Business Understanding. Eine Liste erläutert die Schritte auf Deutsch, von der Aufgabendefinition bis zur Anwendung der Ergebnisse."
   },
+  "5.66": {
+   "status": "pruefung",
+   "datei": "Diagramme_zur_Big-Data-Datenvisualisierung",
+   "kommentare": [
+    "Sonderfall (Collage) als Übersicht 1024 × 646 px nachgebaut: genau die zwölf Arten des Originals als gleich große kleine Vielfache, je Kachel Name und Analyseaufgabe, geordnet nach Hierarchie, Netzwerk, Vergleich, Raum, Zeit, Text; Datenschnitt hebt eine Aufgabe hervor, Klick/Tooltip nennt Eignung, Grenzen und Power-BI-Visual",
+    "Eigenes, erfundenes Beispiel (Online-Händler) statt englischer Bibliotheks-Beispieldaten; Baumdiagramm, eingerückter Baum, Treemap, Sunburst und Balken zeigen dasselbe Sortiment (48,2 Mio. €) und sind dadurch vergleichbar",
+    "Nicht 1:1 im Buchstil darstellbar: 3D-Globus mit schwarzem Hintergrund und Leuchtrand → flache orthografische Ansicht mit Gradnetz und Säulen, ohne Küstenlinien (keine Geodaten im Werkzeug); Umrisskarte Deutschland → Kachelkarte der 16 Länder wie Abb. 3.66; gedrehte Wörter der Wortwolke → waagerecht",
+    "Bunte Standardfarben → Graustufen, Anthrazit für das Wichtigste; Beschriftungen und Legenden (Karte, Kalender) ergänzt",
+    "Original ist ein Scan einer Fremdquelle (Buchseite mit Fließtext im Hintergrund, Galerie-Beispiele einer Visualisierungsbibliothek) ohne Quellenangabe – durch den Neubau mit eigenen Daten keine Quelle mehr nötig? Titel im Bild „Diagrammarten für die Big-Data-Visualisierung“ – Caption anpassen?"
+   ],
+   "alt": "Übersicht mit zwölf kleinen Diagrammen, geordnet nach Analyseaufgabe: in der ersten Zeile Hierarchien (Baumdiagramm, eingerückter Baum, Treemap und Sunburst desselben Sortiments mit 48,2 Mio. € Umsatz), in der zweiten Netzwerke (Kantenbündelung der Datenflüsse zwischen IT-Systemen, Sehnendiagramm der Kanalwechsel) und Vergleiche (Blasendiagramm der Themen im Kundenfeedback, Balkendiagramm des Umsatzes je Warengruppe), in der dritten Raum (Kachelkarte der Bundesländer, Globus mit Säulen), Zeit (Kalender-Heatmap der Bestellungen im 1. Quartal 2027) und Text (Wortwolke aus Kundenbewertungen). Alle Diagramme sind in Graustufen gezeichnet und mit dem Namen der Diagrammart beschriftet."
+  },
   "5.67": {
    "status": "pruefung",
    "datei": "Architektur_von_RPA",
@@ -816,6 +840,19 @@
     "„Anstoßen und kontrollieren“ → „Anstoßen und Kontrollieren“ (substantiviertes Verb); weiße Schrift auf Grau des Originals (zu schwacher Kontrast) → dunkle Schrift"
    ],
    "alt": "Pyramide mit drei Stufen: Unten einfache RPA-Systeme, bei denen ein menschlicher Anwender die Ausführung von Aufgaben anstößt und kontrolliert; in der Mitte erweiterte RPA-Systeme, die Aufgaben selbstständig ausführen; an der hervorgehobenen Spitze intelligente RPA-Systeme mit KI für die Lernfähigkeit des Systems. Ein Pfeil links zeigt nach oben: Wert und Intelligenz nehmen zu."
+  },
+  "5.69": {
+   "status": "pruefung",
+   "datei": "Isi_Sprachassistentin_in_der_Diamant-Software_Diamant-4",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dialogfenster „Assistent“ nachgebaut: Startseite im Hintergrund, Favoritenleiste, Produkt- und Assistentenname („Isi“), Mandantenname „Futura GmbH“ (→ Mandant 025), schwebender Logo-Knopf und Symbole entfallen",
+    "Gesprächsverlauf und Werte des Originals übernommen (Juli 7,23–7,95 Mio. €; Mai 7,56, Juni 9,12, Juli 7,44 Mio. €); 27.05.2021 → 27.05.2027 (wieder Donnerstag), EUR → €, „3 Monate“ → „drei Monate“, „BWA Basisgrößen“ → „BWA-Basisgrößen“; Anrede „du“ → „Sie“ – bitte prüfen",
+    "Antwort zusätzlich als kleiner Bericht (Tabelle Vorjahr, Vorschau, Bandbreite, ΔVJ, Summe Mai–Juli); Vorjahreswerte und Bandbreiten für Mai/Juni erfunden, passend zur Textaussage (meist höher, kumuliert stets höher)",
+    "Fragen weiß mit Rahmen, Antworten grau (Eingabe/Anzeige wie in den Masken) statt blauer/weißer Sprechblasen mit Schatten",
+    "HTML bedienbar: vier vorgeschlagene Fragen (Umsatzerlöse mit Rückfrage BWA/HGB, Liquidität, überfällige Forderungen, Personalkosten) bzw. freie Eingabe → Antwort mit Tabelle; Spracheingabe nur als Hinweis",
+    "Caption ohne Produktnamen? z. B. ‚Sprachassistent in einer Rechnungswesensoftware (in Anlehnung an Diamant Software 2021)‘"
+   ],
+   "alt": "Dialogfenster eines KI-Assistenten im Rechnungswesen: Auf die Frage, wie sich die Umsatzerlöse entwickeln werden, fragt der Assistent nach der Basisgröße (BWA oder HGB). Nach der Wahl „BWA-Basisgrößen“ antwortet er mit einer Prognose für Mai bis Juli 2027 – im Juli voraussichtlich 7,23 bis 7,95 Mio. € – und einer kleinen Tabelle mit Vorjahr, Vorschau, Bandbreite und Abweichung; kumuliert liegen die Umsatzerlöse 2,9 % über dem Vorjahr. Unten stehen das Eingabefeld, Knöpfe für Spracheingabe und Senden sowie eine Auswahl vorgeschlagener Fragen."
   },
   "3.32": {
    "status": "pruefung",

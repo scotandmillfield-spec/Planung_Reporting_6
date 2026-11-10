@@ -399,6 +399,8 @@ def luecken(liste):
     tab = {}
     for x in liste:
         if x["art"] in ("D", "V", "M", "S"):
+            if not re.fullmatch(r"\d+\.\d+", x["nr"]):
+                continue                                 # neue Abbildungen ohne endgültige Nummer (z. B. 3.9.8.a)
             k, n = x["nr"].split(".")
             abb.setdefault(k, set()).add(int(n))
         elif x["art"] == "T":

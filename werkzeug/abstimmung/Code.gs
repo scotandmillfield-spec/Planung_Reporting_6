@@ -4,7 +4,8 @@
  * Web-App zur Google-Tabelle „Abbildungsinventur 6. Auflage – Status“.
  *   GET   liefert Status und Kommentare aller Abbildungen als JSON (für index.html)
  *   POST  setzt Status, hängt einen Kommentar an und vermerkt Name und Datum (mit Passwort)
- *   Zeit-Trigger (alle 5 Minuten): übernimmt die Rückmeldungen der Revisionen aus dem Repository
+ *   Zeit-Trigger (alle 5 Minuten): legt Zeilen für neue Abbildungen an („neue_zeilen“ in rueckmeldungen.json)
+ *   und übernimmt die Rückmeldungen der Revisionen aus dem Repository
  *   (werkzeug/abstimmung/rueckmeldungen.json) – Status, Kommentar, „Geändert von: Claude“ – und verschickt
  *   die Benachrichtigung per Mail, wenn eine Abbildung auf „zur Prüfung“ oder „Nächste Version“ gesetzt wurde
  *   (gesammelt: eine Mail, sobald 15 Minuten lang nichts Neues dazugekommen ist).
@@ -121,7 +122,9 @@ function rueckmeldungenUebernehmen() {
   if (antwort.getResponseCode() !== 200) return;
   let liste;
   try {
-    liste = JSON.parse(antwort.getContentText()).eintraege || [];
+    const daten = JSON.parse(antwort.getContentText());
+    try { zeilenAnlegen_(daten.neue_zeilen || []); } catch (err) { console.error(err); }
+    liste = daten.eintraege || [];
   } catch (err) {
     return;
   }
@@ -172,6 +175,37 @@ function rueckmeldungenUebernehmen() {
     sperre.releaseLock();
   }
   merken();
+}
+
+// Neue Abbildungen (z. B. 3.9.8.a): Zeile anlegen, wenn der Schlüssel noch fehlt – hinter der Zeile „nach“
+// (sonst am Ende); Format und Auswahlliste kommen von der Zeile darüber. Wiederholt unschädlich.
+function zeilenAnlegen_(liste) {
+  if (!liste.length) return;
+  const sperre = LockService.getScriptLock();
+  if (!sperre.tryLock(20000)) return;
+  try {
+    const blatt = blatt_();
+    const heute = Utilities.formatDate(new Date(), ZONE, 'dd.MM.yyyy');
+    liste.forEach(r => {
+      if (!r || !r.schluessel) return;
+      const n = blatt.getLastRow() - 1;
+      const schluessel = n > 0 ? blatt.getRange(2, SP.schluessel, n, 1).getValues().map(z => String(z[0])) : [];
+      if (schluessel.indexOf(String(r.schluessel)) >= 0) return;
+      const i = r.nach ? schluessel.indexOf(String(r.nach)) : -1;
+      const nach = i >= 0 ? i + 2 : blatt.getLastRow();
+      blatt.insertRowAfter(nach);
+      const zeile = nach + 1;
+      const status = STATUSWERTE.indexOf(r.status) >= 0 ? r.status : 'offen';
+      const text = bereinigen_(r.kommentar).replace(/\s+/g, ' ').slice(0, 2000);
+      const kapitel = /^\d+$/.test(String(r.kapitel)) ? Number(r.kapitel) : bereinigen_(r.kapitel);
+      blatt.getRange(zeile, 1, 1, SP.am).setValues([[String(r.schluessel), kapitel, bereinigen_(r.abbildung),
+        bereinigen_(r.titel), bereinigen_(r.art), status, text ? heute + ' Claude: ' + text : '', 'Claude', new Date()]]);
+      vormerken_(blatt, zeile, status, text, 'Claude');
+    });
+    SpreadsheetApp.flush();
+  } finally {
+    sperre.releaseLock();
+  }
 }
 
 // Zeit-Trigger alle 5 Minuten: erst Rückmeldungen übernehmen, dann gesammelte Benachrichtigung verschicken

@@ -484,6 +484,118 @@
     }
    ]
   },
+  "5.40": {
+   "status": "pruefung",
+   "datei": "SQL-Abfragegenerator_MS_Access",
+   "quer": true,
+   "kommentare": [
+    "Produktscreenshot (Abfrageentwurf) softwareneutral als Maske nachgebaut, Querformat 1024 px = 155 × 107 mm (breites Entwurfsraster): Programm-, Datenbank- und Taskleistenfenster, Menü-, Symbol- und Statusleiste, Bildlaufleisten und Produktname entfallen; Fenstertitel „Verdichtete Summenwerte : Auswahlabfrage“ als Titelzeile",
+    "Tabellen, Felder, Beziehungen und die 16 Rasterspalten exakt nach dem Listing Abb. 5.39 – die HTML-Fassung erzeugt aus dem Anfangszustand zeichengenau diese SELECT-Anweisung; Felder per Drag & Drop, Doppelklick oder Enter ins Raster, Funktion/Sortierung/Anzeigen/Kriterien ändern das SQL",
+    "Raster zeigt 7 vollständige Spalten (6 × Gruppierung, Umsatz Flaschen als Summe), die übrigen über „Weitere Spalten“ statt abgeschnittener 8. Spalte; Zeile „Feld“ nennt den Feldnamen statt des abgeschnittenen Alias „Summe von Umsatz…“",
+    "Kardinalität „∞“ → „n“, Verbindungslinien rechtwinklig; Tabelle als Anzeigefeld (folgt aus dem Feld); grüne Häkchen → anthrazit; Pfeil nur in der aktiven Zelle wie im Original",
+    "Datenbankname „Glashersteller_Schön“ entfernt („Auftragsdatenbank“); Feldkürzel im Tooltip gedeutet (PLIKZ Plan-/Ist-Kennzeichen, KHIER Kundenhierarchie, FKART Fakturaart) – bitte prüfen",
+    "Caption ohne Produktnamen? z. B. ‚SQL-Abfragegenerator (grafischer Abfrageentwurf)‘ – „MS Access“ ggf. in den Text"
+   ],
+   "alt": "Grafischer Abfrageentwurf: Oben stehen die Tabellen Kunden, Auftrag, Artikel und Farbe mit ihren Feldlisten, verbunden über Kundennummer (1:n), Artikelnummer und Farbnummer. Unten legt das Entwurfsraster je Spalte Feld, Tabelle, Funktion, Sortierung, Anzeige und Kriterien fest – sechs Felder werden gruppiert, die Umsatz- und Konditionsfelder summiert. Daraus erzeugt der Generator die SELECT-Anweisung aus Abb. 5.39."
+  },
+  "5.41": {
+   "status": "pruefung",
+   "datei": "InSight-Reportgenerator_mit_Drag-_und_Drop_von_Arcplan",
+   "kommentare": [
+    "Produktscreenshot (leerer Berichtsentwurf) softwareneutral als Maske nachgebaut, Hochformat 727 px = 110 × 160 mm: Fensterrahmen, Menü- und Symbolleiste (Neu … Zoom), Statusleiste, Produktname, Texturhintergrund, Icons entfallen; schwebende Werkzeugfenster als feste Gruppen in der Lage des Originals (Verbindungen, Hierarchie, Formatierung oben, Objekte und Datenbank unten)",
+    "Drag & Drop sichtbar gemacht (Original zeigte einen leeren Entwurf): Bericht „Erlösschmälerungen“ im Aufbau – Feld „Skonto“ wird aus der Feldliste in die Tabelle gezogen (gestricheltes Feld, Zielspalte und Pfeil); in der HTML-Fassung echt per Drag & Drop bedienbar (Objekte, Felder, Verschieben, Auswahl filtert verbundene Objekte, alle Werkzeuge mit Wirkung oder Meldung, Zurück/Vor)",
+    "Abgeschnittene Beschriftungen ausgeschrieben – bitte prüfen: Zeichen.. → Zeichensatz, Schriftf.. → Schriftfarbe, Spalten.. → Spaltenbreite, Selektie.. → Selektion, Positioni.. → Position, Eigensc.. → Eigenschaften, Einzelfe.. → Einzelfeld, Options.. → Optionsfeld, Kontroll.. → Kontrollkästchen, Schaltf.. → Schaltfläche, Tastenf.. → Tastenfeld (?), Vertikal../Horizon../Menühi.. → Vertikale/Horizontale/Menühierarchie, Optimier.. → Optimieren, Sortieru.. → Sortierung; zweites „Neu“ → „Neue Tabelle“, Browse → Durchsuchen",
+    "Datenbank wie Abb. 5.40 (Kunden, Auftrag, Artikel, Farbe), Felder getrennt nach Merkmalen und Kennzahlen; Werte erfunden (Ist, Tsd. €, Gesamt = Summe der Zeilen); dunkelblaue Kopfzeilen, gelbe Fläche und farbige Pfeillegende der Statusleiste entfallen (Legende in den Erläuterungen)",
+    "Caption ohne Produktnamen? z. B. ‚Reportgenerator mit Drag & Drop (in Anlehnung an arcplan inSight)‘; Schreibweise „Drag- und Drop“ → „Drag & Drop“"
+   ],
+   "alt": "Berichtsentwurf eines Reportgenerators: Oben stehen die Werkzeuggruppen Verbindungen, Hierarchie und Formatierung, darunter eine Palette von Berichtsobjekten wie Tabelle, Spalte, Grafik und Menü. Auf der Berichtsfläche entsteht ein Bericht mit einer Auswahlliste „Farbe“ und einer Tabelle mit Umsatz und Rabatt je Kundenbezirk; ein Pfeil zeigt, wie das Feld „Skonto“ aus der Feldliste der Datenbank unten per Drag & Drop als neue Spalte in die Tabelle gezogen wird."
+  },
+  "5.43": {
+   "status": "pruefung",
+   "datei": "Cockpit--Dashboard-Beispiel_Diamant-3_IQ",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px im Buchstil nach SUCCESS nachgebaut (HTML, PNG); Menüband, Explorer, Symbolleisten, Info-/Schlüssel-Symbole, Statuszeile und Navigationsschaltflächen (Bilanz-, Finanz-, Kosten-/Erfolgs-Controlling) entfallen – Verzweigung im Nachbau über den Seitennavigator",
+    "Kennzahlen und Visualtypen übernommen: ROCE, Umsatz, DB II, Cashflow mit Ist, Plan, Abw. rel. für Monat und kumuliert (vier Tabellen → eine Matrix); Monatsverläufe Ist/Plan für Umsatz, DB II, Cashflow; Werte des Originals exakt (z. B. Umsatz 492/685, kum. 1.431/1.827), Januar/Februar und Plan April–Dezember aus den Diagrammen abgelesen; 2009 → 2027, TEUR → Tsd. €",
+    "Tachometer (ROCE Periode/kumuliert) durch Abweichungsbalken in der Matrix ersetzt; Ist rot/Plan grün → Ist anthrazit, Plan als Kontur; Linien für Umsatz und Cashflow → Säulen wie beim DB II; Ist-Linie fiel im Original im April auf 0 (fehlende Werte) – hier endet Ist am Stichtag, Schalter Stichtag Jan/Feb/Mär",
+    "Korrektur: ROCE im Original unplausibel (Plan 113,57 %, Ist 28,97 %); hier aus EBIT = DB II − Fixkosten und Capital Employed gerechnet (annualisiert, Ist 4,8 % gegen Plan 20,4 %, −76,4 %; Fixkosten/Capital Employed erfunden) – Aussage „rund drei Viertel unter Plan“ bleibt; bitte prüfen, ob Buchtext ROCE-Werte zitiert",
+    "Caption ohne Produktnamen? z. B. ‚Cockpit-/Dashboard-Beispiel einer Rechnungswesen-Software‘ (Original: „Diamant®/3 IQ“)"
+   ],
+   "alt": "Dashboard „Controlling-Cockpit“ zum Stichtag März 2027. Links oben eine Matrix mit ROCE, Umsatz, Deckungsbeitrag II und Cashflow, je mit Ist, Plan und relativer Planabweichung für März und kumuliert seit Januar; alle vier Kennzahlen liegen unter Plan, am stärksten der Cashflow mit −94,3 %. Drei Säulendiagramme zeigen Umsatz, DB II und Cashflow je Monat 2027 mit Plan als Kontur für alle Monate und Ist gefüllt für Januar bis März."
+  },
+  "5.44": {
+   "status": "pruefung",
+   "datei": "Cockpit--Dashboard-Beispiel_SAP_Analytics_Cloud",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px im Buchstil nach SUCCESS nachgebaut (HTML, PNG); Browserrahmen, Reiterleiste (Overview, Timeline …), Firmenlogo „Company name“ und graue Flächen entfallen",
+    "Inhalte des Originals übernommen: Preis je Stück und Umsatz je Verkaufsorganisation mit ΔVJ absolut und in %, Tabelle Produktkategorie/Kunde mit Umsatz, Rabatt, Absatz, Datenschnitt Land; Werte exakt (USA Ost 41.342.610,61 / 1.381.813,63 / 20.956 Stück; West 23,68 → 24,45 Mio., Ost 37,89 → 41,34 Mio.; Preis je Stück 2,06 → 2,05 bzw. 1,90 → 1,97 Tsd., −0,66 % bzw. +3,61 %); 2018/2019 → 2025/2026, $ → €",
+    "Ergänzt: KPI-Leiste (Umsatz, Absatz, Ø Preis, Rabattquote mit ΔVJ), Datenschnitt Produktkategorie, ΔVJ % in der Tabelle; Deutschland (Nord/Süd), USA West und das Vorjahr je Kunde sind erfunden, Summen stimmen mit dem Original; abgeschnittene Kunden der Trendräder summengetreu ergänzt",
+    "Hellgrün/Pink → Blaugrün/Rot nach Wirkung; zwei Jahre als überlappendes Balkenpaar (VJ hellgrau, Ist anthrazit) statt getrennter Balken; Spalten Verkaufsorganisation, Ort und Währung (je Zeile gleich) entfallen bzw. im Tooltip; Kategorien auf-/zuklappbar statt 42 Kundenzeilen (Original unten abgeschnitten)",
+    "Kundennamen der Demodaten (z. B. „Beantown Bikes“) durch neutrale Namen „Kundentyp + Ort“ ersetzt, Produktkategorien übersetzt (Touring Bikes → Tourenräder, Offroad Bikes → Mountainbikes …)",
+    "Caption ohne Produktnamen? z. B. ‚Cockpit-/Dashboard-Beispiel einer Cloud-BI-Anwendung‘; Schreibweise im Original „SAP Analytic Cloud“"
+   ],
+   "alt": "Dashboard „Vertriebscockpit: Umsatz und Preis je Stück“ für das Land USA mit KPI-Leiste (Umsatz 65,79 Mio. €, Absatz, Ø Preis je Stück, Rabattquote, jeweils mit Abweichung zum Vorjahr). Links vergleichen zwei Balkendiagramme den Preis je Stück und den Umsatz der Verkaufsorganisationen West und Ost für 2025 und 2026 mit Abweichungsbalken; der Umsatzzuwachs von 6,9 % kommt zu 82 % aus Ost. Rechts zeigt eine Tabelle Umsatz, Rabatt, Absatz und Vorjahresabweichung je Produktkategorie und Kunde der Verkaufsorganisation Ost; Tourenräder bringen 41 % des Umsatzes."
+  },
+  "5.45": {
+   "status": "pruefung",
+   "datei": "Excel-Add-in_als_Oberflaeche_hier_SAP_BEx_Analyzer",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als interaktiver Bericht 1024 × 646 px nachgebaut (HTML, PNG), Gestaltung wie Abb. 4.19: Navigationsbereich (Anzeige, freie Merkmale mit „Zeilen“/„Spalten“/„–“ und Auswahlliste) neben Berichtsinformationen, Ergebnistabelle und Diagramm; Spaltenbuchstaben, Zeilennummern, Gitternetz, blaue Flächen und gelbe Ergebniszeilen entfallen",
+    "Werte des Originals übernommen (Absatz und Umsatz je Vertriebsweg und Verkaufsorganisation, Ergebnisse, Gesamtergebnis 99.508 Stück / 147.685.911,83); Währung AUD → €, Umsatz in Tsd. € mit einer Nachkommastelle, Einheiten im Titel statt „IT“/„AUD“ an jeder Zahl; für den Aufriss nach Kalenderjahr/-monat summengetreu auf 01/2025–06/2026 verteilt",
+    "Namen neutralisiert: „Bike Company Sales – Case 1“ → „Absatz und Umsatz nach Vertriebsweg“, AUS1–AUS3 → Nord/Mitte/Süd, IN/WH → Internet/Großhandel (nur Text statt Schlüssel + Text), Autor → Frau Brandt/Herr Tal; Datumsangaben 2008 → 2026; technische Namen (InfoProvider, Query) und doppelte Datenaktualität im Informationsblock entfallen",
+    "Schaltflächen „Chart/Filter/Information“ des Originals als Anzeige-Schalter „Information“/„Diagramm“ im Navigationsbereich; Diagramm im Startzustand eingeschaltet (Original zeigte nur die Tabelle), damit die Seite gefüllt ist – ok?",
+    "Caption ohne Produktnamen? z. B. ‚Tabellenkalkulation mit Add-in als Oberfläche eines Data Warehouse‘"
+   ],
+   "alt": "Bericht „Absatz und Umsatz nach Vertriebsweg“ in einer Tabellenkalkulationsoberfläche: links ein Navigationsbereich mit Anzeige-Schaltern und den Merkmalen Vertriebsweg und Verkaufsorganisation im Aufriss, rechts Berichtsinformationen (Autor, Datenquelle, Datenstand, Stichtag), eine Ergebnistabelle mit Absatz und Umsatz je Vertriebsweg und Verkaufsorganisation samt Ergebniszeilen und ein Balkendiagramm des Umsatzes. Die Botschaft lautet, dass das Internet 51,7 % des Umsatzes bringt und Süd mit 40,2 % die größte Verkaufsorganisation ist."
+  },
+  "5.46": {
+   "status": "pruefung",
+   "datei": "What-If-Simulation_Beispiel_QlikView",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als interaktives Dashboard 1024 × 646 px nachgebaut; Browserfenster, Logo, Reiterleiste, Lesezeichen, „Lock/Unlock“ und Schnellsuche entfallen, Jahr/Monat (Jul) als Basis „Ist Juli 2026“ im Untertitel",
+    "Drei Optionslisten „What if Volume/Price/Cost“ (−20 % … +20 %) → Schieberegler Absatzmenge, Verkaufspreis, Stückkosten in gleicher Schrittweite, Startwerte wie im Original (−15/+5/−5 %); die Seite rechnet echt neu. What-If-Dimension → „Analyse nach“ Warengruppe, Region, Kundensegment (Aufteilung auf Region/Segment erfunden, summengetreu; Country/State/Sales Manager entfallen)",
+    "Werte des Originals übernommen und nachgerechnet: alle 17 Warengruppen und die Summen (Umsatz 6.114.008 → 5.456.752 €, Marge 2.567.491 → 2.592.940 €, Δ +25.449 €); $ → €, Tabelle in Tsd. € mit einer Nachkommastelle, genaue €-Werte im Tooltip; Warengruppen übersetzt (z. B. Starchy Foods → Teigwaren und Reis, Canned Products/Canned Foods → Dosenprodukte/Konserven)",
+    "Korrektur: Δ Marge % bei negativer Marge (Alkoholische Getränke) +26,2 % statt −26,2 % (Bezug auf den Betrag); Spalte „Revenue Change %“ (jede Zeile −10,8 %) und Summenzeile → KPI-Leiste; rot/grün gefüllte Zellen → Abweichungsbalken nach Wirkung; Sortierung nach Umsatz statt nach Margenänderung",
+    "Neu ergänzt: KPI-Leiste mit Margenquote (42,0 % → 47,5 %) und Zerlegung der Margenänderung in Mengen-, Preis- und Kosteneffekt (−385,1 / +259,8 / +150,7 Tsd. €) – ok?",
+    "Caption ohne Produktnamen? z. B. ‚What-If-Simulation von Absatzmenge, Preis und Stückkosten‘"
+   ],
+   "alt": "Dashboard einer What-If-Simulation: Oben stehen Schieberegler für die Annahmen Absatzmenge −15 %, Verkaufspreis +5 % und Stückkosten −5 % sowie die Auswahl der Analysedimension. Darunter zeigt eine Kennzahlenleiste das Ergebnis – Umsatz −10,8 %, Marge +1,0 %, Margenquote 47,5 % – und ein Balkendiagramm zerlegt die Margenänderung in Mengen-, Preis- und Kosteneffekt. Eine Tabelle stellt je Warengruppe Ist, Simulation und Abweichung gegenüber; die Marge sinkt in 8 von 17 Warengruppen, am stärksten bei Backzutaten."
+  },
+  "5.47": {
+   "status": "pruefung",
+   "datei": "Schematischer_Aufbau_eines_Portals",
+   "kommentare": [
+    "Fenster, Menü-, Symbol- und Adressleiste des Webbrowsers (Produktname, Logo, „http://localhost“) und Bildlaufleiste entfernt; der Browser bleibt als gestrichelte Gruppe „Portalseite im Webbrowser“ erkennbar",
+    "Sechs Bereiche in Anordnung und Proportionen des Originals, Beschriftung oben links; Detailbereich als Schlüsselelement rot (Ort der BI-Applikation), übrige Bereiche grau",
+    "„z.B.“ → „z. B.“",
+    "Copyright-Zeile im Bild entfernt; Caption: ‚In Anlehnung an Kemper et al. 2010‘ (Seite ergänzen)?",
+    "Hinweis: „Aktienkurse“ als Beispiel-Portlet etwas zeitgebunden – ggf. „Kennzahlen/Marktdaten“?"
+   ],
+   "alt": "Schematische Portalseite im Webbrowser: Oben liegt über die ganze Breite der Bereich Navigation & Konfiguration. Darunter stehen links Nachrichten und Suche, in der Mitte der hervorgehobene Detailbereich, etwa für eine BI-Applikation oder ein Analysesystem, und rechts Aktienkurse sowie Kommunikation & Kollaboration."
+  },
+  "5.49": {
+   "status": "pruefung",
+   "datei": "Bildschirmaufloesung_und_Bildschirmgroesse",
+   "kommentare": [
+    "Gerätefotos entfernt, Produktnamen ersetzt (softwareneutral): iPad → Tablet, iPhone → Smartphone, BlackBerry → Smartphone mit Tastatur; lila Flächen → Grau im Wechsel mit Weiß",
+    "Flächen jetzt maßstäblich aus Diagonale und Seitenverhältnis der Auflösung (Original nicht maßstäblich); Verschachtelung unten links bleibt – die Beschriftungen der Smartphones stehen daneben bzw. darüber",
+    "„z.B“ → „z. B.“, „17-Zoll“ → „17 Zoll“, Tausenderpunkt, Auflösung einheitlich Breite × Höhe: Smartphone hochkant 320 × 480, Smartphone mit Tastatur quer 480 × 320 (im Original vertauscht notiert)",
+    "Frage: Tablet 1.280 × 768 bei 9,7 Zoll – das gemeinte Gerät hatte 1.024 × 768; Wert korrigieren?",
+    "Hinweis: Werte von ca. 2012 – aktualisieren (z. B. PC 1.920 × 1.080 bei 24 Zoll, Tablet 2.360 × 1.640 bei 10,9 Zoll, Smartphone 1.179 × 2.556 bei 6,1 Zoll)? Die Flächen passen sich im Skript an"
+   ],
+   "alt": "Maßstäblich ineinanderliegende Bildschirmflächen: Ein PC-Bildschirm mit z. B. 1.280 × 1.024 Pixeln und 17 Zoll umfasst unten links ein Tablet mit z. B. 1.280 × 768 Pixeln und 9,7 Zoll. Darin liegen ein Smartphone (320 × 480 Pixel, 3,5 Zoll) und ein Smartphone mit Tastatur (480 × 320 Pixel, 2,6 Zoll); die Abbildung zeigt, wie stark Auflösung und Größe der Endgeräte voneinander abweichen."
+  },
+  "5.53": {
+   "status": "pruefung",
+   "datei": "SAP_Fiori_Responsive_Design_fuer_verschiedene_Endgeraete",
+   "kommentare": [
+    "Produktscreenshot (Gerätefotos) schematisch nachgebaut: drei vereinfachte Geräterahmen mit Layoutblöcken – Desktop vier Spalten, Tablet drei, Smartphone eine; Anordnung der Karten je Gerät wie im Screenshot, über den Bildschirm hinausreichende Karten unten offen angeschnitten",
+    "Entfernt: Gerätefotos, Logo und Produktname, Personenfoto und -name (Kontaktkarte), Karteninhalte mit Ampelbalken und farbigem Ringdiagramm – nur die Kartentitel bleiben",
+    "Kartentitel übersetzt (Procurement Overview → Einkaufsübersicht, Contract Monitoring → Vertragsüberwachung, Recent Contacts → Letzte Kontakte, Open Activities → Offene Aktivitäten, Purchase Order Management → Bestellmanagement, Off-Contract Spend → Ausgaben ohne Vertrag, Urgent Purchase Requisition Items → Dringende Bestellanforderungen, Quick Links → Schnellzugriffe); „Non-Managed Spend by Supplier“ verkürzt zu „Ausgaben je Lieferant“ – bitte prüfen",
+    "Laptop des Originals als „Desktop“ bezeichnet (übliche Stufe im Responsive Design)",
+    "Caption ohne Produktnamen? z. B. ‚Responsive Design einer Übersichtsseite für verschiedene Endgeräte (in Anlehnung an SAP Fiori 2017a)‘; Dateiname folgt dann der neuen Caption"
+   ],
+   "alt": "Dieselbe Übersichtsseite „Einkaufsübersicht“ schematisch auf drei Endgeräten. Auf dem Desktop stehen die neun Karten in vier Spalten, auf dem Tablet in drei Spalten und auf dem Smartphone untereinander in einer Spalte; was nicht auf den Bildschirm passt, wird angeschnitten und ist per Bildlauf erreichbar. Kopf- und Filterleiste passen sich der Breite an."
+  },
   "5.62": {
    "status": "latex",
    "latex": "tabellen/Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart.tex",
@@ -496,6 +608,29 @@
     "„DreamCard“ aus dem Original übernommen – falls Markenname, durch „Kundenkarte“ ersetzen?"
    ],
    "alt": "Metadatenbeschreibung eines Sales Data Mart im Star-Schema. Eine Matrix zeigt, nach welchen Dimensionen die Kennzahlen der Faktentabelle Sales auswertbar sind: Umsatz und Menge nach Kunden, Datum und Produkten, Bonuspunkte nur nach Kunden und Datum. Darunter stehen die Eigenschaften der Dimensionen Kunde, Datum und Produkte sowie ihre Hierarchien, etwa Jahr – Quartal – Monat – Tag und Produktlinie – Produktgruppe."
+  },
+  "5.67": {
+   "status": "pruefung",
+   "datei": "Architektur_von_RPA",
+   "kommentare": [
+    "Beschriftungen links („Prozesse“, „Substitution“) und die geschweifte Klammer „3 Schichten betrieblicher Anwendungssysteme“ → drei Bänder mit Titel oben links; Anordnung wie im Original (Schichten rechts, Präsentation oben)",
+    "Monitor- und Personensymbol entfernt → beschriftete Boxen „RPA – Bots/Softwareroboter“ und „Anwendung durch Mensch“; Pfeil „ersetzt“ bleibt",
+    "Zwei Schrägpfeile aus der Präsentationsschicht → orthogonale Verzweigung ohne Knotenpunkt zu RPA und Mensch",
+    "Grau hervorgehobene Präsentationsschicht als Schlüsselelement rot (dort setzen Bots wie Menschen an); Datenhaltung box_hi nach Festlegung Kap. 5 – oder soll eher „RPA“ rot sein?",
+    "Platzhalter „Aktivität …“ → „Aktivität 2“ (keine Auslassungspunkte); „Bots / Software-roboter“ → „Bots/Softwareroboter“"
+   ],
+   "alt": "Drei Ebenen untereinander: Oben bilden Aktivität 1, Aktivität 2 und Aktivität n eine Prozesskette. Darunter ersetzt RPA mit Bots bzw. Softwarerobotern die Anwendung durch den Menschen. Unten stehen die drei Schichten betrieblicher Anwendungssysteme – Präsentation (hervorgehoben), Datenverarbeitung und Datenhaltung; Pfeile führen von der Präsentationsschicht sowohl zu RPA als auch zum Menschen, beide greifen also über die Benutzeroberfläche zu."
+  },
+  "5.68": {
+   "status": "pruefung",
+   "datei": "Arten_von_RPA-Loesungen",
+   "kommentare": [
+    "Pyramide mit drei Stufen wie im Original; einheitliches Grau → Helligkeitsleiter nach oben (hellgrau, grau, Spitze rot als Schlüsselelement) – oder Spitze ohne Rot (anthrazit), falls der Text keine Stufe hervorhebt?",
+    "Schräger Pfeil entlang der linken Flanke mit gedrehter Beschriftung → senkrechter Pfeil links, „Zunehmender Wert und Intelligenz“ waagerecht oben",
+    "In der Spitze war die Beschreibung abgeschnitten („KI für Lernfähigkeit des“) – vollständig nach dem Folientext „… des Systems“; Spitze dafür etwas höher als die übrigen Stufen",
+    "„Anstoßen und kontrollieren“ → „Anstoßen und Kontrollieren“ (substantiviertes Verb); weiße Schrift auf Grau des Originals (zu schwacher Kontrast) → dunkle Schrift"
+   ],
+   "alt": "Pyramide mit drei Stufen: Unten einfache RPA-Systeme, bei denen ein menschlicher Anwender die Ausführung von Aufgaben anstößt und kontrolliert; in der Mitte erweiterte RPA-Systeme, die Aufgaben selbstständig ausführen; an der hervorgehobenen Spitze intelligente RPA-Systeme mit KI für die Lernfähigkeit des Systems. Ein Pfeil links zeigt nach oben: Wert und Intelligenz nehmen zu."
   },
   "3.32": {
    "status": "pruefung",

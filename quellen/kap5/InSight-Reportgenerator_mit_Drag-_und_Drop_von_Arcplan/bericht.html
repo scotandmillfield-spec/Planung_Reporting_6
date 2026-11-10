@@ -1,0 +1,170 @@
+<!-- Abb. 5.41 „Reportgenerator mit Drag & Drop“: Berichtsentwurf eines Reportgenerators (softwareneutral nachgebaut).
+     Hochformat 727 px = 110 mm; Inhalt 695 px. Titelzeile wie Abb. 3.7/3.179.
+     Die schwebenden Werkzeugfenster des Originals stehen als feste Gruppen in der Reihenfolge des Originals:
+     oben Verbindungen (260) · 20 · Hierarchie (415), darunter Formatierung; Mitte Objekte und Berichtsfläche;
+     unten Datenbank mit Tabellen (140) · 12 · Feldern (543). Objekte, Felder und Werte erzeugt bericht.js. -->
+<style>
+  #bericht { --sp-label: 84px; --sp-feld: 200px; }
+  #bericht .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #bericht .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #bericht .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #bericht .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  #bericht .mk-gruppe + .mk-gruppe { margin-top: 0; }
+  #bericht .reihe { display: grid; grid-template-columns: 260px 415px; column-gap: 20px; align-items: start; }
+  #bericht .reihe + .mk-gruppe, #bericht .mk-gruppe.abstand { margin-top: 12px; }
+  #bericht .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  #bericht .mk-knopf.wz { height: 26px; line-height: 24px; padding: 0 8px; font-weight: normal; }
+  /* Objekte: Ziehquellen (keine Knöpfe) */
+  #bericht .oq { height: 26px; line-height: 24px; padding: 0 6px; border: 1px dashed var(--rahmen); border-radius: 3px;
+    background: #FFFFFF; white-space: nowrap; }
+  body:not(.print) #bericht .oq, body:not(.print) #bericht .fl { cursor: grab; user-select: none; touch-action: none; }
+  body:not(.print) #bericht .oq:hover, #bericht .oq:focus { border-style: solid; border-color: var(--ac); outline: none; }
+  /* Berichtsfläche */
+  #bericht .flaeche { position: relative; height: 240px; margin-top: 12px; border: 1px solid var(--rahmen); background: #FFFFFF; overflow: hidden; }
+  #bericht .verb { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+  #bericht .obj { position: absolute; background: #FFFFFF; line-height: 18px; white-space: nowrap; }
+  #bericht .obj.rahmen { border: 1px solid var(--rahmen); }
+  #bericht .obj.grau { background: var(--anzeige); }
+  #bericht .obj.blass { opacity: .35; }
+  body:not(.print) #bericht .obj { cursor: move; touch-action: none; user-select: none; }
+  #bericht .obj.gewaehlt { outline: 2px solid var(--ac); outline-offset: 1px; }
+  #bericht .obj.ziel { outline: 2px dashed var(--ac); outline-offset: 2px; }
+  #bericht .o-kopf { height: 22px; line-height: 22px; padding: 0 8px; font-weight: bold; border-bottom: 1px solid var(--rahmen); }
+  #bericht .o-unter { height: 20px; line-height: 20px; padding: 0 8px; color: var(--muted); }
+  #bericht .o-el { height: 22px; line-height: 22px; padding: 0 8px; }
+  #bericht .o-el.sel { background: var(--ac); color: #FFFFFF; }
+  #bericht .o-quer { display: flex; }
+  #bericht .o-quer .o-el { border-right: 1px solid var(--linie); }
+  #bericht .o-text { padding: 4px 8px; font-weight: bold; }
+  #bericht .o-text.normal { font-weight: normal; }
+  #bericht .o-wert { padding: 2px 8px 4px; text-align: right; font-weight: bold; }
+  #bericht .o-hinweis { padding: 2px 8px 4px; color: var(--muted); }
+  #bericht table.o-tab { border-collapse: collapse; }
+  #bericht .o-tab th, #bericht .o-tab td { height: 22px; padding: 0 8px; text-align: right; font-weight: normal; }
+  #bericht .o-tab th { border-bottom: 1px solid var(--ac); color: var(--muted); vertical-align: bottom; }
+  #bericht .o-tab th:first-child, #bericht .o-tab td:first-child { text-align: left; }
+  #bericht .o-tab tr.summe td { font-weight: bold; border-top: 1px solid var(--ac); }
+  #bericht .o-tab td.sel { background: var(--ac); color: #FFFFFF; }
+  #bericht .o-tab .schlitz { border-left: 1px dashed var(--ac); border-right: 1px dashed var(--ac); min-width: 96px; }
+  #bericht .o-tab th.schlitz { border-top: 1px dashed var(--ac); border-bottom: 1px solid var(--ac); }
+  #bericht .o-tab tr.summe td.schlitz { border-bottom: 1px dashed var(--ac); }
+  #bericht .o-balken { display: grid; grid-template-columns: 100px 150px 52px; align-items: center; row-gap: 4px; padding: 4px 8px 6px; }
+  #bericht .o-balken .b { height: 14px; background: var(--ac); }
+  #bericht .o-balken .w { text-align: right; }
+  #bericht .geist { position: absolute; height: 24px; line-height: 22px; padding: 0 8px; border: 1px dashed var(--ac);
+    background: #FFFFFF; white-space: nowrap; pointer-events: none; }
+  #bericht .demo-pfeil { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+  /* Datenbank */
+  #bericht .db-zeile { display: flex; align-items: center; gap: 6px; }
+  #bericht .db-zeile + .db-zeile { margin-top: 6px; }
+  #bericht .db-zeile .mk-label { width: 84px; flex: 0 0 auto; }
+  #bericht .db-zeile .mk-feld { width: 200px; flex: 0 0 auto; margin-right: 6px; }
+  #bericht .panes { display: grid; grid-template-columns: 140px 543px; column-gap: 12px; margin-top: 12px; align-items: start; }
+  #bericht .tl { height: 22px; line-height: 22px; padding: 0 8px; white-space: nowrap; }
+  body:not(.print) #bericht .tl { cursor: pointer; }
+  #bericht .tl.aktiv { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+  #bericht .felder { display: grid; grid-template-columns: repeat(4, 1fr); height: 154px; align-content: start; }
+  #bericht .felder .art { grid-column: 1 / -1; height: 22px; line-height: 22px; color: var(--muted); padding-left: 4px; }
+  #bericht .fl { height: 22px; line-height: 22px; padding: 0 4px; white-space: nowrap; overflow: hidden; }
+  #bericht .fl.kz { font-style: italic; }
+  #bericht .fl.quelle { border: 1px dashed var(--ac); line-height: 20px; padding: 0 3px; color: var(--muted); }
+  body:not(.print) #bericht .fl:hover, #bericht .fl:focus { background: var(--anzeige); outline: none; }
+  .zieh-geist { position: fixed; z-index: 50; pointer-events: none; background: #FFFFFF; border: 1px dashed #3A3F44;
+    padding: 2px 8px; font: 14px/18px Arial, "Liberation Sans", sans-serif; color: #1A1A1A; white-space: nowrap; }
+</style>
+<form class="mk-maske" id="bericht" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Berichtsentwurf</span><span class="kopf-unter" id="kopf-unter">Bericht „Erlösschmälerungen“ · Verbindung Auftragsdatenbank · Werte Ist in Tsd. €</span></div>
+  <div class="mk-inhalt">
+
+    <section class="mk-abschnitt" id="abschnitt-werkzeuge">
+      <div class="mk-band" id="band-werkzeuge">Werkzeuge</div>
+      <div class="reihe">
+        <div class="mk-gruppe" id="g-verbindungen">
+          <div class="mk-gruppenkopf">Verbindungen</div>
+          <div class="chips">
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="zurueck">Zurück</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="vor">Vor</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="start">Start</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="pfeile" id="k-pfeile">Pfeile</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="lokal">Lokal</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="optimieren">Optimieren</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="sortierung" id="k-sortierung">Sortierung</button>
+          </div>
+        </div>
+        <div class="mk-gruppe" id="g-hierarchie">
+          <div class="mk-gruppenkopf">Hierarchie</div>
+          <div class="chips">
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="nur">Nur selektierte zeigen</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="aus">Selektierte ausblenden</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="anfang">Anfangszustand</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="zuruecksetzen">Zurücksetzen</button>
+          </div>
+        </div>
+      </div>
+      <div class="mk-gruppe abstand" id="g-format">
+        <div class="mk-gruppenkopf">Formatierung des gewählten Objekts</div>
+        <div class="chips">
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="zeichensatz">Zeichensatz</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="schriftfarbe">Schriftfarbe</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="ausrichtung">Ausrichtung</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="farbe">Farbe</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="rahmen">Rahmen</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="zahlenformat" id="k-zahlenformat">Zahlenformat</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="grafik">Grafik</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="spalten">Spaltenbreite</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="sichtbar">Sichtbar</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="selektion">Selektion</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="position">Position</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="eigenschaften">Eigenschaften</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-bericht">
+      <div class="mk-band" id="band-bericht">Bericht</div>
+      <div class="mk-gruppe" id="g-objekte">
+        <div class="mk-gruppenkopf">Objekte – in den Bericht ziehen</div>
+        <div class="chips" id="objekte"><!-- Objektarten erzeugt bericht.js --></div>
+      </div>
+      <div class="flaeche" id="flaeche" aria-label="Berichtsfläche">
+        <svg class="verb" id="verb" width="693" height="238" aria-hidden="true"></svg>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-datenbank">
+      <div class="mk-band" id="band-datenbank">Datenbank</div>
+      <div class="db-zeile">
+        <label class="mk-label" for="f-verbindung">Verbindung</label>
+        <select class="mk-feld" id="f-verbindung">
+          <option value="auftrag" selected>Auftragsdatenbank</option>
+          <option value="planung">Planungsdatenbank</option>
+        </select>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-neu">Neu</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-oeffnen">Öffnen</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-info">Info</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-offline">Offline</button>
+      </div>
+      <div class="db-zeile">
+        <span class="mk-label"></span>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-suchen">Suchen</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-tabneu">Neue Tabelle</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-tabinfo">Tabellen-Info</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-browse">Durchsuchen</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-feldinfo">Feld-Info</button>
+      </div>
+      <div class="panes">
+        <div class="mk-gruppe" id="g-tabellen">
+          <div class="mk-gruppenkopf">Tabellen</div>
+          <div id="tabellen"></div>
+        </div>
+        <div class="mk-gruppe" id="g-felder">
+          <div class="mk-gruppenkopf" id="felder-kopf">Felder</div>
+          <div class="felder" id="felder"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <svg class="demo-pfeil" id="demo-pfeil" width="727" height="10" aria-hidden="true"></svg>
+</form>

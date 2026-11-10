@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reportgenerator mit Drag & Drop</title>
+<style>
+/* maskkit.css – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Maßstab wie bei den Dashboards: 727 px = 110 mm (Abbildungsbreite), 1024 px = 155 mm; 14 px = 6 pt im Druck.
+   Rollen: Eingabefeld weiß mit Rahmen · Anzeigefeld grau ohne Rahmen · Abschnittsband · Gruppenkopf · Knopf. */
+:root {
+  --ac: #3A3F44;          /* Anthrazit: Kopfleiste, Knopf, Pfeile, Links */
+  --text: #1A1A1A;
+  --muted: #4D4D4D;
+  --rahmen: #9A9A9A;      /* Kontur der Eingabefelder und der Maske */
+  --linie: #D9D9D9;       /* Haarlinien */
+  --anzeige: #EFEFEF;     /* Anzeigefelder (nicht editierbar) */
+  --band: #F6F6F6;        /* Abschnittsband */
+  --schlecht: #C62828;    /* nur Fehlermeldungen in der interaktiven Fassung */
+  --gut: #00806B;
+  --schrift: Arial, "Liberation Sans", Helvetica, sans-serif;
+  --zh: 26px;             /* Feldhöhe */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ECECEC; color: var(--text); font-family: var(--schrift); }
+body.print { background: #FFFFFF; }
+
+/* ---------- Lernplattform-Leiste und Panel (nicht im Druck) ---------- */
+.mk-leiste { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #FFFFFF;
+  border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 8px; padding: 0 16px;
+  font-size: 14px; z-index: 30; }
+.mk-leiste .mk-leiste-titel { font-weight: bold; margin-right: auto; }
+.mk-leiste button { font: inherit; font-size: 14px; color: var(--text); background: #FFFFFF;
+  border: 1px solid var(--rahmen); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.mk-leiste button[aria-pressed="true"] { background: var(--ac); border-color: var(--ac); color: #FFFFFF; }
+body.print .mk-leiste, body.print .mk-panel, body.print .mk-meldung { display: none !important; }
+.mk-buehne { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: auto; }
+body.print .mk-buehne { position: static; overflow: visible; }
+.mk-rahmen { margin: 16px auto; box-shadow: 0 1px 3px rgba(0,0,0,.18); background: #FFFFFF; }
+body.print .mk-rahmen { margin: 0; box-shadow: none; }
+.mk-seite { position: relative; transform-origin: 0 0; background: #FFFFFF; }
+
+.mk-marke { position: absolute; z-index: 20; min-width: 22px; height: 22px; border-radius: 11px; padding: 0 6px;
+  background: var(--ac); color: #FFFFFF; font-size: 13px; font-weight: bold; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 0 0 2px #FFFFFF; cursor: pointer; }
+.mk-marke.gestaltung { background: #FFFFFF; color: var(--ac); border: 2px solid var(--ac); }
+.mk-marke.aktiv { background: var(--schlecht); color: #FFFFFF; border-color: var(--schlecht); }
+.mk-panel { position: fixed; top: 44px; right: 0; bottom: 0; width: 380px; background: #FFFFFF;
+  border-left: 1px solid var(--linie); overflow: auto; padding: 16px 18px; font-size: 14px; line-height: 1.4;
+  z-index: 25; display: none; }
+.mk-panel h2 { font-size: 17px; margin: 0 0 4px; }
+.mk-panel .mk-panel-intro { color: var(--muted); margin-bottom: 12px; }
+.mk-panel .mk-eintrag { padding: 10px 0; border-top: 1px solid var(--linie); cursor: pointer; }
+.mk-panel .mk-eintrag.aktiv { background: var(--band); margin: 0 -18px; padding: 10px 18px; }
+.mk-panel .mk-eintrag-kopf { display: flex; gap: 8px; align-items: baseline; font-weight: bold; }
+.mk-panel .mk-regel { font-size: 12px; letter-spacing: .04em; color: var(--muted); font-weight: bold; }
+.mk-meldung { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ac); color: #FFFFFF;
+  padding: 10px 16px; border-radius: 3px; font-size: 14px; z-index: 40; display: none; }
+.mk-markiert { outline: 2px solid var(--schlecht); outline-offset: 2px; }
+
+/* ---------- Maske ---------- */
+.mk-maske { position: relative; width: 727px; background: #FFFFFF; border: 1px solid var(--rahmen);
+  font-size: 14px; line-height: 18px; color: var(--text); margin: 0; }
+.mk-kopf { height: 30px; background: var(--ac); color: #FFFFFF; font-size: 16px; font-weight: bold;
+  line-height: 30px; padding: 0 15px; display: flex; justify-content: space-between; }
+.mk-kopf .mk-kopf-info { font-weight: normal; font-size: 14px; color: #FFFFFF; }
+.mk-inhalt { padding: 14px 15px 16px; }
+
+/* Abschnitt mit Band (in der interaktiven Fassung auf- und zuklappbar) */
+.mk-abschnitt + .mk-abschnitt { margin-top: 18px; }
+.mk-band { height: 26px; line-height: 26px; background: var(--band); color: var(--ac); font-size: 14px; font-weight: bold;
+  text-transform: uppercase; letter-spacing: .02em; padding: 0 8px; margin-bottom: 10px; position: relative; }
+.mk-band .mk-klapp { position: absolute; right: 9px; top: 10px; }
+body:not(.print) .mk-band { cursor: pointer; user-select: none; }
+.mk-abschnitt.zu > :not(.mk-band) { display: none; }
+.mk-abschnitt.zu .mk-klapp { transform: rotate(180deg); }
+
+/* Gruppen */
+.mk-gruppenkopf { font-weight: bold; height: 24px; line-height: 18px; border-bottom: 1px solid var(--rahmen);
+  margin-bottom: 6px; white-space: nowrap; overflow: hidden; }
+.mk-gruppe + .mk-gruppe { margin-top: 12px; }
+
+/* Zeilen: Beschriftung + Feld(er); Spaltenbreiten über --sp-label, --sp-feld */
+.mk-zeile { display: grid; grid-template-columns: var(--sp-label, 160px) var(--sp-feld, 192px); column-gap: 8px;
+  align-items: center; min-height: var(--zh); }
+.mk-zeile + .mk-zeile { margin-top: 4px; }
+.mk-label { white-space: nowrap; overflow: hidden; }
+.mk-label.mk-neben, .mk-neben { color: var(--muted); }
+.mk-feldgruppe { display: flex; align-items: center; gap: 0; }
+.mk-feldgruppe > .mk-feld { flex: 1 1 0; min-width: 0; }
+.mk-feldgruppe > .mk-zwischen { flex: 0 0 auto; padding: 0 6px; color: var(--muted); }
+.mk-feld.mk-datum { padding: 0 4px; text-align: center; }
+
+/* Felder: input, select, textarea und deren Druckfassung (div) sehen gleich aus */
+.mk-feld { display: block; width: 100%; height: var(--zh); margin: 0; padding: 0 7px; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; color: var(--text); font: inherit; font-size: 14px; line-height: 24px;
+  white-space: nowrap; overflow: hidden; text-overflow: clip; position: relative; text-align: left; }
+input.mk-feld, select.mk-feld, textarea.mk-feld { -webkit-appearance: none; appearance: none; outline: none; }
+input.mk-feld:focus, select.mk-feld:focus, textarea.mk-feld:focus { border-color: var(--ac); box-shadow: 0 0 0 1px var(--ac); }
+.mk-feld.mk-zahl { text-align: right; }
+.mk-feld.mk-mitte { text-align: center; }
+.mk-feld.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-feld.mk-leer { color: var(--muted); }
+.mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: 0 0 0 1px var(--schlecht); }
+select.mk-feld, .mk-feld.mk-auswahl { padding-right: 24px; cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><polygon points='0,0 8,0 4,5' fill='%233A3F44'/></svg>");
+  background-repeat: no-repeat; background-position: right 9px center; background-size: 8px 5px; }
+div.mk-feld.mk-auswahl { background-image: none; }
+.mk-feld .mk-pfeil { position: absolute; right: 9px; top: 10px; }
+textarea.mk-feld, .mk-feld.mk-mehrzeilig { height: auto; white-space: pre-wrap; line-height: 18px; padding: 6px 8px; resize: none; }
+
+/* Mehrzeiliger Anzeige- bzw. Textbereich (z. B. Brief), Absätze als <p> */
+.mk-textbereich { border: 1px solid var(--rahmen); border-radius: 2px; background: #FFFFFF; padding: 8px 10px;
+  font-size: 14px; line-height: 18px; overflow: hidden; }
+.mk-textbereich.mk-anzeige { background: var(--anzeige); border-color: var(--anzeige); }
+.mk-textbereich p { margin: 0 0 8px; }
+.mk-textbereich p:last-child { margin-bottom: 0; }
+
+/* Links */
+.mk-link, a.mk-link { color: var(--ac); text-decoration: underline; cursor: pointer; }
+
+/* Knöpfe */
+.mk-knopf { display: inline-block; height: 30px; padding: 0 16px; border-radius: 3px; border: 1px solid var(--ac);
+  background: var(--ac); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: bold; line-height: 28px; cursor: pointer;
+  white-space: nowrap; margin: 0; vertical-align: top; }
+.mk-knopf.mk-zweit { background: #FFFFFF; color: var(--ac); }
+button.mk-knopf { -webkit-appearance: none; appearance: none; }
+.mk-knopfleiste { display: flex; gap: 8px; margin-top: 16px; }
+
+/* Kontrollkästchen und Optionsfelder (Druckfassung als SVG) */
+.mk-option { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+input.mk-check { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin: 0; border: 1px solid var(--rahmen);
+  border-radius: 2px; background: #FFFFFF; position: relative; cursor: pointer; flex: 0 0 auto; }
+input.mk-check[type="radio"] { border-radius: 7px; }
+input.mk-check:checked { background: var(--ac); border-color: var(--ac); }
+input.mk-check[type="checkbox"]:checked::after { content: ""; position: absolute; left: 4px; top: 1px; width: 3px; height: 7px;
+  border: solid #FFFFFF; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+input.mk-check[type="radio"]:checked { background: #FFFFFF; }
+input.mk-check[type="radio"]:checked::after { content: ""; position: absolute; left: 3px; top: 3px; width: 6px; height: 6px;
+  border-radius: 3px; background: var(--ac); }
+.mk-check-druck { width: 14px; height: 14px; flex: 0 0 auto; display: block; }
+
+/* Raster / Tabelle mit Eingabezellen */
+table.mk-tabelle { border-collapse: separate; border-spacing: 0 4px; margin: -4px 0; }
+table.mk-tabelle th { font-weight: normal; color: var(--muted); text-align: left; padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td { padding: 0 8px 0 0; height: var(--zh); white-space: nowrap; }
+table.mk-tabelle td:last-child, table.mk-tabelle th:last-child { padding-right: 0; }
+
+/* Reiter */
+.mk-reiter { display: flex; gap: 2px; border-bottom: 1px solid var(--ac); margin-bottom: 10px; }
+.mk-reiter > * { height: 26px; line-height: 26px; padding: 0 12px; background: var(--anzeige); color: var(--text); white-space: nowrap; }
+.mk-reiter > .aktiv { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+
+/* Hilfsklassen für das Raster */
+.mk-spalten { display: grid; grid-template-columns: var(--sp-links, 360px) var(--sp-rechts, 315px); column-gap: 20px; align-items: start; }
+.mk-nur-interaktiv { }
+body.print .mk-nur-interaktiv { display: none !important; }
+
+</style>
+</head>
+<body>
+<!-- Abb. 5.41 „Reportgenerator mit Drag & Drop“: Berichtsentwurf eines Reportgenerators (softwareneutral nachgebaut).
+     Hochformat 727 px = 110 mm; Inhalt 695 px. Titelzeile wie Abb. 3.7/3.179.
+     Die schwebenden Werkzeugfenster des Originals stehen als feste Gruppen in der Reihenfolge des Originals:
+     oben Verbindungen (260) · 20 · Hierarchie (415), darunter Formatierung; Mitte Objekte und Berichtsfläche;
+     unten Datenbank mit Tabellen (140) · 12 · Feldern (543). Objekte, Felder und Werte erzeugt bericht.js. -->
+<style>
+  #bericht { --sp-label: 84px; --sp-feld: 200px; }
+  #bericht .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #bericht .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #bericht .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #bericht .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  #bericht .mk-gruppe + .mk-gruppe { margin-top: 0; }
+  #bericht .reihe { display: grid; grid-template-columns: 260px 415px; column-gap: 20px; align-items: start; }
+  #bericht .reihe + .mk-gruppe, #bericht .mk-gruppe.abstand { margin-top: 12px; }
+  #bericht .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  #bericht .mk-knopf.wz { height: 26px; line-height: 24px; padding: 0 8px; font-weight: normal; }
+  /* Objekte: Ziehquellen (keine Knöpfe) */
+  #bericht .oq { height: 26px; line-height: 24px; padding: 0 6px; border: 1px dashed var(--rahmen); border-radius: 3px;
+    background: #FFFFFF; white-space: nowrap; }
+  body:not(.print) #bericht .oq, body:not(.print) #bericht .fl { cursor: grab; user-select: none; touch-action: none; }
+  body:not(.print) #bericht .oq:hover, #bericht .oq:focus { border-style: solid; border-color: var(--ac); outline: none; }
+  /* Berichtsfläche */
+  #bericht .flaeche { position: relative; height: 240px; margin-top: 12px; border: 1px solid var(--rahmen); background: #FFFFFF; overflow: hidden; }
+  #bericht .verb { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+  #bericht .obj { position: absolute; background: #FFFFFF; line-height: 18px; white-space: nowrap; }
+  #bericht .obj.rahmen { border: 1px solid var(--rahmen); }
+  #bericht .obj.grau { background: var(--anzeige); }
+  #bericht .obj.blass { opacity: .35; }
+  body:not(.print) #bericht .obj { cursor: move; touch-action: none; user-select: none; }
+  #bericht .obj.gewaehlt { outline: 2px solid var(--ac); outline-offset: 1px; }
+  #bericht .obj.ziel { outline: 2px dashed var(--ac); outline-offset: 2px; }
+  #bericht .o-kopf { height: 22px; line-height: 22px; padding: 0 8px; font-weight: bold; border-bottom: 1px solid var(--rahmen); }
+  #bericht .o-unter { height: 20px; line-height: 20px; padding: 0 8px; color: var(--muted); }
+  #bericht .o-el { height: 22px; line-height: 22px; padding: 0 8px; }
+  #bericht .o-el.sel { background: var(--ac); color: #FFFFFF; }
+  #bericht .o-quer { display: flex; }
+  #bericht .o-quer .o-el { border-right: 1px solid var(--linie); }
+  #bericht .o-text { padding: 4px 8px; font-weight: bold; }
+  #bericht .o-text.normal { font-weight: normal; }
+  #bericht .o-wert { padding: 2px 8px 4px; text-align: right; font-weight: bold; }
+  #bericht .o-hinweis { padding: 2px 8px 4px; color: var(--muted); }
+  #bericht table.o-tab { border-collapse: collapse; }
+  #bericht .o-tab th, #bericht .o-tab td { height: 22px; padding: 0 8px; text-align: right; font-weight: normal; }
+  #bericht .o-tab th { border-bottom: 1px solid var(--ac); color: var(--muted); vertical-align: bottom; }
+  #bericht .o-tab th:first-child, #bericht .o-tab td:first-child { text-align: left; }
+  #bericht .o-tab tr.summe td { font-weight: bold; border-top: 1px solid var(--ac); }
+  #bericht .o-tab td.sel { background: var(--ac); color: #FFFFFF; }
+  #bericht .o-tab .schlitz { border-left: 1px dashed var(--ac); border-right: 1px dashed var(--ac); min-width: 96px; }
+  #bericht .o-tab th.schlitz { border-top: 1px dashed var(--ac); border-bottom: 1px solid var(--ac); }
+  #bericht .o-tab tr.summe td.schlitz { border-bottom: 1px dashed var(--ac); }
+  #bericht .o-balken { display: grid; grid-template-columns: 100px 150px 52px; align-items: center; row-gap: 4px; padding: 4px 8px 6px; }
+  #bericht .o-balken .b { height: 14px; background: var(--ac); }
+  #bericht .o-balken .w { text-align: right; }
+  #bericht .geist { position: absolute; height: 24px; line-height: 22px; padding: 0 8px; border: 1px dashed var(--ac);
+    background: #FFFFFF; white-space: nowrap; pointer-events: none; }
+  #bericht .demo-pfeil { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+  /* Datenbank */
+  #bericht .db-zeile { display: flex; align-items: center; gap: 6px; }
+  #bericht .db-zeile + .db-zeile { margin-top: 6px; }
+  #bericht .db-zeile .mk-label { width: 84px; flex: 0 0 auto; }
+  #bericht .db-zeile .mk-feld { width: 200px; flex: 0 0 auto; margin-right: 6px; }
+  #bericht .panes { display: grid; grid-template-columns: 140px 543px; column-gap: 12px; margin-top: 12px; align-items: start; }
+  #bericht .tl { height: 22px; line-height: 22px; padding: 0 8px; white-space: nowrap; }
+  body:not(.print) #bericht .tl { cursor: pointer; }
+  #bericht .tl.aktiv { background: var(--ac); color: #FFFFFF; font-weight: bold; }
+  #bericht .felder { display: grid; grid-template-columns: repeat(4, 1fr); height: 154px; align-content: start; }
+  #bericht .felder .art { grid-column: 1 / -1; height: 22px; line-height: 22px; color: var(--muted); padding-left: 4px; }
+  #bericht .fl { height: 22px; line-height: 22px; padding: 0 4px; white-space: nowrap; overflow: hidden; }
+  #bericht .fl.kz { font-style: italic; }
+  #bericht .fl.quelle { border: 1px dashed var(--ac); line-height: 20px; padding: 0 3px; color: var(--muted); }
+  body:not(.print) #bericht .fl:hover, #bericht .fl:focus { background: var(--anzeige); outline: none; }
+  .zieh-geist { position: fixed; z-index: 50; pointer-events: none; background: #FFFFFF; border: 1px dashed #3A3F44;
+    padding: 2px 8px; font: 14px/18px Arial, "Liberation Sans", sans-serif; color: #1A1A1A; white-space: nowrap; }
+</style>
+<form class="mk-maske" id="bericht" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Berichtsentwurf</span><span class="kopf-unter" id="kopf-unter">Bericht „Erlösschmälerungen“ · Verbindung Auftragsdatenbank · Werte Ist in Tsd. €</span></div>
+  <div class="mk-inhalt">
+
+    <section class="mk-abschnitt" id="abschnitt-werkzeuge">
+      <div class="mk-band" id="band-werkzeuge">Werkzeuge</div>
+      <div class="reihe">
+        <div class="mk-gruppe" id="g-verbindungen">
+          <div class="mk-gruppenkopf">Verbindungen</div>
+          <div class="chips">
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="zurueck">Zurück</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="vor">Vor</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="start">Start</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="pfeile" id="k-pfeile">Pfeile</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="lokal">Lokal</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="optimieren">Optimieren</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="sortierung" id="k-sortierung">Sortierung</button>
+          </div>
+        </div>
+        <div class="mk-gruppe" id="g-hierarchie">
+          <div class="mk-gruppenkopf">Hierarchie</div>
+          <div class="chips">
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="nur">Nur selektierte zeigen</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="aus">Selektierte ausblenden</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="anfang">Anfangszustand</button>
+            <button type="button" class="mk-knopf mk-zweit wz" data-f="zuruecksetzen">Zurücksetzen</button>
+          </div>
+        </div>
+      </div>
+      <div class="mk-gruppe abstand" id="g-format">
+        <div class="mk-gruppenkopf">Formatierung des gewählten Objekts</div>
+        <div class="chips">
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="zeichensatz">Zeichensatz</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="schriftfarbe">Schriftfarbe</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="ausrichtung">Ausrichtung</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="farbe">Farbe</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="rahmen">Rahmen</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="zahlenformat" id="k-zahlenformat">Zahlenformat</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="grafik">Grafik</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="spalten">Spaltenbreite</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="sichtbar">Sichtbar</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="selektion">Selektion</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="position">Position</button>
+          <button type="button" class="mk-knopf mk-zweit wz" data-f="eigenschaften">Eigenschaften</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-bericht">
+      <div class="mk-band" id="band-bericht">Bericht</div>
+      <div class="mk-gruppe" id="g-objekte">
+        <div class="mk-gruppenkopf">Objekte – in den Bericht ziehen</div>
+        <div class="chips" id="objekte"><!-- Objektarten erzeugt bericht.js --></div>
+      </div>
+      <div class="flaeche" id="flaeche" aria-label="Berichtsfläche">
+        <svg class="verb" id="verb" width="693" height="238" aria-hidden="true"></svg>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-datenbank">
+      <div class="mk-band" id="band-datenbank">Datenbank</div>
+      <div class="db-zeile">
+        <label class="mk-label" for="f-verbindung">Verbindung</label>
+        <select class="mk-feld" id="f-verbindung">
+          <option value="auftrag" selected>Auftragsdatenbank</option>
+          <option value="planung">Planungsdatenbank</option>
+        </select>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-neu">Neu</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-oeffnen">Öffnen</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-info">Info</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-offline">Offline</button>
+      </div>
+      <div class="db-zeile">
+        <span class="mk-label"></span>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-suchen">Suchen</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-tabneu">Neue Tabelle</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-tabinfo">Tabellen-Info</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-browse">Durchsuchen</button>
+        <button type="button" class="mk-knopf mk-zweit wz" data-f="db-feldinfo">Feld-Info</button>
+      </div>
+      <div class="panes">
+        <div class="mk-gruppe" id="g-tabellen">
+          <div class="mk-gruppenkopf">Tabellen</div>
+          <div id="tabellen"></div>
+        </div>
+        <div class="mk-gruppe" id="g-felder">
+          <div class="mk-gruppenkopf" id="felder-kopf">Felder</div>
+          <div class="felder" id="felder"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <svg class="demo-pfeil" id="demo-pfeil" width="727" height="10" aria-hidden="true"></svg>
+</form>
+
+<script>
+/* maskkit.js – softwareneutrale Eingabemasken im Buchstil (6. Auflage)
+   Die Maske ist HTML5 (<form class="mk-maske">) mit den Klassen aus maskkit.css.
+   ?print: Druckfassung – Steuerelemente werden zu statischen Elementen gleicher Geometrie, ohne Leiste.
+   MK.exportieren() liefert alle Flächen, Linien, Formen und Textzeilen in px für die PowerPoint-Ausgabe. */
+const MK = (() => {
+  "use strict";
+  const Q = new URLSearchParams(location.search);
+  const PRINT = Q.has("print");
+  if (PRINT) document.body.classList.add("print");
+  const NS = "http://www.w3.org/2000/svg";
+  const NBSP = String.fromCharCode(0xA0), MINUS = String.fromCharCode(0x2212);
+
+  /* ---------------- DOM/SVG ---------------- */
+  function el(tag, attrs = {}, parent, text) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function sv(tag, attrs = {}, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  // Pfeil nach unten (Auswahlfeld) bzw. oben (Klappband), 8 x 5 px
+  function pfeil(cls, oben = false) {
+    const s = sv("svg", { width: 8, height: 5, viewBox: "0 0 8 5", class: cls, "aria-hidden": "true" });
+    sv("polygon", { points: oben ? "0,5 8,5 4,0" : "0,0 8,0 4,5", fill: "#3A3F44" }, s);
+    return s;
+  }
+
+  /* ---------------- Zahlen und Datum (deutsches Format) ---------------- */
+  const NF = {};
+  const nf = nk => NF[nk] || (NF[nk] = new Intl.NumberFormat("de-DE", { minimumFractionDigits: nk, maximumFractionDigits: nk }));
+  function zahl(v, nk = 1) { return v == null || isNaN(v) ? "" : (v < 0 ? MINUS : "") + nf(nk).format(Math.abs(v)); }
+  function leseZahl(text) {
+    const t = String(text).trim().replace(MINUS, "-").replace(/\s/g, "");
+    if (!t) return null;
+    if (!/^-?(\d{1,3}(\.\d{3})+|\d+)(,\d+)?$/.test(t)) return NaN;
+    return parseFloat(t.replace(/\./g, "").replace(",", "."));
+  }
+  function leseDatum(text) {
+    const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(String(text).trim());
+    if (!m) return null;
+    const d = new Date(+m[3], +m[2] - 1, +m[1]);
+    return d.getMonth() === +m[2] - 1 ? d : null;
+  }
+  function datum(d) { return d ? String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear() : ""; }
+  // Eingabe prüfen und markieren; liefert den Wert oder null
+  function pruefeFeld(feld, art = "zahl", opt = {}) {
+    const t = feld.value;
+    let v = null, ok = true;
+    if (art === "zahl") {
+      v = leseZahl(t);
+      ok = v === null ? !opt.pflicht : !isNaN(v) && (opt.min == null || v >= opt.min) && (opt.max == null || v <= opt.max);
+    } else if (art === "datum") {
+      v = leseDatum(t);
+      ok = t.trim() === "" ? !opt.pflicht : v !== null;
+    }
+    feld.classList.toggle("mk-fehler", !ok);
+    feld.title = ok ? (feld.dataset.hilfe || "") : (opt.meldung || "Eingabe prüfen");
+    return ok ? v : null;
+  }
+
+  /* ---------------- Seite, Skalierung, Leiste ---------------- */
+  let seite, rahmen, buehne, panel, maske, meldungEl, leiste, B = 727, H = 0;
+  function init(o = {}) {
+    document.title = o.titel || document.title;
+    maske = document.querySelector(o.maske || ".mk-maske");
+    if (!maske) throw new Error("Keine .mk-maske gefunden");
+    if (!PRINT) {
+      leiste = el("div", { class: "mk-leiste" }, document.body);
+      el("div", { class: "mk-leiste-titel" }, leiste, o.titel || "");
+    }
+    buehne = el("div", { class: "mk-buehne" }, document.body);
+    rahmen = el("div", { class: "mk-rahmen" }, buehne);
+    seite = el("div", { class: "mk-seite", id: "seite" }, rahmen);
+    seite.appendChild(maske);
+    panel = el("div", { class: "mk-panel" }, document.body);
+    meldungEl = el("div", { class: "mk-meldung", role: "status" }, document.body);
+    // Klappbänder: Klick auf das Band klappt den Abschnitt auf und zu (nur interaktiv)
+    maske.querySelectorAll(".mk-abschnitt > .mk-band").forEach(b => {
+      if (PRINT || b.dataset.klappbar === "nein") return;
+      b.appendChild(pfeil("mk-klapp mk-nur-interaktiv", true));
+      b.setAttribute("role", "button"); b.tabIndex = 0;
+      const klapp = () => { b.parentElement.classList.toggle("zu"); skalieren(); if (MK._ebenenNeu) MK._ebenenNeu(); };
+      b.addEventListener("click", klapp);
+      b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); klapp(); } });
+    });
+    maske.addEventListener("submit", e => e.preventDefault());
+    addEventListener("resize", skalieren);
+    return maske;
+  }
+  function skalieren() {
+    B = maske.offsetWidth; H = maske.offsetHeight;
+    seite.style.width = B + "px"; seite.style.height = H + "px";
+    if (PRINT) { rahmen.style.width = B + "px"; rahmen.style.height = H + "px"; seite.style.transform = ""; return; }
+    const frei = panel.style.display === "block" ? 380 : 0;
+    const s = Math.max(0.4, Math.min(1.6, (innerWidth - frei - 32) / B, (innerHeight - 44 - 32) / H));
+    seite.style.transform = `scale(${s})`;
+    rahmen.style.width = B * s + "px"; rahmen.style.height = H * s + "px";
+    rahmen.style.marginLeft = frei ? "16px" : "auto";
+  }
+  function meldung(text) {
+    meldungEl.textContent = text; meldungEl.style.display = "block";
+    clearTimeout(meldung._t); meldung._t = setTimeout(() => { meldungEl.style.display = "none"; }, 2600);
+  }
+
+  /* ---------------- Druckfassung: Steuerelemente -> statische Elemente ---------------- */
+  let fertigGemeldet = false;
+  function kopieAttribute(von, nach) {
+    ["id", "style", "title"].forEach(a => { if (von.getAttribute(a)) nach.setAttribute(a, von.getAttribute(a)); });
+    Object.entries(von.dataset).forEach(([k, v]) => { nach.dataset[k] = v; });
+  }
+  function druckfassung() {
+    maske.querySelectorAll("input, select, textarea, button").forEach(f => {
+      let d;
+      if (f.matches("input.mk-check")) {
+        d = sv("svg", { width: 14, height: 14, viewBox: "0 0 14 14", class: "mk-check-druck" });
+        if (f.type === "radio") {
+          sv("circle", { cx: 7, cy: 7, r: 6.5, fill: "#FFFFFF", stroke: "#9A9A9A", "stroke-width": 1 }, d);
+          if (f.checked) sv("circle", { cx: 7, cy: 7, r: 3, fill: "#3A3F44" }, d);
+        } else {
+          sv("rect", { x: 0.5, y: 0.5, width: 13, height: 13, rx: 2, fill: f.checked ? "#3A3F44" : "#FFFFFF",
+                       stroke: f.checked ? "#3A3F44" : "#9A9A9A", "stroke-width": 1 }, d);
+          if (f.checked) sv("polyline", { points: "3.5,7.2 6,9.6 10.5,4.4", fill: "none", stroke: "#FFFFFF", "stroke-width": 2 }, d);
+        }
+      } else if (f.tagName === "SELECT") {
+        d = el("div", { class: f.className + " mk-auswahl" });
+        el("span", {}, d, f.selectedIndex >= 0 ? f.options[f.selectedIndex].text : "");
+        d.appendChild(pfeil("mk-pfeil"));
+      } else if (f.tagName === "TEXTAREA") {
+        d = el("div", { class: f.className + " mk-mehrzeilig" }, undefined, f.value);
+        d.style.height = f.offsetHeight + "px";               // Höhe aus rows übernehmen
+      } else if (f.tagName === "BUTTON") {
+        d = el("div", { class: f.className }, undefined, f.textContent);
+      } else if (f.type === "hidden") {
+        return;
+      } else {
+        d = el("div", { class: f.className }, undefined, f.value);
+      }
+      if (!(d instanceof SVGElement)) { const h = d.style.height; kopieAttribute(f, d); if (h) d.style.height = h; }
+      f.replaceWith(d);
+    });
+  }
+  // Am Ende des Masken-Skripts aufrufen: setzt die Druckfassung und skaliert
+  function fertig() {
+    if (fertigGemeldet) return;
+    fertigGemeldet = true;
+    if (PRINT) druckfassung();
+    skalieren();
+    if (MK._ebenenNeu) MK._ebenenNeu();
+  }
+
+  /* ---------------- Ebenen der Lernplattform: Erläuterungen und Gestaltung ---------------- */
+  function zielElement(z) { return !z ? null : document.getElementById(z) || maske.querySelector(z); }
+  function ebenen(o) {
+    if (PRINT) return;
+    let modus = null;
+    const marken = [], knoepfe = {};
+    const arten = [["erlaeuterungen", "Erläuterungen", ""], ["gestaltung", "Gestaltung", "gestaltung"]].filter(([k]) => o[k]);
+    arten.forEach(([k, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": "false" }, leiste, text);
+      b.addEventListener("click", () => umschalten(k));
+      knoepfe[k] = b;
+    });
+    function markenWeg() { marken.forEach(m => m.remove()); marken.length = 0; maske.querySelectorAll(".mk-markiert").forEach(e => e.classList.remove("mk-markiert")); }
+    function markeSetzen(eintrag, text, cls) {
+      const z = zielElement(eintrag.ziel);
+      if (!z || !z.offsetParent) return;
+      const [dx, dy] = eintrag.versatz || [0, 0];
+      const sr = seite.getBoundingClientRect(), r = z.getBoundingClientRect(), sk = sr.width / B;
+      // anker "rechts" (Standard): Marke an der rechten oberen Ecke des Ziels; "links": links neben dem Ziel
+      const x = eintrag.anker === "links" ? (r.left - sr.left) / sk - 28 : (r.right - sr.left) / sk - 22;
+      const m = el("div", { class: "mk-marke " + cls, style: `left:${x + dx}px;top:${(r.top - sr.top) / sk - 4 + dy}px` }, seite, text);
+      m.addEventListener("click", () => aktiv(text, eintrag));
+      marken.push(m);
+    }
+    function aktiv(text, eintrag) {
+      panel.querySelectorAll(".mk-eintrag").forEach(e => e.classList.toggle("aktiv", e.dataset.marke === text));
+      marken.forEach(m => m.classList.toggle("aktiv", m.textContent === text));
+      maske.querySelectorAll(".mk-markiert").forEach(e => e.classList.remove("mk-markiert"));
+      const z = eintrag && zielElement(eintrag.ziel);
+      if (z) z.classList.add("mk-markiert");
+      const e = panel.querySelector(`.mk-eintrag[data-marke="${text}"]`);
+      if (e) e.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function umschalten(k) {
+      modus = modus === k ? null : k;
+      Object.entries(knoepfe).forEach(([a, b]) => b.setAttribute("aria-pressed", String(modus === a)));
+      markenWeg(); panel.textContent = "";
+      panel.style.display = modus ? "block" : "none";
+      skalieren();
+      if (!modus) return;
+      const def = o[modus], cls = modus === "gestaltung" ? "gestaltung" : "";
+      el("h2", {}, panel, def.titel || (modus === "gestaltung" ? "Gestaltung" : "Erläuterungen"));
+      if (def.intro) el("div", { class: "mk-panel-intro" }, panel, def.intro);
+      def.eintraege.forEach(r => {
+        const nr = String(r.nr);
+        const e = el("div", { class: "mk-eintrag", "data-marke": nr }, panel);
+        const kopf = el("div", { class: "mk-eintrag-kopf" }, e);
+        el("span", {}, kopf, modus === "gestaltung" ? nr : nr + "."); el("span", {}, kopf, r.titel);
+        if (r.regel) el("div", { class: "mk-regel" }, e, r.regel);
+        el("div", {}, e, r.text);
+        e.addEventListener("click", () => aktiv(nr, r));
+        markeSetzen(r, nr, cls);
+      });
+    }
+    MK._ebenenNeu = () => { if (modus) { const m = modus; modus = null; umschalten(m); } };
+    addEventListener("keydown", e => { if (e.key === "Escape" && modus) umschalten(modus); });
+  }
+
+  /* ---------------- Export für PowerPoint (Druckfassung) ---------------- */
+  function farbe(c) {
+    const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/.exec(c || "");
+    if (!m) return null;
+    const a = m[4] === undefined ? 1 : parseFloat(m[4]);
+    const hex = [m[1], m[2], m[3]].map(v => Math.round(+v).toString(16).padStart(2, "0")).join("").toUpperCase();
+    return { hex, a };
+  }
+  function exportieren() {
+    const R = maske.getBoundingClientRect();
+    const formen = [];
+    const name = e => e.id || e.dataset.name || (e.className && typeof e.className === "string" ? e.className.split(" ")[0] : e.tagName);
+    const sichtbar = s => s.w > 0 && s.st !== "none" && s.st !== "hidden" && s.c && s.c.a > 0;
+    function kasten(e, cs) {
+      const r = e.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const bg = farbe(cs.backgroundColor);
+      const seiten = ["Top", "Right", "Bottom", "Left"].map(s => ({ w: parseFloat(cs["border" + s + "Width"]) || 0,
+        c: farbe(cs["border" + s + "Color"]), st: cs["border" + s + "Style"] }));
+      const gleich = seiten.every(s => sichtbar(s) && s.w === seiten[0].w && s.c.hex === seiten[0].c.hex && s.st === seiten[0].st);
+      const x = r.left - R.left, y = r.top - R.top, rad = parseFloat(cs.borderTopLeftRadius) || 0;
+      const fuell = bg && bg.a > 0.01 ? bg.hex : null;
+      if (fuell || gleich) {
+        const lw = gleich ? seiten[0].w : 0;
+        formen.push({ t: "rect", name: name(e), x: x + lw / 2, y: y + lw / 2, w: r.width - lw, h: r.height - lw,
+                      fill: fuell, line: gleich ? seiten[0].c.hex : null, lw, dash: gleich && seiten[0].st === "dashed", r: rad });
+      }
+      if (!gleich) seiten.forEach((s, i) => {
+        if (!sichtbar(s)) return;
+        const h = s.w / 2;
+        const p = [[x, y + h, x + r.width, y + h], [x + r.width - h, y, x + r.width - h, y + r.height],
+                   [x, y + r.height - h, x + r.width, y + r.height - h], [x + h, y, x + h, y + r.height]][i];
+        formen.push({ t: "linie", name: name(e), x1: p[0], y1: p[1], x2: p[2], y2: p[3], farbe: s.c.hex, lw: s.w, dash: s.st === "dashed" });
+      });
+    }
+    function svgFormen(svg) {
+      svg.querySelectorAll("polygon, polyline, rect, circle, line").forEach(k => {
+        const cs = getComputedStyle(k), M = k.getScreenCTM();
+        const pt = (x, y) => { const p = new DOMPoint(x, y).matrixTransform(M); return [p.x - R.left, p.y - R.top]; };
+        const f = farbe(cs.fill), s = farbe(cs.stroke), lw = parseFloat(cs.strokeWidth) || 0;
+        const fill = f && f.a > 0.01 ? f.hex : null, line = s && s.a > 0.01 && lw > 0 ? s.hex : null;
+        const tag = k.tagName.toLowerCase();
+        if (tag === "polygon" || tag === "polyline") {
+          const pts = [...k.points].map(p => pt(p.x, p.y));
+          formen.push({ t: "poly", name: "Form", pts, zu: tag === "polygon", fill: tag === "polygon" ? fill : null, line, lw });
+        } else if (tag === "rect") {
+          const x = +k.getAttribute("x") || 0, y = +k.getAttribute("y") || 0, w = +k.getAttribute("width"), h = +k.getAttribute("height");
+          const a = pt(x, y), b = pt(x + w, y + h);
+          formen.push({ t: "rect", name: "Form", x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1], fill, line, lw, r: +k.getAttribute("rx") || 0 });
+        } else if (tag === "circle") {
+          const cx = +k.getAttribute("cx"), cy = +k.getAttribute("cy"), r = +k.getAttribute("r");
+          const a = pt(cx - r, cy - r), b = pt(cx + r, cy + r);
+          formen.push({ t: "oval", name: "Form", x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1], fill, line, lw });
+        } else if (tag === "line") {
+          const a = pt(+k.getAttribute("x1"), +k.getAttribute("y1")), b = pt(+k.getAttribute("x2"), +k.getAttribute("y2"));
+          formen.push({ t: "linie", name: "Linie", x1: a[0], y1: a[1], x2: b[0], y2: b[1], farbe: line, lw });
+        }
+      });
+    }
+    function text(n) {
+      const t = n.textContent;
+      if (!t.trim()) return;
+      const p = n.parentElement, cs = getComputedStyle(p);
+      const woerter = [], re = /[^\s]+/g;
+      let m;
+      while ((m = re.exec(t))) {
+        const rg = document.createRange();
+        rg.setStart(n, m.index); rg.setEnd(n, m.index + m[0].length);
+        const rs = [...rg.getClientRects()].filter(r => r.width > 0);
+        if (rs.length) woerter.push({ a: m.index, b: m.index + m[0].length, r: rs[0] });
+      }
+      if (!woerter.length) return;
+      const zeilen = [];
+      woerter.forEach(w => {
+        const z = zeilen[zeilen.length - 1];
+        if (z && Math.abs(z.top - w.r.top) < 2) { z.b = w.b; z.right = Math.max(z.right, w.r.right); z.bottom = Math.max(z.bottom, w.r.bottom); }
+        else zeilen.push({ a: w.a, b: w.b, left: w.r.left, right: w.r.right, top: w.r.top, bottom: w.r.bottom });
+      });
+      const gross = cs.textTransform === "uppercase";
+      const unter = (cs.textDecorationLine || cs.textDecoration || "").includes("underline");
+      formen.push({ t: "text", name: name(p), groesse: parseFloat(cs.fontSize), fett: parseInt(cs.fontWeight, 10) >= 600,
+        kursiv: cs.fontStyle === "italic", farbe: (farbe(cs.color) || { hex: "1A1A1A" }).hex, unter,
+        ausr: { right: "r", end: "r", center: "c" }[cs.textAlign] || "l",
+        sperr: parseFloat(cs.letterSpacing) || 0,
+        zeilen: zeilen.map(z => {
+          let s = t.slice(z.a, z.b).replace(/[ \t\n\r]+/g, " ");
+          if (gross) s = s.toUpperCase();
+          return { x: z.left - R.left, y: z.top - R.top, w: z.right - z.left, h: z.bottom - z.top, text: s };
+        }) });
+    }
+    function gehe(n) {
+      if (n.nodeType === 3) { text(n); return; }
+      if (n.nodeType !== 1) return;
+      const cs = getComputedStyle(n);
+      if (cs.display === "none" || cs.visibility === "hidden") return;
+      if (n.tagName.toLowerCase() === "svg") { svgFormen(n); return; }
+      kasten(n, cs);
+      n.childNodes.forEach(gehe);
+    }
+    gehe(maske);
+    return { breite: R.width, hoehe: R.height, formen };
+  }
+
+  /* ---------------- Prüfungen (Druckfassung) ---------------- */
+  function kontrast(a, b) {
+    const lin = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+    const L = h => 0.2126 * lin(parseInt(h.slice(0, 2), 16)) + 0.7152 * lin(parseInt(h.slice(2, 4), 16)) + 0.0722 * lin(parseInt(h.slice(4, 6), 16));
+    const [x, y] = [L(a), L(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05);
+  }
+  function pruefen() {
+    const R = maske.getBoundingClientRect(), probleme = [];
+    const kurz = s => s.trim().replace(/\s+/g, " ").slice(0, 40);
+    maske.querySelectorAll("*").forEach(e => {
+      const cs = getComputedStyle(e);
+      if (cs.display === "none" || e.closest("svg")) return;
+      const r = e.getBoundingClientRect();
+      if (r.width && (r.left < R.left - 0.5 || r.right > R.right + 0.5 || r.bottom > R.bottom + 0.5))
+        probleme.push(`Überlauf aus der Maske: ${e.className || e.tagName} „${kurz(e.textContent)}“`);
+      if (e.textContent.trim() && (cs.overflow === "hidden" || cs.overflowX === "hidden") &&
+          (e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 1))
+        probleme.push(`Text abgeschnitten: „${kurz(e.textContent)}“`);
+    });
+    const tw = document.createTreeWalker(maske, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = tw.nextNode())) {
+      if (!n.textContent.trim()) continue;
+      const p = n.parentElement, cs = getComputedStyle(p);
+      if (cs.display === "none") continue;
+      if (parseFloat(cs.fontSize) < 13.9) probleme.push(`Schrift unter 6 pt (${cs.fontSize}): „${kurz(n.textContent)}“`);
+      let a = p, bg = null;
+      while (a && !bg) { const f = farbe(getComputedStyle(a).backgroundColor); if (f && f.a > 0.5) bg = f.hex; a = a.parentElement; }
+      const fg = farbe(cs.color);
+      if (fg && kontrast(fg.hex, bg || "FFFFFF") < 4.5) probleme.push(`Kontrast < 4,5:1: „${kurz(n.textContent)}“`);
+    }
+    return [...new Set(probleme)];
+  }
+
+  return { PRINT, NBSP, MINUS, el, sv, pfeil, zahl, leseZahl, leseDatum, datum, pruefeFeld, init, fertig, skalieren,
+           meldung, ebenen, exportieren, pruefen, druckfassung };
+})();
+
+</script>
+<script>
+/* Abb. 5.41 „Reportgenerator mit Drag & Drop“ – Logik des Berichtsentwurfs.
+   Berichtsobjekte (Tabelle, Spalte, Grafik …) und Datenbankfelder werden per Drag & Drop in den Bericht gezogen:
+   Merkmal auf freie Fläche → Spalte (Auswahlliste), Kennzahl auf freie Fläche → Einzelfeld, Feld auf eine Tabelle
+   oder Grafik → neue Zeilen bzw. Wertspalte, Kennzahl auf eine Spalte → Tabelle. Auswahl in einer Spalte filtert
+   die verbundenen Objekte. Datenbank wie in Abb. 5.40 (Kunden, Auftrag, Artikel, Farbe), Werte erfunden
+   (fester Startwert), Ist in Tsd. €. Druckfassung: Bericht im Aufbau – „Skonto“ wird in die Tabelle gezogen. */
+(() => {
+  "use strict";
+  const { el, sv, zahl } = MK;
+  MK.init({ titel: "Reportgenerator mit Drag & Drop" });
+  const $ = id => document.getElementById(id);
+  const PRINT = MK.PRINT;
+  const maske = $("bericht"), flaeche = $("flaeche"), verb = $("verb");
+  const FB = 695, FH = 240;                                   // Berichtsfläche
+
+  /* ---------- Datenbank: Tabellen, Felder, Würfel ---------- */
+  const TABELLEN = {
+    Artikel: { m: ["ARTNR", "Bezeichnung", "Farbe"], k: [] },
+    Auftrag: { m: ["PLIKZ", "KNDNR", "ARTNR", "FKART", "KHIER"],
+               k: ["Umsatz Flaschen", "Umsatz Verpackung", "Rabatt", "Skonto", "Bonus", "Fracht", "Gruppenbonus",
+                   "Herstellkosten", "Menge", "Provision", "Sonderbonus"] },
+    Farbe: { m: ["Farbnr", "Farbe"], k: [] },
+    Kunden: { m: ["KNDNR", "Name", "PLZ", "Ort", "Land", "Kundenbezirk"], k: [] },
+  };
+  // Merkmale mit hinterlegten Elementen (Tabelle.Feld → Dimension des Würfels)
+  const DIM = { "Kunden.Kundenbezirk": "bezirk", "Artikel.Bezeichnung": "artikel", "Artikel.Farbe": "farbe",
+                "Farbe.Farbe": "farbe", "Auftrag.PLIKZ": "plikz" };
+  const DIMNAME = { bezirk: "Kundenbezirk", artikel: "Artikel", farbe: "Farbe", plikz: "Plan/Ist" };
+  const EL = { bezirk: ["Nord", "Ost", "Süd", "West"],
+               artikel: ["Bierflasche 0,33 l", "Bierflasche 0,5 l", "Weinflasche 0,75 l", "Saftflasche 1,0 l"],
+               farbe: ["Braunglas", "Grünglas", "Weißglas"], plikz: ["Ist", "Plan"] };
+  const KZ = TABELLEN.Auftrag.k;
+  const EINHEIT = k => (k === "Menge" ? "Tsd. Stück" : "Tsd. €");
+  // Würfel: Kundenbezirk × Artikel × Farbe × Plan/Ist; Menge in Tsd. Stück, Werte in Tsd. €
+  const WUERFEL = (() => {
+    let s = 20260541;
+    const zufall = () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const MENGE = [5200, 3900, 6100, 4700], ANTEIL = [0.30, 0.35, 0.20, 0.15], PREIS = [0.16, 0.21, 0.34, 0.29];
+    const FARBE = [[0.70, 0.25, 0.05], [0.70, 0.25, 0.05], [0.05, 0.60, 0.35], [0.05, 0.15, 0.80]];
+    const SATZ = { "Umsatz Verpackung": 0.12, Rabatt: 0.030, Skonto: 0.015, Bonus: 0.020, Fracht: 0.040, Gruppenbonus: 0.010,
+                   Herstellkosten: 0.620, Provision: 0.025, Sonderbonus: 0.005 };
+    const z = [];
+    MENGE.forEach((mb, b) => ANTEIL.forEach((an, a) => FARBE[a].forEach((fa, f) => {
+      const ist = mb * an * fa * (0.92 + 0.16 * zufall());
+      [["Ist", ist], ["Plan", ist * (0.95 + 0.15 * zufall())]].forEach(([p, menge]) => {
+        const r = { bezirk: EL.bezirk[b], artikel: EL.artikel[a], farbe: EL.farbe[f], plikz: p, Menge: menge,
+                    "Umsatz Flaschen": menge * PREIS[a] };
+        Object.entries(SATZ).forEach(([k, q]) => { r[k] = r["Umsatz Flaschen"] * q * (0.85 + 0.3 * zufall()); });
+        z.push(r);
+      });
+    })));
+    return z;
+  })();
+
+  /* ---------- Zustand des Berichts ---------- */
+  const START = () => ({
+    demo: true, pfeile: false, gewaehlt: null, naechste: 4,
+    objekte: [
+      { id: "o1", typ: "Text", x: 16, y: 12, text: "Erlösschmälerungen nach Kundenbezirk", rahmen: false },
+      { id: "o2", typ: "Spalte", x: 16, y: 52, dim: "farbe", sel: [] },
+      { id: "o3", typ: "Tabelle", x: 170, y: 52, dim: "bezirk", kz: ["Umsatz Flaschen", "Rabatt"], sel: [] },
+    ],
+  });
+  let S = START(), verlauf = [], vorwaerts = [], anfang = null;
+  const kopie = o => JSON.parse(JSON.stringify(o));
+  function merken() { verlauf.push(kopie(S)); if (verlauf.length > 40) verlauf.shift(); vorwaerts = []; }
+  const obj = id => S.objekte.find(o => o.id === id);
+  const LISTEN = ["Spalte", "Zeile", "Menü", "Optionsfeld", "Kontrollkästchen", "Vertikale Hierarchie", "Horizontale Hierarchie", "Menühierarchie"];
+  const DATEN = ["Tabelle", "Grafik", "Einzelfeld"];
+  const OBJEKTARTEN = ["Tabelle", "Spalte", "Zeile", "Einzelfeld", "Menü", "Optionsfeld", "Kontrollkästchen", "Schaltfläche",
+                       "Tastenfeld", "Text", "Bild", "Grafik", "Internet", "Vertikale Hierarchie", "Horizontale Hierarchie", "Menühierarchie"];
+
+  /* ---------- Werte: Filter aus den Auswahlobjekten (Verbindungen) ---------- */
+  function filter(o) {
+    const f = {};
+    if (!o.lokal) S.objekte.forEach(l => {
+      if (LISTEN.includes(l.typ) && l.dim && l.sel && l.sel.length && l.sichtbar !== false && l.dim !== o.dim) f[l.dim] = l.sel;
+    });
+    if (!f.plikz && o.dim !== "plikz") f.plikz = ["Ist"];
+    return f;
+  }
+  function wert(o, k, el2) {
+    const f = filter(o);
+    return WUERFEL.reduce((s, r) => (Object.entries(f).every(([d, v]) => v.includes(r[d])) && (!el2 || r[o.dim] === el2) ? s + r[k] : s), 0);
+  }
+  const fmt = (v, o) => zahl(v, o.nk || 0);
+  function elemente(o) {
+    let e = EL[o.dim].slice();
+    if (o.nur && o.sel.length) e = e.filter(x => o.sel.includes(x));
+    if (o.aus && o.aus.length) e = e.filter(x => !o.aus.includes(x));
+    if (o.sort && o.kz && o.kz.length) {
+      const k = o.kz[0], gerundet = x => Math.round(wert(o, k, x) * 10 ** (o.nk || 0));
+      e.sort((a, b) => (gerundet(a) - gerundet(b)) * (o.sort === "ab" ? -1 : 1));
+    }
+    return e;
+  }
+
+  /* ---------- Darstellung ---------- */
+  function zeichnen() {
+    flaeche.querySelectorAll(".obj, .geist").forEach(e => e.remove());
+    S.objekte.forEach(o => {
+      const k = ["obj"];
+      if (o.rahmen !== false) k.push("rahmen");
+      if (o.grau) k.push("grau");
+      if (o.sichtbar === false) k.push("blass");
+      if (S.gewaehlt === o.id) k.push("gewaehlt");
+      const d = el("div", { class: k.join(" "), id: o.id, style: `left:${o.x}px;top:${o.y}px`, "data-typ": o.typ }, flaeche);
+      if (o.typ === "Text") {
+        d.classList.remove("rahmen");
+        if (o.rahmen === true) d.classList.add("rahmen");
+        el("div", { class: "o-text" + (o.fett === false ? " normal" : ""), style: o.ausr ? `text-align:${o.ausr}` : "" }, d, o.text);
+      } else if (o.typ === "Tabelle") tabelle(o, d);
+      else if (o.typ === "Grafik") grafik(o, d);
+      else if (o.typ === "Einzelfeld") einzelfeld(o, d);
+      else if (LISTEN.includes(o.typ)) liste(o, d);
+      else {
+        el("div", { class: "o-kopf" }, d, o.typ);
+        el("div", { class: "o-hinweis" }, d, o.typ === "Schaltfläche" || o.typ === "Tastenfeld" ? "Aktion zuweisen" : o.typ === "Bild" ? "Bilddatei zuweisen" : "Adresse zuweisen");
+      }
+      if (o.breite) d.style.minWidth = o.breite + "px";
+    });
+    // Position begrenzen: Objekte bleiben auf der Fläche
+    S.objekte.forEach(o => {
+      const d = $(o.id);
+      o.x = Math.max(0, Math.min(o.x, FB - 2 - d.offsetWidth));
+      o.y = Math.max(0, Math.min(o.y, FH - 2 - d.offsetHeight));
+      d.style.left = o.x + "px"; d.style.top = o.y + "px";
+    });
+    if (S.demo) demoGeist();
+    pfeile();
+    demoPfeil();
+  }
+  function kopfText(o) { return o.dim ? DIMNAME[o.dim] : o.typ; }
+  function liste(o, d) {
+    el("div", { class: "o-kopf" }, d, kopfText(o));
+    if (!o.dim) { el("div", { class: "o-hinweis" }, d, "Merkmal hierher ziehen"); return; }
+    const quer = /Zeile|Horizontale/.test(o.typ);
+    const box = el("div", { class: quer ? "o-quer" : "" }, d);
+    const nurEins = /Menü|Option/.test(o.typ);
+    const e = nurEins && !o.offen ? [o.sel[0] || EL[o.dim][0]] : elemente(o);
+    e.forEach(x => {
+      const z = el("div", { class: "o-el" + (o.sel.includes(x) ? " sel" : ""), "data-el": x }, box,
+        (o.typ === "Kontrollkästchen" ? (o.sel.includes(x) ? "[x] " : "[ ] ") : "") + x);
+      z.dataset.obj = o.id;
+    });
+  }
+  function tabelle(o, d) {
+    const kz = o.kz || [];
+    el("div", { class: "o-unter" }, d, `Ist · ${kz.includes("Menge") && kz.length > 1 ? "Tsd. € bzw. Tsd. Stück" : kz.length ? EINHEIT(kz[0]) : "Kennzahl hierher ziehen"}`);
+    if (!o.dim) { el("div", { class: "o-hinweis" }, d, "Merkmal hierher ziehen"); return; }
+    const t = el("table", { class: "o-tab" }, d);
+    const h = el("tr", {}, t);
+    el("th", { style: `min-width:${o.breite ? 0 : 96}px` }, h, DIMNAME[o.dim]);
+    kz.forEach(k => el("th", { style: `min-width:${o.spalte || 80}px` }, h, k));
+    const schlitz = S.demo && o.id === "o3";
+    if (schlitz) el("th", { class: "schlitz", id: "schlitz-kopf" }, h, "");
+    const e = elemente(o);
+    const sum = kz.map(() => 0);
+    e.forEach(x => {
+      const r = el("tr", {}, t);
+      el("td", { class: o.sel.includes(x) ? "sel" : "", "data-el": x, "data-obj": o.id }, r, x);
+      kz.forEach((k, i) => {
+        const v = Math.round(wert(o, k, x) * 10 ** (o.nk || 0)) / 10 ** (o.nk || 0);
+        sum[i] += v;
+        el("td", { style: o.ausr ? `text-align:${o.ausr}` : "" }, r, fmt(v, o));
+      });
+      if (schlitz) el("td", { class: "schlitz" }, r, "");
+    });
+    const r = el("tr", { class: "summe" }, t);
+    el("td", {}, r, "Gesamt");
+    sum.forEach(v => el("td", { style: o.ausr ? `text-align:${o.ausr}` : "" }, r, fmt(v, o)));
+    if (schlitz) el("td", { class: "schlitz" }, r, "");
+  }
+  function grafik(o, d) {
+    const k = (o.kz || [])[0];
+    el("div", { class: "o-unter" }, d, k ? `${k}, ${EINHEIT(k)}` : "Kennzahl hierher ziehen");
+    if (!o.dim || !k) { el("div", { class: "o-hinweis" }, d, o.dim ? "Kennzahl hierher ziehen" : "Merkmal hierher ziehen"); return; }
+    const g = el("div", { class: "o-balken" }, d);
+    const e = elemente(o), w = e.map(x => wert(o, k, x)), max = Math.max(1, ...w);
+    e.forEach((x, i) => {
+      el("div", {}, g, x);
+      const z = el("div", {}, g);
+      el("div", { class: "b", style: `width:${Math.max(1, Math.round(w[i] / max * 150))}px` }, z);
+      el("div", { class: "w" }, g, fmt(w[i], o));
+    });
+  }
+  function einzelfeld(o, d) {
+    const k = (o.kz || [])[0];
+    el("div", { class: "o-unter" }, d, k ? `${k}, ${EINHEIT(k)}` : "Einzelfeld");
+    if (!k) { el("div", { class: "o-hinweis" }, d, "Kennzahl hierher ziehen"); return; }
+    el("div", { class: "o-wert" }, d, fmt(wert(o, k), o));
+  }
+  // Druckfassung: „Skonto“ wird gerade in die Tabelle gezogen
+  function demoGeist() {
+    const k = $("schlitz-kopf");
+    if (!k) return;
+    const t = $("o3");
+    el("div", { class: "geist", id: "geist", style: `left:${t.offsetLeft + k.offsetLeft + 22}px;top:${t.offsetTop + k.offsetTop + 10}px` }, flaeche, "Skonto");
+  }
+  const relativ = (e, bezug) => {
+    const a = e.getBoundingClientRect(), b = bezug.getBoundingClientRect(), sk = b.width / bezug.offsetWidth;
+    return { x: (a.left - b.left) / sk, y: (a.top - b.top) / sk, w: a.width / sk, h: a.height / sk };
+  };
+  function demoPfeil() {
+    const p = $("demo-pfeil");
+    p.textContent = "";
+    const g = $("geist"), q = S.demo && document.querySelector('#felder .fl[data-feld="Auftrag.Skonto"]');
+    if (!g || !q || !q.offsetParent || !g.offsetParent) return;
+    p.setAttribute("height", maske.offsetHeight);
+    const a = relativ(q, maske), b = relativ(g, maske);
+    const xr = 721, y0 = a.y + a.h / 2, y1 = b.y + b.h / 2, x0 = a.x + a.w + 2, x1 = b.x + b.w + 9;
+    sv("polyline", { points: `${x0},${y0} ${xr},${y0} ${xr},${y1} ${x1},${y1}`, fill: "none", stroke: "#3A3F44", "stroke-width": 1.5 }, p);
+    sv("polygon", { points: `${x1 - 8},${y1} ${x1 + 1},${y1 - 4.5} ${x1 + 1},${y1 + 4.5}`, fill: "#3A3F44" }, p);
+  }
+  // Verbindungen: Auswahlobjekte → Datenobjekte (nur mit „Pfeile“)
+  function pfeile() {
+    verb.textContent = "";
+    if (!S.pfeile) return;
+    S.objekte.filter(l => LISTEN.includes(l.typ) && l.dim).forEach(l => {
+      S.objekte.filter(o => DATEN.includes(o.typ) && !o.lokal && o.dim !== l.dim).forEach(o => {
+        const a = $(l.id), b = $(o.id);
+        const ax = a.offsetLeft + a.offsetWidth, ay = a.offsetTop + 11, bx = b.offsetLeft, by = b.offsetTop + 11;
+        const xm = Math.round((ax + bx) / 2);
+        const pts = bx > ax + 12 ? `${ax},${ay} ${xm},${ay} ${xm},${by} ${bx - 1},${by}` : `${a.offsetLeft + 20},${a.offsetTop + a.offsetHeight} ${a.offsetLeft + 20},${by} ${bx - 1},${by}`;
+        sv("polyline", { points: pts, fill: "none", stroke: "#3A3F44", "stroke-width": 1.5, "stroke-dasharray": "4 3" }, verb);
+        sv("polygon", { points: `${bx - 1},${by} ${bx - 9},${by - 4} ${bx - 9},${by + 4}`, fill: "#3A3F44" }, verb);
+      });
+    });
+  }
+
+  /* ---------- Objektpalette, Tabellen und Felder ---------- */
+  const palette = $("objekte");
+  OBJEKTARTEN.forEach(t => {
+    const q = el("div", { class: "oq", "data-art": t, tabindex: "0", role: "button", title: `${t}: in den Bericht ziehen oder Enter` }, palette, t);
+    if (PRINT) { q.removeAttribute("tabindex"); q.removeAttribute("role"); return; }
+    ziehbar(q, () => t, ziel => ablegen({ art: t }, ziel));
+    q.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); ablegen({ art: t }, frei()); } });
+    q.addEventListener("dblclick", () => ablegen({ art: t }, frei()));
+  });
+  let tabAktiv = "Auftrag";
+  function tabellenListe() {
+    const t = $("tabellen");
+    t.textContent = "";
+    Object.keys(TABELLEN).forEach(n => {
+      const z = el("div", { class: "tl" + (n === tabAktiv ? " aktiv" : ""), id: "tab-" + n, tabindex: PRINT ? "-1" : "0" }, t, n);
+      if (PRINT) { z.removeAttribute("tabindex"); return; }
+      const w = () => { tabAktiv = n; tabellenListe(); felderListe(); demoPfeil(); };
+      z.addEventListener("click", w);
+      z.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); w(); } });
+    });
+  }
+  function felderListe() {
+    const f = $("felder"), T = TABELLEN[tabAktiv];
+    f.textContent = "";
+    $("felder-kopf").textContent = `Felder der Tabelle ${tabAktiv}`;
+    const gruppe = (titel, liste, kz) => {
+      if (!liste.length) return;
+      el("div", { class: "art" }, f, titel);
+      liste.forEach(n => {
+        const key = `${tabAktiv}.${n}`;
+        const z = el("div", { class: "fl" + (kz ? " kz" : "") + (S.demo && key === "Auftrag.Skonto" ? " quelle" : ""), "data-feld": key,
+          id: "feld-" + key.replace(/\W/g, ""), tabindex: "0",
+          title: `${kz ? "Kennzahl" : "Merkmal"} ${n} – in den Bericht oder auf ein Objekt ziehen` }, f, n);
+        if (PRINT) { z.removeAttribute("tabindex"); return; }
+        const quelle = { feld: n, tab: tabAktiv, kz };
+        ziehbar(z, () => n, ziel => ablegen(quelle, ziel));
+        z.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); ablegen(quelle, S.gewaehlt ? { obj: S.gewaehlt } : frei()); } });
+        z.addEventListener("dblclick", () => ablegen(quelle, S.gewaehlt ? { obj: S.gewaehlt } : frei()));
+      });
+    };
+    gruppe("Merkmale", T.m, false);
+    gruppe("Kennzahlen (kursiv)", T.k, true);
+  }
+  tabellenListe();
+  felderListe();
+
+  /* ---------- Ablegen: was beim Drop entsteht ---------- */
+  function frei() {                                           // freier Platz unten links, Objekte stapeln sich versetzt
+    const n = S.objekte.length;
+    return { x: 16 + (n % 5) * 14, y: 160 + (n % 5) * 8 };
+  }
+  function neu(typ, x, y, extra = {}) {
+    const o = Object.assign({ id: "o" + S.naechste++, typ, x: Math.round(x), y: Math.round(y), sel: [] }, extra);
+    S.objekte.push(o);
+    S.gewaehlt = o.id;
+    return o;
+  }
+  function ablegen(q, ziel) {
+    if (!ziel) return;
+    S.demo = false;
+    merken();
+    let o = ziel.obj ? obj(ziel.obj) : null, text = "";
+    if (q.art) {                                              // Objektart aus der Palette
+      const extra = q.art === "Text" ? { text: "Text", rahmen: false } : q.art === "Tabelle" || q.art === "Grafik" || q.art === "Einzelfeld" ? { kz: [] } : {};
+      const p = o ? { x: o.x + 24, y: o.y + 24 } : ziel;
+      o = neu(q.art, p.x, p.y, extra);
+      text = `Objekt ${q.art} eingefügt – Felder aus der Datenbank darauf ziehen.`;
+    } else {
+      const key = `${q.tab}.${q.feld}`, dim = DIM[key];
+      if (!q.kz && !dim) { verlauf.pop(); MK.meldung(`Für ${key} sind in der Beispielmaske keine Elemente hinterlegt – z. B. Kundenbezirk, Bezeichnung, Farbe oder PLIKZ ziehen.`); return; }
+      if (!o) {
+        o = q.kz ? neu("Einzelfeld", ziel.x, ziel.y, { kz: [q.feld] }) : neu("Spalte", ziel.x, ziel.y, { dim });
+        text = q.kz ? `Einzelfeld ${q.feld} angelegt.` : `Spalte ${DIMNAME[dim]} angelegt – Elemente anklicken, um verbundene Objekte zu filtern.`;
+      } else if (q.kz) {
+        if (o.typ === "Tabelle") {
+          o.kz = o.kz || [];
+          if (o.kz.includes(q.feld)) text = `${q.feld} steht schon in der Tabelle.`;
+          else { if (o.kz.length >= 4) o.kz.pop(); o.kz.push(q.feld); text = `${q.feld} als Wertspalte in die Tabelle übernommen.`; }
+        } else if (o.typ === "Grafik" || o.typ === "Einzelfeld") { o.kz = [q.feld]; text = `${o.typ} zeigt jetzt ${q.feld}.`; }
+        else if (LISTEN.includes(o.typ) && o.dim) { o.typ = "Tabelle"; o.kz = [q.feld]; text = `Aus der Spalte ${DIMNAME[o.dim]} wird eine Tabelle mit ${q.feld}.`; }
+        else { verlauf.pop(); MK.meldung(`Eine Kennzahl passt nicht auf das Objekt ${o.typ} – auf Tabelle, Grafik oder Einzelfeld ziehen.`); return; }
+      } else {
+        if (DATEN.includes(o.typ) || LISTEN.includes(o.typ)) {
+          if (o.typ === "Einzelfeld") { verlauf.pop(); MK.meldung("Ein Einzelfeld zeigt nur eine Kennzahl – Merkmal auf eine Tabelle oder freie Fläche ziehen."); return; }
+          o.dim = dim; o.sel = []; o.nur = false; o.aus = [];
+          text = `${o.typ} gliedert jetzt nach ${DIMNAME[dim]}.`;
+        } else { verlauf.pop(); MK.meldung(`Auf das Objekt ${o.typ} lässt sich kein Merkmal ziehen.`); return; }
+      }
+      S.gewaehlt = o.id;
+    }
+    zeichnen(); felderListe();
+    MK.meldung(text);
+  }
+
+  /* ---------- Ziehen mit Zeiger (Maus, Stift, Finger) ---------- */
+  function zielBei(x, y, ohne) {
+    const r = flaeche.getBoundingClientRect();
+    if (x < r.left || x > r.right || y < r.top || y > r.bottom) return null;
+    const sk = r.width / flaeche.offsetWidth;
+    const treffer = document.elementsFromPoint(x, y).map(e => e.closest && e.closest(".obj")).find(e => e && e.id !== ohne);
+    return treffer ? { obj: treffer.id } : { x: (x - r.left) / sk - 8, y: (y - r.top) / sk - 8 };
+  }
+  function ziehbar(q, text, fertig) {
+    q.addEventListener("pointerdown", e => {
+      if (e.button !== 0) return;
+      e.preventDefault(); q.focus();
+      const x0 = e.clientX, y0 = e.clientY;
+      let geist = null, ziel = null, markiert = null;
+      const bewegen = ev => {
+        if (!geist && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 5) return;
+        if (!geist) {
+          geist = el("div", { class: "zieh-geist" }, document.body, text());
+          const sk = $("seite").getBoundingClientRect().width / maske.offsetWidth;
+          geist.style.fontSize = 14 * sk + "px"; geist.style.lineHeight = 18 * sk + "px";
+          if (S.demo) { S.demo = false; zeichnen(); felderListe(); }
+        }
+        geist.style.left = ev.clientX + 12 + "px"; geist.style.top = ev.clientY + 10 + "px";
+        ziel = zielBei(ev.clientX, ev.clientY);
+        const m = ziel && ziel.obj ? $(ziel.obj) : null;
+        if (markiert && markiert !== m) markiert.classList.remove("ziel");
+        if (m) m.classList.add("ziel");
+        markiert = m;
+      };
+      const ende = () => {
+        removeEventListener("pointermove", bewegen); removeEventListener("pointerup", ende); removeEventListener("pointercancel", ende);
+        if (markiert) markiert.classList.remove("ziel");
+        if (!geist) return;
+        geist.remove();
+        fertig(ziel);
+      };
+      addEventListener("pointermove", bewegen); addEventListener("pointerup", ende); addEventListener("pointercancel", ende);
+    });
+  }
+  // Objekte verschieben, wählen, Elemente anklicken
+  if (!PRINT) flaeche.addEventListener("pointerdown", e => {
+    const d = e.target.closest(".obj");
+    if (!d) { if (S.gewaehlt) { S.gewaehlt = null; zeichnen(); } return; }
+    e.preventDefault();
+    const o = obj(d.id), r = flaeche.getBoundingClientRect(), sk = r.width / flaeche.offsetWidth;
+    const x0 = e.clientX, y0 = e.clientY, ox = o.x, oy = o.y;
+    const elem = e.target.closest("[data-el]");
+    let bewegt = false;
+    const bewegen = ev => {
+      const dx = (ev.clientX - x0) / sk, dy = (ev.clientY - y0) / sk;
+      if (!bewegt && Math.hypot(dx, dy) < 4) return;
+      if (!bewegt) { bewegt = true; merken(); S.demo = false; }
+      o.x = Math.round(ox + dx); o.y = Math.round(oy + dy);
+      d.style.left = o.x + "px"; d.style.top = o.y + "px";
+      pfeile();
+    };
+    const ende = () => {
+      removeEventListener("pointermove", bewegen); removeEventListener("pointerup", ende); removeEventListener("pointercancel", ende);
+      if (!bewegt && elem && o.sel && o.selektion !== false) {
+        merken();
+        const x = elem.dataset.el;
+        if (/Menü|Option/.test(o.typ)) o.sel = [x];
+        else o.sel = o.sel.includes(x) ? o.sel.filter(v => v !== x) : o.sel.concat(x);
+      }
+      if (S.demo && !bewegt) S.demo = false;
+      S.gewaehlt = o.id;
+      zeichnen(); felderListe();
+    };
+    addEventListener("pointermove", bewegen); addEventListener("pointerup", ende); addEventListener("pointercancel", ende);
+  });
+  addEventListener("keydown", e => {
+    if ((e.key === "Delete" || e.key === "Backspace") && S.gewaehlt && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) {
+      e.preventDefault(); merken();
+      S.objekte = S.objekte.filter(o => o.id !== S.gewaehlt); S.gewaehlt = null; S.demo = false;
+      zeichnen(); felderListe(); MK.meldung("Objekt gelöscht – „Zurück“ stellt es wieder her.");
+    }
+  });
+
+  /* ---------- Werkzeuge ---------- */
+  const brauchtObjekt = () => { const o = S.gewaehlt && obj(S.gewaehlt); if (!o) MK.meldung("Bitte zuerst ein Objekt im Bericht anklicken."); return o; };
+  const FUNK = {
+    zurueck: () => { if (!verlauf.length) return "Nichts rückgängig zu machen."; vorwaerts.push(kopie(S)); S = verlauf.pop(); return "Letzter Schritt zurückgenommen."; },
+    vor: () => { if (!vorwaerts.length) return "Kein Schritt zum Wiederholen."; verlauf.push(kopie(S)); S = vorwaerts.pop(); return "Schritt wiederholt."; },
+    start: () => { merken(); const d = S.demo; S = START(); S.demo = d; return "Bericht im Startzustand."; },
+    pfeile: () => { S.pfeile = !S.pfeile; $("k-pfeile").setAttribute("aria-pressed", String(S.pfeile));
+      return S.pfeile ? "Verbindungen sichtbar: Auswahl in Spalten filtert die Tabellen, Grafiken und Einzelfelder." : "Verbindungspfeile ausgeblendet."; },
+    lokal: o => { o.lokal = !o.lokal; return o.lokal ? `${o.typ} rechnet lokal – ohne Filter aus verbundenen Objekten.` : `${o.typ} folgt wieder den Verbindungen.`; },
+    optimieren: () => `Abfragen zusammengefasst: ${S.objekte.filter(o => DATEN.includes(o.typ)).length} Datenobjekte, ein Datenbankzugriff.`,
+    sortierung: o => { if (!o.kz || !o.kz.length) return "Sortiert werden Tabellen und Grafiken nach ihrer ersten Kennzahl.";
+      o.sort = o.sort === "ab" ? "auf" : o.sort === "auf" ? null : "ab";
+      return o.sort ? `${o.typ} nach ${o.kz[0]} ${o.sort === "ab" ? "absteigend" : "aufsteigend"} sortiert.` : "Sortierung aufgehoben."; },
+    nur: o => { if (!o.sel || !o.sel.length) return "Zuerst Elemente im Objekt anklicken."; o.nur = true; o.aus = []; return `Nur ${o.sel.join(", ")} sichtbar.`; },
+    aus: o => { if (!o.sel || !o.sel.length) return "Zuerst Elemente im Objekt anklicken."; o.aus = (o.aus || []).concat(o.sel); o.sel = []; o.nur = false; return "Gewählte Elemente ausgeblendet."; },
+    anfang: o => { anfang = { id: o.id, sel: (o.sel || []).slice(), aus: (o.aus || []).slice(), nur: !!o.nur }; return "Aktuelle Auswahl als Anfangszustand gespeichert."; },
+    zuruecksetzen: o => { const a = anfang && anfang.id === o.id ? anfang : { sel: [], aus: [], nur: false };
+      o.sel = a.sel.slice(); o.aus = a.aus.slice(); o.nur = a.nur; return "Auswahl auf den Anfangszustand zurückgesetzt."; },
+    zeichensatz: o => { o.fett = o.fett === false; return o.fett === false ? "Schrift normal." : "Schrift fett."; },
+    schriftfarbe: o => { o.grau = !o.grau; return o.grau ? "Fläche grau hinterlegt." : "Fläche weiß."; },
+    ausrichtung: o => { o.ausr = o.ausr === "left" ? "center" : o.ausr === "center" ? null : "left"; return `Ausrichtung ${o.ausr === "left" ? "links" : o.ausr === "center" ? "zentriert" : "Standard (Zahlen rechts)"}.`; },
+    farbe: o => { o.grau = !o.grau; return o.grau ? "Hintergrund grau." : "Hintergrund weiß."; },
+    rahmen: o => { o.rahmen = o.rahmen === false; return o.rahmen ? "Rahmen ein." : "Rahmen aus."; },
+    zahlenformat: o => { o.nk = o.nk ? 0 : 1; return `Zahlen mit ${o.nk} Nachkommastelle${o.nk === 1 ? "" : "n"}.`; },
+    grafik: o => { if (o.typ === "Tabelle" && o.dim && o.kz && o.kz.length) { o.typ = "Grafik"; return `Tabelle als Balkengrafik (${o.kz[0]}).`; }
+      if (o.typ === "Grafik") { o.typ = "Tabelle"; return "Grafik wieder als Tabelle."; } return "Grafik: zuerst eine Tabelle mit Kennzahl wählen."; },
+    spalten: o => { o.spalte = o.spalte === 110 ? 80 : (o.spalte || 80) + 15; return `Spaltenbreite ${o.spalte} px.`; },
+    sichtbar: o => { o.sichtbar = o.sichtbar === false; return o.sichtbar ? "Objekt im Bericht sichtbar." : "Objekt im Bericht unsichtbar (im Entwurf blass)."; },
+    selektion: o => { o.selektion = o.selektion === false; return o.selektion ? "Elemente sind anklickbar." : "Elemente sind nicht mehr anklickbar."; },
+    position: o => `Position ${o.x} / ${o.y} px, ${$(o.id).offsetWidth} × ${$(o.id).offsetHeight} px.`,
+    eigenschaften: o => `${o.typ}${o.dim ? " · Merkmal " + DIMNAME[o.dim] : ""}${o.kz && o.kz.length ? " · Kennzahlen " + o.kz.join(", ") : ""}${o.lokal ? " · lokal" : ""}.`,
+    "db-neu": () => "Neue Datenbankverbindung: in der Beispielmaske nicht hinterlegt.",
+    "db-oeffnen": () => "Verbindung „Auftragsdatenbank“ ist geöffnet.",
+    "db-info": () => "Auftragsdatenbank: 4 Tabellen, Würfel Kundenbezirk × Artikel × Farbe × Plan/Ist.",
+    "db-offline": () => "Offline: Der Bericht rechnet mit zwischengespeicherten Werten.",
+    "db-suchen": () => "Suchen: Feldnamen eingeben – in der Beispielmaske nicht hinterlegt.",
+    "db-tabneu": () => "Neue Tabelle: in der Beispielmaske nicht hinterlegt.",
+    "db-tabinfo": () => `Tabelle ${tabAktiv}: ${TABELLEN[tabAktiv].m.length} Merkmale, ${TABELLEN[tabAktiv].k.length} Kennzahlen.`,
+    "db-browse": () => `Durchsuchen: Elemente der Tabelle ${tabAktiv} – Merkmal in den Bericht ziehen, um sie zu sehen.`,
+    "db-feldinfo": () => "Feld-Info: Merkmale gliedern (Kundenbezirk, Farbe …), Kennzahlen sind Werte (kursiv).",
+  };
+  const OHNE_OBJEKT = ["zurueck", "vor", "start", "pfeile", "optimieren"];
+  maske.querySelectorAll("button.wz").forEach(b => b.addEventListener("click", () => {
+    const f = b.dataset.f;
+    if (f.startsWith("db-") || OHNE_OBJEKT.includes(f)) { const t = FUNK[f](); zeichnen(); felderListe(); MK.meldung(t); return; }
+    const o = brauchtObjekt();
+    if (!o) return;
+    merken();
+    const t = FUNK[f](o);
+    zeichnen(); MK.meldung(t);
+  }));
+  $("f-verbindung").addEventListener("change", e => {
+    if (e.target.value !== "auftrag") { MK.meldung("Beispielmaske: Nur die Auftragsdatenbank ist hinterlegt."); e.target.value = "auftrag"; }
+  });
+
+  /* ---------- Klappen ohne Maßstabssprung (wie Abb. 3.7), Pfeil der Druckfassung nachziehen ---------- */
+  if (!PRINT) {
+    const seite = $("seite"), rahmen = seite.parentElement;
+    let alt = null;
+    const merkenK = e => { if (e.target.closest && e.target.closest(".mk-band")) alt = seite.style.transform; };
+    const halten = e => {
+      if (alt === null || !(e.target.closest && e.target.closest(".mk-band"))) return;
+      const s = parseFloat((/scale\(([\d.]+)\)/.exec(alt) || [0, 1])[1]);
+      seite.style.transform = alt; alt = null;
+      rahmen.style.width = maske.offsetWidth * s + "px"; rahmen.style.height = maske.offsetHeight * s + "px";
+      demoPfeil();
+      if (MK._ebenenNeu) MK._ebenenNeu();
+    };
+    ["click", "keydown"].forEach(t => { maske.addEventListener(t, merkenK, true); maske.addEventListener(t, halten); });
+  }
+  zeichnen();
+
+  /* ---------- Lernplattform: Erläuterungen und Gestaltung ---------- */
+  MK.ebenen({
+    erlaeuterungen: {
+      titel: "Erläuterungen",
+      intro: "Wie ein Bericht im Reportgenerator per Drag & Drop entsteht. Ziehen Sie Objekte und Felder in den Bericht, klicken Sie Elemente einer Spalte an und probieren Sie die Werkzeuge am gewählten Objekt.",
+      eintraege: [
+        { nr: 1, ziel: "g-objekte", versatz: [-4, 2], titel: "Berichtsobjekte",
+          text: "Tabelle, Spalte, Zeile, Einzelfeld, Grafik, Auswahlobjekte wie Menü oder Optionsfeld sowie Text, Bild und Schaltfläche werden aus der Palette in den Bericht gezogen und dort frei angeordnet." },
+        { nr: 2, ziel: "g-felder", versatz: [-4, 2], titel: "Datenbank: Merkmale und Kennzahlen",
+          text: "Die Verbindung öffnet die Datenbank (hier die Auftragsdatenbank aus Abb. 5.40). Zu jeder Tabelle stehen ihre Felder bereit: Merkmale gliedern den Bericht, Kennzahlen (kursiv) liefern die Werte." },
+        { nr: 3, ziel: "geist", versatz: [0, -24], titel: "Drag & Drop",
+          text: "Ein Feld auf eine Tabelle gezogen ergibt eine neue Wertspalte – im Bild wird „Skonto“ gerade in die Tabelle gezogen. Auf freier Fläche wird aus einem Merkmal eine Spalte, aus einer Kennzahl ein Einzelfeld. Programmieren muss niemand." },
+        { nr: 4, ziel: "o3", anker: "links", versatz: [6, 40], titel: "Tabelle mit Gesamtzeile",
+          text: "Die Tabelle gliedert nach Kundenbezirk und zeigt Umsatz und Rabatt im Ist in Tsd. €; die Gesamtzeile rechnet der Generator selbst. Ziehen Sie z. B. „Bezeichnung“ auf die Tabelle, gliedert sie nach Artikeln." },
+        { nr: 5, ziel: "o2", versatz: [12, 1], titel: "Auswahl und Verbindungen",
+          text: "Die Spalte „Farbe“ ist ein Auswahlobjekt: Ein Klick auf Braunglas filtert alle verbundenen Objekte. „Pfeile“ zeigt diese Verbindungen; im Original waren Datenbank- und Sortierverbindungen rot bzw. blau gekennzeichnet." },
+        { nr: 6, ziel: "g-verbindungen", versatz: [-4, 2], titel: "Verbindungen",
+          text: "Zurück und Vor nehmen Schritte zurück bzw. wiederholen sie, Start stellt den Ausgangsbericht her. „Lokal“ löst ein Objekt aus den Verbindungen, „Sortierung“ ordnet nach der ersten Kennzahl." },
+        { nr: 7, ziel: "g-hierarchie", versatz: [-4, 2], titel: "Hierarchie",
+          text: "Angeklickte Elemente lassen sich allein zeigen oder ausblenden; der Anfangszustand speichert eine Auswahl, „Zurücksetzen“ stellt sie wieder her – so entstehen Drill-down und Ausschnitte ohne neue Abfrage." },
+        { nr: 8, ziel: "g-format", versatz: [-4, 2], titel: "Formatierung",
+          text: "Die Formatierung gilt für das gewählte Objekt: Schrift, Ausrichtung, Hintergrund, Rahmen, Zahlenformat, Spaltenbreite, Sichtbarkeit und Selektion. „Grafik“ stellt eine Tabelle als Balkengrafik dar." },
+      ],
+    },
+    gestaltung: {
+      titel: "Gestaltung",
+      intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
+      eintraege: [
+        { nr: "A", ziel: "kopf-titel", versatz: [-4, 4], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Programmfenster",
+          text: "Fensterrahmen, Menüleiste, die Symbolleiste (Neu, Öffnen, Sichern … Zoom), Statusleiste, Produktname und der Texturhintergrund der Arbeitsfläche entfallen. Übrig bleiben die Werkzeuge und der Bericht." },
+        { nr: "B", ziel: "band-werkzeuge", versatz: [-24, 2], regel: "ERWARTUNGSKONFORMITÄT", titel: "Feste Gruppen statt schwebender Fenster",
+          text: "Die schwebenden Werkzeugfenster stehen als feste Gruppen in der Lage des Originals: Verbindungen und Hierarchie oben links, Formatierung darunter, Objekte und Datenbank unten. Nichts verdeckt den Bericht." },
+        { nr: "C", ziel: "g-format", versatz: [-4, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Text statt Symbol",
+          text: "Die Symbole entfallen, die abgeschnittenen Beschriftungen („Zeichen..“, „Schriftf..“, „Positioni..“, „Eigensc..“) sind ausgeschrieben. Grau dargestellte, inaktive Werkzeuge melden jetzt, worauf sie wirken." },
+        { nr: "D", ziel: "schlitz-kopf", versatz: [26, -14], regel: "AUFGABENANGEMESSENHEIT", titel: "Drag & Drop sichtbar",
+          text: "Das Original zeigte einen leeren Entwurf. Jetzt zeigt das Bild einen Bericht im Aufbau: Das gezogene Feld, die gestrichelte Zielspalte und der Pfeil von der Feldliste machen die Aussage der Caption sichtbar." },
+        { nr: "E", ziel: "felder-kopf", versatz: [-4, 2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Merkmale und Kennzahlen getrennt",
+          text: "Die leeren Listen „Tabellen“ und „Felder“ des Originals sind gefüllt; die Felder stehen getrennt nach Merkmalen und Kennzahlen, damit klar ist, was gliedert und was rechnet." },
+        { nr: "F", ziel: "g-tabellen", versatz: [-4, 2], regel: "STEUERBARKEIT", titel: "Ziehen, Doppelklick oder Tastatur",
+          text: "Objekte und Felder lassen sich ziehen, doppelklicken oder mit Tabulator und Enter einfügen; Entf löscht das gewählte Objekt, „Zurück“ nimmt jeden Schritt zurück." },
+        { nr: "G", ziel: "o1", versatz: [26, 0], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Meldung statt Fehler",
+          text: "Passt ein Feld nicht auf das Zielobjekt – etwa ein Merkmal auf ein Einzelfeld –, erklärt eine Meldung, wohin es gehört; der Bericht bleibt unverändert. Objekte bleiben stets auf der Berichtsfläche." },
+        { nr: "H", ziel: "kopf-unter", versatz: [-4, 2], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Grau statt Farbe, erfundene Werte",
+          text: "Dunkelblaue Kopfzeilen, gelbe Fläche und die farbige Pfeillegende der Statusleiste entfallen. Bericht und Werte sind erfunden und nutzen die Datenbank aus Abb. 5.40; der Titel „Ohne Titel 1“ wird zum Bericht „Erlösschmälerungen“." },
+      ],
+    },
+  });
+  MK.fertig();
+})();
+
+</script>
+</body>
+</html>

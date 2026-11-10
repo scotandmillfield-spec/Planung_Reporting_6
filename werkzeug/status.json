@@ -1523,6 +1523,49 @@
     "Abb. 3.79–3.177 (Kap. 3.9) liegen in einer eigenen PowerPoint-Datei – noch nicht geliefert"
    ]
   },
+  "3.9.8.a": {
+   "status": "pruefung",
+   "datei": "Balanced_Chance_and_Cyber-Risk_Card_mit_Kennzahlen_je_Perspektive_und_Fuehrungsebene",
+   "kommentare": [
+    "Neue Abbildung nach Vorlage des Autors (SECURWARE 2025), ins Deutsche übertragen; senkrechter Titel links entfällt (gehört in die Caption); blaugraue Kennzahlkästen → Grau, graue Köpfe (Perspektiven, Rollen) → box_hi, Spalten als gestrichelte Container, Zeilen als Bänder",
+    "Keine Knotenpunkte: Abzweige der roten Wirkungslinien ohne Punkt (Vorgabe des Autors)",
+    "Übersetzung: Finance/Growth/Market/Process/Cyber Resilience → Finanzen, Wachstum (Lernen und Entwicklung), Markt, Prozesse, Cyber-Resilienz; Middle Mgmt./Employees → Mittleres Management/Mitarbeitende; Kennzahlen deutsch, Kürzel in Klammern (ROE, ROI, DSO, EAL, MTTD, MTTR); Net Promoter Score, Cyber-Value at Risk und CFO … CISO bleiben",
+    "Rot trägt die Kernaussage: Cyber-Kennzahlen in den übrigen Perspektiven (CLI, Phishing-Klickrate, Serviceausfallzeit je Kunde, Patch-Compliance-Rate) und die Perspektive Cyber-Resilienz; Wirkungspfeile als rote gepunktete Sammelleitung vom Erwarteten Jahresverlust (Original: diagonal, teils vom Perspektivkopf Cyber Resilience, ein Pfeil von links in CLI) – so gemeint?",
+    "Die sieben gestrichelten „…“-Platzhalterkästen entfallen; dadurch bleiben Zellen leer (Spalte Mitarbeitende nur mit Schulungsstunden je Jahr)",
+    "Kästen auf Zellgrenzen zugeordnet: Gewährleistungsquote → Prozesse (Original auf der Grenze Markt/Prozesse), ROI, Serviceausfallzeit je Kunde, Cyber-Value at Risk → C-Level, Mitarbeiterzufriedenheit → Mittleres Management – bitte prüfen",
+    "Rückfrage: Wofür steht CLI (Langform)? Abkürzung vorerst belassen",
+    "Caption-Hinweis: ‚… (In Anlehnung an … 2025)‘ – bitte genaue Quelle angeben (Autorenreihenfolge; SECURWARE 2025 oder erweiterte Fassung)"
+   ],
+   "alt": "Raster der Balanced Chance and Cyber-Risk Card: Die Zeilen sind die Perspektiven Finanzen, Wachstum (Lernen und Entwicklung), Markt, Prozesse und Cyber-Resilienz mit den verantwortlichen Rollen CFO, CHRO, CSO, COO und CISO, die Spalten die Führungsebenen C-Level, Mittleres Management und Mitarbeitende; in den Zellen stehen Kennzahlen wie Eigenkapitalrendite, Net Promoter Score oder Mean Time to Detect. In den vier übrigen Perspektiven ist je eine Cyber-Kennzahl rot hervorgehoben (CLI, Phishing-Klickrate, Serviceausfallzeit je Kunde, Patch-Compliance-Rate), zu der gepunktete Pfeile vom Erwarteten Jahresverlust der Perspektive Cyber-Resilienz führen. Die Abbildung zeigt, dass Cyber-Risiken in alle Perspektiven wirken und dort mit eigenen Kennzahlen gesteuert werden."
+  },
+  "3.9.8.b": {
+   "status": "pruefung",
+   "datei": "Strategien_der_Risikobehandlung_in_der_Risikomatrix",
+   "kommentare": [
+    "Neue Abbildung nach Vorlage des Autors (SECURWARE 2025), ins Deutsche übertragen: Likelihood of Occurance → Eintrittswahrscheinlichkeit (Tippfehler entfällt), Potential Damage → Schadenspotenzial; Transfer, Diversification, Avoidance, Reduction, Acceptance → Risikotransfer, Diversifikation, Vermeidung, Verminderung, Akzeptanz",
+    "Türkis → Anthrazit: gefüllte Kreise = Risiko vor der Maßnahme, hohle Kreise (weiß mit Kontur) = nach der Maßnahme; kurze Legende oben rechts, weil die Bedeutung sonst nirgends steht",
+    "Pinselstriche durch saubere Pfeile ersetzt; Verminderung bleibt diagonal, weil sie beide Dimensionen zugleich senkt; 3 × 3-Raster dünn gestrichelt grau; Achsentitel waagerecht (Eintrittswahrscheinlichkeit über der Achse)",
+    "Beschriftung Vermeidung links des Pfeils über dem Zielkreis (Original rechts außerhalb des Rasters), analog zu Verminderung",
+    "Kein Rot (keine einzelne Schlüsselstelle); auf Wunsch die fünf Strategiepfeile als rote Akzentlinien. Diversifikation: zwei Kreise gleich groß wie im Original – kleiner zeichnen (Teilrisiken)?",
+    "Caption-Hinweis: ‚… (In Anlehnung an … 2025)‘ – bitte genaue Quelle angeben (Autorenreihenfolge; SECURWARE 2025 oder erweiterte Fassung)"
+   ],
+   "alt": "Risikomatrix mit drei mal drei Feldern, senkrecht die Eintrittswahrscheinlichkeit, waagerecht das Schadenspotenzial; gefüllte Kreise zeigen Risiken vor, hohle Kreise nach der Maßnahme. Pfeile zeigen die Wirkung der Strategien: Risikotransfer senkt das Schadenspotenzial, Vermeidung die Eintrittswahrscheinlichkeit, Verminderung beides, Diversifikation verteilt ein Risiko auf zwei Risiken mit geringerem Schadenspotenzial. Bei Akzeptanz bleibt ein Risiko mit geringer Wahrscheinlichkeit und geringem Schaden unverändert."
+  },
+  "3.9.8.c": {
+   "status": "pruefung",
+   "datei": "Integriertes_Steuerungskonzept_mit_Cybersecurity",
+   "kommentare": [
+    "Neue Abbildung nach Vorlage des Autors (SECURWARE 2025), ins Deutsche übertragen; Petrol/Hellblau → Grau (Blöcke und Perspektivzeilen box_hi, BSC/KPIs und KPI-/KRI-Zellen weiß, Spalten strategisch/operativ als Bänder), Blockpfeile → normale Pfeile",
+    "Keine Knotenpunkte: Abzweige der roten Wirkungslinien ohne Punkt (Vorgabe des Autors)",
+    "Begriffe: Concept-orientated Steering → Konzeptionsorientierte Steuerung; Controlling Framework → Controlling-Konzeption (Reichmann, nicht ‚Framework‘; auf Wunsch ‚Mehrdimensionale Controlling-Konzeption‘); Regulations → Regulatorik; Cyber Security integrated Steering Concept → Integriertes Steuerungskonzept mit Cybersecurity; Economic/Technical View als ‚Ökonomische/Technische Sicht‘ waagerecht über dem Containertitel statt gedreht",
+    "Risikomatrix mit denselben Achsentiteln wie Abb. 3.9.8.b; kritische Risiken rot, unkritische grau; die drei Warndreiecke entfallen (keine Icons, Kritikalität schon durch Rot) – haben sie eine eigene Bedeutung (z. B. Cyberrisiken)?",
+    "Drei gleichmäßig verteilte Blockpfeile aus dem Band Risikomanagement → je ein Pfeil in jede der fünf Perspektiven",
+    "KRI 1 → KPI 1 und KRI 1 → KPI 2 als rote gestrichelte Akzentlinien, gebündelt (Original: zwei getrennte Pfeile, einer diagonal); Lage von KPI 1/2/3/n und KRI 1 wie im Original",
+    "Rückfrage: Perspektiven hier Finanzen, Prozesse, Markt, Mitarbeitende, Cyber-Resilienz (wie Original); Abb. 3.9.8.a hat Wachstum (Lernen und Entwicklung), andere Reihenfolge und ‚Mitarbeitende‘ als Führungsebene – vereinheitlichen?",
+    "Caption-Hinweis: ‚… (In Anlehnung an … 2025)‘ – bitte genaue Quelle angeben (Autorenreihenfolge; SECURWARE 2025 oder erweiterte Fassung)"
+   ],
+   "alt": "Oben stehen zwei Sichten: die ökonomische Sicht der konzeptionsorientierten Steuerung mit Controlling-Konzeption (BSC, KPIs) und Risikomanagement sowie die technische Sicht der Cybersecurity mit Regulatorik und KRIs; beide fließen in das integrierte Steuerungskonzept darunter. Dort speist eine Risikomatrix mit kritischen (rot) und unkritischen Risiken über das Risikomanagement die Perspektiven Finanzen, Prozesse, Markt, Mitarbeitende und Cyber-Resilienz, die in den Spalten strategisch und operativ mit KPIs gesteuert werden. Rote gestrichelte Pfeile zeigen, dass KRI 1 der Perspektive Cyber-Resilienz auf KPI 1 (Finanzen) und KPI 2 (Prozesse) wirkt."
+  },
   "3.178": {
    "status": "pruefung",
    "datei": "Verteilungs-_und_Verdichtungsfunktionen",

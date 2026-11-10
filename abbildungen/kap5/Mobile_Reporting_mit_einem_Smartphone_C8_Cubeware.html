@@ -827,7 +827,7 @@ const DK = (() => {
   }
 
   /* ---------- V2: ABC-Analyse nach Land – Umsatz (Balken), (Anteil), kum. Anteil, Klasse, (Ergebnis) ---------- */
-  const SP2 = PHONE ? { l: 101, u: 141, a: 0, k: 52, c: 34, e: 0, rh: 29 } : { l: 116, u: 150, a: 58, k: 62, c: 40, e: 64, rh: 48 };
+  const SP2 = PHONE ? { l: 101, u: 141, a: 0, k: 52, c: 34, e: 0, rh: 29 } : { l: 112, u: 140, a: 56, k: 80, c: 42, e: 60, rh: 48 };
   function laenderVisual(f, d) {
     const z = d.zeilen, n = z.length, kopfH = 18, Wd = f.breite, Hd = kopfH + Math.max(1, n) * SP2.rh;
     const svg = sv("svg", { width: Wd, height: Hd, role: "img", "aria-label": "ABC-Analyse nach Land", id: "la-svg" }, f.flaeche);
@@ -875,6 +875,7 @@ const DK = (() => {
     const zeit = `12 Monate bis ${mKurz(S.ende)}`;
     kopf(PHONE ? passt([`${zeit} · ${auswahl || reg}`, `bis ${mKurz(S.ende)} · ${auswahl || reg}`], S.sel ? 230 : 328)
                : passt([`Umsatz und Ergebnis · ${zeit} (${mKurz(ms[0])} bis ${mKurz(S.ende)}) · ${reg}${auswahl ? " · " + auswahl : ""} · Vergleich zum Budget (ΔBU)`,
+                        `Umsatz und Ergebnis · ${zeit} · ${reg}${auswahl ? " · " + auswahl : ""} · Vergleich zum Budget (ΔBU)`,
                         `${zeit} · ${reg}${auswahl ? " · " + auswahl : ""} · ΔBU`], 600));
     if (chip) chip.style.visibility = S.sel ? "visible" : "hidden";
 

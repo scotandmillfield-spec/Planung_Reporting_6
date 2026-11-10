@@ -585,6 +585,20 @@
    ],
    "alt": "Schematische Portalseite im Webbrowser: Oben liegt über die ganze Breite der Bereich Navigation & Konfiguration. Darunter stehen links Nachrichten und Suche, in der Mitte der hervorgehobene Detailbereich, etwa für eine BI-Applikation oder ein Analysesystem, und rechts Aktienkurse sowie Kommunikation & Kollaboration."
   },
+  "5.48": {
+   "status": "pruefung",
+   "datei": "Main_Dashboard_des_QlikView_Governance_Dashboards",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als interaktives Dashboard 1024 × 646 px nachgebaut; Reiterleiste (Operations, Applications, Scan Details …), grüner Produkttitel, Hilfesymbol und unscharf gemachte Nutzer-/App-Namen entfallen; Titel „Governance-Dashboard der BI-Plattform“, Namen erfunden (Frau Brandt …, „Sales 360“ → Vertriebsanalyse)",
+    "Alle Bereiche des Originals erhalten: Serverbetrieb und Nutzung (Heute/Gestern/7 Tage/28 Tage + Verlauf), Ladevorgänge mit Ladedauer, Tage seit letzter Aktualisierung, aktivste Nutzer und genutzte Apps (90 Tage, ohne anonyme), komplexeste Apps, Datenquellen; Kreisdiagramm (5 Segmente) → Balken, neutrale Bezeichnungen (QVD → Zwischendatei, Resident → Speichertabelle, Excel → Tabellenkalkulation)",
+    "28- und 90-Tage-Werte des Originals übernommen (1.312 Warnungen, 43 GB, 16 %, 275 Nutzer, 1.353 Sitzungen, 308/206/188/117/111, 7.694/1, 28 Aufträge, 9.009 Ladevorgänge, 3.571 fehlerhaft); Heute/Gestern/7 Tage (im Original überall 0 bzw. „–“) aus erfundenen Einzelsätzen passend dazu",
+    "Korrekturen/Annahmen: Ladedauer-Klassen ergaben 9.008 ≠ 9.009 → „1–5 Min“ 196; Klasse „0–7 Tage“ mit 26 Apps ergänzt (28 Ladeaufträge = 28 aktuelle Apps, 252 ohne Auftrag veraltet); Zeitraum der Ladevorgänge als 90 Tage angenommen; Fehler je Dauerklasse und Anteile der Datenquellen (aus dem Kreis geschätzt) erfunden – ok?",
+    "Farben: Rot nur für Warnungen, Fehler, fehlerhafte Ladevorgänge und veraltete Apps, sonst Anthrazit (Original: grüne/rote Balken ohne Bedeutung, komplexeste Apps rot); Verlauf über 28 Tage ab null statt zwei Wochen; Botschaft je Visual (z. B. „2 von 280 Apps genutzt“)",
+    "Online: Klick auf Nutzer oder App filtert die Nutzungstabelle, Klick auf Zeilen/Balken hebt hervor, Esc hebt auf",
+    "Caption ohne Produktnamen? z. B. ‚Hauptseite eines Governance-Dashboards für eine BI-Plattform‘"
+   ],
+   "alt": "Governance-Dashboard einer BI-Plattform zum Stichtag 15.12.2026: Links oben zeigen zwei Tabellen Serverbetrieb (Fehler, Warnungen, Arbeitsspeicher, CPU-Last, geladene Apps) und Nutzung (aktive Nutzer, genutzte Apps, Sitzungen, gleichzeitige Sitzungen) für heute, gestern, 7 und 28 Tage mit Verlauf; rechts stehen die Ladevorgänge nach Dauer mit fehlerhaften Anteilen und die Apps nach Tagen seit letzter Aktualisierung. Unten folgen die aktivsten Nutzer und genutzten Apps der letzten 90 Tage, die komplexesten Apps und die Datenquellen. Auffällig sind 1.312 Serverwarnungen in 28 Tagen, 39,6 % fehlerhafte Ladevorgänge und 252 von 280 Apps, die seit über 60 Tagen nicht aktualisiert wurden."
+  },
   "5.49": {
    "status": "pruefung",
    "datei": "Bildschirmaufloesung_und_Bildschirmgroesse",
@@ -596,6 +610,32 @@
     "Hinweis: Werte von ca. 2012 – aktualisieren (z. B. PC 1.920 × 1.080 bei 24 Zoll, Tablet 2.360 × 1.640 bei 10,9 Zoll, Smartphone 1.179 × 2.556 bei 6,1 Zoll)? Die Flächen passen sich im Skript an"
    ],
    "alt": "Maßstäblich ineinanderliegende Bildschirmflächen: Ein PC-Bildschirm mit z. B. 1.280 × 1.024 Pixeln und 17 Zoll umfasst unten links ein Tablet mit z. B. 1.280 × 768 Pixeln und 9,7 Zoll. Darin liegen ein Smartphone (320 × 480 Pixel, 3,5 Zoll) und ein Smartphone mit Tastatur (480 × 320 Pixel, 2,6 Zoll); die Abbildung zeigt, wie stark Auflösung und Größe der Endgeräte voneinander abweichen."
+  },
+  "5.50": {
+   "status": "pruefung",
+   "datei": "Exemplarischer_Du-Pont-Kennzahlen-Baum",
+   "kommentare": [
+    "Als interaktiver Kennzahlenbaum (Einzelvisual 110 × 77 mm) neu gebaut: ROI = Umsatzrendite × Kapitalumschlag, Umsatzrendite = Gewinn ÷ Umsatz, Kapitalumschlag = Umsatz ÷ Kapital; Rechenzeichen an den Verbindungen, Umsatz wie im klassischen Du-Pont-Schema unter beiden Ästen (Original: ein gemeinsames Umsatzdiagramm mit zwei Linien)",
+    "Werte des Originals (Excel-Objekt) übernommen: Gewinn 25–32, Umsatz 227–213, Kapital 180–202 Mio. €; Knoten aus den Blättern nachgerechnet – Original rechnete den ROI mit gerundeter Umsatzrendite (z. B. 13,87 % statt 13,89 %), auf eine Nachkommastelle identisch; ungenutzte zweite Wertereihe im Excel-Objekt nicht übernommen",
+    "Jahre 1–7 → 2023–2029, Jahre 6/7 als Plan gedeutet (im Original uneinheitlich heller/grau gefärbt) – ok?",
+    "Je Knoten: Wert des Stichjahres 2027, Vorjahr, Abweichung nach Wirkung (Kapital: Anstieg ungünstig) und Mini-Säulen der sieben Jahre (Ist anthrazit, Plan weiß umrandet) statt sechs Excel-Diagrammen mit Linien/Säulen, Gitternetz und Achsen",
+    "Korrektur: alle Säulen ab null (Original: Kapitalachse ab 150, Achsen bis −20 % bzw. −1.000 ohne negative Werte); englische Titel übersetzt (Return on Sales → Umsatzrendite, Capital Turn → Kapitalumschlag, Net Sales → Umsatz, Profit → Gewinn)",
+    "Online: Klick auf einen Knoten klappt seine Äste ein/aus, Klick auf eine Säule wählt das Jahr für den ganzen Baum, Esc zurück zu 2027; Botschaft nennt den treibenden Ast"
+   ],
+   "alt": "Du-Pont-Kennzahlenbaum: Links steht der Return on Investment (2027: 15,6 %, −0,1 %-Pkt. zum Vorjahr), der sich als Produkt aus Umsatzrendite (13,0 %) und Kapitalumschlag (1,20) ergibt; diese entstehen aus Gewinn (29 Mio. €) geteilt durch Umsatz (223 Mio. €) bzw. Umsatz geteilt durch Kapital (186 Mio. €). Jeder Knoten zeigt Vorjahreswert und Abweichung sowie Mini-Säulen für Ist 2023–2027 und Plan 2028–2029. Die Aussage lautet, dass der Kapitalumschlag 2027 sinkt, weil das Kapital stärker wächst als der Umsatz."
+  },
+  "5.51": {
+   "status": "pruefung",
+   "datei": "Scorecard-Analyse_mit_SAP_SEM",
+   "kommentare": [
+    "Produktscreenshot softwareneutral als interaktives Dashboard 1024 × 646 px nachgebaut; Fensterrahmen, Menü-/Symbolleisten, Logo, rote Markierung und das zweite, überlappende Fenster (Navigationsbaum, Kennzahldetails, Berichtsliste) entfallen – Navigation Perspektive › Ziel › Kennzahl steckt in der Tabelle, Verantwortliche im Tooltip",
+    "Inhalt des Fensters „Ursache-Wirkung Analyse“ vollständig übernommen: 4 Perspektiven, 7 Ziele, 9 Ursache-Wirkungs-Pfeile, 12 Kennzahlenzuordnungen mit Ist und Ziel (Werte des Originals); Perspektiven als durchgehende Bänder über Karte und Tabelle, deutsch und waagerecht (Financial/Extern/Intern/Innovationsperspektive → Finanzen/Kunden/Interne Prozesse/Lernen und Entwicklung)",
+    "Status barrierearm wie Abb. 3.182: fünf Ampelsymbole → Wörter nach Regel (über Ziel übertroffen, auf Ziel erreicht, bis −10 % im Rahmen, sonst kritisch; Ziel = schlechteste Kennzahl) – ergibt dieselbe Einstufung wie das Original; neu: Abweichung Ist zum Ziel als Balken nach Wirkung wie Abb. 3.2",
+    "Annahmen/Korrekturen: EUR → Tsd. €, Kosten positiv mit Wirkung „Anstieg ungünstig“; Ziel Durchlaufzeit im Original 0,000 → 20 Tage angenommen; „Schulungstage/MA 110/100“ als Schulungstage gesamt gelesen – bitte prüfen; „ST“/„T“ → Anzahl/Tage; Perioden 2000.002/2001.012 → 02/2027 und 12/2028",
+    "Name „Egger, Norbert“ (realer Name?) entfernt, Verantwortliche erfunden (Frau Brandt, Herr Tal …); Gruppenbezeichnung „IIT Gruppe“ entfällt, Scorecard heißt „Wertsteigerung“ wie im Original",
+    "Caption ohne Produktnamen? z. B. ‚Scorecard-Analyse mit Ursache-Wirkungs-Kette‘"
+   ],
+   "alt": "Dashboard einer Scorecard-Analyse: Links zeigt eine Ursache-Wirkungs-Kette die sieben strategischen Ziele in den Perspektiven Finanzen, Kunden, Interne Prozesse sowie Lernen und Entwicklung mit Pfeilen von den Ursachen zu den Wirkungen und je einem Status in Worten. Rechts stehen auf gleicher Höhe die Ziele mit ihren Kennzahlen, Ist, Ziel, Abweichung in Prozent als Balken und Status. Drei Ziele sind kritisch – Kundenbindung, Prozessoptimierung und Umsetzung Innovation –, die größte Lücke hat der Umsatz mit neuen Produkten mit −87,6 %."
   },
   "5.52": {
    "status": "pruefung",

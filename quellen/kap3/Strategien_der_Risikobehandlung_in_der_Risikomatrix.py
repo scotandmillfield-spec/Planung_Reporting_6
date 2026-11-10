@@ -76,19 +76,18 @@ def build(theme):
     vorher(vv, "Vermeidung vorher")
     nachher(vn, "Vermeidung nachher")
     f.arrow([(xv, vv[1] + D / 2 + GAP), (xv, vn[1] - D / 2 - GAP)], lw=LWP, name="Pfeil Vermeidung")
-    label(xv - 1.6, GY + 1.12 * CH, "Vermeidung", align="r")
+    label(xv - 1.6, GY + 2.08 * CH, "Vermeidung", align="r")   # wie Verminderung: über dem Zielkreis
 
     # ------------------------------------------------------------ Diversifikation: ein Risiko auf mehrere verteilt
     yd = GY + 1.52 * CH
-    dv = (GX + 1.72 * CW, yd)
+    dv = (GX + 1.78 * CW, yd)
     dn1 = (GX + 0.30 * CW, yd)
     dn2 = (GX + 0.30 * CW + 0.72 * D, yd)
     vorher(dv, "Diversifikation vorher")
     nachher(dn1, "Diversifikation nachher 1")
     nachher(dn2, "Diversifikation nachher 2")
     f.arrow([(dv[0] - D / 2 - GAP, yd), (dn2[0] + D / 2 + GAP, yd)], lw=LWP, name="Pfeil Diversifikation")
-    xm = (dv[0] - D / 2 - GAP + dn2[0] + D / 2 + GAP) / 2
-    label(xm, yd - 4.6, "Diversifikation")
+    label(GX + CW + 1.2, yd - 4.6, "Diversifikation", align="l")
 
     # ------------------------------------------------------------ Verminderung: beide Dimensionen sinken
     mv = (GX + 2.30 * CW, GY + 1.62 * CH)
@@ -101,7 +100,9 @@ def build(theme):
     a = (mv[0] + ux * (D / 2 + GAP), mv[1] + uy * (D / 2 + GAP))
     b = (mn[0] - ux * (D / 2 + GAP), mn[1] - uy * (D / 2 + GAP))
     f.arrow([a, b], lw=LWP, name="Pfeil Verminderung")
-    label(GX + 1.95 * CW, GY + 2.08 * CH, "Verminderung", align="r")
+    yl = GY + 2.06 * CH                      # links neben dem Pfeil, oberhalb des Zielkreises
+    xa = mv[0] + ux * (yl + 1.7 - mv[1]) / uy
+    label(xa - 2.6, yl, "Verminderung", align="r")
 
     # ------------------------------------------------------------ Akzeptanz: Risiko bleibt
     av = (GX + 0.45 * CW, GY + 2.58 * CH)

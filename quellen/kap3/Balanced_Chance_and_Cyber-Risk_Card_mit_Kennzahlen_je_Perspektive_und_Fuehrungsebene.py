@@ -3,7 +3,7 @@
 # Muster: Raster aus Perspektiven (Zeilen als Bänder, Kopf links) und Führungsebenen (Spalten als gestrichelte
 # Container); rechts die verantwortlichen Rollen. Cyber-Kennzahlen in den übrigen Perspektiven und die Perspektive
 # Cyber-Resilienz tragen die Kernaussage (rot); die Wirkungspfeile vom Erwarteten Jahresverlust laufen gebündelt
-# über eine Sammelleitung am linken Rand der Spalte C-Level. Titel senkrecht links und „…“-Platzhalter entfallen.
+# über eine Sammelleitung am linken Rand der Spalte C-Level (Abzweige ohne Knotenpunkte). Titel senkrecht links und „…“-Platzhalter entfallen.
 STEM = "Balanced_Chance_and_Cyber-Risk_Card_mit_Kennzahlen_je_Perspektive_und_Fuehrungsebene"
 from bookfig import Fig, P
 
@@ -133,5 +133,4 @@ def build(theme):
     for b in ziele[1:]:
         f.arrow([(xl, b.cy), (b.x, b.cy)], role="accent", lw=1.0, dash="sysDot", size="sm",
                 name="Wirkung EAL Abzweig")
-        f.ellipse(xl - 0.45, b.cy - 0.45, 0.9, 0.9, fill=t.accent, line="none", name="Knoten")
     return f

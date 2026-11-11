@@ -1,0 +1,1374 @@
+{
+ "titel": "Inhaltsrevision 6. Auflage",
+ "untertitel": "Planung und Reporting im BI-gestützten Controlling – was bleibt, was geht, was kommt",
+ "buch_repo": "https://github.com/scotandmillfield-spec/-6th-ed.-Planung-Reporting",
+ "stand": "2026-11-11",
+ "einstellungen": {
+  "exkurs_als_knoten_in": [
+   "cha:zusammenfassung-ausblick"
+  ],
+  "absaetze_ausblenden_unter": [
+   "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien",
+   "sec:Softwarelösungen für Planung und Reporting/reporting-und-planungsfunktionen-der-erp-systeme",
+   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme",
+   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn",
+   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme"
+  ]
+ },
+ "skalen": {
+  "bewertung": {
+   "aktuell": {
+    "text": "aktuell",
+    "farbe": "#00806B",
+    "erklaerung": "Inhalt ist auf dem Stand; allenfalls Belege auffrischen."
+   },
+   "teilweise": {
+    "text": "noch aktuell",
+    "farbe": "#B7791F",
+    "erklaerung": "Kern gültig, Beispiele, Belege, Abbildungen oder Rechtsstand veraltet."
+   },
+   "veraltet": {
+    "text": "veraltet",
+    "farbe": "#C62828",
+    "erklaerung": "Inhalt überholt: streichen, stark kürzen oder ersetzen."
+   },
+   "neu": {
+    "text": "neu (6. Aufl.)",
+    "farbe": "#3A3F44",
+    "erklaerung": "Für die 6. Auflage neu geschrieben oder angelegt."
+   },
+   "vorschlag": {
+    "text": "Vorschlag",
+    "farbe": "#6E747A",
+    "erklaerung": "Neuer Inhalt vorgeschlagen, noch nicht geschrieben."
+   },
+   "ungeprueft": {
+    "text": "ungeprüft",
+    "farbe": "#B5B5B5",
+    "erklaerung": "Noch keine Bewertung."
+   }
+  },
+  "empfehlung": [
+   "behalten",
+   "aktualisieren",
+   "ausbauen",
+   "überarbeiten",
+   "straffen",
+   "kürzen",
+   "stark kürzen",
+   "zusammenlegen",
+   "ersetzen",
+   "streichen",
+   "neu strukturieren",
+   "neu schreiben",
+   "fertigstellen"
+  ],
+  "entscheidung": {
+   "offen": "noch nicht besprochen",
+   "behalten": "bleibt (ggf. mit Aktualisierung)",
+   "überarbeiten": "bleibt, wird überarbeitet",
+   "kürzen": "bleibt gekürzt",
+   "streichen": "entfällt ersatzlos",
+   "aufnehmen": "wird neu aufgenommen",
+   "zurückgestellt": "spätere Auflage / Lernplattform"
+  },
+  "kanten": {
+   "struktur": {
+    "text": "Gliederung",
+    "stil": "linie"
+   },
+   "verweis": {
+    "text": "Querverweis im Text",
+    "stil": "punktiert"
+   },
+   "ersetzt": {
+    "text": "wird ersetzt durch",
+    "stil": "pfeil-rot"
+   },
+   "erweitert": {
+    "text": "wird erweitert durch",
+    "stil": "pfeil"
+   },
+   "zusammenlegen": {
+    "text": "zusammenlegen mit",
+    "stil": "pfeil-gestrichelt"
+   },
+   "verwandt": {
+    "text": "inhaltlich verwandt",
+    "stil": "gestrichelt"
+   }
+  }
+ },
+ "knoten": {
+  "ch:einfuehrung": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Aufbau trägt, beschreibt aber den Stand der 5. Auflage. Wird zuletzt an die endgültige Gliederung angepasst.",
+   "begruendung": "Belege 1995–2020 (Median 2011), Teradata-Studie von 2010; Kapitelüberblick nennt Hadoop, Smartpads, Mobile Computing."
+  },
+  "sec:einfuehrung-problemstellung": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Problemaufriss weiter gültig; Trendaufzählung (RPA, Chatbots, Data Discovery) und Belege sind von 2010–2020.",
+   "begruendung": "Um generative KI, KI-Agenten, Cloud-Datenplattformen und ESG-Berichtspflichten ergänzen; Studie „State of BI in Academia 2010“ ersetzen."
+  },
+  "sec:einfuehrung-zielsetzung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Zielsetzung und vier Kernfragen tragen unverändert. Kernfrage 4 (neue Technologien) kann auf KI zugespitzt werden."
+  },
+  "sec:einfuehrung-vorgehensweise": {
+   "bewertung": "teilweise",
+   "empfehlung": "neu schreiben",
+   "befund": "Kapitelüberblick spiegelt die 5. Auflage (Hadoop, Mobile Computing, Smartpads). Nach der Gliederungsentscheidung neu fassen.",
+   "begruendung": "Muss neues KI-Kapitel, Abschnitt 3.9.8 und gestrichene Teile abbilden.",
+   "meta": {
+    "abhaengig_von": "Gliederungsentscheidung mit dem Verlag"
+   }
+  },
+  "ch:grundlagen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Begriffliches Fundament (Management-Regelkreis, Definitionen, Vier-Felder-Ordnungsrahmen) ist zeitlos und trägt das ganze Buch.",
+   "begruendung": "Literatur 1972–2013 (Median 1999): klassische Standardwerke, auf aktuelle Auflagen umstellen."
+  },
+  "sec:grundlagen-zusammenhang": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Management-Regelkreis und Zeitdimensionen der Steuerung sind zeitlos."
+  },
+  "sec:grundlagen-grundlagen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Definitionen von Planung und Reporting gültig; Literatur auf aktuelle Auflagen heben."
+  },
+  "sec:grundlagen-planungsdefinition": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Planungsdefinition nach Wild und Teilplan-Interdependenzen sind Standardstoff; Exkurs Better/Beyond Budgeting weiterhin Teil der Diskussion.",
+   "begruendung": "Belege 1981–2009; Verweise auf In-Memory und Predictive Analytics schon enthalten."
+  },
+  "sec:grundlagen-ziele-planung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Planungsfunktionen zeitlos; Belege 1976–1992 durch aktuelle Lehrbuchauflagen ergänzen."
+  },
+  "sec:grundlagen-reportingdefinition": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Reportingdefinition und Abgrenzung (Weber, Horváth, Küpper, Blom) gültig."
+  },
+  "sec:grundlagen-ziele-reporting": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Ziele und Grundfragen des Reportings zeitlos."
+  },
+  "sec:grundlagen-beeinflussungsgroessen": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "Einflussgrößen gültig; regulatorische Berichtspflichten (z. B. Nachhaltigkeitsberichterstattung) als Einflussgröße ergänzen."
+  },
+  "sec:grundlagen-analyseprofil": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Vier-Felder-Ordnungsrahmen ist das Rückgrat des Buches. Feld IT-Unterstützung (Abb. 2.7) um KI/Cloud-Plattformen ergänzen."
+  },
+  "ch:fachliche-ausgestaltung": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Fachlicher Kern des Buches und weitgehend zeitlos. Veraltet sind vor allem Software-Beispiele, Screenshots und einzelne Visualisierungsformen.",
+   "begruendung": "Abschn. 3.9 allein ≈ 43.700 Wörter; größter Hebel für Umfang und Seitenzahl."
+  },
+  "sec:fa-strategiebezug": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Integrierte Unternehmensplanung und -steuerung, Roadmap, Prämissen und Top-Down-Vorgaben sind fachlich gültig."
+  },
+  "sec:fa-integration-steuerung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Balanced Chance and Risk Card ist zugleich Brücke zum neuen Abschn. 3.9.8. Belege 1993–2017 auffrischen."
+  },
+  "sec:fa-praemissen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Prämissenplanung und Top-Down-Vorgaben zeitlos."
+  },
+  "sec:fa-werttreiber": {
+   "bewertung": "aktuell",
+   "empfehlung": "ausbauen",
+   "befund": "Inhalt gültig, aber mit ≈ 250 Wörtern sehr knapp. Bietet sich als Anker für treiberbasierte Planung an (Bezug 3.13, 5.9.7)."
+  },
+  "sec:fa-struktur-navigation-reporting": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Struktur und Navigation im Reporting zeitlos."
+  },
+  "sec:fa-struktur-navigation-planung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Planungskalender und Teilplanungsgebiete zeitlos."
+  },
+  "sec:fa-reporting-planungsobjekte": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Dimensionen, Hierarchien, Attribute und Kennzahlen – Grundbegriffe, die in jedem BI-Werkzeug gelten."
+  },
+  "sec:fa-berichtsarten": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Standard-, Ausnahme-, Analyse- und Ad-hoc-Reporting gültig; Beleg 2006."
+  },
+  "sec:fa-berichtsgrundformen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Berichtsgrundformen sind zeitlos; Abbildungen werden im Buchstil neu gezeichnet."
+  },
+  "sec:fa-berichtsgestaltung": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Tabellen- und OLAP-Grundlagen gültig. Gestaltungshinweise ohne IBCS/SUCCESS, Diagrammbeispiele und Animationsteil 2011–2017.",
+   "begruendung": "Die neuen Dashboards der 6. Auflage folgen den SUCCESS-Regeln – der Text erwähnt IBCS bisher nur einmal (in Kap. 6)."
+  },
+  "sec:fa-filterkriterien": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Vor- und Detailselektion zeitlos."
+  },
+  "sec:fa-layout": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Grundraster gültig; generelle Gestaltungshinweise brauchen Bezug zu IBCS/SUCCESS und Barrierefreiheit."
+  },
+  "sec:fa-gestaltungshinweise": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Gestaltungshinweise (Hichert 2008, Bissantz 2013) gültig, aber ohne IBCS-Notation, Farbsehschwäche/Kontrast und Hinweis auf Flash/3D ist überholt."
+  },
+  "sec:fa-grundraster": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Elemente des Berichtsrasters (Navigation, Berichtsinformationen, CI, Selektion, Funktionen, Auswertungsbereich) zeitlos."
+  },
+  "sec:fa-tabellen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Tabellenformen und OLAP-Operationen (Slice/Dice, Drill-Down/-Through, Pivoting) sind Grundwissen und werkzeugunabhängig."
+  },
+  "sec:fa-diagramme": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Diagrammtypen weitgehend zeitlos; Beispiele aus Werkzeugen von 2011–2017 (amCharts, bime, QlikView, Cubeware) und fehlende Einordnung nach IBCS."
+  },
+  "sec:fa-diagramme/kreis-und-kuchendiagramme-donut-sunburst-und-treemap-charts": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig; kritische Einordnung von Kreisdiagrammen beibehalten."
+  },
+  "sec:fa-diagramme/portfolio-blasendiagramme": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "sec:fa-diagramme/saulen-balkendiagramme-und-bullet-charts": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig; Bullet-Charts sind Standard."
+  },
+  "sec:fa-diagramme/wasserfalldiagramme-histogramme-box-plot-und-trichterdiagram": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig; Cubeware-Beispiel (2011) softwareneutral ersetzen."
+  },
+  "sec:fa-diagramme/kurven-linien-punkt-und-flachendiagramme": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "sec:fa-diagramme/ampelsignale-und-heatmap": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig; Belege 2004–2010 auffrischen."
+  },
+  "sec:fa-diagramme/tachos-und-thermometer": {
+   "bewertung": "veraltet",
+   "empfehlung": "kürzen",
+   "befund": "Tachos und Thermometer gelten heute als platzintensiv bei geringer Informationsdichte. Nur noch als Negativbeispiel mit Verweis auf Bullet-Charts.",
+   "begruendung": "Widerspricht dem SUCCESS-Prinzip „Condense“; die Dashboard-Neugestaltung der 6. Auflage verzichtet darauf."
+  },
+  "sec:fa-diagramme/geo-visualisierung": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "Gültig; Beleg von 2003 ersetzen."
+  },
+  "sec:fa-diagramme/scoring-abbildung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "sec:fa-diagramme/spinnennetz-bzw-netzdiagramme": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig, kritisch einordnen (Flächenverzerrung)."
+  },
+  "sec:fa-diagramme/sparklines-bzw-microcharts": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig und in allen gängigen Werkzeugen verfügbar."
+  },
+  "sec:fa-diagramme/kurs-chartanalyse-diagramme": {
+   "bewertung": "teilweise",
+   "empfehlung": "zusammenlegen",
+   "befund": "Randthema für das Controlling (≈ 100 Wörter). In die Linien-/Kurvendiagramme integrieren oder streichen."
+  },
+  "sec:fa-diagramme/weitere-visualisierungshilfen-und-animationen": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Animationen, Flash, QlikView-Vorher/Nachher und 3D-Beispiele sind überholt. Durch Interaktivität heutiger Werkzeuge (Filterinteraktion, Tooltips, Drill) ersetzen.",
+   "begruendung": "Flash ist seit Ende 2020 abgekündigt (PRUEFEN-Hinweis im LaTeX)."
+  },
+  "sec:fa-kommentierungen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Kommentierung und Management Summary gültig; automatisch erzeugte Kommentare (KI-Narrative) und Data Storytelling fehlen."
+  },
+  "sec:fa-cockpit-steuerung": {
+   "bewertung": "teilweise",
+   "empfehlung": "straffen",
+   "befund": "Kennzahlen und Analysepfade der Cockpits sind fachlich zeitlos und der Kern des Buches. Abbildungen werden softwareneutral neu gebaut; Belege und redaktionelle Mängel der 5. Auflage sind zu bereinigen.",
+   "begruendung": "Umfang ≈ 43.700 Wörter. Option für den Verlag: ausführliche Kennzahlenkataloge auf die Lernplattform (interaktive Dashboards) auslagern und im Buch straffen.",
+   "meta": {
+    "option": "Kennzahlenkataloge teilweise auf die Lernplattform auslagern"
+   }
+  },
+  "sec:fa-cockpit-leitung-operativ": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Rentabilitäts-, Erfolgs-, Kosten-, Finanz- und Jahresabschlussanalyse fachlich gültig; Belege überwiegend 2011 und älter, Begriffe wie „EDV-Kosten“ und „Middle Case“ anpassen."
+  },
+  "sec:fa-leitung-kosten": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Kostenanalyse gültig; einziger Beleg von 1995, „EDV-Kosten“ → IT-Kosten."
+  },
+  "sec:fa-cockpit-leitung-strategisch": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Strategische Instrumente (PEST, SWOT, BCG, McKinsey) zeitlos; Nachhaltigkeitsteil und Ausgabeformate veraltet."
+  },
+  "sec:fa-cockpit-leitung-strategisch/strategisches-start-cockpit-nachhaltigkeit": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Nachhaltigkeit nur über SDGs; CSRD/ESRS (einschließlich der Omnibus-Änderungen 2025) fehlen. Krisenliste endet mit dem Stand der 5. Auflage; Bildrechte der SDG-Grafik klären."
+  },
+  "sec:fa-cockpit-leitung-strategisch/strategische-planung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Klassische Analyseinstrumente der strategischen Planung; mehrere doppelte Fußnoten der 5. Auflage bereinigen."
+  },
+  "sec:fa-cockpit-leitung-strategisch/kommentare-und-massnahmen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Kommentar- und Maßnahmenmanagement gültig; „PostScript“ als Ausgabeformat überholt, KI-gestützte Kommentierung ergänzen."
+  },
+  "sec:fa-cockpit-vertrieb": {
+   "bewertung": "aktuell",
+   "empfehlung": "überarbeiten",
+   "befund": "Vertriebskennzahlen gültig; Farbbeschreibungen beziehen sich auf das alte Layout, Belege 2005–2017."
+  },
+  "sec:fa-cockpit-produktion": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Produktionscontrolling fachlich gültig (OEE, Produktivität, Bestände, Qualität). Die 5. Auflage enthält hier viele abgebrochene Sätze und Formeln – redaktionell dringend.",
+   "begruendung": "54 PRUEFEN-Hinweise aus der Überführung, mehr als in jedem anderen Abschnitt."
+  },
+  "sec:fa-cockpit-einkauf": {
+   "bewertung": "aktuell",
+   "empfehlung": "überarbeiten",
+   "befund": "Einkaufskennzahlen gültig, aber fast ohne Belege (2 Belegstellen im ganzen Abschnitt)."
+  },
+  "sec:fa-cockpit-projektsteuerung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Einzel- und Multiprojektcontrolling gültig."
+  },
+  "sec:agile-projektsteuerung": {
+   "bewertung": "neu",
+   "empfehlung": "fertigstellen",
+   "befund": "Überschrift für die 6. Auflage angelegt, noch ohne Text.",
+   "begruendung": "Agile Steuerung (Sprints, Velocity, Burn-down, Release-Budgets) als Ergänzung zum klassischen Projektcontrolling."
+  },
+  "sec:fa-cockpit-personalsteuerung": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "Jüngster Teil des Cockpit-Kapitels (Belege 2020–2022). Rechtsstand prüfen: DSGVO/§ 87 BetrVG, Ausgleichsabgabe, Arbeitnehmerüberlassung; Corona-Begründungen streichen."
+  },
+  "sec:fa-cockpit-cybersecurity": {
+   "bewertung": "neu",
+   "empfehlung": "behalten",
+   "befund": "Neu in der 6. Auflage: Balanced Chance and Cyber-Risk Card mit Spitzenkennzahl, Perspektiven, Risikolandkarte und Wirkungsketten.",
+   "begruendung": "Grundlage sind die eigenen Veröffentlichungen zur BCCR-Card (SECURWARE 2025 und erweiterte Fassung)."
+  },
+  "sec:fa-planungsformulare": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Besonderheiten von Planungsformularen gültig; prevero-Beispiel (heute Unit4) und PASW (heute SPSS) veraltet, Power-ON-Beispiel (2023) aktuell. Masken softwareneutral neu bauen."
+  },
+  "sec:fa-abstimmung-planung-reporting": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Abstimmung von Planungs- und Reportinginhalten zeitlos."
+  },
+  "sec:fa-exemplarische-planungsgebiete": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Planungsgebiete fachlich gültig; sämtliche Beispiele und Masken stammen von 2007–2010 (SAP NetWeaver, BEx, Cubeware). Masken softwareneutral neu bauen, Belege erneuern.",
+   "begruendung": "Ankündigung im Einleitungstext passt nicht zu den tatsächlichen Unterabschnitten (PRUEFEN)."
+  },
+  "sec:fa-bsc-planung": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Balanced Scorecard in der strategischen Planung gültig; Beispiel „SAP NetWeaver“ (2010) ersetzen."
+  },
+  "sec:fa-trendanalysen-prognosen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Aktuellster Abschnitt aus Kap. 3 (Belege 2019–2024): Expertenprognose, Trendanalyse, Monte-Carlo, Prognosen mit SAP Analytics Cloud und R.",
+   "begruendung": "Brücke zum KI-Kapitel; Querverweis auf generative KI ergänzen."
+  },
+  "cha:organisation-prozesse": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Organisations- und Prozesslogik weitgehend zeitlos. Empirische Befunde (2004–2011), Software-Beispiele und Rechtsstand sind veraltet."
+  },
+  "sec:op-organisatorische-einbindung": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Einbindung nach Größe, Verbindungen, Aufbauorganisation, Führungsstil und Rollen gültig; Studienlage veraltet."
+  },
+  "sec:op-unternehmensgroesse": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "KMU-Merkmale gültig, aber gestützt auf Studien von 2005–2011 und eine veraltete IfM-Definition (Datum 2002). Studien erneuern oder als historisch kennzeichnen und straffen.",
+   "begruendung": "≈ 3.200 Wörter, 6 VERALTET-Hinweise."
+  },
+  "sec:op-it-gestuetzte-systeme": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Befund (Erhebung 2011, Schwelle 100 Beschäftigte) ist überholt: Self-Service-Werkzeuge wie Power BI haben die Einstiegshürde für KMU deutlich gesenkt."
+  },
+  "sec:op-kapitalabhaengigkeit": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Basel III ist seit 01.01.2025 mit der CRR III umgesetzt; Rechtsrahmen anpassen."
+  },
+  "sec:op-unternehmensverbindungen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Holding-Typen und Konzernverflechtungen zeitlos; Belege 2000–2008 auffrischen."
+  },
+  "sec:op-aufbauorganisation": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Funktionale, divisionale und Matrixorganisation gültig; agile/Produktorganisation als Ergänzung erwägen."
+  },
+  "sec:op-fuehrungsstil": {
+   "bewertung": "veraltet",
+   "empfehlung": "kürzen",
+   "befund": "Gestützt auf die MIND-Studien von 2004, die seit 2007 nicht fortgeführt werden. Als historischen Befund kennzeichnen oder durch neuere Typologie ersetzen."
+  },
+  "sec:op-beteiligte": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Rollenmodell (Adressaten, Koordinatoren, Ersteller) gültig; neue Rollen der Datenorganisation fehlen."
+  },
+  "sec:op-self-service-bi": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Self-Service BI ist kein Trend mehr, sondern Stand der Technik (Power BI u. a.); Belege 2014/2017. Governance (Managed Self-Service) und Adoption ergänzen.",
+   "begruendung": "Eigener Fachartikel zur SSBI-Adoption (BUSTECH 2026) bietet sich als Grundlage an."
+  },
+  "sec:op-prozesse": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Prozessmodell (Einführung, zyklische Planung/Reporting, Qualitätssicherung) zeitlos; Werkzeugbeispiele und Rechtsstand veraltet."
+  },
+  "sec:op-einfuehrungsprozess": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Einführungsprozess (Ist-Analyse, Blueprint, Fachkonzept, IT-Konzept, Auswahl, Implementierung) als Vorgehensmodell gültig."
+  },
+  "sec:op-it-konzept": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "IT-Konzept ohne Cloud-/SaaS-Architekturen; ergänzen."
+  },
+  "sec:op-it-auswahl": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "IT-Auswahl gültig; SaaS-Auswahl, Anbieterbindung und Datenhoheit ergänzen; „InfoSoft AG“ ist unbelegt."
+  },
+  "sec:op-it-implementierung": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Implementierung gültig; agile und cloudbasierte Einführung ergänzen."
+  },
+  "sec:op-planungsprozess": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Zyklischer Planungsprozess gültig; Planungskalender mit Jahreszahlen 2011–2013, rollierende und KI-gestützte Forecasts nur angerissen."
+  },
+  "sec:op-grundausrichtung-planung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Top-Down, Bottom-Up, Gegenstromverfahren zeitlos."
+  },
+  "sec:op-planungsvorbereitung": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Werkzeugbeispiel „Lotus Notes“ veraltet (heute z. B. MS Teams/Outlook)."
+  },
+  "sec:op-reportingprozess": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Prozesslogik der Berichterstellung gültig; alle Werkzeugbeispiele (Hyperion Application Link, BEx Analyzer, Cognos ReportNet/PowerPlay) sind abgekündigt."
+  },
+  "sec:op-berichterstellung": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Prozessschritte gültig, Beispiele und Abbildungen durchweg veraltet (Hyperion Application Link, SAP BEx Analyzer, Cognos ReportNet). Softwareneutral oder mit aktuellen Werkzeugen neu fassen."
+  },
+  "sec:op-berichterstellung/informationsaufbereitung-und-verdichtung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "sec:op-analysevorbereitung": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Datenqualität als häufigstes Problemfeld mit Belegen von 2008/2011 – aktuelle Umfrage heranziehen; KI-gestützte Abweichungsanalyse ergänzen."
+  },
+  "sec:op-berichtsbereitstellung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Bereitstellung über Web und MS Teams mit Belegen 2023/2024 aktuell."
+  },
+  "sec:op-informationsanalyse": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Informationsanalyse und Berichtspräsentation gültig; Beispiel Cognos PowerPlay veraltet."
+  },
+  "sec:op-informationsanalyse/informationsanalyse-des-berichtsempfangers": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Beispiel und Abbildung „Multidimensionale Analysen mit Cognos PowerPlay“ (2004) ersetzen."
+  },
+  "sec:op-qualitaetssicherungsprozess": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Qualitätssicherung gültig; Datenqualitätsteil hat Rechtsstand 2021."
+  },
+  "sec:op-qs-datenqualitaet": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Datenqualitätsmanagement inhaltlich stark (Belege bis 2021). Rechtsstand heben: EU Data Act, KI-Verordnung; Data Governance ausbauen."
+  },
+  "sec:op-qs-informationssystem": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Prüfung des Informationssystems gültig; CeBIT-Beispiel entfernt, Belege 2011."
+  },
+  "sec:bi_gestuetztes_controlling": {
+   "bewertung": "teilweise",
+   "empfehlung": "neu strukturieren",
+   "befund": "Größtes Kapitel (≈ 65.000 Wörter, ≈ 40 % des Buches) und der am schnellsten alternde Teil. Grundlagen (DWH, ETL, OLAP, Modellierung) bleiben, Werkzeug-, Mobile-, Big-Data- und Softwareteile sind überholt; generative KI fehlt ganz.",
+   "begruendung": "Gliederungsfehler im LaTeX: „Spezielle Software“ und „BI-gestützte Systeme“ hängen als 5.10.3.1/5.10.3.2 unter „Tabellenkalkulation“ statt als 5.10.4/5.10.5. Viele Abschnitte ohne \\label."
+  },
+  "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Ordnungsrahmen und Referenzarchitektur gültig; Cloud-Datenplattform, semantische Schicht und KI-Komponenten fehlen."
+  },
+  "sec:bi_definition": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "BI-Definitionen gültig (Belege 1997–2015); Abgrenzung zu Data & Analytics und KI ergänzen."
+  },
+  "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling/business-intelligence-referenzarchitektur": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Referenzarchitektur (Belege 2020/21) ist Leitlinie des Kapitels – um Lakehouse/Cloud-Datenplattform, semantische Schicht und LLM-Komponenten erweitern."
+  },
+  "sec:betriebliche_applikationssysteme": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Systemdimensionen und Integration gültig; Cloud-Teil teils aktualisiert."
+  },
+  "sec:betriebliche_applikationssysteme/dimensionen-betrieblicher-it-systeme": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "Dimensionen betrieblicher IT-Systeme (Belege 1988–2011) gültig, aber lehrbuchhaft breit."
+  },
+  "sec:historische_entwicklung": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "Historie bleibt gültig; bis in die Cloud-/KI-Phase fortschreiben."
+  },
+  "sec:betriebsformen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "On-Premise vs. Cloud gültig, Belege überwiegend 2010–2012 (vereinzelt 2024). SaaS als Normalfall, Datensouveränität und EU Data Act ergänzen."
+  },
+  "sec:horizontale_und_vertikale_integration": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Horizontale/vertikale Integration (2019) gültig; API- und ereignisgesteuerte Integration ergänzen."
+  },
+  "sec:etl_prozess": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "ETL-Prozess mit Case-Study gültig und didaktisch stark; ELT in Cloud-Plattformen und Datenpipelines ergänzen."
+  },
+  "sec:case_study_sofias_coffee_dream_ein_innovatives_kaffeehaus": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Case-Study „Sofias Coffee Dream“ gut geeignet.",
+   "begruendung": "Schreibweise mit der Lernplattform abgleichen (dort „Sophias Coffee Dream“)."
+  },
+  "sec:data_warehouse": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "DWH-Grundlagen gültig (Belege Median 2008); Cloud-DWH und Abgrenzung zum Lakehouse ergänzen."
+  },
+  "sec:data_marts": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Data Marts und OLAP-Modellierung sind Grundwissen."
+  },
+  "sec:OLAP": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "OLAP-Grundlagen gültig."
+  },
+  "OLAP-Datenmodellierung und -speicherung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Star-, Snowflake-, Galaxy-Schema und Konten- vs. Kennzahlenmodell zeitlos; Power-BI-Beispiel aktuell."
+  },
+  "sec:olap_speicherkonzepte": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "ROLAP/MOLAP/HOLAP auf das Grundprinzip kürzen; heutige spaltenorientierte In-Memory-Engines einordnen."
+  },
+  "sec:data_marts/abgrenzung-von-data-mart-und-core-data-warehouse": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Abgrenzung Data Mart / Core-DWH (Belege 2021) aktuell."
+  },
+  "sec:big_data": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "„Big Data“ ist als Schlagwort weitgehend in Data & Analytics aufgegangen. 4-V-Modell und analytische Datenbanken kurz halten, Hadoop-Teil ersetzen."
+  },
+  "das_4-v-modell": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "4-V-Modell als Begriffsrahmen kurz behalten."
+  },
+  "sec:Technische Grundlagen für Big Data": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Technische Grundlagen: In-Memory und analytische Datenbanken gültig, Hadoop und NoSQL-Teil überholt bzw. zu breit."
+  },
+  "sec:In-Memory-Technik": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "In-Memory-Technik gültig."
+  },
+  "sec:Technische Grundlagen für Big Data/nosql-datenbanken": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "NoSQL-Kategorien und CAP-Theorem für das Controlling zu ausführlich (≈ 1.000 Wörter)."
+  },
+  "sec:Technische Grundlagen für Big Data/hadoop": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "Hadoop hat als Plattform an Bedeutung verloren; abgelöst durch Cloud-Objektspeicher, Spark und Lakehouse-Formate.",
+   "begruendung": "Ersetzen durch den Vorschlag „Moderne Datenarchitekturen“."
+  },
+  "sec:Analytische_Datenbanken": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "Spaltenorientierte analytische Datenbanken gültig; heute als Cloud-DWH-Dienste verbreitet."
+  },
+  "sec:Explorative_Business_Intelligence_und_Business_Analytics": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Explorative BI, Sandboxing, Analysespektrum gültig (Belege bis 2024); Architekturbild um Lakehouse/KI ergänzen."
+  },
+  "sec:Analyse-_und_Planungswerkzeuge": {
+   "bewertung": "teilweise",
+   "empfehlung": "neu strukturieren",
+   "befund": "Werkzeugklassen nach dem Stand um 2011; Mobile-Teil (≈ 7.000 Wörter) überholt."
+  },
+  "sec:Freie_Datenrecherchen_und_Abfragengeneratoren": {
+   "bewertung": "veraltet",
+   "empfehlung": "kürzen",
+   "befund": "Freie Datenrecherche mit SQL/MS-Access-Abfragegenerator (Belege 2006–2010). Heute: natürlichsprachliche Abfragen über KI-Assistenten."
+  },
+  "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Oberflächenklassen (proprietäre Reportgeneratoren, Web, Excel-Add-in) und Beispiele (arcplan, Diamant/3 IQ, BEx) von 2011. Durch heutige Frontend-Landschaft ersetzen."
+  },
+  "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen/internetgestutzte-reportgeneratoren-mit-web-oberflache": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Webfrontends sind heute Normalfall; Vorteilsliste veraltet."
+  },
+  "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen/tabellenkalkulationsgestutzte-berichtssysteme-mit-excel-add-": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Excel-Integration bleibt relevant; BEx Analyzer ist durch Analysis for Office abgelöst."
+  },
+  "sec:Modellbasierte_Analyse-_und_Prognosewerkzeuge": {
+   "bewertung": "teilweise",
+   "empfehlung": "zusammenlegen",
+   "befund": "Modellbasierte Prognosewerkzeuge (Beleg 2004) mit 3.13 bzw. dem KI-Teil zusammenführen."
+  },
+  "Besonderheiten_der_Planungswerkzeuge": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Besonderheiten von Planungswerkzeugen gültig (Belege 2003–2006); integrierte Planung in BI-Plattformen (Write-back) und xP&A fehlen."
+  },
+  "Portale_und_Embedded_BI": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Portale sind weitgehend abgelöst; Embedded BI (z. B. in MS Teams) aktuell."
+  },
+  "BI_Monitoring_BI_on_BI_und_Reporting_2.0": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "BI on BI (Nutzungsmonitoring) gültig; Begriff „Reporting 2.0“ streichen."
+  },
+  "Distribution": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Verteilwege (Belege 2010/11) um Abonnements, Kollaborationsplattformen und Push-Benachrichtigungen aktualisieren."
+  },
+  "sec:Analyse-_und_Planungswerkzeuge/ausgabeformate-und-medien": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Ausgabeformate gültig; Bildschirmbeispiele mit BlackBerry/Smartpad veraltet."
+  },
+  "sec:Analyse-_und_Planungswerkzeuge/ausgabeformate-und-medien/paginierte-berichte": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Paginierte Berichte weiterhin relevant."
+  },
+  "Weitere_Nutzungsmöglichkeiten_für_Managementaufgaben_(Konsolidierung_Balanced Scorecard_Risikomanagement)": {
+   "bewertung": "veraltet",
+   "empfehlung": "zusammenlegen",
+   "befund": "Konsolidierung, BSC und Risikomanagement mit Beispiel SAP SEM (2003). Inhalt mit 3.12.1 bzw. 3.1.1 zusammenführen, Beispiel streichen."
+  },
+  "sec:Mobile Computing": {
+   "bewertung": "veraltet",
+   "empfehlung": "stark kürzen",
+   "befund": "Mobile Computing (≈ 7.000 Wörter) beschreibt Endgeräte, Netze und Plattformen um 2011–2017. BARC führt Mobile BI im Trend-Monitor 2024 nicht mehr. Auf 1–2 Seiten „Mobile BI und Responsive Design“ verdichten."
+  },
+  "sec:mobile_endgeräte": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "Notebooks, Netbooks, BlackBerry, Windows Phone – Geräteklassen-Beschreibung ohne Mehrwert."
+  },
+  "sec:Mobile Computing/drahtlose-netzwerke": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "UMTS/GPRS; UMTS ist in Deutschland seit 2021 abgeschaltet."
+  },
+  "sec:app": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "App-Konzept (SAP Fiori 2017) auf Grundprinzip kürzen."
+  },
+  "sec:Mobile Business Intelligence": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "Native vs. Web-Anwendung und Mobile Device Management als Kern behalten, Rest kürzen."
+  },
+  "sec:Mobiles Reporting und mobile Planung": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "Studien 2010/11; Funktionsliste mobiler Reporting- und Planungslösungen kürzen."
+  },
+  "sec:Mobile Computing/mobile-erfolgspotenziale": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "Erfolgspotenziale mit Belegen 2008–2011."
+  },
+  "sec:querschnittsfunktionen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Berechtigungen und Metadaten gültig; Belege 2003/2009."
+  },
+  "sec:Berechtigungssystem_und_Zugriffssteuerung": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Rollen- und Zugriffskonzepte gültig; Row-Level-Security, Zero Trust und Bezug zum Cybersecurity-Controlling (3.9.8) ergänzen."
+  },
+  "sec:querschnittsfunktionen/metadatenmanagement": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Metadatenmanagement um Datenkatalog, Data Lineage und semantische Schicht erweitern."
+  },
+  "sec:ki_es_dm_rpa_cb": {
+   "bewertung": "veraltet",
+   "empfehlung": "neu strukturieren",
+   "befund": "Stand vor ChatGPT (Belege bis 2020): generative KI, Large Language Models und KI-Agenten fehlen vollständig. Grundlagen ML/DL bleiben.",
+   "begruendung": "Geplant ist ein eigenes Hauptkapitel zu generativer KI (siehe Vorschlag)."
+  },
+  "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Schwache/starke KI gültig; Foundation Models und generative KI einordnen."
+  },
+  "sec:Machine Learning, Deep Learning und Neuronale Netze": {
+   "bewertung": "aktuell",
+   "empfehlung": "aktualisieren",
+   "befund": "ML, Deep Learning, Neuronale Netze gültig (Belege bis 2024); Transformer-Architektur ergänzen."
+  },
+  "sec:ki_es_dm_rpa_cb/expertensysteme-xps": {
+   "bewertung": "veraltet",
+   "empfehlung": "zusammenlegen",
+   "befund": "Expertensysteme sind ein historischer Ansatz; als Absatz in 5.9.1 aufgehen lassen."
+  },
+  "sec:Data Mining, Text Mining, Web Mining und Predictive Analytics": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Data Mining und CRISP-DM gültig; Web-Mining-Beispiele (DynaSight, Comshare, BullsEye, 2004) veraltet."
+  },
+  "sec:rpa": {
+   "bewertung": "teilweise",
+   "empfehlung": "kürzen",
+   "befund": "RPA-Architektur gültig, wird aber zunehmend von KI-Agenten abgelöst. Kürzen und gegen Agenten abgrenzen."
+  },
+  "sec:ki_es_dm_rpa_cb/chatbots-conversational-ux": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Chatbots mit Siri/Alexa und regelbasierten Dialogen (Belege 2016–2020). Durch LLM-basierte Assistenten/Copilots ersetzen."
+  },
+  "sec:ki_rpa_chatbots_planung_reporting": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Gliederung nach Aufgaben (strategisch, operativ, Werttreiber, Szenarien, Analysen) gut; Inhalte von 2019/2020 mit generativer KI neu füllen."
+  },
+  "sec:ki_rpa_chatbots_planung_reporting/werttreiberplanung-mit-simulationen-oder-sensitivitatsanalys": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Werttreiberplanung mit Simulation/Sensitivität gültig."
+  },
+  "sec:ki_rpa_chatbots_planung_reporting/szenarioanalysen": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Szenarioanalysen und Bandbreitenplanung gültig."
+  },
+  "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Herausforderungen (Data Scientists, Datenqualität) um EU KI-Verordnung, Halluzinationen und KI-Governance ergänzen."
+  },
+  "sec:Softwarelösungen für Planung und Reporting": {
+   "bewertung": "veraltet",
+   "empfehlung": "neu schreiben",
+   "befund": "Softwarelandschaft nach Stand 2011–2015 (SAP ERP CC, Hyperion Planning, MS Access, prevero). Kriterienraster behalten, Systemklassen und Beispiele neu fassen.",
+   "begruendung": "Gliederungsfehler: 5.10.3.1 und 5.10.3.2 sind eigentlich gleichrangige Abschnitte 5.10.4/5.10.5."
+  },
+  "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Kriterienraster gültig; Cloud-, KI- und Governance-Kriterien ergänzen."
+  },
+  "sec:Softwarelösungen für Planung und Reporting/reporting-und-planungsfunktionen-der-erp-systeme": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "ERP-Berichte am Beispiel SAP ERP CC (2011). Heute: Embedded Analytics in S/4HANA bzw. Cloud-ERP."
+  },
+  "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Excel bleibt das meistgenutzte Werkzeug; Power Query/Power Pivot und KI-Funktionen fehlen."
+  },
+  "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "Eigenentwicklungen auf relationaler Datenbank (MS Access, Visual Studio) als eigene Systemklasse überholt; in xP&A/Planungsplattformen aufgehen lassen."
+  },
+  "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "BI-gestützte Systeme bleiben die Zielarchitektur; Hyperion-Beispiele ersetzen, Cloud-Plattformen ergänzen."
+  },
+  "cha:zusammenfassung-ausblick": {
+   "bewertung": "veraltet",
+   "empfehlung": "neu schreiben",
+   "befund": "Ausblick der 5. Auflage – altert am schnellsten. Nach Abschluss der übrigen Kapitel neu schreiben; Gliederung in Abschnitte 6.1–6.4 nach den vier Analysefeldern erwägen.",
+   "begruendung": "Ohne nummerierte Abschnitte erscheinen die 24 Stichpunkte nicht im Inhaltsverzeichnis."
+  },
+  "cha:zusammenfassung-ausblick/fachlicher-inhalt": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Kernaussagen zur Integration gültig, Beispiele (prevero 2011, pmOne OneMind) veraltet."
+  },
+  "cha:zusammenfassung-ausblick/organisation": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Organisatorische Trends gültig; Datensicherheit mit Cybersecurity-Controlling verknüpfen."
+  },
+  "cha:zusammenfassung-ausblick/prozesse": {
+   "bewertung": "teilweise",
+   "empfehlung": "überarbeiten",
+   "befund": "Prozesstrends gültig bis auf die RPA-Einordnung."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung": {
+   "bewertung": "veraltet",
+   "empfehlung": "neu schreiben",
+   "befund": "IT-Trends von 2016–2017 (BARC); generative KI und KI-Agenten fehlen, Mobile und Open Source falsch gewichtet."
+  },
+  "cha:zusammenfassung-ausblick/fachlicher-inhalt/integrierte-planung-und-reporting-im-bi-gestutzten-controlli": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Leitgedanke des Buches, gültig."
+  },
+  "cha:zusammenfassung-ausblick/fachlicher-inhalt/erhohte-entscheidungsqualitat-durch-business-analyse-und-fac": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/fachlicher-inhalt/ausbau-der-planungs-und-analysefunktionen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Beispiel prevero (Vortrag 2011) ersetzen."
+  },
+  "cha:zusammenfassung-ausblick/fachlicher-inhalt/standardlosungen-und-abbildung-individueller-anforderungen": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Beispiel pmOne OneMind (2011) nicht mehr nachweisbar."
+  },
+  "cha:zusammenfassung-ausblick/organisation/starkung-der-organisation-fur-planung-und-reporting": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/organisation/datensicherheit-und-leistungsfahige-berechtigungs-und-zugrif": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Mit Cybersecurity-Controlling (3.9.8) verknüpfen."
+  },
+  "cha:zusammenfassung-ausblick/organisation/adressatengerechte-aufbereitung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/organisation/verteilung-und-zusammenarbeit-collaboration": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Kollaboration (MS Teams) aktuell."
+  },
+  "cha:zusammenfassung-ausblick/prozesse/generelle-prozessunterstutzung": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/prozesse/datenqualitatsmanagement": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/prozesse/bilaterale-integration-von-bi-und-erp-planungs-und-reporting": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "BI-/ERP-Integration heute über Cloud-Plattformen und APIs."
+  },
+  "cha:zusammenfassung-ausblick/prozesse/alternative-und-zirkulare-prozesse": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/prozesse/substitution-manueller-berichterstellungsprozesse-durch-rpa": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "RPA als „Zwischentechnologie“ – Aufgabe wird zunehmend von KI-Agenten übernommen."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/leistungsfahige-frontends": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Frontends heute mit KI-Assistenten und natürlichsprachlicher Abfrage."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/data-discovery-und-data-visualization": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Belege BARC 2016/2017, an anderer Stelle 2024 – vereinheitlichen."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/big-data-data-mining-und-predictive-analytics": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "In Data & Analytics bzw. KI aufgegangen."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/data-warehouse-modernisierung-hybride-traditionelle-und-expl": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "DWH-Modernisierung heute als Lakehouse/Cloud-Datenplattform."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/machine-learning-und-ki-gestutzte-analytics-sowie-chatbots": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Generative KI und KI-Agenten fehlen; Chatbot-Begriff überholt."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/mobile-systeme": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "Mobile BI ist Normalfall und kein eigener Trend mehr."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/cloud-computing-versus-on-premise": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Cloud ist Regelbetrieb; Souveränität und Kosten in den Vordergrund."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/self-service-bi-und-sandboxing": {
+   "bewertung": "teilweise",
+   "empfehlung": "aktualisieren",
+   "befund": "Self-Service ist Standard; Governance betonen."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/embedded-bi-und-bi-portalintegration": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/bi-monitoring-bzw-bi-on-bi": {
+   "bewertung": "aktuell",
+   "empfehlung": "behalten",
+   "befund": "Gültig."
+  },
+  "cha:zusammenfassung-ausblick/it-unterstutzung/open-source-produkte": {
+   "bewertung": "veraltet",
+   "empfehlung": "ersetzen",
+   "befund": "Aussage „Durchsetzung nicht absehbar“ überholt: Python, R und Open-Source-Datenformate sind Standard."
+  }
+ },
+ "vorschlaege": [
+  {
+   "id": "vorschlag:genai",
+   "parent": "buch",
+   "nach": "sec:bi_gestuetztes_controlling",
+   "titel": "Generative KI und KI-Agenten im BI-gestützten Controlling",
+   "empfehlung": "neu schreiben",
+   "befund": "Eigenes Hauptkapitel. Schließt die größte inhaltliche Lücke der 5. Auflage.",
+   "begruendung": "Generative KI kommt im Manuskript bisher nicht vor (einziger Treffer: Generative Adversarial Networks). Löst Teile von 5.9 (Chatbots, RPA) ab.",
+   "meta": {
+    "quelle": "Planung der Autoren",
+    "umfang_ziel": "ca. 30–40 Seiten"
+   },
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:genai-grundlagen",
+   "parent": "vorschlag:genai",
+   "titel": "Grundlagen: Large Language Models, Retrieval Augmented Generation, Agenten",
+   "empfehlung": "neu schreiben",
+   "befund": "Begriffe und Funktionsweise auf Controller-Niveau.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:genai-copilots",
+   "parent": "vorschlag:genai",
+   "nach": "vorschlag:genai-grundlagen",
+   "titel": "Copilots in BI-Frontends: natürlichsprachliche Abfragen und automatische Kommentierung",
+   "empfehlung": "neu schreiben",
+   "befund": "Nachfolger von Chatbots (5.9.6) und freier Datenrecherche (5.7.1).",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:genai-agenten",
+   "parent": "vorschlag:genai",
+   "nach": "vorschlag:genai-copilots",
+   "titel": "KI-Agenten in Planung, Forecasting und Abschluss",
+   "empfehlung": "neu schreiben",
+   "befund": "Agentische Abläufe für Forecast, Abweichungsanalyse und Berichtserstellung; Abgrenzung zu RPA (5.9.5).",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:genai-daten",
+   "parent": "vorschlag:genai",
+   "nach": "vorschlag:genai-agenten",
+   "titel": "Daten- und Semantikschicht als Voraussetzung",
+   "empfehlung": "neu schreiben",
+   "befund": "Semantische Schicht, Datenqualität und Berechtigungen als Grundlage verlässlicher KI-Antworten.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:genai-governance",
+   "parent": "vorschlag:genai",
+   "nach": "vorschlag:genai-daten",
+   "titel": "Governance, Risiken und Rechtsrahmen (EU-KI-Verordnung)",
+   "empfehlung": "neu schreiben",
+   "befund": "Halluzinationen, Nachvollziehbarkeit, Datenschutz, KI-Verordnung.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:genai-usecases",
+   "parent": "vorschlag:genai",
+   "nach": "vorschlag:genai-governance",
+   "titel": "Use-Case-Bewertung: Nutzen und Wirtschaftlichkeit",
+   "empfehlung": "neu schreiben",
+   "befund": "Bewertungsraster für KI-Anwendungsfälle in Planung und Reporting.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:datenarchitektur",
+   "parent": "sec:bi_gestuetztes_controlling",
+   "nach": "sec:data_marts",
+   "titel": "Moderne Datenarchitekturen: Cloud-Datenplattform, Lakehouse, Data Mesh, semantische Schicht",
+   "empfehlung": "neu schreiben",
+   "befund": "Ersetzt den Hadoop-Teil und ergänzt DWH/OLAP um den heutigen Architekturstand.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:ibcs",
+   "parent": "sec:fa-berichtsgestaltung",
+   "nach": "sec:fa-layout",
+   "titel": "Reporting-Standards: IBCS und SUCCESS-Regeln, barrierearme Gestaltung",
+   "empfehlung": "neu schreiben",
+   "befund": "Theoretische Grundlage für die neu gestalteten Dashboards der 6. Auflage; bisher im Text nicht verankert.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:storytelling",
+   "parent": "sec:fa-berichtsgestaltung",
+   "nach": "sec:fa-kommentierungen",
+   "titel": "Data Storytelling und automatisierte Kommentierung",
+   "empfehlung": "neu schreiben",
+   "befund": "Erweitert 3.8.5 um Storyline, Botschaftsführung und KI-generierte Kommentare.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:esg-cockpit",
+   "parent": "sec:fa-cockpit-steuerung",
+   "nach": "sec:fa-cockpit-cybersecurity",
+   "titel": "Cockpit Nachhaltigkeitscontrolling (ESG)",
+   "empfehlung": "neu schreiben",
+   "befund": "Nachhaltigkeitskennzahlen, CSRD/ESRS-Bezug, Verknüpfung mit finanzieller Steuerung; bisher nur SDG-Hinweis in 3.9.2.1.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:datenrollen",
+   "parent": "sec:op-beteiligte",
+   "nach": "sec:op-self-service-bi",
+   "titel": "Rollen der Datenorganisation und Data Literacy",
+   "empfehlung": "neu schreiben",
+   "befund": "Data Owner, Data Steward, Analytics Engineer, Controller als Business Partner.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:mobile-kompakt",
+   "parent": "sec:Analyse-_und_Planungswerkzeuge",
+   "nach": "sec:Mobile Computing",
+   "titel": "Mobile BI und Responsive Design (kompakt)",
+   "empfehlung": "neu schreiben",
+   "befund": "Ersatz für 5.7.9 auf 1–2 Seiten.",
+   "entscheidung": "offen"
+  },
+  {
+   "id": "vorschlag:xpa",
+   "parent": "sec:Softwarelösungen für Planung und Reporting",
+   "nach": "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien",
+   "titel": "Integrierte Planungsplattformen und Extended Planning & Analysis (xP&A)",
+   "empfehlung": "neu schreiben",
+   "befund": "Bereichsübergreifende, cloudbasierte Planung als heutige Systemklasse; ersetzt „spezielle Software auf relationaler Datenbank“.",
+   "entscheidung": "offen"
+  }
+ ],
+ "kanten": [
+  {
+   "von": "sec:Technische Grundlagen für Big Data/hadoop",
+   "nach": "vorschlag:datenarchitektur",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:olap_speicherkonzepte",
+   "nach": "vorschlag:datenarchitektur",
+   "typ": "erweitert",
+   "beschriftung": "wird eingeordnet in",
+   "meta": {}
+  },
+  {
+   "von": "sec:ki_es_dm_rpa_cb/chatbots-conversational-ux",
+   "nach": "vorschlag:genai-copilots",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:Freie_Datenrecherchen_und_Abfragengeneratoren",
+   "nach": "vorschlag:genai-copilots",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:rpa",
+   "nach": "vorschlag:genai-agenten",
+   "typ": "ersetzt",
+   "beschriftung": "wird teilweise ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting",
+   "nach": "vorschlag:genai-agenten",
+   "typ": "erweitert",
+   "beschriftung": "wird fortgeführt in",
+   "meta": {}
+  },
+  {
+   "von": "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen",
+   "nach": "vorschlag:genai-governance",
+   "typ": "erweitert",
+   "beschriftung": "wird fortgeführt in",
+   "meta": {}
+  },
+  {
+   "von": "sec:ki_es_dm_rpa_cb/expertensysteme-xps",
+   "nach": "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz",
+   "typ": "zusammenlegen",
+   "beschriftung": "aufgehen in",
+   "meta": {}
+  },
+  {
+   "von": "sec:Mobile Computing",
+   "nach": "vorschlag:mobile-kompakt",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-diagramme/tachos-und-thermometer",
+   "nach": "vorschlag:ibcs",
+   "typ": "verwandt",
+   "beschriftung": "Negativbeispiel für",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-gestaltungshinweise",
+   "nach": "vorschlag:ibcs",
+   "typ": "erweitert",
+   "beschriftung": "wird erweitert durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-kommentierungen",
+   "nach": "vorschlag:storytelling",
+   "typ": "erweitert",
+   "beschriftung": "wird erweitert durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-cockpit-leitung-strategisch/strategisches-start-cockpit-nachhaltigkeit",
+   "nach": "vorschlag:esg-cockpit",
+   "typ": "erweitert",
+   "beschriftung": "wird erweitert durch",
+   "meta": {}
+  },
+  {
+   "von": "Besonderheiten_der_Planungswerkzeuge",
+   "nach": "vorschlag:xpa",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn",
+   "nach": "vorschlag:xpa",
+   "typ": "ersetzt",
+   "beschriftung": "geht auf in",
+   "meta": {}
+  },
+  {
+   "von": "sec:op-self-service-bi",
+   "nach": "vorschlag:datenrollen",
+   "typ": "erweitert",
+   "beschriftung": "wird erweitert durch",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-integration-steuerung",
+   "nach": "sec:fa-cockpit-cybersecurity",
+   "typ": "verwandt",
+   "beschriftung": "Balanced Chance and Risk Card → BCCR-Card",
+   "meta": {}
+  },
+  {
+   "von": "sec:Modellbasierte_Analyse-_und_Prognosewerkzeuge",
+   "nach": "sec:fa-trendanalysen-prognosen",
+   "typ": "zusammenlegen",
+   "beschriftung": "zusammenführen mit",
+   "meta": {}
+  },
+  {
+   "von": "Weitere_Nutzungsmöglichkeiten_für_Managementaufgaben_(Konsolidierung_Balanced Scorecard_Risikomanagement)",
+   "nach": "sec:fa-bsc-planung",
+   "typ": "zusammenlegen",
+   "beschriftung": "zusammenführen mit",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-diagramme/kurs-chartanalyse-diagramme",
+   "nach": "sec:fa-diagramme/kurven-linien-punkt-und-flachendiagramme",
+   "typ": "zusammenlegen",
+   "beschriftung": "aufgehen in",
+   "meta": {}
+  },
+  {
+   "von": "sec:Berechtigungssystem_und_Zugriffssteuerung",
+   "nach": "sec:fa-cockpit-cybersecurity",
+   "typ": "verwandt",
+   "beschriftung": "Zugriffssteuerung ↔ Cyberrisiken",
+   "meta": {}
+  },
+  {
+   "von": "sec:fa-trendanalysen-prognosen",
+   "nach": "vorschlag:genai",
+   "typ": "verwandt",
+   "beschriftung": "Prognosen ↔ generative KI",
+   "meta": {}
+  },
+  {
+   "von": "cha:zusammenfassung-ausblick/it-unterstutzung/machine-learning-und-ki-gestutzte-analytics-sowie-chatbots",
+   "nach": "vorschlag:genai",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "cha:zusammenfassung-ausblick/it-unterstutzung/mobile-systeme",
+   "nach": "vorschlag:mobile-kompakt",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "cha:zusammenfassung-ausblick/prozesse/substitution-manueller-berichterstellungsprozesse-durch-rpa",
+   "nach": "vorschlag:genai-agenten",
+   "typ": "ersetzt",
+   "beschriftung": "wird ersetzt durch",
+   "meta": {}
+  },
+  {
+   "von": "cha:zusammenfassung-ausblick/it-unterstutzung/data-warehouse-modernisierung-hybride-traditionelle-und-expl",
+   "nach": "vorschlag:datenarchitektur",
+   "typ": "erweitert",
+   "beschriftung": "wird fortgeführt in",
+   "meta": {}
+  }
+ ]
+}

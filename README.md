@@ -4,6 +4,8 @@ Planung und Reporting im BI-gestützten Controlling – alle Abbildungen und Tab
 
 Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 
+Zweite Seite: **`mindmap/index.html`** – Mindmap der Inhaltsrevision (was bleibt, was geht, was kommt) für die Abstimmung mit dem Verlag, siehe unten.
+
 ## Ordner
 
 | Ordner | Inhalt |
@@ -13,6 +15,7 @@ Einstieg: **`index.html`** (lokal per Doppelklick oder über GitHub Pages).
 | `tabellen/` | LaTeX-Code der Tabellen und Listings, benannt nach der Caption (z. B. `Kennzahlenblatt.tex`) |
 | `quellen/kapN/` | Skripte, aus denen die Abbildungen gebaut werden |
 | `vorschau/` | Vorschaubilder (Original zugeschnitten, neue Fassung, gesetzte Tabellen) |
+| `mindmap/` | Mindmap der Inhaltsrevision: `index.html` (Viewer), `bewertung.json` (Pflege), `daten.js` und `gliederung.json` (erzeugt), `ABGLEICH.md` (Bericht des letzten Abgleichs) |
 | `werkzeug/` | Generator, Pflegeliste `status.json`, Caption-Prüfregeln, Bau-Werkzeuge `bookfig/` (Abbildungen), `dashkit/` (Dashboards) und `maskkit/` (Eingabemasken), Anbindung der Abstimmung (`abstimmung.json`, `abstimmung/Code.gs`, Rückmeldungen `abstimmung/rueckmeldungen.json`), Neubau einer Abbildung `bauen.py`, Revisionen `revision.py` |
 
 ## In Overleaf verwenden
@@ -71,6 +74,37 @@ Status und Kommentare je Abbildung liegen in der Google-Tabelle „Abbildungsinv
 Die Shell der Claude-Umgebung erreicht Google nicht; deshalb liest Claude über den Connector und schreibt über das Repository zurück. Ein Passwort braucht Claude dafür nicht.
 
 **Code ändern:** Nach einer Änderung an `Code.gs` in Apps Script *Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Version: Neue Version → Bereitstellen*. So bleibt die URL gleich.
+
+## Mindmap der Inhaltsrevision
+
+`mindmap/index.html` zeigt das ganze Buch als auf- und zuklappbare Mindmap. Knoten sind die Unterkapitel aus dem LaTeX-Manuskript (`scotandmillfield-spec/-6th-ed.-Planung-Reporting`), dazu vorgeschlagene neue Inhalte. Jeder Knoten trägt Bewertung (aktuell / noch aktuell / veraltet / neu / Vorschlag), Empfehlung, Entscheidung des Verlags, Befund, Begründung, Umfang (≈ Seiten, Abbildungen), Belegjahre, die VERALTET-/PRUEFEN-Vermerke aus der Überführung und frei wählbare Metadaten. Kanten: Gliederung, Querverweise aus dem Text und gepflegte Revisionsbeziehungen (ersetzt, erweitert, zusammenlegen, verwandt) – ebenfalls mit Metadaten. Ansicht *Liste* und *CSV* für den Verlag.
+
+**Was wo steht**
+
+| Datei | Inhalt | Pflege |
+|---|---|---|
+| `mindmap/bewertung.json` | Bewertung je Knoten (`knoten`, Schlüssel = LaTeX-Label), Vorschläge (`vorschlaege`), Revisionskanten (`kanten`), Skalen und Einstellungen | **von Hand** bzw. über *Exportieren* in der Seite |
+| `mindmap/daten.js` | Gliederung, Kennzahlen, Querverweise aus dem LaTeX + Bewertung | erzeugt |
+| `mindmap/gliederung.json` | Gliederung des letzten Abgleichs (für den Vergleich) | erzeugt |
+| `mindmap/ABGLEICH.md` | neue, entfallene, umnummerierte, umbenannte und ungeprüfte Abschnitte | erzeugt |
+
+**Manuskript hat sich geändert** (neues Kapitel, verschobene Abschnitte, Titel geändert):
+
+```bash
+python3 werkzeug/mindmap.py --buch ../-6th-ed.-Planung-Reporting
+```
+
+Danach `mindmap/ABGLEICH.md` lesen: neue Abschnitte erben die Bewertung ihres Elternabschnitts, bis sie in `bewertung.json` eine eigene bekommen. Nummern kommen immer aus dem LaTeX, nie aus der Pflegedatei – Umnummerierungen brauchen also keine Pflege.
+
+**Kennungen:** Schlüssel ist das `\label` des Abschnitts. Abschnitte ohne Label (vor allem in Kap. 5) bekommen eine Kennung aus Elternkennung und Titel; bei Titeländerungen ordnet der Abgleich über die Ähnlichkeit neu zu und meldet das. Dauerhaft robust wird es mit einem `\label` direkt hinter der Überschrift.
+
+**Vorschlag wird geschrieben:** Im Vorschlag in `bewertung.json` das künftige Label eintragen (`"label": "sec:..."`). Sobald der Abschnitt mit diesem Label im Manuskript steht, übernimmt der Abgleich Befund, Empfehlung und Metadaten auf den echten Knoten; der gestrichelte Vorschlag verschwindet.
+
+**Abstimmung mit dem Verlag:** In der Seite einen Knoten wählen, unter *Abstimmung* Entscheidung, Bewertung, Empfehlung und Notiz setzen oder einen Unterpunkt vorschlagen. Das bleibt im Browser gespeichert. *Exportieren* lädt die vollständige neue `bewertung.json` herunter; sie ersetzt `mindmap/bewertung.json`, dann den Abgleich laufen lassen und committen. Entscheidungen vererben sich auf Unterabschnitte, solange diese keine eigene haben.
+
+**Metadaten:** Beliebige Schlüssel unter `meta` an einem Knoten (`knoten.<id>.meta`), einem Vorschlag oder einer Kante (`kanten[].meta`) erscheinen in der Seite unter *Metadaten* bzw. an der Beziehung. Neue Kantentypen und Skalenwerte unter `skalen` ergänzen.
+
+**Deep Link:** `mindmap/index.html#k=<Kennung>` öffnet direkt einen Knoten, z. B. `#k=sec:fa-cockpit-cybersecurity`.
 
 ## Auf GitHub Pages veröffentlichen
 

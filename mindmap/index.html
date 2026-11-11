@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inhaltsrevision 6. Auflage</title>
+<!--
+  Mindmap der Inhaltsrevision – Planung und Reporting im BI-gestützten Controlling, 6. Auflage.
+  Diese Datei ist der Viewer und wird nicht erzeugt. Die Daten kommen aus daten.js
+  (erzeugt von werkzeug/mindmap.py aus den LaTeX-Quellen und mindmap/bewertung.json).
+  Datenmodell (window.MINDMAP):
+    meta    – Stand, Buch-Commit, Skalen (Bewertung, Empfehlung, Entscheidung, Kantentypen), Rohfassung bewertung.json
+    knoten  – {id, parent, nr, titel, ebene, typ, reihenfolge, im_manuskript, quelle, kennzahlen, abbildungen,
+               hinweise{veraltet,pruefen}, signale{alt,neu}, bewertung?, empfehlung?, entscheidung?, befund?,
+               begruendung?, notiz?, meta{…frei…}}
+    kanten  – {id, von, nach, typ: struktur|verweis|ersetzt|erweitert|zusammenlegen|verwandt, beschriftung?, meta{…frei…}}
+  Freie Metadaten (meta) an Knoten und Kanten werden im Detailbereich vollständig angezeigt.
+-->
+<style>
+:root{--ac:#3A3F44;--rot:#C62828;--gut:#00806B;--text:#1A1A1A;--muted:#5A5F64;--linie:#D9D9D9;--flaeche:#F4F4F4;--kante:#C3C7CB;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font:15px/1.45 Arial,"Liberation Sans",Helvetica,sans-serif;color:var(--text);background:#fff;display:flex;flex-direction:column;overflow:hidden}
+a{color:inherit}
+button,select,input,textarea{font:inherit}
+.kopf{padding:14px 20px 8px;border-bottom:1px solid var(--linie);display:flex;flex-wrap:wrap;gap:6px 28px;align-items:flex-end}
+.kopf .titel{flex:1 1 380px;min-width:0}
+h1{font-size:22px;margin:0;line-height:1.2}
+.unter{color:var(--muted);margin:2px 0 0;font-size:14px}
+.stand{color:var(--muted);font-size:12.5px;margin-top:3px}
+.stand a{color:var(--muted)}
+.bilanz{flex:1 1 460px;min-width:0;max-width:640px}
+.balken{display:flex;height:22px;border-radius:4px;overflow:hidden;background:var(--flaeche)}
+.balken button{all:unset;cursor:pointer;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;white-space:nowrap;overflow:hidden;color:#fff;border-right:1px solid #fff;min-width:0}
+.balken button:last-child{border-right:none}
+.balken button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--text)}
+.balken button:focus-visible{outline:2px solid var(--rot);outline-offset:1px}
+.legende-zeile{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:5px;font-size:12.5px;color:var(--muted)}
+.legende-zeile i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.legende-zeile b{color:var(--text)}
+.leiste{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:8px 20px;border-bottom:1px solid var(--linie);background:#fff}
+.gruppe{display:flex;border:1px solid var(--ac);border-radius:4px;overflow:hidden}
+.gruppe button{all:unset;cursor:pointer;padding:4px 10px;font-size:13.5px;border-left:1px solid var(--ac);white-space:nowrap}
+.gruppe button:first-child{border-left:none}
+.gruppe button[aria-pressed=true]{background:var(--ac);color:#fff}
+.gruppe button:focus-visible{outline:2px solid var(--rot);outline-offset:-2px}
+select,input[type=search]{font-size:13.5px;padding:4px 7px;border:1px solid #9A9A9A;border-radius:4px;background:#fff}
+input[type=search]{min-width:150px;flex:1 1 170px;max-width:300px}
+label.cb{font-size:13.5px;display:flex;gap:5px;align-items:center;cursor:pointer;white-space:nowrap}
+.knopf{all:unset;cursor:pointer;font-size:13.5px;padding:4px 10px;border:1px solid #9A9A9A;border-radius:4px;white-space:nowrap}
+.knopf:hover{border-color:var(--ac)}
+.knopf:focus-visible{outline:2px solid var(--rot)}
+.knopf.haupt{background:var(--ac);border-color:var(--ac);color:#fff}
+.knopf[hidden]{display:none}
+.treffer{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.rechts{margin-left:auto;display:flex;gap:8px;align-items:center}
+.lokal{font-size:12.5px;color:var(--rot);font-weight:bold;white-space:nowrap}
+main{position:relative;flex:1 1 auto;min-height:0;display:flex}
+#flaeche{flex:1 1 auto;min-width:0;position:relative;background:#fff}
+#karte{width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+#karte.zieht{cursor:grabbing}
+.zoom{position:absolute;left:14px;bottom:14px;display:flex;flex-direction:column;gap:4px}
+.zoom button{all:unset;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #9A9A9A;border-radius:4px;font-size:16px}
+.zoom button:hover{border-color:var(--ac)}
+.zoom button:focus-visible{outline:2px solid var(--rot)}
+.hinweis-ecke{position:absolute;right:14px;bottom:12px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.9);padding:2px 6px;border-radius:3px;pointer-events:none}
+/* SVG */
+.k text{font-size:13px;fill:var(--text);paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.k .nr{font-weight:bold}
+.k.e1 text{font-size:14.5px;font-weight:bold;stroke-width:0}
+.k.e1 .kasten{fill:var(--flaeche);stroke:#B9BDC1;stroke-width:1}
+.k.wurzel text{fill:#fff;font-size:15px;font-weight:bold;stroke-width:0}
+.k.wurzel .kasten{fill:var(--ac);stroke:none}
+.k .punkt{stroke-width:2.2}
+.k .anzahl{fill:var(--muted);font-size:11.5px;font-weight:normal}
+.k.vorschlag text{font-style:italic;fill:#3F4449}
+.k.gestrichen text.titel{text-decoration:line-through;fill:#8A8F94}
+.k.gedimmt{opacity:.22}
+.k.kontext{opacity:.55}
+.k.treffer-s .ring{stroke:var(--rot);stroke-width:2.5;fill:none}
+.k.gewaehlt .wahl{fill:none;stroke:var(--ac);stroke-width:1.5;stroke-dasharray:3 2}
+.k{cursor:pointer}
+.k .ring,.k .wahl{fill:none;stroke:none}
+.k:focus{outline:none}
+.k:focus-visible .wahl{stroke:var(--rot);stroke-width:2}
+.kante{fill:none;stroke:var(--kante);stroke-width:1.4}
+.kante.e1{stroke-width:2.4;stroke:#AEB3B8}
+.kante.gedimmt{opacity:.25}
+.rel{fill:none;stroke-width:1.6;opacity:.75}
+.rel.ersetzt{stroke:var(--rot)}
+.rel.erweitert{stroke:var(--ac)}
+.rel.zusammenlegen{stroke:#6E747A;stroke-dasharray:6 4}
+.rel.verwandt{stroke:#8A8F94;stroke-dasharray:2 4}
+.rel.verweis{stroke:#6E747A;stroke-dasharray:1 3;stroke-width:1.3;opacity:.9}
+.rel.hervor{opacity:1;stroke-width:2.4}
+.rel.leise{opacity:.18}
+/* Detailbereich */
+#detail{width:min(420px,100%);flex:0 0 auto;border-left:1px solid var(--linie);background:#fff;overflow:auto;padding:14px 18px 40px;display:none}
+#detail.offen{display:block}
+#detail .zu{float:right;all:unset;cursor:pointer;font-size:20px;line-height:1;padding:2px 6px;color:var(--muted);float:right}
+#detail .zu:focus-visible{outline:2px solid var(--rot)}
+.pfad{font-size:12px;color:var(--muted);margin:0 0 4px}
+.pfad button{all:unset;cursor:pointer;text-decoration:underline;text-decoration-color:#B5B5B5}
+#detail h2{font-size:17px;margin:0 0 8px;line-height:1.3}
+.marken{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.marke{font-size:12px;padding:2px 8px;border-radius:10px;border:1px solid var(--ac);white-space:nowrap}
+.marke.voll{color:#fff}
+.marke.geerbt{border-style:dashed}
+.marke small{opacity:.8}
+#detail h3{font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:16px 0 6px;font-weight:bold}
+#detail p{margin:0 0 8px}
+.befund{font-size:15px}
+.zahlen{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 10px;margin:4px 0}
+.zahlen div{border-top:1px solid var(--linie);padding-top:4px}
+.zahlen b{display:block;font-size:18px;line-height:1.15}
+.zahlen span{font-size:12px;color:var(--muted)}
+.liste{margin:0;padding-left:18px;font-size:13.5px}
+.liste li{margin:2px 0}
+.liste button{all:unset;cursor:pointer;text-decoration:underline;text-decoration-color:#B5B5B5}
+.liste button:focus-visible{outline:2px solid var(--rot)}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:12px;padding:1px 7px;border-radius:3px;background:var(--flaeche);border:1px solid var(--linie)}
+.tag.alt{border-color:#E6B3B3;background:#FBEFEF}
+.tag.neu{border-color:#A9D3CC;background:#EEF7F5}
+details{margin:6px 0}
+details summary{cursor:pointer;font-size:13.5px}
+.metatab{border-collapse:collapse;font-size:13px;width:100%}
+.metatab td{border-bottom:1px solid var(--linie);padding:3px 6px 3px 0;vertical-align:top}
+.metatab td:first-child{color:var(--muted);white-space:nowrap;width:1%}
+.bearbeiten{background:var(--flaeche);border-radius:5px;padding:10px 12px;margin-top:14px}
+.bearbeiten label{display:block;font-size:12.5px;color:var(--muted);margin:6px 0 2px}
+.bearbeiten select,.bearbeiten textarea{width:100%}
+.bearbeiten textarea{min-height:64px;font-size:13.5px;padding:5px 7px;border:1px solid #9A9A9A;border-radius:4px;resize:vertical}
+.bearbeiten .zeile{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.quelle{font-size:12.5px;color:var(--muted)}
+/* Liste */
+#tabelle{flex:1 1 auto;overflow:auto;display:none;padding:0 20px 40px}
+#tabelle.offen{display:block}
+table.uebersicht{border-collapse:collapse;width:100%;font-size:13.5px}
+table.uebersicht th{position:sticky;top:0;background:#fff;text-align:left;font-size:12.5px;color:var(--muted);border-bottom:2px solid var(--ac);padding:8px 8px 6px 0;z-index:1}
+table.uebersicht td{border-bottom:1px solid var(--linie);padding:5px 8px 5px 0;vertical-align:top}
+table.uebersicht tr{cursor:pointer}
+table.uebersicht tr:hover td{background:#FAFAFA}
+table.uebersicht tr.gewaehlt td{background:#F1F2F3}
+table.uebersicht td.zahl{text-align:right;white-space:nowrap}
+td .pkt{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:2px solid}
+td.geerbt{color:var(--muted)}
+.e-1 td.t{font-weight:bold}
+/* Legende */
+#legende{position:absolute;right:14px;top:14px;width:300px;background:#fff;border:1px solid var(--linie);border-radius:5px;padding:10px 12px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.08);display:none;z-index:4}
+#legende.offen{display:block}
+#legende h4{margin:6px 0 4px;font-size:12px;text-transform:uppercase;color:var(--muted)}
+#legende ul{list-style:none;margin:0;padding:0}
+#legende li{display:flex;gap:8px;align-items:center;margin:3px 0}
+#legende svg{flex:0 0 auto}
+@media (max-width:760px){
+  .kopf{padding:10px 16px 6px}
+  .leiste{padding:6px 16px}
+  #detail{position:absolute;inset:auto 0 0 0;width:100%;max-height:62%;border-left:none;border-top:1px solid var(--linie);box-shadow:0 -4px 12px rgba(0,0,0,.08);z-index:5}
+  .hinweis-ecke{display:none}
+  #tabelle{padding:0 16px 40px}
+  table.uebersicht .befund-sp{display:none}
+}
+@media print{
+  body{overflow:visible;height:auto;display:block}
+  .leiste,#flaeche,#detail,.zoom{display:none!important}
+  #tabelle{display:block!important;overflow:visible;padding:0}
+  table.uebersicht th{position:static}
+  main{display:block}
+}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <div class="titel">
+    <h1 id="titel">Inhaltsrevision 6. Auflage</h1>
+    <p class="unter" id="untertitel"></p>
+    <div class="stand" id="stand"></div>
+  </div>
+  <div class="bilanz" aria-label="Umfang nach Bewertung">
+    <div class="balken" id="balken" role="group" aria-label="Nach Bewertung filtern"></div>
+    <div class="legende-zeile" id="balken-legende"></div>
+  </div>
+</header>
+
+<div class="leiste" role="toolbar" aria-label="Ansicht und Filter">
+  <div class="gruppe" role="group" aria-label="Ansicht">
+    <button type="button" data-ansicht="karte" aria-pressed="true">Mindmap</button>
+    <button type="button" data-ansicht="liste" aria-pressed="false">Liste</button>
+  </div>
+  <div class="gruppe" role="group" aria-label="Anordnung" id="anordnung">
+    <button type="button" data-modus="beidseitig" aria-pressed="true">beidseitig</button>
+    <button type="button" data-modus="gliederung" aria-pressed="false">Gliederung</button>
+  </div>
+  <div class="gruppe" role="group" aria-label="Aufklappen bis Ebene" id="ebenen">
+    <button type="button" data-ebene="1" aria-pressed="false" title="nur Kapitel">1</button>
+    <button type="button" data-ebene="2" aria-pressed="true" title="bis Abschnitt">2</button>
+    <button type="button" data-ebene="3" aria-pressed="false" title="bis Unterabschnitt">3</button>
+    <button type="button" data-ebene="9" aria-pressed="false" title="alles">alle</button>
+  </div>
+  <input type="search" id="suche" placeholder="Suchen (Titel, Nr., Befund) …" aria-label="Suchen">
+  <span class="treffer" id="trefferzahl"></span>
+  <select id="f-empfehlung" aria-label="Filter Empfehlung"><option value="">Empfehlung: alle</option></select>
+  <select id="f-entscheidung" aria-label="Filter Entscheidung"><option value="">Entscheidung: alle</option></select>
+  <label class="cb"><input type="checkbox" id="t-vorschlaege" checked> Vorschläge</label>
+  <label class="cb nur-karte" title="Ohne Haken: nur Beziehungen des gewählten Knotens"><input type="checkbox" id="t-beziehungen"> alle Revisionskanten</label>
+  <label class="cb nur-karte" title="Querverweise im Text für den gewählten Knoten"><input type="checkbox" id="t-verweise"> Querverweise</label>
+  <div class="rechts">
+    <span class="lokal" id="lokalzahl" hidden></span>
+    <button type="button" class="knopf" id="b-export" hidden title="bewertung.json mit den lokalen Änderungen herunterladen">Exportieren</button>
+    <button type="button" class="knopf" id="b-verwerfen" hidden title="Lokale Änderungen in diesem Browser verwerfen">Verwerfen</button>
+    <button type="button" class="knopf" id="b-csv">CSV</button>
+    <button type="button" class="knopf" id="b-legende" aria-expanded="false" aria-controls="legende">Legende</button>
+  </div>
+</div>
+
+<main>
+  <div id="flaeche">
+    <svg id="karte" role="tree" aria-label="Mindmap der Kapitel und Unterkapitel">
+      <defs>
+        <marker id="pfeil-ersetzt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828"/></marker>
+        <marker id="pfeil-erweitert" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3A3F44"/></marker>
+        <marker id="pfeil-zusammenlegen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6E747A"/></marker>
+        <marker id="pfeil-verweis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8A8F94"/></marker>
+      </defs>
+      <g id="welt"><g id="ebene-kanten"></g><g id="ebene-rel"></g><g id="ebene-knoten"></g></g>
+    </svg>
+    <div class="zoom" aria-label="Zoom">
+      <button type="button" id="z-plus" aria-label="Vergrößern">+</button>
+      <button type="button" id="z-minus" aria-label="Verkleinern">−</button>
+      <button type="button" id="z-fit" aria-label="Einpassen" title="Einpassen">⤢</button>
+    </div>
+    <div class="hinweis-ecke">Klick: auswählen und aufklappen · erneuter Klick: zuklappen · Ziehen: verschieben · Mausrad: zoomen · Kanten des gewählten Knotens werden eingeblendet</div>
+    <div id="legende" role="dialog" aria-label="Legende"></div>
+  </div>
+  <div id="tabelle"></div>
+  <aside id="detail" aria-live="polite"></aside>
+</main>
+
+<script src="daten.js"></script>
+<script>
+(function(){
+'use strict';
+const D = window.MINDMAP;
+if(!D){document.body.innerHTML='<p style="padding:20px">daten.js fehlt. Bitte <code>python3 werkzeug/mindmap.py</code> ausführen.</p>';return;}
+const SK = D.meta.skalen || {};
+const BEW = SK.bewertung || {};
+const KANTENTYP = SK.kanten || {};
+const REIHE = ['aktuell','teilweise','veraltet','neu','vorschlag','ungeprueft'];
+const LS = 'mindmap6.aenderungen.v1';
+const $ = s => document.querySelector(s);
+const svgNS = 'http://www.w3.org/2000/svg';
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm = s => String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const fmt = (x,d=0) => (x==null||isNaN(x)) ? '–' : Number(x).toLocaleString('de-DE',{maximumFractionDigits:d,minimumFractionDigits:d});
+
+/* ---------- lokale Änderungen (Browser) ---------- */
+function ladeLokal(){ try{ const o = JSON.parse(localStorage.getItem(LS)||'null'); if(o && o.knoten) return o; }catch(e){} return {knoten:{}, vorschlaege:[]}; }
+function speichereLokal(){ try{ localStorage.setItem(LS, JSON.stringify(lokal)); }catch(e){} zeigeLokal(); }
+let lokal = ladeLokal();
+
+/* ---------- Modell ---------- */
+const K = new Map();
+let wurzel;
+function aufbauen(){
+  K.clear();
+  wurzel = {id:'buch', parent:null, nr:null, titel:D.meta.buchtitel || 'Buch', ebene:0, typ:'Buch', im_manuskript:true, kennzahlen:{}, kinder:[], reihenfolge:-1};
+  K.set('buch', wurzel);
+  const roh = D.knoten.map(n => Object.assign({}, n));
+  for(const v of (lokal.vorschlaege||[])) roh.push(Object.assign({typ:'Vorschlag', im_manuskript:false, kennzahlen:{}, bewertung:'vorschlag', reihenfolge:1e7, lokal_neu:true}, v));
+  for(const n of roh){
+    const l = lokal.knoten[n.id];
+    if(l){ for(const f of ['bewertung','empfehlung','entscheidung','notiz']) if(l[f]!==undefined) n[f] = l[f]; n.lokal = true; }
+    n.kinder = [];
+    K.set(n.id, n);
+  }
+  for(const n of K.values()){ if(n===wurzel) continue; const p = K.get(n.parent) || wurzel; n.p = p; p.kinder.push(n); }
+  for(const n of K.values()) n.kinder.sort((a,b)=>a.reihenfolge-b.reihenfolge);
+  // Ebene aus Baum (Vorschläge)
+  (function tiefe(n,e){ n.tiefe=e; n.kinder.forEach(c=>tiefe(c,e+1)); })(wurzel,0);
+  // Wirksame Bewertung/Empfehlung/Entscheidung (Vererbung vom nächsten Vorfahren mit eigener Angabe)
+  (function erben(n, bew, emp, ent){
+    if(n!==wurzel){
+      if(n.typ==='Vorschlag'){ n.w_bew = {wert:'vorschlag'}; }
+      else if(n.bewertung){ n.w_bew = {wert:n.bewertung}; }
+      else if(bew){ n.w_bew = {wert:bew.wert, von:bew.von}; }
+      else n.w_bew = {wert:'ungeprueft'};
+      if(n.empfehlung) n.w_emp = {wert:n.empfehlung}; else if(emp) n.w_emp = {wert:emp.wert, von:emp.von}; else n.w_emp = null;
+      if(n.entscheidung && n.entscheidung!=='offen') n.w_ent = {wert:n.entscheidung}; else if(ent) n.w_ent = {wert:ent.wert, von:ent.von}; else n.w_ent = {wert:'offen'};
+      bew = n.w_bew.von ? bew : (n.w_bew.wert==='ungeprueft'?bew:{wert:n.w_bew.wert, von:n.id});
+      emp = n.w_emp ? (n.w_emp.von ? emp : {wert:n.w_emp.wert, von:n.id}) : emp;
+      ent = (n.w_ent.wert!=='offen') ? (n.w_ent.von ? ent : {wert:n.w_ent.wert, von:n.id}) : ent;
+    }
+    n.kinder.forEach(c=>erben(c,bew,emp,ent));
+  })(wurzel,null,null,null);
+  // eigener Umfang (ohne Unterabschnitte) und Verteilung im Teilbaum
+  (function umfang(n){
+    let kindSeiten = 0;
+    n.kinder.forEach(c=>{ umfang(c); kindSeiten += (c.kennzahlen&&c.kennzahlen.seiten)||0; });
+    const s = (n.kennzahlen&&n.kennzahlen.seiten)||0;
+    n.eigen = n.im_manuskript && n!==wurzel ? Math.max(0, s - kindSeiten) : 0;
+    n.vert = {};
+    if(n!==wurzel){ n.vert[n.w_bew.wert] = (n.vert[n.w_bew.wert]||0) + (n.typ==='Vorschlag' ? 0 : n.eigen); }
+    n.kinder.forEach(c=>{ for(const k in c.vert) n.vert[k]=(n.vert[k]||0)+c.vert[k]; });
+    n.anzVorschlag = (n.typ==='Vorschlag'?1:0) + n.kinder.reduce((a,c)=>a+c.anzVorschlag,0);
+  })(wurzel);
+}
+
+/* ---------- Kanten ---------- */
+const REL = []; const VERWEIS = [];
+for(const e of D.kanten){ if(e.typ==='verweis') VERWEIS.push(e); else if(e.typ!=='struktur') REL.push(e); }
+const STRUKTURMETA = new Map(D.kanten.filter(e=>e.typ==='struktur' && e.meta && Object.keys(e.meta).length).map(e=>[e.nach,e.meta]));
+
+/* ---------- Zustand ---------- */
+const zustand = {offen:new Set(['buch']), modus:'beidseitig', ansicht:'karte', gewaehlt:null, suche:'', treffer:[], trefferIdx:-1,
+  fBew:new Set(), fEmp:'', fEnt:'', vorschlaege:true, beziehungen:false, verweise:false};
+
+function bisEbene(e){
+  zustand.offen = new Set(['buch']);
+  for(const n of K.values()) if(n!==wurzel && n.tiefe < e && n.kinder.length) zustand.offen.add(n.id);
+}
+
+/* ---------- Text messen ---------- */
+const mcan = document.createElement('canvas').getContext('2d');
+function breite(t, fett, gr){ mcan.font = (fett?'bold ':'') + (gr||13) + 'px Arial, "Liberation Sans", Helvetica, sans-serif'; return mcan.measureText(t).width; }
+function kurz(t, max){ return t.length>max ? t.slice(0,max-1).trimEnd()+'…' : t; }
+function beschriftung(n){
+  if(n===wurzel) return {nr:'', titel:n.titel};
+  const max = n.tiefe===1 ? 70 : 54;
+  return {nr: n.nr ? n.nr+' ' : (n.typ==='Vorschlag' ? '＋ ' : (n.typ==='Stichpunkt'||n.typ==='Absatz'||n.typ==='Entfallen' ? '· ' : '')), titel: kurz(n.titel, max)};
+}
+
+/* ---------- Filter / Suche ---------- */
+function passtFilter(n){
+  if(n===wurzel) return true;
+  if(zustand.fBew.size && !zustand.fBew.has(n.w_bew.wert)) return false;
+  if(zustand.fEmp && !(n.w_emp && n.w_emp.wert===zustand.fEmp)) return false;
+  if(zustand.fEnt && n.w_ent.wert!==zustand.fEnt) return false;
+  return true;
+}
+const filterAktiv = () => zustand.fBew.size || zustand.fEmp || zustand.fEnt;
+function suchtext(n){ return norm([n.nr, n.titel, n.befund, n.begruendung, n.notiz, (n.signale&&n.signale.alt||[]).join(' ')].join(' ')); }
+function sichtbar(n){ return n.typ!=='Vorschlag' || zustand.vorschlaege; }
+function kinderSichtbar(n){ if(n._ersatz) return n.kinder; return zustand.offen.has(n.id) ? n.kinder.filter(sichtbar) : []; }
+function vorfahrenOeffnen(n){ let p = n.p; while(p){ zustand.offen.add(p.id); p = p.p; } }
+function nachFilterAufklappen(){
+  if(!filterAktiv()) return;
+  for(const n of K.values()) if(n!==wurzel && sichtbar(n) && passtFilter(n)) vorfahrenOeffnen(n);
+}
+function sucheAnwenden(){
+  const q = norm(zustand.suche.trim());
+  zustand.treffer = [];
+  if(q.length>=2){
+    for(const n of K.values()) if(n!==wurzel && sichtbar(n) && suchtext(n).includes(q)) zustand.treffer.push(n);
+    zustand.treffer.sort((a,b)=>ordnung(a)-ordnung(b));
+    zustand.treffer.forEach(vorfahrenOeffnen);
+  }
+  zustand.trefferIdx = -1;
+  $('#trefferzahl').textContent = q.length>=2 ? (zustand.treffer.length + ' Treffer') : '';
+}
+const ORD = new Map();
+function ordnung(n){ return ORD.get(n.id) ?? 0; }
+function ordnungBerechnen(){ let i=0; ORD.clear(); (function w(n){ ORD.set(n.id,i++); n.kinder.forEach(w); })(wurzel); }
+
+/* ---------- Layout ---------- */
+const POS = new Map();   // aktuelle Zielpositionen
+let ALT = new Map();     // Positionen vor dem letzten Render
+const LUECKE = 34, ZEILE = 25, ZEILE1 = 40, GRUPPE = 7;
+function seiteVon(kap){
+  if(zustand.modus==='gliederung') return 1;
+  const nr = parseInt(kap.nr,10);
+  if(!isNaN(nr)) return nr<=3 ? 1 : -1;
+  return -1; // Vorschläge auf Kapitelebene: links bei den Technikkapiteln
+}
+function layout(){
+  POS.clear();
+  const sichtbare = [];
+  const rb = breite(wurzel.titel, true, 15) + 32;
+  POS.set('buch', {x:0, y:0, s:0, b:rb, h:36});
+  const seiten = {1:[], '-1':[]};
+  for(const k of kinderSichtbar(wurzel)) seiten[seiteVon(k)].push(k);
+  for(const s of [1,-1]){
+    const liste = seiten[s];
+    if(!liste.length) continue;
+    // Spaltenbreiten je Tiefe
+    const spalte = [];
+    (function mess(n){
+      const bz = beschriftung(n);
+      let b = breite(bz.nr, true, n.tiefe===1?14.5:13) + breite(bz.titel, n.tiefe===1, n.tiefe===1?14.5:13) + 18;
+      const ks = kinderSichtbar(n);
+      if(!ks.length && n.kinder.filter(sichtbar).length) b += breite(' +'+n.kinder.filter(sichtbar).length, false, 11.5) + 4;
+      if(n.tiefe===1) b += 22;
+      n._b = b;
+      spalte[n.tiefe] = Math.max(spalte[n.tiefe]||0, b);
+      ks.forEach(mess);
+    })(wurzelErsatz(liste));
+    const xs = [];
+    xs[1] = rb/2 + LUECKE;
+    for(let t=2; t<spalte.length; t++) xs[t] = xs[t-1] + spalte[t-1] + LUECKE;
+    let y = 0, letzteEltern = null;
+    (function setze(n){
+      const ks = kinderSichtbar(n);
+      if(n.tiefe>=1){
+        if(!ks.length){
+          const h = n.tiefe===1 ? ZEILE1 : ZEILE;
+          if(letzteEltern && letzteEltern!==n.parent) y += GRUPPE;
+          POS.set(n.id, {x:s*xs[n.tiefe], y:y + h/2, s, b:n._b, h});
+          y += h; letzteEltern = n.parent;
+          sichtbare.push(n);
+          return;
+        }
+      }
+      ks.forEach(setze);
+      if(n.tiefe>=1){
+        const a = POS.get(ks[0].id).y, z = POS.get(ks[ks.length-1].id).y;
+        POS.set(n.id, {x:s*xs[n.tiefe], y:(a+z)/2, s, b:n._b, h:n.tiefe===1?ZEILE1:ZEILE});
+        sichtbare.push(n);
+      }
+    })(wurzelErsatz(liste));
+    // senkrecht zentrieren
+    const versatz = -y/2;
+    for(const n of sichtbare) if(POS.get(n.id).s===s) POS.get(n.id).y += versatz;
+  }
+  return sichtbare;
+}
+window.addEventListener('hashchange', () => { const m = location.hash.match(/k=([^&]+)/); if(m){ const id = decodeURIComponent(m[1]); if(K.has(id) && id!==zustand.gewaehlt) waehle(id); } });
+// Ersatzwurzel je Seite: trägt nur die Kapitel dieser Seite
+function wurzelErsatz(liste){ return {tiefe:0, kinder:liste, id:'buch', typ:'Buch', _ersatz:true, nr:null, titel:''}; }
+
+/* ---------- Zeichnen ---------- */
+const gK = $('#ebene-knoten'), gE = $('#ebene-kanten'), gR = $('#ebene-rel');
+let ELEM = new Map();
+function el(name, attrs, eltern){ const e = document.createElementNS(svgNS, name); for(const k in attrs) e.setAttribute(k, attrs[k]); if(eltern) eltern.appendChild(e); return e; }
+function farbe(w){ return (BEW[w]||BEW.ungeprueft||{farbe:'#B5B5B5'}).farbe; }
+function sichtbarerVorfahr(id){ let n = K.get(id); while(n && !POS.has(n.id)) n = n.p; return n; }
+function anker(id, richtung){ // richtung: 'innen' (Punkt) oder 'aussen' (Ende der Beschriftung)
+  const p = POS.get(id); if(!p) return null;
+  if(id==='buch') return {x: richtung==='rechts' ? p.b/2 : -p.b/2, y:p.y};
+  return richtung==='aussen' ? {x:p.x + p.s*p.b, y:p.y} : {x:p.x, y:p.y};
+}
+
+function render(anim){
+  ordnungBerechnen();
+  const sichtbare = layout();
+  gK.textContent=''; gE.textContent=''; gR.textContent='';
+  ELEM = new Map();
+  const treffer = new Set(zustand.treffer.map(n=>n.id));
+  const fa = filterAktiv();
+  const kontext = new Set();
+  if(fa){ for(const n of sichtbare) if(passtFilter(n)){ let p=n.p; while(p){kontext.add(p.id); p=p.p;} } }
+  // Strukturkanten
+  for(const n of sichtbare){
+    const pfad = el('path', {class:'kante' + (n.tiefe===1?' e1':'') + (fa && !passtFilter(n) ? ' gedimmt':'')}, gE);
+    ELEM.set('k:'+n.id, pfad);
+  }
+  // Knoten
+  const alle = [wurzel, ...sichtbare];
+  for(const n of alle){
+    const p = POS.get(n.id);
+    const g = el('g', {class:'k', tabindex:'0', role:'treeitem'}, gK);
+    const bz = beschriftung(n);
+    if(n===wurzel){
+      g.classList.add('wurzel');
+      el('rect', {class:'kasten', x:-p.b/2, y:-18, width:p.b, height:36, rx:6}, g);
+      const t = el('text', {x:0, y:5, 'text-anchor':'middle'}, g); t.textContent = bz.titel;
+      el('rect', {class:'wahl', x:-p.b/2-4, y:-22, width:p.b+8, height:44, rx:8, fill:'none', stroke:'none'}, g);
+    } else {
+      g.classList.add('e'+Math.min(n.tiefe,4));
+      if(n.typ==='Vorschlag') g.classList.add('vorschlag');
+      if(n.w_ent && n.w_ent.wert==='streichen') g.classList.add('gestrichen');
+      if(fa && !passtFilter(n)) g.classList.add(kontext.has(n.id)?'kontext':'gedimmt');
+      if(treffer.has(n.id)) g.classList.add('treffer-s');
+      if(zustand.gewaehlt===n.id) g.classList.add('gewaehlt');
+      const s = p.s, f = farbe(n.w_bew.wert);
+      const kinderAnz = n.kinder.filter(sichtbar).length;
+      const zu = kinderAnz && !zustand.offen.has(n.id);
+      g.setAttribute('aria-expanded', kinderAnz ? String(!zu) : 'false');
+      g.setAttribute('aria-label', (n.nr?n.nr+' ':'') + n.titel + ', ' + (BEW[n.w_bew.wert]||{}).text);
+      if(n.tiefe===1){
+        el('rect', {class:'kasten', x: s>0 ? 0 : -p.b, y:-15, width:p.b, height:30, rx:5}, g);
+      }
+      el('rect', {class:'wahl', x: s>0 ? -9 : -p.b-3, y:-12, width:p.b+12, height:24, rx:5}, g);
+      // Punkt: gefüllt = eigene Bewertung, Ring = geerbt; gestrichelt = Vorschlag
+      const r = n.tiefe===1 ? 6.5 : 5.2;
+      const cx = n.tiefe===1 ? s*12 : 0;
+      const eigen = !n.w_bew.von;
+      el('circle', {class:'ring', cx, cy:0, r:r+3.5}, g);
+      el('circle', {class:'punkt', cx, cy:0, r, fill: n.typ==='Vorschlag' ? '#fff' : (eigen ? f : '#fff'), stroke:f, 'stroke-dasharray': n.typ==='Vorschlag' ? '2.5 2' : 'none'}, g);
+      const tx = n.tiefe===1 ? s*24 : s*10;
+      const t = el('text', {class:'titel', x:tx, y:4.5, 'text-anchor': s>0 ? 'start':'end'}, g);
+      if(s>0){
+        if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
+        const b = el('tspan', {}, t); b.textContent = bz.titel;
+        if(zu){ const c = el('tspan', {class:'anzahl', dx:4}, t); c.textContent = '+'+kinderAnz; }
+      } else {
+        if(zu){ const c = el('tspan', {class:'anzahl'}, t); c.textContent = '+'+kinderAnz+' '; }
+        if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
+        const b = el('tspan', {}, t); b.textContent = bz.titel;
+      }
+      const tt = el('title', {}, g); tt.textContent = (n.nr?n.nr+' ':'') + n.titel + '\n' + (BEW[n.w_bew.wert]||{}).text + (n.w_emp ? ' · '+n.w_emp.wert : '') + (n.befund ? '\n'+n.befund : '');
+      // Mini-Verteilung bei eingeklappten Knoten mit Unterabschnitten
+      if(zu && n.im_manuskript){
+        const summe = REIHE.reduce((a,k)=>a+(n.vert[k]||0),0);
+        if(summe>0){
+          const bw = Math.min(64, Math.max(28, p.b*0.3)); let off = 0;
+          const bx = s>0 ? p.b - bw - 2 : -p.b + 2;
+          const by = n.tiefe===1 ? 9 : 10;
+          for(const k of REIHE){ const v = n.vert[k]||0; if(!v) continue; const w = bw*v/summe;
+            el('rect', {x:bx+off, y:by, width:Math.max(w,0.8), height:3, fill:farbe(k)}, g); off += w; }
+        }
+      }
+    }
+    g.addEventListener('click', ev => { ev.stopPropagation(); klick(n); });
+    g.addEventListener('keydown', ev => { if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); klick(n); } });
+    ELEM.set('n:'+n.id, g);
+  }
+  // Beziehungen
+  relZeichnen();
+  animiere(anim!==false);
+  ALT = new Map(Array.from(POS, ([k,v])=>[k,Object.assign({},v)]));
+  if(zustand.ansicht==='liste') tabelle();
+}
+
+function imTeilbaum(id){ if(!zustand.gewaehlt) return false; let n = K.get(id); while(n){ if(n.id===zustand.gewaehlt) return true; n = n.p; } return false; }
+function relListe(){
+  const out = [];
+  const add = (e, klasse) => {
+    const a = sichtbarerVorfahr(e.von), b = sichtbarerVorfahr(e.nach);
+    if(!a || !b || a===b || a===wurzel || b===wurzel) return;
+    if(!sichtbar(K.get(e.von)||{}) || !sichtbar(K.get(e.nach)||{})) return;
+    out.push({e, a:a.id, b:b.id, klasse, direkt: a.id===e.von && b.id===e.nach});
+  };
+  REL.forEach(e=>{ if(zustand.beziehungen || imTeilbaum(e.von) || imTeilbaum(e.nach)) add(e, e.typ); });
+  if(zustand.verweise && zustand.gewaehlt){
+    VERWEIS.forEach(e=>{ if(e.von===zustand.gewaehlt || e.nach===zustand.gewaehlt) add(e,'verweis'); });
+  }
+  // Doppelte (gleiche sichtbare Endpunkte und Typ) zusammenfassen
+  const m = new Map();
+  for(const r of out){ const k = r.a+'|'+r.b+'|'+r.klasse; if(!m.has(k)) m.set(k, r); }
+  return [...m.values()];
+}
+function relZeichnen(){ relPfade(POS); }
+function relPfade(P){
+  gR.textContent='';
+  // neu zeichnen mit Positionen P (einfach, da wenige Kanten)
+  for(const r of relListe()){
+    const a = P.get(r.a), b = P.get(r.b); if(!a||!b) continue;
+    const ber = zustand.gewaehlt && (imTeilbaum(r.e.von) || imTeilbaum(r.e.nach));
+    const leise = zustand.gewaehlt && !ber && r.klasse!=='verweis';
+    const pfad = el('path', {class:'rel '+r.klasse + (ber?' hervor':'') + (leise?' leise':''),
+      'marker-end': r.klasse==='verwandt' ? '' : 'url(#pfeil-'+(r.klasse==='verweis'?'verweis':r.klasse)+')'}, gR);
+    const t = el('title', {}, pfad);
+    const kt = KANTENTYP[r.e.typ] || {};
+    const va = K.get(r.e.von), vb = K.get(r.e.nach);
+    t.textContent = ((va&&va.nr)||'') + ' ' + ((va&&va.titel)||'') + '\n→ ' + (r.e.beschriftung || kt.text || r.e.typ) + '\n' + ((vb&&vb.nr)||'') + ' ' + ((vb&&vb.titel)||'');
+    const sa = a.s||1, sb = b.s||1;
+    const x1 = a.x - sa*7, y1 = a.y, x2 = b.x - sb*9, y2 = b.y;
+    let d;
+    if(sa===sb){
+      // Klammer auf der Außenseite: an den Beschriftungsenden vorbei, damit keine Texte gekreuzt werden
+      const y0 = Math.min(y1,y2) - 14, y9 = Math.max(y1,y2) + 14;
+      let ext = sa>0 ? -Infinity : Infinity;
+      for(const [id,q] of P){ if(id==='buch' || q.s!==sa || q.y<y0 || q.y>y9) continue; const e = q.x + sa*q.b; ext = sa>0 ? Math.max(ext,e) : Math.min(ext,e); }
+      const xa = a.x + sa*(a.b+4), xb = b.x + sb*(b.b+9);
+      const cx = ext + sa*(26 + Math.min(70, Math.abs(y2-y1)*0.08));
+      d = `M${xa},${y1} C${cx},${y1} ${cx},${y2} ${xb},${y2}`;
+    } else {
+      d = `M${x1},${y1} C${x1*0.2},${y1} ${x2*0.2},${y2} ${x2},${y2}`;
+    }
+    pfad.setAttribute('d', d);
+  }
+}
+
+function strukturPfad(von, nach, P){
+  const a = P.get(von), b = P.get(nach); if(!a||!b) return '';
+  let sx, sy = a.y;
+  if(von==='buch') sx = (b.s>0 ? a.b/2 : -a.b/2); else sx = a.x + a.s*a.b;
+  const tx = b.x + (b.s>0 ? (K.get(nach).tiefe===1? 0 : -6) : (K.get(nach).tiefe===1 ? 0 : 6)), ty = b.y;
+  const dx = (tx - sx)/2;
+  return `M${sx},${sy} C${sx+dx},${sy} ${tx-dx},${ty} ${tx},${ty}`;
+}
+
+let animId = 0;
+function animiere(weich){
+  const ziel = POS;
+  const start = new Map();
+  for(const [id, p] of ziel){
+    let q = ALT.get(id);
+    if(!q){ // neuer Knoten: vom (alten) Elternknoten aus einblenden
+      let n = K.get(id); let a = n && n.p;
+      while(a && !ALT.has(a.id)) a = a.p;
+      q = a ? ALT.get(a.id) : p;
+      q = Object.assign({}, p, {x:q.x, y:q.y});
+    }
+    start.set(id, q);
+  }
+  const dauer = weich ? 320 : 0;
+  const t0 = performance.now(); const meine = ++animId;
+  const zwischen = new Map();
+  function schritt(t){
+    if(meine!==animId) return;
+    const f = dauer ? Math.min(1, (t - t0)/dauer) : 1;
+    const e = f<.5 ? 2*f*f : 1 - Math.pow(-2*f+2,2)/2;
+    for(const [id, p] of ziel){ const q = start.get(id); zwischen.set(id, Object.assign({}, p, {x:q.x+(p.x-q.x)*e, y:q.y+(p.y-q.y)*e})); }
+    for(const [id, p] of zwischen){
+      const g = ELEM.get('n:'+id); if(g && id!=='buch') g.setAttribute('transform', `translate(${p.x},${p.y})`);
+      const k = ELEM.get('k:'+id); if(k){ const n = K.get(id); k.setAttribute('d', strukturPfad(n.p.id, id, zwischen)); }
+    }
+    if(f>=1) relPfade(ziel);
+    else if(gR.childNodes.length) gR.textContent='';
+    if(f<1) requestAnimationFrame(schritt);
+  }
+  requestAnimationFrame(schritt);
+}
+
+/* ---------- Pan & Zoom ---------- */
+const svg = $('#karte'), welt = $('#welt');
+const ansicht = {x:0, y:0, k:1};
+function setzeAnsicht(){ welt.setAttribute('transform', `translate(${ansicht.x},${ansicht.y}) scale(${ansicht.k})`); }
+function einpassen(){
+  const bb = welt.getBBox(); const r = svg.getBoundingClientRect();
+  if(!bb.width || !r.width) return;
+  const k = Math.min(1.25, Math.max(0.15, Math.min((r.width-40)/bb.width, (r.height-40)/bb.height)));
+  ansicht.k = k; ansicht.x = r.width/2 - (bb.x + bb.width/2)*k; ansicht.y = r.height/2 - (bb.y + bb.height/2)*k;
+  setzeAnsicht();
+}
+function zentriere(id){
+  const p = POS.get(id); if(!p) return; const r = svg.getBoundingClientRect();
+  const k = Math.max(ansicht.k, 0.8);
+  const x = p.x + (id==='buch'?0:p.s*p.b/2);
+  ansicht.k = k; ansicht.x = r.width/2 - x*k; ansicht.y = r.height/2 - p.y*k; setzeAnsicht();
+}
+function zoomUm(f, cx, cy){
+  const r = svg.getBoundingClientRect(); if(cx==null){ cx = r.width/2; cy = r.height/2; }
+  const k = Math.min(3, Math.max(0.12, ansicht.k*f)); const g = k/ansicht.k;
+  ansicht.x = cx - (cx-ansicht.x)*g; ansicht.y = cy - (cy-ansicht.y)*g; ansicht.k = k; setzeAnsicht();
+}
+svg.addEventListener('wheel', ev => { ev.preventDefault(); const r = svg.getBoundingClientRect(); zoomUm(Math.exp(-ev.deltaY*0.0015), ev.clientX-r.left, ev.clientY-r.top); }, {passive:false});
+const zeiger = new Map(); let zieh = null, pinch = null, bewegt = false;
+svg.addEventListener('pointerdown', ev => {
+  zeiger.set(ev.pointerId, {x:ev.clientX, y:ev.clientY}); bewegt = false;
+  if(zeiger.size===1){ zieh = {x:ev.clientX, y:ev.clientY, ax:ansicht.x, ay:ansicht.y}; }
+  if(zeiger.size===2){ const [a,b] = [...zeiger.values()]; pinch = {d:Math.hypot(a.x-b.x,a.y-b.y), k:ansicht.k}; zieh = null; }
+});
+svg.addEventListener('pointermove', ev => {
+  if(!zeiger.has(ev.pointerId)) return;
+  zeiger.set(ev.pointerId, {x:ev.clientX, y:ev.clientY});
+  if(pinch && zeiger.size===2){ const [a,b] = [...zeiger.values()]; const r = svg.getBoundingClientRect();
+    const f = Math.hypot(a.x-b.x,a.y-b.y)/pinch.d; zoomUm(pinch.k*f/ansicht.k, (a.x+b.x)/2-r.left, (a.y+b.y)/2-r.top); bewegt = true; return; }
+  if(zieh){ const dx = ev.clientX-zieh.x, dy = ev.clientY-zieh.y;
+    if(!bewegt && Math.hypot(dx,dy) > 4){ bewegt = true; svg.classList.add('zieht'); try{ svg.setPointerCapture(ev.pointerId); }catch(e){} }
+    if(bewegt){ ansicht.x = zieh.ax+dx; ansicht.y = zieh.ay+dy; setzeAnsicht(); } }
+});
+function loslassen(ev){ zeiger.delete(ev.pointerId); if(zeiger.size<2) pinch = null; if(!zeiger.size){ zieh = null; svg.classList.remove('zieht'); } }
+svg.addEventListener('pointerup', loslassen); svg.addEventListener('pointercancel', loslassen);
+svg.addEventListener('click', ev => { if(bewegt){ ev.stopPropagation(); bewegt=false; } }, true);
+$('#z-plus').onclick = () => zoomUm(1.25); $('#z-minus').onclick = () => zoomUm(0.8); $('#z-fit').onclick = einpassen;
+
+/* ---------- Interaktion ---------- */
+function klick(n){
+  const hatKinder = n.kinder.filter(sichtbar).length > 0;
+  if(zustand.gewaehlt===n.id){ if(hatKinder){ if(zustand.offen.has(n.id)) zuklappen(n); else zustand.offen.add(n.id); } }
+  else { zustand.gewaehlt = n.id; if(hatKinder) zustand.offen.add(n.id); }
+  if(n===wurzel) zustand.offen.add('buch');
+  render(); detail(n.id); hashSetzen(n.id);
+}
+function zuklappen(n){ zustand.offen.delete(n.id); }
+function waehle(id, zentrieren){
+  const n = K.get(id); if(!n) return;
+  if(!sichtbar(n)){ zustand.vorschlaege = true; $('#t-vorschlaege').checked = true; }
+  vorfahrenOeffnen(n); zustand.gewaehlt = id; render(); detail(id); hashSetzen(id);
+  if(zentrieren!==false && zustand.ansicht==='karte') setTimeout(()=>zentriere(id), 340);
+  if(zustand.ansicht==='liste'){ const z = document.querySelector(`tr[data-id="${CSS.escape(id)}"]`); if(z) z.scrollIntoView({block:'nearest'}); }
+}
+function hashSetzen(id){ try{ history.replaceState(null, '', '#k=' + encodeURIComponent(id)); }catch(e){} }
+
+/* ---------- Detailbereich ---------- */
+const det = $('#detail');
+function marke(text, f, geerbtVon, titel){
+  const voll = !!f && !geerbtVon;
+  return `<span class="marke${voll?' voll':''}${geerbtVon?' geerbt':''}" style="${f?`border-color:${f};${voll?`background:${f}`:`color:${f}`}`:''}" title="${esc(titel||'')}">${esc(text)}${geerbtVon?` <small>(geerbt von ${esc(K.get(geerbtVon)?.nr||'')})</small>`:''}</span>`;
+}
+function knotenLink(id, txt){ const n = K.get(id); if(!n) return esc(id); return `<button type="button" data-geh="${esc(id)}">${esc(txt || ((n.nr?n.nr+' ':'') + n.titel))}</button>`; }
+function detail(id){
+  const n = K.get(id);
+  if(!n || n===wurzel){ det.classList.remove('offen'); return; }
+  const kz = n.kennzahlen || {};
+  const pfad = []; let p = n.p; while(p && p!==wurzel){ pfad.unshift(p); p = p.p; }
+  const b = BEW[n.w_bew.wert] || {};
+  let h = `<button type="button" class="zu" aria-label="Schließen" id="d-zu">×</button>`;
+  h += `<p class="pfad">${pfad.map(x=>knotenLink(x.id, x.nr || kurz(x.titel,24))).join(' › ') || 'Buch'}</p>`;
+  h += `<h2>${n.nr?esc(n.nr)+' ':''}${esc(n.titel)}</h2>`;
+  h += `<div class="marken">${marke(b.text||n.w_bew.wert, b.farbe, n.w_bew.von, b.erklaerung)}`;
+  if(n.w_emp) h += marke('Empfehlung: '+n.w_emp.wert, '#3A3F44', n.w_emp.von);
+  h += marke('Verlag: '+n.w_ent.wert, n.w_ent.wert==='offen' ? '#9A9A9A' : '#3A3F44', n.w_ent.von, (SK.entscheidung||{})[n.w_ent.wert]);
+  if(n.lokal) h += `<span class="marke" style="border-color:#C62828;color:#C62828">lokal geändert</span>`;
+  if(n.typ==='Vorschlag') h += `<span class="marke" style="border-style:dashed">noch nicht geschrieben</span>`;
+  if(n.typ==='Entfallen') h += `<span class="marke" style="border-style:dashed">nicht mehr im Manuskript</span>`;
+  h += `</div>`;
+  const quelleBef = n.befund ? n : (n.w_bew.von ? K.get(n.w_bew.von) : null);
+  if(n.befund) h += `<p class="befund">${esc(n.befund)}</p>`;
+  else if(quelleBef && quelleBef.befund) h += `<p class="befund" style="color:var(--muted)">Befund zu ${esc(quelleBef.nr||'')}: ${esc(quelleBef.befund)}</p>`;
+  if(n.begruendung) h += `<p>${esc(n.begruendung)}</p>`;
+  if(n.notiz) h += `<p><b>Notiz:</b> ${esc(n.notiz)}</p>`;
+  if(n.im_manuskript){
+    h += `<h3>Umfang und Belege</h3><div class="zahlen">
+      <div><b>≈ ${fmt(kz.seiten,0)}</b><span>Seiten (Schätzung)</span></div>
+      <div><b>${fmt(kz.woerter)}</b><span>Wörter</span></div>
+      <div><b>${fmt(kz.abbildungen)}</b><span>Abbildungen${kz.platzhalter?` (${kz.platzhalter} Platzh.)`:''}</span></div>
+      <div><b>${fmt(kz.belege)}</b><span>Belegstellen</span></div>
+      <div><b>${kz.lit_median||'–'}</b><span>Literatur Median</span></div>
+      <div><b>${kz.lit_min?kz.lit_min+'–'+kz.lit_max:'–'}</b><span>Literatur Spanne</span></div>
+    </div>`;
+    if(kz.anteil_vor_2015!=null) h += `<p class="quelle">${fmt(kz.anteil_vor_2015*100)} % der Belegstellen sind älter als 2015.</p>`;
+    if(n.kinder.length){
+      const summe = REIHE.reduce((a,k)=>a+(n.vert[k]||0),0);
+      if(summe>0) h += `<p class="quelle">Im Teilbaum: ${REIHE.filter(k=>n.vert[k]>0.05).map(k=>`${esc((BEW[k]||{}).text||k)} ≈ ${fmt(n.vert[k])} S.`).join(' · ')}</p>`;
+    }
+  }
+  const sig = n.signale || {};
+  if((sig.alt&&sig.alt.length) || (sig.neu&&sig.neu.length)){
+    h += `<h3>Signalbegriffe im Text</h3><div class="tags">${(sig.alt||[]).map(s=>`<span class="tag alt" title="Hinweis auf veralteten Inhalt">${esc(s)}</span>`).join('')}${(sig.neu||[]).map(s=>`<span class="tag neu" title="Hinweis auf aktuellen Inhalt">${esc(s)}</span>`).join('')}</div>`;
+  }
+  const hin = n.hinweise || {};
+  if(hin.veraltet && hin.veraltet.length) h += `<h3>VERALTET-Vermerke aus der Überführung</h3><ul class="liste">${hin.veraltet.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+  if(hin.pruefen && hin.pruefen.length) h += `<details><summary>Prüfhinweise aus der Überführung (${hin.pruefen.length})</summary><ul class="liste">${hin.pruefen.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`;
+  if(n.abbildungen && n.abbildungen.length) h += `<details><summary>Abbildungen (${n.abbildungen.length})</summary><ul class="liste">${n.abbildungen.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`;
+  // Beziehungen
+  const aus = REL.filter(e=>e.von===id), ein = REL.filter(e=>e.nach===id);
+  const tb = REL.filter(e=>e.von!==id && e.nach!==id && (imTeilbaum(e.von) || imTeilbaum(e.nach)));
+  if(aus.length || ein.length || tb.length){
+    h += `<h3>Revisionsbeziehungen</h3><ul class="liste">`;
+    for(const e of aus) h += `<li>${esc(e.beschriftung || (KANTENTYP[e.typ]||{}).text || e.typ)} → ${knotenLink(e.nach)}${metaKurz(e.meta)}</li>`;
+    for(const e of ein) h += `<li>${knotenLink(e.von)} → ${esc(e.beschriftung || (KANTENTYP[e.typ]||{}).text || e.typ)} diesem Abschnitt${metaKurz(e.meta)}</li>`;
+    h += `</ul>`;
+    if(tb.length){
+      h += `<details${aus.length||ein.length?'':' open'}><summary>Im Teilbaum (${tb.length})</summary><ul class="liste">`;
+      for(const e of tb) h += `<li>${knotenLink(e.von, (K.get(e.von)?.nr||'') + ' ' + kurz(K.get(e.von)?.titel||'', 40))} – ${esc(e.beschriftung || (KANTENTYP[e.typ]||{}).text || e.typ)} → ${knotenLink(e.nach, (K.get(e.nach)?.nr||'') + ' ' + kurz(K.get(e.nach)?.titel||'', 40))}</li>`;
+      h += `</ul></details>`;
+    }
+  }
+  const vA = VERWEIS.filter(e=>e.von===id), vE = VERWEIS.filter(e=>e.nach===id);
+  if(vA.length || vE.length){
+    h += `<details><summary>Querverweise im Text (${vA.length} ausgehend, ${vE.length} eingehend)</summary><ul class="liste">`;
+    for(const e of vA) h += `<li>verweist auf ${knotenLink(e.nach)}${e.meta&&e.meta.anzahl>1?` (${e.meta.anzahl}×)`:''}</li>`;
+    for(const e of vE) h += `<li>${knotenLink(e.von)} verweist hierher</li>`;
+    h += `</ul></details>`;
+  }
+  const sm = STRUKTURMETA.get(id);
+  const meta = Object.assign({}, n.meta||{}, sm ? {'Kante zum Elternknoten': JSON.stringify(sm)} : {});
+  if(Object.keys(meta).length) h += `<h3>Metadaten</h3><table class="metatab">${Object.entries(meta).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(typeof v==='object'?JSON.stringify(v):v)}</td></tr>`).join('')}</table>`;
+  if(n.quelle){
+    const url = D.meta.repo ? `${D.meta.repo}/blob/main/author/content/${n.quelle.datei.split('/').map(encodeURIComponent).join('/')}#L${n.quelle.zeile}` : '';
+    h += `<p class="quelle" style="margin-top:12px">Quelle: ${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(n.quelle.datei)}:${n.quelle.zeile}</a>`:esc(n.quelle.datei+':'+n.quelle.zeile)}${n.quelle.label?` · <code>${esc(n.quelle.label)}</code>`:' · ohne \\label'}</p>`;
+  }
+  // Bearbeiten
+  const opt = (liste, wert, leer, txt) => (leer?`<option value="">${leer}</option>`:'') + liste.map(v=>`<option value="${esc(v)}"${v===wert?' selected':''}>${esc(txt?txt(v):v)}</option>`).join('');
+  const bewWerte = Object.keys(BEW).filter(k=>k!=='ungeprueft' && (n.typ==='Vorschlag' ? true : k!=='vorschlag'));
+  h += `<div class="bearbeiten"><b style="font-size:13.5px">Abstimmung</b>
+    <label for="e-ent">Entscheidung mit dem Verlag</label><select id="e-ent">${opt(Object.keys(SK.entscheidung||{offen:1}), n.entscheidung||'offen', null, v=>v + ' – ' + ((SK.entscheidung||{})[v]||''))}</select>
+    ${n.typ==='Vorschlag'?'':`<label for="e-bew">Bewertung</label><select id="e-bew">${opt(bewWerte, n.bewertung||'', '(vom Elternabschnitt übernehmen)', v=>(BEW[v]||{}).text||v)}</select>`}
+    <label for="e-emp">Empfehlung</label><select id="e-emp">${opt(SK.empfehlung||[], n.empfehlung||'', '(vom Elternabschnitt übernehmen)')}</select>
+    <label for="e-notiz">Notiz</label><textarea id="e-notiz" placeholder="z. B. Absprache mit dem Verlag">${esc(n.notiz||'')}</textarea>
+    <div class="zeile"><button type="button" class="knopf" id="e-neu">Unterpunkt vorschlagen …</button>${n.lokal_neu?'<button type="button" class="knopf" id="e-weg">Vorschlag entfernen</button>':''}</div>
+    <p class="quelle" style="margin:8px 0 0">Änderungen bleiben in diesem Browser gespeichert. Für alle sichtbar werden sie über „Exportieren“ (neue bewertung.json) und den Abgleich im Repository.</p></div>`;
+  det.innerHTML = h; det.classList.add('offen'); det.scrollTop = 0;
+  $('#d-zu').onclick = () => { det.classList.remove('offen'); zustand.gewaehlt = null; render(false); hashSetzen(''); };
+  det.querySelectorAll('[data-geh]').forEach(x => x.onclick = () => waehle(x.dataset.geh));
+  const set = (f, v) => { const l = lokal.knoten[id] = lokal.knoten[id] || {}; l[f] = v; l.t = new Date().toISOString().slice(0,16); speichereLokal(); aufbauen(); sucheAnwenden(); bilanz(); render(false); detail(id); };
+  $('#e-ent').onchange = e => set('entscheidung', e.target.value);
+  if($('#e-bew')) $('#e-bew').onchange = e => set('bewertung', e.target.value || null);
+  $('#e-emp').onchange = e => set('empfehlung', e.target.value || null);
+  $('#e-notiz').onchange = e => set('notiz', e.target.value);
+  $('#e-neu').onclick = () => {
+    const t = prompt('Titel des neuen Unterpunkts unter „' + (n.nr?n.nr+' ':'') + n.titel + '“:'); if(!t || !t.trim()) return;
+    const vid = 'vorschlag:' + Date.now().toString(36);
+    lokal.vorschlaege.push({id:vid, parent:id, titel:t.trim(), empfehlung:'neu schreiben', entscheidung:'offen', befund:'', t:new Date().toISOString().slice(0,16)});
+    speichereLokal(); aufbauen(); bilanz(); zustand.offen.add(id); waehle(vid);
+  };
+  if($('#e-weg')) $('#e-weg').onclick = () => { lokal.vorschlaege = lokal.vorschlaege.filter(v=>v.id!==id); delete lokal.knoten[id]; speichereLokal(); aufbauen(); bilanz(); zustand.gewaehlt = n.parent; render(); detail(n.parent); };
+}
+function metaKurz(m){ if(!m || !Object.keys(m).length) return ''; return ` <span class="quelle">(${esc(Object.entries(m).map(([k,v])=>k+': '+(typeof v==='object'?JSON.stringify(v):v)).join(', '))})</span>`; }
+
+/* ---------- Liste ---------- */
+function zeilenAlle(){ const z = []; (function w(n){ if(n!==wurzel && sichtbar(n)) z.push(n); n.kinder.forEach(w); })(wurzel); return z; }
+function tabelle(){
+  const q = norm(zustand.suche.trim());
+  const rows = zeilenAlle().filter(n => passtFilter(n) && (q.length<2 || suchtext(n).includes(q)));
+  let h = `<table class="uebersicht"><thead><tr><th>Nr.</th><th>Titel</th><th>Bewertung</th><th>Empfehlung</th><th>Verlag</th><th style="text-align:right">≈ S.</th><th class="befund-sp">Befund</th></tr></thead><tbody>`;
+  for(const n of rows){
+    const b = BEW[n.w_bew.wert]||{};
+    const eigen = !n.w_bew.von;
+    h += `<tr data-id="${esc(n.id)}" class="e-${n.tiefe}${zustand.gewaehlt===n.id?' gewaehlt':''}">
+      <td>${esc(n.nr||(n.typ==='Vorschlag'?'neu':'·'))}</td>
+      <td class="t" style="padding-left:${(n.tiefe-1)*14}px">${esc(n.titel)}</td>
+      <td class="${eigen?'':'geerbt'}"><span class="pkt" style="border-color:${b.farbe};background:${eigen&&n.typ!=='Vorschlag'?b.farbe:'#fff'}"></span>${esc(b.text||n.w_bew.wert)}</td>
+      <td class="${n.w_emp&&n.w_emp.von?'geerbt':''}">${esc(n.w_emp?n.w_emp.wert:'')}</td>
+      <td class="${n.w_ent.von?'geerbt':''}">${esc(n.w_ent.wert)}</td>
+      <td class="zahl">${n.im_manuskript && n.kennzahlen ? fmt(n.kennzahlen.seiten,0) : ''}</td>
+      <td class="befund-sp">${esc(n.befund||'')}</td></tr>`;
+  }
+  h += `</tbody></table><p class="quelle">${rows.length} Einträge. Seitenzahlen sind Schätzungen aus dem Textumfang (Wörter/300 + 0,6 Seiten je Abbildung) einschließlich der Unterabschnitte.</p>`;
+  const t = $('#tabelle'); t.innerHTML = h;
+  t.querySelectorAll('tr[data-id]').forEach(r => r.onclick = () => { zustand.gewaehlt = r.dataset.id; detail(r.dataset.id); hashSetzen(r.dataset.id); t.querySelectorAll('tr.gewaehlt').forEach(x=>x.classList.remove('gewaehlt')); r.classList.add('gewaehlt'); });
+}
+function csv(){
+  const sp = ['Nr.','Titel','Ebene','Typ','Bewertung','Bewertung geerbt von','Empfehlung','Entscheidung Verlag','Seiten (Schätzung)','Wörter','Abbildungen','Literatur Median','Befund','Begründung','Notiz','ID'];
+  const z = [sp];
+  for(const n of zeilenAlle()){ const kz = n.kennzahlen||{};
+    z.push([n.nr||'', n.titel, n.tiefe, n.typ, (BEW[n.w_bew.wert]||{}).text||n.w_bew.wert, n.w_bew.von?(K.get(n.w_bew.von)?.nr||''):'', n.w_emp?n.w_emp.wert:'', n.w_ent.wert, kz.seiten??'', kz.woerter??'', kz.abbildungen??'', kz.lit_median??'', n.befund||'', n.begruendung||'', n.notiz||'', n.id]); }
+  const text = '\ufeff' + z.map(r=>r.map(c=>{ const s = String(c).replace(/"/g,'""'); return /[;"\n]/.test(s) ? `"${s}"` : s; }).join(';')).join('\r\n');
+  laden(text, 'inhaltsrevision_6_auflage.csv', 'text/csv;charset=utf-8');
+}
+function laden(text, name, typ){ const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type:typ})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+
+/* ---------- Export der Pflegedatei ---------- */
+function exportieren(){
+  const roh = JSON.parse(JSON.stringify(D.meta.bewertung_roh || {knoten:{}, vorschlaege:[], kanten:[]}));
+  roh.knoten = roh.knoten || {}; roh.vorschlaege = roh.vorschlaege || [];
+  const vIdx = new Map(roh.vorschlaege.map((v,i)=>[v.id,i]));
+  for(const [id, l] of Object.entries(lokal.knoten)){
+    const ziel = vIdx.has(id) ? roh.vorschlaege[vIdx.get(id)] : (lokal.vorschlaege.find(v=>v.id===id) ? null : (roh.knoten[id] = roh.knoten[id] || {}));
+    if(!ziel) continue;
+    for(const f of ['bewertung','empfehlung','entscheidung','notiz']){
+      if(l[f]===undefined) continue;
+      if(l[f]===null || l[f]==='') delete ziel[f]; else ziel[f] = l[f];
+    }
+    if(!vIdx.has(id) && !Object.keys(ziel).length) delete roh.knoten[id];
+  }
+  for(const v of lokal.vorschlaege){
+    const kopie = Object.assign({}, v); delete kopie.t;
+    const l = lokal.knoten[v.id] || {};
+    for(const f of ['empfehlung','entscheidung','notiz']) if(l[f]) kopie[f] = l[f];
+    roh.vorschlaege.push(kopie);
+  }
+  roh.stand = new Date().toISOString().slice(0,10);
+  laden(JSON.stringify(roh, null, 1), 'bewertung.json', 'application/json');
+}
+function zeigeLokal(){
+  const n = Object.keys(lokal.knoten).length + lokal.vorschlaege.length;
+  $('#lokalzahl').hidden = !n; $('#lokalzahl').textContent = n + (n===1?' lokale Änderung':' lokale Änderungen');
+  $('#b-export').hidden = !n; $('#b-verwerfen').hidden = !n;
+}
+
+/* ---------- Kopf, Bilanz, Legende ---------- */
+function kopf(){
+  $('#titel').textContent = D.meta.titel || 'Inhaltsrevision';
+  $('#untertitel').textContent = D.meta.untertitel || '';
+  const repo = D.meta.repo ? `<a href="${esc(D.meta.repo)}/commit/${esc(D.meta.buch_commit)}" target="_blank" rel="noopener">${esc(D.meta.buch_commit)}</a>` : esc(D.meta.buch_commit);
+  $('#stand').innerHTML = `Manuskript ${repo} vom ${esc(D.meta.buch_datum)} · Bewertung Stand ${esc(D.meta.stand_bewertung)} · Abgleich ${esc(D.meta.erzeugt)}`;
+}
+function bilanz(){
+  const w = wurzel.vert; const summe = REIHE.reduce((a,k)=>a+(w[k]||0),0) || 1;
+  let h = '', l = '';
+  for(const k of REIHE){ const v = w[k]||0; if(v<0.5) continue; const b = BEW[k]||{};
+    const pct = v/summe*100;
+    h += `<button type="button" data-bew="${k}" aria-pressed="${zustand.fBew.has(k)}" style="width:${pct}%;background:${b.farbe};${k==='ungeprueft'?'color:#1A1A1A':''}" title="${esc(b.text)}: ≈ ${fmt(v)} Seiten (${fmt(pct)} %) – ${esc(b.erklaerung||'')}">${pct>7?fmt(pct)+' %':''}</button>`; }
+  const anzV = wurzel.anzVorschlag;
+  const ents = [...K.values()].filter(n=>n!==wurzel && n.entscheidung && n.entscheidung!=='offen').length;
+  for(const k of REIHE){ const v = w[k]||0; if(k==='vorschlag'){ if(anzV) l += `<span><i style="background:#fff;border:1.5px dashed ${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>${anzV}</b></span>`; continue; }
+    if(v<0.5) continue; l += `<span><i style="background:${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>≈ ${fmt(v)} S.</b></span>`; }
+  l += `<span>Verlag entschieden <b>${ents}</b></span>`;
+  $('#balken').innerHTML = h; $('#balken-legende').innerHTML = l;
+  $('#balken').querySelectorAll('button').forEach(b => b.onclick = () => { const k = b.dataset.bew; zustand.fBew.has(k) ? zustand.fBew.delete(k) : zustand.fBew.add(k); nachFilterAufklappen(); bilanz(); render(); });
+}
+function legende(){
+  const p = (fill, stroke, dash) => `<svg width="18" height="18"><circle cx="9" cy="9" r="5.5" fill="${fill}" stroke="${stroke}" stroke-width="2.2" ${dash?'stroke-dasharray="2.5 2"':''}/></svg>`;
+  const k = (cls, mk) => `<svg width="34" height="14"><path class="rel ${cls}" d="M2,7 L30,7" style="opacity:1" ${mk?`marker-end="url(#pfeil-${mk})"`:''}/></svg>`;
+  let h = `<h4>Bewertung</h4><ul>`;
+  for(const kk of REIHE){ const b = BEW[kk]; if(!b) continue; h += `<li>${p(kk==='vorschlag'?'#fff':b.farbe, b.farbe, kk==='vorschlag')}<span><b>${esc(b.text)}</b> – ${esc(b.erklaerung||'')}</span></li>`; }
+  h += `</ul><h4>Darstellung</h4><ul><li>${p('#fff','#B7791F')}<span>Ring: Bewertung vom Elternabschnitt übernommen</span></li>
+  <li><svg width="18" height="18"><text x="1" y="13" font-size="12" text-decoration="line-through" fill="#8A8F94">Ab</text></svg><span>durchgestrichen: Verlag hat „streichen“ entschieden</span></li>
+  <li><svg width="34" height="10"><rect x="2" y="3" width="10" height="3" fill="#00806B"/><rect x="12" y="3" width="8" height="3" fill="#B7791F"/><rect x="20" y="3" width="10" height="3" fill="#C62828"/></svg><span>Balken: Verteilung im eingeklappten Teilbaum (nach Seiten)</span></li></ul>
+  <h4>Kanten</h4><ul><li>${k('ersetzt','ersetzt')}<span>wird ersetzt durch</span></li><li>${k('erweitert','erweitert')}<span>wird erweitert durch</span></li>
+  <li>${k('zusammenlegen','zusammenlegen')}<span>zusammenlegen mit</span></li><li>${k('verwandt')}<span>inhaltlich verwandt</span></li><li>${k('verweis','verweis')}<span>Querverweis im Text (nur für den gewählten Knoten)</span></li></ul>
+  <p class="quelle" style="margin:8px 0 0">Kanten zu eingeklappten Knoten enden am nächsten sichtbaren Elternknoten.</p>`;
+  $('#legende').innerHTML = h;
+}
+
+/* ---------- Bedienleiste ---------- */
+function ansichtSetzen(a){
+  zustand.ansicht = a;
+  document.querySelectorAll('[data-ansicht]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.ansicht===a)));
+  $('#flaeche').style.display = a==='karte' ? '' : 'none';
+  $('#tabelle').classList.toggle('offen', a==='liste');
+  ['#anordnung','#ebenen'].forEach(s=>$(s).style.display = a==='karte' ? '' : 'none');
+  document.querySelectorAll('.nur-karte').forEach(x=>x.style.display = a==='karte' ? '' : 'none');
+  if(a==='liste') tabelle(); else { render(false); }
+}
+document.querySelectorAll('[data-ansicht]').forEach(b => b.onclick = () => ansichtSetzen(b.dataset.ansicht));
+document.querySelectorAll('[data-modus]').forEach(b => b.onclick = () => { zustand.modus = b.dataset.modus; document.querySelectorAll('[data-modus]').forEach(x=>x.setAttribute('aria-pressed', String(x===b))); render(); setTimeout(einpassen, 360); });
+document.querySelectorAll('[data-ebene]').forEach(b => b.onclick = () => { bisEbene(+b.dataset.ebene); document.querySelectorAll('[data-ebene]').forEach(x=>x.setAttribute('aria-pressed', String(x===b))); nachFilterAufklappen(); render(); setTimeout(einpassen, 360); });
+let sucheTimer;
+$('#suche').addEventListener('input', e => { clearTimeout(sucheTimer); sucheTimer = setTimeout(() => { zustand.suche = e.target.value; sucheAnwenden(); render(); }, 180); });
+$('#suche').addEventListener('keydown', e => { if(e.key==='Enter' && zustand.treffer.length){ zustand.trefferIdx = (zustand.trefferIdx+1) % zustand.treffer.length; waehle(zustand.treffer[zustand.trefferIdx].id); } });
+function optionen(){
+  const fe = $('#f-empfehlung'); (SK.empfehlung||[]).forEach(v => fe.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(v)}</option>`));
+  const fn = $('#f-entscheidung'); Object.entries(SK.entscheidung||{}).forEach(([k,v]) => fn.insertAdjacentHTML('beforeend', `<option value="${esc(k)}" title="${esc(v)}">${esc(k)}</option>`));
+}
+$('#f-empfehlung').onchange = e => { zustand.fEmp = e.target.value; nachFilterAufklappen(); render(); };
+$('#f-entscheidung').onchange = e => { zustand.fEnt = e.target.value; nachFilterAufklappen(); render(); };
+$('#t-vorschlaege').onchange = e => { zustand.vorschlaege = e.target.checked; sucheAnwenden(); render(); };
+$('#t-beziehungen').onchange = e => { zustand.beziehungen = e.target.checked; render(false); };
+$('#t-verweise').onchange = e => { zustand.verweise = e.target.checked; render(false); };
+$('#b-csv').onclick = csv;
+$('#b-export').onclick = exportieren;
+$('#b-verwerfen').onclick = () => { if(!confirm('Alle lokalen Änderungen in diesem Browser verwerfen?')) return; lokal = {knoten:{}, vorschlaege:[]}; speichereLokal(); aufbauen(); bilanz(); render(); if(zustand.gewaehlt) detail(zustand.gewaehlt); };
+$('#b-legende').onclick = () => { const o = $('#legende').classList.toggle('offen'); $('#b-legende').setAttribute('aria-expanded', String(o)); };
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ if($('#legende').classList.contains('offen')){ $('#legende').classList.remove('offen'); $('#b-legende').setAttribute('aria-expanded','false'); } else if(det.classList.contains('offen')){ det.classList.remove('offen'); zustand.gewaehlt=null; render(false); } } });
+svg.addEventListener('click', () => { if(zustand.gewaehlt){ zustand.gewaehlt = null; det.classList.remove('offen'); render(false); hashSetzen(''); } });
+
+/* ---------- Start ---------- */
+aufbauen(); optionen(); kopf(); legende(); zeigeLokal();
+bisEbene(2);
+bilanz();
+render(false);
+requestAnimationFrame(() => {
+  einpassen();
+  const m = location.hash.match(/k=([^&]+)/);
+  if(m){ const id = decodeURIComponent(m[1]); if(K.has(id)) waehle(id); }
+});
+})();
+</script>
+</body>
+</html>

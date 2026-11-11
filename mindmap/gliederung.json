@@ -1,0 +1,1582 @@
+[
+{
+"id": "ch:einfuehrung",
+"nr": "1",
+"titel": "Einführung"
+},
+{
+"id": "sec:einfuehrung-problemstellung",
+"nr": "1.1",
+"titel": "Problemstellung"
+},
+{
+"id": "sec:einfuehrung-zielsetzung",
+"nr": "1.2",
+"titel": "Zielsetzung"
+},
+{
+"id": "sec:einfuehrung-vorgehensweise",
+"nr": "1.3",
+"titel": "Vorgehensweise"
+},
+{
+"id": "ch:grundlagen",
+"nr": "2",
+"titel": "Grundlagen"
+},
+{
+"id": "sec:grundlagen-zusammenhang",
+"nr": "2.1",
+"titel": "Planung und Reporting im Zusammenhang mit der Unternehmenssteuerung und dem Controlling"
+},
+{
+"id": "sec:grundlagen-grundlagen",
+"nr": "2.2",
+"titel": "Grundlagen zur Planung und zum Reporting"
+},
+{
+"id": "sec:grundlagen-planungsdefinition",
+"nr": "2.2.1",
+"titel": "Planungsdefinition"
+},
+{
+"id": "sec:grundlagen-ziele-planung",
+"nr": "2.2.2",
+"titel": "Ziele und Aufgaben der Planung"
+},
+{
+"id": "sec:grundlagen-reportingdefinition",
+"nr": "2.2.3",
+"titel": "Reportingdefinition"
+},
+{
+"id": "sec:grundlagen-ziele-reporting",
+"nr": "2.2.4",
+"titel": "Ziele und Aufgaben des Reportings"
+},
+{
+"id": "sec:grundlagen-beeinflussungsgroessen",
+"nr": "2.2.5",
+"titel": "Generelle Beeinflussungsgrößen von Planung und Reporting"
+},
+{
+"id": "sec:grundlagen-analyseprofil",
+"nr": "2.3",
+"titel": "Integriertes Analyseprofil für die Planung und das Reporting"
+},
+{
+"id": "ch:fachliche-ausgestaltung",
+"nr": "3",
+"titel": "Fachliche und inhaltliche Ausgestaltung"
+},
+{
+"id": "sec:fa-strategiebezug",
+"nr": "3.1",
+"titel": "Bezug zur Unternehmensstrategie"
+},
+{
+"id": "sec:fa-integration-steuerung",
+"nr": "3.1.1",
+"titel": "Integration der strategischen, taktischen und operativen Steuerung"
+},
+{
+"id": "sec:fa-praemissen",
+"nr": "3.1.2",
+"titel": "Planungsprämissen und Top-Down-Vorgaben"
+},
+{
+"id": "sec:fa-werttreiber",
+"nr": "3.2",
+"titel": "Wertschöpfungstreibende Faktoren des Geschäftsmodells"
+},
+{
+"id": "sec:fa-struktur-navigation-reporting",
+"nr": "3.3",
+"titel": "Struktur und Navigation im Reporting"
+},
+{
+"id": "sec:fa-struktur-navigation-planung",
+"nr": "3.4",
+"titel": "Struktur und Navigation in der Planung"
+},
+{
+"id": "sec:fa-reporting-planungsobjekte",
+"nr": "3.5",
+"titel": "Reporting- und Planungsobjekte (Dimensionen, Hierarchien und Werte)"
+},
+{
+"id": "sec:fa-berichtsarten",
+"nr": "3.6",
+"titel": "Berichtsarten"
+},
+{
+"id": "sec:fa-berichtsgrundformen",
+"nr": "3.7",
+"titel": "Berichtsgrundformen"
+},
+{
+"id": "sec:fa-ist-ist",
+"nr": "3.7.1",
+"titel": "Ist-Ist-Vergleiche"
+},
+{
+"id": "sec:fa-soll-ist",
+"nr": "3.7.2",
+"titel": "Soll-Ist- bzw. Plan-Ist-Vergleiche"
+},
+{
+"id": "sec:fa-plan-wird",
+"nr": "3.7.3",
+"titel": "Plan-Wird-Vergleiche (Forecast/Hochrechnungen/Prognosen)"
+},
+{
+"id": "sec:fa-zielerreichung",
+"nr": "3.7.4",
+"titel": "Zielerreichungsberichte"
+},
+{
+"id": "sec:fa-zeitreihen",
+"nr": "3.7.5",
+"titel": "Zeitreihenanalysen"
+},
+{
+"id": "sec:fa-abc-analyse",
+"nr": "3.7.6",
+"titel": "ABC-, Top-/Flop- und Klassen-Analyse"
+},
+{
+"id": "sec:fa-portfolio",
+"nr": "3.7.7",
+"titel": "Portfolio-Analyse"
+},
+{
+"id": "sec:fa-benchmark",
+"nr": "3.7.8",
+"titel": "Objekt- und Benchmark-Vergleiche"
+},
+{
+"id": "sec:fa-break-even",
+"nr": "3.7.9",
+"titel": "Break-Even-Point-Analyse"
+},
+{
+"id": "sec:fa-scoring",
+"nr": "3.7.10",
+"titel": "Scoring- bzw. Nutzwertanalysen"
+},
+{
+"id": "sec:fa-berichtsgestaltung",
+"nr": "3.8",
+"titel": "Berichtsgestaltung"
+},
+{
+"id": "sec:fa-filterkriterien",
+"nr": "3.8.1",
+"titel": "Filter- bzw. Selektionskriterien"
+},
+{
+"id": "sec:fa-layout",
+"nr": "3.8.2",
+"titel": "Layout"
+},
+{
+"id": "sec:fa-gestaltungshinweise",
+"nr": "3.8.2.1",
+"titel": "Generelle Gestaltungshinweise"
+},
+{
+"id": "sec:fa-grundraster",
+"nr": "3.8.2.2",
+"titel": "Grundraster"
+},
+{
+"id": "sec:fa-grundraster/navigationsmenu",
+"nr": null,
+"titel": "Navigationsmenü"
+},
+{
+"id": "sec:fa-grundraster/generelle-berichtsinformationen",
+"nr": null,
+"titel": "Generelle Berichtsinformationen"
+},
+{
+"id": "sec:fa-grundraster/corporate-identity",
+"nr": null,
+"titel": "Corporate Identity"
+},
+{
+"id": "sec:fa-grundraster/selektionskriterien",
+"nr": null,
+"titel": "Selektionskriterien"
+},
+{
+"id": "sec:fa-grundraster/funktionen",
+"nr": null,
+"titel": "Funktionen"
+},
+{
+"id": "sec:fa-grundraster/auswertungsbereich",
+"nr": null,
+"titel": "Auswertungsbereich"
+},
+{
+"id": "sec:fa-tabellen",
+"nr": "3.8.3",
+"titel": "Tabellen"
+},
+{
+"id": "sec:fa-tabellen/flache-tabellen",
+"nr": null,
+"titel": "Flache Tabellen"
+},
+{
+"id": "sec:fa-tabellen/kreuztabellen",
+"nr": null,
+"titel": "Kreuztabellen"
+},
+{
+"id": "sec:fa-tabellen/pivottabellen",
+"nr": null,
+"titel": "Pivottabellen"
+},
+{
+"id": "sec:fa-tabellen/rotation-bzw-pivoting",
+"nr": null,
+"titel": "Rotation bzw. Pivoting"
+},
+{
+"id": "sec:fa-tabellen/slice-und-dice",
+"nr": null,
+"titel": "Slice und Dice"
+},
+{
+"id": "sec:fa-tabellen/roll-up-und-drill-down",
+"nr": null,
+"titel": "Roll-Up und Drill-Down"
+},
+{
+"id": "sec:fa-tabellen/drill-through-und-drill-across",
+"nr": null,
+"titel": "Drill-Through und Drill-Across"
+},
+{
+"id": "sec:fa-tabellen/split-und-merge",
+"nr": null,
+"titel": "Split und Merge"
+},
+{
+"id": "sec:fa-diagramme",
+"nr": "3.8.4",
+"titel": "Diagramme und andere Visualisierungshilfen"
+},
+{
+"id": "sec:fa-diagramme/kreis-und-kuchendiagramme-donut-sunburst-und-treemap-charts",
+"nr": null,
+"titel": "Kreis- und Kuchendiagramme, Donut-, Sunburst- und Treemap-Charts"
+},
+{
+"id": "sec:fa-diagramme/portfolio-blasendiagramme",
+"nr": null,
+"titel": "Portfolio-/Blasendiagramme"
+},
+{
+"id": "sec:fa-diagramme/saulen-balkendiagramme-und-bullet-charts",
+"nr": null,
+"titel": "Säulen-/Balkendiagramme und Bullet-Charts"
+},
+{
+"id": "sec:fa-diagramme/wasserfalldiagramme-histogramme-box-plot-und-trichterdiagram",
+"nr": null,
+"titel": "Wasserfalldiagramme, Histogramme, Box-Plot- und Trichterdiagramm"
+},
+{
+"id": "sec:fa-diagramme/kurven-linien-punkt-und-flachendiagramme",
+"nr": null,
+"titel": "Kurven-, Linien-, Punkt- und Flächendiagramme"
+},
+{
+"id": "sec:fa-diagramme/ampelsignale-und-heatmap",
+"nr": null,
+"titel": "Ampelsignale und Heatmap"
+},
+{
+"id": "sec:fa-diagramme/tachos-und-thermometer",
+"nr": null,
+"titel": "Tachos und Thermometer"
+},
+{
+"id": "sec:fa-diagramme/geo-visualisierung",
+"nr": null,
+"titel": "Geo-Visualisierung"
+},
+{
+"id": "sec:fa-diagramme/scoring-abbildung",
+"nr": null,
+"titel": "Scoring-Abbildung"
+},
+{
+"id": "sec:fa-diagramme/spinnennetz-bzw-netzdiagramme",
+"nr": null,
+"titel": "Spinnennetz- bzw. Netzdiagramme"
+},
+{
+"id": "sec:fa-diagramme/sparklines-bzw-microcharts",
+"nr": null,
+"titel": "Sparklines bzw. Microcharts"
+},
+{
+"id": "sec:fa-diagramme/kurs-chartanalyse-diagramme",
+"nr": null,
+"titel": "Kurs-/Chartanalyse-Diagramme"
+},
+{
+"id": "sec:fa-diagramme/weitere-visualisierungshilfen-und-animationen",
+"nr": null,
+"titel": "Weitere Visualisierungshilfen und Animationen"
+},
+{
+"id": "sec:fa-kommentierungen",
+"nr": "3.8.5",
+"titel": "Kommentierungen, Botschaften und Management Summary"
+},
+{
+"id": "sec:fa-cockpit-steuerung",
+"nr": "3.9",
+"titel": "Steuerung im BI-gestützten Controlling-Cockpit"
+},
+{
+"id": "sec:fa-cockpit-leitung-operativ",
+"nr": "3.9.1",
+"titel": "Cockpit Unternehmensleitung: Operatives Controlling"
+},
+{
+"id": "sec:fa-leitung-rentabilitaet",
+"nr": "3.9.1.1",
+"titel": "Rentabilitätsanalyse"
+},
+{
+"id": "sec:fa-leitung-erfolg",
+"nr": "3.9.1.2",
+"titel": "Erfolgsanalyse"
+},
+{
+"id": "sec:fa-leitung-kosten",
+"nr": "3.9.1.3",
+"titel": "Kostenanalyse"
+},
+{
+"id": "sec:fa-leitung-finanzen",
+"nr": "3.9.1.4",
+"titel": "Finanz- und Liquiditätsanalyse"
+},
+{
+"id": "sec:fa-leitung-working-capital",
+"nr": "3.9.1.5",
+"titel": "Working-Capital-Management"
+},
+{
+"id": "sec:fa-leitung-jahresabschluss",
+"nr": "3.9.1.6",
+"titel": "Jahresabschlussanalyse"
+},
+{
+"id": "sec:fa-leitung-einzelkennzahlen",
+"nr": "3.9.1.7",
+"titel": "Einzel-Kennzahlen-Analyse"
+},
+{
+"id": "sec:fa-cockpit-leitung-strategisch",
+"nr": "3.9.2",
+"titel": "Cockpit Unternehmensleitung: Strategisches Controlling"
+},
+{
+"id": "sec:fa-cockpit-leitung-strategisch/strategisches-start-cockpit-nachhaltigkeit",
+"nr": "3.9.2.1",
+"titel": "Strategisches Start-Cockpit/Nachhaltigkeit"
+},
+{
+"id": "sec:fa-cockpit-leitung-strategisch/strategische-planung",
+"nr": "3.9.2.2",
+"titel": "Strategische Planung"
+},
+{
+"id": "sec:fa-cockpit-leitung-strategisch/kommentare-und-massnahmen",
+"nr": "3.9.2.3",
+"titel": "Kommentare und Maßnahmen"
+},
+{
+"id": "sec:fa-cockpit-vertrieb",
+"nr": "3.9.3",
+"titel": "Cockpit Vertrieb"
+},
+{
+"id": "sec:fa-cockpit-vertrieb/umsatz-und-erfolgsanalysen",
+"nr": "3.9.3.1",
+"titel": "Umsatz- und Erfolgsanalysen"
+},
+{
+"id": "sec:fa-vertrieb-verkaufschancen",
+"nr": "3.9.3.2",
+"titel": "Verkaufschancen-, Angebots- und Auftragsanalysen"
+},
+{
+"id": "sec:fa-vertrieb-preiskonditionen",
+"nr": "3.9.3.3",
+"titel": "Preis- und Konditionenanalysen"
+},
+{
+"id": "sec:fa-cockpit-vertrieb/verkauferanalysen",
+"nr": "3.9.3.4",
+"titel": "Verkäuferanalysen"
+},
+{
+"id": "sec:fa-cockpit-vertrieb/versand-und-lieferqualitatsanalysen",
+"nr": "3.9.3.5",
+"titel": "Versand- und Lieferqualitätsanalysen"
+},
+{
+"id": "sec:fa-vertrieb-forderungen",
+"nr": "3.9.3.6",
+"titel": "Forderungsanalyse"
+},
+{
+"id": "sec:fa-cockpit-produktion",
+"nr": "3.9.4",
+"titel": "Cockpit Produktion"
+},
+{
+"id": "sec:fa-produktion-programm",
+"nr": "3.9.4.1",
+"titel": "Produktionsprogrammanalyse und -planung"
+},
+{
+"id": "sec:fa-produktion-ergebnis",
+"nr": "3.9.4.2",
+"titel": "Produktionsergebnis und -kosten"
+},
+{
+"id": "sec:fa-produktion-produktivitaet",
+"nr": "3.9.4.3",
+"titel": "Produktivitätsanalyse"
+},
+{
+"id": "sec:fa-produktion-oee",
+"nr": "3.9.4.4",
+"titel": "Anlageneffektivität"
+},
+{
+"id": "sec:fa-produktion-auslastung",
+"nr": "3.9.4.5",
+"titel": "Anlagenauslastung"
+},
+{
+"id": "sec:fa-produktion-mitarbeiter",
+"nr": "3.9.4.6",
+"titel": "Mitarbeiter"
+},
+{
+"id": "sec:fa-produktion-bestaende",
+"nr": "3.9.4.7",
+"titel": "Bestandsmanagement"
+},
+{
+"id": "sec:fa-produktion-termine",
+"nr": "3.9.4.8",
+"titel": "Termine und Aufträge"
+},
+{
+"id": "sec:fa-produktion-qualitaet",
+"nr": "3.9.4.9",
+"titel": "Qualität"
+},
+{
+"id": "sec:fa-cockpit-einkauf",
+"nr": "3.9.5",
+"titel": "Cockpit Einkauf"
+},
+{
+"id": "sec:fa-einkaufsanalysen",
+"nr": "3.9.5.1",
+"titel": "Einkaufsanalysen"
+},
+{
+"id": "sec:fa-einkaeuferanalysen",
+"nr": "3.9.5.2",
+"titel": "Einkäuferanalysen"
+},
+{
+"id": "sec:fa-preis-konditionen",
+"nr": "3.9.5.3",
+"titel": "Preis-/Konditionenanalysen"
+},
+{
+"id": "sec:fa-lieferantenanalysen",
+"nr": "3.9.5.4",
+"titel": "Lieferantenanalysen"
+},
+{
+"id": "sec:fa-lager-lieferanalysen",
+"nr": "3.9.5.5",
+"titel": "Lager- und Lieferanalysen"
+},
+{
+"id": "sec:fa-cockpit-projektsteuerung",
+"nr": "3.9.6",
+"titel": "Cockpit Projektsteuerung"
+},
+{
+"id": "sec:fa-projektuebersicht",
+"nr": "3.9.6.1",
+"titel": "Projektübersicht"
+},
+{
+"id": "sec:fa-projekterfolg",
+"nr": "3.9.6.2",
+"titel": "Projektleistung und -erfolg"
+},
+{
+"id": "sec:fa-projekttermine",
+"nr": "3.9.6.3",
+"titel": "Projekttermine"
+},
+{
+"id": "sec:fa-projektfinanzen",
+"nr": "3.9.6.4",
+"titel": "Projektfinanzen"
+},
+{
+"id": "sec:fa-projektrisiken",
+"nr": "3.9.6.5",
+"titel": "Projektrisiken"
+},
+{
+"id": "sec:fa-projektressourcen",
+"nr": "3.9.6.6",
+"titel": "Projektressourcen"
+},
+{
+"id": "sec:agile-projektsteuerung",
+"nr": "3.9.6.7",
+"titel": "Agile Projektsteuerung"
+},
+{
+"id": "sec:fa-cockpit-personalsteuerung",
+"nr": "3.9.7",
+"titel": "Cockpit Personalsteuerung"
+},
+{
+"id": "sec:fa-personal-bestand",
+"nr": "3.9.7.1",
+"titel": "Personalbestandsanalyse und -planung"
+},
+{
+"id": "sec:fa-personal-bedarf",
+"nr": "3.9.7.2",
+"titel": "Personalbedarfsanalyse und -planung"
+},
+{
+"id": "sec:fa-personal-gewinnung",
+"nr": "3.9.7.3",
+"titel": "Personalgewinnung und -freisetzung"
+},
+{
+"id": "sec:fa-personal-einsatz",
+"nr": "3.9.7.4",
+"titel": "Personaleinsatz"
+},
+{
+"id": "sec:fa-personal-entwicklung",
+"nr": "3.9.7.5",
+"titel": "Personalentwicklung"
+},
+{
+"id": "sec:fa-personal-struktur",
+"nr": "3.9.7.6",
+"titel": "Personalstruktur"
+},
+{
+"id": "sec:fa-personal-kosten",
+"nr": "3.9.7.7",
+"titel": "Personalkosten"
+},
+{
+"id": "sec:fa-cockpit-cybersecurity",
+"nr": "3.9.8",
+"titel": "Cockpit Cybersecurity-Controlling"
+},
+{
+"id": "sec:fa-cyber-bccr",
+"nr": "3.9.8.1",
+"titel": "Von der Balanced Chance and Risk Card zur Balanced Chance and Cyber-Risk Card"
+},
+{
+"id": "sec:fa-cyber-cli",
+"nr": "3.9.8.2",
+"titel": "Die Spitzenkennzahl Cyber Loss Intensity"
+},
+{
+"id": "sec:fa-cyber-kennzahlen",
+"nr": "3.9.8.3",
+"titel": "Kennzahlen der fünf Perspektiven"
+},
+{
+"id": "sec:fa-cyber-rollen",
+"nr": "3.9.8.4",
+"titel": "Verantwortlichkeiten, Kaskadierung und Ampellogik"
+},
+{
+"id": "sec:fa-cyber-architektur",
+"nr": "3.9.8.5",
+"titel": "Risikolandkarte und Steuerungsarchitektur"
+},
+{
+"id": "sec:fa-cyber-wirkungsketten",
+"nr": "3.9.8.6",
+"titel": "Ursache-Wirkungs-Ketten"
+},
+{
+"id": "sec:fa-cyber-grenzen",
+"nr": "3.9.8.7",
+"titel": "Einführung, Grenzen und Forschungsbedarf"
+},
+{
+"id": "sec:fa-planungsformulare",
+"nr": "3.10",
+"titel": "Planungsformulare und ihre Besonderheiten"
+},
+{
+"id": "sec:fa-abstimmung-planung-reporting",
+"nr": "3.11",
+"titel": "Abstimmung der Planungs- und Reportinginhalte"
+},
+{
+"id": "sec:fa-exemplarische-planungsgebiete",
+"nr": "3.12",
+"titel": "Exemplarische Planungsgebiete im BI-gestützten Controlling-Cockpit"
+},
+{
+"id": "sec:fa-bsc-planung",
+"nr": "3.12.1",
+"titel": "Balanced Scorecard im Rahmen der strategischen Planung"
+},
+{
+"id": "sec:fa-absatz-umsatzplanung",
+"nr": "3.12.2",
+"titel": "Absatz- und Umsatzplanung"
+},
+{
+"id": "sec:fa-ressourcenplanung",
+"nr": "3.12.3",
+"titel": "Ressourcenplanung"
+},
+{
+"id": "sec:fa-einkaufspreisplanung",
+"nr": "3.12.4",
+"titel": "Einkaufspreisplanung"
+},
+{
+"id": "sec:fa-personal-anlagen",
+"nr": "3.12.5",
+"titel": "Personal- und Anlagenplanung"
+},
+{
+"id": "sec:fa-trendanalysen-prognosen",
+"nr": "3.13",
+"titel": "Trendanalysen, Prognosen und Predictive Forecasting"
+},
+{
+"id": "cha:organisation-prozesse",
+"nr": "4",
+"titel": "Organisation und Prozesse"
+},
+{
+"id": "sec:op-organisatorische-einbindung",
+"nr": "4.1",
+"titel": "Organisatorische Einbindung"
+},
+{
+"id": "sec:op-unternehmensgroesse",
+"nr": "4.1.1",
+"titel": "Unternehmensgröße"
+},
+{
+"id": "sec:op-eigentumsverhaeltnisse",
+"nr": "4.1.1.1",
+"titel": "Eigentumsverhältnisse und Unternehmensführung"
+},
+{
+"id": "sec:op-strategieverankerung",
+"nr": "4.1.1.2",
+"titel": "Strategieverankerung"
+},
+{
+"id": "sec:op-operatives-handeln",
+"nr": "4.1.1.3",
+"titel": "Operatives Handeln und Entscheidungswege"
+},
+{
+"id": "sec:op-personelle-ressourcen",
+"nr": "4.1.1.4",
+"titel": "Begrenzte personelle Ressourcen"
+},
+{
+"id": "sec:op-planungsintensitaet",
+"nr": "4.1.1.5",
+"titel": "Planungs- und Reportingintensität"
+},
+{
+"id": "sec:op-it-gestuetzte-systeme",
+"nr": "4.1.1.6",
+"titel": "IT-gestützte Controllingsysteme"
+},
+{
+"id": "sec:op-kapitalabhaengigkeit",
+"nr": "4.1.1.7",
+"titel": "Kapital- und Liquiditätsabhängigkeit"
+},
+{
+"id": "sec:op-beteiligungsstrukturen",
+"nr": "4.1.1.8",
+"titel": "Beteiligungsstrukturen"
+},
+{
+"id": "sec:op-unternehmensverbindungen",
+"nr": "4.1.2",
+"titel": "Unternehmensverbindungen"
+},
+{
+"id": "sec:op-aufbauorganisation",
+"nr": "4.1.3",
+"titel": "Aufbauorganisation"
+},
+{
+"id": "sec:op-fuehrungsstil",
+"nr": "4.1.4",
+"titel": "Führungsstil"
+},
+{
+"id": "sec:op-beteiligte",
+"nr": "4.1.5",
+"titel": "Beteiligte"
+},
+{
+"id": "sec:op-adressaten",
+"nr": "4.1.5.1",
+"titel": "Adressaten/Empfänger"
+},
+{
+"id": "sec:op-adressaten/volle-ubereinstimmung-idealfall",
+"nr": null,
+"titel": "Volle Übereinstimmung (Idealfall)"
+},
+{
+"id": "sec:op-adressaten/teilweise-ubereinstimmung",
+"nr": null,
+"titel": "Teilweise Übereinstimmung"
+},
+{
+"id": "sec:op-adressaten/keine-ubereinstimmung",
+"nr": null,
+"titel": "Keine Übereinstimmung"
+},
+{
+"id": "sec:op-adressaten/mehrfache-verantwortung",
+"nr": null,
+"titel": "Mehrfache Verantwortung"
+},
+{
+"id": "sec:op-koordinatoren",
+"nr": "4.1.5.2",
+"titel": "Koordinatoren"
+},
+{
+"id": "sec:op-ersteller",
+"nr": "4.1.5.3",
+"titel": "Ersteller/Sender"
+},
+{
+"id": "sec:op-self-service-bi",
+"nr": "4.1.5.4",
+"titel": "Self-Service BI"
+},
+{
+"id": "sec:op-prozesse",
+"nr": "4.2",
+"titel": "Prozesse"
+},
+{
+"id": "sec:op-einfuehrungsprozess",
+"nr": "4.2.1",
+"titel": "Einführungsprozess"
+},
+{
+"id": "sec:op-rahmenbedingungen",
+"nr": "4.2.1.1",
+"titel": "Festlegung der Rahmenbedingungen"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse",
+"nr": "4.2.1.2",
+"titel": "Informationsbedarfs- und Ist-Analyse"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse/informationsbedarfsanalyse-und-inhaltliche-statusaufnahme",
+"nr": null,
+"titel": "Informationsbedarfsanalyse und inhaltliche Statusaufnahme"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse/organisationsanalyse",
+"nr": null,
+"titel": "Organisationsanalyse"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse/prozessanalyse",
+"nr": null,
+"titel": "Prozessanalyse"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse/it-analyse",
+"nr": null,
+"titel": "IT-Analyse"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse/starken-und-schwachenprofil-und-best-practice-analyse",
+"nr": null,
+"titel": "Stärken- und Schwächenprofil und Best-Practice-Analyse"
+},
+{
+"id": "sec:op-informationsbedarfsanalyse/blueprint-mit-projektvorschlagen",
+"nr": null,
+"titel": "Blueprint mit Projektvorschlägen"
+},
+{
+"id": "sec:op-fachkonzept",
+"nr": "4.2.1.3",
+"titel": "Soll- bzw. Fachkonzept"
+},
+{
+"id": "sec:op-it-konzept",
+"nr": "4.2.1.4",
+"titel": "IT-Konzept"
+},
+{
+"id": "sec:op-it-auswahl",
+"nr": "4.2.1.5",
+"titel": "IT-Auswahl"
+},
+{
+"id": "sec:op-it-implementierung",
+"nr": "4.2.1.6",
+"titel": "IT-Implementierung"
+},
+{
+"id": "sec:op-coaching-schulung",
+"nr": "4.2.1.7",
+"titel": "Coaching/Schulung/Qualitätssicherung"
+},
+{
+"id": "sec:op-planungsprozess",
+"nr": "4.2.2",
+"titel": "Zyklischer Planungsprozess"
+},
+{
+"id": "sec:op-grundausrichtung-planung",
+"nr": "4.2.2.1",
+"titel": "Grundausrichtung der Planung (Top-Down, Bottom-Up oder Gegenstromverfahren)"
+},
+{
+"id": "sec:op-planungsvorbereitung",
+"nr": "4.2.2.2",
+"titel": "Planungsvorbereitung"
+},
+{
+"id": "sec:op-planungsdurchfuehrung",
+"nr": "4.2.2.3",
+"titel": "Planungsdurchführung"
+},
+{
+"id": "sec:op-planungsgenehmigung",
+"nr": "4.2.2.4",
+"titel": "Abstimmung und Genehmigung der Planung"
+},
+{
+"id": "sec:op-reportingprozess",
+"nr": "4.2.3",
+"titel": "Zyklischer Reportingprozess"
+},
+{
+"id": "sec:op-berichterstellung",
+"nr": "4.2.3.1",
+"titel": "Berichterstellung"
+},
+{
+"id": "sec:op-berichterstellung/informationsbeschaffung-und-transformation",
+"nr": null,
+"titel": "Informationsbeschaffung und -transformation"
+},
+{
+"id": "sec:op-berichterstellung/informationsaufbereitung-und-verdichtung",
+"nr": null,
+"titel": "Informationsaufbereitung und -verdichtung"
+},
+{
+"id": "sec:op-berichterstellung/berichterstellung-und-gestaltung",
+"nr": null,
+"titel": "Berichterstellung und -gestaltung"
+},
+{
+"id": "sec:op-analysevorbereitung",
+"nr": "4.2.3.2",
+"titel": "Analysevorbereitung"
+},
+{
+"id": "sec:op-analysevorbereitung/plausibilisierung-der-datenqualitat",
+"nr": null,
+"titel": "Plausibilisierung der Datenqualität"
+},
+{
+"id": "sec:op-analysevorbereitung/abweichungs-ursachen-und-andere-analysen",
+"nr": null,
+"titel": "Abweichungs-, Ursachen- und andere Analysen"
+},
+{
+"id": "sec:op-analysevorbereitung/berichtskommentierung-und-entscheidungsvorbereitung",
+"nr": null,
+"titel": "Berichtskommentierung und Entscheidungsvorbereitung"
+},
+{
+"id": "sec:op-berichtsbereitstellung",
+"nr": "4.2.3.3",
+"titel": "Berichtsbereitstellung"
+},
+{
+"id": "sec:op-berichtsbereitstellung/bundelung-der-berichte",
+"nr": null,
+"titel": "Bündelung der Berichte"
+},
+{
+"id": "sec:op-berichtsbereitstellung/versendung-und-bereitstellung-der-berichte",
+"nr": null,
+"titel": "Versendung und Bereitstellung der Berichte"
+},
+{
+"id": "sec:op-informationsanalyse",
+"nr": "4.2.3.4",
+"titel": "Informationsanalyse und Steuerung"
+},
+{
+"id": "sec:op-informationsanalyse/informationsanalyse-des-berichtsempfangers",
+"nr": null,
+"titel": "Informationsanalyse des Berichtsempfängers"
+},
+{
+"id": "sec:op-informationsanalyse/berichtsprasentation-und-diskussion",
+"nr": null,
+"titel": "Berichtspräsentation und -diskussion"
+},
+{
+"id": "sec:op-informationsanalyse/entscheidungsfindung-und-massnahmeneinleitung",
+"nr": null,
+"titel": "Entscheidungsfindung und Maßnahmeneinleitung"
+},
+{
+"id": "sec:op-qualitaetssicherungsprozess",
+"nr": "4.2.4",
+"titel": "Qualitätssicherungsprozess"
+},
+{
+"id": "sec:op-qs-informationsbedarf",
+"nr": "4.2.4.1",
+"titel": "Informationsbedarfsanalyse und -änderungen"
+},
+{
+"id": "sec:op-qs-prozessqualitaet",
+"nr": "4.2.4.2",
+"titel": "Prozessqualitätsprüfung und -änderungen"
+},
+{
+"id": "sec:op-qs-organisation",
+"nr": "4.2.4.3",
+"titel": "Organisatorische Qualitätsprüfung und Änderungen"
+},
+{
+"id": "sec:op-qs-datenqualitaet",
+"nr": "4.2.4.4",
+"titel": "Datenqualitätsprüfung und -steuerung"
+},
+{
+"id": "sec:op-qs-informationssystem",
+"nr": "4.2.4.5",
+"titel": "Informationssystem-Qualitätsprüfung und -steuerung"
+},
+{
+"id": "sec:bi_gestuetztes_controlling",
+"nr": "5",
+"titel": "Das BI-gestützte Controlling"
+},
+{
+"id": "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling",
+"nr": "5.1",
+"titel": "Ordnungsrahmen für das BI-gestützte Controlling"
+},
+{
+"id": "sec:bi_definition",
+"nr": "5.1.1",
+"titel": "BI-Definition"
+},
+{
+"id": "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling/business-intelligence-referenzarchitektur",
+"nr": "5.1.2",
+"titel": "Business Intelligence Referenzarchitektur"
+},
+{
+"id": "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling/business-intelligence-referenzarchitektur/datamarts",
+"nr": null,
+"titel": "Datamarts"
+},
+{
+"id": "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling/business-intelligence-referenzarchitektur/business-intelligence-frontends",
+"nr": null,
+"titel": "Business Intelligence Frontends"
+},
+{
+"id": "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling/business-intelligence-referenzarchitektur/querschnittsfunktionen",
+"nr": null,
+"titel": "Querschnittsfunktionen"
+},
+{
+"id": "sec:betriebliche_applikationssysteme",
+"nr": "5.2",
+"titel": "Betriebliche IT-Systeme"
+},
+{
+"id": "sec:betriebliche_applikationssysteme/dimensionen-betrieblicher-it-systeme",
+"nr": "5.2.1",
+"titel": "Dimensionen betrieblicher IT-Systeme"
+},
+{
+"id": "sec:historische_entwicklung",
+"nr": "5.2.2",
+"titel": "Historische Entwicklung auswertungsorientierter Systeme"
+},
+{
+"id": "sec:betriebsformen",
+"nr": "5.2.3",
+"titel": "Betriebsformen (OnPremise versus Cloud)"
+},
+{
+"id": "sec:horizontale_und_vertikale_integration",
+"nr": "5.2.4",
+"titel": "Horizontale und vertikale Integration"
+},
+{
+"id": "sec:etl_prozess",
+"nr": "5.3",
+"titel": "ETL-Prozess"
+},
+{
+"id": "sec:case_study_sofias_coffee_dream_ein_innovatives_kaffeehaus",
+"nr": "5.3.1",
+"titel": "Case-Study: Sofias Coffee Dream - ein innovatives Kaffeehaus"
+},
+{
+"id": "sec:übersicht",
+"nr": "5.3.2",
+"titel": "Übersicht"
+},
+{
+"id": "sec:Extraktion",
+"nr": "5.3.3",
+"titel": "Erste Prozessphase: Extraktion"
+},
+{
+"id": "sec:Transformation",
+"nr": "5.3.4",
+"titel": "Zweite Prozessphase: Transformation"
+},
+{
+"id": "sec:Laden",
+"nr": "5.3.5",
+"titel": "Dritte Prozessphase: Laden"
+},
+{
+"id": "sec:data_warehouse",
+"nr": "5.4",
+"titel": "Data Warehouse"
+},
+{
+"id": "sec:data_marts",
+"nr": "5.5",
+"titel": "Data Marts"
+},
+{
+"id": "sec:OLAP",
+"nr": "5.5.1",
+"titel": "Online Analytical Processing"
+},
+{
+"id": "OLAP-Datenmodellierung und -speicherung",
+"nr": "5.5.1.1",
+"titel": "OLAP-Datenmodellierung und -speicherung"
+},
+{
+"id": "sec:olap_speicherkonzepte",
+"nr": "5.5.1.2",
+"titel": "OLAP-Speicherkonzepte"
+},
+{
+"id": "sec:data_marts/abgrenzung-von-data-mart-und-core-data-warehouse",
+"nr": "5.5.2",
+"titel": "Abgrenzung von Data Mart und Core Data Warehouse"
+},
+{
+"id": "sec:big_data",
+"nr": "5.6",
+"titel": "Big Data"
+},
+{
+"id": "das_4-v-modell",
+"nr": "5.6.1",
+"titel": "Das 4-V-Modell"
+},
+{
+"id": "sec:Technische Grundlagen für Big Data",
+"nr": "5.6.2",
+"titel": "Technische Grundlagen für Big Data"
+},
+{
+"id": "sec:In-Memory-Technik",
+"nr": "5.6.2.1",
+"titel": "In-Memory-Technik"
+},
+{
+"id": "sec:Technische Grundlagen für Big Data/nosql-datenbanken",
+"nr": "5.6.2.2",
+"titel": "NoSQL-Datenbanken"
+},
+{
+"id": "sec:Technische Grundlagen für Big Data/hadoop",
+"nr": "5.6.2.3",
+"titel": "Hadoop"
+},
+{
+"id": "sec:Analytische_Datenbanken",
+"nr": "5.6.2.4",
+"titel": "Analytische Datenbanken"
+},
+{
+"id": "sec:Explorative_Business_Intelligence_und_Business_Analytics",
+"nr": "5.6.3",
+"titel": "Explorative Business Intelligence und Business Analytics"
+},
+{
+"id": "sec:Analyse-_und_Planungswerkzeuge",
+"nr": "5.7",
+"titel": "Analyse- und Planungswerkzeuge"
+},
+{
+"id": "sec:Freie_Datenrecherchen_und_Abfragengeneratoren",
+"nr": "5.7.1",
+"titel": "Freie Datenrecherchen und Abfragengeneratoren"
+},
+{
+"id": "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen",
+"nr": "5.7.2",
+"titel": "OLAP-basierte Analysesysteme und ihre Oberflächen"
+},
+{
+"id": "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen/proprietare-reportgeneratoren-mit-herstellereigener-grafisch",
+"nr": null,
+"titel": "Proprietäre Reportgeneratoren mit herstellereigener grafischer Benutzeroberfläche"
+},
+{
+"id": "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen/internetgestutzte-reportgeneratoren-mit-web-oberflache",
+"nr": null,
+"titel": "Internetgestützte Reportgeneratoren mit Web-Oberfläche"
+},
+{
+"id": "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen/tabellenkalkulationsgestutzte-berichtssysteme-mit-excel-add-",
+"nr": null,
+"titel": "Tabellenkalkulationsgestützte Berichtssysteme mit Excel-Add-in als Oberfläche"
+},
+{
+"id": "sec:Modellbasierte_Analyse-_und_Prognosewerkzeuge",
+"nr": "5.7.3",
+"titel": "Modellbasierte Analyse- und Prognosewerkzeuge"
+},
+{
+"id": "Besonderheiten_der_Planungswerkzeuge",
+"nr": "5.7.4",
+"titel": "Besonderheiten der Planungswerkzeuge"
+},
+{
+"id": "Portale_und_Embedded_BI",
+"nr": "5.7.5",
+"titel": "Portale und Embedded BI"
+},
+{
+"id": "BI_Monitoring_BI_on_BI_und_Reporting_2.0",
+"nr": "5.7.6",
+"titel": "BI Monitoring, BI on BI und Reporting 2.0"
+},
+{
+"id": "Distribution",
+"nr": "5.7.7",
+"titel": "Distribution"
+},
+{
+"id": "sec:Analyse-_und_Planungswerkzeuge/ausgabeformate-und-medien",
+"nr": "5.7.8",
+"titel": "Ausgabeformate und -medien"
+},
+{
+"id": "sec:Analyse-_und_Planungswerkzeuge/ausgabeformate-und-medien/paginierte-berichte",
+"nr": null,
+"titel": "Paginierte Berichte"
+},
+{
+"id": "sec:Analyse-_und_Planungswerkzeuge/ausgabeformate-und-medien/bildschirme-und-prasentationsmedien",
+"nr": null,
+"titel": "Bildschirme und Präsentationsmedien"
+},
+{
+"id": "Weitere_Nutzungsmöglichkeiten_für_Managementaufgaben_(Konsolidierung_Balanced Scorecard_Risikomanagement)",
+"nr": "5.7.8.1",
+"titel": "Weitere Nutzungsmöglichkeiten für Managementaufgaben (Konsolidierung, Balanced Scorecard, Risikomanagement)"
+},
+{
+"id": "sec:Mobile Computing",
+"nr": "5.7.9",
+"titel": "Mobile Computing"
+},
+{
+"id": "sec:mobile_endgeräte",
+"nr": "5.7.9.1",
+"titel": "Mobile Endgeräte"
+},
+{
+"id": "sec:mobile_endgeräte/notebooks",
+"nr": null,
+"titel": "Notebooks"
+},
+{
+"id": "sec:mobile_endgeräte/mobiltelefone",
+"nr": null,
+"titel": "Mobiltelefone"
+},
+{
+"id": "sec:mobile_endgeräte/tablet-pc",
+"nr": null,
+"titel": "Tablet-PC"
+},
+{
+"id": "sec:Mobile Computing/drahtlose-netzwerke",
+"nr": "5.7.9.2",
+"titel": "Drahtlose Netzwerke"
+},
+{
+"id": "sec:app",
+"nr": "5.7.9.3",
+"titel": "App – Applikation"
+},
+{
+"id": "sec:Mobile Computing/reporting-und-planung-im-mobile-computing",
+"nr": "5.7.9.4",
+"titel": "Reporting und Planung im Mobile Computing"
+},
+{
+"id": "sec:Mobile Business Intelligence",
+"nr": "5.7.9.5",
+"titel": "Mobile Business Intelligence"
+},
+{
+"id": "sec:Mobile Business Intelligence/rich-client-native-anwendung",
+"nr": null,
+"titel": "Rich-Client/Native Anwendung"
+},
+{
+"id": "sec:Mobile Business Intelligence/thin-client-web-anwendung",
+"nr": null,
+"titel": "Thin-Client/Web-Anwendung"
+},
+{
+"id": "sec:Mobiles Reporting und mobile Planung",
+"nr": "5.7.9.6",
+"titel": "Mobiles Reporting und mobile Planung"
+},
+{
+"id": "sec:Mobile Computing/mobile-erfolgspotenziale",
+"nr": "5.7.9.7",
+"titel": "Mobile Erfolgspotenziale"
+},
+{
+"id": "sec:querschnittsfunktionen",
+"nr": "5.8",
+"titel": "Querschnittsfunktionen"
+},
+{
+"id": "sec:Berechtigungssystem_und_Zugriffssteuerung",
+"nr": "5.8.1",
+"titel": "Berechtigungssystem und Zugriffssteuerung"
+},
+{
+"id": "sec:querschnittsfunktionen/metadatenmanagement",
+"nr": "5.8.2",
+"titel": "Metadatenmanagement"
+},
+{
+"id": "sec:ki_es_dm_rpa_cb",
+"nr": "5.9",
+"titel": "Künstliche Intelligenz, Expertensysteme, Data Mining, RPA und Chat Bots"
+},
+{
+"id": "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz",
+"nr": "5.9.1",
+"titel": "Allgemeine und spezifische (schwache) Künstliche Intelligenz"
+},
+{
+"id": "sec:Machine Learning, Deep Learning und Neuronale Netze",
+"nr": "5.9.2",
+"titel": "Machine Learning, Deep Learning und Neuronale Netze"
+},
+{
+"id": "sec:ki_es_dm_rpa_cb/expertensysteme-xps",
+"nr": "5.9.3",
+"titel": "Expertensysteme (XPS)"
+},
+{
+"id": "sec:Data Mining, Text Mining, Web Mining und Predictive Analytics",
+"nr": "5.9.4",
+"titel": "Data Mining, Text Mining, Web Mining und Predictive Analytics"
+},
+{
+"id": "sec:rpa",
+"nr": "5.9.5",
+"titel": "Robotic Process Automation (RPA)"
+},
+{
+"id": "sec:rpa/architektur-von-rpa",
+"nr": null,
+"titel": "Architektur von RPA"
+},
+{
+"id": "sec:ki_es_dm_rpa_cb/chatbots-conversational-ux",
+"nr": "5.9.6",
+"titel": "Chatbots/Conversational UX"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting",
+"nr": "5.9.7",
+"titel": "Einsatz von KI, RPA und Chatbots in der Planung und im Reporting"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting/strategische-planung",
+"nr": null,
+"titel": "Strategische Planung"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting/operative-planung-und-forecasting",
+"nr": null,
+"titel": "Operative Planung und Forecasting"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting/werttreiberplanung-mit-simulationen-oder-sensitivitatsanalys",
+"nr": null,
+"titel": "Werttreiberplanung mit Simulationen oder Sensitivitätsanalysen"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting/szenarioanalysen",
+"nr": null,
+"titel": "Szenarioanalysen"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting/analysen-und-reporting",
+"nr": null,
+"titel": "Analysen und Reporting"
+},
+{
+"id": "sec:ki_rpa_chatbots_planung_reporting/ubergeordnete-planungs-und-analyseaufgaben",
+"nr": null,
+"titel": "Übergeordnete Planungs- und Analyseaufgaben"
+},
+{
+"id": "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen",
+"nr": "5.9.8",
+"titel": "Herausforderungen und Handlungsempfehlungen"
+},
+{
+"id": "sec:Softwarelösungen für Planung und Reporting",
+"nr": "5.10",
+"titel": "Softwarelösungen für Planung und Reporting"
+},
+{
+"id": "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien",
+"nr": "5.10.1",
+"titel": "Anforderungskriterien"
+},
+{
+"id": "sec:Softwarelösungen für Planung und Reporting/reporting-und-planungsfunktionen-der-erp-systeme",
+"nr": "5.10.2",
+"titel": "Reporting- und Planungsfunktionen der ERP-Systeme"
+},
+{
+"id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme",
+"nr": "5.10.3",
+"titel": "Tabellenkalkulationsprogramme"
+},
+{
+"id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn",
+"nr": "5.10.3.1",
+"titel": "Spezielle Software (basierend auf relationaler Datenbanktechnik)"
+},
+{
+"id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme",
+"nr": "5.10.3.2",
+"titel": "BI-gestützte Systeme"
+},
+{
+"id": "cha:zusammenfassung-ausblick",
+"nr": "6",
+"titel": "Zusammenfassung und Ausblick"
+},
+{
+"id": "cha:zusammenfassung-ausblick/fachlicher-inhalt",
+"nr": null,
+"titel": "Fachlicher Inhalt"
+},
+{
+"id": "cha:zusammenfassung-ausblick/fachlicher-inhalt/integrierte-planung-und-reporting-im-bi-gestutzten-controlli",
+"nr": null,
+"titel": "Integrierte Planung und Reporting im BI-gestützten Controlling-Cockpit"
+},
+{
+"id": "cha:zusammenfassung-ausblick/fachlicher-inhalt/erhohte-entscheidungsqualitat-durch-business-analyse-und-fac",
+"nr": null,
+"titel": "Erhöhte Entscheidungsqualität durch Business Analyse und Fachkonzepte"
+},
+{
+"id": "cha:zusammenfassung-ausblick/fachlicher-inhalt/ausbau-der-planungs-und-analysefunktionen",
+"nr": null,
+"titel": "Ausbau der Planungs- und Analysefunktionen"
+},
+{
+"id": "cha:zusammenfassung-ausblick/fachlicher-inhalt/standardlosungen-und-abbildung-individueller-anforderungen",
+"nr": null,
+"titel": "Standardlösungen und Abbildung individueller Anforderungen"
+},
+{
+"id": "cha:zusammenfassung-ausblick/organisation",
+"nr": null,
+"titel": "Organisation"
+},
+{
+"id": "cha:zusammenfassung-ausblick/organisation/starkung-der-organisation-fur-planung-und-reporting",
+"nr": null,
+"titel": "Stärkung der Organisation für Planung und Reporting"
+},
+{
+"id": "cha:zusammenfassung-ausblick/organisation/datensicherheit-und-leistungsfahige-berechtigungs-und-zugrif",
+"nr": null,
+"titel": "Datensicherheit und leistungsfähige Berechtigungs- und Zugriffssysteme"
+},
+{
+"id": "cha:zusammenfassung-ausblick/organisation/adressatengerechte-aufbereitung",
+"nr": null,
+"titel": "Adressatengerechte Aufbereitung"
+},
+{
+"id": "cha:zusammenfassung-ausblick/organisation/verteilung-und-zusammenarbeit-collaboration",
+"nr": null,
+"titel": "Verteilung und Zusammenarbeit (Collaboration)"
+},
+{
+"id": "cha:zusammenfassung-ausblick/prozesse",
+"nr": null,
+"titel": "Prozesse"
+},
+{
+"id": "cha:zusammenfassung-ausblick/prozesse/generelle-prozessunterstutzung",
+"nr": null,
+"titel": "Generelle Prozessunterstützung"
+},
+{
+"id": "cha:zusammenfassung-ausblick/prozesse/datenqualitatsmanagement",
+"nr": null,
+"titel": "Datenqualitätsmanagement"
+},
+{
+"id": "cha:zusammenfassung-ausblick/prozesse/bilaterale-integration-von-bi-und-erp-planungs-und-reporting",
+"nr": null,
+"titel": "Bilaterale Integration von BI- und ERP-Planungs- und Reportingprozessen"
+},
+{
+"id": "cha:zusammenfassung-ausblick/prozesse/alternative-und-zirkulare-prozesse",
+"nr": null,
+"titel": "Alternative und zirkuläre Prozesse"
+},
+{
+"id": "cha:zusammenfassung-ausblick/prozesse/substitution-manueller-berichterstellungsprozesse-durch-rpa",
+"nr": null,
+"titel": "Substitution manueller Berichterstellungsprozesse durch RPA"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung",
+"nr": null,
+"titel": "IT-Unterstützung"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/leistungsfahige-frontends",
+"nr": null,
+"titel": "Leistungsfähige Frontends"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/data-discovery-und-data-visualization",
+"nr": null,
+"titel": "Data Discovery und Data Visualization"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/big-data-data-mining-und-predictive-analytics",
+"nr": null,
+"titel": "Big Data, Data Mining und Predictive Analytics"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/data-warehouse-modernisierung-hybride-traditionelle-und-expl",
+"nr": null,
+"titel": "Data-Warehouse-Modernisierung, hybride traditionelle und explorative BI"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/machine-learning-und-ki-gestutzte-analytics-sowie-chatbots",
+"nr": null,
+"titel": "Machine Learning und KI-gestützte Analytics sowie Chatbots"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/mobile-systeme",
+"nr": null,
+"titel": "Mobile Systeme"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/cloud-computing-versus-on-premise",
+"nr": null,
+"titel": "Cloud Computing versus On-Premise"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/self-service-bi-und-sandboxing",
+"nr": null,
+"titel": "Self-Service BI und Sandboxing"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/embedded-bi-und-bi-portalintegration",
+"nr": null,
+"titel": "Embedded BI und BI-Portalintegration"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/bi-monitoring-bzw-bi-on-bi",
+"nr": null,
+"titel": "BI-Monitoring bzw. BI on BI"
+},
+{
+"id": "cha:zusammenfassung-ausblick/it-unterstutzung/open-source-produkte",
+"nr": null,
+"titel": "Open-Source-Produkte"
+}
+]

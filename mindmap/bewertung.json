@@ -317,9 +317,38 @@
    "befund": "Gültig und in allen gängigen Werkzeugen verfügbar."
   },
   "sec:fa-diagramme/kurs-chartanalyse-diagramme": {
-   "bewertung": "teilweise",
-   "empfehlung": "zusammenlegen",
-   "befund": "Randthema für das Controlling (≈ 100 Wörter). In die Linien-/Kurvendiagramme integrieren oder streichen."
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "entscheidung": "streichen",
+   "befund": "Ersatzlos gestrichen am 11.11.2026. Randthema ohne Controllingbezug.",
+   "begruendung": "Randthema für das Controlling (≈ 100 Wörter). In die Linien-/Kurvendiagramme integrieren oder streichen.",
+   "notiz": "Entscheidung der Autoren. Quelltext unverändert in author/content/gestrichen/3-8-4-kurs-chartanalyse-diagramme.tex; an der alten Stelle steht eine auskommentierte \\input-Zeile. Abbildungen 3.70, 3.71 im Abbildungsmanager auf „entfällt“.",
+   "titel_alt": "Kurs-/Chartanalyse-Diagramme",
+   "nr_alt": null,
+   "parent_alt": "sec:fa-diagramme",
+   "nach_alt": "sec:fa-diagramme/sparklines-bzw-microcharts",
+   "quelle_alt": {
+    "datei": "gestrichen/3-8-4-kurs-chartanalyse-diagramme.tex",
+    "zeile": 1,
+    "label": null
+   },
+   "kennzahlen_alt": {
+    "woerter": 100,
+    "abbildungen": 2,
+    "platzhalter": 2,
+    "tabellen": 0,
+    "seiten": 1.5,
+    "belege": 1,
+    "lit_min": 2011,
+    "lit_median": 2011,
+    "lit_max": 2011,
+    "anteil_vor_2015": 1.0
+   },
+   "meta": {
+    "gestrichen_am": "2026-11-11",
+    "datei": "author/content/gestrichen/3-8-4-kurs-chartanalyse-diagramme.tex",
+    "abbildungen": "Abb. 3.70, 3.71"
+   }
   },
   "sec:fa-diagramme/weitere-visualisierungshilfen-und-animationen": {
    "bewertung": "veraltet",
@@ -693,8 +722,35 @@
   "sec:Technische Grundlagen für Big Data/hadoop": {
    "bewertung": "veraltet",
    "empfehlung": "streichen",
-   "befund": "Hadoop hat als Plattform an Bedeutung verloren; abgelöst durch Cloud-Objektspeicher, Spark und Lakehouse-Formate.",
-   "begruendung": "Ersetzen durch den Vorschlag „Moderne Datenarchitekturen“."
+   "entscheidung": "streichen",
+   "befund": "Ersatzlos gestrichen am 11.11.2026. Im Controlling ohne Bedeutung; abgelöst durch Cloud-Objektspeicher, Spark und Lakehouse.",
+   "begruendung": "Hadoop hat als Plattform an Bedeutung verloren; abgelöst durch Cloud-Objektspeicher, Spark und Lakehouse-Formate.",
+   "notiz": "Entscheidung der Autoren. Quelltext unverändert in author/content/gestrichen/5-6-2-3-hadoop.tex; an der alten Stelle steht eine auskommentierte \\input-Zeile.",
+   "titel_alt": "Hadoop",
+   "nr_alt": "5.6.2.3",
+   "parent_alt": "sec:Technische Grundlagen für Big Data",
+   "nach_alt": "sec:Technische Grundlagen für Big Data/nosql-datenbanken",
+   "quelle_alt": {
+    "datei": "gestrichen/5-6-2-3-hadoop.tex",
+    "zeile": 1,
+    "label": null
+   },
+   "kennzahlen_alt": {
+    "woerter": 920,
+    "abbildungen": 0,
+    "platzhalter": 0,
+    "tabellen": 0,
+    "seiten": 3.1,
+    "belege": 10,
+    "lit_min": 2008,
+    "lit_median": 2014,
+    "lit_max": 2017,
+    "anteil_vor_2015": 0.7
+   },
+   "meta": {
+    "gestrichen_am": "2026-11-11",
+    "datei": "author/content/gestrichen/5-6-2-3-hadoop.tex"
+   }
   },
   "sec:Analytische_Datenbanken": {
    "bewertung": "aktuell",
@@ -773,38 +829,37 @@
   },
   "sec:Mobile Computing": {
    "bewertung": "veraltet",
-   "empfehlung": "stark kürzen",
-   "befund": "Mobile Computing (≈ 7.000 Wörter) beschreibt Endgeräte, Netze und Plattformen um 2011–2017. BARC führt Mobile BI im Trend-Monitor 2024 nicht mehr. Auf 1–2 Seiten „Mobile BI und Responsive Design“ verdichten."
-  },
-  "sec:mobile_endgeräte": {
-   "bewertung": "veraltet",
    "empfehlung": "streichen",
-   "befund": "Notebooks, Netbooks, BlackBerry, Windows Phone – Geräteklassen-Beschreibung ohne Mehrwert."
-  },
-  "sec:Mobile Computing/drahtlose-netzwerke": {
-   "bewertung": "veraltet",
-   "empfehlung": "streichen",
-   "befund": "UMTS/GPRS; UMTS ist in Deutschland seit 2021 abgeschaltet."
-  },
-  "sec:app": {
-   "bewertung": "teilweise",
-   "empfehlung": "kürzen",
-   "befund": "App-Konzept (SAP Fiori 2017) auf Grundprinzip kürzen."
-  },
-  "sec:Mobile Business Intelligence": {
-   "bewertung": "teilweise",
-   "empfehlung": "kürzen",
-   "befund": "Native vs. Web-Anwendung und Mobile Device Management als Kern behalten, Rest kürzen."
-  },
-  "sec:Mobiles Reporting und mobile Planung": {
-   "bewertung": "teilweise",
-   "empfehlung": "kürzen",
-   "befund": "Studien 2010/11; Funktionsliste mobiler Reporting- und Planungslösungen kürzen."
-  },
-  "sec:Mobile Computing/mobile-erfolgspotenziale": {
-   "bewertung": "veraltet",
-   "empfehlung": "streichen",
-   "befund": "Erfolgspotenziale mit Belegen 2008–2011."
+   "entscheidung": "streichen",
+   "befund": "Ersatzlos gestrichen am 11.11.2026. Endgeräte, Netze und Potenziale um 2010/2011; Mobile BI ist heute Normalfall jeder BI-Plattform.",
+   "begruendung": "Mobile Computing (≈ 7.000 Wörter) beschreibt Endgeräte, Netze und Plattformen um 2011–2017. BARC führt Mobile BI im Trend-Monitor 2024 nicht mehr. Auf 1–2 Seiten „Mobile BI und Responsive Design“ verdichten.",
+   "notiz": "Entscheidung der Autoren. Quelltext unverändert in author/content/gestrichen/5-7-9-mobile-computing.tex; an der alten Stelle steht eine auskommentierte \\input-Zeile. Abbildungen 5.52–5.61 im Abbildungsmanager auf „entfällt“.",
+   "titel_alt": "Mobile Computing",
+   "nr_alt": "5.7.9",
+   "parent_alt": "sec:Analyse-_und_Planungswerkzeuge",
+   "nach_alt": "sec:Analyse-_und_Planungswerkzeuge/ausgabeformate-und-medien",
+   "quelle_alt": {
+    "datei": "gestrichen/5-7-9-mobile-computing.tex",
+    "zeile": 1,
+    "label": "sec:Mobile Computing"
+   },
+   "kennzahlen_alt": {
+    "woerter": 6989,
+    "abbildungen": 10,
+    "platzhalter": 10,
+    "tabellen": 0,
+    "seiten": 29.3,
+    "belege": 36,
+    "lit_min": 2007,
+    "lit_median": 2011,
+    "lit_max": 2024,
+    "anteil_vor_2015": 0.69
+   },
+   "meta": {
+    "gestrichen_am": "2026-11-11",
+    "datei": "author/content/gestrichen/5-7-9-mobile-computing.tex",
+    "abbildungen": "Abb. 5.52–5.61"
+   }
   },
   "sec:querschnittsfunktionen": {
    "bewertung": "teilweise",
@@ -839,8 +894,36 @@
   },
   "sec:ki_es_dm_rpa_cb/expertensysteme-xps": {
    "bewertung": "veraltet",
-   "empfehlung": "zusammenlegen",
-   "befund": "Expertensysteme sind ein historischer Ansatz; als Absatz in 5.9.1 aufgehen lassen."
+   "empfehlung": "streichen",
+   "entscheidung": "streichen",
+   "befund": "Ersatzlos gestrichen am 11.11.2026. Historischer KI-Ansatz. Data Mining rückt auf 5.9.3 nach.",
+   "begruendung": "Expertensysteme sind ein historischer Ansatz; als Absatz in 5.9.1 aufgehen lassen.",
+   "notiz": "Entscheidung der Autoren. Quelltext unverändert in author/content/gestrichen/5-9-3-expertensysteme.tex; an der alten Stelle steht eine auskommentierte \\input-Zeile.",
+   "titel_alt": "Expertensysteme (XPS)",
+   "nr_alt": "5.9.3",
+   "parent_alt": "sec:ki_es_dm_rpa_cb",
+   "nach_alt": "sec:Machine Learning, Deep Learning und Neuronale Netze",
+   "quelle_alt": {
+    "datei": "gestrichen/5-9-3-expertensysteme.tex",
+    "zeile": 1,
+    "label": null
+   },
+   "kennzahlen_alt": {
+    "woerter": 325,
+    "abbildungen": 0,
+    "platzhalter": 0,
+    "tabellen": 0,
+    "seiten": 1.1,
+    "belege": 5,
+    "lit_min": 1976,
+    "lit_median": 2018,
+    "lit_max": 2020,
+    "anteil_vor_2015": 0.4
+   },
+   "meta": {
+    "gestrichen_am": "2026-11-11",
+    "datei": "author/content/gestrichen/5-9-3-expertensysteme.tex"
+   }
   },
   "sec:Data Mining, Text Mining, Web Mining und Predictive Analytics": {
    "bewertung": "teilweise",
@@ -901,7 +984,36 @@
   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn": {
    "bewertung": "veraltet",
    "empfehlung": "streichen",
-   "befund": "Eigenentwicklungen auf relationaler Datenbank (MS Access, Visual Studio) als eigene Systemklasse überholt; in xP&A/Planungsplattformen aufgehen lassen."
+   "entscheidung": "streichen",
+   "befund": "Ersatzlos gestrichen am 11.11.2026. Eigenentwicklungen auf relationaler Datenbank (MS Access u. Ä.) als Systemklasse überholt.",
+   "begruendung": "Eigenentwicklungen auf relationaler Datenbank (MS Access, Visual Studio) als eigene Systemklasse überholt; in xP&A/Planungsplattformen aufgehen lassen.",
+   "notiz": "Entscheidung der Autoren. Quelltext unverändert in author/content/gestrichen/5-10-3-1-spezielle-software.tex; an der alten Stelle steht eine auskommentierte \\input-Zeile. Abbildungen 5.76 im Abbildungsmanager auf „entfällt“.",
+   "titel_alt": "Spezielle Software (basierend auf relationaler Datenbanktechnik)",
+   "nr_alt": "5.10.3.1",
+   "parent_alt": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme",
+   "nach_alt": null,
+   "quelle_alt": {
+    "datei": "gestrichen/5-10-3-1-spezielle-software.tex",
+    "zeile": 1,
+    "label": null
+   },
+   "kennzahlen_alt": {
+    "woerter": 1224,
+    "abbildungen": 1,
+    "platzhalter": 1,
+    "tabellen": 0,
+    "seiten": 4.7,
+    "belege": 0,
+    "lit_min": null,
+    "lit_median": null,
+    "lit_max": null,
+    "anteil_vor_2015": null
+   },
+   "meta": {
+    "gestrichen_am": "2026-11-11",
+    "datei": "author/content/gestrichen/5-10-3-1-spezielle-software.tex",
+    "abbildungen": "Abb. 5.76"
+   }
   },
   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme": {
    "bewertung": "teilweise",
@@ -1169,15 +1281,6 @@
    "entscheidung": "offen"
   },
   {
-   "id": "vorschlag:mobile-kompakt",
-   "parent": "sec:Analyse-_und_Planungswerkzeuge",
-   "nach": "sec:Mobile Computing",
-   "titel": "Mobile BI und Responsive Design (kompakt)",
-   "empfehlung": "neu schreiben",
-   "befund": "Ersatz für 5.7.9 auf 1–2 Seiten.",
-   "entscheidung": "offen"
-  },
-  {
    "id": "vorschlag:xpa",
    "parent": "sec:Softwarelösungen für Planung und Reporting",
    "nach": "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien",
@@ -1191,8 +1294,8 @@
   {
    "von": "sec:Technische Grundlagen für Big Data/hadoop",
    "nach": "vorschlag:datenarchitektur",
-   "typ": "ersetzt",
-   "beschriftung": "wird ersetzt durch",
+   "typ": "verwandt",
+   "beschriftung": "Thema wird aufgegriffen in",
    "meta": {}
   },
   {
@@ -1238,20 +1341,6 @@
    "meta": {}
   },
   {
-   "von": "sec:ki_es_dm_rpa_cb/expertensysteme-xps",
-   "nach": "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz",
-   "typ": "zusammenlegen",
-   "beschriftung": "aufgehen in",
-   "meta": {}
-  },
-  {
-   "von": "sec:Mobile Computing",
-   "nach": "vorschlag:mobile-kompakt",
-   "typ": "ersetzt",
-   "beschriftung": "wird ersetzt durch",
-   "meta": {}
-  },
-  {
    "von": "sec:fa-diagramme/tachos-und-thermometer",
    "nach": "vorschlag:ibcs",
    "typ": "verwandt",
@@ -1289,8 +1378,8 @@
   {
    "von": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn",
    "nach": "vorschlag:xpa",
-   "typ": "ersetzt",
-   "beschriftung": "geht auf in",
+   "typ": "verwandt",
+   "beschriftung": "Thema wird aufgegriffen in",
    "meta": {}
   },
   {
@@ -1322,13 +1411,6 @@
    "meta": {}
   },
   {
-   "von": "sec:fa-diagramme/kurs-chartanalyse-diagramme",
-   "nach": "sec:fa-diagramme/kurven-linien-punkt-und-flachendiagramme",
-   "typ": "zusammenlegen",
-   "beschriftung": "aufgehen in",
-   "meta": {}
-  },
-  {
    "von": "sec:Berechtigungssystem_und_Zugriffssteuerung",
    "nach": "sec:fa-cockpit-cybersecurity",
    "typ": "verwandt",
@@ -1345,13 +1427,6 @@
   {
    "von": "cha:zusammenfassung-ausblick/it-unterstutzung/machine-learning-und-ki-gestutzte-analytics-sowie-chatbots",
    "nach": "vorschlag:genai",
-   "typ": "ersetzt",
-   "beschriftung": "wird ersetzt durch",
-   "meta": {}
-  },
-  {
-   "von": "cha:zusammenfassung-ausblick/it-unterstutzung/mobile-systeme",
-   "nach": "vorschlag:mobile-kompakt",
    "typ": "ersetzt",
    "beschriftung": "wird ersetzt durch",
    "meta": {}

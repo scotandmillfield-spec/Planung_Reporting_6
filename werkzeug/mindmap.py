@@ -368,13 +368,18 @@ def main():
         eltern = b.get('parent_alt') or (vid.rsplit('/', 1)[0] if '/' in vid else 'buch')
         if eltern not in nach_id:
             eltern = 'buch'
-        n = dict(id=vid, parent=eltern, nr=b.get('nr_alt'), titel=b.get('titel_alt', vid), ebene=2, typ='Entfallen',
-                 im_manuskript=False, quelle=None, kennzahlen={}, reihenfolge=10 ** 6)
+        # an alter Stelle einsortieren: hinter dem früheren Vorgänger (nach_alt), sonst ans Ende
+        reihe = reih.get(b.get('nach_alt'), (nach_id[eltern].get('reihenfolge', 0) if eltern in nach_id else 0)) + 0.4
+        n = dict(id=vid, parent=eltern, nr=b.get('nr_alt'), titel=b.get('titel_alt', vid),
+                 ebene=(nach_id[eltern]['ebene'] + 1) if eltern in nach_id else 2, typ='Entfallen',
+                 im_manuskript=False, quelle=b.get('quelle_alt'), kennzahlen=b.get('kennzahlen_alt', {}),
+                 reihenfolge=reihe)
         for f in ('bewertung', 'empfehlung', 'entscheidung', 'befund', 'begruendung', 'notiz', 'meta'):
             if f in b:
                 n[f] = b[f]
         knoten.append(n)
-        bericht.append(f'- Bewertung ohne Abschnitt im Manuskript: `{vid}` (als „nicht mehr im Manuskript“ geführt)')
+        if b.get('entscheidung') not in ('streichen',):
+            bericht.append(f'- Bewertung ohne Abschnitt im Manuskript: `{vid}` (als „nicht mehr im Manuskript“ geführt)')
 
     # Vergleich mit dem letzten Lauf (mindmap/gliederung.json)
     snap_pfad = os.path.join(MAP, 'gliederung.json')

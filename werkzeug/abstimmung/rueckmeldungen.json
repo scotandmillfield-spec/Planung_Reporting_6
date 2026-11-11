@@ -495,6 +495,97 @@
    "kommentar": "In der Maske lassen sich jetzt drei Vertriebsgebiete (Österreich, Deutschland, Schweiz) mit je zwei bis drei Kunden wählen, jeweils mit eigenen Ist- und Forecastwerten und eigenem Stand des 1. Planungsdurchlaufs. Das sieht man in der interaktiven Fassung; die Druckabbildung kann nur ein Planungsobjekt zeigen und bleibt bei Österreich, Kunde 1001. Falls die weiteren Gebiete und Kunden auch im gedruckten Bild sichtbar sein sollen, bitte kurz Bescheid geben.",
    "auftrag": "32a05be9c953",
    "zeit": "2026-11-11T11:05"
+  },
+  {
+   "id": "2026-11-11-abb-3-70-entfaellt",
+   "schluessel": "abb-3-70",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Absatz Kurs-/Chartanalyse-Diagramme in 3.8.4 ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-3-71-entfaellt",
+   "schluessel": "abb-3-71",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Absatz Kurs-/Chartanalyse-Diagramme in 3.8.4 ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-52-entfaellt",
+   "schluessel": "abb-5-52",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-53-entfaellt",
+   "schluessel": "abb-5-53",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-54-entfaellt",
+   "schluessel": "abb-5-54",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-55-entfaellt",
+   "schluessel": "abb-5-55",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-56-entfaellt",
+   "schluessel": "abb-5-56",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-57-entfaellt",
+   "schluessel": "abb-5-57",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-58-entfaellt",
+   "schluessel": "abb-5-58",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-59-entfaellt",
+   "schluessel": "abb-5-59",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-60-entfaellt",
+   "schluessel": "abb-5-60",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-61-entfaellt",
+   "schluessel": "abb-5-61",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-76-entfaellt",
+   "schluessel": "abb-5-76",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10.3.1 Spezielle Software (relationale Datenbanktechnik) ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
+   "zeit": "2026-11-11T15:59"
   }
  ],
  "neue_zeilen": [

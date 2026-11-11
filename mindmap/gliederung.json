@@ -325,11 +325,6 @@
 "titel": "Sparklines bzw. Microcharts"
 },
 {
-"id": "sec:fa-diagramme/kurs-chartanalyse-diagramme",
-"nr": null,
-"titel": "Kurs-/Chartanalyse-Diagramme"
-},
-{
 "id": "sec:fa-diagramme/weitere-visualisierungshilfen-und-animationen",
 "nr": null,
 "titel": "Weitere Visualisierungshilfen und Animationen"
@@ -1155,13 +1150,8 @@
 "titel": "NoSQL-Datenbanken"
 },
 {
-"id": "sec:Technische Grundlagen für Big Data/hadoop",
-"nr": "5.6.2.3",
-"titel": "Hadoop"
-},
-{
 "id": "sec:Analytische_Datenbanken",
-"nr": "5.6.2.4",
+"nr": "5.6.2.3",
 "titel": "Analytische Datenbanken"
 },
 {
@@ -1245,71 +1235,6 @@
 "titel": "Weitere Nutzungsmöglichkeiten für Managementaufgaben (Konsolidierung, Balanced Scorecard, Risikomanagement)"
 },
 {
-"id": "sec:Mobile Computing",
-"nr": "5.7.9",
-"titel": "Mobile Computing"
-},
-{
-"id": "sec:mobile_endgeräte",
-"nr": "5.7.9.1",
-"titel": "Mobile Endgeräte"
-},
-{
-"id": "sec:mobile_endgeräte/notebooks",
-"nr": null,
-"titel": "Notebooks"
-},
-{
-"id": "sec:mobile_endgeräte/mobiltelefone",
-"nr": null,
-"titel": "Mobiltelefone"
-},
-{
-"id": "sec:mobile_endgeräte/tablet-pc",
-"nr": null,
-"titel": "Tablet-PC"
-},
-{
-"id": "sec:Mobile Computing/drahtlose-netzwerke",
-"nr": "5.7.9.2",
-"titel": "Drahtlose Netzwerke"
-},
-{
-"id": "sec:app",
-"nr": "5.7.9.3",
-"titel": "App – Applikation"
-},
-{
-"id": "sec:Mobile Computing/reporting-und-planung-im-mobile-computing",
-"nr": "5.7.9.4",
-"titel": "Reporting und Planung im Mobile Computing"
-},
-{
-"id": "sec:Mobile Business Intelligence",
-"nr": "5.7.9.5",
-"titel": "Mobile Business Intelligence"
-},
-{
-"id": "sec:Mobile Business Intelligence/rich-client-native-anwendung",
-"nr": null,
-"titel": "Rich-Client/Native Anwendung"
-},
-{
-"id": "sec:Mobile Business Intelligence/thin-client-web-anwendung",
-"nr": null,
-"titel": "Thin-Client/Web-Anwendung"
-},
-{
-"id": "sec:Mobiles Reporting und mobile Planung",
-"nr": "5.7.9.6",
-"titel": "Mobiles Reporting und mobile Planung"
-},
-{
-"id": "sec:Mobile Computing/mobile-erfolgspotenziale",
-"nr": "5.7.9.7",
-"titel": "Mobile Erfolgspotenziale"
-},
-{
 "id": "sec:querschnittsfunktionen",
 "nr": "5.8",
 "titel": "Querschnittsfunktionen"
@@ -1340,18 +1265,13 @@
 "titel": "Machine Learning, Deep Learning und Neuronale Netze"
 },
 {
-"id": "sec:ki_es_dm_rpa_cb/expertensysteme-xps",
-"nr": "5.9.3",
-"titel": "Expertensysteme (XPS)"
-},
-{
 "id": "sec:Data Mining, Text Mining, Web Mining und Predictive Analytics",
-"nr": "5.9.4",
+"nr": "5.9.3",
 "titel": "Data Mining, Text Mining, Web Mining und Predictive Analytics"
 },
 {
 "id": "sec:rpa",
-"nr": "5.9.5",
+"nr": "5.9.4",
 "titel": "Robotic Process Automation (RPA)"
 },
 {
@@ -1361,12 +1281,12 @@
 },
 {
 "id": "sec:ki_es_dm_rpa_cb/chatbots-conversational-ux",
-"nr": "5.9.6",
+"nr": "5.9.5",
 "titel": "Chatbots/Conversational UX"
 },
 {
 "id": "sec:ki_rpa_chatbots_planung_reporting",
-"nr": "5.9.7",
+"nr": "5.9.6",
 "titel": "Einsatz von KI, RPA und Chatbots in der Planung und im Reporting"
 },
 {
@@ -1401,7 +1321,7 @@
 },
 {
 "id": "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen",
-"nr": "5.9.8",
+"nr": "5.9.7",
 "titel": "Herausforderungen und Handlungsempfehlungen"
 },
 {
@@ -1425,13 +1345,8 @@
 "titel": "Tabellenkalkulationsprogramme"
 },
 {
-"id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn",
-"nr": "5.10.3.1",
-"titel": "Spezielle Software (basierend auf relationaler Datenbanktechnik)"
-},
-{
 "id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme",
-"nr": "5.10.3.2",
+"nr": "5.10.3.1",
 "titel": "BI-gestützte Systeme"
 },
 {

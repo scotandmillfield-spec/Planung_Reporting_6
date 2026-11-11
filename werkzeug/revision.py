@@ -21,6 +21,9 @@ Ablauf (Skill „sechste-auflage-revision“):
        „revisionen“ der Abbildung in werkzeug/status.json (Anzeige in der Inventur). Bei einer Rückfrage
        statt Umsetzung: --status "Klärung nötig" und die Frage als --umsetzung.
 
+  Gestrichene Abschnitte: python3 werkzeug/revision.py entfaellt 5.52 5.53 … --grund "…" setzt die Abbildungen
+     in Tabelle (über rueckmeldungen.json) und Inventur (status.json) auf „entfällt“.
+
   5. Inventur neu erzeugen, committen, pushen. Ein Zeit-Trigger der Tabelle (Code.gs,
      rueckmeldungenUebernehmen) holt rueckmeldungen.json binnen etwa 5–10 Minuten und setzt Status und
      Kommentar „TT.MM.JJJJ Claude: …“.
@@ -263,6 +266,36 @@ def befehl_melden(a):
     print("Jetzt: python3 werkzeug/vorschau.py && python3 werkzeug/inventur.py, dann committen und pushen.")
 
 
+def befehl_entfaellt(a):
+    """Abbildungen gestrichener Abschnitte auf „entfällt“ setzen: Rückmeldung an die Tabelle (ohne „von“,
+    also unabhängig vom bisherigen Status) und Status „entfaellt“ samt Vermerk in status.json."""
+    eintr = inventur_eintraege()
+    nach_nr = {x["nr"]: x for x in eintr.values() if x.get("nr")}
+    heute = datetime.date.today()
+    text = " ".join(a.grund.split())
+    rueck = lade(RUECK, {"_hinweis": "", "eintraege": []})
+    grenze = (heute - datetime.timedelta(days=AUFBEWAHREN_TAGE)).isoformat()
+    rueck["eintraege"] = [x for x in rueck["eintraege"] if x.get("zeit", "")[:10] >= grenze]
+    st = lade(STATUS, {"eintraege": {}})
+    for s in a.abbildungen:
+        k = re.sub(r"^Abb\.?\s*", "", s.strip())
+        x = eintr.get(k) or nach_nr.get(k)
+        if not x:
+            sys.exit(f"{s}: keine Abbildung mit diesem Schlüssel bzw. dieser Nummer in der Inventur.")
+        kennung = f"{heute.isoformat()}-{x['anker']}-entfaellt"
+        if not any(r["id"] == kennung for r in rueck["eintraege"]):
+            rueck["eintraege"].append({"id": kennung, "schluessel": x["anker"], "status": "entfällt",
+                                       "kommentar": "Entfällt: " + text,
+                                       "zeit": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")})
+        e = st["eintraege"].setdefault(x["nr"], {})
+        e["status"] = "entfaellt"
+        vermerk = f"Entfällt ({heute.strftime('%d.%m.%Y')}): {text}"
+        e["kommentare"] = [vermerk] + [v for v in e.get("kommentare", []) if v != vermerk]
+        print(f"Abb. {x['nr']} ({x['anker']}) → entfällt")
+    speichere(RUECK, rueck)
+    speichere(STATUS, st)
+
+
 def befehl_offen(a):
     """Rückmeldungen im Repository, die die Tabelle laut letzter CSV noch nicht übernommen hat."""
     zeilen, _, _ = tabelle_lesen(a.csv)
@@ -284,6 +317,10 @@ def main():
     p.add_argument("--umsetzung", required=True, help="ein bis zwei Sätze: was geändert wurde bzw. die Rückfrage")
     p.add_argument("--status", default="Nächste Version")
     p.set_defaults(f=befehl_melden)
+    p = sub.add_parser("entfaellt", help="Abbildungen gestrichener Abschnitte auf „entfällt“ setzen")
+    p.add_argument("abbildungen", nargs="+", help="Nummern (5.52) oder Schlüssel (abb-5-52)")
+    p.add_argument("--grund", required=True, help="Vermerk für Tabelle und Inventur, z. B. welcher Abschnitt gestrichen wurde")
+    p.set_defaults(f=befehl_entfaellt)
     p = sub.add_parser("offen", help="Rückmeldungen gegen die Tabelle abgleichen")
     p.add_argument("--csv")
     p.set_defaults(f=befehl_offen)

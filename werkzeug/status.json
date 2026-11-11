@@ -638,10 +638,11 @@
    "alt": "Dashboard einer Scorecard-Analyse: Links zeigt eine Ursache-Wirkungs-Kette die sieben strategischen Ziele in den Perspektiven Finanzen, Kunden, Interne Prozesse sowie Lernen und Entwicklung mit Pfeilen von den Ursachen zu den Wirkungen und je einem Status in Worten. Rechts stehen auf gleicher Höhe die Ziele mit ihren Kennzahlen, Ist, Ziel, Abweichung in Prozent als Balken und Status. Drei Ziele sind kritisch – Kundenbindung, Prozessoptimierung und Umsetzung Innovation –, die größte Lücke hat der Umsatz mit neuen Produkten mit −87,6 %."
   },
   "5.52": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "SAP_Fiori_Launchpad_Homepage_im_Editiermodus",
    "quer": true,
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot softwareneutral als Maske nachgebaut, Querformat 1024 px = 155 × 110 mm (Kachelraster mit fünf Einheiten plus Benachrichtigungen rechts): Kopfleiste mit Profilfoto, Logo und Symbolen, Hintergrundverlauf und dunkle Fußleiste entfallen; Texte übersetzt („Home“ → Startseite, „Done“ → Fertig)",
     "Kacheln schlicht im Buchstil ohne Icons, Anordnung wie im Original (Gruppe „Meine Startseite“, Link-Gruppe, drei Benachrichtigungen); Editiermodus bedienbar: Kacheln per Drag & Drop oder Pfeiltasten verschieben, „Entfernen“, „Kachel hinzufügen“ (holt Entferntes zurück bzw. Apps aus einem Katalog), „Fertig“/„Bearbeiten“ wechselt den Modus",
     "Symbole → Text: × → „Entfernen“, + → „Kachel hinzufügen“, „…“ entfällt; Foto und Abspielknopf der Nachrichtenkachel entfallen; Ampelfarben der Umsatzbalken → anthrazit, „234M“ → „234 Mio.“; Überschrift „Benachrichtigungen“ ergänzt",
@@ -651,9 +652,10 @@
    "alt": "Startseite eines Launchpads im Editiermodus: Unter den Reitern Meine Startseite, Nützliche Apps und Innendienst Vertrieb stehen Kacheln wie Kunden verwalten, eine Nachrichtenkachel, ein kleines Balkendiagramm der Jahresumsätze nach Region und Kacheln mit Kennzahlen (35 offene Reiseanträge), jede mit der Aktion „Entfernen“, dazu eine Kachel „Kachel hinzufügen“ und eine Gruppe mit Link-Kacheln. Rechts stehen drei Benachrichtigungen, unten beendet „Fertig“ den Editiermodus."
   },
   "5.53": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "SAP_Fiori_Responsive_Design_fuer_verschiedene_Endgeraete",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot (Gerätefotos) schematisch nachgebaut: drei vereinfachte Geräterahmen mit Layoutblöcken – Desktop vier Spalten, Tablet drei, Smartphone eine; Anordnung der Karten je Gerät wie im Screenshot, über den Bildschirm hinausreichende Karten unten offen angeschnitten",
     "Entfernt: Gerätefotos, Logo und Produktname, Personenfoto und -name (Kontaktkarte), Karteninhalte mit Ampelbalken und farbigem Ringdiagramm – nur die Kartentitel bleiben",
     "Kartentitel übersetzt (Procurement Overview → Einkaufsübersicht, Contract Monitoring → Vertragsüberwachung, Recent Contacts → Letzte Kontakte, Open Activities → Offene Aktivitäten, Purchase Order Management → Bestellmanagement, Off-Contract Spend → Ausgaben ohne Vertrag, Urgent Purchase Requisition Items → Dringende Bestellanforderungen, Quick Links → Schnellzugriffe); „Non-Managed Spend by Supplier“ verkürzt zu „Ausgaben je Lieferant“ – bitte prüfen",
@@ -663,9 +665,10 @@
    "alt": "Dieselbe Übersichtsseite „Einkaufsübersicht“ schematisch auf drei Endgeräten. Auf dem Desktop stehen die neun Karten in vier Spalten, auf dem Tablet in drei Spalten und auf dem Smartphone untereinander in einer Spalte; was nicht auf den Bildschirm passt, wird angeschnitten und ist per Bildlauf erreichbar. Kopf- und Filterleiste passen sich der Breite an."
   },
   "5.54": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Management-Dashboard_mit_Diamant-4",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px nachgebaut (HTML für die Lernplattform, PNG): Programmleiste, Navigationsspalte, Logo, Mandant „225 | Soziale Einrichtung … Bielefeld“, Kachelrahmen, Bildlaufleiste und „Dashboard bearbeiten“ entfallen; Inhaltsgruppen wie im Original (BWA, Meine Kennzahlen, Auslastung, Personalkennzahlen, Kosten)",
     "Ist-Werte aller sichtbaren BWA-Zeilen (März kum.) centgenau übernommen, Jahr 2021 → 2027; Betriebsergebnis 1.756.891 € wie die Kachel des Originals – dafür Zeile „Sonstige Erträge“ 20.888,28 € ergänzt (im Original vermutlich unterhalb des Bildlaufs). Plan neu: Das Original zeigte für März kum. 28,1 Mio. € Plan-Erlöse bei 15,0 Mio. € Ist (offenbar anderer Zeitraum); Plan Wasser/Energie und Abschreibungen wie im Original",
     "Korrigiert: Ergebnis je Belegungstag −39 (ohne Einheit) passte nicht zum positiven Betriebsergebnis → 19,31 € = Betriebsergebnis / Belegungstage; Erlössäule „Ist-Daten 15.007.921 EUR“ stand beim Mai → Monatswerte Jan–Jun, Ist bis zum Berichtsmonat, Plan weiß mit Kontur",
@@ -676,9 +679,10 @@
    "alt": "Management-Dashboard einer stationären Pflegeeinrichtung mit drei Häusern, Januar bis März 2027 kumuliert. Oben sechs Kennzahlen mit Planabweichung (u. a. Erlöse 15.008 Tsd. €, Betriebsergebnis 1.757 Tsd. € und damit 19 % unter Plan, Ergebnis je Belegungstag 19,31 €, Teilzeitquote 52 %); links die BWA als Plan-Ist-Vergleich mit Abweichungsbalken nach Wirkung, rechts Erlöse je Monat (Ist vor Plan), Auslastungsgrad je Haus mit Abweichung zu Plan und Benchmark, Krankheits- und Überstundenquote über zwölf Monate sowie Kosten je Berechnungstag nach Kostenart. Aussage: Das Ergebnis liegt vor allem wegen geringerer Pflegeerlöse – Haus Fliederhof ist schwach belegt – und höherer Personalkosten unter Plan."
   },
   "5.55": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Mobile_Computing_Mobile_BI_sowie_mobiles_Reporting_und_mobile_Planung",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Verschachtelte Bereiche wie im Original (nach rechts unten eingerückt), Titel oben links; fast deckungsgleiche Ränder des Originals mit einheitlichem Abstand",
     "Helligkeitsleiter außen → innen: Mobile Computing weiß, Mobile BI grau, mobiles Reporting und mobile Planung rot (Schlüsselelement, Gegenstand des Buches)",
     "Englisch übertragen: „Mobile Planning and Reporting“ → „Mobiles Reporting und mobile Planung“ (Reihenfolge wie Caption); „Mobile Computing“ und „Mobile BI“ bleiben als Fachbegriffe",
@@ -687,9 +691,10 @@
    "alt": "Drei ineinanderliegende Bereiche: Mobile Computing umfasst Mobile BI, Mobile BI umfasst mobiles Reporting und mobile Planung. Die Abbildung zeigt mobiles Reporting und mobile Planung als Teilgebiet von Mobile BI und dieses als Teilgebiet des Mobile Computing."
   },
   "5.56": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Aufbau_von_mobilen_BI-Systemen",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Stationärer Teil deckungsgleich mit Abb. 5.32/5.38 (Geometrie, Texte, Rollen, Korrekturen wie dort: Daten-Virtualisierung, Core Data Warehouse, Analytische Datenbank, Sensordaten, Tabellenkalkulation statt Excel, „…“ entfallen)",
     "Zeilenbeschriftungen → vier Bänder mit Titel oben links; gedrehte Gruppenbeschriftungen „Mobile/Stationäre BI-Komponenten“ → Klammern am linken Rand (keine Querschnittsspalten)",
     "Rahmen „Mobile BI-Anwendung“ → gestrichelte Gruppe über beide mobilen Bänder; Mobile BI-Client rot (wie Abb. 5.57), Mobile Data Marts und Sandboxing grau (Datenhaltung) – Sandboxing hier nicht rot wie in Abb. 5.38",
@@ -700,9 +705,10 @@
    "alt": "Schichtenmodell eines mobilen BI-Systems. Unten die stationären BI-Komponenten wie in der traditionellen und explorativen BI-Architektur (Quellsysteme, ETL/ELT, Data Warehouse, Data Marts, Sandboxing, Data Lake), darüber die mobilen BI-Komponenten: Mobile Data Marts mit Replikations-, Synchronisations- und Sicherheitsmechanismen und der Mobile BI-Client. Daten gelangen aus den stationären Speichern in die mobile Datenverwaltung, das Sandboxing ist per Direktverbindung an den Mobile BI-Client angebunden."
   },
   "5.57": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Mobile_Zugangsarten_und_Endgeraete",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Mobile BI-Komponenten als derselbe Baustein wie in Abb. 5.56 (gleiche Geometrie, Begriffe, Rollen; Mobile BI-Client rot); dafür die beiden Bandtitel „Mobile Datenauswertung und -nutzung“ / „Mobile Datenverwaltung und -distribution“ aus Abb. 5.56 übernommen – so gewünscht?",
     "Gedrehte Seitenbeschriftungen → Bänder „Endgeräte“, „Zugangsarten“ mit Titel oben links",
     "Gerätefotos (Smartphone, Tablet mit Bildschirminhalt) → beschriftete Boxen; Fahne mit Blitz → kursive Beschriftung „Direktverbindung“ (Pfeil kommt von unten aus den stationären Komponenten)",
@@ -712,9 +718,10 @@
    "alt": "Die mobile BI-Anwendung mit Mobile BI-Client und Mobile Data Marts erreicht die Endgeräte über zwei Zugangsarten: mobilen Zugriff über das Mobilfunknetz und Hotspot-Zugang per WLAN. Beide Zugangsarten führen zu Mobiltelefon/Smartphone und Tablet-PC/Notebook."
   },
   "5.58": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "SAP_BusinessObjects_Mobile_Architecture",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot softwareneutral nachgebaut, Anordnung wie Original; Produkt- und Versionsangaben entfernt (SAP BusinessObjects, XI 3.1/4.0, Web Intelligence, Crystal Reports, Sybase SUP 2.1.0, SAP BI app)",
     "Übertragen: Mobile application server → mobiler Anwendungsserver (rot, Schlüsselelement), BI platform → BI-Plattform, Web Intelligence Processing servers → Verarbeitungsserver für Ad-hoc-Berichte, Crystal Report server → Server für formatierte Berichte, Search service → Suchdienst, File Repository Server → Dateiablageserver, Report and CMS databases → Berichts- und Systemdatenbanken (CMS = Central Management Server), Sybase SUP → Mobile-Middleware-Server, Kbits/sec → kbit/s",
     "Schnittstellenkreise mit „R“ → Pfeile mit kursivem Protokoll (◄R► Doppelpfeil, R► einfach); grauer Hinweis „Optional“ → gestrichelte Gruppen „optional“",
@@ -724,9 +731,10 @@
    "alt": "Architektur einer mobilen BI-Lösung. Nutzer mit mobilem Endgerät greifen über Internet/WLAN direkt oder über optionale Komponenten zwischen zwei Firewalls (Reverse Proxy bzw. Relay-Server mit Middleware-Server) per HTTPS auf den mobilen Anwendungsserver zu. Dieser ist per TCP mit der BI-Plattform und ihren Diensten verbunden, die ihrerseits auf den Dateiablageserver mit Dateiablage sowie Berichts- und Systemdatenbanken zugreift."
   },
   "5.59": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Mobile_Reporting_mit_einem_Smartphone_C8_Cubeware",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot softwareneutral als mobiler Bericht im Hochformat nachgebaut (HTML, PNG; Seite 376 × 796 px = 57 × 120 mm, Anzeigefläche 360 × 780 px im gleichen Maßstab wie die Dashboards); Gerät nur durch dünnen Rahmen mit abgerundeten Ecken angedeutet; Statusleiste, Symbolleiste, Knöpfe „Car Sales/Arena/Back“ und Markennamen entfallen",
     "Abb. 5.59 und 5.60 zeigen jetzt denselben Bericht „Vertrieb Europa“ aus einem Datensatz (im Original zwei verschiedene Berichte: Market Dashboard bzw. ABC-Analyse); Smartphone eine Spalte, Nebenspalten (Budget, Anteil, Ergebnis) im Tooltip",
     "Inhalte: Marken → fünf Produktlinien mit 12-Monats-Verlauf (Sparkline), Ist und ΔBU; ABC-Analyse der acht Länder mit den Werten aus Abb. 5.60 (T€, 12 Monate bis Aug 2027). Entfallen: Top-5-Händler nach Umsatz und Ergebnis sowie das Ergebnis je Markt als eigenes Diagramm (Ergebnis je Land im Tooltip) – bitte prüfen",
@@ -737,9 +745,10 @@
    "alt": "Mobiler Bericht „Vertrieb Europa“ auf einem Smartphone im Hochformat, angedeutet durch einen dünnen Rahmen mit abgerundeten Ecken. Untereinander stehen Zeitraum- und Regionsauswahl, die Kennzahlen Umsatz 1.631,4 Mio. € (−0,6 % zum Budget) und Ergebnis 64,5 Mio. € (−11,4 %), eine Tabelle der fünf Produktlinien mit 12-Monats-Verlauf, Ist und Abweichung zum Budget (Elektro +8,2 %, Sport −6,9 %) sowie die ABC-Analyse der acht Länder mit Umsatzbalken, kumuliertem Anteil und Klasse – Großbritannien und Deutschland bringen als A-Länder 58 % des Umsatzes. Derselbe Bericht erscheint in Abb. 5.60 zweispaltig auf dem Tablet."
   },
   "5.60": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Mobile_Reporting_mit_einem_Tablet_C8_Cubeware",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Gleicher Bericht und gleicher Datensatz wie Abb. 5.59 (Generator von 5.59, alle Zahlen identisch); Tablet im Querformat 1024 × 646 px (155 × 98 mm, wird gedreht eingebunden), zwei Spalten, Gerät nur durch dünnen Rahmen angedeutet; Statusleiste (Carrier, Uhrzeit, Akku), Symbolleisten, Präsentations-/Vollbildknöpfe entfallen",
     "Werte des Originals übernommen: Umsatz der acht Länder in T€ (Großbritannien 481.492 … Polen 35.992), Anteile und kumulierte Anteile identisch (29,51 % … 100,00 %), Klassengrenzen A bis 65 %, B bis 80 % (Original: „A 65 %, B 15 %“) – Klassen wie im Original; Jahr 2012 → 12 Monate bis August 2027",
     "Korrigiert: Titel „ABC-Analyse DACH“ passte nicht zum Inhalt (acht europäische Länder) → Datenschnitt Region (Alle, DACH, Übrige); Tippfehler „Hierachische“; englische Ländernamen; Rot-Gelb-Grün in Tabelle und Karte → Rangfolge mit Balken, Klassen als Buchstaben und Trennlinien",
@@ -750,9 +759,10 @@
    "alt": "Derselbe mobile Bericht „Vertrieb Europa“ wie in Abb. 5.59, hier auf einem Tablet im Querformat in zwei Spalten. Oben Zeitraum- und Regionsauswahl sowie Umsatz 1.631,4 Mio. € und Ergebnis 64,5 Mio. € mit Abweichung zum Budget; links die fünf Produktlinien mit 12-Monats-Verlauf, Ist, Budget und Abweichung, rechts die ABC-Analyse der acht Länder mit Umsatzbalken, Anteil, kumuliertem Anteil, Klasse und Ergebnis. Aussage: Zwei Länder bringen 58 % des Umsatzes, Großbritannien als größter Markt schreibt Verlust."
   },
   "5.61": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Einfache_exemplarische_Eingabefunktionen",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.7.9 Mobile Computing ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Vier Smartphone-Bedienelemente (Produktscreenshots) softwareneutral als eine Maske „Eingabefunktionen“ nachgebaut, Anordnung und Namen wie im Original; Navigationsleiste „Back/Select Days“, Glanz, Verläufe und 3D-Walze entfallen, blaue Flächen → Grau/Anthrazit",
     "Englisch → deutsch: Woche ab Montag, Mo–So, „Januar“; Walze im 24-Stunden-Format (Mon Jan 25 8:00 PM → Mo 25.01. 20:00, AM/PM-Walze entfällt), OFF → Aus; Spaltenköpfe Datum/Stunde/Minute ergänzt",
     "Jahre aktualisiert: Januar 2010 → Januar 2027, 2009 → 2026 (gleiche Wochentage, 2027 beginnt wie 2010 an einem Freitag)",
@@ -929,9 +939,10 @@
    "alt": "Planungsmaske „Projektplanung“ eines Projektfertigers für ein einzelnes Projekt in Tsd. €. Spalten führen vom Ist über die Prognose lt. Projektliste, Chancen und neue Prognose des Gesamtprojekts zu den Restbeträgen, den vier Quartalen des Geschäftsjahrs 2027/28 und dem Folgejahr; Zeilen enthalten fremdbezogene Leistungen, Personalkosten, die Fertigstellungsgradplanung und ein stufiges MOR-Schema. Nach der neuen Prognose ergibt sich für das Projekt ein Projektvollkostenergebnis von −206,9 Tsd. €; nach dem Geschäftsjahr bleibt ein Arbeitsvorrat von 534,3 Tsd. €."
   },
   "5.76": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Reporting_mit_MS_Access",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10.3.1 Spezielle Software (relationale Datenbanktechnik) ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot (Datenbankbericht) softwareneutral als interaktive Kreuztabelle nachgebaut: Menüband, Navigationsbereich, Reiter, Statusleiste, blaue Kopffläche mit Symbol und Formularkästen je Zelle entfernt",
     "Werte des Originals übernommen (11 Kostenarten × 7 Kostenstellen, Gesamt 106.104 € nachgerechnet); Summenzeile je Kostenstelle ergänzt, Gesamtspalte mit Balken",
     "Einheit € ergänzt (im Original keine), Tausenderpunkt, leere Zellen als „–“; „sonstige Kosten“ → „Sonstige Kosten“",
@@ -3130,9 +3141,10 @@
    "alt": "Drei untereinanderstehende Tabellen für drei Produktfamilien mit Sparklines der letzten 20 Arbeitstage bis 15.10.2027 neben dem aktuellen Wert: bestellte Stückzahl mit Änderung zum Vortag (+178 %, +14 %, −53 %), Lagermenge mit Änderung zum Vortag (Familie 1 rutscht in eine Mindermenge von 10.813 Stück, rote Säulen unter der Nulllinie) sowie Produktionsmenge, Durchlaufzeit und Produktqualität mit gestrichelten Ziellinien. Kernaussage: Die Aufträge von Familie 1 haben sich fast verdreifacht, die von Familie 3 mehr als halbiert, und für Familie 1 fehlt Material."
   },
   "3.70": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Beispiel_Kursdiagramm",
    "kommentare": [
+    "Entfällt (11.11.2026): Absatz Kurs-/Chartanalyse-Diagramme in 3.8.4 ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Als Einzelvisual mit dem Dashboard-Baukasten neu gebaut (110 mm breit); Diagrammtyp bleibt: Kursdiagramm mit Volumen, jetzt als Kerzen (Eröffnung, Hoch, Tief, Schluss) statt Hoch-Tief-Schluss-Strichen",
     "Werte des Originals übernommen (Hoch, Tief, Schluss, Volumen aus der Excel-Datentabelle); Eröffnungskurse ergänzt (erfunden, jeweils zwischen Tief und Hoch), weil Kerzen sie benötigen",
     "Kerzen: steigend hohl mit blaugrüner Kontur, fallend rot gefüllt – Unterscheidung über Füllung und Farbe, nicht über Rot/Grün allein",
@@ -3143,9 +3155,10 @@
    "alt": "Kerzendiagramm des Aktienkurses vom 06. bis 10.09.2027 in Euro mit Handelsvolumen darunter. Montag bis Mittwoch steigen die Kurse (hohle Kerzen, Schluss 44,56, 45,73 und 47,91 €), Donnerstag und Freitag fallen sie (rot gefüllte Kerzen, Schluss 45,89 und 43,76 €); dazwischen die Veränderung zum Vortag von +2,6 % bis −4,6 %. Die Volumensäulen ab null sind fast gleich hoch (87.520 bis 95.820 €)."
   },
   "3.71": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Beispiel_Chartanalysediagramm",
    "kommentare": [
+    "Entfällt (11.11.2026): Absatz Kurs-/Chartanalyse-Diagramme in 3.8.4 ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
     "Produktscreenshot softwareneutral als Einzelvisual nachgebaut (110 mm breit): Wertpapiername (reales Unternehmen) → „Aktie A“, Kopfzeile mit Kürzeln (C, O, H, L, TckV, LV, TotV), „Chart erstellt mit …“, Web-Adresse und Symbolleiste entfernt",
     "Kursverlauf erfunden, in Anlehnung an das Original abgelesen und um 16 Jahre verschoben (14.10.2026–14.07.2027); beschriftete Marken übernommen: Hoch 43,33, Tief 37,82, Unterstützung 33,53, letzter Tag 43,00/43,00/42,70/42,88 (+0,175)",
     "Inhalt vollständig: Tageskerzen, gleitende Durchschnitte 20 und 50 Tage, Abwärtstrend, Dreieck, Unterstützung, Hoch/Tief, bevorzugtes Szenario und Alternativszenario als Skizze über den Stand hinaus",

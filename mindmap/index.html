@@ -336,7 +336,8 @@ function kurz(t, max){ return t.length>max ? t.slice(0,max-1).trimEnd()+'…' : 
 function beschriftung(n){
   if(n===wurzel) return {nr:'', titel:n.titel};
   const max = n.tiefe===1 ? 70 : 54;
-  return {nr: n.nr ? n.nr+' ' : (n.typ==='Vorschlag' ? '＋ ' : (n.typ==='Stichpunkt'||n.typ==='Absatz'||n.typ==='Entfallen' ? '· ' : '')), titel: kurz(n.titel, max)};
+  if(n.typ==='Entfallen') return {nr: n.nr ? '('+n.nr+') ' : '· ', titel: kurz(n.titel, max)};
+  return {nr: n.nr ? n.nr+' ' : (n.typ==='Vorschlag' ? '＋ ' : (n.typ==='Stichpunkt'||n.typ==='Absatz' ? '· ' : '')), titel: kurz(n.titel, max)};
 }
 
 /* ---------- Filter / Suche ---------- */
@@ -750,15 +751,15 @@ function detail(id){
   h += marke('Verlag: '+n.w_ent.wert, n.w_ent.wert==='offen' ? '#9A9A9A' : '#3A3F44', n.w_ent.von, (SK.entscheidung||{})[n.w_ent.wert]);
   if(n.lokal) h += `<span class="marke" style="border-color:#C62828;color:#C62828">lokal geändert</span>`;
   if(n.typ==='Vorschlag') h += `<span class="marke" style="border-style:dashed">noch nicht geschrieben</span>`;
-  if(n.typ==='Entfallen') h += `<span class="marke" style="border-style:dashed">nicht mehr im Manuskript</span>`;
+  if(n.typ==='Entfallen') h += `<span class="marke" style="border-style:dashed">nicht mehr im Manuskript${n.nr?' (war '+esc(n.nr)+')':''}</span>`;
   h += `</div>`;
   const quelleBef = n.befund ? n : (n.w_bew.von ? K.get(n.w_bew.von) : null);
   if(n.befund) h += `<p class="befund">${esc(n.befund)}</p>`;
   else if(quelleBef && quelleBef.befund) h += `<p class="befund" style="color:var(--muted)">Befund zu ${esc(quelleBef.nr||'')}: ${esc(quelleBef.befund)}</p>`;
   if(n.begruendung) h += `<p>${esc(n.begruendung)}</p>`;
   if(n.notiz) h += `<p><b>Notiz:</b> ${esc(n.notiz)}</p>`;
-  if(n.im_manuskript){
-    h += `<h3>Umfang und Belege</h3><div class="zahlen">
+  if(n.im_manuskript || (n.typ==='Entfallen' && kz.seiten)){
+    h += `<h3>${n.im_manuskript ? 'Umfang und Belege' : 'Umfang vor dem Streichen'}</h3><div class="zahlen">
       <div><b>≈ ${fmt(kz.seiten,0)}</b><span>Seiten (Schätzung)</span></div>
       <div><b>${fmt(kz.woerter)}</b><span>Wörter</span></div>
       <div><b>${fmt(kz.abbildungen)}</b><span>Abbildungen${kz.platzhalter?` (${kz.platzhalter} Platzh.)`:''}</span></div>
@@ -915,7 +916,9 @@ function bilanz(){
   const ents = [...K.values()].filter(n=>n!==wurzel && n.entscheidung && n.entscheidung!=='offen').length;
   for(const k of REIHE){ const v = w[k]||0; if(k==='vorschlag'){ if(anzV) l += `<span><i style="background:#fff;border:1.5px dashed ${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>${anzV}</b></span>`; continue; }
     if(v<0.5) continue; l += `<span><i style="background:${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>≈ ${fmt(v)} S.</b></span>`; }
-  l += `<span>Verlag entschieden <b>${ents}</b></span>`;
+  const gestr = [...K.values()].filter(n=>n.typ==='Entfallen' && n.w_ent && n.w_ent.wert==='streichen').reduce((a,n)=>a+((n.kennzahlen&&n.kennzahlen.seiten)||0),0);
+  if(gestr) l += `<span><i style="background:#fff;border:1.5px solid #8A8F94"></i>gestrichen <b>≈ ${fmt(gestr)} S.</b></span>`;
+  l += `<span>entschieden <b>${ents}</b></span>`;
   $('#balken').innerHTML = h; $('#balken-legende').innerHTML = l;
   $('#balken').querySelectorAll('button').forEach(b => b.onclick = () => { const k = b.dataset.bew; zustand.fBew.has(k) ? zustand.fBew.delete(k) : zustand.fBew.add(k); nachFilterAufklappen(); bilanz(); render(); });
 }

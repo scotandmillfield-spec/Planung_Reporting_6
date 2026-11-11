@@ -1311,10 +1311,34 @@
   "cha:zusammenfassung-ausblick/it-unterstutzung/mobile-systeme": {
    "bewertung": "veraltet",
    "empfehlung": "streichen",
-   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Folge der Streichung von 5.7.9: Mobile BI ist kein Zukunftstrend mehr; Stichpunkt ersatzlos streichen.",
+   "befund": "Gestrichen am 11.11.2026. Folge der Streichung von 5.7.9 Mobile Computing: Mobile BI ist kein Zukunftstrend mehr; Stichpunkt in der Übersichtstabelle ebenfalls entfernt.",
    "meta": {
-    "streichkandidat": "ersatzlos",
-    "umfang": "≈ 0,6 S."
+    "umfang": "≈ 0,6 S.",
+    "gestrichen_am": "2026-11-11",
+    "datei": "author/content/gestrichen/6-mobile-systeme.tex"
+   },
+   "entscheidung": "streichen",
+   "notiz": "Entscheidung der Autoren. Quelltext in author/content/gestrichen/6-mobile-systeme.tex; an der alten Stelle steht eine auskommentierte \\input-Zeile. Dokumentiert in author/content/update-notes.tex.",
+   "titel_alt": "Mobile Systeme",
+   "nr_alt": null,
+   "parent_alt": "cha:zusammenfassung-ausblick/it-unterstutzung",
+   "nach_alt": "cha:zusammenfassung-ausblick/it-unterstutzung/machine-learning-und-ki-gestutzte-analytics-sowie-chatbots",
+   "quelle_alt": {
+    "datei": "gestrichen/6-mobile-systeme.tex",
+    "zeile": 10,
+    "label": null
+   },
+   "kennzahlen_alt": {
+    "woerter": 184,
+    "abbildungen": 0,
+    "platzhalter": 0,
+    "tabellen": 0,
+    "seiten": 0.6,
+    "belege": 1,
+    "lit_min": 2011,
+    "lit_median": 2011,
+    "lit_max": 2011,
+    "anteil_vor_2015": 1.0
    }
   },
   "cha:zusammenfassung-ausblick/it-unterstutzung/cloud-computing-versus-on-premise": {

@@ -652,6 +652,18 @@
    "schluessel": "abb-5-82",
    "kommentar": "Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
    "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-63-vermerk-1",
+   "schluessel": "abb-5-63",
+   "kommentar": "Verschoben mit Abschnitt Machine Learning, Deep Learning und Neuronale Netze (bisher 5.9.2) nach 6.1.2 im neuen Kapitel 6 (11.11.2026); Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
+   "zeit": "2026-11-11T23:35"
+  },
+  {
+   "id": "2026-11-11-abb-5-64-vermerk-1",
+   "schluessel": "abb-5-64",
+   "kommentar": "Verschoben mit Abschnitt Machine Learning, Deep Learning und Neuronale Netze (bisher 5.9.2) nach 6.1.2 im neuen Kapitel 6 (11.11.2026); Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
+   "zeit": "2026-11-11T23:35"
   }
  ],
  "neue_zeilen": [

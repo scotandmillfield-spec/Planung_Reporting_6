@@ -920,7 +920,12 @@
   "sec:Machine Learning, Deep Learning und Neuronale Netze": {
    "bewertung": "aktuell",
    "empfehlung": "aktualisieren",
-   "befund": "ML, Deep Learning, Neuronale Netze gültig (Belege bis 2024); Transformer-Architektur ergänzen."
+   "befund": "Verlagert am 11.11.2026 aus 5.9.2 nach 6.1.2 (Text und Label unverändert, Abb. 5.63 und 5.64 mitverschoben). ML, Deep Learning, Neuronale Netze gültig (Belege bis 2024); Transformer-Architektur ergänzen.",
+   "notiz": "Hinweis im Quelltext: GAN als Beispiel ersetzen, Transformer und Foundation Models als Überleitung zu den LLMs ergänzen.",
+   "meta": {
+    "verlagert_am": "2026-11-11",
+    "herkunft": "5.9.2"
+   }
   },
   "sec:ki_es_dm_rpa_cb/expertensysteme-xps": {
    "bewertung": "veraltet",
@@ -1762,16 +1767,6 @@
    "beschriftung": "Liste „Vorteile BI-gestützter Controlling-Systeme“ nach",
    "meta": {
     "vorschlag": "2026-11-11"
-   }
-  },
-  {
-   "von": "sec:Machine Learning, Deep Learning und Neuronale Netze",
-   "nach": "sec:genai-grundlagen",
-   "typ": "verschieben",
-   "beschriftung": "ganz nach (um Transformer/LLM ergänzen)",
-   "meta": {
-    "vorschlag": "2026-11-11",
-    "entscheidung": "offen"
    }
   },
   {

@@ -788,6 +788,7 @@
    "status": "pruefung",
    "datei": "Machine_Learning",
    "kommentare": [
+    "11.11.2026: Verschoben mit Abschnitt Machine Learning, Deep Learning und Neuronale Netze (bisher 5.9.2) nach 6.1.2 im neuen Kapitel 6 (11.11.2026); Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
     "Eingabe → Machine Learning → Ausgabe in einer Achse wie im Original; Machine Learning als Karte mit Kopfleiste und Aufzählung, Daten als graue Pfeilformen (stehen jetzt vor bzw. hinter der Karte statt den Rahmen zu überlappen)",
     "Blaue Flächen, Rahmen und Überschrift → Rollen; kein Rot",
     "Übertragen/korrigiert: „Input-Daten“ → „Eingabedaten“, „Output-Daten“ → „Ausgabedaten“, „wahrscheinl.“ → „wahrscheinliche“, „Beispieldaten …“ → „Beispieldaten etc.“; „Machine Learning“ bleibt (wie Caption)"
@@ -798,6 +799,7 @@
    "status": "pruefung",
    "datei": "Kuenstliche_Neuronale_Netze",
    "kommentare": [
+    "11.11.2026: Verschoben mit Abschnitt Machine Learning, Deep Learning und Neuronale Netze (bisher 5.9.2) nach 6.1.2 im neuen Kapitel 6 (11.11.2026); Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
     "Aufbau wie Original: Neuronen als Kreise in fünf Spalten (3 – 4 – 5 – 4 – 2), benachbarte Spalten vollständig verbunden, dünne diagonale Linien",
     "Blau → Helligkeitsleiter: Eingabe hellgrau, verdeckte Schichten grau, Ausgabe anthrazit; kein Rot",
     "Übertragen: „Input-Layer“ → „Eingabeschicht (Input Layer)“, „Hidden-Layer“ → „Verdeckte Schichten (Hidden Layers)“, „Output-Layer“ → „Ausgabeschicht (Output Layer)“",

@@ -1260,18 +1260,13 @@
 "titel": "Künstliche Intelligenz, Expertensysteme, Data Mining, RPA und Chat Bots"
 },
 {
-"id": "sec:Machine Learning, Deep Learning und Neuronale Netze",
-"nr": "5.9.1",
-"titel": "Machine Learning, Deep Learning und Neuronale Netze"
-},
-{
 "id": "sec:Data Mining, Text Mining, Web Mining und Predictive Analytics",
-"nr": "5.9.2",
+"nr": "5.9.1",
 "titel": "Data Mining, Text Mining, Web Mining und Predictive Analytics"
 },
 {
 "id": "sec:rpa",
-"nr": "5.9.3",
+"nr": "5.9.2",
 "titel": "Robotic Process Automation (RPA)"
 },
 {
@@ -1281,12 +1276,12 @@
 },
 {
 "id": "sec:ki_es_dm_rpa_cb/chatbots-conversational-ux",
-"nr": "5.9.4",
+"nr": "5.9.3",
 "titel": "Chatbots/Conversational UX"
 },
 {
 "id": "sec:ki_rpa_chatbots_planung_reporting",
-"nr": "5.9.5",
+"nr": "5.9.4",
 "titel": "Einsatz von KI, RPA und Chatbots in der Planung und im Reporting"
 },
 {
@@ -1321,7 +1316,7 @@
 },
 {
 "id": "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen",
-"nr": "5.9.6",
+"nr": "5.9.5",
 "titel": "Herausforderungen und Handlungsempfehlungen"
 },
 {
@@ -1338,6 +1333,11 @@
 "id": "sec:genai-allgemeine-spezifische-ki",
 "nr": "6.1.1",
 "titel": "Allgemeine und spezifische (schwache) Künstliche Intelligenz"
+},
+{
+"id": "sec:Machine Learning, Deep Learning und Neuronale Netze",
+"nr": "6.1.2",
+"titel": "Machine Learning, Deep Learning und Neuronale Netze"
 },
 {
 "id": "sec:genai-copilots",

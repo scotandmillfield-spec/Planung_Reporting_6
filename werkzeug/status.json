@@ -1799,9 +1799,20 @@
     "Werte des Originals in Tsd. € (Ist 2025/2026, Forecast 2027; Vorgabe = Durchschnitt der drei Jahre 151,7, verteilt wie Forecast – entspricht dem Original); Monatswerte wie Original, die abgeschnittenen Monate Nov/Dez aus der Budgetsumme ergänzt; Rennrad 200 und Skates wie im Original noch ohne Monatswerte",
     "Entfallen: Fenster, Menü-/Symbolleiste, Logo, grüne Navigationsleiste, Statusleiste mit Benutzer und Server, zugeklappter Abschnitt „Planungsvorgaben“, Zeilen „Absatzmenge“ (Platz) und Ebene „Outdoor“ (= Gesamt); zweites Skate-Produkt (im Original abgeschnitten) als „Inline 200S“ ergänzt, damit die Summen stimmen",
     "Ersetzt: Kunde „1001 - Hervis“ (reales Unternehmen) → „1001 – Sportfachhandel“, Rolle „GL Administrator“ entfällt; gelber Ampelpunkt → Zielerreichung in % (86,0 %); Umsatzziel 13.000.000 € (passte nicht zu den Zeilen) → Vorgabe Gesamt 151,7 Tsd. €; IST 2009/2010, FC 1 2011, BUD 2012 → Ist 2025/2026, Forecast 2027, Budget 2028",
-    "Caption ohne Produktnamen? z. B. „Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung (in Anlehnung an Hein 2011, S. 42)“"
+    "Caption ohne Produktnamen? z. B. „Verschiedene Eingabe- und Planungsfunktionen am Beispiel der Erlösplanung (in Anlehnung an Hein 2011, S. 42)“",
+    "Revision DS 10.11.2026: Zahlenbeispiel um Vertriebsgebiete und Kunden erweitert – Österreich (1001 Sportfachhandel, 1002 Sporthauskette, 1003 Onlinehandel), Deutschland (2001 Sportfachhandel, 2002 Fahrradfachhandel, 2003 Warenhauskette), Schweiz (3001 Sportfachhandel, 3002 Bergsportgeschäft); je Kunde eigene Ist-/Forecastwerte und eigener Stand des 1. Planungsdurchlaufs, umschaltbar in der Lernplattform. Druckfassung zeigt weiter Österreich/1001 (Werte des Originals)"
    ],
-   "alt": "Eingabemaske „Erlösplanung“ für das Budget 2028 in Tsd. €. Oben stehen die Auswahl (Vertriebsgebiet, Kunde, Variante), die Planungsfunktionen 1. Prognose (Durchschnitt der drei Vorjahre: 151,7), 2. vertikale Verteilung wie Forecast 2027 und 3. horizontale Verteilung nach dem Saisonverlauf sowie die 5. Ergebnisvorschau mit Umsatzziel 151,7, aktueller Planung 130,4 und Zielerreichung 86,0 %. Darunter die Produkthierarchie von Gesamt über Winter- und Sommersport bis zu acht Einzelprodukten mit Ist 2025, Ist 2026, Forecast 2027, Vorgabe und Budget 2028 sowie den manuell korrigierbaren Monatswerten (4.); drei Produkte sind noch nicht auf Monate geplant."
+   "alt": "Eingabemaske „Erlösplanung“ für das Budget 2028 in Tsd. €. Oben stehen die Auswahl (Vertriebsgebiet, Kunde, Variante), die Planungsfunktionen 1. Prognose (Durchschnitt der drei Vorjahre: 151,7), 2. vertikale Verteilung wie Forecast 2027 und 3. horizontale Verteilung nach dem Saisonverlauf sowie die 5. Ergebnisvorschau mit Umsatzziel 151,7, aktueller Planung 130,4 und Zielerreichung 86,0 %. Darunter die Produkthierarchie von Gesamt über Winter- und Sommersport bis zu acht Einzelprodukten mit Ist 2025, Ist 2026, Forecast 2027, Vorgabe und Budget 2028 sowie den manuell korrigierbaren Monatswerten (4.); drei Produkte sind noch nicht auf Monate geplant.",
+   "revisionen": [
+    {
+     "datum": "11.11.2026",
+     "wunsch": [
+      "10.11.2026 DS: Bitte Zahlenbeispiel um andere Vertriebsgebiete und Kunden erweitern. 1.Planungsdurchlauf kann bleiben."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "In der Maske lassen sich jetzt drei Vertriebsgebiete (Österreich, Deutschland, Schweiz) mit je zwei bis drei Kunden wählen, jeweils mit eigenen Ist- und Forecastwerten und eigenem Stand des 1. Planungsdurchlaufs. Das sieht man in der interaktiven Fassung; die Druckabbildung kann nur ein Planungsobjekt zeigen und bleibt bei Österreich, Kunde 1001. Falls die weiteren Gebiete und Kunden auch im gedruckten Bild sichtbar sein sollen, bitte kurz Bescheid geben."
+    }
+   ]
   },
   "3.180": {
    "status": "pruefung",
@@ -3060,14 +3071,23 @@
    "status": "pruefung",
    "datei": "Geo-Visualisierung",
    "kommentare": [
-    "Produktscreenshot softwareneutral als Einzelvisual nachgebaut (110 × 78,7 mm): Fensterrahmen, Bedienleiste „Map Design“, Werkzeugsymbole und Schaltflächen entfernt; Register „States/Sales Region“ → Schalter Vertriebsregion (Lernplattform)",
-    "US-Bundesstaaten → 16 Bundesländer als schematische Kachelkarte (eigene SVG-Kacheln, keine Kartenkacheln/Bibliotheken); Daten erfunden (Marktpotenzial, Quartalsumsätze, 12 Vertriebsbüros), englische Begriffe übersetzt",
-    "Flächenfärbung: zwölf Blautöne → fünf Graustufen-Klassen mit verdoppelnden Grenzen (200/400/800/1.600 Mio. €), Wert zusätzlich in der Kachel",
-    "Mini-Säulen „Change Q3 vs Q2 / Q4 vs Q3“ in Rot/Gelb/Grün-Klassen ohne Werte → Säulen nach Wirkung (Blaugrün/Rot) mit Zahl; Vertriebsbüros als Kreise (Anzahl je Land, Orte im Tooltip) statt orangefarbener Punkte",
-    "Neu: Kernaussage und Summenfeld Deutschland bzw. gewählte Region; Designregeln nennen die Grenzen von Karten (Flächenwirkung, Lage nur grob) und das sortierte Balkendiagramm als Alternative",
-    "Caption ohne Firmennamen? Daten, Karte und Gestaltung sind neu – z. B. „Geo-Visualisierung als Kachelkarte (eigene Darstellung)“ oder Quellenangabe als „in Anlehnung an“ beibehalten"
+    "Revision DS 10.11.2026: Kachelkarte durch eine echte Karte der Bundesländer ersetzt (Landesgrenzen aus Natural Earth, gemeinfrei); Flächenfärbung Marktpotenzial in fünf Graustufen, Vertriebsbüros als Kreise an ihrem Standort, Stadtstaaten und Saarland mit Hinweislinien beschriftet",
+    "Mini-Säulen aus den Kacheln wandern in eine Werteliste rechts neben der Karte: je Land Potenzial (Mio. €) und Umsatz zum Vorquartal Q3/Q4 als Abweichungsbalken nach Wirkung, nach Vertriebsregion gruppiert, Summenzeile Deutschland bzw. gewählte Region",
+    "Daten unverändert (erfunden): Marktpotenzial, Quartalsumsätze, 12 Vertriebsbüros; Schalter Vertriebsregion und Klick auf Land oder Zeile in der Lernplattform",
+    "Bildunterschrift nach Vorgabe: „Geo-Visualisierung (Eigene Abbildung)“ statt „In Anlehnung an SAP AG 2003“"
    ],
-   "alt": "Kachelkarte der 16 Bundesländer: Jedes Land ist eine gleich große Kachel in grober geografischer Lage, deren Grauton das Marktpotenzial 2027 in fünf Klassen zeigt (dunkel: Nordrhein-Westfalen 1.920 und Bayern 1.760 Mio. €); Kreise markieren Vertriebsbüros. In jeder Kachel zeigen zwei Mini-Säulen mit Zahlen die Umsatzveränderung zum Vorquartal für Q3 und Q4, Zuwächse blaugrün, Rückgänge rot. Kernaussage: NW, BY und BW bündeln 52 % des Potenzials; der Umsatz im vierten Quartal sinkt in sechs Ländern, am stärksten in Baden-Württemberg (−3,4 %)."
+   "alt": "Karte Deutschlands mit den 16 Bundesländern, deren Grauton das Marktpotenzial 2027 in fünf Klassen zeigt (am dunkelsten Nordrhein-Westfalen mit 1.920 und Bayern mit 1.760 Mio. €); weiße Kreise markieren zwölf Vertriebsbüros an ihren Standorten. Rechts daneben eine Liste der Länder nach Vertriebsregion mit Potenzial und Umsatzveränderung zum Vorquartal für Q3 und Q4 als Balken mit Zahlen, Zuwächse blaugrün, Rückgänge rot; Summe Deutschland 9.915 Mio. €, Q3 +1,6 %, Q4 ±0,0 %. Kernaussage: NW, BY und BW bündeln 52 % des Potenzials; der Umsatz im vierten Quartal sinkt in sechs Ländern, am stärksten in Baden-Württemberg (−3,4 %).",
+   "caption": "Geo-Visualisierung (Eigene Abbildung)",
+   "revisionen": [
+    {
+     "datum": "11.11.2026",
+     "wunsch": [
+      "10.11.2026 DS: Bitte eine echte Karte für die BRD einfügen und dort die Visualisierung einer Geo-Map zeigen. Als Beschreibung dann eigene Abbildung verwenden."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Kachelkarte ist durch eine echte Karte der Bundesländer ersetzt: Die Flächen zeigen das Marktpotenzial in fünf Graustufen, die Vertriebsbüros stehen an ihren Standorten, Stadtstaaten und Saarland sind mit Hinweislinien beschriftet. Die Umsatzveränderungen zum Vorquartal stehen jetzt als Liste mit Balken neben der Karte, weil Mini-Diagramme auf den kleinen Ländern nicht lesbar wären. Die Bildunterschrift lautet „Geo-Visualisierung (Eigene Abbildung)“."
+    }
+   ]
   },
   "3.67": {
    "status": "pruefung",

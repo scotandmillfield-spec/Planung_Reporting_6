@@ -1,18 +1,23 @@
 """Daten für Abb. 3.66 „Geo-Visualisierung“: Marktpotenzial und Umsatzentwicklung je Bundesland.
 
-Softwareneutraler Nachbau eines Kartenberichts (Original: US-Bundesstaaten, Flächenfärbung „Market Potential“,
-Mini-Säulen „Change Q3 vs Q2“ und „Change Q4 vs Q3“, Symbole für Vertriebsbüros, Register „States“ und „Sales
-Region“). Hier die 16 Bundesländer als Kachelkarte (Zeile, Spalte), vier Vertriebsregionen, Jahr 2027.
-Alle Werte erfunden: Marktpotenzial in Mio. € p. a., Umsatz je Quartal in Tsd. €, Vertriebsbüros mit Ort.
+Eigene Abbildung: Karte der 16 Bundesländer mit Flächenfärbung nach Marktpotenzial, Vertriebsbüros an ihrem
+Standort, vier Vertriebsregionen, Jahr 2027. Alle Werte erfunden: Marktpotenzial in Mio. € p. a., Umsatz je
+Quartal in Tsd. €, Vertriebsbüros mit Ort.
+
+Kartengrundlage: bundeslaender.topojson – Grenzen der Länder aus Natural Earth (Admin-1, 1:10 Mio., gemeinfrei),
+als TopoJSON aus dem npm-Paket datamaps 0.5.10 (MIT, dist/datamaps.deu.js). Das Skript projiziert die Grenzen
+(abstandstreue Zylinderprojektion mit Breitenkorrektur bei 51° N), vereinfacht sie je Kante (Douglas-Peucker, so dass
+gemeinsame Grenzen deckungsgleich bleiben) und legt SVG-Pfade in einem Koordinatensystem 1000 Einheiten breit ab.
 Ausgabe: geo.json und geo.csv.
 """
 import csv
 import json
+import math
 import os
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 REGIONEN = ["Nord", "Ost", "Süd", "West"]
-# Kürzel, Name, Region, Zeile, Spalte, Potenzial (Mio. €), Umsatz Q2 (Tsd. €), Δ Q3 (%), Δ Q4 (%), Vertriebsbüros
+# Kürzel, Name, Region, Zeile, Spalte (frühere Kachelkarte, nur noch Reihenfolge), Potenzial (Mio. €), Umsatz Q2 (Tsd. €), Δ Q3 (%), Δ Q4 (%), Vertriebsbüros
 LAENDER = [
     ("SH", "Schleswig-Holstein", "Nord", 0, 2, 330, 3420, 1.2, -0.8, []),
     ("HB", "Bremen", "Nord", 1, 1, 95, 1080, -1.5, -2.2, []),
@@ -37,14 +42,85 @@ for k, n, r, z, s, pot, q2, d3, d4, b in LAENDER:
     q4 = round(q3 * (1 + d4 / 100))
     zeilen.append([k, n, REGIONEN.index(r), z, s, pot, [q2, q3, q4], b])
 
-json.dump({"jahr": 2027, "regionen": REGIONEN, "klassen": [200, 400, 800, 1600], "laender": zeilen},
+
+# ---------------------------------------------------------------- Karte
+LAT0 = 51.0
+KX = math.cos(math.radians(LAT0))
+TOL = 0.9                     # Vereinfachung in Karteneinheiten (Karte 1000 breit, gedruckt ≈ 300 px)
+# Standorte der Vertriebsbüros (Länge, Breite)
+ORTE = {"Hamburg": (9.99, 53.55), "Düsseldorf": (6.78, 51.23), "Köln": (6.96, 50.94), "Dortmund": (7.47, 51.51),
+        "Hannover": (9.74, 52.37), "Berlin": (13.40, 52.52), "Frankfurt am Main": (8.68, 50.11),
+        "Leipzig": (12.37, 51.34), "Stuttgart": (9.18, 48.78), "Mannheim": (8.47, 49.49), "München": (11.58, 48.14),
+        "Nürnberg": (11.08, 49.45)}
+# Lage der Landeskürzel (Länge, Breite); bei Stadtstaaten außerhalb mit Hinweislinie zum Punkt „an“
+KUERZEL = {"SH": (9.55, 54.25), "HH": (10.95, 53.62, 10.08, 53.57), "HB": (7.95, 53.32, 8.72, 53.12),
+           "MV": (12.45, 53.78), "NW": (7.75, 51.95), "NI": (9.35, 52.75), "ST": (11.65, 52.05),
+           "BE": (14.35, 52.78, 13.55, 52.55), "BB": (13.35, 51.95), "RP": (7.35, 49.95), "HE": (9.05, 50.6),
+           "TH": (11.0, 50.85), "SN": (13.35, 51.0), "SL": (6.25, 49.15, 6.85, 49.38), "BW": (9.05, 48.45),
+           "BY": (11.55, 49.05)}
+
+
+def _dp(pts, tol):
+    if len(pts) < 3:
+        return pts
+    (x1, y1), (x2, y2) = pts[0], pts[-1]
+    dx, dy = x2 - x1, y2 - y1
+    n = math.hypot(dx, dy)
+    best, idx = -1.0, 0
+    for i in range(1, len(pts) - 1):
+        x, y = pts[i]
+        d = abs(dy * (x - x1) - dx * (y - y1)) / n if n else math.hypot(x - x1, y - y1)
+        if d > best:
+            best, idx = d, i
+    if best <= tol:
+        return [pts[0], pts[-1]]
+    return _dp(pts[:idx + 1], tol)[:-1] + _dp(pts[idx:], tol)
+
+
+def karte():
+    topo = json.load(open(os.path.join(HIER, "bundeslaender.topojson"), encoding="utf-8"))
+    (sx, sy), (tx, ty) = topo["transform"]["scale"], topo["transform"]["translate"]
+    arcs_ll = []
+    for a in topo["arcs"]:
+        x = y = 0
+        pts = []
+        for dx, dy in a:
+            x += dx
+            y += dy
+            pts.append((x * sx + tx, y * sy + ty))
+        arcs_ll.append(pts)
+    lon_min = min(p[0] for a in arcs_ll for p in a)
+    lon_max = max(p[0] for a in arcs_ll for p in a)
+    lat_min = min(p[1] for a in arcs_ll for p in a)
+    lat_max = max(p[1] for a in arcs_ll for p in a)
+    k = 1000 / ((lon_max - lon_min) * KX)
+    proj = lambda lon, lat: (round((lon - lon_min) * KX * k, 1), round((lat_max - lat) * k, 1))
+    arcs = [_dp([proj(*p) for p in a], TOL) for a in arcs_ll]
+
+    def ring(idx):
+        pts = []
+        for i in idx:
+            a = arcs[i] if i >= 0 else arcs[~i][::-1]
+            pts += a if not pts else a[1:]
+        return "M" + "L".join(f"{x:g},{y:g}" for x, y in pts) + "Z"
+
+    namen = {n: kz for kz, n, *_ in LAENDER}
+    pfade = {}
+    for g in topo["objects"]["deu"]["geometries"]:
+        polys = [g["arcs"]] if g["type"] == "Polygon" else g["arcs"]
+        pfade[namen[g["properties"]["name"]]] = "".join(ring(r) for p in polys for r in p)
+    lab = {kz: [*proj(*v[:2])] + ([*proj(*v[2:])] if len(v) > 2 else []) for kz, v in KUERZEL.items()}
+    orte = {o: [*proj(*ll)] for o, ll in ORTE.items()}
+    return {"breite": 1000, "hoehe": round((lat_max - lat_min) * k, 1), "pfade": pfade, "kuerzel": lab, "orte": orte}
+
+json.dump({"jahr": 2027, "regionen": REGIONEN, "klassen": [200, 400, 800, 1600], "laender": zeilen, "karte": karte()},
           open(os.path.join(HIER, "geo.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 with open(os.path.join(HIER, "geo.csv"), "w", newline="", encoding="utf-8-sig") as fh:
     w = csv.writer(fh, delimiter=";", lineterminator="\r\n")
     w.writerow(["Kuerzel", "Bundesland", "Region", "Marktpotenzial_Mio_EUR", "Umsatz_Q2_Tsd_EUR", "Umsatz_Q3_Tsd_EUR",
-                "Umsatz_Q4_Tsd_EUR", "Vertriebsbueros", "Kachel_Zeile", "Kachel_Spalte"])
+                "Umsatz_Q4_Tsd_EUR", "Vertriebsbueros"])
     for k, n, r, z, s, pot, (q2, q3, q4), b in zeilen:
-        w.writerow([k, n, REGIONEN[r], pot, q2, q3, q4, ", ".join(b), z + 1, s + 1])
+        w.writerow([k, n, REGIONEN[r], pot, q2, q3, q4, ", ".join(b)])
 pot = sum(x[5] for x in zeilen)
 u = [sum(x[6][i] for x in zeilen) for i in range(3)]
 print("Potenzial gesamt", pot, "Mio. € | Umsatz Q2/Q3/Q4", u, "Tsd. € | ΔQ3 %+.1f %% ΔQ4 %+.1f %%" % ((u[1] / u[0] - 1) * 100, (u[2] / u[1] - 1) * 100))

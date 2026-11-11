@@ -477,6 +477,24 @@
    "kommentar": "Die Grafik verwendet jetzt Ampelfarben statt Graustufen: Kennzahlen-Ampel in Grün, Gelb und Rot, ABC-Klassen in Tabelle und Karte grün, gelb und rot, Heatmap als Farbskala von Rot über Gelb nach Grün. Die Formen (Kreis, Dreieck, Quadrat) bleiben zusätzlich erhalten.",
    "auftrag": "fd50d2512b21",
    "zeit": "2026-11-07T11:04"
+  },
+  {
+   "id": "2026-11-11-abb-3-66-1",
+   "schluessel": "abb-3-66",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Kachelkarte ist durch eine echte Karte der Bundesländer ersetzt: Die Flächen zeigen das Marktpotenzial in fünf Graustufen, die Vertriebsbüros stehen an ihren Standorten, Stadtstaaten und Saarland sind mit Hinweislinien beschriftet. Die Umsatzveränderungen zum Vorquartal stehen jetzt als Liste mit Balken neben der Karte, weil Mini-Diagramme auf den kleinen Ländern nicht lesbar wären. Die Bildunterschrift lautet „Geo-Visualisierung (Eigene Abbildung)“.",
+   "auftrag": "d21ff6e210a8",
+   "zeit": "2026-11-11T11:05"
+  },
+  {
+   "id": "2026-11-11-abb-3-179-1",
+   "schluessel": "abb-3-179",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "In der Maske lassen sich jetzt drei Vertriebsgebiete (Österreich, Deutschland, Schweiz) mit je zwei bis drei Kunden wählen, jeweils mit eigenen Ist- und Forecastwerten und eigenem Stand des 1. Planungsdurchlaufs. Das sieht man in der interaktiven Fassung; die Druckabbildung kann nur ein Planungsobjekt zeigen und bleibt bei Österreich, Kunde 1001. Falls die weiteren Gebiete und Kunden auch im gedruckten Bild sichtbar sein sollen, bitte kurz Bescheid geben.",
+   "auftrag": "32a05be9c953",
+   "zeit": "2026-11-11T11:05"
   }
  ],
  "neue_zeilen": [

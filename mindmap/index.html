@@ -75,6 +75,8 @@ main{position:relative;flex:1 1 auto;min-height:0;display:flex}
 .k .anzahl{fill:var(--muted);font-size:11.5px;font-weight:normal}
 .k.vorschlag text{font-style:italic;fill:#3F4449}
 .k.gestrichen text.titel{text-decoration:line-through;fill:#8A8F94}
+.k .schere{fill:var(--rot);font-weight:normal}
+.k .schere.teil{fill:#B7791F}
 .k.gedimmt{opacity:.22}
 .k.kontext{opacity:.55}
 .k.treffer-s .ring{stroke:var(--rot);stroke-width:2.5;fill:none}
@@ -340,6 +342,13 @@ function beschriftung(n){
   return {nr: n.nr ? n.nr+' ' : (n.typ==='Vorschlag' ? '＋ ' : (n.typ==='Stichpunkt'||n.typ==='Absatz' ? '· ' : '')), titel: kurz(n.titel, max)};
 }
 
+// Streichkandidat: eigene Empfehlung „streichen“/„teilweise streichen“, aber noch nicht als gestrichen entschieden
+function kandidat(n){
+  if(!n || n===wurzel || n.typ==='Entfallen' || (n.w_ent && n.w_ent.wert==='streichen')) return null;
+  return n.empfehlung==='streichen' ? 'ganz' : (n.empfehlung==='teilweise streichen' ? 'teil' : null);
+}
+const SCHERE = 17;
+
 /* ---------- Filter / Suche ---------- */
 function passtFilter(n){
   if(n===wurzel) return true;
@@ -401,6 +410,7 @@ function layout(){
       const ks = kinderSichtbar(n);
       if(n.kinder.filter(sichtbar).length) b += SCHALTER;
       if(n.tiefe===1) b += 22;
+      if(kandidat(n)) b += SCHERE;
       n._b = b;
       spalte[n.tiefe] = Math.max(spalte[n.tiefe]||0, b);
       ks.forEach(mess);
@@ -506,13 +516,12 @@ function render(anim, ankerId){
       el('circle', {class:'punkt', cx, cy:0, r, fill: n.typ==='Vorschlag' ? '#fff' : (eigen ? f : '#fff'), stroke:f, 'stroke-dasharray': n.typ==='Vorschlag' ? '2.5 2' : 'none'}, g);
       const tx = n.tiefe===1 ? s*24 : s*10;
       const t = el('text', {class:'titel', x:tx, y:4.5, 'text-anchor': s>0 ? 'start':'end'}, g);
-      if(s>0){
-        if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
-        const b = el('tspan', {}, t); b.textContent = bz.titel;
-      } else {
-        if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
-        const b = el('tspan', {}, t); b.textContent = bz.titel;
-      }
+      // Schere für Streichkandidaten jeweils am äußeren Ende der Beschriftung
+      const ka = kandidat(n), schere = () => { const c = el('tspan', {class:'schere' + (ka==='teil'?' teil':'')}, t); c.textContent = s>0 ? '\u2002✂' : '✂\u2002'; };
+      if(ka && s<0) schere();
+      if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
+      const b = el('tspan', {}, t); b.textContent = bz.titel;
+      if(ka && s>0) schere();
       const tt = el('title', {}, g); tt.textContent = (n.nr?n.nr+' ':'') + n.titel + '\n' + (BEW[n.w_bew.wert]||{}).text + (n.w_emp ? ' · '+n.w_emp.wert : '') + (n.befund ? '\n'+n.befund : '');
       // Mini-Verteilung bei eingeklappten Knoten mit Unterabschnitten
       if(zu && n.im_manuskript){
@@ -918,6 +927,11 @@ function bilanz(){
     if(v<0.5) continue; l += `<span><i style="background:${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>≈ ${fmt(v)} S.</b></span>`; }
   const gestr = [...K.values()].filter(n=>n.typ==='Entfallen' && n.w_ent && n.w_ent.wert==='streichen').reduce((a,n)=>a+((n.kennzahlen&&n.kennzahlen.seiten)||0),0);
   if(gestr) l += `<span><i style="background:#fff;border:1.5px solid #8A8F94"></i>gestrichen <b>≈ ${fmt(gestr)} S.</b></span>`;
+  const kand = [...K.values()].filter(n=>kandidat(n));
+  const hatKandVorfahr = n => { for(let p=K.get(n.parent); p && p!==wurzel; p=K.get(p.parent)) if(kandidat(p)) return true; return false; };
+  const ganz = kand.filter(n=>kandidat(n)==='ganz'), teil = kand.length - ganz.length;
+  const kandS = ganz.filter(n=>!hatKandVorfahr(n)).reduce((a,n)=>a+((n.kennzahlen&&n.kennzahlen.seiten)||0),0);
+  if(kand.length) l += `<span title="Empfehlung „streichen“ (ganz) bzw. „teilweise streichen“, Entscheidung noch offen"><b style="color:var(--rot)">✂</b> Streichkandidaten <b>${ganz.length}</b> ≈ ${fmt(kandS)} S.${teil?` · teilweise <b>${teil}</b>`:''}</span>`;
   l += `<span>entschieden <b>${ents}</b></span>`;
   $('#balken').innerHTML = h; $('#balken-legende').innerHTML = l;
   $('#balken').querySelectorAll('button').forEach(b => b.onclick = () => { const k = b.dataset.bew; zustand.fBew.has(k) ? zustand.fBew.delete(k) : zustand.fBew.add(k); nachFilterAufklappen(); bilanz(); render(); });
@@ -929,6 +943,8 @@ function legende(){
   for(const kk of REIHE){ const b = BEW[kk]; if(!b) continue; h += `<li>${p(kk==='vorschlag'?'#fff':b.farbe, b.farbe, kk==='vorschlag')}<span><b>${esc(b.text)}</b> – ${esc(b.erklaerung||'')}</span></li>`; }
   h += `</ul><h4>Darstellung</h4><ul><li>${p('#fff','#B7791F')}<span>Ring: Bewertung vom Elternabschnitt übernommen</span></li>
   <li><svg width="18" height="18"><text x="1" y="13" font-size="12" text-decoration="line-through" fill="#8A8F94">Ab</text></svg><span>durchgestrichen: Verlag hat „streichen“ entschieden</span></li>
+  <li><svg width="18" height="18"><text x="2" y="14" font-size="14" fill="#C62828">✂</text></svg><span>Streichkandidat: Empfehlung „streichen“, noch nicht entschieden</span></li>
+  <li><svg width="18" height="18"><text x="2" y="14" font-size="14" fill="#B7791F">✂</text></svg><span>Empfehlung „teilweise streichen“</span></li>
   <li><svg width="34" height="10"><rect x="2" y="3" width="10" height="3" fill="#00806B"/><rect x="12" y="3" width="8" height="3" fill="#B7791F"/><rect x="20" y="3" width="10" height="3" fill="#C62828"/></svg><span>Balken: Verteilung im eingeklappten Teilbaum (nach Seiten)</span></li></ul>
   <h4>Kanten</h4><ul><li>${k('ersetzt','ersetzt')}<span>wird ersetzt durch</span></li><li>${k('erweitert','erweitert')}<span>wird erweitert durch</span></li>
   <li>${k('zusammenlegen','zusammenlegen')}<span>zusammenlegen mit</span></li><li>${k('verwandt')}<span>inhaltlich verwandt</span></li><li>${k('verweis','verweis')}<span>Querverweis im Text (nur für den gewählten Knoten)</span></li></ul>

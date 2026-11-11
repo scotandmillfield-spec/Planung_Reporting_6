@@ -58,6 +58,7 @@
    "stark kürzen",
    "zusammenlegen",
    "ersetzen",
+   "teilweise streichen",
    "streichen",
    "neu strukturieren",
    "neu schreiben",
@@ -292,9 +293,14 @@
   },
   "sec:fa-diagramme/tachos-und-thermometer": {
    "bewertung": "veraltet",
-   "empfehlung": "kürzen",
-   "befund": "Tachos und Thermometer gelten heute als platzintensiv bei geringer Informationsdichte. Nur noch als Negativbeispiel mit Verweis auf Bullet-Charts.",
-   "begruendung": "Widerspricht dem SUCCESS-Prinzip „Condense“; die Dashboard-Neugestaltung der 6. Auflage verzichtet darauf."
+   "empfehlung": "teilweise streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Auf einen Satz als Negativbeispiel kürzen (geringe Informationsdichte, Verweis auf Bullet-Charts); Abbildung entfällt.",
+   "begruendung": "Widerspricht dem SUCCESS-Prinzip „Condense“; die Dashboard-Neugestaltung der 6. Auflage verzichtet darauf.",
+   "meta": {
+    "streichkandidat": "teilweise",
+    "abbildungen": "Abb. 3.65",
+    "umfang": "≈ 1,5 von 1,9 S."
+   }
   },
   "sec:fa-diagramme/geo-visualisierung": {
    "bewertung": "aktuell",
@@ -351,10 +357,15 @@
    }
   },
   "sec:fa-diagramme/weitere-visualisierungshilfen-und-animationen": {
-   "bewertung": "veraltet",
-   "empfehlung": "ersetzen",
-   "befund": "Animationen, Flash, QlikView-Vorher/Nachher und 3D-Beispiele sind überholt. Durch Interaktivität heutiger Werkzeuge (Filterinteraktion, Tooltips, Drill) ersetzen.",
-   "begruendung": "Flash ist seit Ende 2020 abgekündigt (PRUEFEN-Hinweis im LaTeX)."
+   "bewertung": "teilweise",
+   "empfehlung": "teilweise streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). QlikView- und HEARTBEAT-Vorher/Nachher-Beispiele sowie „Fotos und Logos“ (Cubeware) streichen (Abb. 3.74–3.78); Kombination Kreis-/Säulendiagramm und Warnung vor 3D-Effekten (Abb. 3.72, 3.73) behalten.",
+   "begruendung": "Flash ist seit Ende 2020 abgekündigt (PRUEFEN-Hinweis im LaTeX).",
+   "meta": {
+    "streichkandidat": "teilweise",
+    "abbildungen": "Abb. 3.74–3.78 entfallen, 3.72/3.73 bleiben",
+    "umfang": "≈ 4 von 7 S."
+   }
   },
   "sec:fa-kommentierungen": {
    "bewertung": "teilweise",
@@ -483,8 +494,12 @@
   },
   "sec:op-it-gestuetzte-systeme": {
    "bewertung": "veraltet",
-   "empfehlung": "ersetzen",
-   "befund": "Befund (Erhebung 2011, Schwelle 100 Beschäftigte) ist überholt: Self-Service-Werkzeuge wie Power BI haben die Einstiegshürde für KMU deutlich gesenkt."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Befund aus einer Erhebung von 2011 (Schwelle 100 Beschäftigte) ist durch Self-Service-BI überholt; ersatzlos streichbar.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "umfang": "≈ 1,0 S."
+   }
   },
   "sec:op-kapitalabhaengigkeit": {
    "bewertung": "teilweise",
@@ -503,8 +518,12 @@
   },
   "sec:op-fuehrungsstil": {
    "bewertung": "veraltet",
-   "empfehlung": "kürzen",
-   "befund": "Gestützt auf die MIND-Studien von 2004, die seit 2007 nicht fortgeführt werden. Als historischen Befund kennzeichnen oder durch neuere Typologie ersetzen."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Stützt sich auf die MIND-Studien von 2004, die nicht fortgeführt wurden. Der Kerngedanke (inhaber- vs. managementgeführt) steht bereits in 4.1.1; ersatzlos streichbar.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "umfang": "≈ 1,8 S."
+   }
   },
   "sec:op-beteiligte": {
    "bewertung": "teilweise",
@@ -769,8 +788,13 @@
   },
   "sec:Freie_Datenrecherchen_und_Abfragengeneratoren": {
    "bewertung": "veraltet",
-   "empfehlung": "kürzen",
-   "befund": "Freie Datenrecherche mit SQL/MS-Access-Abfragegenerator (Belege 2006–2010). Heute: natürlichsprachliche Abfragen über KI-Assistenten."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Freie Datenrecherche per SQL und MS-Access-Abfragegenerator (Belege 2006–2010) ist durch Self-Service-BI und natürlichsprachliche Abfragen überholt; ersatzlos streichbar.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "abbildungen": "Abb. 5.39, 5.40",
+    "umfang": "≈ 2,4 S."
+   }
   },
   "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen": {
    "bewertung": "veraltet",
@@ -824,8 +848,13 @@
   },
   "Weitere_Nutzungsmöglichkeiten_für_Managementaufgaben_(Konsolidierung_Balanced Scorecard_Risikomanagement)": {
    "bewertung": "veraltet",
-   "empfehlung": "zusammenlegen",
-   "befund": "Konsolidierung, BSC und Risikomanagement mit Beispiel SAP SEM (2003). Inhalt mit 3.12.1 bzw. 3.1.1 zusammenführen, Beispiel streichen."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Konsolidierung, BSC und Risikomanagement mit Beispiel SAP SEM (2003). Die Inhalte stehen aktueller in 3.1.1 (Chance and Risk Card), 3.9.1 (Kennzahlenbaum), 3.12.1 (BSC) und 3.9.8; ersatzlos streichbar.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "abbildungen": "Abb. 5.50, 5.51",
+    "umfang": "≈ 3,2 S."
+   }
   },
   "sec:Mobile Computing": {
    "bewertung": "veraltet",
@@ -1139,7 +1168,11 @@
   "cha:zusammenfassung-ausblick/it-unterstutzung/mobile-systeme": {
    "bewertung": "veraltet",
    "empfehlung": "streichen",
-   "befund": "Mobile BI ist Normalfall und kein eigener Trend mehr."
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Folge der Streichung von 5.7.9: Mobile BI ist kein Zukunftstrend mehr; Stichpunkt ersatzlos streichen.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "umfang": "≈ 0,6 S."
+   }
   },
   "cha:zusammenfassung-ausblick/it-unterstutzung/cloud-computing-versus-on-premise": {
    "bewertung": "teilweise",
@@ -1165,6 +1198,16 @@
    "bewertung": "veraltet",
    "empfehlung": "ersetzen",
    "befund": "Aussage „Durchsetzung nicht absehbar“ überholt: Python, R und Open-Source-Datenformate sind Standard."
+  },
+  "sec:OLAP-basierte_Analysesysteme_und_ihre_Oberflächen/proprietare-reportgeneratoren-mit-herstellereigener-grafisch": {
+   "bewertung": "veraltet",
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag 11.11.2026, noch nicht entschieden). Proprietäre Reportgeneratoren mit herstellereigener Oberfläche (arcplan, Diamant/3 IQ, Stand 2011) gibt es als eigene Klasse nicht mehr. Absatz ersatzlos streichen; Web- und Excel-Frontends in 5.7.2 bleiben.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "abbildungen": "Abb. 5.41–5.44",
+    "umfang": "≈ 4,5 S."
+   }
   }
  },
  "vorschlaege": [

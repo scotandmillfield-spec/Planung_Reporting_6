@@ -925,7 +925,11 @@ function bilanz(){
   const ents = [...K.values()].filter(n=>n!==wurzel && n.entscheidung && n.entscheidung!=='offen').length;
   for(const k of REIHE){ const v = w[k]||0; if(k==='vorschlag'){ if(anzV) l += `<span><i style="background:#fff;border:1.5px dashed ${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>${anzV}</b></span>`; continue; }
     if(v<0.5) continue; l += `<span><i style="background:${(BEW[k]||{}).farbe}"></i>${esc((BEW[k]||{}).text)} <b>≈ ${fmt(v)} S.</b></span>`; }
-  const gestr = [...K.values()].filter(n=>n.typ==='Entfallen' && n.w_ent && n.w_ent.wert==='streichen').reduce((a,n)=>a+((n.kennzahlen&&n.kennzahlen.seiten)||0),0);
+  // jede ausgelagerte Datei einmal zählen: Unterabschnitte, die in derselben Datei wie ihr gestrichener
+  // Elternabschnitt liegen, stecken schon in dessen Seitenzahl
+  const datei = n => (n.meta && n.meta.datei) || n.id;
+  const mitgezaehlt = n => { for(let p=K.get(n.parent); p && p.typ==='Entfallen'; p=K.get(p.parent)) if(datei(p)===datei(n)) return true; return false; };
+  const gestr = [...K.values()].filter(n=>n.typ==='Entfallen' && n.w_ent && n.w_ent.wert==='streichen' && !mitgezaehlt(n)).reduce((a,n)=>a+((n.kennzahlen&&n.kennzahlen.seiten)||0),0);
   if(gestr) l += `<span><i style="background:#fff;border:1.5px solid #8A8F94"></i>gestrichen <b>≈ ${fmt(gestr)} S.</b></span>`;
   const kand = [...K.values()].filter(n=>kandidat(n));
   const hatKandVorfahr = n => { for(let p=K.get(n.parent); p && p!==wurzel; p=K.get(p.parent)) if(kandidat(p)) return true; return false; };

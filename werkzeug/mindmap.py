@@ -362,8 +362,14 @@ def main():
             n['reihenfolge'] = reih[n['id']]
     knoten.sort(key=lambda n: (n['ebene'], n['reihenfolge']))
 
-    # Bewertungen ohne Knoten im Manuskript behalten (z. B. gestrichene Abschnitte)
-    for vid in verwaist:
+    # Bewertungen ohne Knoten im Manuskript behalten (z. B. gestrichene Abschnitte). Eltern vor Kindern
+    # anlegen, damit ein gestrichener Unterabschnitt unter seinem ebenfalls gestrichenen Abschnitt hängt.
+    offen_v, reihenfolge_v = list(verwaist), []
+    while offen_v:
+        frei = [v for v in offen_v if bewertet[v].get('parent_alt') not in offen_v] or offen_v[:1]
+        reihenfolge_v += frei
+        offen_v = [v for v in offen_v if v not in frei]
+    for vid in reihenfolge_v:
         b = bewertet[vid]
         eltern = b.get('parent_alt') or (vid.rsplit('/', 1)[0] if '/' in vid else 'buch')
         if eltern not in nach_id:
@@ -378,6 +384,8 @@ def main():
             if f in b:
                 n[f] = b[f]
         knoten.append(n)
+        nach_id[vid] = n
+        reih[vid] = reihe
         if b.get('entscheidung') not in ('streichen',):
             bericht.append(f'- Bewertung ohne Abschnitt im Manuskript: `{vid}` (als „nicht mehr im Manuskript“ geführt)')
 

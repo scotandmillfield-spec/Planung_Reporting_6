@@ -889,9 +889,10 @@
    "alt": "Dashboard mit den Ergebnissen der Bandbreitenplanung der Business Unit Antriebe für Januar bis Juni 2027. Links steht die stufenweise Erfolgsrechnung in Worst Case, Plan und Best Case mit Abweichungsbalken; der DB Business Unit liegt zwischen 9,6 und 27,1 Mio. € bei einem Plan von 20,0 Mio. €. Rechts zeigen zwei Liniendiagramme den DB Business Unit je Monat und kumuliert mit Ist bis Juni, der Fläche zwischen Worst und Best Case und dem Band einer Monte-Carlo-Simulation, nach der der Jahresplan von 39,6 Mio. € nur in 32 % der Läufe erreicht wird."
   },
   "5.72": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Standardbericht_SAP_ERP_CC_Selektionsmaske",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
     "Produktscreenshot (Selektionsbild) softwareneutral als Maske 727 px = 110 × 79 mm nachgebaut (HTML, PNG, PDF, PPTX); Menü- und Symbolleiste mit Befehlsfeld, Info- und Ausführen-Symbol entfallen; Fenstertitel als Titel, „: Selektieren“ → Untertitel „Selektion“",
     "Felder, Reihenfolge und Vorbelegung wie im Original (Kostenrechnungskreis 1000, Perioden 1 bis 12, Planversion 0, Kostenstelle 1000, Gruppen leer); ergänzt: Texte aus den Stammdaten (Inland, Januar/Dezember 2026, Plan/Ist-Version, Zentrale Dienste, alle Kostenarten); gelber Pfeilknopf → Link „Mehrfachauswahl“, Ausführen und „Datenquelle …“ als Knöpfe",
     "Gehört zu Abb. 5.73: die Vorbelegung ist der Startzustand des Detailberichts, Stammdaten gleichlautend; Geschäftsjahr 2008 → 2026",
@@ -901,9 +902,10 @@
    "alt": "Selektionsmaske des Berichts Kostenstellen: Ist/Soll/Abweichung mit zwei Abschnitten. Unter „Auswahl Werte“ sind Kostenrechnungskreis 1000 (Inland), Geschäftsjahr 2026, Perioden 1 bis 12 und Planversion 0 (Plan/Ist-Version) eingetragen, das Kennzeichen Istbewertung ist leer. Unter „Auswahl Gruppen“ ist statt einer Kostenstellengruppe die Kostenstelle 1000 Zentrale Dienste gewählt, die Kostenarten sind nicht eingeschränkt; darunter stehen die Knöpfe Ausführen und Datenquelle."
   },
   "5.73": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Standardbericht_SAP_ERP_CC_Detailbild",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
     "Produktscreenshot (Listenausgabe) softwareneutral als Einzelvisual 727 × 726 px = 110 × 110 mm nachgebaut (HTML, PNG); Menü- und Symbolleisten, Statuszeile, Taskleiste, Bildlauf, blaue und gelbe Flächen sowie Seiten- und Spaltenzähler („Seiten 2/4“, „Spalte 1/6“) entfallen",
     "Werte des Originals auf den Cent übernommen (Belastung 627.269,28 / 2.127.402,27 €, Entlastung −1.405.829,60 €, Über-/Unterdeckung −778.560,32 / 721.572,67 €, −207,9 %); Liste in ganzen Euro, Cent im Tooltip; nachgestelltes Minus („200,20-“) → echtes Minus, Abweichung als Balken nach Wirkung (unter Soll = günstig)",
     "Ergänzt: Die Belastung enthielt Kostenarten der nicht gezeigten Seite 1 – die Differenz steht als „430000 Gehälter“ (Ist 198.381,38 €, Soll 238.489,86 €), damit die Summen aus den Zeilen folgen (bitte prüfen); Zeilen ohne Werte (431900, 440100) entfallen",
@@ -913,9 +915,10 @@
    "alt": "Bericht Kostenstellen: Ist/Soll/Abweichung für die Kostenstelle 1000 Zentrale Dienste, Perioden 1 bis 12/2026. Eine Liste zeigt je Kostenart Ist- und Sollkosten sowie die Abweichung als Zahl mit Balken und in Prozent; darunter folgen die Summen Belastung, Entlastung und Über-/Unterdeckung. Die Istkosten liegen mit 627.269 € um 1.500.133 € unter dem Soll, vor allem wegen der kalkulatorischen Zinsen und Abschreibungen."
   },
   "5.74": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Planungsformular_SAP_ERP_CC",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
     "Produktscreenshot (Planungsübersicht) softwareneutral als Maske 727 px = 110 × 91 mm nachgebaut (HTML, PNG, PDF, PPTX); Menü- und Symbolleisten, Spaltenauswahl- und Bildlaufsymbole entfallen; „Einzelposten“ und „Werte ändern“ als Knöpfe, Sichern als Hauptaktion",
     "Werte und Verteilungsschlüssel des Originals übernommen (Plankosten fix 470000–476900, Summe 122.809,68 €; VS 0 bei 471000 und 476500); Spalten gruppiert unter „Plankosten in €“ und „Planverbrauch“ je fix/variabel; Bezeichnung der Kostenarten ergänzt; Kopfdaten grau als Anzeige",
     "„*Kostenart“ → „Summe“, Planverbrauch nicht summiert (verschiedene Einheiten); leere Spalten E (Einheit), M und L entfallen – bitte prüfen; von den freien Zeilen bleiben zwei (Kostenart eingeben → Bezeichnung aus den Stammdaten)",
@@ -925,9 +928,10 @@
    "alt": "Planungsformular „Planung Kostenarten/Leistungsaufnahmen ändern“ für die Kostenstelle 1000 Zentrale Dienste, Version 0, Perioden 1 bis 12 des Geschäftsjahres 2026. Ein Raster zeigt je Kostenart Plankosten fix und variabel sowie Planverbrauch fix und variabel mit Verteilungsschlüssel; geplant sind nur fixe Kosten, zusammen 122.809,68 €. Zwei leere Zeilen für weitere Kostenarten und die Knöpfe Sichern, Einzelposten und Werte ändern schließen das Formular ab."
   },
   "5.75": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Planung_eines_Projektfertigers_mit_MS_Excel",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
     "Tabellenblatt softwareneutral als Planungsmaske im Querformat (1024 px) nachgebaut; Fenster, Menü-/Bearbeitungsleiste, Zeilen-/Spaltenköpfe, Taskleiste entfernt",
     "Alle Zeilen, Spalten und Werte übernommen und nachgerechnet (Rechenlogik vollständig nachgebildet, interaktiv); Anzeige in Tsd. € mit 1 Nachkommastelle statt €, sonst passen 14 Spalten nicht",
     "„NL Erfurt“ → Niederlassung Mitte, Projekt „Uni Klinik Halle“ → „OP-Trakt“ (reale Einrichtung); Jahre +24 (GJ 2027/28); Projektbeginn/-ende Mrz 1999/Sep 2000 lagen vor dem Ist-Stichtag → 03/2027 bzw. 09/2028",
@@ -953,9 +957,10 @@
    "alt": "Kreuztabelle „Kostenarten nach Kostenstellen“ in Euro mit elf Kostenarten in den Zeilen und sieben Kostenstellen in den Spalten, dazu eine Gesamtspalte mit Balken und eine Summenzeile. Die Gesamtkosten betragen 106.104 €; Kostenstelle 3455 trägt mit 31.181 € rund 29 %, größte Kostenart ist Personalnebenkosten-Lohn mit 22.560 €."
   },
   "5.77": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Star-Schema_fuer_den_Einkauf_mit_Microsoft_Visual_Studio",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
     "Produktscreenshot der Würfel-Entwurfsansicht als Diagramm im Stil von Abb. 5.19 (Tabellenkarten, PK/FK, Kardinalität n:1); Fakten box_hi, kein Rot",
     "Anordnung wie im Original (Lieferant oben, Datum links, Einkäufer rechts, Region/Artikel unten); Pfeile Fakten → Dimension → Linien mit Kardinalität",
     "Präfixe TC_/TD_ entfernt, englische Feldnamen übersetzt (City → Ort, vendor posting group → Buchungsgruppe, country_name/code → Ländername/-code, Inventory posting group → Lagerbuchungsgruppe); Schlüssel zuerst",
@@ -969,6 +974,7 @@
    "status": "pruefung",
    "datei": "Hyperion_Planning_Mehrdimensionale_Planungsformulare",
    "kommentare": [
+    "11.11.2026: Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
     "Produktscreenshot softwareneutral als Planungsformular „Zielvorgaben“ neu gebaut (Querformat 1024 px = 155 × 100 mm, im LaTeX gedreht); Browserfenster, Produktname, Navigations- und Statusleisten entfallen; die Dialoge „Anweisungen“ und „Geschäftsregeln starten“ stehen als feste Bereiche unter dem Raster statt als überlappende Fenster",
     "Werte des Originals: Ist 4.018/4.521, Vorgabe 10.000 (→ 4.705/5.295), Bottom-up Jan–Jul je Produktgruppe; Aug–Dez ergänzt (alle 12 Monate sichtbar, Original nach August abgeschnitten); Summen gerechnet – das Original zeigte gerundete Linienwerte (Feb 940 statt 443 + 498 = 941)",
     "Klartext: IST/REALCASE, TOPDOWN, BESTCASE, YearTotal, FY01/FY02 → Ist 2027, Top-down, Bottom-up, Jahr; Point-of-View/Page → Sicht/Seite; Produktlinie 1, Produktgruppe 1.1 … → Fahrräder, Cityräder …; Grosskunde → Großkunde; Gruppe Cityräder bis zu den Produkten aufgeklappt, damit Eingabezeilen sichtbar sind",
@@ -981,6 +987,7 @@
    "status": "pruefung",
    "datei": "Hyperion_Planning_Individuelle_Planungsmodelle_Business_Rules",
    "kommentare": [
+    "11.11.2026: Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
     "Produktscreenshot (Grafik „Verknüpfungen im Umsatzmodell“ in einem Browserfenster über dem Formular „Umsatzplanung“) als Diagramm im Querformat 155 × 96 mm; Bildtitel, Fenster und das Anweisungsfenster mit dem Link entfallen – die Aussage der Sprechblase (Links in den Anweisungen) gehört in den Text",
     "Farblegende (blau gestrichelt, grün, orange, rot) durch Spaltenbänder Eingabe | Berechnung | GuV | Bilanz | Cash-Flow ersetzt; Eingaben weiß gestrichelt wie im Original, berechnete Größen weiß, Nettoumsatz als Ausgangsgröße des Modells rot; Zeilenfolge des Originals beibehalten",
     "Verbindungen fachlich bereinigt – bitte prüfen: Fertigungsmaterial aus Zugang Produktion × Standardmaterialkosten, Fertigungslöhne aus Zugang Produktion × Standardfertigungskosten (Original: nur eine Linie STD MK STK → Fertigungslöhne); Frachtkosten → Deckungsbeitrag und Nettoumsatz → Zugang Verbindlichkeiten Finanzamt ergänzt (im Original nur gekreuzt)",
@@ -990,9 +997,10 @@
    "alt": "Verknüpfungsdiagramm des Umsatzmodells in fünf Spalten: Eingaben (Inkassorate, Absatz, Listenpreis, Rabatt, USt-Satz, Frachtkostensatz, Standardmaterial- und Standardfertigungskosten je Stück), berechnete Größen (Verkaufspreis, Zugang Produktion), GuV-Positionen, Bilanzpositionen und Zahlungen. Pfeile zeigen den Rechenweg vom hervorgehobenen Nettoumsatz über Frachtkosten und Wareneinsatz zum Deckungsbeitrag, vom Zugang Produktion über Bestandsveränderung und Fertigungskosten zum Lagerbestand sowie zu den Einzahlungen und Auszahlungen."
   },
   "5.80": {
-   "status": "pruefung",
+   "status": "entfaellt",
    "datei": "Hyperion_Planning_Auswertungen",
    "kommentare": [
+    "Entfällt (11.11.2026): Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
     "Produktscreenshot (Berichte „Gewinn- & Verlustrechnung“ mit Expansion und „Umsätze nach Produkten“ mit 3D-Torte) softwareneutral als interaktiver Bericht 1024 × 646 px; Browserfenster, Repository-Pfad, zwei Herstellerlogos und Links des Benutzer-POV entfallen, Ausgabe HTML/PDF bleibt als Schalter (PDF öffnet die Druckansicht)",
     "Werte neu aus dem gemeinsamen Planungsmodell der Serie, weil das Original in sich nicht stimmte (Bilanzergebnis ≠ Betriebsergebnis − AfA − Zinsen, Gesamterlöse ≠ Nettoumsatz + Bestandsveränderungen, Tortenanteil 65,71 % statt 56 %); Nettoumsatz Deutschland enthält die Absatzplanung aus Abb. 5.78, Abschreibungen die Investitionen aus Abb. 5.81",
     "Gesamterlöse → Gesamtleistung, Bilanzergebnis → Ergebnis vor Steuern, Zwischensumme Deckungsbeitrag ergänzt, „Variable Herstellkosten“ zusätzlich aufklappbar (Fertigungsmaterial, Fertigungslöhne wie Abb. 5.79); GJ 2002 → Plan 2028, neu mit KPI-Leiste und ΔVJ zum Ist 2027 (Abweichungsbalken nach Wirkung)",
@@ -1006,6 +1014,7 @@
    "status": "pruefung",
    "datei": "Hyperion_Planning_Kommentarfunktion",
    "kommentare": [
+    "11.11.2026: Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
     "Produktscreenshot softwareneutral als Formular „Investitionsplanung“ mit Positionsanmerkung und Anmerkungen der Planungseinheit (Querformat 1024 px = 155 × 109 mm, im LaTeX gedreht); das überlappende Fenster „Anmerkungen der Planungseinheit“ steht als Abschnitt unter dem Raster, der Knopf „Navigation“ entfällt",
     "Anschaffungswert 6.000 € im März wie im Original; Nutzungsdauer „20“ (ohne Einheit, rechnerisch Monate) → 5 Jahre und Restwert 100 → 0 €, damit 100 € Abschreibung je Monat (Original 295 €) – bitte prüfen; „Nutzungsdauer in Jahren“, „Durchführung (1 = ja)“, „Cash Investitionen“ → „Auszahlung Investition“",
     "Personen und Daten fiktiv bzw. aktuell: admin → Herr Albers (Konzerncontrolling), CC Mgr → Herr Roth (Kostenstellenleitung), GES_E1 → Deutschland, PLAN/REALCASE → Plan 2028/Bottom-up, 25.02.2003 → 13.10.2027, BÜROMÖBEL → Büromöbel; Title/Author/Date/Text → Titel, Autor · Datum, Uhrzeit, Text",
@@ -1018,6 +1027,7 @@
    "status": "pruefung",
    "datei": "Hyperion_Planning_Workflowkomponente",
    "kommentare": [
+    "11.11.2026: Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
     "Produktscreenshot softwareneutral als Maske „Status überprüfen und Prozess verwalten“ nachgebaut (Hochformat 110 × 150 mm, PDF ohne Skalierung); Browserfenster, Produktname, Navigations- und Statusleisten entfallen; die Seite „Details“ (Link in der Spalte Aktion) steht als Abschnitt mit Aktion, nächstem Eigentümer, Anmerkung und Verlauf darunter – Aussage der Sprechblase „Weiterleiten“",
     "Status und Eigentümer wie im Original; Statusfarben (grün/blau/rot) entfallen, nicht gestartete Einheiten grau; CO_D, CO_USA, admin → Frau Brandt, Frau Kaya, Herr Albers (fiktiv); Summenknoten zeigen den am wenigsten fortgeschrittenen Status der Einheiten darunter (deckt sich mit allen Werten des Originals)",
     "„Summe Europa“ usw. → Europa, Amerika, Asien (wie Abb. 5.80), Grossbritannien → Großbritannien, New Zealand → Neuseeland; Wurzelknoten „Gesellschaften“ entfällt; Russland als Gesellschaft beibehalten – für ein Planjahr 2028 ersetzen?",

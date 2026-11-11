@@ -23,6 +23,8 @@ Ablauf (Skill „sechste-auflage-revision“):
 
   Gestrichene Abschnitte: python3 werkzeug/revision.py entfaellt 5.52 5.53 … --grund "…" setzt die Abbildungen
      in Tabelle (über rueckmeldungen.json) und Inventur (status.json) auf „entfällt“.
+  Verschobene Abbildungen o. Ä.: python3 werkzeug/revision.py vermerk 5.78 … --text "…" ergänzt nur einen
+     Kommentar in Tabelle und Inventur, der Status bleibt.
 
   5. Inventur neu erzeugen, committen, pushen. Ein Zeit-Trigger der Tabelle (Code.gs,
      rueckmeldungenUebernehmen) holt rueckmeldungen.json binnen etwa 5–10 Minuten und setzt Status und
@@ -296,6 +298,34 @@ def befehl_entfaellt(a):
     speichere(STATUS, st)
 
 
+def befehl_vermerk(a):
+    """Kommentar zu Abbildungen ohne Statusänderung, z. B. wenn eine Abbildung in einen anderen Abschnitt
+    verschoben wird: Rückmeldung an die Tabelle ohne „status“ (der Trigger hängt nur den Kommentar an) und
+    Vermerk in status.json."""
+    eintr = inventur_eintraege()
+    nach_nr = {x["nr"]: x for x in eintr.values() if x.get("nr")}
+    heute = datetime.date.today()
+    text = " ".join(a.text.split())
+    rueck = lade(RUECK, {"_hinweis": "", "eintraege": []})
+    grenze = (heute - datetime.timedelta(days=AUFBEWAHREN_TAGE)).isoformat()
+    rueck["eintraege"] = [x for x in rueck["eintraege"] if x.get("zeit", "")[:10] >= grenze]
+    st = lade(STATUS, {"eintraege": {}})
+    for s in a.abbildungen:
+        k = re.sub(r"^Abb\.?\s*", "", s.strip())
+        x = eintr.get(k) or nach_nr.get(k)
+        if not x:
+            sys.exit(f"{s}: keine Abbildung mit diesem Schlüssel bzw. dieser Nummer in der Inventur.")
+        n = 1 + sum(1 for r in rueck["eintraege"] if r["id"].startswith(f"{heute.isoformat()}-{x['anker']}-vermerk"))
+        rueck["eintraege"].append({"id": f"{heute.isoformat()}-{x['anker']}-vermerk-{n}", "schluessel": x["anker"],
+                                   "kommentar": text, "zeit": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")})
+        e = st["eintraege"].setdefault(x["nr"], {})
+        vermerk = f"{heute.strftime('%d.%m.%Y')}: {text}"
+        e["kommentare"] = [vermerk] + [v for v in e.get("kommentare", []) if v != vermerk]
+        print(f"Abb. {x['nr']} ({x['anker']}): Vermerk ergänzt")
+    speichere(RUECK, rueck)
+    speichere(STATUS, st)
+
+
 def befehl_offen(a):
     """Rückmeldungen im Repository, die die Tabelle laut letzter CSV noch nicht übernommen hat."""
     zeilen, _, _ = tabelle_lesen(a.csv)
@@ -321,6 +351,10 @@ def main():
     p.add_argument("abbildungen", nargs="+", help="Nummern (5.52) oder Schlüssel (abb-5-52)")
     p.add_argument("--grund", required=True, help="Vermerk für Tabelle und Inventur, z. B. welcher Abschnitt gestrichen wurde")
     p.set_defaults(f=befehl_entfaellt)
+    p = sub.add_parser("vermerk", help="Kommentar ohne Statusänderung (z. B. Abbildung verschoben)")
+    p.add_argument("abbildungen", nargs="+", help="Nummern (5.78) oder Schlüssel (abb-5-78)")
+    p.add_argument("--text", required=True, help="Vermerk für Tabelle und Inventur")
+    p.set_defaults(f=befehl_vermerk)
     p = sub.add_parser("offen", help="Rückmeldungen gegen die Tabelle abgleichen")
     p.add_argument("--csv")
     p.set_defaults(f=befehl_offen)

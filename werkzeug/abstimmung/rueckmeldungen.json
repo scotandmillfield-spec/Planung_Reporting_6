@@ -586,6 +586,72 @@
    "status": "entfällt",
    "kommentar": "Entfällt: Abschnitt 5.10.3.1 Spezielle Software (relationale Datenbanktechnik) ist für die 6. Auflage ersatzlos gestrichen (Inhaltsrevision 11.11.2026); Quelltext im Buch-Repository unter author/content/gestrichen/.",
    "zeit": "2026-11-11T15:59"
+  },
+  {
+   "id": "2026-11-11-abb-5-72-entfaellt",
+   "schluessel": "abb-5-72",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-73-entfaellt",
+   "schluessel": "abb-5-73",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-74-entfaellt",
+   "schluessel": "abb-5-74",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-75-entfaellt",
+   "schluessel": "abb-5-75",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-77-entfaellt",
+   "schluessel": "abb-5-77",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-80-entfaellt",
+   "schluessel": "abb-5-80",
+   "status": "entfällt",
+   "kommentar": "Entfällt: Abschnitt 5.10 Softwarelösungen für Planung und Reporting aufgelöst (11.11.2026); Quelltext in author/content/gestrichen/5-10-softwareloesungen.tex. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-78-vermerk-1",
+   "schluessel": "abb-5-78",
+   "kommentar": "Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-79-vermerk-1",
+   "schluessel": "abb-5-79",
+   "kommentar": "Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-81-vermerk-1",
+   "schluessel": "abb-5-81",
+   "kommentar": "Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
+  },
+  {
+   "id": "2026-11-11-abb-5-82-vermerk-1",
+   "schluessel": "abb-5-82",
+   "kommentar": "Verschoben aus dem aufgelösten Abschnitt 5.10 nach 5.7.4 Besonderheiten der Planungswerkzeuge (11.11.2026); Bildunterschrift jetzt softwareneutral, Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
+   "zeit": "2026-11-11T19:19"
   }
  ],
  "neue_zeilen": [

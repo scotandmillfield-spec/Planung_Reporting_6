@@ -1235,6 +1235,11 @@
 "titel": "Weitere Nutzungsmöglichkeiten für Managementaufgaben (Konsolidierung, Balanced Scorecard, Risikomanagement)"
 },
 {
+"id": "sec:auswahlkriterien_werkzeuge",
+"nr": "5.7.9",
+"titel": "Kriterien für die Auswahl von Planungs- und Reportingwerkzeugen"
+},
+{
 "id": "sec:querschnittsfunktionen",
 "nr": "5.8",
 "titel": "Querschnittsfunktionen"
@@ -1323,31 +1328,6 @@
 "id": "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen",
 "nr": "5.9.7",
 "titel": "Herausforderungen und Handlungsempfehlungen"
-},
-{
-"id": "sec:Softwarelösungen für Planung und Reporting",
-"nr": "5.10",
-"titel": "Softwarelösungen für Planung und Reporting"
-},
-{
-"id": "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien",
-"nr": "5.10.1",
-"titel": "Anforderungskriterien"
-},
-{
-"id": "sec:Softwarelösungen für Planung und Reporting/reporting-und-planungsfunktionen-der-erp-systeme",
-"nr": "5.10.2",
-"titel": "Reporting- und Planungsfunktionen der ERP-Systeme"
-},
-{
-"id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme",
-"nr": "5.10.3",
-"titel": "Tabellenkalkulationsprogramme"
-},
-{
-"id": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme",
-"nr": "5.10.3.1",
-"titel": "BI-gestützte Systeme"
 },
 {
 "id": "cha:zusammenfassung-ausblick",

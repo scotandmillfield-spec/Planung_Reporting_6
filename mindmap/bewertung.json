@@ -97,6 +97,10 @@
    "verwandt": {
     "text": "inhaltlich verwandt",
     "stil": "gestrichelt"
+   },
+   "verschieben": {
+    "text": "Verschiebekandidat nach",
+    "stil": "pfeil-gestrichelt"
    }
   }
  },
@@ -1752,6 +1756,116 @@
    "beschriftung": "Liste „Vorteile BI-gestützter Controlling-Systeme“ nach",
    "meta": {
     "vorschlag": "2026-11-11"
+   }
+  },
+  {
+   "von": "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz",
+   "nach": "sec:genai-grundlagen",
+   "typ": "verschieben",
+   "beschriftung": "ganz nach (gekürzt, als Einstieg)",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:Machine Learning, Deep Learning und Neuronale Netze",
+   "nach": "sec:genai-grundlagen",
+   "typ": "verschieben",
+   "beschriftung": "ganz nach (um Transformer/LLM ergänzen)",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:rpa",
+   "nach": "sec:genai-agenten",
+   "typ": "verschieben",
+   "beschriftung": "teilweise nach (Grundidee, Abgrenzung zu Agenten; Architektur entfällt)",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_es_dm_rpa_cb/chatbots-conversational-ux",
+   "nach": "sec:genai-copilots",
+   "typ": "verschieben",
+   "beschriftung": "teilweise nach (Einordnung als Vorläufer; Rest entfällt)",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting/strategische-planung",
+   "nach": "sec:genai-agenten",
+   "typ": "verschieben",
+   "beschriftung": "nach",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting/operative-planung-und-forecasting",
+   "nach": "sec:genai-agenten",
+   "typ": "verschieben",
+   "beschriftung": "nach",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting/analysen-und-reporting",
+   "nach": "sec:genai-copilots",
+   "typ": "verschieben",
+   "beschriftung": "nach",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting/ubergeordnete-planungs-und-analyseaufgaben",
+   "nach": "sec:genai-governance",
+   "typ": "verschieben",
+   "beschriftung": "nach",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_es_dm_rpa_cb/herausforderungen-und-handlungsempfehlungen",
+   "nach": "sec:genai-governance",
+   "typ": "verschieben",
+   "beschriftung": "ganz nach",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting/werttreiberplanung-mit-simulationen-oder-sensitivitatsanalys",
+   "nach": "sec:fa-trendanalysen-prognosen",
+   "typ": "verschieben",
+   "beschriftung": "besser nach 3.13 (klassische Planungsmethode, nicht Kap. 6)",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
+   }
+  },
+  {
+   "von": "sec:ki_rpa_chatbots_planung_reporting/szenarioanalysen",
+   "nach": "sec:fa-trendanalysen-prognosen",
+   "typ": "verschieben",
+   "beschriftung": "besser nach 3.13 (klassische Planungsmethode, nicht Kap. 6)",
+   "meta": {
+    "vorschlag": "2026-11-11",
+    "entscheidung": "offen"
    }
   }
  ]

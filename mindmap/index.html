@@ -13,7 +13,7 @@
     knoten  – {id, parent, nr, titel, ebene, typ, reihenfolge, im_manuskript, quelle, kennzahlen, abbildungen,
                hinweise{veraltet,pruefen}, signale{alt,neu}, bewertung?, empfehlung?, entscheidung?, befund?,
                begruendung?, notiz?, meta{…frei…}}
-    kanten  – {id, von, nach, typ: struktur|verweis|ersetzt|erweitert|zusammenlegen|verwandt, beschriftung?, meta{…frei…}}
+    kanten  – {id, von, nach, typ: struktur|verweis|ersetzt|erweitert|zusammenlegen|verschieben|verwandt, beschriftung?, meta{…frei…}}
   Freie Metadaten (meta) an Knoten und Kanten werden im Detailbereich vollständig angezeigt.
 -->
 <style>
@@ -101,6 +101,7 @@ main{position:relative;flex:1 1 auto;min-height:0;display:flex}
 .rel.ersetzt{stroke:var(--rot)}
 .rel.erweitert{stroke:var(--ac)}
 .rel.zusammenlegen{stroke:#6E747A;stroke-dasharray:6 4}
+.rel.verschieben{stroke:#B7791F;stroke-dasharray:6 3}
 .rel.verwandt{stroke:#8A8F94;stroke-dasharray:2 4}
 .rel.verweis{stroke:#6E747A;stroke-dasharray:1 3;stroke-width:1.3;opacity:.9}
 .rel.hervor{opacity:1;stroke-width:2.4}
@@ -232,6 +233,7 @@ td.geerbt{color:var(--muted)}
         <marker id="pfeil-ersetzt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828"/></marker>
         <marker id="pfeil-erweitert" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3A3F44"/></marker>
         <marker id="pfeil-zusammenlegen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6E747A"/></marker>
+        <marker id="pfeil-verschieben" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B7791F"/></marker>
         <marker id="pfeil-verweis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8A8F94"/></marker>
       </defs>
       <g id="welt"><g id="ebene-kanten"></g><g id="ebene-rel"></g><g id="ebene-knoten"></g></g>
@@ -951,7 +953,7 @@ function legende(){
   <li><svg width="18" height="18"><text x="2" y="14" font-size="14" fill="#B7791F">✂</text></svg><span>Empfehlung „teilweise streichen“</span></li>
   <li><svg width="34" height="10"><rect x="2" y="3" width="10" height="3" fill="#00806B"/><rect x="12" y="3" width="8" height="3" fill="#B7791F"/><rect x="20" y="3" width="10" height="3" fill="#C62828"/></svg><span>Balken: Verteilung im eingeklappten Teilbaum (nach Seiten)</span></li></ul>
   <h4>Kanten</h4><ul><li>${k('ersetzt','ersetzt')}<span>wird ersetzt durch</span></li><li>${k('erweitert','erweitert')}<span>wird erweitert durch</span></li>
-  <li>${k('zusammenlegen','zusammenlegen')}<span>zusammenlegen mit</span></li><li>${k('verwandt')}<span>inhaltlich verwandt</span></li><li>${k('verweis','verweis')}<span>Querverweis im Text (nur für den gewählten Knoten)</span></li></ul>
+  <li>${k('zusammenlegen','zusammenlegen')}<span>zusammenlegen mit</span></li><li>${k('verschieben','verschieben')}<span>Verschiebekandidat nach (Entscheidung offen)</span></li><li>${k('verwandt')}<span>inhaltlich verwandt</span></li><li>${k('verweis','verweis')}<span>Querverweis im Text (nur für den gewählten Knoten)</span></li></ul>
   <p class="quelle" style="margin:8px 0 0">Kanten zu eingeklappten Knoten enden am nächsten sichtbaren Elternknoten.</p>`;
   $('#legende').innerHTML = h;
 }

@@ -917,11 +917,6 @@
    "befund": "Stand vor ChatGPT (Belege bis 2020): generative KI, Large Language Models und KI-Agenten fehlen vollständig. Grundlagen ML/DL bleiben.",
    "begruendung": "Geplant ist ein eigenes Hauptkapitel zu generativer KI (siehe Vorschlag)."
   },
-  "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz": {
-   "bewertung": "teilweise",
-   "empfehlung": "aktualisieren",
-   "befund": "Schwache/starke KI gültig; Foundation Models und generative KI einordnen."
-  },
   "sec:Machine Learning, Deep Learning und Neuronale Netze": {
    "bewertung": "aktuell",
    "empfehlung": "aktualisieren",
@@ -1444,6 +1439,17 @@
    "meta": {
     "angelegt_am": "2026-11-11"
    }
+  },
+  "sec:genai-allgemeine-spezifische-ki": {
+   "bewertung": "teilweise",
+   "empfehlung": "straffen",
+   "befund": "Verlagert am 11.11.2026 aus 5.9.1 nach 6.1.1 (Text unverändert bis auf Korrekturen). Schwache/starke KI gültig; Foundation Models und generative KI einordnen.",
+   "notiz": "Hinweise im Quelltext: Beispiele um generative KI ergänzen, Aussage zur starken KI (AGI) aktualisieren, Qualitätsanalogie und Navigationsbeispiel kürzen, Beleg Willenborg 2018 aufnehmen.",
+   "meta": {
+    "verlagert_am": "2026-11-11",
+    "herkunft": "5.9.1",
+    "herkunft_id": "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz"
+   }
   }
  },
  "vorschlaege": [
@@ -1477,7 +1483,7 @@
    "nach": "vorschlag:genai-grundlagen",
    "titel": "Copilots in BI-Frontends: natürlichsprachliche Abfragen und automatische Kommentierung",
    "empfehlung": "neu schreiben",
-   "befund": "Nachfolger von Chatbots (5.9.5) und freier Datenrecherche (5.7.1).",
+   "befund": "Nachfolger von Chatbots (in 5.9) und freier Datenrecherche (5.7.1).",
    "entscheidung": "offen",
    "label": "sec:genai-copilots"
   },
@@ -1487,7 +1493,7 @@
    "nach": "vorschlag:genai-copilots",
    "titel": "KI-Agenten in Planung, Forecasting und Abschluss",
    "empfehlung": "neu schreiben",
-   "befund": "Agentische Abläufe für Forecast, Abweichungsanalyse und Berichtserstellung; Abgrenzung zu RPA (5.9.4).",
+   "befund": "Agentische Abläufe für Forecast, Abweichungsanalyse und Berichtserstellung; Abgrenzung zu RPA (in 5.9).",
    "entscheidung": "offen",
    "label": "sec:genai-agenten"
   },
@@ -1756,16 +1762,6 @@
    "beschriftung": "Liste „Vorteile BI-gestützter Controlling-Systeme“ nach",
    "meta": {
     "vorschlag": "2026-11-11"
-   }
-  },
-  {
-   "von": "sec:ki_es_dm_rpa_cb/allgemeine-und-spezifische-schwache-kunstliche-intelligenz",
-   "nach": "sec:genai-grundlagen",
-   "typ": "verschieben",
-   "beschriftung": "ganz nach (gekürzt, als Einstieg)",
-   "meta": {
-    "vorschlag": "2026-11-11",
-    "entscheidung": "offen"
    }
   },
   {

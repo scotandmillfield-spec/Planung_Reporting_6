@@ -423,7 +423,10 @@ def main():
         bericht.append(f'- Ungeprüft (weder eigene noch geerbte Bewertung): {k["nr"] or "–"} {k["titel"]} (`{k["id"]}`)')
 
     # Kanten: Struktur, Querverweise aus dem Text, gepflegte Kanten
-    kanten_meta = {(e['von'], e['nach'], e.get('typ', 'verwandt')): e for e in bew.get('kanten', [])}
+    # Kanten zu umgesetzten Vorschlägen zeigen auf deren LaTeX-Label (vorschlag:xyz → sec:xyz)
+    alias = {v['id']: v['label'] for v in vorschlaege if v.get('label') in ids}
+    kanten_meta = {(alias.get(e['von'], e['von']), alias.get(e['nach'], e['nach']), e.get('typ', 'verwandt')): e
+                   for e in bew.get('kanten', [])}
     kanten = []
     alle = {n['id'] for n in knoten} | {'buch'}
     for n in knoten:

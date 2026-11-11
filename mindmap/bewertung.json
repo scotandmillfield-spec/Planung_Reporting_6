@@ -1384,6 +1384,62 @@
     "aufgenommen_am": "2026-11-11",
     "herkunft": "5.10.1"
    }
+  },
+  "cha:generative-ki": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt. Noch nichts aus anderen Kapiteln verlagert.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
+  },
+  "sec:genai-grundlagen": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
+  },
+  "sec:genai-copilots": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
+  },
+  "sec:genai-agenten": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
+  },
+  "sec:genai-datenschicht": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
+  },
+  "sec:genai-governance": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
+  },
+  "sec:genai-usecases": {
+   "bewertung": "neu",
+   "entscheidung": "aufnehmen",
+   "notiz": "Gerüst am 11.11.2026 angelegt (Überschrift, Label, geplante Inhalte als Kommentar); Text folgt.",
+   "meta": {
+    "angelegt_am": "2026-11-11"
+   }
   }
  },
  "vorschlaege": [
@@ -1399,7 +1455,8 @@
     "quelle": "Planung der Autoren",
     "umfang_ziel": "ca. 30–40 Seiten"
    },
-   "entscheidung": "offen"
+   "entscheidung": "offen",
+   "label": "cha:generative-ki"
   },
   {
    "id": "vorschlag:genai-grundlagen",
@@ -1407,7 +1464,8 @@
    "titel": "Grundlagen: Large Language Models, Retrieval Augmented Generation, Agenten",
    "empfehlung": "neu schreiben",
    "befund": "Begriffe und Funktionsweise auf Controller-Niveau.",
-   "entscheidung": "offen"
+   "entscheidung": "offen",
+   "label": "sec:genai-grundlagen"
   },
   {
    "id": "vorschlag:genai-copilots",
@@ -1415,8 +1473,9 @@
    "nach": "vorschlag:genai-grundlagen",
    "titel": "Copilots in BI-Frontends: natürlichsprachliche Abfragen und automatische Kommentierung",
    "empfehlung": "neu schreiben",
-   "befund": "Nachfolger von Chatbots (5.9.6) und freier Datenrecherche (5.7.1).",
-   "entscheidung": "offen"
+   "befund": "Nachfolger von Chatbots (5.9.5) und freier Datenrecherche (5.7.1).",
+   "entscheidung": "offen",
+   "label": "sec:genai-copilots"
   },
   {
    "id": "vorschlag:genai-agenten",
@@ -1424,8 +1483,9 @@
    "nach": "vorschlag:genai-copilots",
    "titel": "KI-Agenten in Planung, Forecasting und Abschluss",
    "empfehlung": "neu schreiben",
-   "befund": "Agentische Abläufe für Forecast, Abweichungsanalyse und Berichtserstellung; Abgrenzung zu RPA (5.9.5).",
-   "entscheidung": "offen"
+   "befund": "Agentische Abläufe für Forecast, Abweichungsanalyse und Berichtserstellung; Abgrenzung zu RPA (5.9.4).",
+   "entscheidung": "offen",
+   "label": "sec:genai-agenten"
   },
   {
    "id": "vorschlag:genai-daten",
@@ -1434,7 +1494,8 @@
    "titel": "Daten- und Semantikschicht als Voraussetzung",
    "empfehlung": "neu schreiben",
    "befund": "Semantische Schicht, Datenqualität und Berechtigungen als Grundlage verlässlicher KI-Antworten.",
-   "entscheidung": "offen"
+   "entscheidung": "offen",
+   "label": "sec:genai-datenschicht"
   },
   {
    "id": "vorschlag:genai-governance",
@@ -1443,7 +1504,8 @@
    "titel": "Governance, Risiken und Rechtsrahmen (EU-KI-Verordnung)",
    "empfehlung": "neu schreiben",
    "befund": "Halluzinationen, Nachvollziehbarkeit, Datenschutz, KI-Verordnung.",
-   "entscheidung": "offen"
+   "entscheidung": "offen",
+   "label": "sec:genai-governance"
   },
   {
    "id": "vorschlag:genai-usecases",
@@ -1452,7 +1514,8 @@
    "titel": "Use-Case-Bewertung: Nutzen und Wirtschaftlichkeit",
    "empfehlung": "neu schreiben",
    "befund": "Bewertungsraster für KI-Anwendungsfälle in Planung und Reporting.",
-   "entscheidung": "offen"
+   "entscheidung": "offen",
+   "label": "sec:genai-usecases"
   },
   {
    "id": "vorschlag:datenarchitektur",

@@ -1330,8 +1330,43 @@
 "titel": "Herausforderungen und Handlungsempfehlungen"
 },
 {
-"id": "cha:zusammenfassung-ausblick",
+"id": "cha:generative-ki",
 "nr": "6",
+"titel": "Generative KI und KI-Agenten im BI-gestützten Controlling"
+},
+{
+"id": "sec:genai-grundlagen",
+"nr": "6.1",
+"titel": "Grundlagen: Large Language Models, Retrieval Augmented Generation, Agenten"
+},
+{
+"id": "sec:genai-copilots",
+"nr": "6.2",
+"titel": "Copilots in BI-Frontends: natürlichsprachliche Abfragen und automatische Kommentierung"
+},
+{
+"id": "sec:genai-agenten",
+"nr": "6.3",
+"titel": "KI-Agenten in Planung, Forecasting und Abschluss"
+},
+{
+"id": "sec:genai-datenschicht",
+"nr": "6.4",
+"titel": "Daten- und Semantikschicht als Voraussetzung"
+},
+{
+"id": "sec:genai-governance",
+"nr": "6.5",
+"titel": "Governance, Risiken und Rechtsrahmen (EU-KI-Verordnung)"
+},
+{
+"id": "sec:genai-usecases",
+"nr": "6.6",
+"titel": "Use-Case-Bewertung: Nutzen und Wirtschaftlichkeit"
+},
+{
+"id": "cha:zusammenfassung-ausblick",
+"nr": "7",
 "titel": "Zusammenfassung und Ausblick"
 },
 {

@@ -1,6 +1,6 @@
 # Abgleich Mindmap ↔ Manuskript
 
-Lauf 2026-11-11 18:51, Buch-Commit `2bf9219` (2026-11-11).
+Lauf 2026-11-11 19:04, Buch-Commit `2bf9219` (2026-11-11).
 
 | | |
 |---|---:|
@@ -10,7 +10,7 @@ Lauf 2026-11-11 18:51, Buch-Commit `2bf9219` (2026-11-11).
 | ungeprüft | 0 |
 | Vorschläge (noch nicht geschrieben) | 13 |
 | Querverweise | 277 |
-| gepflegte Kanten | 22 |
+| gepflegte Kanten | 25 |
 
 ## Meldungen
 

@@ -991,24 +991,44 @@
   },
   "sec:Softwarelösungen für Planung und Reporting": {
    "bewertung": "veraltet",
-   "empfehlung": "neu schreiben",
-   "befund": "Softwarelandschaft nach Stand 2011–2015 (SAP ERP CC, Hyperion Planning, MS Access, prevero). Kriterienraster behalten, Systemklassen und Beispiele neu fassen.",
-   "begruendung": "Gliederungsfehler: 5.10.3.1 und 5.10.3.2 sind eigentlich gleichrangige Abschnitte 5.10.4/5.10.5."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag Autoren 11.11.2026, noch nicht entschieden). Abschnitt als Ganzes auflösen. Der Vergleich der Systemklassen ERP – Excel – BI nach dem Stand 2004–2013 ist entschieden; neun Kriterien werden je Systemklasse wiederholt. Verlagert werden nur: Kriterienraster als Tabelle (≈ 1 S.) nach 5.7, Liste „Vorteile BI-gestützter Controlling-Systeme“ (≈ 1 S.) nach 5.1, Planungsmasken Abb. 5.78, 5.79, 5.81, 5.82 nach 5.7.4 (≈ 2 S.). xP&A-Vorschlag ebenfalls nach 5.7. Netto ≈ 22 von 26 S.",
+   "begruendung": "Gliederungsfehler: 5.10.3.1 und 5.10.3.2 sind eigentlich gleichrangige Abschnitte 5.10.4/5.10.5.",
+   "meta": {
+    "streichkandidat": "ganz (auflösen)",
+    "umfang": "≈ 26 S., netto ≈ 22 S.",
+    "abbildungen": "Abb. 5.72–5.75, 5.77, 5.80 entfallen; 5.78, 5.79, 5.81, 5.82 wandern nach 5.7.4 (alle bereits softwareneutral neu gebaut)",
+    "verweise_anpassen": "1.3, Kap.-5-Einleitung, 4.1.1, 4.2.1 (zeigt auf 5.10.5), 4.2.3 (gemeint ist 5.7.2)"
+   }
   },
   "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien": {
    "bewertung": "teilweise",
-   "empfehlung": "aktualisieren",
-   "befund": "Kriterienraster gültig; Cloud-, KI- und Governance-Kriterien ergänzen."
+   "empfehlung": "teilweise streichen",
+   "befund": "Streichkandidat (Vorschlag Autoren 11.11.2026, noch nicht entschieden). Neun Kriterien als kompakte Tabelle nach 5.7 (Auswahl von Planungs- und Reportingwerkzeugen), um Cloud, KI und Governance ergänzt; Fließtext und Belege von 2003 entfallen.",
+   "meta": {
+    "streichkandidat": "teilweise",
+    "umfang": "≈ 3 von 4 S."
+   }
   },
   "sec:Softwarelösungen für Planung und Reporting/reporting-und-planungsfunktionen-der-erp-systeme": {
    "bewertung": "veraltet",
-   "empfehlung": "ersetzen",
-   "befund": "ERP-Berichte am Beispiel SAP ERP CC (2011). Heute: Embedded Analytics in S/4HANA bzw. Cloud-ERP."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag Autoren 11.11.2026, noch nicht entschieden). ERP-Berichtswesen am Beispiel SAP ERP CC (2011); Integration ERP–BI steht in 5.2.4. Ersatzlos.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "umfang": "≈ 6,8 S.",
+    "abbildungen": "Abb. 5.72–5.74"
+   }
   },
   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme": {
    "bewertung": "teilweise",
-   "empfehlung": "aktualisieren",
-   "befund": "Excel bleibt das meistgenutzte Werkzeug; Power Query/Power Pivot und KI-Funktionen fehlen."
+   "empfehlung": "streichen",
+   "befund": "Streichkandidat (Vorschlag Autoren 11.11.2026, noch nicht entschieden). Excel als Planungswerkzeug; Excel als Oberfläche steht bereits in 5.7.2 (Excel-Add-in). Ersatzlos.",
+   "meta": {
+    "streichkandidat": "ersatzlos",
+    "umfang": "≈ 5,3 S. (ohne BI-gestützte Systeme)",
+    "abbildungen": "Abb. 5.75"
+   }
   },
   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/spezielle-software-basierend-auf-relationaler-datenbanktechn": {
    "bewertung": "veraltet",
@@ -1046,8 +1066,13 @@
   },
   "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme": {
    "bewertung": "teilweise",
-   "empfehlung": "aktualisieren",
-   "befund": "BI-gestützte Systeme bleiben die Zielarchitektur; Hyperion-Beispiele ersetzen, Cloud-Plattformen ergänzen."
+   "empfehlung": "teilweise streichen",
+   "befund": "Streichkandidat (Vorschlag Autoren 11.11.2026, noch nicht entschieden). Kriterienweise Beschreibung am Beispiel Hyperion Planning entfällt. Vorteile-Liste nach 5.1, Planungsmasken (Planungsformular, Business Rules, Kommentar, Workflow) nach 5.7.4. Star-Schema Abb. 5.77 doppelt sich mit Abb. 5.19, Auswertung Abb. 5.80 entfällt.",
+   "meta": {
+    "streichkandidat": "teilweise",
+    "umfang": "≈ 6–7 von 9,8 S.",
+    "abbildungen": "5.77, 5.80 entfallen; 5.78, 5.79, 5.81, 5.82 nach 5.7.4"
+   }
   },
   "cha:zusammenfassung-ausblick": {
    "bewertung": "veraltet",
@@ -1487,6 +1512,33 @@
    "typ": "erweitert",
    "beschriftung": "wird fortgeführt in",
    "meta": {}
+  },
+  {
+   "von": "sec:Softwarelösungen für Planung und Reporting/anforderungskriterien",
+   "nach": "sec:Analyse-_und_Planungswerkzeuge",
+   "typ": "zusammenlegen",
+   "beschriftung": "Kriterienraster als Tabelle nach",
+   "meta": {
+    "vorschlag": "2026-11-11"
+   }
+  },
+  {
+   "von": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme",
+   "nach": "Besonderheiten_der_Planungswerkzeuge",
+   "typ": "zusammenlegen",
+   "beschriftung": "Planungsmasken Abb. 5.78, 5.79, 5.81, 5.82 nach",
+   "meta": {
+    "vorschlag": "2026-11-11"
+   }
+  },
+  {
+   "von": "sec:Softwarelösungen für Planung und Reporting/tabellenkalkulationsprogramme/bi-gestutzte-systeme",
+   "nach": "sec:ordnungsrahmen_für_das_bi_gestuetzte_controlling",
+   "typ": "zusammenlegen",
+   "beschriftung": "Liste „Vorteile BI-gestützter Controlling-Systeme“ nach",
+   "meta": {
+    "vorschlag": "2026-11-11"
+   }
   }
  ]
 }

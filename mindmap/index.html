@@ -81,6 +81,15 @@ main{position:relative;flex:1 1 auto;min-height:0;display:flex}
 .k.gewaehlt .wahl{fill:none;stroke:var(--ac);stroke-width:1.5;stroke-dasharray:3 2}
 .k{cursor:pointer}
 .k .ring,.k .wahl{fill:none;stroke:none}
+.schalter{cursor:pointer}
+.schalter .treffer-flaeche{fill:transparent;stroke:none}
+.schalter .knopf-kreis{fill:#fff;stroke:#8A8F94;stroke-width:1.3}
+.schalter .zeichen{stroke:#3A3F44;stroke-width:1.6;stroke-linecap:round;fill:none}
+.schalter:hover .knopf-kreis{fill:var(--ac);stroke:var(--ac)}
+.schalter:hover .zeichen{stroke:#fff}
+.k.e1 .schalter .knopf-kreis{fill:#fff}
+.k .titel{cursor:pointer}
+.k:hover text.titel{text-decoration:underline;text-decoration-color:#B5B5B5}
 .k:focus{outline:none}
 .k:focus-visible .wahl{stroke:var(--rot);stroke-width:2}
 .kante{fill:none;stroke:var(--kante);stroke-width:1.4}
@@ -230,7 +239,7 @@ td.geerbt{color:var(--muted)}
       <button type="button" id="z-minus" aria-label="Verkleinern">−</button>
       <button type="button" id="z-fit" aria-label="Einpassen" title="Einpassen">⤢</button>
     </div>
-    <div class="hinweis-ecke">Klick: auswählen und aufklappen · erneuter Klick: zuklappen · Ziehen: verschieben · Mausrad: zoomen · Kanten des gewählten Knotens werden eingeblendet</div>
+    <div class="hinweis-ecke">+ / − : auf- und zuklappen · Klick auf den Titel: Details · Ziehen: verschieben · Mausrad: zoomen</div>
     <div id="legende" role="dialog" aria-label="Legende"></div>
   </div>
   <div id="tabelle"></div>
@@ -365,7 +374,8 @@ function ordnungBerechnen(){ let i=0; ORD.clear(); (function w(n){ ORD.set(n.id,
 /* ---------- Layout ---------- */
 const POS = new Map();   // aktuelle Zielpositionen
 let ALT = new Map();     // Positionen vor dem letzten Render
-const LUECKE = 34, ZEILE = 25, ZEILE1 = 40, GRUPPE = 7;
+const LUECKE = 34, ZEILE = 25, ZEILE1 = 40, GRUPPE = 7, SCHALTER = 22;
+let WELT = {x:0, y:0};   // Verschiebung der Weltkoordinaten, damit der angeklickte Knoten an seinem Platz bleibt
 function seiteVon(kap){
   if(zustand.modus==='gliederung') return 1;
   const nr = parseInt(kap.nr,10);
@@ -388,7 +398,7 @@ function layout(){
       const bz = beschriftung(n);
       let b = breite(bz.nr, true, n.tiefe===1?14.5:13) + breite(bz.titel, n.tiefe===1, n.tiefe===1?14.5:13) + 18;
       const ks = kinderSichtbar(n);
-      if(!ks.length && n.kinder.filter(sichtbar).length) b += breite(' +'+n.kinder.filter(sichtbar).length, false, 11.5) + 4;
+      if(n.kinder.filter(sichtbar).length) b += SCHALTER;
       if(n.tiefe===1) b += 22;
       n._b = b;
       spalte[n.tiefe] = Math.max(spalte[n.tiefe]||0, b);
@@ -439,9 +449,16 @@ function anker(id, richtung){ // richtung: 'innen' (Punkt) oder 'aussen' (Ende d
   return richtung==='aussen' ? {x:p.x + p.s*p.b, y:p.y} : {x:p.x, y:p.y};
 }
 
-function render(anim){
+function render(anim, ankerId){
   ordnungBerechnen();
   const sichtbare = layout();
+  for(const q of POS.values()){ q.x += WELT.x; q.y += WELT.y; }
+  // Anker: angeklickter Knoten, sonst der gewählte, sonst die Wurzel bleibt an ihrem Platz
+  const anker = [ankerId, zustand.gewaehlt, 'buch'].find(id => id && ALT.has(id) && POS.has(id));
+  if(anker){
+    const o = ALT.get(anker), q = POS.get(anker), dx = o.x - q.x, dy = o.y - q.y;
+    if(dx || dy){ WELT.x += dx; WELT.y += dy; for(const r of POS.values()){ r.x += dx; r.y += dy; } }
+  }
   gK.textContent=''; gE.textContent=''; gR.textContent='';
   ELEM = new Map();
   const treffer = new Set(zustand.treffer.map(n=>n.id));
@@ -491,9 +508,7 @@ function render(anim){
       if(s>0){
         if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
         const b = el('tspan', {}, t); b.textContent = bz.titel;
-        if(zu){ const c = el('tspan', {class:'anzahl', dx:4}, t); c.textContent = '+'+kinderAnz; }
       } else {
-        if(zu){ const c = el('tspan', {class:'anzahl'}, t); c.textContent = '+'+kinderAnz+' '; }
         if(bz.nr){ const a = el('tspan', {class:'nr'}, t); a.textContent = bz.nr; }
         const b = el('tspan', {}, t); b.textContent = bz.titel;
       }
@@ -503,15 +518,31 @@ function render(anim){
         const summe = REIHE.reduce((a,k)=>a+(n.vert[k]||0),0);
         if(summe>0){
           const bw = Math.min(64, Math.max(28, p.b*0.3)); let off = 0;
-          const bx = s>0 ? p.b - bw - 2 : -p.b + 2;
+          const bx = s>0 ? p.b - SCHALTER - bw : -p.b + SCHALTER;
           const by = n.tiefe===1 ? 9 : 10;
           for(const k of REIHE){ const v = n.vert[k]||0; if(!v) continue; const w = bw*v/summe;
             el('rect', {x:bx+off, y:by, width:Math.max(w,0.8), height:3, fill:farbe(k)}, g); off += w; }
         }
       }
     }
+    // Auf-/Zuklappen über den Schalter +/− am Ende der Beschriftung – öffnet keine Details
+    if(n!==wurzel && n.kinder.filter(sichtbar).length){
+      const p = POS.get(n.id), s = p.s, auf = zustand.offen.has(n.id), anz = n.kinder.filter(sichtbar).length;
+      const sx = s*(p.b - (n.tiefe===1 ? 12 : 9));
+      const sw = el('g', {class:'schalter', transform:`translate(${sx},0)`, role:'button',
+        'aria-label': (auf?'Zuklappen: ':'Aufklappen: ') + anz + ' Unterpunkte'}, g);
+      el('circle', {class:'treffer-flaeche', r:13}, sw);
+      el('circle', {class:'knopf-kreis', r:7.5}, sw);
+      el('path', {class:'zeichen', d: auf ? 'M-3.6,0 H3.6' : 'M-3.6,0 H3.6 M0,-3.6 V3.6'}, sw);
+      const st = el('title', {}, sw); st.textContent = (auf ? 'Zuklappen' : 'Aufklappen') + ' (' + anz + ' Unterpunkte)';
+      sw.addEventListener('click', ev => { ev.stopPropagation(); umschalten(n); });
+    }
     g.addEventListener('click', ev => { ev.stopPropagation(); klick(n); });
-    g.addEventListener('keydown', ev => { if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); klick(n); } });
+    g.addEventListener('keydown', ev => {
+      if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); klick(n); }
+      else if(ev.key==='+'||ev.key==='ArrowRight'){ ev.preventDefault(); umschalten(n, true); }
+      else if(ev.key==='-'||ev.key==='ArrowLeft'){ ev.preventDefault(); umschalten(n, false); }
+    });
     ELEM.set('n:'+n.id, g);
   }
   // Beziehungen
@@ -565,7 +596,8 @@ function relPfade(P){
       const cx = ext + sa*(26 + Math.min(70, Math.abs(y2-y1)*0.08));
       d = `M${xa},${y1} C${cx},${y1} ${cx},${y2} ${xb},${y2}`;
     } else {
-      d = `M${x1},${y1} C${x1*0.2},${y1} ${x2*0.2},${y2} ${x2},${y2}`;
+      const rx = (P.get('buch')||{x:0}).x;
+      d = `M${x1},${y1} C${rx+(x1-rx)*0.2},${y1} ${rx+(x2-rx)*0.2},${y2} ${x2},${y2}`;
     }
     pfad.setAttribute('d', d);
   }
@@ -574,7 +606,7 @@ function relPfade(P){
 function strukturPfad(von, nach, P){
   const a = P.get(von), b = P.get(nach); if(!a||!b) return '';
   let sx, sy = a.y;
-  if(von==='buch') sx = (b.s>0 ? a.b/2 : -a.b/2); else sx = a.x + a.s*a.b;
+  if(von==='buch') sx = a.x + (b.s>0 ? a.b/2 : -a.b/2); else sx = a.x + a.s*a.b;
   const tx = b.x + (b.s>0 ? (K.get(nach).tiefe===1? 0 : -6) : (K.get(nach).tiefe===1 ? 0 : 6)), ty = b.y;
   const dx = (tx - sx)/2;
   return `M${sx},${sy} C${sx+dx},${sy} ${tx-dx},${ty} ${tx},${ty}`;
@@ -603,7 +635,7 @@ function animiere(weich){
     const e = f<.5 ? 2*f*f : 1 - Math.pow(-2*f+2,2)/2;
     for(const [id, p] of ziel){ const q = start.get(id); zwischen.set(id, Object.assign({}, p, {x:q.x+(p.x-q.x)*e, y:q.y+(p.y-q.y)*e})); }
     for(const [id, p] of zwischen){
-      const g = ELEM.get('n:'+id); if(g && id!=='buch') g.setAttribute('transform', `translate(${p.x},${p.y})`);
+      const g = ELEM.get('n:'+id); if(g) g.setAttribute('transform', `translate(${p.x},${p.y})`);
       const k = ELEM.get('k:'+id); if(k){ const n = K.get(id); k.setAttribute('d', strukturPfad(n.p.id, id, zwischen)); }
     }
     if(f>=1) relPfade(ziel);
@@ -629,6 +661,22 @@ function zentriere(id){
   const k = Math.max(ansicht.k, 0.8);
   const x = p.x + (id==='buch'?0:p.s*p.b/2);
   ansicht.k = k; ansicht.x = r.width/2 - x*k; ansicht.y = r.height/2 - p.y*k; setzeAnsicht();
+}
+// Knoten nach dem Öffnen des Detailbereichs im sichtbaren Ausschnitt halten (weich verschieben)
+function sichtbarHalten(id){
+  const p = POS.get(id); if(!p) return;
+  const r = svg.getBoundingClientRect(); if(!r.width) return;
+  const k = ansicht.k, rand = 24;
+  const x0 = id==='buch' ? p.x - p.b/2 : (p.s>0 ? p.x - 12 : p.x - p.b), x1 = id==='buch' ? p.x + p.b/2 : (p.s>0 ? p.x + p.b : p.x + 12);
+  let dx = 0, dy = 0;
+  const l = ansicht.x + x0*k, re = ansicht.x + x1*k, y = ansicht.y + p.y*k;
+  if(re > r.width - rand) dx = (r.width - rand) - re;
+  if(l + dx < rand) dx = rand - l;
+  if(y < rand) dy = rand - y; else if(y > r.height - rand) dy = (r.height - rand) - y;
+  if(!dx && !dy) return;
+  const sx = ansicht.x, sy = ansicht.y, t0 = performance.now();
+  (function schritt(t){ const f = Math.min(1, (t-t0)/220), e = 1 - Math.pow(1-f, 3);
+    ansicht.x = sx + dx*e; ansicht.y = sy + dy*e; setzeAnsicht(); if(f<1) requestAnimationFrame(schritt); })(t0);
 }
 function zoomUm(f, cx, cy){
   const r = svg.getBoundingClientRect(); if(cx==null){ cx = r.width/2; cy = r.height/2; }
@@ -657,14 +705,21 @@ svg.addEventListener('click', ev => { if(bewegt){ ev.stopPropagation(); bewegt=f
 $('#z-plus').onclick = () => zoomUm(1.25); $('#z-minus').onclick = () => zoomUm(0.8); $('#z-fit').onclick = einpassen;
 
 /* ---------- Interaktion ---------- */
+// Klick auf Punkt oder Titel: Details öffnen, Gliederung bleibt unverändert
 function klick(n){
-  const hatKinder = n.kinder.filter(sichtbar).length > 0;
-  if(zustand.gewaehlt===n.id){ if(hatKinder){ if(zustand.offen.has(n.id)) zuklappen(n); else zustand.offen.add(n.id); } }
-  else { zustand.gewaehlt = n.id; if(hatKinder) zustand.offen.add(n.id); }
-  if(n===wurzel) zustand.offen.add('buch');
-  render(); detail(n.id); hashSetzen(n.id);
+  if(n===wurzel) return;
+  zustand.gewaehlt = n.id; render(false); detail(n.id); hashSetzen(n.id);
+  const g = ELEM.get('n:'+n.id); if(g) g.focus({preventScroll:true});
 }
-function zuklappen(n){ zustand.offen.delete(n.id); }
+// Schalter +/−: nur auf- oder zuklappen; der Knoten bleibt an seiner Stelle
+function umschalten(n, auf){
+  if(!n.kinder.filter(sichtbar).length) return;
+  const offen = zustand.offen.has(n.id), ziel = auf===undefined ? !offen : auf;
+  if(ziel===offen) return;
+  if(ziel) zustand.offen.add(n.id); else zustand.offen.delete(n.id);
+  render(true, n.id);
+  const g = ELEM.get('n:'+n.id); if(g) g.focus({preventScroll:true});
+}
 function waehle(id, zentrieren){
   const n = K.get(id); if(!n) return;
   if(!sichtbar(n)){ zustand.vorschlaege = true; $('#t-vorschlaege').checked = true; }
@@ -764,6 +819,7 @@ function detail(id){
     <div class="zeile"><button type="button" class="knopf" id="e-neu">Unterpunkt vorschlagen …</button>${n.lokal_neu?'<button type="button" class="knopf" id="e-weg">Vorschlag entfernen</button>':''}</div>
     <p class="quelle" style="margin:8px 0 0">Änderungen bleiben in diesem Browser gespeichert. Für alle sichtbar werden sie über „Exportieren“ (neue bewertung.json) und den Abgleich im Repository.</p></div>`;
   det.innerHTML = h; det.classList.add('offen'); det.scrollTop = 0;
+  if(zustand.ansicht==='karte') requestAnimationFrame(() => sichtbarHalten(id));
   $('#d-zu').onclick = () => { det.classList.remove('offen'); zustand.gewaehlt = null; render(false); hashSetzen(''); };
   det.querySelectorAll('[data-geh]').forEach(x => x.onclick = () => waehle(x.dataset.geh));
   const set = (f, v) => { const l = lokal.knoten[id] = lokal.knoten[id] || {}; l[f] = v; l.t = new Date().toISOString().slice(0,16); speichereLokal(); aufbauen(); sucheAnwenden(); bilanz(); render(false); detail(id); };

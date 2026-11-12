@@ -39,7 +39,7 @@ def build(theme):
     zeilen = [f"{MINUS} Rationalisierungsvorgabe in{NB}%", "+ Aufschlag für technisches Risiko/Ausschuss",
               "+ Mehrbedarf für Neuanläufe auf Monatsebene"]
     abgleich = [P("Kapazitätsabgleich je KST/Monat", bold=True)]
-    anpassung = [P(f"Anpassung über NN plus oder minus bzw. Mitarbeiter- oder KST-Prämissen")]
+    anpassung = [P(f"Anpassung über mehr oder weniger noch nicht namentlich besetzte Planstellen (NN-Stellen) bzw. über Mitarbeiter- oder KST-Prämissen")]
     leistung = [P("Mögliche Stundenleistung je KST/LA aus Mitarbeiterstammdaten und Prämissen", bold=True)]
 
     ZH = 3.5                                       # Zeilenhöhe der Zu- und Abschläge

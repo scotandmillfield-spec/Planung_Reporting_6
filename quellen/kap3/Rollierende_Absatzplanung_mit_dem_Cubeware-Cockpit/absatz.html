@@ -1,7 +1,8 @@
 <!-- Abb. 3.183 „Rollierende Absatzplanung“: Planungsmaske „Absatzplanung Produkt/Kunde“ (softwareneutral nachgebaut).
      Querformat 1024 px = 155 mm; Inhalt 992 px. Titelzeile wie Abb. 3.7/3.179 (Titel fett, Untertitel, Haarlinie).
      Raster (absatz.js): Block 110 · Planzeile 112 · Ø 12/6/3 Monate je 40 · Verlauf 54 · Ist 5 × 35 · Plan 12 × 35 = 991 px.
-     Je Block sechs Zeilen: Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant, Summe.
+     Vier Blöcke (Summe + drei Kunden bzw. Produkte) zu je sechs Zeilen à 21 px: Trend (Vorjahr), Ist/Plan, Aktion bestätigt,
+     Aktion geplant, Listung geplant, Summe. Auch die Summenblöcke sind planbar (Verteilung nach Verteilschlüssel, links oben).
      Zellen wie Abb. 3.179: Eingabe weiß mit Gitterlinie, Anzeige grau, Summenzeilen fett. -->
 <style>
   #absatz { width: 1024px; }
@@ -14,7 +15,8 @@
   #absatz .auswahl { display: flex; align-items: center; margin-bottom: 14px; }
   #absatz .auswahl .mk-label { flex: 0 0 auto; margin-right: 8px; }
   #absatz .auswahl .mk-feld { flex: 0 0 auto; width: 210px; margin-right: 24px; }
-  #absatz .auswahl #f-gruppe { width: 160px; }
+  #absatz .auswahl #f-auswahl { width: 180px; }
+  #absatz .auswahl #f-gruppe { width: 150px; }
   #absatz .auswahl .rechts { margin-left: auto; display: flex; gap: 8px; }
   /* Raster */
   #absatz .mx { display: grid; grid-template-columns: 110px 112px repeat(3, 40px) 54px repeat(17, 35px); }
@@ -29,8 +31,13 @@
   #absatz .mx-b { grid-row: span 6; border-bottom: 1px solid var(--rahmen); padding: 3px 6px 0 0; }
   #absatz .mx-b .mk-label { display: block; height: 18px; line-height: 18px; }
   #absatz .mx-b .mk-label:first-child { font-weight: bold; }
-  #absatz .mx-l { height: 24px; line-height: 23px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
-  #absatz .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+  #absatz .mx-b .anteil { color: var(--muted); }
+  #absatz .schl-l { grid-row: 1; grid-column: 1 / span 2; height: 21px; line-height: 21px; color: var(--muted); white-space: nowrap; }
+  #absatz .mx .mk-feld.schl-f { grid-row: 2; grid-column: 1 / span 2; width: 200px; height: 21px; line-height: 19px; padding-left: 6px;
+    border: 1px solid var(--rahmen); border-radius: 2px; background-color: #FFFFFF; }
+  #absatz .mx .mk-feld.schl-f .mk-pfeil { top: 7px; }
+  #absatz .mx-l { height: 21px; line-height: 20px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #absatz .mx .mk-feld { height: 21px; line-height: 20px; padding: 0 4px; border: 0; border-radius: 0;
     border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
   #absatz .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
   #absatz .mx .mk-feld.mk-anzeige.trenn { border-left-color: var(--rahmen); }
@@ -38,7 +45,7 @@
   #absatz .mx .summe { font-weight: bold; }
   #absatz .mx .mx-l.summe, #absatz .mx .mk-feld.summe { border-bottom: 1px solid var(--rahmen); }
   #absatz .mx .verlauf { padding: 0; }
-  #absatz .mx .verlauf svg { display: block; margin: 3px auto 0; }
+  #absatz .mx .verlauf svg { display: block; margin: 2px auto 0; }
 </style>
 <form class="mk-maske" id="absatz" autocomplete="off" novalidate>
   <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Absatzplanung Produkt/Kunde</span><span class="kopf-unter" id="kopf-unter">Absatzmenge in Stück nach Liefermonat · Stand 12.10.2027 · Bearbeitung: Frau Brandt</span></div>
@@ -49,17 +56,11 @@
       <label class="mk-label" for="f-gruppe">Kundengruppe</label>
       <select class="mk-feld" id="f-gruppe"><option value="nord" selected>Region Nord</option></select>
       <div class="rechts">
-        <button type="button" class="mk-knopf mk-zweit" id="k-drucken">Bericht drucken</button>
-        <button type="button" class="mk-knopf mk-zweit" id="k-pdf">PDF-Bericht</button>
-        <button type="button" class="mk-knopf mk-zweit" id="k-excel">Excel-Bericht</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiterrollen</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-tauschen">Kunde/Produkt tauschen</button>
       </div>
     </div>
 
     <div class="mx" id="raster"><!-- Kopfzeilen und Blöcke erzeugt absatz.js --></div>
-
-    <div class="mk-knopfleiste">
-      <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiterrollen</button>
-      <button type="button" class="mk-knopf mk-zweit" id="k-tauschen" style="margin-left:auto">Kunde/Produkt tauschen</button>
-    </div>
   </div>
 </form>

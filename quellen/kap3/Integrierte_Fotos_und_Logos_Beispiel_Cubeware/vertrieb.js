@@ -1,8 +1,8 @@
 /* Dashboard „Integrierte Fotos und Logos“ (Abb. 3.78): Monatsübersicht eines Automobilvertriebs mit Logo im Kopf,
    Foto der Verkäuferin/des Verkäufers des Monats und Produktfoto des Modells des Monats.
    Seite 1024 x 646 px. Daten: vertrieb.json (daten_vertrieb.py) – Ergebnisübersicht März mit den Werten des Originals,
-   Ergebnis je Quartal, Verkäufer und Absatz je Modell (erfunden). Die Bildflächen sind bewusst neutrale Platzhalter
-   (graue Fläche mit Symbol und Beschriftung) – keine echten Fotos und Logos.
+   Ergebnis je Quartal, Verkäufer und Absatz je Modell (erfunden). Fotos und Logo sind selbst gezeichnete, lizenzfreie
+   Illustrationen (daten_bilder.py): fiktive Personen, fiktive Modelle, Logo des fiktiven Autohauses „Lindqvar Automobile“.
    Datenschnitt Region; Klick auf eine Region (Diagramm, Tabelle) wirkt wie der Datenschnitt, Esc hebt auf. */
 (() => {
   "use strict";
@@ -20,8 +20,8 @@
 
   /* ---------- Layout ---------- */
   DK.init({ titel: "Integrierte Fotos und Logos" });
-  const bKopf = DK.box("kopf", 16, 10, 856, 46);
-  const bLogo = DK.box("logo", 888, 10, 120, 46);
+  const bKopf = DK.box("kopf", 16, 10, 826, 46);
+  const bLogo = DK.box("logo", 858, 10, 150, 46);
   DK.haarlinie(62);
   const bFilter = DK.box("filter", 16, 68, 992, 50, "dk-filter");
   const bKpi = DK.box("kpis", 16, 128, 992, 68);
@@ -79,26 +79,11 @@
   }
   const passt = (k, b) => k.find(t => DK.tw(t) <= b) || k[k.length - 1];
 
-  /* ---------- Bildplatzhalter (keine echten Fotos/Logos) ---------- */
-  function platzhalter(svg, x, y, w, h, art, zeilen, id) {
+  /* ---------- Bilder (selbst gezeichnete Illustrationen, als SVG in DATA.bilder eingebettet) ---------- */
+  const bildUrl = svg => "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  function bild(svg, x, y, w, h, quelle, id, alt) {
     const g = sv("g", { id }, svg);
-    sv("rect", { x: x + 0.5, y: y + 0.5, width: w - 1, height: h - 1, fill: "#EFEFEF", stroke: "#A9A9A9", "stroke-width": 1, "stroke-dasharray": "4 3" }, g);
-    const cx = x + w / 2, ic = art === "logo" ? { x: x + 12, y: y + h / 2 - 8 } : { x: cx - 16, y: y + h / 2 - 30 };
-    if (art === "person") {
-      sv("circle", { cx: cx, cy: ic.y + 9, r: 9, fill: "#C9C9C9" }, g);
-      sv("path", { d: `M${cx - 17},${ic.y + 36}Q${cx - 17},${ic.y + 20} ${cx},${ic.y + 20}Q${cx + 17},${ic.y + 20} ${cx + 17},${ic.y + 36}Z`, fill: "#C9C9C9" }, g);
-    } else if (art === "bild") {
-      sv("polygon", { points: `${cx - 20},${ic.y + 34} ${cx - 6},${ic.y + 14} ${cx + 4},${ic.y + 26} ${cx + 10},${ic.y + 19} ${cx + 22},${ic.y + 34}`, fill: "#C9C9C9" }, g);
-      sv("circle", { cx: cx + 12, cy: ic.y + 6, r: 5, fill: "#C9C9C9" }, g);
-    } else {
-      sv("rect", { x: ic.x, y: ic.y, width: 16, height: 16, rx: 3, fill: "#C9C9C9" }, g);
-    }
-    if (art === "logo") {
-      sv("text", { x: x + 36, y: y + h / 2 - 8, dy: "0.35em", style: "font-weight:bold;fill:#4D4D4D" }, g, zeilen[0]);
-      sv("text", { x: x + 36, y: y + h / 2 + 9, dy: "0.35em", class: "muted" }, g, zeilen[1]);
-    } else {
-      zeilen.forEach((t, i) => sv("text", { x: cx, y: ic.y + 50 + i * 17, dy: "0.35em", "text-anchor": "middle", class: i ? "muted" : "", style: i ? "" : "fill:#4D4D4D" }, g, t));
-    }
+    sv("image", { x, y, width: w, height: h, href: bildUrl(quelle), preserveAspectRatio: "xMidYMid slice", "aria-label": alt }, g);
     return g;
   }
 
@@ -172,9 +157,10 @@
 
   function verkaeuferBox(ziel, breite, hoehe, vs) {
     ziel.textContent = "";
-    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Verkäufer des Monats mit Fotoplatzhalter" }, ziel);
-    platzhalter(svg, 0, 4, 108, 140, "person", ["Foto", "(Platzhalter)"], "vk-foto");
-    const v = vs[0], x = 126, g = sv("g", { id: "vk-text" }, svg);
+    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Verkäufer des Monats mit Foto" }, ziel);
+    const v = vs[0], x = 126;
+    bild(svg, 0, 4, 108, 140, DATA.bilder.personen[v.name], "vk-foto", `Porträt ${v.name} (Illustration)`);
+    const g = sv("g", { id: "vk-text" }, svg);
     sv("text", { x, y: 14, dy: "0.35em", style: "font-weight:bold;font-size:16px" }, g, v.name);
     sv("text", { x, y: 36, dy: "0.35em", class: "muted" }, g, RG[v.ri]);
     sv("text", { x, y: 66, dy: "0.35em" }, g, `${zahl(v.fz)} Fahrzeuge, Ziel ${zahl(v.ziel)}`);
@@ -186,9 +172,10 @@
 
   function produktBox(ziel, breite, hoehe, m) {
     ziel.textContent = "";
-    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Modell des Monats mit Produktfotoplatzhalter" }, ziel);
-    platzhalter(svg, 0, 4, 150, 104, "bild", ["Produktfoto", "(Platzhalter)"], "pd-foto");
-    const [a, b] = m.liste, x = 166, g = sv("g", { id: "pd-text" }, svg);
+    const svg = sv("svg", { width: breite, height: hoehe, role: "img", "aria-label": "Modell des Monats mit Produktfoto" }, ziel);
+    const [a, b] = m.liste;
+    bild(svg, 0, 4, 150, 104, DATA.bilder.produkte[a.name], "pd-foto", `${a.name} (Illustration)`);
+    const x = 166, g = sv("g", { id: "pd-text" }, svg);
     sv("text", { x, y: 14, dy: "0.35em", style: "font-weight:bold;font-size:16px" }, g, a.name);
     sv("text", { x, y: 42, dy: "0.35em" }, g, `${zahl(a.n)} Fahrzeuge`);
     sv("text", { x, y: 62, dy: "0.35em" }, g, `${pz(a.n / m.ges)} des Absatzes`);
@@ -223,7 +210,7 @@
     [...regKnoepfe.querySelectorAll("button")].forEach((b, i) => b.setAttribute("aria-pressed", String(i === 0 ? S.region === null : S.region === i - 1)));
     DK.kopf(bKopf, { titel: "Monatsübersicht Vertrieb",
       untertitel: `Ergebnis nach Regionen · März 2027 · ${S.region === null ? "alle Regionen" : RG[S.region]} · Vergleich mit Plan (ΔPL)`,
-      quelle: "Stand 31.03.2027",
+      quelle: "Bilder: eigene Illustrationen (fiktiv) · Stand 31.03.2027",
       legende: [["#3A3F44", "Ist"], ["#FFFFFF", "Plan", "#3A3F44"], [FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
     const kpi = (label, s, fmt, einheit) => ({ label, wert: fmt(s.ist), einheit, bezug: "ΔPL",
       delta: delta(pdl(s.ist, s.plan), 1, NBSP + "%"), klasse: wirkung(pdl(s.ist, s.plan), 1, 1) });
@@ -246,7 +233,7 @@
       botschaft: passt([`${a.name}: ${zahl(a.n)} Fahrzeuge, ${pz(a.n / m.ges)} des Absatzes`, `${a.name}: ${zahl(a.n)} Fahrzeuge (${pz(a.n / m.ges)})`], 328) });
     produktBox(v.flaeche, v.breite, v.hoehe, m);
     bLogo.textContent = "";
-    platzhalter(sv("svg", { width: 120, height: 46, role: "img", "aria-label": "Platzhalter für das Logo" }, bLogo), 0, 0, 120, 46, "logo", ["Logo", "(Platzhalter)"], "lg-logo");
+    bild(sv("svg", { width: 150, height: 46, role: "img", "aria-label": "Logo " + DATA.bilder.firma }, bLogo), 0, 0, 150, 46, DATA.bilder.logo, "lg-logo", "Logo " + DATA.bilder.firma);
     if (DK._ebenenNeu) DK._ebenenNeu();
   }
 
@@ -256,7 +243,7 @@
       { nr: 1, ziel: "v-quartal", anker: "links", versatz: [600, 26], regel: "SAY – Botschaft vermitteln", titel: "Aussage statt Begrüßung",
         text: "Jedes Visual nennt in einem Satz, was es zeigt – etwa, dass im ersten Quartal nur Kontinentaleuropa über Plan liegt. Das Original begann mit „Hallo User Admin, willkommen beim … Info-System“." },
       { nr: 2, ziel: "vk-foto", anker: "links", versatz: [71, 148], regel: "SIMPLIFY – Bilder mit Informationswert", titel: "Fotos nur, wo sie etwas sagen",
-        text: "Fotos stehen dort, wo sie Inhalt tragen: bei der Verkäuferin oder dem Verkäufer des Monats und beim Modell des Monats; das Logo klein im Kopf. Das dekorative Fahrzeugbild im Kopfbanner und das Hintergrundbild hinter dem ganzen Bericht entfallen. Hier sind alle Bildflächen bewusst neutrale Platzhalter. Fotos von Beschäftigten nur mit deren Einwilligung verwenden." },
+        text: "Fotos stehen dort, wo sie Inhalt tragen: bei der Verkäuferin oder dem Verkäufer des Monats und beim Modell des Monats; das Logo klein im Kopf. Das dekorative Fahrzeugbild im Kopfbanner und das Hintergrundbild hinter dem ganzen Bericht entfallen. Person, Modell und Logo des Autohauses „Lindqvar Automobile“ sind frei erfunden und selbst gezeichnet (lizenzfreie Illustrationen); Foto und Produktbild wechseln mit dem Datenschnitt. Fotos von Beschäftigten nur mit deren Einwilligung verwenden." },
       { nr: 3, ziel: "v-quartal", anker: "links", versatz: [272, 149], regel: "EXPRESS – Passende Visualisierung", titel: "Säulen statt überlagerter Flächen",
         text: "Das Original zeigte vier geglättete, halbtransparente Flächen übereinander; wo sie sich überlagerten, entstanden Mischfarben, und negative Werte verschwanden hinter anderen Flächen. Jetzt hat jede Region ein eigenes kleines Diagramm mit gleichem Maßstab." },
       { nr: 4, ziel: "kopf-legende", anker: "links", versatz: [-6, -2], regel: "UNIFY – Semantische Notation", titel: "Ist, Plan und Wirkung",

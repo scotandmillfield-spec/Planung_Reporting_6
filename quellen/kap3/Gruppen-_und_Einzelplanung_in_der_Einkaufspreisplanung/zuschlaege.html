@@ -1,0 +1,104 @@
+<!-- Abb. 3.186 (zusammengeführt mit Abb. 3.187) „Exemplarische Zuschläge in der Einkaufspreisplanung“:
+     Gruppen- und Einzelplanung in einer Maske „Materialpreisplanung“ (softwareneutral nachgebaut).
+     Oben die Gruppenplanung mit je einem Preisänderungsfaktor für Lieferantengruppe und Warengruppe (aus den Original-
+     masken „Lieferantenkonditionen“ und „MatPreisPlanung Umwertung“), darunter die Einzelplanung je Lieferant und
+     Material (aus der Maske „Preisplanung“). Planpreis-Vorschlag = Brutto × Faktor Lieferantengruppe × Faktor Warengruppe,
+     je Position überschreibbar (fett). Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Raster Lieferantengruppen: Nr. 56 · Bezeichnung 170 · Faktor 86 · Positionen 80 · Volumen 100 = 492 px;
+     Raster Warengruppen: Nr. 56 · Bezeichnung 154 · Faktor 86 · Positionen 80 · Volumen 100 = 476 px; Abstand 24 px.
+     Raster Positionen: Lieferant 126 · Material 70 · Bezeichnung 170 · WG 36 · Menge 64 · Brutto 72 · Faktor 56/56 ·
+     Planpreis 80 · Ø-Preis 72 · Volumen 76 · Abweichung 62/52 = 992 px. Zellen wie Abb. 3.179/3.183. -->
+<style>
+  #zuschlaege { width: 1024px; }
+  #zuschlaege .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #zuschlaege .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #zuschlaege .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #zuschlaege .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  #zuschlaege .gruppen { display: grid; grid-template-columns: 492px 476px; column-gap: 24px; align-items: start; }
+  /* Raster */
+  #zuschlaege .mx { display: grid; }
+  #zuschlaege #raster-lg { grid-template-columns: 56px 170px 86px 80px 100px; }
+  #zuschlaege #raster-wg { grid-template-columns: 56px 154px 86px 80px 100px; }
+  #zuschlaege #raster-pos { grid-template-columns: 126px 70px 170px 36px 64px 72px 56px 56px 80px 72px 76px 62px 52px; }
+  #zuschlaege .mx-k { height: 21px; line-height: 21px; padding: 0 4px; text-align: right; color: var(--muted);
+    white-space: nowrap; overflow: hidden; }
+  #zuschlaege .mx-k.links { text-align: left; }
+  #zuschlaege .mx-k.gruppe { text-align: left; color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen); margin-left: 4px; }
+  #zuschlaege .mx-k.k2 { border-bottom: 1px solid var(--ac); }
+  #zuschlaege .mx-k.unten { height: 42px; padding-top: 21px; }
+  #zuschlaege .mx-b { border-bottom: 1px solid var(--rahmen); padding: 3px 4px 0 4px; }
+  #zuschlaege .mx-b .mk-label { display: block; height: 18px; line-height: 18px; }
+  #zuschlaege .mx-b .mk-label:first-child { font-weight: bold; }
+  #zuschlaege .mx-l { height: 24px; line-height: 23px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #zuschlaege .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #zuschlaege .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #zuschlaege .mx .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #zuschlaege .mx .mk-feld.ueber { font-weight: bold; }
+  #zuschlaege .mx .summe { font-weight: bold; }
+  #zuschlaege .mx .mx-l.summe { border-bottom: 0; border-top: 1px solid var(--ac); }
+  #zuschlaege .mx .mk-feld.summe { border-top: 1px solid var(--ac); height: 25px; }
+  #zuschlaege .mx .leer { border-top: 1px solid var(--ac); height: 25px; }
+</style>
+<form class="mk-maske" id="zuschlaege" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Materialpreisplanung</span><span class="kopf-unter" id="kopf-unter">Budget 2028 · Planversion 51 · Werk 1010 · Mengen in Stück, Preise in € je 100 Stück, Faktoren ohne Einheit · fett: einzeln überschrieben</span></div>
+  <div class="mk-inhalt">
+
+    <section class="mk-abschnitt" id="abschnitt-gruppe">
+      <div class="mk-band" id="band-gruppe">Gruppenplanung: Preisänderungsfaktoren</div>
+      <div class="gruppen">
+        <div class="mx" id="raster-lg">
+          <div class="mx-k gruppe" id="h-lg" style="grid-row:1;grid-column:1 / span 2">Lieferantengruppe</div>
+          <div class="mx-k k2 unten" id="h-lg-faktor" style="grid-row:1 / span 2;grid-column:3">Faktor</div>
+          <div class="mx-k k2 unten" style="grid-row:1 / span 2;grid-column:4">Positionen</div>
+          <div class="mx-k k2 unten" id="h-lg-vol" style="grid-row:1 / span 2;grid-column:5">Volumen in €</div>
+          <div class="mx-k links k2" style="grid-row:2;grid-column:1">Nr.</div>
+          <div class="mx-k links k2" style="grid-row:2;grid-column:2">Bezeichnung</div>
+          <!-- Zeilen erzeugt zuschlaege.js -->
+        </div>
+        <div class="mx" id="raster-wg">
+          <div class="mx-k gruppe" id="h-wg" style="grid-row:1;grid-column:1 / span 2">Warengruppe</div>
+          <div class="mx-k k2 unten" id="h-wg-faktor" style="grid-row:1 / span 2;grid-column:3">Faktor</div>
+          <div class="mx-k k2 unten" style="grid-row:1 / span 2;grid-column:4">Positionen</div>
+          <div class="mx-k k2 unten" style="grid-row:1 / span 2;grid-column:5">Volumen in €</div>
+          <div class="mx-k links k2" style="grid-row:2;grid-column:1">Nr.</div>
+          <div class="mx-k links k2" style="grid-row:2;grid-column:2">Bezeichnung</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-pos">
+      <div class="mk-band" id="band-pos">Einzelplanung je Lieferant und Material</div>
+      <div class="mx" id="raster-pos">
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:1">Lieferant</div>
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:2">Material</div>
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:3">Bezeichnung</div>
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:4">WG</div>
+        <div class="mx-k" style="grid-row:1;grid-column:5">Menge</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:5">in Stück</div>
+        <div class="mx-k" style="grid-row:1;grid-column:6">Brutto</div>
+        <div class="mx-k k2" id="h-brutto" style="grid-row:2;grid-column:6">in €</div>
+        <div class="mx-k gruppe" id="h-faktor" style="grid-row:1;grid-column:7 / span 2">Faktor</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:7">LG</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:8">WG</div>
+        <div class="mx-k" style="grid-row:1;grid-column:9">Planpreis</div>
+        <div class="mx-k k2" id="h-pp" style="grid-row:2;grid-column:9">in €</div>
+        <div class="mx-k" style="grid-row:1;grid-column:10">Ø-Preis</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:10">lfd. Jahr</div>
+        <div class="mx-k" style="grid-row:1;grid-column:11">Volumen</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:11">in €</div>
+        <div class="mx-k gruppe" id="h-abw" style="grid-row:1;grid-column:12 / span 2">Abweichung</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:12">in €</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:13">in %</div>
+        <!-- Zeilen erzeugt zuschlaege.js -->
+      </div>
+    </section>
+
+    <div class="mk-knopfleiste">
+      <button type="button" class="mk-knopf" id="k-sichern">Sichern</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-uebernahme">Konditionen übernehmen</button>
+    </div>
+  </div>
+</form>

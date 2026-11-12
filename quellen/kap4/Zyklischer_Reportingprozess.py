@@ -1,7 +1,7 @@
 """Abb. 4.17 – Zyklischer Reportingprozess."""
 # Muster (identisch mit Abb. 4.13 Zyklischer Planungsprozess): Phasen links als senkrechte Kette (box_hi, fett)
-# mit Pfeilen, Tätigkeiten je Phase rechts daneben als Aufzählung. Der Rückpfeil links von der letzten zur
-# ersten Phase zeigt den Zyklus. Bildtitel „Zyklischer Reportingprozess“ entfällt (steht in der Caption).
+# mit Pfeilen, Tätigkeiten je Phase rechts daneben als Aufzählung. Der Rückpfeil von der letzten zur ersten
+# Phase entfällt auf Wunsch der Prüfer (Revision 11/2026). Bildtitel „Zyklischer Reportingprozess“ entfällt (steht in der Caption).
 STEM = "Zyklischer_Reportingprozess"
 from bookfig import Fig, P
 
@@ -10,7 +10,7 @@ PHASEN = [
     ("Berichterstellung", [
         "Informationsbeschaffung und -transformation",
         "Informationsaufbereitung und -verdichtung",
-        "Berichterstellung",
+        "Berichtsgenerierung",
     ]),
     ("Analysevorbereitung", [
         "Plausibilisierung",
@@ -30,8 +30,7 @@ PHASEN = [
 
 # ---- gemeinsame Geometrie mit Abb. 4.13 ----
 XR = W - 0.3
-XL = 1.4                         # Rückpfeil (senkrechter Abschnitt)
-PX, PW = 4.6, 31.0               # Phasenspalte
+PX, PW = 0.3, 31.0               # Phasenspalte
 AX = PX + PW + 1.6               # Tätigkeiten
 AW = XR - AX
 GAP = 4.2                        # Abstand der Phasen (Pfeil)
@@ -61,8 +60,4 @@ def build(theme):
               name=f"Tätigkeiten {ph}"[:40])
         if i:
             f.arrow([(pcx, ys[i - 1] + hs[i - 1]), (pcx, y)], name=f"Pfeil Phase {i}→{i + 1}")
-    # Rückpfeil: letzte Phase → erste Phase (Zyklus)
-    ya = ys[-1] + hs[-1] / 2
-    ye = ys[0] + hs[0] / 2
-    f.arrow([(PX, ya), (XL, ya), (XL, ye), (PX, ye)], name="Rückpfeil Zyklus")
     return f

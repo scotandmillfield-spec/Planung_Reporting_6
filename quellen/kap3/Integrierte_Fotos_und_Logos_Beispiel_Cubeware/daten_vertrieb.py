@@ -5,13 +5,17 @@ der Plan ist aus Ist und Abweichung zurückgerechnet (bei negativem Plan: Abweic
 Regionen statt der Gesellschaftsnamen des Originals (Motor Union Australia → Australien, Rolling North Americas →
 Nordamerika, Motorcars of UK → Großbritannien, United European Car Dealers → Kontinentaleuropa).
 Ergebnis je Quartal (Tsd. €): Q1 Ist und Plan Q1 bis Q4 in Anlehnung an das Flächendiagramm des Originals.
-Verkäufer und Modelle (Fahrzeuge im März) sind erfunden. Ausgabe: vertrieb.json und vertrieb.csv.
+Verkäufer und Modelle (Fahrzeuge im März) sind erfunden. Porträts, Produktansichten und das Logo des erfundenen
+Autohauses „Lindqvar Automobile“ sind selbst gezeichnete, lizenzfreie Illustrationen (daten_bilder.py, bilder/). Ausgabe: vertrieb.json und vertrieb.csv.
 """
 import csv
 import json
 import os
+import sys
 
 HIER = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HIER)
+sys.dont_write_bytecode = True
 REGIONEN = ["Kontinentaleuropa", "Nordamerika", "Australien", "Großbritannien"]       # nach Umsatz
 KENNZAHLEN = ["Umsatzerlöse", "Rohertrag", "Ergebnis"]
 # März 2027: Ist in € und Abweichung zum Plan in % (Original)
@@ -48,7 +52,14 @@ maerz = [[ri, ki, ist, plan(ist, p)] for ri, r in enumerate(REGIONEN) for ki, (i
 quartal = [[ri, qi, QUARTAL[r][0] if qi == 0 else None, QUARTAL[r][1][qi]] for ri, r in enumerate(REGIONEN) for qi in range(4)]
 verk = [[REGIONEN.index(r), n, f, u, z] for r, n, f, u, z in VERKAEUFER]
 absatz = [[ri, mi, ABSATZ[r][mi]] for ri, r in enumerate(REGIONEN) for mi in range(len(MODELLE))]
-json.dump({"monat": "2027-03", "stand": "2027-03-31", "regionen": REGIONEN, "kennzahlen": KENNZAHLEN, "modelle": MODELLE,
+# Selbst gezeichnete Illustrationen (daten_bilder.py) einbetten: Porträt je Verkäufer, Seitenansicht je Modell, Logo
+import daten_bilder as DB  # noqa: E402
+bilder = {"logo": DB.LOGO,
+          "personen": {n: DB.portraet(p, i) for i, (n, p) in enumerate(DB.PERSONEN.items())},
+          "produkte": {m: DB.produkt(m, i) for i, m in enumerate(DB.MODELLBAU)},
+          "firma": "Lindqvar Automobile"}
+assert set(bilder["personen"]) == {v[1] for v in VERKAEUFER} and set(bilder["produkte"]) == set(MODELLE)
+json.dump({"bilder": bilder, "monat": "2027-03", "stand": "2027-03-31", "regionen": REGIONEN, "kennzahlen": KENNZAHLEN, "modelle": MODELLE,
            "maerz": maerz, "quartal": quartal, "verkaeufer": verk, "absatz": absatz},
           open(os.path.join(HIER, "vertrieb.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 with open(os.path.join(HIER, "vertrieb.csv"), "w", newline="", encoding="utf-8-sig") as fh:

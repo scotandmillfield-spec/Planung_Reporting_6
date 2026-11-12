@@ -664,6 +664,240 @@
    "schluessel": "abb-5-64",
    "kommentar": "Verschoben mit Abschnitt Machine Learning, Deep Learning und Neuronale Netze (bisher 5.9.2) nach 6.1.2 im neuen Kapitel 6 (11.11.2026); Abbildungsnummer im Buch ändert sich. Siehe Update Notes.",
    "zeit": "2026-11-11T23:35"
+  },
+  {
+   "id": "2026-11-12-tab-3-1-1",
+   "schluessel": "tab-3-1",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die LaTeX-Fassung der Tabelle entfällt; im Buch steht nur noch die Abbildung.",
+   "auftrag": "5d4d73951ef1",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-tab-3-2-1",
+   "schluessel": "tab-3-2",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Überschrift „Produkt“ über den Spalten ist entfernt; die Tabelle beginnt direkt mit den Spaltenköpfen Produkt 1 bis 4.",
+   "auftrag": "6211914b42cd",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-78-1",
+   "schluessel": "abb-3-78",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Ein Foto einer fiktiven Verkäuferin, ein Produktbild eines fiktiven Fahrzeugmodells und das Logo eines erfundenen Autohauses sind eingefügt. Alle Bilder sind eigens erstellte, lizenzfreie Illustrationen ohne echte Personen oder Marken; in der interaktiven Fassung wechseln Foto und Produktbild mit der gewählten Region.",
+   "auftrag": "9fa6aca999f6",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-180-1",
+   "schluessel": "abb-3-180",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Im Beispiel stehen nur noch die Register „Manuelle Planung“ und „Verteilung“; alle anderen Register sind entfernt, auch die Erläuterungen der Online-Fassung nennen nur noch diese beiden Funktionen.",
+   "auftrag": "1916b17bfe6b",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-182-1",
+   "schluessel": "abb-3-182",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Link je Perspektive heißt jetzt „Maßnahmen pflegen“, und alle Planwerte ab 2028 sind als Eingabezellen dargestellt. Die Caption lautet nun „Exemplarische Balanced-Scorecard-Planung (In Anlehnung an Schön et al. 2010, S. 25)“, ohne Produktnamen.",
+   "auftrag": "55f085009fd2",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-183-1",
+   "schluessel": "abb-3-183",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Auch die Summenzeile „Alle Kunden“ ist planbar: Ein dort eingegebener Wert wird top-down auf die Kunden verteilt, standardmäßig im Verhältnis ihrer Istmengen (Verteilschlüssel wählbar, Anteile sichtbar). Es werden jetzt drei Kunden und drei Produkte gezeigt; die Buttons Drucken, PDF und Excel sind entfernt.",
+   "auftrag": "d62db4f4e023",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-184-1",
+   "schluessel": "abb-3-184",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Abb. 3.184 und 3.185 sind in einer Maske zusammengeführt: oben die Gruppenplanung (Savings je Materialgruppe, Rabatt und Skonto je Kundengruppe), darunter die Positionen je Kunde und Artikel, die die Gruppenwerte übernehmen und einzeln überschreibbar sind (fett). Neue Caption: „Gruppen- und Einzelplanung von Preisveränderungen und Konditionen (In Anlehnung an Schön und Irmer 2010, S. 52)“.",
+   "auftrag": "89b29244e790",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-185-1",
+   "schluessel": "abb-3-185",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Der Inhalt von Abb. 3.185 ist jetzt in Abb. 3.184 enthalten (Gruppen- und Einzelplanung in einer Maske). Soll Abb. 3.185 entfallen (Nummerierung und Textverweise ändern sich), oder soll sie als Detailansicht bleiben?",
+   "auftrag": "89b29244e790",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-186-1",
+   "schluessel": "abb-3-186",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Abb. 3.186 und 3.187 sind in einer Maske zusammengeführt: oben je Lieferantengruppe und Warengruppe ein Preisänderungsfaktor, darunter die Planpreise je Lieferant-Produkt-Kombination, deren Vorschlag sich aus Bruttopreis mal beiden Faktoren ergibt und einzeln überschreibbar ist. Der getrennte MTZ-Faktor und die Werksdimension entfallen zugunsten der Übersicht; neue Caption „Gruppen- und Einzelplanung in der Einkaufspreisplanung (In Anlehnung an Schön und Irmer 2009, S. 296, und Schön und Irmer 2010, S. 54)“.",
+   "auftrag": "547869e6e641",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-187-1",
+   "schluessel": "abb-3-187",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Der Inhalt von Abb. 3.187 ist jetzt in Abb. 3.186 enthalten (Gruppen- und Einzelplanung in einer Maske). Soll Abb. 3.187 entfallen (Nummerierung und Textverweise ändern sich), oder soll sie als Detailansicht bleiben?",
+   "auftrag": "547869e6e641",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-188-1",
+   "schluessel": "abb-3-188",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Abkürzung ist ausgeschrieben: „Anpassung über mehr oder weniger noch nicht namentlich besetzte Planstellen (NN-Stellen) bzw. über Mitarbeiter- oder KST-Prämissen“.",
+   "auftrag": "0c94cab74ce0",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-191-1",
+   "schluessel": "abb-3-191",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Filter Profit-Center ist entfernt, Werk, Kostenstelle und Arbeitsplatz bieten mehrere Beispiele, die Leistungsart lautet „Maschinenstunden fix“, und die Monatsreihe beginnt mit Januar. Neu sind die Spalten Kapazitätsangebot und Abweichung (Engpässe hervorgehoben); die Register Kapazitätsbedarf Personal und Kapazitätsangebot sind entfernt, die Caption steht ohne Produktnamen.",
+   "auftrag": "d32c51a4bf5b",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-3-194-1",
+   "schluessel": "abb-3-194",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das Beispiel umfasst jetzt Gesamt, drei Produktgruppen und sechs Einzelprodukte; vier Modelle (saisonale Regression, ARIMA, Holt-Winters, Prophet-Ansatz) werden mit Prognose, Intervall und MAPE im Testjahr verglichen, das beste Modell ist hervorgehoben. Die Druckfassung zeigt die Küchengeräte mit Modellvergleichstabelle und ist dafür auf volle Satzspiegelbreite gewachsen; Prophet ist im Ansatz nachgebildet.",
+   "auftrag": "084ac0b28ea1",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-2-1",
+   "schluessel": "abb-4-2",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Kasten „Konzern“ ist jetzt wie alle anderen Kästen formatiert: gleiche Größe, grau gefüllt, durchgezogene statt gestrichelte Kontur.",
+   "auftrag": "3845e2418876",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-5-1",
+   "schluessel": "abb-4-5",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Spartendimension heißt „Divisional oder regional“, die Niederlassungen sind als dritte Dimension in gestaffelten Ebenen dargestellt, und Pfeile zeigen in alle drei Richtungen. Unter der Matrix steht in Rot „Reporting/Planung ist auf die Matrixorganisation ausgerichtet“.",
+   "auftrag": "8476e274aa53",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-8-1",
+   "schluessel": "abb-4-8",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Abbildung verwendet durchgehend „Reporting- und Planungsprozesse“; die Caption lautet jetzt ebenfalls „Reporting- und Planungsprozesse“.",
+   "auftrag": "4dcbe87b55ba",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-10-1",
+   "schluessel": "abb-4-10",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Gesamtbewertung der Planungs- bzw. Berichtsinhalte ist jetzt der Durchschnitt ihrer Unterpunkte (Planung −0,2 statt −1, Reporting −0,5 statt 0) und mit Ø gekennzeichnet; alle Bewertungen stehen einheitlich mit einer Nachkommastelle.",
+   "auftrag": "842b3c9047a9",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-tab-4-8-1",
+   "schluessel": "tab-4-8",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "„Deckungsgrad II“ ist durch „Anlagendeckung“ ersetzt, und die Zielgröße steht auch im Text einheitlich bei 110–150 %. Zur Frage: Die Vorschau der Tabelle wird aus dem LaTeX-Code gesetzt; das dafür nötige Satzprogramm fehlte bei der letzten Änderung in der Arbeitsumgebung. Diesmal ist es eingerichtet, die Vorschau zeigt den aktuellen Stand.",
+   "auftrag": "dbfe0e26b8d3",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-11-1",
+   "schluessel": "abb-4-11",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die strategische Planung lag im Planungskalender bereits im August/September (19.08.–16.09.); angeglichen wurde der Reportingkalender. Die Caption lautet jetzt „Planungskalender“, ohne Produktnamen.",
+   "auftrag": "76614a8bff27",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-12-1",
+   "schluessel": "abb-4-12",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Abbildung ist vereinfacht und auf 2027/2028 umgestellt: eine Zeile Planung 2027, drei Zeilen YTE-Prognose ab Anfang Q2, Q3 und Q4 bis Jahresende und drei Zeilen rollierende Planung ab Anfang Q2, Q3 und Q4 bis Ende Q1, Q2 bzw. Q3 2028. Das jeweils vorliegende Ist ist dunkel vorangestellt, eine Fußnote erklärt YTE.",
+   "auftrag": "65470a5152e8",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-13-1",
+   "schluessel": "abb-4-13",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der rücklaufende Pfeil von der letzten zur ersten Phase ist gelöscht.",
+   "auftrag": "5fb93bd3dee6",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-14-1",
+   "schluessel": "abb-4-14",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "„Konzentrierte Planung“ heißt jetzt „Aggregierte Planung“; die Pfeilspitzen sind kleiner und haben mehr Abstand zur Linie.",
+   "auftrag": "b6156ae75901",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-15-1",
+   "schluessel": "abb-4-15",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die strategische Planung liegt jetzt wie im Planungskalender im August/September (19.08.–16.09.) statt im Januar/Februar. Die Caption lautet „Reportingkalender“, ohne Produktnamen.",
+   "auftrag": "76614a8bff27",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-16-1",
+   "schluessel": "abb-4-16",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Zeitachse zeigt nur noch Arbeitstage, passend zur Dauer in Arbeitstagen; statt der Wahl Kalendertage/Arbeitstage gibt es in der interaktiven Fassung eine Auswahl Tage oder Wochen, die Druckfassung zeigt Tage. Die Caption lautet „Reportingkalender Monatsabschluss“, ohne Produktnamen.",
+   "auftrag": "7942b353e6ba",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-17-1",
+   "schluessel": "abb-4-17",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der rücklaufende Pfeil ist gelöscht, und die Tätigkeit in der Phase „Berichterstellung“ heißt jetzt „Berichtsgenerierung“, damit Phase und Tätigkeit nicht mehr gleich lauten.",
+   "auftrag": "6b4fee146ef7",
+   "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-12-abb-4-24-1",
+   "schluessel": "abb-4-24",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Abbildung ist jetzt ein Prozessschaubild: Die Informationsbedarfsanalyse und -änderungen stehen oben als Auslöser und stoßen die vier Prüfungen (Prozess, Organisation, Daten, Informationssystem) an, die nebeneinander parallel laufen.",
+   "auftrag": "15cb88af9003",
+   "zeit": "2026-11-12T11:14"
   }
  ],
  "neue_zeilen": [

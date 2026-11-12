@@ -236,7 +236,8 @@
     "Visual 110 mm breit mit denselben fünf Positionen; Einheiten im Titel („Menge in Stück, Preis und Umsatz in €“) – Annahme wie oben",
     "Schlüssel (Auftrags-, Artikelnummer) linksbündig, Werte rechtsbündig; Klick auf eine Auftrags- bzw. Artikelnummer hebt alle zugehörigen Positionen hervor, Tooltip mit Rechnung Menge × Preis und Anteilen",
     "Neu: Ansicht „Pivotiert: Auftrag × Artikel“ (Wertfeld Umsatz oder Menge, Summen am Rand, leere Kombination „–“) als Brücke zu Tab. 3.2 – Preis bewusst nicht als Wertfeld (nicht additiv)",
-    "Hinweis: Tab. 3.1 und Tab. 3.2 haben im Original keinen gemeinsamen Datensatz (Aufträge/Artikel bzw. Kunden/Produkte); die Werte bleiben getrennt wie im Original"
+    "Hinweis: Tab. 3.1 und Tab. 3.2 haben im Original keinen gemeinsamen Datensatz (Aufträge/Artikel bzw. Kunden/Produkte); die Werte bleiben getrennt wie im Original",
+    "LaTeX-Fassung entfallen (Wunsch MD 11.11.2026): im Buch nur die Abbildung"
    ],
    "alt": "Flache Tabelle mit fünf Auftragspositionen und den Spalten Auftragsnummer, Artikelnummer, Menge, Preis und Umsatz: Auftrag 10001 mit Artikel 20101 (2 × 10 = 20 €) und 20201 (1 × 20 = 20 €), Auftrag 10002 mit Artikel 20101 (3 × 10 = 30 €), 20201 (4 × 20 = 80 €) und 20203 (1 × 15 = 15 €). Jede Zeile ist ein Datensatz; zusammen ergeben sich 165 € Umsatz.",
    "revisionen": [
@@ -247,6 +248,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?"
+    },
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 MD: Es bleibt hier nur die Abbildung"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die LaTeX-Fassung der Tabelle entfällt; im Buch steht nur noch die Abbildung."
     }
    ]
   },
@@ -270,6 +279,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Die Tabelle liegt als Abbildung (PNG) vor; zusätzlich gibt es eine LaTeX-Tabelle. Soll die LaTeX-Fassung entfallen und nur die Abbildung bleiben, oder soll etwas an der Abbildung selbst geändert werden – und wenn ja, was?"
+    },
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Überschrift Produkt nicht notwendig. (ohne Überschrift darstellen)."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Überschrift „Produkt“ über den Spalten ist entfernt; die Tabelle beginnt direkt mit den Spaltenköpfen Produkt 1 bis 4."
     }
    ]
   },
@@ -341,7 +358,17 @@
     "Online: Schalter 80 %/95 %, Klick auf einen Monat zeigt seine Werte, Tooltip mit Ist/Modell bzw. beiden Intervallen",
     "Caption ohne Produktnamen? z. B. „Liniendiagramm mit Prognosewerten sowie Prognoseintervallen“ – Dateiname enthält „SAP_Analytics_Cloud“"
    ],
-   "alt": "Liniendiagramm des monatlichen Absatzes in Stück von Januar 2024 bis Dezember 2028. Bis Juni 2027 zeigen eine anthrazitfarbene Linie die Istwerte und eine dünne graue Linie die Modellwerte (MAPE 9,4 %); ab Juli 2027 folgt die grau gestrichelte Prognose in einem hellgrauen 95-%-Prognoseintervall von rund ±250 Stück je Monat. Das Saisonmuster mit schwachem Januar und März setzt sich fort; für 2028 werden 10.569 Stück prognostiziert (+4,0 % zu 2027)."
+   "alt": "Absatzprognose der Produktgruppe Küchengeräte mit Ist von Januar 2024 bis Juni 2027 und Prognose bis Dezember 2028 samt 95-%-Intervall nach dem besten Modell (ARIMA); das Testjahr Juli 2026 bis Juni 2027 ist hinterlegt. Darunter vergleicht eine Tabelle vier Modelle (ARIMA, Holt-Winters, Prophet-Ansatz, saisonale Regression) nach MAPE im Testjahr; ARIMA ist mit 5,0 % am besten.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Datenbeispiele für verschiedene Produktgruppen oder Einzelprodukte ergänzen. Auswahl Statistischer Modelle mit unterschiedlichen Ergebnisausweis: z.B. saisonale Regression, Arima, Holt-Winters, Prophet ....Bestes Model hervorheben."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das Beispiel umfasst jetzt Gesamt, drei Produktgruppen und sechs Einzelprodukte; vier Modelle (saisonale Regression, ARIMA, Holt-Winters, Prophet-Ansatz) werden mit Prognose, Intervall und MAPE im Testjahr verglichen, das beste Modell ist hervorgehoben. Die Druckfassung zeigt die Küchengeräte mit Modellvergleichstabelle und ist dafür auf volle Satzspiegelbreite gewachsen; Prophet ist im Ansatz nachgebildet."
+    }
+   ]
   },
   "3.195": {
    "status": "pruefung",
@@ -378,7 +405,17 @@
     "Abkürzungsliste unten links beibehalten (6,5 pt, Grau), da die Kästen für ausgeschriebene Begriffe zu schmal wären",
     "Kein Rot, da kein Element als zentral markiert ist"
    ],
-   "alt": "Organigramm eines Konzerns mit drei Teilkonzernen (TK). TK 1 und TK 2 sind gemeinsam mit den strategischen Geschäftseinheiten SGE 1 und SGE 2 verflochten, denen die Einzelgesellschaften EG 1 bis EG 4 zugeordnet sind; unter TK 3 stehen EG 5 und EG 6, die gemeinsam den Geschäftseinheiten SGE 3 und SGE 4 zugeordnet sind. Die Abbildung zeigt, dass Gesellschafts- und Geschäftseinheitenstruktur nicht deckungsgleich sein müssen."
+   "alt": "Organigramm eines Konzerns mit drei Teilkonzernen (TK). TK 1 und TK 2 sind gemeinsam mit den strategischen Geschäftseinheiten SGE 1 und SGE 2 verflochten, denen die Einzelgesellschaften EG 1 bis EG 4 zugeordnet sind; unter TK 3 stehen EG 5 und EG 6, die gemeinsam den Geschäftseinheiten SGE 3 und SGE 4 zugeordnet sind. Die Abbildung zeigt, dass Gesellschafts- und Geschäftseinheitenstruktur nicht deckungsgleich sein müssen.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Konzern wie andere Kästchen formatieren."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Kasten „Konzern“ ist jetzt wie alle anderen Kästen formatiert: gleiche Größe, grau gefüllt, durchgezogene statt gestrichelte Kontur."
+    }
+   ]
   },
   "4.3": {
    "status": "pruefung",
@@ -411,7 +448,17 @@
     "„NL 1 ..n,“ → „Niederlassung 1–n“ (Abkürzung aufgelöst, überzähliges Komma und Punkte entfernt), eigene Kopfzeile unter den Sparten",
     "Kein Rot, da kein Element als zentral markiert ist"
    ],
-   "alt": "Matrix aus zwei Dimensionen: In den Spalten stehen divisional bzw. regional die Sparten 1 bis n mit jeweils den Niederlassungen 1 bis n, in den Zeilen funktional Vertrieb, Einkauf und weitere Funktionen. Die leeren Schnittfelder stehen für die Einheiten, die beiden Dimensionen zugleich unterstellt sind."
+   "alt": "Matrixorganisation mit drei Dimensionen: Sparten (divisional oder regional) waagerecht, Funktionen senkrecht und Niederlassungen als gestaffelte Ebenen in die Tiefe, jeweils mit Richtungspfeil. Darunter in Rot: Reporting/Planung ist auf die Matrixorganisation ausgerichtet.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Divisional oder Regional. Niederlassungen in einer dritten Dimension zeigen. roter Text hinzufügen Reporting/Planung ist auf die Matrixorganisation ausgerichtet. mit mehrdimensionaler Pfeilausrichtung visualisieren."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Spartendimension heißt „Divisional oder regional“, die Niederlassungen sind als dritte Dimension in gestaffelten Ebenen dargestellt, und Pfeile zeigen in alle drei Richtungen. Unter der Matrix steht in Rot „Reporting/Planung ist auf die Matrixorganisation ausgerichtet“."
+    }
+   ]
   },
   "4.6": {
    "status": "pruefung",
@@ -436,14 +483,25 @@
   },
   "4.8": {
    "status": "pruefung",
-   "datei": "Prozesse_der_Planung_und_des_Reportings",
+   "datei": "Reporting-_und_Planungsprozesse",
    "kommentare": [
     "Baum wie im Original: Wurzel grau hinterlegt, drei gleich große Teilprozesse über eine Sammelleitung (Linien ohne Spitzen)",
     "Silbentrennung der Kästen („Einführungs-/prozess“) entfällt, wo der Platz reicht",
     "Kein Rot, da kein Teilprozess hervorgehoben ist",
     "Kastentext „Reporting- und Planungsprozesse“ unverändert, Caption lautet „Prozesse der Planung und des Reportings“ – vereinheitlichen?"
    ],
-   "alt": "Baumdiagramm: Die Reporting- und Planungsprozesse gliedern sich in drei Teilprozesse – Einführungsprozess, zyklischer Durchführungsprozess und Qualitätssicherungsprozess."
+   "alt": "Baumdiagramm: Die Reporting- und Planungsprozesse gliedern sich in drei Teilprozesse – Einführungsprozess, zyklischer Durchführungsprozess und Qualitätssicherungsprozess.",
+   "caption": "Reporting- und Planungsprozesse",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Reporting- und Planungsprozesse einheitlich auch in Caption"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abbildung verwendet durchgehend „Reporting- und Planungsprozesse“; die Caption lautet jetzt ebenfalls „Reporting- und Planungsprozesse“."
+    }
+   ]
   },
   "4.9": {
    "status": "pruefung",
@@ -1091,7 +1149,17 @@
     "„…“ → „weitere Teilpläne“; neu: Datenschnitt Bereich (Planung/Reporting, Reporting-Werte erfunden) und Schalter „nach Bewertung“ (schwächste Felder oben)",
     "Caption „Scoring-Analyse (hier der Bereich Planung)“ passt; Abgrenzung zu Abb. 3.27 („Scoring-Analyse im Produktvergleich“) ist gegeben"
    ],
-   "alt": "Scoring-Analyse für den Bereich Planung mit einem Datenschnitt für den Bereich. Je Analysefeld steht die Bewertung auf einer Skala von −4 (Worst Practice) über 0 (Durchschnitt) bis +4 (Best Practice), daneben ein Balken von der Durchschnittslinie: Planungsinhalte −1 mit den Teilplänen Absatz-, Kosten- und Finanzplanung (je ±0), Einkaufsplanung (+1), Ergebnisplanung und weitere Teilpläne (je −1), danach Planungsprozesse (−2), Planungsorganisation (±0) und IT-Unterstützung (+1). Am schwächsten sind die Planungsprozesse, über dem Durchschnitt liegen nur Einkaufsplanung und IT-Unterstützung."
+   "alt": "Scoring-Analyse für den Bereich Planung mit einem Datenschnitt für den Bereich. Je Analysefeld steht die Bewertung auf einer Skala von −4 (Worst Practice) über 0 (Durchschnitt) bis +4 (Best Practice), daneben ein Balken von der Durchschnittslinie: Planungsinhalte −1 mit den Teilplänen Absatz-, Kosten- und Finanzplanung (je ±0), Einkaufsplanung (+1), Ergebnisplanung und weitere Teilpläne (je −1), danach Planungsprozesse (−2), Planungsorganisation (±0) und IT-Unterstützung (+1). Am schwächsten sind die Planungsprozesse, über dem Durchschnitt liegen nur Einkaufsplanung und IT-Unterstützung.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Reportinginhalte: Durchschnitt bitte aus Unterpunkten richtig berechnen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Gesamtbewertung der Planungs- bzw. Berichtsinhalte ist jetzt der Durchschnitt ihrer Unterpunkte (Planung −0,2 statt −1, Reporting −0,5 statt 0) und mit Ø gekennzeichnet; alle Bewertungen stehen einheitlich mit einer Nachkommastelle."
+    }
+   ]
   },
   "Tab. 4.8": {
    "status": "latex",
@@ -1110,12 +1178,22 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Der Kennzahlname „Anlagendeckung (%)“ steht jetzt in der rechten Spalte linksbündig über dem Text, „Kennzahl:“ in der linken Spalte. Hinter allen Begriffen der linken Spalte steht ein Doppelpunkt. Die Vorschau wird erst bei der nächsten LaTeX-Übersetzung aktualisiert."
+    },
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "14.10.2026 DS: Was bedeutet Die Vorschau wird erst bei der nächsten LaTeX-Übersetzung aktualisiert. Warum kann man die Abbildung nicht in der Vorschau bereits aktualisieren?",
+      "11.11.2026 DS: Das Wort Deckungsgrad II durch Anlagendeckung austauschen.",
+      "11.11.2026 DS: Zielgröße einheitlich auf 110–150 % setzen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "„Deckungsgrad II“ ist durch „Anlagendeckung“ ersetzt, und die Zielgröße steht auch im Text einheitlich bei 110–150 %. Zur Frage: Die Vorschau der Tabelle wird aus dem LaTeX-Code gesetzt; das dafür nötige Satzprogramm fehlte bei der letzten Änderung in der Arbeitsumgebung. Diesmal ist es eingerichtet, die Vorschau zeigt den aktuellen Stand."
     }
    ]
   },
   "4.11": {
    "status": "pruefung",
-   "datei": "Planungskalender_Der_Planungskalender_wurde_mit_MS_Project_erstellt",
+   "datei": "Planungskalender",
    "kommentare": [
     "Produktscreenshot (MS Project) softwareneutral als Kalender-Dashboard neu aufgebaut, Gestaltung wie Abb. 3.12/3.3: links Vorgang, Dauer (Arbeitstage), Anfang, Ende, Status, rechts Zeitachse nach Kalenderwochen; Fenster, Menüs, Ansichtsleiste und Vorgangsnummern entfallen",
     "Caption ohne Produktnamen? z. B. „Planungskalender“ (Zusatz „mit MS Project erstellt“ passt nicht mehr zum softwareneutralen Nachbau)",
@@ -1124,7 +1202,18 @@
     "Strategische Planung im Original von Abb. 4.11 Aug./Sep., in Abb. 4.15 Jan./Feb. (zwei Stände derselben Projektdatei) – je Abbildung beibehalten; angleichen?",
     "Originale ohne Meilensteine – keine ergänzt; Budgetierung identisch mit Abb. 4.15. Abb. 3.12 liegt ein Jahr später (2027/2028) – angleichen?"
    ],
-   "alt": "Kalender „Planungskalender“ mit Stichtag 16.10.2026 und Filtern für Zeitraum und Status. Links stehen die strategische Planung, die Budgetierung 2027 mit 19 Teilplänen von der Vorbereitung und dem Kick-off (ab 07.09.2026) bis zur Veröffentlichung der Budgetplanung (bis 24.11.2026) und die Mehrjahresplanung, je mit Dauer in Arbeitstagen, Anfang, Ende und Status; rechts zeigt eine Zeitachse nach Kalenderwochen die Planbalken weiß umrandet, den Ist-Verlauf anthrazit und Verzug rot, eine gestrichelte Linie markiert den Stichtag. Überfällig ist die Produktionsplanung (5 Arbeitstage), die Absatz- und Umsatzplanung wurde 2 Arbeitstage später fertig, acht Teilpläne laufen im Plan."
+   "alt": "Kalender „Planungskalender“ mit Stichtag 16.10.2026 und Filtern für Zeitraum und Status. Links stehen die strategische Planung, die Budgetierung 2027 mit 19 Teilplänen von der Vorbereitung und dem Kick-off (ab 07.09.2026) bis zur Veröffentlichung der Budgetplanung (bis 24.11.2026) und die Mehrjahresplanung, je mit Dauer in Arbeitstagen, Anfang, Ende und Status; rechts zeigt eine Zeitachse nach Kalenderwochen die Planbalken weiß umrandet, den Ist-Verlauf anthrazit und Verzug rot, eine gestrichelte Linie markiert den Stichtag. Überfällig ist die Produktionsplanung (5 Arbeitstage), die Absatz- und Umsatzplanung wurde 2 Arbeitstage später fertig, acht Teilpläne laufen im Plan.",
+   "caption": "Planungskalender",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Caption ohne Produktnamen. Strategische Planung Zeitraum angleichen: Aug-Sep."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die strategische Planung lag im Planungskalender bereits im August/September (19.08.–16.09.); angeglichen wurde der Reportingkalender. Die Caption lautet jetzt „Planungskalender“, ohne Produktnamen."
+    }
+   ]
   },
   "4.12": {
    "status": "pruefung",
@@ -1136,7 +1225,17 @@
     "Datumsangaben vereinheitlicht („1.Jan.11“, „1. Okt.12“ → „1. Jan. 11“, „1. Okt. 12“)",
     "Rot gepunktete Linie bei 1. Jan. 13 übernommen, im Original unbeschriftet – Bedeutung (Betrachtungszeitpunkt?) ggf. im Text nennen oder beschriften"
    ],
-   "alt": "Zeitachse von Anfang 2011 bis Anfang 2013 in Quartalen mit einer Zeile je Planungszeitpunkt: Bis zum jeweiligen Zeitpunkt liegt laufendes Ist vor, es folgt der Plan für das nächste Quartal bzw. Jahr und danach der ggf. überarbeitete Plan, der jedes Quartal fortgeschrieben wird. Darunter ist das Ist des Jahres 2012 für den Plan-Ist-Vergleich hervorgehoben und das laufende Ist über den gesamten Zeitraum dargestellt."
+   "alt": "Zeitleiste von Q1 2027 bis Q3 2028 mit sieben Zeilen: Planung für das Jahr 2027; drei Year-to-End-Prognosen ab Anfang Q2, Q3 und Q4 jeweils bis Jahresende 2027; drei rollierende Planungen über vier Quartale ab Anfang Q2, Q3 und Q4 bis Ende Q1, Q2 bzw. Q3 2028. Vor jeder Prognose bzw. rollierenden Planung steht das bereits vorliegende Ist.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Jahreszahlen auf 2027 und 2028 stellen. Grafik vereinfachen: eine Zeile Planung für das ganze Jahr 2027 eine Zeile für eine YTE-Prognose am Anfang Q2 bis Jahresende. eine Zeile für eine YTE-Prognose am Anfang Q3 bis Jahresende eine Zeile für eine YTE-Prognose am Anfang Q4 bis Jahresende eine Zeile rollierende Planung beginnend am Anfang Q2 bis Ende Q1 2028. eine Zeile rollierende Planung beginnend am Anfang Q3 bis Ende Q2 2028. eine Zeile rollierende Planung beginnend am Anfang Q4 bis Ende Q3 2028."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abbildung ist vereinfacht und auf 2027/2028 umgestellt: eine Zeile Planung 2027, drei Zeilen YTE-Prognose ab Anfang Q2, Q3 und Q4 bis Jahresende und drei Zeilen rollierende Planung ab Anfang Q2, Q3 und Q4 bis Ende Q1, Q2 bzw. Q3 2028. Das jeweils vorliegende Ist ist dunkel vorangestellt, eine Fußnote erklärt YTE."
+    }
+   ]
   },
   "4.13": {
    "status": "pruefung",
@@ -1147,7 +1246,17 @@
     "Bildtitel „Zyklischer Planungsprozess:“ und Rahmen entfernt (Caption)",
     "Texte unverändert, kein Rot"
    ],
-   "alt": "Zyklischer Planungsprozess mit drei aufeinanderfolgenden Phasen und ihren Tätigkeiten: Planungsvorbereitung (Terminplan, Systemeinstellungen, Beschaffung und Transformation der Vorgabe- und Orientierungswerte, Bereitstellung der Planungsformulare und -funktionen), Planungsdurchführung (automatische Planungsfunktionen und manuelle Eingaben, Plausibilisierung und Prüfung, Kommentierung) sowie Abstimmung und Genehmigung der Planung (Präsentation und Abstimmung, Pflege und Korrektur, Genehmigung, Fixierung). Ein Rückpfeil führt von der letzten zur ersten Phase."
+   "alt": "Zyklischer Planungsprozess mit drei aufeinanderfolgenden Phasen und ihren Tätigkeiten: Planungsvorbereitung (Terminplan, Systemeinstellungen, Beschaffung und Transformation der Vorgabe- und Orientierungswerte, Bereitstellung der Planungsformulare und -funktionen), Planungsdurchführung (automatische Planungsfunktionen und manuelle Eingaben, Plausibilisierung und Prüfung, Kommentierung) sowie Abstimmung und Genehmigung der Planung (Präsentation und Abstimmung, Pflege und Korrektur, Genehmigung, Fixierung). Ein Rückpfeil führt von der letzten zur ersten Phase.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Rücklaufender Pfeil löschen"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der rücklaufende Pfeil von der letzten zur ersten Phase ist gelöscht."
+    }
+   ]
   },
   "4.14": {
    "status": "pruefung",
@@ -1159,11 +1268,21 @@
     "Pfeile docken jetzt an den Kästen an (im Original teils an der Kastenkante entlang); „...“ → „…“",
     "Waagerechte Beschriftung der Blockpfeile nicht möglich (zu schmal), daher senkrecht wie im Original"
    ],
-   "alt": "Drei Planungsebenen untereinander: oben die zentrale Planung (Controlling) im Austausch mit dem Vorstand, darunter mehrere konzentrierte Planungen der Hauptbereichsleiter, unten mehrere dezentrale Planungen der Niederlassungsleiter. Pfeile in beide Richtungen zwischen den Ebenen stehen für das Gegenstromverfahren; links zeigt ein Pfeil die Top-Down-, rechts einer die Bottom-Up-Richtung."
+   "alt": "Drei Planungsebenen untereinander: oben die zentrale Planung (Controlling) im Austausch mit dem Vorstand, darunter mehrere konzentrierte Planungen der Hauptbereichsleiter, unten mehrere dezentrale Planungen der Niederlassungsleiter. Pfeile in beide Richtungen zwischen den Ebenen stehen für das Gegenstromverfahren; links zeigt ein Pfeil die Top-Down-, rechts einer die Bottom-Up-Richtung.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Konzentrierte Planung durch Aggregierte Planung austauschen. Pfeilspitzen kleiner darstellen (zu eng an der Linie)"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "„Konzentrierte Planung“ heißt jetzt „Aggregierte Planung“; die Pfeilspitzen sind kleiner und haben mehr Abstand zur Linie."
+    }
+   ]
   },
   "4.15": {
    "status": "pruefung",
-   "datei": "Reportingkalender_Der_Reportingkalender_wurde_mit_MS_Project_erstellt",
+   "datei": "Reportingkalender",
    "kommentare": [
     "Produktscreenshot (MS Project) softwareneutral neu aufgebaut, gleiche Gestaltung wie Abb. 4.11, 4.16 und 3.12; Caption ohne Produktnamen? z. B. „Reportingkalender“",
     "Berichtsjahr 2011 → 2026 (Termine 2026/2027): Monatsabschlüsse wie im Original vom 1. bis 8. Arbeitstag des Folgemonats, Feiertage NRW berücksichtigt (März/Q I 01.–14.04. wegen Ostern); Forecasts parallel zu Quartals- bzw. Halbjahresabschluss; Jahresabschlüsse 2025 und 2026 ab dem 1. Arbeitstag",
@@ -1172,11 +1291,22 @@
     "Erfunden: Stichtag 16.10.2026 und Ist; Monats- und Quartalsabschluss September 2 Arbeitstage später erledigt, Forecast III 4 Arbeitstage überfällig",
     "Strategische Planung hier Jan./Feb. wie im Original, in Abb. 4.11 Aug./Sep. – angleichen?"
    ],
-   "alt": "Kalender „Reportingkalender“ mit Stichtag 16.10.2026 und Filtern für Zeitraum und Status. Links das Reporting mit Jahresabschluss 2025, 13 Monatsabschlüssen vom 1. bis 8. Arbeitstag des Folgemonats (März, Juni und September zugleich Quartals- bzw. Halbjahresabschluss), Forecast I bis III und dem Jahresabschluss 2026 im Januar und Februar 2027, darunter Risikomanagement, strategische Planung und Budgetierung 2027, je mit Dauer, Anfang, Ende und Status; rechts eine Zeitachse von Januar 2026 bis Februar 2027 mit Planbalken, Ist-Verlauf und Verzug. Überfällig sind Forecast III (4 Arbeitstage) und in der Budgetierung die Produktionsplanung, der Monats- und Quartalsabschluss September wurde 2 Arbeitstage später fertig."
+   "alt": "Kalender „Reportingkalender“ mit Stichtag 16.10.2026 und Filtern für Zeitraum und Status. Links das Reporting mit Jahresabschluss 2025, 13 Monatsabschlüssen vom 1. bis 8. Arbeitstag des Folgemonats (März, Juni und September zugleich Quartals- bzw. Halbjahresabschluss), Forecast I bis III und dem Jahresabschluss 2026 im Januar und Februar 2027, darunter Risikomanagement, strategische Planung und Budgetierung 2027, je mit Dauer, Anfang, Ende und Status; rechts eine Zeitachse von Januar 2026 bis Februar 2027 mit Planbalken, Ist-Verlauf und Verzug. Überfällig sind Forecast III (4 Arbeitstage) und in der Budgetierung die Produktionsplanung, der Monats- und Quartalsabschluss September wurde 2 Arbeitstage später fertig.",
+   "caption": "Reportingkalender",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Caption ohne Produktnamen. Strategische Planung Zeitraum angleichen: Aug-Sep."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die strategische Planung liegt jetzt wie im Planungskalender im August/September (19.08.–16.09.) statt im Januar/Februar. Die Caption lautet „Reportingkalender“, ohne Produktnamen."
+    }
+   ]
   },
   "4.16": {
    "status": "pruefung",
-   "datei": "Reportingkalender_Monatsabschluss_Der_Reportingkalender_Monatsabschluss_wurde_mit_MS_Project_erstellt",
+   "datei": "Reportingkalender_Monatsabschluss",
    "kommentare": [
     "Produktscreenshot softwareneutral neu aufgebaut, gleiche Gestaltung wie Abb. 4.11 und 4.15; Tagesachse mit Wochentagen und grauem Wochenende, Datenschnitt „Zeitachse: Arbeitstage“ zeigt Arbeitstag 1–8; Caption ohne Produktnamen? z. B. „Reportingkalender Monatsabschluss“",
     "Monatsabschluss Januar 2011 → Januar 2026 nach Arbeitstagen: 02.02. (AT 1) bis 11.02.2026 (AT 8), gleiche Termine wie in Abb. 4.15; die Informationsanalyse begann im Original an einem Samstag → AT 5–6 (Fr 06.02./Mo 09.02.)",
@@ -1184,7 +1314,18 @@
     "Die im Original darunter zugeklappten übrigen Abschlüsse (Feb.–Dez.) entfallen – sie stehen in Abb. 4.15",
     "Erfunden: Stichtag Mi 04.02.2026 (AT 3) mit Ist; Abschlussbuchungen 1 Arbeitstag überfällig"
    ],
-   "alt": "Kalender „Reportingkalender Monatsabschluss“ für den Monatsabschluss Januar 2026, Stichtag 04.02.2026, mit Filtern für die Zeitachse (Kalender- oder Arbeitstage) und den Status. Links die vier Phasen Berichtserstellung, Analysevorbereitung, Berichtsbereitstellung sowie Berichtsanalyse und -steuerung mit 13 Schritten, je mit Dauer, Anfang, Ende und Status; rechts eine Tagesachse vom 02. bis 12.02.2026 mit grauem Wochenende, Planbalken, Ist-Verlauf und Verzug. Der Abschluss läuft vom 1. Arbeitstag (02.02.) bis zum 8. (11.02.), die Berichte gehen am 4. Arbeitstag hinaus; zum Stichtag sind die Abschlussbuchungen einen Arbeitstag überfällig."
+   "alt": "Kalender „Reportingkalender Monatsabschluss“ für den Monatsabschluss Januar 2026, Stichtag 04.02.2026, mit Filtern für die Zeitachse (Kalender- oder Arbeitstage) und den Status. Links die vier Phasen Berichtserstellung, Analysevorbereitung, Berichtsbereitstellung sowie Berichtsanalyse und -steuerung mit 13 Schritten, je mit Dauer, Anfang, Ende und Status; rechts eine Tagesachse vom 02. bis 12.02.2026 mit grauem Wochenende, Planbalken, Ist-Verlauf und Verzug. Der Abschluss läuft vom 1. Arbeitstag (02.02.) bis zum 8. (11.02.), die Berichte gehen am 4. Arbeitstag hinaus; zum Stichtag sind die Abschlussbuchungen einen Arbeitstag überfällig.",
+   "caption": "Reportingkalender Monatsabschluss",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Caption ohne Produktnamen. Unterschied Kalendertage und Arbeitstage nicht klar. Besser ggf. Tage und Wochen zu Auswahl?"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Zeitachse zeigt nur noch Arbeitstage, passend zur Dauer in Arbeitstagen; statt der Wahl Kalendertage/Arbeitstage gibt es in der interaktiven Fassung eine Auswahl Tage oder Wochen, die Druckfassung zeigt Tage. Die Caption lautet „Reportingkalender Monatsabschluss“, ohne Produktnamen."
+    }
+   ]
   },
   "4.17": {
    "status": "pruefung",
@@ -1195,7 +1336,18 @@
     "Bildtitel „Zyklischer Reportingprozess“ und Rahmen entfernt (Caption)",
     "Phase und erste Tätigkeit heißen beide „Berichterstellung“ (wie im Original) – Tätigkeit ggf. präzisieren, z. B. „Berichtsgenerierung“?"
    ],
-   "alt": "Zyklischer Reportingprozess mit vier aufeinanderfolgenden Phasen und ihren Tätigkeiten: Berichterstellung (Informationsbeschaffung, -aufbereitung und Berichterstellung), Analysevorbereitung (Plausibilisierung, Abweichungs- und Ursachenanalysen, Kommentierung und Entscheidungsvorbereitung), Berichtsbereitstellung (Bündelung und Versendung) sowie Informationsanalyse und -steuerung (Analyse durch den Empfänger, Präsentation und Diskussion, Entscheidung und Maßnahmen). Ein Rückpfeil führt von der letzten zur ersten Phase."
+   "alt": "Zyklischer Reportingprozess mit vier aufeinanderfolgenden Phasen und ihren Tätigkeiten: Berichterstellung (Informationsbeschaffung, -aufbereitung und Berichterstellung), Analysevorbereitung (Plausibilisierung, Abweichungs- und Ursachenanalysen, Kommentierung und Entscheidungsvorbereitung), Berichtsbereitstellung (Bündelung und Versendung) sowie Informationsanalyse und -steuerung (Analyse durch den Empfänger, Präsentation und Diskussion, Entscheidung und Maßnahmen). Ein Rückpfeil führt von der letzten zur ersten Phase.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Rücklaufender Pfeil löschen",
+      "11.11.2026 DS: Berichtsgenerierung"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der rücklaufende Pfeil ist gelöscht, und die Tätigkeit in der Phase „Berichterstellung“ heißt jetzt „Berichtsgenerierung“, damit Phase und Tätigkeit nicht mehr gleich lauten."
+    }
+   ]
   },
   "4.18": {
    "status": "pruefung",
@@ -1281,7 +1433,7 @@
     "Bildtitel „Qualitätssicherungsprozess:“ und Rahmen entfernt (Caption)",
     "Kastenbreite wie Abb. 4.9; Texte unverändert, kein Rot"
    ],
-   "alt": "Fünf Bestandteile des Qualitätssicherungsprozesses untereinander: Informationsbedarfsanalyse und -änderungen, Prozessqualitätsprüfung und -änderungen, organisatorische Qualitätsprüfung und -änderungen, Datenqualitätsprüfung und -steuerung sowie Informationssystem-Qualitätsprüfung und -steuerung.",
+   "alt": "Prozessschaubild: Die Informationsbedarfsanalyse und -änderungen stoßen als Auslöser vier parallel laufende Prüfungen an – Prozessqualitätsprüfung, organisatorische Qualitätsprüfung, Datenqualitätsprüfung und Informationssystem-Qualitätsprüfung.",
    "revisionen": [
     {
      "datum": "05.11.2026",
@@ -1290,6 +1442,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Für ein Prozessschaubild brauche ich die Logik zwischen den fünf Teilschritten, denn das Original zeigte nur eine Aufzählung ohne Reihenfolge: Sollen die Schritte in der aktuellen Reihenfolge (Informationsbedarf → Prozess → Organisation → Daten → Informationssystem) nacheinander laufen, mit oder ohne Rückkopplung zum Informationsbedarf als Kreislauf – oder ist eine andere Anordnung gemeint (z. B. Informationsbedarfsanalyse als Auslöser, die vier Prüfungen parallel)?"
+    },
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Informationsbedarfsanalyse und -änderungen als Auslöser, die vier Prüfungen parallel."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abbildung ist jetzt ein Prozessschaubild: Die Informationsbedarfsanalyse und -änderungen stehen oben als Auslöser und stoßen die vier Prüfungen (Prozess, Organisation, Daten, Informationssystem) an, die nebeneinander parallel laufen."
     }
    ]
   },
@@ -1848,7 +2008,18 @@
     "Sorten und Produkte deutsch (Apple 0.5l bottle → Apfel, 0,5 l Flasche; Cola DAVID 20l → 20 l Fass; KEG/keg 30l → 30 l Fass); in der Lernplattform zusätzlich Planungsalternativen Best Case (+5 %) und Worst Case (−8 %)",
     "Caption ohne Produktnamen? z. B. „Integrierte Planungsfunktionen in einem BI-Bericht (Vortragsunterlagen vom Controlling Innovations Center, Dortmund 2023)“"
    ],
-   "alt": "Planungsseite „Verteilung und Verdichtung“ eines Berichts für die Umsatzplanung 2028 in Tsd. €, rechts oben Datenschnitte für Jahr, Planungsalternative und Sorte. Darunter eine Leiste mit elf Planungsfunktionen von der manuellen Planung über Verteilung, Hochrechnung und Rückschreiben bis zu Genehmigung, Kommentaren und Export sowie die Knöpfe Speichern, Verwerfen, Zielwertsuche und Zurücksetzen. Die Matrix zeigt die Sorten Apfel, Cola, Orange und Tonic mit elf Produkten, Summen je Sorte und Monat und das Gesamtjahr von 20.000,0; ein Säulendiagramm darunter zeigt den Monatsverlauf des Gesamtumsatzes mit dem Höchstwert im Mai (3.306,5)."
+   "alt": "Planungsseite „Verteilung und Verdichtung“ eines Berichts für die Umsatzplanung 2028 in Tsd. €, rechts oben Datenschnitte für Jahr, Planungsalternative und Sorte. Darunter eine Leiste mit elf Planungsfunktionen von der manuellen Planung über Verteilung, Hochrechnung und Rückschreiben bis zu Genehmigung, Kommentaren und Export sowie die Knöpfe Speichern, Verwerfen, Zielwertsuche und Zurücksetzen. Die Matrix zeigt die Sorten Apfel, Cola, Orange und Tonic mit elf Produkten, Summen je Sorte und Monat und das Gesamtjahr von 20.000,0; ein Säulendiagramm darunter zeigt den Monatsverlauf des Gesamtumsatzes mit dem Höchstwert im Mai (3.306,5).",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "10.11.2026 DS: Weitere Planungsfunktionen die nicht umgesetzt sind n der Beschreibung rausnehmen? Hochrechnung ....?",
+      "11.11.2026 DS: Bitte nur die Register Manuelle Planung und Verteilung im Beispiel lassen. Alle anderen Register löschen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Im Beispiel stehen nur noch die Register „Manuelle Planung“ und „Verteilung“; alle anderen Register sind entfernt, auch die Erläuterungen der Online-Fassung nennen nur noch diese beiden Funktionen."
+    }
+   ]
   },
   "3.181": {
    "status": "pruefung",
@@ -1864,7 +2035,7 @@
   },
   "3.182": {
    "status": "pruefung",
-   "datei": "Exemplarische_Balanced_Scorecard_Planung_mit_SAP_NetWeaver-Technologie",
+   "datei": "Exemplarische_Balanced-Scorecard-Planung",
    "kommentare": [
     "Produktscreenshot softwareneutral als Planungsmaske neu gebaut (Querformat 1024 px = 155 × 108 mm, im LaTeX gedreht): HTML mit erfassbaren Planwerten 2028–2030, Prüfungen, Hinweis bei rückläufigem Zielpfad und klappbaren Perspektiven; PNG, PDF, PPTX",
     "Alle Kennzahlen und Werte des Originals übernommen; Jahre +19 (IST 2007/2008, PLAN 2008, PLAN 2009–2011 → Ist 2026/2027, Plan 2027, Plan 2028–2030); Beträge „[EUR]“ als Tsd. € gelesen – bitte prüfen; „Ist 2027“ ist beim Stand 30.06.2027 ein erwartetes Ist",
@@ -1873,7 +2044,18 @@
     "Umbenannt: zweimal „Stammkundenumsatz mit ext. Kunden“ → Stammkundenanteil (%) und Stammkundenumsatz (Tsd. €); „Neukundenumsatz“ (%) → Neukundenumsatzanteil; „Aufwendungen fuer Aus- und Weiterbildung“ → Weiterbildungsaufwand; „strategische Aufgabendeckungsziffer“ → Aufgabendeckungsziffer; „Potentiale“ → Potenziale; ROS und Umsatz neue Produkte als abgeleitete Werte (EBIT/Umsatz bzw. Anteil × Umsatz)",
     "Caption ohne Produktnamen? z. B. „Exemplarische Balanced-Scorecard-Planung (in Anlehnung an Schön et al. 2010, S. 25)“; „Entnommen aus“ → „In Anlehnung an“"
    ],
-   "alt": "Planungsmaske „Balanced-Scorecard-Planung“ für 2028 bis 2030 mit den Perspektiven Finanzen, Kunden, Prozesse und Potenziale. Je Perspektive stehen strategische Ziele mit ihren Kennzahlen, Ist 2026 und Ist 2027, eine Tendenz in Worten, Plan 2027 mit dem Status der Zielerreichung sowie die Planwerte 2028 bis 2030; im Band jeder Perspektive die zugehörigen Maßnahmen. Kritisch sind die persönlichen Kundenkontakte (350 statt 400) und die neuen Produkte (3 statt 4), übertroffen sind unter anderem Cashflow und Anzahl Neukunden."
+   "alt": "Planungsmaske „Balanced-Scorecard-Planung“ für 2028 bis 2030 mit den Perspektiven Finanzen, Kunden, Prozesse und Potenziale. Je Perspektive stehen strategische Ziele mit ihren Kennzahlen, Ist 2026 und Ist 2027, eine Tendenz in Worten, Plan 2027 mit dem Status der Zielerreichung sowie die Planwerte 2028 bis 2030; im Band jeder Perspektive die zugehörigen Maßnahmen. Kritisch sind die persönlichen Kundenkontakte (350 statt 400) und die neuen Produkte (3 statt 4), übertroffen sind unter anderem Cashflow und Anzahl Neukunden.",
+   "caption": "Exemplarische Balanced-Scorecard-Planung (In Anlehnung an Schön et al. 2010, S. 25)",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Statt Anlegen Maßnahmen pflegen. Alle Planwerte ab 2028 pflegbar darstellen. Caption: Im Anlehnung an ..."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Link je Perspektive heißt jetzt „Maßnahmen pflegen“, und alle Planwerte ab 2028 sind als Eingabezellen dargestellt. Die Caption lautet nun „Exemplarische Balanced-Scorecard-Planung (In Anlehnung an Schön et al. 2010, S. 25)“, ohne Produktnamen."
+    }
+   ]
   },
   "3.183": {
    "status": "pruefung",
@@ -1886,11 +2068,21 @@
     "Stückzahlen ganzzahlig statt „7,00“, Ø mit einer Nachkommastelle; Zeile „Trend“ → „Trend (Vorjahr)“, da sie den Vorjahresmonat enthält – fachlich prüfen",
     "Caption ohne Produktnamen? z. B. „Rollierende Absatzplanung (Planungsmaske, softwareneutral nachgebaut)“"
    ],
-   "alt": "Planungsmaske „Absatzplanung Produkt/Kunde“ mit Absatzmengen in Stück für das Produkt Kompakt 2.0 in der Region Nord. Je Block (Alle Kunden, zwei Kunden) stehen sechs Zeilen – Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant und Summe – mit dem Durchschnitt des Ist der letzten 12, 6 und 3 Monate, dem Ist Mai bis September 2027 und dem rollierenden Plan Oktober 2027 bis September 2028. Geplant sind bisher die ersten vier Monate; die Summe aller Kunden steigt im Dezember auf 17 Stück."
+   "alt": "Planungsmaske „Absatzplanung Produkt/Kunde“ mit Absatzmengen in Stück für das Produkt Kompakt 2.0 in der Region Nord. Je Block (Alle Kunden, zwei Kunden) stehen sechs Zeilen – Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant und Summe – mit dem Durchschnitt des Ist der letzten 12, 6 und 3 Monate, dem Ist Mai bis September 2027 und dem rollierenden Plan Oktober 2027 bis September 2028. Geplant sind bisher die ersten vier Monate; die Summe aller Kunden steigt im Dezember auf 17 Stück.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Planung auf Knoten/Summen zulassen und somit Splashing z.B. anhand der Istzahlen zulassen. Mindestens drei Produkte bzw. Kunden zeigen. Buttons drucken, pdf und Excel löschen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Auch die Summenzeile „Alle Kunden“ ist planbar: Ein dort eingegebener Wert wird top-down auf die Kunden verteilt, standardmäßig im Verhältnis ihrer Istmengen (Verteilschlüssel wählbar, Anteile sichtbar). Es werden jetzt drei Kunden und drei Produkte gezeigt; die Buttons Drucken, PDF und Excel sind entfernt."
+    }
+   ]
   },
   "3.184": {
    "status": "pruefung",
-   "datei": "Selektive_Gruppenplanung_von_Preisveraenderungen_und_Konditionen",
+   "datei": "Gruppen-_und_Einzelplanung_von_Preisveraenderungen_und_Konditionen",
    "kommentare": [
     "Zwei Produktscreenshots („Detail Absatz-/Umsatzplanung: Savings“ und „…: Rabatte“) zu einer softwareneutralen Maske mit zwei Abschnitten zusammengeführt (110 mm, PDF ohne Skalierung); HTML rechnet: Erlöswirkung = Planabsatz × Vk-Preis × Saving je Materialgruppe bzw. × Nettopreis × (Rabatt + Skonto) je Kundengruppe, Spalten „Artikel“, „Kunden“ und „Erlöswirkung“ ergänzt",
     "Gemeinsame Stammdaten mit Abb. 3.185: Materialgruppe S01 „Fahrersitze“ mit den Sitzen aus 3.185, Kundengruppe 008 (statt 034 wie im Original), damit die Gruppenwerte dort als Vorschlag je Artikel erscheinen; 034 als zweite Kundengruppe auswählbar",
@@ -1899,7 +2091,18 @@
     "Ersetzt: geschwärzte Kundengruppe („Muster“) → „008 Landtechnik“, „S-Fahrersitz“ → „Fahrersitze“, MG3 „L22“ mit Bezeichnung „Baureihe 44“ (fiktiv)",
     "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2010, S. 52)“ ohne den Zusatz zum BEx Web Application Designer"
    ],
-   "alt": "Eingabemaske „Detail Absatz-/Umsatzplanung“ für das Budget 2028 mit zwei Abschnitten. Oben werden Savings für die Materialgruppe S01 Fahrersitze, Baureihe 44 geplant – 2,0 % beeinflussbar und 1,0 % nicht beeinflussbar; sie gelten für sechs Artikel und mindern den Umsatz um 2.270 €. Darunter Rabatt und Skonto von je 2,0 % für die Kundengruppe 008 Landtechnik mit einer Erlöswirkung von −4.331 €, unten Meldungsprotokoll sowie die Knöpfe Sichern und Aktualisieren."
+   "alt": "Eingabemaske mit Gruppen- und Einzelplanung: oben Savings je Materialgruppe sowie Rabatt und Skonto je Kundengruppe mit Erlöswirkung, darunter die Positionen je Kunde und Artikel (Planabsatz, Verkaufspreis, Savings, Nettopreis, Rabatt, Planumsatz). Die Positionen übernehmen die Gruppenwerte; einzeln überschriebene Werte sind fett.",
+   "caption": "Gruppen- und Einzelplanung von Preisveränderungen und Konditionen (In Anlehnung an Schön und Irmer 2010, S. 52)",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Bitte Abb. 3.184 und Abb. 3.185 zusammenführen. Die Gruppenplanung wirkt direkt auf die einzelnen Planpositionen. Gruppen- und Einzelplanung soll in einem Formular möglich sein."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Abb. 3.184 und 3.185 sind in einer Maske zusammengeführt: oben die Gruppenplanung (Savings je Materialgruppe, Rabatt und Skonto je Kundengruppe), darunter die Positionen je Kunde und Artikel, die die Gruppenwerte übernehmen und einzeln überschreibbar sind (fett). Neue Caption: „Gruppen- und Einzelplanung von Preisveränderungen und Konditionen (In Anlehnung an Schön und Irmer 2010, S. 52)“."
+    }
+   ]
   },
   "3.185": {
    "status": "pruefung",
@@ -1912,11 +2115,21 @@
     "Ersetzt: Kunde/Kundengruppe „John Deere“ (im Buch „Muster“) → „11002 Agrarwerk Mitte“, „008 Landtechnik“; reale Sitztypen DS44/MSG83/MSG85 → FS44/FS83/FS85; „MUSTERSITZ (TBS)“ → „Mustersitz“; Materialtexte ausgeschrieben („POLSTER F.R_STOFF“ → „Rückenpolster Stoff“); Mengen ganzzahlig statt „138,000“",
     "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2010, S. 52)“ ohne den Zusatz zum BEx Web Application Designer"
    ],
-   "alt": "Planungsmaske „Übersicht Absatz-/Umsatzplanung“ für den Kunden 11002 der Kundengruppe 008 Landtechnik mit 14 Artikeln – Fahrersitze, Sitzschalen, Konsolen und Polster. Je Artikel stehen Planabsatz in Stück, Verkaufspreis, Saving beeinflussbar und nicht beeinflussbar, Nettopreis nach Saving, Rabatt und Planumsatz; für die Sitze der Baureihe 44 gelten 3 % Savings, für alle Artikel 2 % Rabatt. Die Summenzeile zeigt 1.250 Stück und einen Planumsatz von 106.121 €."
+   "alt": "Planungsmaske „Übersicht Absatz-/Umsatzplanung“ für den Kunden 11002 der Kundengruppe 008 Landtechnik mit 14 Artikeln – Fahrersitze, Sitzschalen, Konsolen und Polster. Je Artikel stehen Planabsatz in Stück, Verkaufspreis, Saving beeinflussbar und nicht beeinflussbar, Nettopreis nach Saving, Rabatt und Planumsatz; für die Sitze der Baureihe 44 gelten 3 % Savings, für alle Artikel 2 % Rabatt. Die Summenzeile zeigt 1.250 Stück und einen Planumsatz von 106.121 €.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Bitte Abb. 3.184 und Abb. 3.185 zusammenführen. Die Gruppenplanung wirkt direkt auf die einzelnen Planpositionen. Gruppen- und Einzelplanung soll in einem Formular möglich sein."
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Der Inhalt von Abb. 3.185 ist jetzt in Abb. 3.184 enthalten (Gruppen- und Einzelplanung in einer Maske). Soll Abb. 3.185 entfallen (Nummerierung und Textverweise ändern sich), oder soll sie als Detailansicht bleiben?"
+    }
+   ]
   },
   "3.186": {
    "status": "pruefung",
-   "datei": "Exemplarische_Zuschlaege_in_der_Einkaufspreisplanung",
+   "datei": "Gruppen-_und_Einzelplanung_in_der_Einkaufspreisplanung",
    "kommentare": [
     "Zwei Produktscreenshots (Reiter „Lieferantenkonditionen“ und „MatPreisPlanung Umwertung“) als eine softwareneutrale Maske „Materialpreisplanung“, Reiter „Zuschläge“, gebaut (110 mm, PDF ohne Skalierung); gleiche Kopfzeile, Reiter, Rasterzellen und Daten wie Abb. 3.187 (Reiter „Preisplanung“)",
     "Logik: Zuschlag Brutto = Planpreisfaktor des Lieferanten × (1 + Veränderung der Warengruppe im Werk); neuer Abschnitt „Ergebnis für die Preisplanung“ zeigt für Lieferant 55654, Warengruppe 3, Werk 1010 den Zuschlag 1,020, Planvolumen 2.047.078 € und Abweichung −88.411 € – identisch mit der Summenzeile von Abb. 3.187",
@@ -1925,7 +2138,18 @@
     "Entfallen: Browserfenster mit Server-URL (Firmenname) und Fenstertitel, Menü-/Symbol-/Status-/Taskleiste, Blätter- und Bildlaufleiste, Knopf „Beenden“; Lieferantennamen (reale Unternehmen, im Buch geschwärzt) → fiktiv; Geschäfts-/Planjahr 2009 → 2028",
     "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2009, S. 296)“ ohne den Zusatz zum BEx Web Application Designer"
    ],
-   "alt": "Eingabemaske „Materialpreisplanung“, Reiter „Zuschläge“, für Geschäfts- und Planjahr 2028. Oben stehen Planpreis- und MTZ-Faktoren für sieben Lieferanten (zum Beispiel 0,969 oder 1,114), darunter die Umwertung je Warengruppe und Werk mit +2,00 % für Polster im Werk 1010 und +10,00 % für Bezüge im Werk 7010. Das Ergebnis zeigt für den Lieferanten 55654 einen Zuschlag von 1,020, ein Planvolumen von 2.047.078 € und eine Abweichung zum Durchschnittspreis von −88.411 €."
+   "alt": "Eingabemaske der Einkaufspreisplanung: oben je Lieferantengruppe und je Warengruppe ein Preisänderungsfaktor, darunter die Planpreise je Lieferant und Material. Der Planpreisvorschlag ergibt sich aus Bruttopreis mal beiden Faktoren und ist einzeln überschreibbar (fett), dazu Volumen und Abweichung zum Durchschnittspreis des laufenden Jahres.",
+   "caption": "Gruppen- und Einzelplanung in der Einkaufspreisplanung (In Anlehnung an Schön und Irmer 2009, S. 296, und Schön und Irmer 2010, S. 54)",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Abb. 3.186 und 3.187 zusammenführe Gruppenplanung für Lieferantengruppe und Warengruppe mit jeweils einem Preisänderungsfaktor in Verbindung mit der Einzelplanung auf Lieferanten-Produktkombination."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Abb. 3.186 und 3.187 sind in einer Maske zusammengeführt: oben je Lieferantengruppe und Warengruppe ein Preisänderungsfaktor, darunter die Planpreise je Lieferant-Produkt-Kombination, deren Vorschlag sich aus Bruttopreis mal beiden Faktoren ergibt und einzeln überschreibbar ist. Der getrennte MTZ-Faktor und die Werksdimension entfallen zugunsten der Übersicht; neue Caption „Gruppen- und Einzelplanung in der Einkaufspreisplanung (In Anlehnung an Schön und Irmer 2009, S. 296, und Schön und Irmer 2010, S. 54)“."
+    }
+   ]
   },
   "3.187": {
    "status": "pruefung",
@@ -1938,7 +2162,17 @@
     "Entfallen: Browserfenster mit Server-URL (Firmenname) und Fenstertitel, Menü-/Symbol-/Status-/Taskleiste, Bildlaufleiste, Knopf „Beenden“; Lieferant „GUMOTEX A.S.“ (reales Unternehmen, im Buch geschwärzt) → „55654 Polsterwerk Ost“; Materialtexte ausgeschrieben („POLSTER F.R.KSTL.KPL.“ → „Rückenpolster Kunstleder“); Filter Material 1175221 (nicht in der Liste) → „Alle“",
     "Caption ohne Produktnamen? z. B. „… (In Anlehnung an Schön und Irmer 2010, S. 54)“ ohne den Zusatz zum BEx Web Application Designer"
    ],
-   "alt": "Planungsmaske „Materialpreisplanung“, Reiter „Preisplanung“, für den Lieferanten 55654 und die Warengruppe 3 Polster im Werk 1010. Für 14 Polster stehen Menge, Brutto- und MTZ-Kondition je 100 Stück, die Zuschläge 1,020 und 1,000, der Durchschnittspreis des laufenden Jahres, der vorgeschlagene Planpreis sowie Volumen und Abweichung. In Summe ergibt sich ein Einkaufsvolumen von 2.047.078 € und eine Abweichung von −88.411 € (−4,32 %), weil die Planpreise über den aktuellen Durchschnittspreisen liegen."
+   "alt": "Planungsmaske „Materialpreisplanung“, Reiter „Preisplanung“, für den Lieferanten 55654 und die Warengruppe 3 Polster im Werk 1010. Für 14 Polster stehen Menge, Brutto- und MTZ-Kondition je 100 Stück, die Zuschläge 1,020 und 1,000, der Durchschnittspreis des laufenden Jahres, der vorgeschlagene Planpreis sowie Volumen und Abweichung. In Summe ergibt sich ein Einkaufsvolumen von 2.047.078 € und eine Abweichung von −88.411 € (−4,32 %), weil die Planpreise über den aktuellen Durchschnittspreisen liegen.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Abb. 3.186 und 3.187 zusammenführe Gruppenplanung für Lieferantengruppe und Warengruppe mit jeweils einem Preisänderungsfaktor in Verbindung mit der Einzelplanung auf Lieferanten-Produktkombination."
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Der Inhalt von Abb. 3.187 ist jetzt in Abb. 3.186 enthalten (Gruppen- und Einzelplanung in einer Maske). Soll Abb. 3.187 entfallen (Nummerierung und Textverweise ändern sich), oder soll sie als Detailansicht bleiben?"
+    }
+   ]
   },
   "3.188": {
    "status": "pruefung",
@@ -1950,7 +2184,17 @@
     "Frage: „NN plus oder minus“ unverändert – gemeint NN-Stellen (noch nicht namentlich besetzte Planstellen)? Dann ausschreiben",
     "Caption steht bereits auf „In Anlehnung an Schön und Irmer 2009, S. 301“ – passt zur Neuzeichnung"
    ],
-   "alt": "Ablauf der Abstimmung der Personalplanung: Aus der Absatzplanung ergibt sich die benötigte Leistungsmenge in Stunden je Kostenstelle und Leistungsart; davon geht die Rationalisierungsvorgabe ab, Aufschläge für technisches Risiko/Ausschuss (Maßnahmen) und Mehrbedarf für Neuanläufe (Projekte) kommen hinzu. Im Kapazitätsabgleich je Kostenstelle und Monat wird dieser Bedarf in einem Kreislauf mit der möglichen Stundenleistung aus Mitarbeiterstammdaten und Prämissen abgestimmt; angepasst wird über NN plus oder minus bzw. Mitarbeiter- oder KST-Prämissen."
+   "alt": "Ablauf der Abstimmung der Personalplanung: Aus der Absatzplanung ergibt sich die benötigte Leistungsmenge in Stunden je Kostenstelle und Leistungsart; davon geht die Rationalisierungsvorgabe ab, Aufschläge für technisches Risiko/Ausschuss (Maßnahmen) und Mehrbedarf für Neuanläufe (Projekte) kommen hinzu. Im Kapazitätsabgleich je Kostenstelle und Monat wird dieser Bedarf in einem Kreislauf mit der möglichen Stundenleistung aus Mitarbeiterstammdaten und Prämissen abgestimmt; angepasst wird über NN plus oder minus bzw. Mitarbeiter- oder KST-Prämissen.",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: „NN plus oder minus“ unverändert – gemeint NN-Stellen (noch nicht namentlich besetzte Planstellen)? Ja, bitte ausschreiben"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abkürzung ist ausgeschrieben: „Anpassung über mehr oder weniger noch nicht namentlich besetzte Planstellen (NN-Stellen) bzw. über Mitarbeiter- oder KST-Prämissen“."
+    }
+   ]
   },
   "3.189": {
    "status": "pruefung",
@@ -1992,7 +2236,20 @@
     "Frage: Periode 1 fehlt wie im Original – beabsichtigt (Planung ab Periode 2) oder Januar ergänzen? Geschäftsjahr 2027 ergänzt (Original ohne Jahr); „MOST Zuschneiden“/„PKW STANZEN MOST“ → Zuschneiden/Pkw-Stanzen, Leistungsart 130 als Maschinenstunden gedeutet",
     "Caption ohne Produktnamen? z. B. „Planungsformular Kapazitätsbedarf Anlagen (In Anlehnung an Schön und Irmer 2010, S. 55)“"
    ],
-   "alt": "Planungsformular „Kapazitätsplanung“ mit dem aktiven Reiter „Kapazitätsbedarf Anlagen“ für Werk 4010 und Kostenstelle 4-4651 Zuschneiden, Arbeitsplatz Pkw-Stanzen, im Geschäftsjahr 2027. Ein Raster zeigt je Periode von Februar bis Dezember den Kapazitätsbedarf aus der Absatzplanung, eine Korrektur in Prozent und einen Mehrbedarf für Neuanläufe als Eingaben sowie den daraus berechneten Bedarf. In Summe werden aus 1.323,5 Stunden nach einer Rationalisierungsvorgabe von 3 % und 72 Stunden Mehrbedarf 1.355,7 Stunden."
+   "alt": "Planungsformular „Kapazitätsplanung“ mit dem aktiven Reiter „Kapazitätsbedarf Anlagen“ für Werk 4010 und Kostenstelle 4-4651 Zuschneiden, Arbeitsplatz Pkw-Stanzen, im Geschäftsjahr 2027. Ein Raster zeigt je Periode von Februar bis Dezember den Kapazitätsbedarf aus der Absatzplanung, eine Korrektur in Prozent und einen Mehrbedarf für Neuanläufe als Eingaben sowie den daraus berechneten Bedarf. In Summe werden aus 1.323,5 Stunden nach einer Rationalisierungsvorgabe von 3 % und 72 Stunden Mehrbedarf 1.355,7 Stunden.",
+   "caption": "Planungsformular Kapazitätsbedarf Anlagen (In Anlehnung an Schön und Irmer 2010, S. 55)",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "11.11.2026 DS: Filter Profit-Center löschen. Mehr Daten-Beispiele für Filter einfügen. Werk, Kostenstelle, Arbeitsplatz. Leistungsart Maschinenstunden fix. Spalte Kapazitätsangebot einfügen und Abweichungen aufzeigen. Register Kapazitätsbedarf Personal löschen REgister Kapazitätsangebot löschen.",
+      "11.11.2026 DS: Januar ergänzen.",
+      "11.11.2026 DS: Caption ohne Produktname"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Filter Profit-Center ist entfernt, Werk, Kostenstelle und Arbeitsplatz bieten mehrere Beispiele, die Leistungsart lautet „Maschinenstunden fix“, und die Monatsreihe beginnt mit Januar. Neu sind die Spalten Kapazitätsangebot und Abweichung (Engpässe hervorgehoben); die Register Kapazitätsbedarf Personal und Kapazitätsangebot sind entfernt, die Caption steht ohne Produktnamen."
+    }
+   ]
   },
   "3.192": {
    "status": "pruefung",
@@ -3280,7 +3537,18 @@
     "Hinweis in den Designregeln: Fotos von Beschäftigten nur mit Einwilligung; Nachbau-Ebene zeigt Bilder per Bild-URL (Tabelle/Karte) und Logo als Bild-Visual",
     "Caption ohne Produktnamen? z. B. „Integrierte Fotos und Logos in einem Dashboard“; „Quelle: Cubeware Bildergalerie 2011“ entfällt, da Daten und Gestaltung neu sind"
    ],
-   "alt": "Dashboard „Monatsübersicht Vertrieb“ für März 2027 mit einem Logo-Platzhalter oben rechts, Datenschnitt Region und vier Kennzahlen: Umsatzerlöse 15,00 Mio. € (−5,3 % zum Plan), Rohertrag 1.539 Tsd. € (+3,3 %), Ergebnis März 470 Tsd. € (+2,5 %) und Ergebnis 1. Quartal 660 Tsd. € (−18,5 %). Links ein Säulendiagramm des Ergebnisses je Quartal für vier Regionen (nur Kontinentaleuropa liegt im ersten Quartal über Plan) und eine Tabelle mit Umsatz, Rohertrag und Ergebnis je Region samt Abweichungsbalken; rechts zwei graue Bildplatzhalter mit Symbol – ein Foto der Verkäuferin des Monats (Frau Brandt, 31 Fahrzeuge, 119 % des Ziels) und ein Produktfoto des Modells des Monats (Limousine L 67, 105 Fahrzeuge, 28 % des Absatzes)."
+   "alt": "Dashboard „Monatsübersicht Vertrieb“ für März 2027 mit einem Logo-Platzhalter oben rechts, Datenschnitt Region und vier Kennzahlen: Umsatzerlöse 15,00 Mio. € (−5,3 % zum Plan), Rohertrag 1.539 Tsd. € (+3,3 %), Ergebnis März 470 Tsd. € (+2,5 %) und Ergebnis 1. Quartal 660 Tsd. € (−18,5 %). Links ein Säulendiagramm des Ergebnisses je Quartal für vier Regionen (nur Kontinentaleuropa liegt im ersten Quartal über Plan) und eine Tabelle mit Umsatz, Rohertrag und Ergebnis je Region samt Abweichungsbalken; rechts zwei graue Bildplatzhalter mit Symbol – ein Foto der Verkäuferin des Monats (Frau Brandt, 31 Fahrzeuge, 119 % des Ziels) und ein Produktfoto des Modells des Monats (Limousine L 67, 105 Fahrzeuge, 28 % des Absatzes).",
+   "revisionen": [
+    {
+     "datum": "12.11.2026",
+     "wunsch": [
+      "10.11.2026 DS: Sollten hier Bilder und Logos einfügen? oder Originalscreenshot behalten?",
+      "11.11.2026 DS: Bitte ein freies schönes kostenloses fiktives Foto für eine Person und ein Produkt und ein fiktives Firmen-Logo einfügen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Ein Foto einer fiktiven Verkäuferin, ein Produktbild eines fiktiven Fahrzeugmodells und das Logo eines erfundenen Autohauses sind eingefügt. Alle Bilder sind eigens erstellte, lizenzfreie Illustrationen ohne echte Personen oder Marken; in der interaktiven Fassung wechseln Foto und Produktbild mit der gewählten Region."
+    }
+   ]
   },
   "3.28": {
    "status": "pruefung",

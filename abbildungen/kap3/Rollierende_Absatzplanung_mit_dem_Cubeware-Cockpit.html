@@ -163,7 +163,8 @@ body.print .mk-nur-interaktiv { display: none !important; }
 <!-- Abb. 3.183 „Rollierende Absatzplanung“: Planungsmaske „Absatzplanung Produkt/Kunde“ (softwareneutral nachgebaut).
      Querformat 1024 px = 155 mm; Inhalt 992 px. Titelzeile wie Abb. 3.7/3.179 (Titel fett, Untertitel, Haarlinie).
      Raster (absatz.js): Block 110 · Planzeile 112 · Ø 12/6/3 Monate je 40 · Verlauf 54 · Ist 5 × 35 · Plan 12 × 35 = 991 px.
-     Je Block sechs Zeilen: Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant, Summe.
+     Vier Blöcke (Summe + drei Kunden bzw. Produkte) zu je sechs Zeilen à 21 px: Trend (Vorjahr), Ist/Plan, Aktion bestätigt,
+     Aktion geplant, Listung geplant, Summe. Auch die Summenblöcke sind planbar (Verteilung nach Verteilschlüssel, links oben).
      Zellen wie Abb. 3.179: Eingabe weiß mit Gitterlinie, Anzeige grau, Summenzeilen fett. -->
 <style>
   #absatz { width: 1024px; }
@@ -176,7 +177,8 @@ body.print .mk-nur-interaktiv { display: none !important; }
   #absatz .auswahl { display: flex; align-items: center; margin-bottom: 14px; }
   #absatz .auswahl .mk-label { flex: 0 0 auto; margin-right: 8px; }
   #absatz .auswahl .mk-feld { flex: 0 0 auto; width: 210px; margin-right: 24px; }
-  #absatz .auswahl #f-gruppe { width: 160px; }
+  #absatz .auswahl #f-auswahl { width: 180px; }
+  #absatz .auswahl #f-gruppe { width: 150px; }
   #absatz .auswahl .rechts { margin-left: auto; display: flex; gap: 8px; }
   /* Raster */
   #absatz .mx { display: grid; grid-template-columns: 110px 112px repeat(3, 40px) 54px repeat(17, 35px); }
@@ -191,8 +193,13 @@ body.print .mk-nur-interaktiv { display: none !important; }
   #absatz .mx-b { grid-row: span 6; border-bottom: 1px solid var(--rahmen); padding: 3px 6px 0 0; }
   #absatz .mx-b .mk-label { display: block; height: 18px; line-height: 18px; }
   #absatz .mx-b .mk-label:first-child { font-weight: bold; }
-  #absatz .mx-l { height: 24px; line-height: 23px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
-  #absatz .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+  #absatz .mx-b .anteil { color: var(--muted); }
+  #absatz .schl-l { grid-row: 1; grid-column: 1 / span 2; height: 21px; line-height: 21px; color: var(--muted); white-space: nowrap; }
+  #absatz .mx .mk-feld.schl-f { grid-row: 2; grid-column: 1 / span 2; width: 200px; height: 21px; line-height: 19px; padding-left: 6px;
+    border: 1px solid var(--rahmen); border-radius: 2px; background-color: #FFFFFF; }
+  #absatz .mx .mk-feld.schl-f .mk-pfeil { top: 7px; }
+  #absatz .mx-l { height: 21px; line-height: 20px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #absatz .mx .mk-feld { height: 21px; line-height: 20px; padding: 0 4px; border: 0; border-radius: 0;
     border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
   #absatz .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
   #absatz .mx .mk-feld.mk-anzeige.trenn { border-left-color: var(--rahmen); }
@@ -200,7 +207,7 @@ body.print .mk-nur-interaktiv { display: none !important; }
   #absatz .mx .summe { font-weight: bold; }
   #absatz .mx .mx-l.summe, #absatz .mx .mk-feld.summe { border-bottom: 1px solid var(--rahmen); }
   #absatz .mx .verlauf { padding: 0; }
-  #absatz .mx .verlauf svg { display: block; margin: 3px auto 0; }
+  #absatz .mx .verlauf svg { display: block; margin: 2px auto 0; }
 </style>
 <form class="mk-maske" id="absatz" autocomplete="off" novalidate>
   <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Absatzplanung Produkt/Kunde</span><span class="kopf-unter" id="kopf-unter">Absatzmenge in Stück nach Liefermonat · Stand 12.10.2027 · Bearbeitung: Frau Brandt</span></div>
@@ -211,18 +218,12 @@ body.print .mk-nur-interaktiv { display: none !important; }
       <label class="mk-label" for="f-gruppe">Kundengruppe</label>
       <select class="mk-feld" id="f-gruppe"><option value="nord" selected>Region Nord</option></select>
       <div class="rechts">
-        <button type="button" class="mk-knopf mk-zweit" id="k-drucken">Bericht drucken</button>
-        <button type="button" class="mk-knopf mk-zweit" id="k-pdf">PDF-Bericht</button>
-        <button type="button" class="mk-knopf mk-zweit" id="k-excel">Excel-Bericht</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiterrollen</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-tauschen">Kunde/Produkt tauschen</button>
       </div>
     </div>
 
     <div class="mx" id="raster"><!-- Kopfzeilen und Blöcke erzeugt absatz.js --></div>
-
-    <div class="mk-knopfleiste">
-      <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiterrollen</button>
-      <button type="button" class="mk-knopf mk-zweit" id="k-tauschen" style="margin-left:auto">Kunde/Produkt tauschen</button>
-    </div>
   </div>
 </form>
 
@@ -591,6 +592,9 @@ const MK = (() => {
    Absatzmengen in Stück je Produkt und Kunde: Ø des Ist der letzten 12/6/3 Monate, Ist der letzten fünf Monate,
    Plan für die nächsten zwölf Monate (rollierend). Trend (Vorjahr) = Ist des Vorjahresmonats.
    Summe = Ist/Plan + Aktion bestätigt + Aktion geplant + Listung geplant; „Alle Kunden“ bzw. „Alle Produkte“ = Summe der Blöcke.
+   Planung auf Knoten: Jede Planzelle eines verdichteten Blocks ist eingabefähig; der eingegebene Wert wird nach dem gewählten
+   Verteilschlüssel (Ist 12/6/3 Monate, Vorjahresmonat, gleichmäßig) ganzzahlig mit Restausgleich auf die Blätter
+   Produkt × Kunde verteilt (Top-down, „Splashing“). Drei Produkte × drei Kunden; der dritte Kunde und das dritte Produkt sind ergänzt.
    Werte der Kundenblöcke wie im Original (Ebene „All Products“, Kunden 15548 und 15561); sie stimmen in sich:
    Ø 12/6/3 Monate und Trend folgen aus derselben Ist-Historie. Produkt „Kombi 2.0“ aus dem Block „A4“ des Originals,
    auf die beiden Kunden aufgeteilt. Monatsachse um 15 Jahre und 8 Monate verschoben (2/2012 → 10/2027). */
@@ -608,8 +612,10 @@ const MK = (() => {
   let c = 12;
 
   /* ---------- Stammdaten (fiktiv) ---------- */
-  const PROD = [["P1", "Kompakt 2.0"], ["P2", "Kombi 2.0"]];
-  const KUND = [["15548", "Autohaus Kiel"], ["15561", "Service Lübeck"]];
+  const PROD = [["P1", "Kompakt 2.0"], ["P2", "Kombi 2.0"], ["P3", "Kombi 2.5"]];
+  const KUND = [["15548", "Autohaus Kiel"], ["15561", "Service Lübeck"], ["15590", "Autohaus Eutin"]];
+  const SCHLUESSEL = [["ist12", "Ist 12 Monate"], ["ist6", "Ist 6 Monate"], ["ist3", "Ist 3 Monate"], ["vj", "Vorjahresmonat"], ["gleich", "gleichmäßig"]];
+  let schluessel = "ist12";
   const ARTEN = ["basis", "akb", "akg", "lst"];
   const ZEILEN = ["Trend (Vorjahr)", "Ist/Plan", "Aktion bestätigt", "Aktion geplant", "Listung geplant", "Summe"];
   // Ist Okt 2026 bis Sep 2027 (m 0–11); Planzeilen ab Okt 2027 (m 12 ff.)
@@ -621,9 +627,14 @@ const MK = (() => {
   }
   const D = {
     P1: { "15548": blatt([3, 2, 3, 4, 6, 1, 2, 0, 1, 2, 0, 1], [[5, 5, 8, 8], [3, 1, 2, 1], [0, 2, 2, 2], [1, 0, 0, 0]]),
-          "15561": blatt([1, 2, 1, 2, 1, 1, 0, 3, 2, 1, 1, 1], [[2, 1, 3, 2], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 2, 0]]) },
+          "15561": blatt([1, 2, 1, 2, 1, 1, 0, 3, 2, 1, 1, 1], [[2, 1, 3, 2], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 2, 0]]),
+          "15590": blatt([2, 1, 2, 3, 2, 1, 1, 2, 1, 2, 1, 2], [[3, 2, 3, 3], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 0, 1]]) },
     P2: { "15548": blatt([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1], [[2, 2, 3, 3], [1, 1, 1, 0], [0, 1, 0, 1], [1, 0, 0, 0]]),
-          "15561": blatt([0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [[0, 1, 2, 1], [1, 0, 1, 0], [0, 0, 1, 1], [0, 0, 0, 0]]) },
+          "15561": blatt([0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [[0, 1, 2, 1], [1, 0, 1, 0], [0, 0, 1, 1], [0, 0, 0, 0]]),
+          "15590": blatt([1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1], [[1, 1, 1, 2], [0, 0, 1, 0], [0, 0, 0, 0], [1, 0, 0, 0]]) },
+    P3: { "15548": blatt([2, 1, 2, 2, 3, 1, 1, 1, 0, 1, 1, 1], [[2, 2, 3, 3], [1, 0, 0, 1], [0, 1, 1, 0], [0, 0, 0, 0]]),
+          "15561": blatt([1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1], [[1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0]]),
+          "15590": blatt([0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0], [[1, 1, 2, 1], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]) },
   };
 
   /* ---------- Hierarchie: Produkt → Kunde (PK) oder Kunde → Produkt (KP) ---------- */
@@ -642,10 +653,29 @@ const MK = (() => {
     PROD.forEach(([p]) => KUND.forEach(([k]) => { if ((blk.p === "*" || blk.p === p) && (blk.k === "*" || blk.k === k)) r.push(D[p][k]); }));
     return r;
   };
+  /* Verteilschlüssel: Gewicht eines Blatts für Planmonat m */
+  function gewicht(L, m) {
+    const ist = (von, bis) => { let s = 0; for (let x = von; x < bis; x++) s += L.ist[x] || 0; return s; };
+    return { ist12: ist(c - 12, c), ist6: ist(c - 6, c), ist3: ist(c - 3, c), vj: L.ist[m - 12] || 0, gleich: 1 }[schluessel];
+  }
+  // Ganzzahlige Verteilung mit Restausgleich (größte Nachkommaanteile zuerst); bei Gewicht 0 überall gleichmäßig
+  function verteile(ziel, g) {
+    let W = g.reduce((a, b) => a + b, 0);
+    if (W <= 0) { g = g.map(() => 1); W = g.length; }
+    const exakt = g.map(x => ziel * x / W), teil = exakt.map(Math.floor);
+    let rest = ziel - teil.reduce((a, b) => a + b, 0);
+    exakt.map((x, i) => [x - teil[i], g[i], i]).sort((a, b) => b[0] - a[0] || b[1] - a[1]).slice(0, rest).forEach(([, , i]) => { teil[i]++; });
+    return teil;
+  }
+  // Anteil eines Blocks am Gesamtblock nach Verteilschlüssel (über den Planungshorizont)
+  function anteil(blk) {
+    const summeG = b => blaetter(b).reduce((s, L) => { let x = 0; for (let m = c; m < c + 12; m++) x += gewicht(L, m); return s + x; }, 0);
+    const ges = summeG(BL[0]);
+    return ges > 0 ? summeG(blk) / ges * 100 : 100 / (BL.length - 1);
+  }
   const wert = (blk, art, m) => blaetter(blk).reduce((s, L) => s + (L[art][m] || 0), 0);
   const plansumme = (blk, m) => ARTEN.reduce((s, a) => s + wert(blk, a, m), 0);
   const mittel = (blk, n) => { let s = 0; for (let m = c - n; m < c; m++) s += wert(blk, "ist", m); return s / n; };
-  const editierbar = blk => blk.p !== "*" && blk.k !== "*";
 
   /* ---------- Auswahlfeld ---------- */
   function auswahlFuellen() {
@@ -664,6 +694,10 @@ const MK = (() => {
   const monat = j => (j < SP_PLAN ? c - 5 + (j - SP_IST) : c + (j - SP_PLAN));
   const pos = (z, s, n = 1) => `grid-row:${z};grid-column:${s}${n > 1 ? " / span " + n : ""}`;
   function kopfzeilen() {
+    el("label", { class: "schl-l", for: "f-schluessel" }, raster, "Verteilschlüssel für Summen");
+    const sel = el("select", { class: "mk-feld schl-f", id: "f-schluessel" }, raster);
+    SCHLUESSEL.forEach(([v, t]) => el("option", v === schluessel ? { value: v, selected: "" } : { value: v }, sel, t));
+    sel.addEventListener("change", () => { schluessel = sel.value; rechnen(); MK.meldung(`Verteilschlüssel: ${sel.selectedOptions[0].text}. Eingaben in Summenzellen werden danach verteilt.`); });
     el("div", { class: "mx-k gruppe", id: "h-avg", style: pos(1, 3, 3) }, raster, "Ø Ist der letzten");
     el("div", { class: "mx-k gruppe", id: "h-ist", style: pos(1, 3 + SP_IST, 5) }, raster, "Ist in Stück");
     el("div", { class: "mx-k gruppe", id: "h-plan", style: pos(1, 3 + SP_PLAN, 12) }, raster, "Plan in Stück – rollierend über 12 Monate");
@@ -693,20 +727,26 @@ const MK = (() => {
     kopfzeilen();
     BL = bloecke();
     BL.forEach((blk, b) => {
-      const z0 = 4 + b * 6, edit = editierbar(blk);
+      const z0 = 4 + b * 6, n = blaetter(blk).length;
       const kb = el("div", { class: "mx-b", id: "b" + b, style: `grid-row:${z0} / span 6;grid-column:1` }, raster);
       blk.text.forEach(t => el("span", { class: "mk-label" }, kb, t));
+      if (b > 0) el("span", { class: "mk-label anteil", id: "anteil" + b }, kb);
       ZEILEN.forEach((t, r) => {
         const sum = r === 5 ? " summe" : "";
         el("span", { class: "mk-label mx-l" + sum, id: `z${b}-${r}`, style: pos(z0 + r, 2) }, raster, t);
         for (let j = 0; j < SP_PLAN + 12; j++) {
           const id = `c${b}-${r}-${j}`, st = pos(z0 + r, 3 + j);
           const trenn = j === SP_IST || j === SP_PLAN ? " trenn" : "";
-          if (edit && j >= SP_PLAN && r >= 1 && r <= 4) {
+          if (j >= SP_PLAN && r >= 1 && r <= 4) {
             const art = ARTEN[r - 1], m = monat(j), v = wert(blk, art, m);
             const f = el("input", { class: "mk-feld mk-zahl" + trenn, id, style: st, value: v ? zahl(v, 0) : "", inputmode: "numeric",
-              "aria-label": `${t}, ${MON_LANG[mIdx(m)]} ${mJahr(m)}`, "data-hilfe": "Ganze Stückzahl", "data-b": b, "data-art": art, "data-j": j }, raster);
-            f.addEventListener("input", eingabe);
+              "aria-label": `${blk.text[0]}, ${t}, ${MON_LANG[mIdx(m)]} ${mJahr(m)}`, "data-b": b, "data-art": art, "data-j": j,
+              "data-hilfe": n > 1 ? `Summe: ganze Stückzahl, wird mit Enter nach Verteilschlüssel auf ${n} Planzeilen verteilt` : "Ganze Stückzahl" }, raster);
+            if (n > 1) {
+              f.addEventListener("input", () => gueltig(f));
+              f.addEventListener("change", () => splashen(f));
+              f.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); splashen(f); f.select(); } });
+            } else f.addEventListener("input", eingabe);
             f.addEventListener("blur", () => { const w = gueltig(f); if (w !== undefined) f.value = w ? zahl(w, 0) : ""; });
           } else {
             el("div", { class: "mk-feld mk-anzeige" + (j === 3 ? " verlauf" : " mk-zahl") + trenn + sum, id, style: st }, raster);
@@ -722,7 +762,11 @@ const MK = (() => {
   }
 
   /* ---------- Rechnen: Ø, Verlauf, Ist, Trend, Summen ---------- */
-  const setze = (id, v, nk = 0) => { const e = $(id); if (e) e.textContent = v ? zahl(v, nk) : ""; };
+  const setze = (id, v, nk = 0) => {
+    const e = $(id); if (!e) return;
+    const t = v ? zahl(v, nk) : "";
+    if (e.tagName === "INPUT") { if (e !== document.activeElement && !e.classList.contains("mk-fehler")) e.value = t; } else e.textContent = t;
+  };
   function verlauf(zelle, werte) {
     zelle.textContent = "";
     const max = Math.max(...werte);
@@ -742,9 +786,10 @@ const MK = (() => {
       for (let j = SP_PLAN; j < SP_PLAN + 12; j++) {
         const m = monat(j);
         setze(`c${b}-0-${j}`, wert(blk, "ist", m - 12));
-        if (!editierbar(blk)) ARTEN.forEach((a, i) => setze(`c${b}-${i + 1}-${j}`, wert(blk, a, m)));
+        ARTEN.forEach((a, i) => setze(`c${b}-${i + 1}-${j}`, wert(blk, a, m)));
         setze(`c${b}-5-${j}`, plansumme(blk, m));
       }
+      if (b > 0) $("anteil" + b).textContent = "Anteil " + zahl(anteil(blk), 1) + MK.NBSP + "%";
     });
   }
 
@@ -758,9 +803,22 @@ const MK = (() => {
   function eingabe(e) {
     const f = e.target, v = gueltig(f);
     if (v !== undefined) {
-      const blk = BL[+f.dataset.b], L = D[blk.p][blk.k], m = monat(+f.dataset.j);
+      const blk = BL[+f.dataset.b], L = blaetter(blk)[0], m = monat(+f.dataset.j);
       if (v) L[f.dataset.art][m] = v; else delete L[f.dataset.art][m];
     }
+    rechnen();
+  }
+  /* Planung auf Summen: Wert top-down nach Verteilschlüssel auf die Blätter verteilen (Splashing) */
+  function splashen(f) {
+    const v = gueltig(f);
+    if (v === undefined) return;
+    const blk = BL[+f.dataset.b], art = f.dataset.art, m = monat(+f.dataset.j), LL = blaetter(blk);
+    const vorher = wert(blk, art, m);
+    if (v !== vorher) {
+      verteile(v, LL.map(L => gewicht(L, m))).forEach((x, i) => { if (x) LL[i][art][m] = x; else delete LL[i][art][m]; });
+      MK.meldung(`${blk.text[0]}, ${MON_LANG[mIdx(m)]} ${mJahr(m)}: ${vorher} → ${v} Stück nach „${SCHLUESSEL.find(s => s[0] === schluessel)[1]}“ auf ${LL.length} Planzeilen verteilt.`);
+    }
+    f.value = v ? zahl(v, 0) : "";
     rechnen();
   }
 
@@ -779,9 +837,10 @@ const MK = (() => {
     aufbauen();
     MK.meldung(`${mLang(alt)} abgeschlossen: Plansumme als Ist übernommen, Planung reicht jetzt bis ${mLang(c + 11)}.`);
   });
-  [["k-drucken", "Bericht drucken"], ["k-pdf", "PDF-Bericht"], ["k-excel", "Excel-Bericht"]].forEach(([id, t]) =>
-    $(id).addEventListener("click", () => MK.meldung(`Beispielmaske: „${t}“ ist nicht hinterlegt.`)));
 
+  // Beispiel: Grundplanung „Alle Kunden“ Februar 2028 = 12 Stück, top-down nach Ist 12 Monate verteilt (Splashing)
+  { const LL = KUND.map(([k]) => D.P1[k]), m = c + 4;
+    verteile(12, LL.map(L => gewicht(L, m))).forEach((x, i) => { if (x) LL[i].basis[m] = x; }); }
   auswahlFuellen();
   aufbauen();
 
@@ -792,7 +851,7 @@ const MK = (() => {
       intro: "Was die Bereiche der Maske in der rollierenden Absatzplanung leisten. Die Nummern in der Maske zeigen, wo.",
       eintraege: [
         { nr: 1, ziel: "f-auswahl", versatz: [-4, 2], titel: "Planungsobjekt Produkt und Kunde",
-          text: "Geplant wird die Absatzmenge in Stück je Produkt und Kunde, nach Liefermonat. Die Auswahl legt den Ausschnitt fest: ein Produkt mit allen Kunden der Kundengruppe. Wählen Sie „Alle Produkte“: Dann zeigt die Maske nur verdichtete Werte." },
+          text: "Geplant wird die Absatzmenge in Stück je Produkt und Kunde, nach Liefermonat. Die Auswahl legt den Ausschnitt fest: ein Produkt mit allen Kunden der Kundengruppe. Wählen Sie „Alle Produkte“: Dann stehen je Kunde die verdichteten Werte aller Produkte da – auch sie sind planbar." },
         { nr: 2, ziel: "c1-0-2", versatz: [-6, 1], titel: "Vergleichswerte",
           text: "Der Durchschnitt des Ist der letzten 12, 6 und 3 Monate zeigt das übliche Niveau eines Kunden. Die drei Balken unter „Verlauf“ stellen ihn nebeneinander: Wird der rechte, jüngste Balken kürzer, sinkt der Absatz." },
         { nr: 3, ziel: "c1-2-6", versatz: [-6, 1], titel: "Ist der letzten fünf Monate",
@@ -803,10 +862,10 @@ const MK = (() => {
           text: "Als Vorschlag zeigt die Zeile „Trend (Vorjahr)“ die Absatzmenge desselben Monats im Vorjahr. So wird die Saison sichtbar; wer davon abweicht, plant bewusst." },
         { nr: 6, ziel: "c1-3-15", versatz: [-6, 1], titel: "Planzeilen und Summe",
           text: "Neben der Grundplanung (Ist/Plan) werden bestätigte und geplante Verkaufsaktionen sowie geplante Listungen getrennt erfasst. Die Summe rechnet sich aus den vier Zeilen; Sondereffekte bleiben so im Plan-Ist-Vergleich erkennbar." },
-        { nr: 7, ziel: "b0", versatz: [-6, 62], titel: "Verdichtung bottom-up",
-          text: "Der Block „Alle Kunden“ addiert die Kundenblöcke. Geplant wird nur auf der untersten Ebene Produkt und Kunde; die Summen folgen bottom-up und gehen in die Umsatzplanung ein." },
-        { nr: 8, ziel: "k-tauschen", versatz: [14, -12], titel: "Sicht wechseln",
-          text: "„Kunde/Produkt tauschen“ wechselt die Hierarchie: Dann stehen die Produkte eines Kunden untereinander. Die Zahlen bleiben dieselben, nur die Sicht ändert sich – für Kundengespräche ist sie oft die passendere." },
+        { nr: 7, ziel: "b0", versatz: [-6, 62], titel: "Planen auf Summen (Splashing)",
+          text: "Geplant werden kann auf jeder Ebene. Eingaben bei einem Kunden verdichten sich bottom-up in „Alle Kunden“. Eine Eingabe im Block „Alle Kunden“ wird top-down nach dem Verteilschlüssel auf die Kunden verteilt – standardmäßig im Verhältnis ihrer Istmengen der letzten zwölf Monate. Der Anteil je Kunde steht unter seinem Namen. So sind im Februar 2028 zwölf Stück auf die drei Kunden verteilt; probieren Sie z. B. 30 im März." },
+        { nr: 8, ziel: "k-tauschen", versatz: [14, -12], titel: "Sicht wechseln und Verteilschlüssel",
+          text: "„Kunde/Produkt tauschen“ wechselt die Hierarchie: Dann stehen die Produkte eines Kunden untereinander. Die Zahlen bleiben dieselben, nur die Sicht ändert sich – für Kundengespräche ist sie oft die passendere. Links über dem Raster wird der Verteilschlüssel für Summeneingaben gewählt: Ist der letzten 12, 6 oder 3 Monate, Vorjahresmonat oder gleichmäßig." },
       ],
     },
     gestaltung: {
@@ -814,11 +873,11 @@ const MK = (() => {
       intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
       eintraege: [
         { nr: "A", ziel: "kopf", versatz: [-6, 8], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Logo, kein Benutzername",
-          text: "Firmenlogo, farbiger Titelbalken mit Verlauf, Benutzername, Filtersymbole, Bildlaufleiste und die Navigationsknöpfe „Start-Cockpit“ und „Zurück zur Vertrieb“ des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen als Titel." },
+          text: "Firmenlogo, farbiger Titelbalken mit Verlauf, Benutzername, Filtersymbole, Bildlaufleiste und die Navigationsknöpfe „Start-Cockpit“ und „Zurück zur Vertrieb“ sowie die Berichtsknöpfe für Drucken, PDF und Export des Originals entfallen. Übrig bleibt die Maske mit ihrem Namen als Titel." },
         { nr: "B", ziel: "z1-5", versatz: [-6, 1], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Summen fett statt gelb",
           text: "Summenzeilen sind fett und grau hinterlegt, die Abschnitte durch Linien getrennt. Das Original färbte die Summen gelb, die Spaltenköpfe türkis, grün und violett und trennte die Abschnitte durch dunkle Balken – im Graustufendruck kaum zu unterscheiden." },
         { nr: "C", ziel: "c1-1-14", versatz: [-6, 1], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Eingabe und Anzeige unterscheidbar",
-          text: "Nur die Planzellen der Kunden sind weiß und eingabebereit; Ist, Durchschnitte, Trend, Summen und der Block „Alle Kunden“ sind grau. Im Original sahen alle Zellen gleich aus." },
+          text: "Alle Planzellen sind weiß und eingabebereit, auch im Summenblock; Ist, Durchschnitte, Trend und die Summenzeilen sind grau. Im Original sahen alle Zellen gleich aus, und auf Summen ließ sich nicht planen." },
         { nr: "D", ziel: "c2-2-5", versatz: [-6, 1], regel: "ERWARTUNGSKONFORMITÄT", titel: "Stückzahlen ohne Nachkommastellen",
           text: "Absatzmengen stehen als ganze Stück, Durchschnitte mit einer Nachkommastelle. Das Original zeigte Stückzahlen wie „7,00“ mit zwei Nachkommastellen." },
         { nr: "E", ziel: "h-jahr-ist", versatz: [-6, -2], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Monate und Einheit lesbar",
@@ -826,7 +885,7 @@ const MK = (() => {
         { nr: "F", ziel: "b1", versatz: [-6, 62], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Fiktive Namen, stimmige Daten",
           text: "Hersteller, Modelle, Kunden und Benutzername des Originals sind durch fiktive Angaben ersetzt. Das Original nannte als Datum den 12.10.2015, zeigte aber Monate von 2011 bis 2013; jetzt passen Stand 12.10.2027, Ist Mai bis September 2027 und Plan Oktober 2027 bis September 2028 zusammen." },
         { nr: "G", ziel: "z0-5", versatz: [-6, 1], regel: "AUFGABENANGEMESSENHEIT", titel: "Summen über alle Ebenen",
-          text: "„Alle Kunden“ ist genau die Summe der gezeigten Kundenblöcke und rechnet bei jeder Eingabe mit. Im Original enthielt die Summe weitere, nicht gezeigte Kunden." },
+          text: "„Alle Kunden“ ist genau die Summe der drei gezeigten Kundenblöcke und rechnet bei jeder Eingabe mit; ein dritter Kunde und ein drittes Produkt sind ergänzt. Im Original enthielt die Summe weitere, nicht gezeigte Kunden." },
         { nr: "H", ziel: "c2-1-13", versatz: [-6, 1], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Eingaben werden geprüft",
           text: "Planzellen nehmen nur ganze Stückzahlen von 0 bis 999 an. Ungültige Eingaben werden rot markiert und nicht in die Summen übernommen; „Monat weiterrollen“ ist erst nach der Korrektur möglich." },
       ],

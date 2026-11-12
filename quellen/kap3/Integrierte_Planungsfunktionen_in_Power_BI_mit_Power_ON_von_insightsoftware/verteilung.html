@@ -19,7 +19,7 @@
   #verteilung .filter-link { display: block; height: 26px; line-height: 26px; white-space: nowrap; }
   /* Planungsfunktionen als Reiterleiste */
   #verteilung .funktionen { margin-bottom: 12px; }
-  #verteilung .funktionen > span { flex: 1 1 auto; text-align: center; padding: 0 6px; }
+  #verteilung .funktionen > span { flex: 0 0 auto; text-align: center; padding: 0 14px; }
   body:not(.print) #verteilung .funktionen > span { cursor: pointer; }
   /* Titel der Matrix und Knöpfe */
   #verteilung .mx-titelzeile { display: flex; justify-content: space-between; align-items: center; height: 30px; margin-bottom: 8px; }
@@ -84,15 +84,6 @@
     <div class="mk-reiter funktionen" id="funktionen">
       <span data-info="Werte Zelle für Zelle erfassen, ohne Verteilung">Manuelle Planung</span>
       <span class="aktiv" id="r-verteilung" data-info="Summen proportional verteilen (top-down), Einzelwerte verdichten (bottom-up) – diese Seite">Verteilung</span>
-      <span data-info="Ist der abgelaufenen Monate plus Plan der Restmonate zur Hochrechnung des Jahres">Hochrechnung</span>
-      <span data-info="Werte einer Planversion oder des Ist als Ausgangspunkt in eine andere Version übernehmen">Versionen</span>
-      <span id="r-rueck" data-info="Gespeicherte Planwerte in die Datenbank zurückschreiben (Write-back)">Rückschreiben</span>
-      <span data-info="Planungsumfang vorab auf Bereiche, Produkte oder Kunden einschränken">Vorselektion</span>
-      <span data-info="Ansicht während der Planung filtern, z. B. nach Sorte">Filter</span>
-      <span data-info="Planungsfortschritt je Planer und Bereich überwachen">Überwachung</span>
-      <span data-info="Planstände abstimmen und freigeben (Genehmigungsworkflow)">Genehmigung</span>
-      <span data-info="Kommentare und Begründungen zu einzelnen Planwerten erfassen">Kommentare</span>
-      <span id="r-export" data-info="Planwerte in eine Tabellenkalkulation exportieren und von dort wieder einlesen">Export</span>
     </div>
 
     <div class="mx-titelzeile" id="mx-titelzeile">

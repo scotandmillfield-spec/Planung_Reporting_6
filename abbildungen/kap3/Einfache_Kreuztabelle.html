@@ -790,7 +790,6 @@ const DK = (() => {
     tabelle(bTab, {
       breiten: [140, 115, 115, 115, 115, 95],
       kopf: [
-        [{ text: "" }, { text: sDim().name, span: spalten.length, klasse: "tp-gruppe", id: "kt-spaltendim" }, { text: "" }],
         [{ text: zDim().name + pfeil("name"), id: "kt-zeilendim", onClick: () => sortieren("name") },
          ...spalten.map(c => ({ text: sDim().liste[c] + pfeil(c), id: "kt-sp-" + c, klasse: c === selS ? "tp-aktiv" : "",
                                 onClick: () => sortieren(c) })),
@@ -834,7 +833,7 @@ const DK = (() => {
   /* ---------- Lernplattform: Designregeln, Nachbau, Tabellen, CSV ---------- */
   DK.ebenen({
     regeln: [
-      { nr: 1, ziel: "kt-spaltendim", anker: "links", versatz: [118, 0], regel: "STRUCTURE – Inhalte ordnen", titel: "Zwei Dimensionen, eine Zelle je Kombination",
+      { nr: 1, ziel: "kt-sp-0", anker: "links", versatz: [0, 0], regel: "STRUCTURE – Inhalte ordnen", titel: "Zwei Dimensionen, eine Zelle je Kombination",
         text: "Kunden bilden die Zeilen, Produkte die Spalten; jede Zelle enthält den Absatz einer Kombination, am Rand stehen die Summen. Aus 16 Datensätzen einer flachen Tabelle (siehe „Daten (CSV)“ und Tab. 3.1) wird so eine 4 × 4-Matrix." },
       { nr: 2, ziel: "filter", anker: "links", versatz: [78, 5], regel: "CONDENSE – Perspektive wechseln", titel: "Zeilen und Spalten tauschen",
         text: "Der Datenschnitt „Zeilen“ dreht die Tabelle: Produkte in die Zeilen, Kunden in die Spalten. Die Werte bleiben gleich, nur die Leserichtung ändert sich – das ist die Rotation (Pivoting) aus Abb. 3.34." },

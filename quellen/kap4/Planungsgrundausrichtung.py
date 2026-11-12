@@ -1,10 +1,10 @@
 """Abb. 4.14 – Planungsgrundausrichtung."""
 # Muster: drei Ebenen untereinander – oben Zentrale Planung (Controlling) und Vorstand, darunter die Ebene der
-# konzentrierten und die der dezentralen Planung als gestapelte Tafeln (mehrere Hauptbereiche bzw. Niederlassungen).
+# aggregierten und die der dezentralen Planung als gestapelte Tafeln (mehrere Hauptbereiche bzw. Niederlassungen).
 # Links Top-Down-, rechts Bottom-Up-Pfeil (Blockpfeile mit senkrechter Beschriftung wie im Original).
 # Gegenstrom: Sammelleitungen mit Pfeilen in beide Richtungen; die zwei Leitungen der Hauptbereichsleitung zu den
 # dezentralen Planungen (im Original eine Sammelleitung und eine Schleife) sind zu einer Sammelleitung gebündelt.
-# Gestrichelt: Rückmeldungen aus den dahinterliegenden Tafeln an die übrigen konzentrierten Planungen.
+# Gestrichelt: Rückmeldungen aus den dahinterliegenden Tafeln an die übrigen aggregierten Planungen.
 STEM = "Planungsgrundausrichtung"
 from bookfig import Fig, P
 
@@ -20,6 +20,7 @@ FX0 = 6.8                        # linke Kante der vorderen Tafeln
 FX1 = XC1 - 2 * STAPEL           # rechte Kante der vorderen Tafeln
 KS = 6.5                         # Schriftgrad der Planungskästen
 INS = (0.6, 0.5)
+AS = "sm"                        # kleine Pfeilspitzen (Revision 11/2026: mehr Abstand zur Sammelleitung)
 
 
 def build(theme):
@@ -28,14 +29,14 @@ def build(theme):
     # ---- Geometrie ----
     y0 = 0.3
     TOP_H = 8.0
-    yM = y0 + TOP_H + 6.3 + 2 * STAPEL       # Oberkante vordere Tafel „konzentriert“
-    yb1 = yM + 2.2                           # Sammelleitung Zentrale ↔ konzentriert
-    yK = yM + 4.4
+    yM = y0 + TOP_H + 6.3 + 2 * STAPEL       # Oberkante vordere Tafel „aggregiert“
+    yb1 = yM + 2.2                           # Sammelleitung Zentrale ↔ aggregiert
+    yK = yM + 5.0
     KH = 7.0
-    yM1 = yK + KH + 2.4                      # Unterkante vordere Tafel „konzentriert“
+    yM1 = yK + KH + 2.4                      # Unterkante vordere Tafel „aggregiert“
     yD = yM1 + 4.5 + 2 * STAPEL              # Oberkante vordere Tafel „dezentral“
     yb2 = yD + 2.2
-    yDk = yD + 4.4
+    yDk = yD + 5.0
     DH = 7.0
     yD1 = yDk + DH + 2.2
     H = round(yD1 + 0.3, 1)
@@ -65,7 +66,7 @@ def build(theme):
                   name=f"{name} Tafel hinten {k}")
         f.box(FX0, ya_, FX1 - FX0, yb_ - ya_, None, role="box_plain", rounded=False, name=f"{name} Tafel vorn")
 
-    stapel(yM, yM1, "Konzentriert")
+    stapel(yM, yM1, "Aggregiert")
     stapel(yD, yD1, "Dezentral")
 
     # ---- Oberste Ebene: Zentrale Planung ↔ Vorstand ----
@@ -74,23 +75,23 @@ def build(theme):
     f.box(ZX, y0, ZW, TOP_H, [P("Zentrale Planung", bold=True), P("(Controlling)", bold=True)], role="box",
           name="Zentrale Planung")
     f.box(VX, y0, ZW, TOP_H, [P("Vorstand", bold=True)], role="box", name="Vorstand")
-    f.arrow([(ZX + ZW + 0.6, y0 + TOP_H / 2), (VX - 0.6, y0 + TOP_H / 2)], head=True, name="Zentrale ↔ Vorstand")
+    f.arrow([(ZX + ZW + 0.6, y0 + TOP_H / 2), (VX - 0.6, y0 + TOP_H / 2)], size=AS, head=True, name="Zentrale ↔ Vorstand")
 
-    # ---- Konzentrierte Planung ----
+    # ---- Aggregierte Planung ----
     KW = 27.2
     kgap = (FX1 - FX0 - 2 * 2.5 - 3 * KW) / 2
     kx = [FX0 + 2.5 + i * (KW + kgap) for i in range(3)]
     kc = [x + KW / 2 for x in kx]
-    ktxt = [[P("Konzentrierte Planung", size=KS), P("(Hauptbereichsleiter)", size=KS)],
-            [P("Konzentrierte Planung", size=KS)], [P("Konzentrierte Planung", size=KS)]]
-    # Sammelleitung Zentrale ↔ konzentrierte Planungen
+    ktxt = [[P("Aggregierte Planung", size=KS), P("(Hauptbereichsleiter)", size=KS)],
+            [P("Aggregierte Planung", size=KS)], [P("Aggregierte Planung", size=KS)]]
+    # Sammelleitung Zentrale ↔ aggregierte Planungen
     zx = ZX + ZW / 2
     f.line([(kc[0], yb1), (kc[-1], yb1)], color=t.arrow, lw=lw, name="Sammelleitung Zentrale")
-    f.arrow([(zx, yb1), (zx, y0 + TOP_H)], name="nach oben in Zentrale")
+    f.arrow([(zx, yb1), (zx, y0 + TOP_H)], size=AS, name="nach oben in Zentrale")
     for i, x in enumerate(kc):
-        f.arrow([(x, yb1), (x, yK)], name=f"nach unten in Konzentriert {i + 1}")
+        f.arrow([(x, yb1), (x, yK)], size=AS, name=f"nach unten in Aggregiert {i + 1}")
     for i, (x, tx) in enumerate(zip(kx, ktxt)):
-        f.box(x, yK, KW, KH, tx, role="box", ins=INS, name=f"Konzentrierte Planung {i + 1}")
+        f.box(x, yK, KW, KH, tx, role="box", ins=INS, name=f"Aggregierte Planung {i + 1}")
 
     # Gegenstromverfahren (Schlüsselbegriff, rot)
     gy = y0 + TOP_H + 1.0
@@ -110,14 +111,14 @@ def build(theme):
     # Sammelleitung Hauptbereichsleiter ↔ dezentrale Planungen (Ein- und Ausgang rechts der Mitte)
     k1x = kx[0] + KW * 0.72
     f.line([(dc[0], yb2), (dc[-1], yb2)], color=t.arrow, lw=lw, name="Sammelleitung Hauptbereich")
-    f.arrow([(k1x, yb2), (k1x, yK + KH)], name="nach oben in Konzentriert 1")
+    f.arrow([(k1x, yb2), (k1x, yK + KH)], size=AS, name="nach oben in Aggregiert 1")
     for i, x_ in enumerate(dc):
-        f.arrow([(x_, yb2), (x_, yDk)], name=f"nach unten in Dezentral {i + 1}")
+        f.arrow([(x_, yb2), (x_, yDk)], size=AS, name=f"nach unten in Dezentral {i + 1}")
     for i, ((x_, w_), tx) in enumerate(zip(dx, dtxt)):
         f.box(x_, yDk, w_, DH, tx, role="box", ins=INS, name=f"Dezentrale Planung {i + 1}")
 
-    # Gestrichelt: aus den dahinterliegenden Tafeln an die übrigen konzentrierten Planungen
+    # Gestrichelt: aus den dahinterliegenden Tafeln an die übrigen aggregierten Planungen
     for k, i in ((1, 1), (2, 2)):
-        f.arrow([(kc[i], yD - k * STAPEL), (kc[i], yK + KH)], role="info", dash="sysDash",
-                name=f"Rückmeldung Tafel {k} → Konzentriert {i + 1}")
+        f.arrow([(kc[i], yD - k * STAPEL), (kc[i], yK + KH)], size=AS, role="info", dash="sysDash",
+                name=f"Rückmeldung Tafel {k} → Aggregiert {i + 1}")
     return f

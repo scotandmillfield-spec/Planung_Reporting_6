@@ -181,7 +181,7 @@ body.print .mk-nur-interaktiv { display: none !important; }
   #verteilung .filter-link { display: block; height: 26px; line-height: 26px; white-space: nowrap; }
   /* Planungsfunktionen als Reiterleiste */
   #verteilung .funktionen { margin-bottom: 12px; }
-  #verteilung .funktionen > span { flex: 1 1 auto; text-align: center; padding: 0 6px; }
+  #verteilung .funktionen > span { flex: 0 0 auto; text-align: center; padding: 0 14px; }
   body:not(.print) #verteilung .funktionen > span { cursor: pointer; }
   /* Titel der Matrix und Knöpfe */
   #verteilung .mx-titelzeile { display: flex; justify-content: space-between; align-items: center; height: 30px; margin-bottom: 8px; }
@@ -246,15 +246,6 @@ body.print .mk-nur-interaktiv { display: none !important; }
     <div class="mk-reiter funktionen" id="funktionen">
       <span data-info="Werte Zelle für Zelle erfassen, ohne Verteilung">Manuelle Planung</span>
       <span class="aktiv" id="r-verteilung" data-info="Summen proportional verteilen (top-down), Einzelwerte verdichten (bottom-up) – diese Seite">Verteilung</span>
-      <span data-info="Ist der abgelaufenen Monate plus Plan der Restmonate zur Hochrechnung des Jahres">Hochrechnung</span>
-      <span data-info="Werte einer Planversion oder des Ist als Ausgangspunkt in eine andere Version übernehmen">Versionen</span>
-      <span id="r-rueck" data-info="Gespeicherte Planwerte in die Datenbank zurückschreiben (Write-back)">Rückschreiben</span>
-      <span data-info="Planungsumfang vorab auf Bereiche, Produkte oder Kunden einschränken">Vorselektion</span>
-      <span data-info="Ansicht während der Planung filtern, z. B. nach Sorte">Filter</span>
-      <span data-info="Planungsfortschritt je Planer und Bereich überwachen">Überwachung</span>
-      <span data-info="Planstände abstimmen und freigeben (Genehmigungsworkflow)">Genehmigung</span>
-      <span data-info="Kommentare und Begründungen zu einzelnen Planwerten erfassen">Kommentare</span>
-      <span id="r-export" data-info="Planwerte in eine Tabellenkalkulation exportieren und von dort wieder einlesen">Export</span>
     </div>
 
     <div class="mx-titelzeile" id="mx-titelzeile">
@@ -866,7 +857,7 @@ const MK = (() => {
         { nr: 1, ziel: "kopf-titel", versatz: [30, 4], titel: "Planung im Bericht",
           text: "Die Planungsfunktionen sind in den Bericht integriert: Werte werden in der Matrix erfasst, Summen und Diagramm folgen sofort. Ein Wechsel in ein eigenes Planungswerkzeug oder in eine Tabellenkalkulation entfällt; geplant wird auf denselben Daten, die berichtet werden." },
         { nr: 2, ziel: "funktionen", anker: "links", versatz: [30, -20], titel: "Planungsfunktionen",
-          text: "Die Leiste führt zu den Funktionen der Planung: manuelle Planung, Verteilung und Verdichtung, Hochrechnung, Übernahme von Versionen, Rückschreiben in die Datenbank, Vorselektion, Filter, Überwachung des Planungsfortschritts, Abstimmung und Genehmigung, Kommentare und Export. Ein Klick zeigt, was die Funktion leistet." },
+          text: "Die Reiter führen zu den beiden Planungsfunktionen des Beispiels: manuelle Planung (Werte Zelle für Zelle erfassen) und Verteilung mit Verdichtung (diese Seite). Ein Klick zeigt, was die Funktion leistet." },
         { nr: 3, ziel: "schnitte", anker: "links", versatz: [0, 18], titel: "Datenschnitte",
           text: "Jahr, Planungsalternative und Sorte grenzen den Planungsausschnitt ein. Eine Verteilung wirkt nur auf die sichtbaren Werte – wählen Sie z. B. die Sorte Cola und verteilen Sie deren Jahressumme." },
         { nr: 4, ziel: "c-p0-4", anker: "links", versatz: [30, 1], titel: "Verdichtung (bottom-up)",
@@ -886,7 +877,7 @@ const MK = (() => {
       intro: "Was gegenüber dem Original geändert wurde – softwareneutral im Buchstil und nach den Interaktionsprinzipien der DIN EN ISO 9241-110.",
       eintraege: [
         { nr: "A", ziel: "kopf-titel", versatz: [30, 4], regel: "BUCHSTIL – SOFTWARENEUTRAL", titel: "Kein Logo, keine Symbole",
-          text: "Logo, Startseiten-Symbol und Radiergummi-Symbol des Originals entfallen; der Filter wird über den Link „Filter zurücksetzen“ gelöscht. Der Knopf mit dem Namen einer Tabellenkalkulation heißt „Export“. Die Titelzeile ist gestaltet wie bei den Dashboards." },
+          text: "Logo, Startseiten-Symbol und Radiergummi-Symbol des Originals entfallen; der Filter wird über den Link „Filter zurücksetzen“ gelöscht. Die Titelzeile ist gestaltet wie bei den Dashboards." },
         { nr: "B", ziel: "kopf-unter", versatz: [26, 0], regel: "SELBSTBESCHREIBUNGSFÄHIGKEIT", titel: "Einheit genannt",
           text: "Die Werte stehen in Tsd. € mit einer Nachkommastelle; die Einheit steht in der Titelzeile und am Diagramm. Das Original zeigte volle Beträge bis 20.000.000 ohne Einheit." },
         { nr: "C", ziel: "mx-titel", versatz: [28, 4], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Keine Farbflächen",
@@ -896,7 +887,7 @@ const MK = (() => {
         { nr: "E", ziel: "diagramm", versatz: [0, 30], regel: "AUFGABENANGEMESSENHEIT", titel: "Diagramm ergänzt",
           text: "Neu ist der Monatsverlauf unter der Matrix, an deren Spalten ausgerichtet: Die Wirkung einer Eingabe ist sofort sichtbar. Das Original zeigte nur die Matrix." },
         { nr: "F", ziel: "funktionen", versatz: [-4, -20], regel: "ERWARTUNGSKONFORMITÄT", titel: "Deutsche Begriffe, deutsches Format",
-          text: "„Goal Seek“ heißt Zielwertsuche, „Write Back“ Rückschreiben; Monate Jan bis Dez statt „Jan - 15“; Sorten und Produkte deutsch (Apfel, 0,5 l Flasche statt „Apple 0.5l bottle“); Dezimalkomma. Zweizeilige Knöpfe sind auf ein Wort gekürzt." },
+          text: "„Goal Seek“ heißt Zielwertsuche; Monate Jan bis Dez statt „Jan - 15“; Sorten und Produkte deutsch (Apfel, 0,5 l Flasche statt „Apple 0.5l bottle“); Dezimalkomma. Zweizeilige Knöpfe sind auf ein Wort gekürzt." },
         { nr: "G", ziel: "c-s0-12", versatz: [24, 1], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Eingaben werden geprüft",
           text: "Ungültige oder negative Beträge werden rot markiert und nicht übernommen. Verteilt wird erst mit Enter oder beim Verlassen des Felds – nicht schon bei jedem Tastendruck." },
         { nr: "H", ziel: "f-jahr", anker: "links", versatz: [0, -22], regel: "BUCHSTIL – NEUTRAL UND AKTUELL", titel: "Aktuelles Jahr",

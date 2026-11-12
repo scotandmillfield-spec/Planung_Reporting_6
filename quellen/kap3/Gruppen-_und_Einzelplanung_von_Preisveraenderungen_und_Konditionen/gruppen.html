@@ -1,0 +1,136 @@
+<!-- Abb. 3.184 (zusammengeführt mit Abb. 3.185) „Selektive Gruppenplanung von Preisveränderungen und Konditionen“:
+     Gruppen- und Einzelplanung in einer Maske „Absatz-/Umsatzplanung“ (softwareneutral nachgebaut).
+     Oben die Gruppenplanung (Savings je Materialgruppe, Rabatt und Skonto je Kundengruppe) aus den Originalmasken
+     „Savings“ und „Rabatte“, darunter die Einzelplanung je Kunde und Artikel aus der Maske „Übersicht Absatz-/Umsatzplanung“.
+     Die Gruppenwerte wirken direkt auf die Positionen; einzeln überschriebene Werte sind fett.
+     Querformat 1024 px = 155 mm; Inhalt 992 px.
+     Raster Savings: MG2 40 + 100 · MG3 40 + 112 · Saving 70 + 98 · Erlöswirkung 98 = 558 px;
+     Raster Konditionen: KG3 40 + 128 · Rabatt 70 · Skonto 70 · Erlöswirkung 98 = 406 px; Abstand 28 px.
+     Raster Positionen: Kunde 104 · Material 64 · Bezeichnung 212 · Auswahl 62 · Planabsatz 76 · Vk-Preis 76 ·
+     Saving 76 + 92 · Nettopreis 80 · Rabatt 64 · Planumsatz 86 = 992 px. Zellen wie Abb. 3.179/3.183. -->
+<style>
+  #gruppen { width: 1024px; }
+  #gruppen .mk-kopf { display: block; height: auto; background: none; color: var(--text); padding: 12px 0 10px;
+    margin: 0 15px; border-bottom: 1px solid var(--linie); line-height: normal; font-size: 14px; font-weight: normal; }
+  #gruppen .mk-kopf .kopf-titel { display: block; font-size: 22px; line-height: 26px; font-weight: bold; }
+  #gruppen .mk-kopf .kopf-unter { display: block; margin-top: 3px; line-height: 18px; color: var(--muted); }
+  #gruppen .mk-abschnitt.zu > :not(.mk-band) { display: none; }
+  /* Auswahl: drei Felder nebeneinander */
+  #gruppen .auswahl { display: grid; grid-template-columns: repeat(3, 318px); column-gap: 19px; margin-bottom: 14px;
+    --sp-label: 122px; --sp-feld: 188px; }
+  #gruppen .auswahl .mk-zeile + .mk-zeile { margin-top: 0; }
+  /* Gruppenplanung: zwei Raster nebeneinander */
+  #gruppen .gruppen { display: grid; grid-template-columns: 558px 406px; column-gap: 28px; align-items: start; }
+  #gruppen .gruppen .mk-gruppenkopf { margin-bottom: 4px; }
+  /* Raster */
+  #gruppen .mx { display: grid; }
+  #gruppen #raster-sav { grid-template-columns: 40px 100px 40px 112px 70px 98px 98px; }
+  #gruppen #raster-kond { grid-template-columns: 40px 128px 70px 70px 98px; }
+  #gruppen #raster-pos { grid-template-columns: 104px 64px 212px 62px 76px 76px 76px 92px 80px 64px 86px; }
+  #gruppen .mx-k { height: 21px; line-height: 21px; padding: 0 4px; text-align: right; color: var(--muted);
+    white-space: nowrap; overflow: hidden; }
+  #gruppen .mx-k.links { text-align: left; }
+  #gruppen .mx-k.mitte { text-align: center; }
+  #gruppen .mx-k.gruppe { text-align: left; color: var(--text); font-weight: bold; border-bottom: 1px solid var(--rahmen);
+    margin-left: 4px; }
+  #gruppen .mx-k.k2 { border-bottom: 1px solid var(--ac); }
+  #gruppen .mx-k.unten { height: 42px; padding-top: 21px; }
+  #gruppen .mx-b { border-bottom: 1px solid var(--rahmen); padding: 3px 4px 0 4px; }
+  #gruppen .mx-b .mk-label { display: block; height: 18px; line-height: 18px; }
+  #gruppen .mx-b .mk-label:first-child { font-weight: bold; }
+  #gruppen .mx-l { height: 24px; line-height: 23px; padding: 0 4px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #D4D4D4; }
+  #gruppen .mx-r { height: 24px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #D4D4D4; }
+  #gruppen .mx .mk-feld { height: 24px; line-height: 23px; padding: 0 4px; border: 0; border-radius: 0;
+    border-left: 1px solid #D4D4D4; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; }
+  #gruppen .mx .mk-feld.mk-anzeige { background: var(--anzeige); border-left-color: #FFFFFF; border-bottom-color: #FFFFFF; }
+  #gruppen .mx .mk-feld.mk-fehler { border-color: var(--schlecht); box-shadow: inset 0 0 0 1px var(--schlecht); }
+  #gruppen .mx .mk-feld.ueber { font-weight: bold; }
+  #gruppen .mx .summe { font-weight: bold; }
+  #gruppen .mx .mx-l.summe { border-bottom: 0; border-top: 1px solid var(--ac); }
+  #gruppen .mx .mk-feld.summe { border-top: 1px solid var(--ac); height: 25px; }
+  #gruppen .mx .leer { border-top: 1px solid var(--ac); height: 25px; }
+</style>
+<form class="mk-maske" id="gruppen" autocomplete="off" novalidate>
+  <div class="mk-kopf" id="kopf"><span class="kopf-titel" id="kopf-titel">Absatz-/Umsatzplanung</span><span class="kopf-unter" id="kopf-unter">Budget 2028 · Gruppen- und Einzelplanung · Mengen in Stück, Preise und Umsatz in €, Savings und Konditionen in % · fett: einzeln überschrieben</span></div>
+  <div class="mk-inhalt">
+    <div class="auswahl" id="auswahl">
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-kg">Kundengruppe 3</label>
+        <select class="mk-feld" id="f-kg"></select>
+      </div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-mg2">Materialgruppe 2</label>
+        <select class="mk-feld" id="f-mg2"></select>
+      </div>
+      <div class="mk-zeile">
+        <label class="mk-label" for="f-mg3">Materialgruppe 3</label>
+        <select class="mk-feld" id="f-mg3"></select>
+      </div>
+    </div>
+
+    <section class="mk-abschnitt" id="abschnitt-gruppe">
+      <div class="mk-band" id="band-gruppe">Gruppenplanung</div>
+      <div class="gruppen">
+        <div id="g-sav">
+          <div class="mk-gruppenkopf" id="kopf-sav">Savings je Materialgruppe</div>
+          <div class="mx" id="raster-sav">
+            <div class="mx-k gruppe" style="grid-row:1;grid-column:1 / span 2">Materialgruppe 2</div>
+            <div class="mx-k gruppe" style="grid-row:1;grid-column:3 / span 2">Materialgruppe 3</div>
+            <div class="mx-k gruppe" id="h-saving" style="grid-row:1;grid-column:5 / span 2">Saving in %</div>
+            <div class="mx-k k2 unten" id="h-wirkung-sav" style="grid-row:1 / span 2;grid-column:7">Erlöswirkung</div>
+            <div class="mx-k links k2" style="grid-row:2;grid-column:1">Nr.</div>
+            <div class="mx-k links k2" style="grid-row:2;grid-column:2">Bezeichnung</div>
+            <div class="mx-k links k2" style="grid-row:2;grid-column:3">Nr.</div>
+            <div class="mx-k links k2" style="grid-row:2;grid-column:4">Bezeichnung</div>
+            <div class="mx-k k2" style="grid-row:2;grid-column:5">beeinfl.</div>
+            <div class="mx-k k2" style="grid-row:2;grid-column:6">nicht beeinfl.</div>
+            <!-- Zeilen erzeugt gruppen.js -->
+          </div>
+        </div>
+        <div id="g-kond">
+          <div class="mk-gruppenkopf" id="kopf-kond">Konditionen je Kundengruppe</div>
+          <div class="mx" id="raster-kond">
+            <div class="mx-k gruppe" style="grid-row:1;grid-column:1 / span 2">Kundengruppe 3</div>
+            <div class="mx-k gruppe" id="h-kond" style="grid-row:1;grid-column:3 / span 2">Kondition in %</div>
+            <div class="mx-k k2 unten" id="h-wirkung-kond" style="grid-row:1 / span 2;grid-column:5">Erlöswirkung</div>
+            <div class="mx-k links k2" style="grid-row:2;grid-column:1">Nr.</div>
+            <div class="mx-k links k2" style="grid-row:2;grid-column:2">Bezeichnung</div>
+            <div class="mx-k k2" style="grid-row:2;grid-column:3">Rabatt</div>
+            <div class="mx-k k2" style="grid-row:2;grid-column:4">Skonto</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-abschnitt" id="abschnitt-pos">
+      <div class="mk-band" id="band-pos">Einzelplanung je Kunde und Artikel</div>
+      <div class="mx" id="raster-pos">
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:1">Kunde</div>
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:2">Material</div>
+        <div class="mx-k links k2 unten" style="grid-row:1 / span 2;grid-column:3">Bezeichnung</div>
+        <div class="mx-k mitte k2 unten" style="grid-row:1 / span 2;grid-column:4">Auswahl</div>
+        <div class="mx-k" style="grid-row:1;grid-column:5">Planabsatz</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:5">in Stück</div>
+        <div class="mx-k" style="grid-row:1;grid-column:6">Vk-Preis</div>
+        <div class="mx-k k2" id="h-vk" style="grid-row:2;grid-column:6">in €</div>
+        <div class="mx-k gruppe" id="h-saving-pos" style="grid-row:1;grid-column:7 / span 2">Saving in %</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:7">beeinfl.</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:8">nicht beeinfl.</div>
+        <div class="mx-k" style="grid-row:1;grid-column:9">Nettopreis</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:9">n. Saving</div>
+        <div class="mx-k" style="grid-row:1;grid-column:10">Rabatt</div>
+        <div class="mx-k k2" id="h-rabatt" style="grid-row:2;grid-column:10">in %</div>
+        <div class="mx-k" id="h-umsatz" style="grid-row:1;grid-column:11">Planumsatz</div>
+        <div class="mx-k k2" style="grid-row:2;grid-column:11">in €</div>
+        <!-- Zeilen erzeugt gruppen.js -->
+      </div>
+    </section>
+
+    <div class="mk-knopfleiste">
+      <button type="button" class="mk-knopf" id="k-sichern">Sichern</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-aktualisieren">Aktualisieren</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-perioden">Periodenwerte planen</button>
+      <button type="button" class="mk-knopf mk-zweit" id="k-verteilen">Jahreswerte auf Perioden verteilen</button>
+    </div>
+  </div>
+</form>

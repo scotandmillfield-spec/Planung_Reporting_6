@@ -1,71 +1,80 @@
 """Abb. 4.12 – Rollierende Planung/rollierender Forecast."""
-# Muster: Zeitachse mit Quartalsgrenzen (1. Jan. 11 … 1. Jan. 13) und einer Zeile je Planungszeitpunkt.
-# Stilregeln Ist/Plan/Vorschau: lfd. Ist anthrazit, Plan weiß mit anthrazitfarbener Kontur, ggf. überarbeiteter Plan
-# (rollierender Forecast) grau #8F8F8F, Ist für den Plan-Ist-Vergleich rot (Schlüsselelement wie im Original).
-# Die Legende entfällt: Jede Kategorie ist einmal direkt im Balken beschriftet. Die gelbe Fläche hinter allen
-# Zeilen ist als Ist-Abschnitt je Zeile umgesetzt; die beiden Zeilen ohne eigenen Inhalt (nur lfd. Ist bis
-# 1. Jan. 13) entfallen, an ihrer Stelle trennt ein Abstand die Planungszeilen von den Ist-Zeilen.
+# Muster: Zeitachse mit Quartalsspalten (Q1 2027 … Q3 2028) und einer Zeile je Planungszeitpunkt.
+# Revision 11/2026 nach Vorgabe der Prüfer vereinfacht auf sieben Zeilen in drei Gruppen:
+#   1 Zeile Planung für das ganze Jahr 2027,
+#   3 Zeilen YTE-Prognose (Year-to-End: Prognose bis Jahresende) ab Anfang Q2, Q3 bzw. Q4 2027,
+#   3 Zeilen rollierende Planung über vier Quartale ab Anfang Q2, Q3 bzw. Q4 2027 (bis Ende Q1, Q2 bzw. Q3 2028).
+# Stil: lfd. Ist anthrazit, Plan 2027 weiß mit Kontur, YTE-Prognose grau #8F8F8F, rollierende Planung hellgrau
+# (box_hi) mit Kontur – Helligkeitsleiter, druckfest in Graustufen. Zeilennamen links, Kategorien einmal direkt im
+# Balken beschriftet (keine Legende). Rot gepunktet: Jahreswechsel 2027/2028 (Horizont der YTE-Prognosen).
 STEM = "Rollierende_Planung-rollierender_Forecast"
 from bookfig import Fig, P
 
 W = 110
 X0, XR = 0.3, W - 0.3
-N = 10                                   # Quartalsspalten: Q4/10 … Q1/13
-CW = (XR - X0) / N
-DATEN = ["1. Jan. 11", "1. Apr. 11", "1. Jul. 11", "1. Okt. 11", "1. Jan. 12", "1. Apr. 12", "1. Jul. 12",
-         "1. Okt. 12", "1. Jan. 13"]     # Quartalsgrenzen 1 … 9
-IST, PLAN, FC, PIV = "ist", "plan", "fc", "piv"
+LW = 28.5                                # Spalte der Zeilennamen
+XT = X0 + LW                             # Beginn der Zeitachse
+N = 7                                    # Quartale Q1 2027 … Q3 2028
+CW = (XR - XT) / N
+QUARTALE = ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3"]
+JAHRE = [("2027", 0, 4), ("2028", 4, 7)]
+IST, PLAN, YTE, ROLL = "ist", "plan", "yte", "roll"
 STIL = {  # Füllung, Kontur, Textfarbe
     IST: ("3A3F44", "none", "FFFFFF"),
     PLAN: ("FFFFFF", "3A3F44", "1A1A1A"),
-    FC: ("8F8F8F", "none", "1A1A1A"),
-    PIV: ("C62828", "none", "FFFFFF"),
+    YTE: ("8F8F8F", "none", "1A1A1A"),
+    ROLL: ("CFCFCF", "3A3F44", "1A1A1A"),
 }
-# Zeilen: Liste (Kategorie, von Grenze, bis Grenze, Beschriftung)
-ZEILEN = [
-    [(IST, 0, 1, None), (PLAN, 1, 5, "Plan"), (FC, 5, 10, "ggf. überarbeiteter Plan")],
-    [(IST, 0, 5, "lfd. Ist"), (PLAN, 5, 6, None), (FC, 6, 10, None)],
-    [(IST, 0, 6, None), (PLAN, 6, 7, None), (FC, 7, 10, None)],
-    [(IST, 0, 7, None), (PLAN, 7, 8, None), (FC, 8, 10, None)],
-    [(IST, 0, 8, None), (PLAN, 8, 9, None), (FC, 9, 10, None)],
-    [(IST, 0, 9, None), (PLAN, 9, 10, None)],
-    None,                                                    # Abstand Planungszeilen | Ist-Zeilen
-    [(IST, 0, 5, None), (PIV, 5, 9, "Ist für Plan-Ist-Vergleich")],
-    [(IST, 0, 10, "lfd. Ist")],
+# Gruppen: Liste von Zeilen (Name, [(Kategorie, von Quartal, bis Quartal, Beschriftung)])
+GRUPPEN = [
+    [("Planung 2027", [(PLAN, 0, 4, "Plan 2027")])],
+    [("YTE-Prognose ab Q2", [(IST, 0, 1, "Ist"), (YTE, 1, 4, "YTE-Prognose")]),
+     ("YTE-Prognose ab Q3", [(IST, 0, 2, "Ist"), (YTE, 2, 4, None)]),
+     ("YTE-Prognose ab Q4", [(IST, 0, 3, "Ist"), (YTE, 3, 4, None)])],
+    [("Rollierende Planung ab Q2", [(IST, 0, 1, "Ist"), (ROLL, 1, 5, "Rollierende Planung")]),
+     ("Rollierende Planung ab Q3", [(IST, 0, 2, "Ist"), (ROLL, 2, 6, None)]),
+     ("Rollierende Planung ab Q4", [(IST, 0, 3, "Ist"), (ROLL, 3, 7, None)])],
 ]
-BH, PITCH, TRENN = 3.6, 5.0, 2.6         # Balkenhöhe, Zeilenabstand, zusätzlicher Abstand der Gruppen
+BH, PITCH, TRENN = 3.6, 4.8, 2.4         # Balkenhöhe, Zeilenabstand, zusätzlicher Abstand der Gruppen
 FUGE = 0.4                               # weiße Fuge zwischen benachbarten Abschnitten
-Y_ACHSE = 3.0                            # Unterkante der Datumsbeschriftung
+Y_JAHR, Y_Q = 0.3, 3.4                   # Kopfzeilen Jahr / Quartal
+Y_ACHSE = 6.4                            # Unterkante der Achsenbeschriftung
 GITTER = "A9A9A9"
 
 
-def bx(b):
-    return X0 + b * CW
+def bx(q):
+    return XT + q * CW
 
 
 def build(theme):
     t = theme
-    ys, y = [], Y_ACHSE + 1.4
-    for z in ZEILEN:
-        if z is None:
+    rows, y = [], Y_ACHSE + 1.2
+    for gi, g in enumerate(GRUPPEN):
+        if gi:
             y += TRENN
-            continue
-        ys.append(y)
-        y += PITCH
-    yend = ys[-1] + BH + 0.8
-    H = round(yend + 0.3, 1)
+        for name, segs in g:
+            rows.append((name, segs, y))
+            y += PITCH
+    yend = rows[-1][2] + BH + 0.8
+    yn = yend + 0.8                      # Erläuterung YTE
+    H = round(yn + 3.0 + 0.3, 1)
     f = Fig(W, H, theme, STEM)
 
-    # Zeitachse: Datumsbeschriftung und Gitterlinien an den Quartalsgrenzen
-    for k, d in enumerate(DATEN, start=1):
-        x = bx(k)
-        f.text(x - CW / 2, 0.3, CW, Y_ACHSE - 0.3, [P(d, size="small")], align="c", anchor="b", name=f"Datum {d}")
-        f.line([(x, Y_ACHSE + 0.4), (x, yend)], color=GITTER, lw=0.4, name=f"Gitter {d}")
+    # Achse: Jahre (über die Quartale gespannt), Quartale, Gitterlinien an den Quartalsgrenzen
+    for j, a, b in JAHRE:
+        f.text(bx(a), Y_JAHR, bx(b) - bx(a), 3.0, [P(j, bold=True)], align="c", anchor="m", name=f"Jahr {j}")
+        f.line([(bx(a) + 0.6, Y_JAHR + 3.0), (bx(b) - 0.6, Y_JAHR + 3.0)], color=t.arrow, lw=0.5,
+               name=f"Jahresklammer {j}")
+    for k, q in enumerate(QUARTALE):
+        f.text(bx(k), Y_Q, CW, Y_ACHSE - Y_Q, [P(q, size="small")], align="c", anchor="m",
+               name=f"Quartal {k + 1}")
+    for k in range(N + 1):
+        f.line([(bx(k), Y_ACHSE + 0.3), (bx(k), yend)], color=GITTER, lw=0.4, name=f"Gitter {k}")
 
-    # Balken
-    zeilen = [z for z in ZEILEN if z is not None]
-    for i, (z, y) in enumerate(zip(zeilen, ys)):
-        for kat, a, b, txt in z:
+    # Zeilen
+    for i, (name, segs, y) in enumerate(rows):
+        f.text(X0, y, LW - 1.0, BH, [P(name, size="small")], align="l", anchor="m", name=f"Zeile {i + 1} {name}"[:40])
+        for kat, a, b, txt in segs:
             xa = bx(a) + (FUGE / 2 if a > 0 else 0)
             xb = bx(b) - (FUGE / 2 if b < N else 0)
             fill, line, tc = STIL[kat]
@@ -74,6 +83,9 @@ def build(theme):
                   lw=0.75 if line != "none" else None, text_color=tc, ins=(0.6, 0.4),
                   name=f"Zeile {i + 1} {kat} {a}-{b}")
 
-    # Stichtag 1. Jan. 13 (rot gepunktet wie im Original)
-    f.line([(bx(9), Y_ACHSE + 0.4), (bx(9), yend)], color=t.accent, lw=1.0, dash="sysDot", name="Stichtag 1. Jan. 13")
+    # Jahreswechsel 2027/2028 = Horizont der YTE-Prognosen
+    f.line([(bx(4), Y_ACHSE + 0.3), (bx(4), yend)], color=t.accent, lw=1.0, dash="sysDot",
+           name="Jahreswechsel 2027/2028")
+    f.text(X0, yn, XR - X0, 3.0, [P("YTE = Year-to-End (Prognose vom Anfang des Quartals bis zum Jahresende)",
+                                     size="small", color=t.text_muted)], align="l", anchor="m", name="Erläuterung YTE")
     return f

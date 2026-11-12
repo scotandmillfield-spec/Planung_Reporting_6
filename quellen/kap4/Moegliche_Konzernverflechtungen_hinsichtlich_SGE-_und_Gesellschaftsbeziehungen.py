@@ -1,7 +1,7 @@
 """Abb. 4.2 – Mögliche Konzernverflechtungen hinsichtlich SGE- und Gesellschaftsbeziehungen."""
 # Muster: Organigramm über fünf Ebenen mit Sammelleitungen. Mehrfachzuordnungen (im Original gekreuzte Diagonalen)
 # als gemeinsame Sammelleitung zweier übergeordneter Einheiten: TK 1 und TK 2 hängen beide an SGE 1 und SGE 2,
-# EG 5 und EG 6 beide an SGE 3 und SGE 4. Konzern gestrichelt (wie im Original), Abkürzungen unten links erklärt.
+# EG 5 und EG 6 beide an SGE 3 und SGE 4. Konzern wie alle anderen Kästen (Revision 11/2026), Abkürzungen unten links erklärt.
 STEM = "Moegliche_Konzernverflechtungen_hinsichtlich_SGE-_und_Gesellschaftsbeziehungen"
 from bookfig import Fig, P
 
@@ -11,7 +11,7 @@ BW, BH = 14.0, 6.5             # Kastengröße aller Einheiten
 G1 = 3.0                       # Abstand innerhalb eines Paares
 G2 = (XR - X0 - 6 * BW - 3 * G1) / 2   # Abstand zwischen den Paaren
 VG = 5.0                       # senkrechter Abstand zwischen den Ebenen
-KW = 2 * BW + G1               # Breite Konzern
+KW = BW                        # Breite Konzern (wie alle Einheiten)
 LEGENDE = [("TK", "Teilkonzern"), ("SGE", "Strategische Geschäftseinheit"), ("EG", "Einzelgesellschaft")]
 
 
@@ -70,7 +70,7 @@ def build(theme):
     bus([TK3], EG[4:6], "TK 3")
     bus(EG[4:6], [SGE3, SGE4], "EG 5/EG 6 – SGE 3/SGE 4")
 
-    f.box(KZ.x, KZ.y, KZ.w, KZ.h, [P("Konzern")], role="container", name="Konzern")
+    f.box(KZ.x, KZ.y, KZ.w, KZ.h, [P("Konzern")], role="box", name="Konzern")
     for b, n in ((TK1, "TK 1"), (TK2, "TK 2"), (TK3, "TK 3"), (SGE1, "SGE 1"), (SGE2, "SGE 2"),
                  (SGE3, "SGE 3"), (SGE4, "SGE 4")):
         f.box(b.x, b.y, b.w, b.h, [P(n)], name=n)

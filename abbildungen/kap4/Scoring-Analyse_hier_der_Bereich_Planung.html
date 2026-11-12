@@ -144,7 +144,7 @@ table.dk-matrix { border-collapse: collapse; width: 100%; font-size: 14px; }
 </style>
 </head>
 <body>
-<script>const DATA = {"skala":[-4,4],"bereiche":{"Planung":[["Planungsinhalte",-1,[["Absatzplanung",0],["Einkaufsplanung",1],["Kostenplanung",0],["Ergebnisplanung",-1],["Finanzplanung",0],["weitere Teilpläne",-1]]],["Planungsprozesse",-2,[]],["Planungsorganisation",0,[]],["IT-Unterstützung",1,[]]],"Reporting":[["Berichtsinhalte",0,[["Monatsbericht",1],["Kennzahlenbericht",0],["Abweichungsanalyse",-2],["Forecastbericht",-1],["Kommentierung",-1],["weitere Berichte",0]]],["Berichtsprozesse",-1,[]],["Berichtsorganisation",1,[]],["IT-Unterstützung",2,[]]]}};</script>
+<script>const DATA = {"skala":[-4,4],"bereiche":{"Planung":[["Planungsinhalte",-0.17,[["Absatzplanung",0],["Einkaufsplanung",1],["Kostenplanung",0],["Ergebnisplanung",-1],["Finanzplanung",0],["weitere Teilpläne",-1]]],["Planungsprozesse",-2,[]],["Planungsorganisation",0,[]],["IT-Unterstützung",1,[]]],"Reporting":[["Berichtsinhalte",-0.5,[["Monatsbericht",1],["Kennzahlenbericht",0],["Abweichungsanalyse",-2],["Forecastbericht",-1],["Kommentierung",-1],["weitere Berichte",0]]],["Berichtsprozesse",-1,[]],["Berichtsorganisation",1,[]],["IT-Unterstützung",2,[]]]}};</script>
 <script>
 /* dashkit.js – Bausteine für die Buch-Dashboards (6. Auflage)
    Jeder Baustein entspricht einem Standard-Visual von Power BI.
@@ -636,6 +636,7 @@ const DK = (() => {
 /* Einzelvisual „Scoring-Analyse (hier der Bereich Planung)“ (Abb. 4.10). Seite 727 x 446 px = 110 x 67,5 mm.
    Daten: scoring.json (daten_scoring.py) – Analysefelder mit Bewertung von −4 (Worst Practice) über 0 (Durchschnitt)
    bis +4 (Best Practice); Bereich Planung mit den Werten des Originals, Bereich Reporting erfunden.
+   Felder mit Teilfeldern (Planungsinhalte, Berichtsinhalte) tragen den Durchschnitt ihrer Teilfelder (Ø, berechnet).
    Statt Punkten vor einer Regenbogenskala Abweichungsbalken vom Durchschnitt auf fester, gleichabständiger Skala,
    gefärbt nach Wirkung (unter dem Durchschnitt rot, darüber blaugrün). Gliederung wie im Original; Schalter
    „Reihenfolge“ sortiert nach Bewertung. Klick hebt ein Feld hervor, Esc hebt auf. Gestaltung wie Abb. 3.27. */
@@ -648,7 +649,8 @@ const DK = (() => {
   const ZEILEN = Object.fromEntries(BER.map(b => [b, DATA.bereiche[b].flatMap(([name, v, teile], i) =>
     [{ key: `${i}`, name, v, ebene: 0, gruppe: teile.length > 0, pos: i },
      ...teile.map(([t, w], j) => ({ key: `${i}.${j}`, name: t, v: w, ebene: 1, eltern: name, pos: i + (j + 1) / 100 }))])]));
-  const pkt = v => (v === 0 ? "±0" : delta(v, 0));
+  const pkt = v => delta(v, 1);                         // ein Format je Spalte: eine Nachkommastelle
+  const pktZeile = r => (r.gruppe ? "Ø" + DK.NBSP : "") + pkt(r.v);
 
   /* ---------- Zustand ---------- */
   const S = { bereich: BER[0], sort: "gliederung", auswahl: null };
@@ -710,7 +712,7 @@ const DK = (() => {
   /* ---------- Profil (Abweichungsbalken auf fester Skala) ---------- */
   const ZH = 27, KOPF = 40;
   const LW = Math.ceil(Math.max(...Object.values(ZEILEN).flat().map(r => r.ebene * 16 + tw(r.name, 14, r.ebene === 0)))) + 16;
-  const VW = Math.ceil(tw("−4")) + 18;
+  const VW = Math.ceil(tw("Ø" + DK.NBSP + "−0,0")) + 18;
   function profil(ziel, breite, rows) {
     ziel.textContent = "";
     const h = KOPF + rows.length * ZH;
@@ -738,7 +740,7 @@ const DK = (() => {
       const g = sv("g", { class: "dk-klick" + (blass ? " dk-blass" : ""), id: "z-" + r.key.replace(".", "-") }, svg);
       sv("text", { x: r.ebene * 16, y: cy, dy: "0.35em", style: r.ebene === 0 ? "font-weight:bold" : "" }, g, r.name);
       const kl = r.v < 0 ? "schlecht" : r.v > 0 ? "gut" : "neutral";
-      sv("text", { x: LW + VW, y: cy, dy: "0.35em", "text-anchor": "end", style: kl === "neutral" ? "" : `fill:${FARBE[kl]}` }, g, pkt(r.v));
+      sv("text", { x: LW + VW, y: cy, dy: "0.35em", "text-anchor": "end", style: kl === "neutral" ? "" : `fill:${FARBE[kl]}` }, g, pktZeile(r));
       if (r.v !== 0) {
         const a = X(Math.min(0, r.v)), b = X(Math.max(0, r.v));
         sv("rect", { x: a, y: cy - 7, width: b - a, height: 14, fill: FARBE[kl] }, g);
@@ -746,8 +748,8 @@ const DK = (() => {
       const hit = sv("rect", { x: 0, y, width: breite, height: ZH, fill: "transparent" }, g);
       hit.addEventListener("click", () => auswaehlen(r.key));
       tooltip(hit, () => [r.name, ...(r.eltern ? [`Teil von: ${r.eltern}`] : []), `Bewertung: ${pkt(r.v)} – ${lage(r.v)}`,
-        `Abstand zur Best Practice: ${MAX - r.v} Punkte`, `Abstand zur Worst Practice: ${r.v - MIN} Punkte`,
-        ...(r.gruppe ? ["Gesamtbewertung des Feldes, kein Mittelwert der Teilfelder"] : []), "Klick hebt hervor"]);
+        `Abstand zur Best Practice: ${DK.zahl(MAX - r.v, 1)} Punkte`, `Abstand zur Worst Practice: ${DK.zahl(r.v - MIN, 1)} Punkte`,
+        ...(r.gruppe ? [`Durchschnitt der ${ZEILEN[S.bereich].filter(q => q.eltern === r.name).length} Teilfelder`] : []), "Klick hebt hervor"]);
     });
     // Nulllinie = Durchschnitt
     sv("line", { x1: Math.round(X(0)) + 0.5, x2: Math.round(X(0)) + 0.5, y1: KOPF - 4, y2: h, stroke: "#3A3F44", "stroke-width": 1.5 }, svg);
@@ -774,7 +776,7 @@ const DK = (() => {
       { nr: 4, ziel: "z-1", anker: "links", versatz: [520, 2], regel: "EXPRESS – Passende Darstellung", titel: "Abweichungsbalken statt Punkte",
         text: "Jedes Feld ist ein Balken von der Durchschnittslinie aus; seine Länge zeigt den Abstand zum Durchschnitt, die Zahl daneben den Wert. Die weißen Punkte des Originals vor dem Farbverlauf ließen sich nur über die Lage im Verlauf ablesen." },
       { nr: 5, ziel: "sp-wert", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Wert als Zahl",
-        text: "Die Bewertung steht als Zahl mit Vorzeichen neben dem Feld, ±0 für durchschnittlich. Der Tooltip nennt den Abstand zur Best und zur Worst Practice." },
+        text: "Die Bewertung steht als Zahl mit Vorzeichen neben dem Feld, ±0,0 für durchschnittlich, einheitlich mit einer Nachkommastelle. Felder mit Teilfeldern tragen den Durchschnitt ihrer Teilfelder (Ø); im Original passte die Gesamtbewertung der Planungsinhalte (−1) nicht zum Mittelwert der Teilpläne. Der Tooltip nennt den Abstand zur Best und zur Worst Practice." },
       { nr: 6, ziel: "sp-feld", versatz: [26, -24], regel: "STRUCTURE – Inhalte ordnen", titel: "Gliederung wie im Original",
         text: "Die Planungsinhalte mit ihren Teilplänen stehen eingerückt oben, darauf folgen Prozesse, Organisation und IT-Unterstützung. Der Schalter „nach Bewertung“ stellt die schwächsten Felder nach oben; die Gliederung bleibt erhalten. „…“ heißt jetzt „weitere Teilpläne“." },
       { nr: 7, ziel: "filter", anker: "links", versatz: [196, 6], regel: "SIMPLIFY – Filtern statt vervielfachen", titel: "Bereich als Datenschnitt",
@@ -784,8 +786,8 @@ const DK = (() => {
     nachbau: [
       { id: "A", ziel: "sp-feld", versatz: [26, -2], titel: "Profil", visual: "Matrix, Layout „Abgestuft“",
         felder: "Zeilen: Gruppe, Analysefeld (Hierarchie; Gruppen ohne Teilfelder über leere Gruppe auf oberster Ebene); Werte: Bewertung (Summe) zweimal – als Zahl und als Datenbalken",
-        format: "Zahlenformat +0;−0;±0; zweite Spalte nur Datenbalken (bedingte Formatierung): Minimum −4, Maximum 4, Achse Mitte, positiv #00806B, negativ #C62828, Achsenfarbe #3A3F44; Zeilenhöhe 20 px",
-        hinweis: "Die Gesamtbewertung einer Gruppe ist ein eigener Wert (Zeile mit leerem Teilfeld), kein Mittelwert: Measure mit ISINSCOPE(Bewertung[Analysefeld]) liefert auf Gruppenebene diesen Wert." },
+        format: "Zahlenformat +0,0;−0,0;±0,0; zweite Spalte nur Datenbalken (bedingte Formatierung): Minimum −4, Maximum 4, Achse Mitte, positiv #00806B, negativ #C62828, Achsenfarbe #3A3F44; Zeilenhöhe 20 px",
+        hinweis: "Die Bewertung einer Gruppe ist der Durchschnitt ihrer Teilfelder: Measure Bewertung = AVERAGE(Bewertung[Bewertung]) liefert auf Gruppenebene automatisch den Mittelwert; Gruppen ohne Teilfelder zeigen ihren eigenen Wert." },
       { id: "B", ziel: "sc-pole", anker: "links", versatz: [0, -2], titel: "Pole der Skala", visual: "Textfelder über der Datenbalkenspalte",
         felder: "„Worst Practice“ links, „Durchschnitt“ mittig, „Best Practice“ rechts; Teilstriche −4 bis +4 als Textfeld", format: "10,5 pt fett bzw. #4D4D4D" },
       { id: "C", ziel: "filter", anker: "links", versatz: [196, 6], titel: "Datenschnitt Bereich", visual: "Datenschnitt (Stil Kacheln, Einzelauswahl)",
@@ -797,9 +799,9 @@ const DK = (() => {
     ],
     theme: DK.thema(),
     csv: { name: "scoring_analyse_daten.csv", text: () => ["Bereich;Gruppe;Analysefeld;Bewertung;Abstand_Best_Practice",
-      ...BER.flatMap(b => ZEILEN[b].map(r => [b, r.eltern || "", r.name, r.v, MAX - r.v].join(";")))].join("\r\n") },
+      ...BER.flatMap(b => ZEILEN[b].map(r => [b, r.eltern || "", r.name, String(r.v).replace(".", ","), String(Math.round((MAX - r.v) * 100) / 100).replace(".", ",")].join(";")))].join("\r\n") },
     tabellen: () => [{ titel: `Scoring-Analyse ${S.bereich} (Skala −4 bis +4)`, kopf: ["Analysefeld", "Bewertung", "Lage", "Abstand zur Best Practice"],
-      zeilen: zeilen().map(r => [(r.ebene ? "  " : "") + r.name, pkt(r.v), lage(r.v), String(MAX - r.v)]) }],
+      zeilen: zeilen().map(r => [(r.ebene ? "  " : "") + r.name, pktZeile(r), lage(r.v), DK.zahl(MAX - r.v, 1)]) }],
   });
   zeichnen();
 })();

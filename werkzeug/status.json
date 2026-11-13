@@ -1388,7 +1388,7 @@
   },
   "4.21": {
    "status": "pruefung",
-   "datei": "Forderungs-Cockpit_mit_Power_BI_im_Webbrowser",
+   "datei": "Forderungs-Cockpit_im_Webbrowser",
    "kommentare": [
     "Produktscreenshot softwareneutral als Dashboard 1024 × 646 px nachgebaut (HTML für die Lernplattform, PNG): Browser- und Programmleisten, Logo, Seitenliste, Navigationsknöpfe und Produktname entfallen",
     "Werte des Originals als Anker übernommen: Forderungen 1.768,7 Tsd. € = 1400 Inland 1.286.866,62 € + 1401 Ausland 481.877,44 €, Reichweite 22 Tage, rund 350 offene Posten (351); übrige Zahlen erfunden und aus Einzelrechnungen je Monatsultimo gerechnet",
@@ -1396,9 +1396,19 @@
     "Umbau: 40 Einzeltage (absteigend, mit Bildlauf) → Fälligkeitsbänder mit Stichtagslinie, Fälligkeitsklassen des Rings darin aufgegangen; Ampel- und Blau-Ringdiagramme → Balken; neu: Überfällig je Monatsultimo und ΔVM in der KPI-Leiste; Debitoren neutral (Branche + Ort), Nummern im Tooltip",
     "Gleicher Datensatz und gleiches Dashboard wie Abb. 4.22",
     "Bitte prüfen: Wirkungsrichtung – Forderungen und Anzahl offener Posten neutral, Anstieg von Überfälligem, Gemahntem und Reichweite ungünstig",
-    "Caption ohne Produktnamen? z. B. ‚Forderungs-Cockpit im Webbrowser (in Anlehnung an Vortragsunterlagen des Controlling Innovations Center, Dortmund 2023)‘"
+    "Revision 13.11.2026: interaktiv alle 24 Debitoren als Bildlaufliste, Klick auf einen Debitor filtert und klappt seine offenen Posten bis auf den Beleg auf (Rechnungsdatum, Fälligkeit, Tage überfällig, Mahnstufe, Betrag); Druckbild unverändert Top 6 + Übrige. Caption ohne Produktnamen: „Forderungs-Cockpit im Webbrowser (…)“"
    ],
-   "alt": "Dashboard „Forderungs-Cockpit“ zum Stichtag 30.06.2027 mit Datenschnitten für Monat und Sammelkonto und fünf Kennzahlen mit Vormonatsvergleich: Forderungen 1.769 Tsd. €, überfällig 103 Tsd. €, 351 offene Posten, Reichweite 22 Tage, gemahnt 60 Tsd. €. Säulen zeigen die offenen Posten nach Fälligkeitsbändern (überfällige anthrazit, nicht fällige hellgrau) und die überfälligen Forderungen je Monatsultimo, die seit Januar von 42 auf 103 Tsd. € steigen. Balken zeigen Mahnstufen, Sammelkonten und die größten Debitoren; der Importeur in Skagen trägt zwei Drittel der Überfälligkeit."
+   "alt": "Dashboard „Forderungs-Cockpit“ zum Stichtag 30.06.2027 mit Datenschnitten für Monat und Sammelkonto und fünf Kennzahlen mit Vormonatsvergleich: Forderungen 1.769 Tsd. €, überfällig 103 Tsd. €, 351 offene Posten, Reichweite 22 Tage, gemahnt 60 Tsd. €. Säulen zeigen die offenen Posten nach Fälligkeitsbändern (überfällige anthrazit, nicht fällige hellgrau) und die überfälligen Forderungen je Monatsultimo, die seit Januar von 42 auf 103 Tsd. € steigen. Balken zeigen Mahnstufen, Sammelkonten und die größten Debitoren; der Importeur in Skagen trägt zwei Drittel der Überfälligkeit.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Bitte die Offenen Posten der Debitoren zum Scrollen in der Analyse bis auf die Detailebene im Datenbeispiel HTML zulassen. Caption ohne Produktname"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Im interaktiven Datenbeispiel lassen sich jetzt alle Debitoren durchscrollen. Ein Klick auf einen Debitor filtert das Dashboard und klappt seine offenen Posten bis auf den einzelnen Beleg auf (Rechnungsdatum, Fälligkeit, Tage überfällig, Mahnstufe, Betrag). Das Buchbild zeigt weiter die sechs größten Debitoren und „Übrige“; die Bildunterschrift lautet ohne Produktnamen „Forderungs-Cockpit im Webbrowser (…)“."
+    }
+   ]
   },
   "4.22": {
    "status": "pruefung",
@@ -1783,7 +1793,17 @@
     "Kopfzeilen „eine Kennzahl je Zeile“ / „Summe mehrerer Kennzahlen“ neu – passt die Wortwahl zum Buchtext?",
     "Fett wie im Original: Umsatzstufen Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz"
    ],
-   "alt": "Tabelle mit den Berichtszeilen Bruttoumsatz, Rabatte, Nettoumsatz, Skonti und NettoNetto-Umsatz und zwei Varianten der Kennzahlenzuordnung. In der ersten Variante gehört zu jeder Berichtszeile genau eine Kennzahl; in der zweiten ergibt sich die Berichtszeile Rabatte als Summe der Kennzahlen Kundenrabatte, Aktionsrabatte und Sonderrabatte."
+   "alt": "Tabelle mit den Berichtszeilen Bruttoumsatz, Rabatte, Nettoumsatz, Skonti und NettoNetto-Umsatz und zwei Varianten der Kennzahlenzuordnung. In der ersten Variante gehört zu jeder Berichtszeile genau eine Kennzahl; in der zweiten ergibt sich die Berichtszeile Rabatte als Summe der Kennzahlen Kundenrabatte, Aktionsrabatte und Sonderrabatte.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Bitte Abb. 5.24 (Kennzahlenmodell) wie Abb. 5.25 (Kontenmodell) als HTML-Beispiel entwickeln einmal mit 3 Kennzeilen und 5 Kennzahlen mit Rabattdifferenzierung Werte aus Abb. 5.25 als Ausgangspunkt nehmen (zunächst ohne Rabattdifferenzierung, dann mit)."
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Soll das HTML-Beispiel die Tabelle im Buch ersetzen (Abb. 5.24 dann als Bild wie Abb. 5.25) oder nur auf der Lernplattform ergänzen? Und bedeutet „3 Kennzeilen und 5 Kennzahlen“: drei Berichtszeilen (Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz) und fünf Kennzahlen (Bruttoumsatz, Kundenrabatte, Aktionsrabatte, Sonderrabatte, Skonti)? Für die Rabattdifferenzierung schlagen wir vor, die bisherigen Rabatte aus Abb. 5.25 aufzuteilen (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte) – passt das?"
+    }
+   ]
   },
   "5.25": {
    "status": "pruefung",
@@ -1795,7 +1815,17 @@
     "Rollenzeile „Dim.-ID / Kennzahl“ einmal über der Faktentabelle statt über jeder Spalte; Schlüssel unterstrichen, Gitter entfällt, echtes Minus und Tausenderpunkt",
     "Annahme: Betrag in €; „NULL“ als Vorgänger des obersten Knotens beibehalten; Kundennamen siehe Abb. 5.23"
    ],
-   "alt": "Kontenmodell mit Parent-Child-Hierarchie: Dimensionstabellen Produkt, Kunde und Zeit, eine Faktentabelle mit zwölf Buchungen (Produkt, Kunde, Zeit, Konto, Betrag) auf den Konten 8000 Bruttoumsatz, 8050 Rabatte und 8090 Skonti sowie die Kontendimension mit Konten-ID, Bezeichnung, Vorgänger und Sortiercode. Daneben die daraus entstehende Hierarchie: Der NettoNetto-Umsatz (3.714 €) enthält Skonti (−76 €) direkt und den Nettoumsatz (3.790 €), der sich aus Rabatten (−210 €) und Bruttoumsatz (4.000 €) zusammensetzt."
+   "alt": "Kontenmodell mit Parent-Child-Hierarchie: Dimensionstabellen Produkt, Kunde und Zeit, eine Faktentabelle mit zwölf Buchungen (Produkt, Kunde, Zeit, Konto, Betrag) auf den Konten 8000 Bruttoumsatz, 8050 Rabatte und 8090 Skonti sowie die Kontendimension mit Konten-ID, Bezeichnung, Vorgänger und Sortiercode. Daneben die daraus entstehende Hierarchie: Der NettoNetto-Umsatz (3.714 €) enthält Skonti (−76 €) direkt und den Nettoumsatz (3.790 €), der sich aus Rabatten (−210 €) und Bruttoumsatz (4.000 €) zusammensetzt.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Bitte alle. Jahreswerte 2018 und 2019 auf 2027 und 2028 anpassen. Abb.5.25 in Anlehnung an Abb. 5.24 erweitern im HTML-Beispiel mit und ohne Rabattdifferenzierungskennzahlen."
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Abb. 5.23, 5.25, 5.26 und 5.27 beruhen auf demselben Datensatz. Sollen die Jahre 2018/2019 → 2027/2028 in allen vier Abbildungen geändert werden (so verstehen wir „Bitte alle“)? Für die Rabattdifferenzierung schlagen wir vor, Konto 8050 Rabatte unter dem Knoten „Rabatte“ in 8051 Kundenrabatte, 8052 Aktionsrabatte und 8053 Sonderrabatte aufzuteilen, im HTML-Beispiel umschaltbar mit/ohne Differenzierung und mit denselben Werten wie das neue Beispiel zu Abb. 5.24. Einverstanden? Umgesetzt wird erst nach der Antwort, damit die Abbildungen der Reihe zusammenpassen."
+    }
+   ]
   },
   "5.26": {
    "status": "pruefung",
@@ -1819,7 +1849,18 @@
     "Klick auf einen Knoten zeigt ihn mit Knoten darüber und darunter samt Buchungen; Tooltip erklärt den Füllknoten",
     "Abbildung deutlich größer als das Original (Kontext aus Abb. 5.26 wiederholt) – falls nur der Hierarchieaufbau gezeigt werden soll, bitte Rückmeldung"
    ],
-   "alt": "Hierarchieaufbau aus der Kontendimension ohne Parent-Child-Hierarchie: Ebene 1 NettoNetto-Umsatz (3.714 €) mit den Knoten der Ebene 2 Skonti (−76 €) und Nettoumsatz (3.790 €); unter Nettoumsatz stehen die Werte Rabatte (−210 €) und Bruttoumsatz (4.000 €). Unter dem Knoten Skonti steht der Wert Skonti noch einmal mit demselben Betrag, weil die feste Ebenenstruktur eine Zwischenebene verlangt; diese Wiederholung ist markiert. Daneben stehen Faktentabelle und Kontendimension als Quelle."
+   "alt": "Hierarchieaufbau aus der Kontendimension ohne Parent-Child-Hierarchie: Ebene 1 NettoNetto-Umsatz (3.714 €) mit den Knoten der Ebene 2 Skonti (−76 €) und Nettoumsatz (3.790 €); unter Nettoumsatz stehen die Werte Rabatte (−210 €) und Bruttoumsatz (4.000 €). Unter dem Knoten Skonti steht der Wert Skonti noch einmal mit demselben Betrag, weil die feste Ebenenstruktur eine Zwischenebene verlangt; diese Wiederholung ist markiert. Daneben stehen Faktentabelle und Kontendimension als Quelle.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Abb. in Anlehnung an die neuen Anforderungen (mit und ohne Rabattdifferenzierung in HTML-Beispiel ergänzen) Abb. 5.24 und Abb. 5.25 anpassen. Da hier die Abbildung 5.27 und Abb. 5.26 zusammengefasst worden sind entfällt eine Abbildung im Buch!",
+      "13.11.2026 DS: eigentlich ist hier nur Abb. 5.26 gemeint!"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Laut Nachtrag ist „eigentlich nur Abb. 5.26 gemeint“. Soll die Erweiterung mit/ohne Rabattdifferenzierung also in Abb. 5.26 (Kontendimension ohne Parent-Child-Hierarchie) statt in Abb. 5.27 umgesetzt werden? Welche Abbildung entfällt im Buch: Wird Abb. 5.27 (Hierarchieaufbau) in Abb. 5.26 aufgenommen und gestrichen, oder umgekehrt? Abb. 5.26 steht derzeit nicht auf „Revision“."
+    }
+   ]
   },
   "5.28": {
    "status": "pruefung",
@@ -2127,7 +2168,8 @@
     "Umfang wie Bildausschnitt, auf einen Produktblock gekürzt (Alle Kunden + zwei Kunden, je sechs Zeilen); Werte der Kundenblöcke aus dem Original (Ebene „All Products“), Planteil von „Alle Kunden“ identisch mit dem Original (7/6/11/10 … Summe 12/9/17/14); Ist und Ø von „Alle Kunden“ jetzt Summe der gezeigten Kunden (Original enthielt weitere Kunden, z. B. Ø 122,00)",
     "Ersetzt: Audi A3/A4 → „Kompakt 2.0“/„Kombi 2.0“, Kunden „Professionals, Inc. – USA – Berkeley“/„Maintenance, Group – USA – Olympia“ → „15548 Autohaus Kiel“/„15561 Service Lübeck“, United States → Region Nord, Bearbeiterin fiktiv; Datum 12 Okt 2015 bei Monaten 9/2011–1/2013 (widersprüchlich) → Stand 12.10.2027, Ist Mai–Sep 2027, Plan Okt 2027–Sep 2028",
     "Stückzahlen ganzzahlig statt „7,00“, Ø mit einer Nachkommastelle; Zeile „Trend“ → „Trend (Vorjahr)“, da sie den Vorjahresmonat enthält – fachlich prüfen",
-    "Caption ohne Produktnamen? z. B. „Rollierende Absatzplanung (Planungsmaske, softwareneutral nachgebaut)“"
+    "Caption ohne Produktnamen? z. B. „Rollierende Absatzplanung (Planungsmaske, softwareneutral nachgebaut)“",
+    "Revision 13.11.2026: Rollieren in beide Richtungen – „◀ Monat zurück“ macht ein Weiterrollen rückgängig (Planwerte wie vorher) und öffnet vor dem Ausgangsstand bis zu sechs Istmonate wieder zur Planung (Vorschlag Ist/Plan = Ist); dafür fiktive Ist-Historie Apr–Sep 2026 ergänzt"
    ],
    "alt": "Planungsmaske „Absatzplanung Produkt/Kunde“ mit Absatzmengen in Stück für das Produkt Kompakt 2.0 in der Region Nord. Je Block (Alle Kunden, zwei Kunden) stehen sechs Zeilen – Trend (Vorjahr), Ist/Plan, Aktion bestätigt, Aktion geplant, Listung geplant und Summe – mit dem Durchschnitt des Ist der letzten 12, 6 und 3 Monate, dem Ist Mai bis September 2027 und dem rollierenden Plan Oktober 2027 bis September 2028. Geplant sind bisher die ersten vier Monate; die Summe aller Kunden steigt im Dezember auf 17 Stück.",
    "revisionen": [
@@ -2138,6 +2180,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Auch die Summenzeile „Alle Kunden“ ist planbar: Ein dort eingegebener Wert wird top-down auf die Kunden verteilt, standardmäßig im Verhältnis ihrer Istmengen (Verteilschlüssel wählbar, Anteile sichtbar). Es werden jetzt drei Kunden und drei Produkte gezeigt; die Buttons Drucken, PDF und Excel sind entfernt."
+    },
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Monat rollierend muss auch rückwärts funktionieren."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der rollierende Monat funktioniert jetzt in beide Richtungen: Neben „Monat weiter ▶“ gibt es „◀ Monat zurück“. Ein Weiterrollen wird damit samt den bisherigen Planwerten rückgängig gemacht; vor dem Ausgangsstand lassen sich bis zu sechs abgeschlossene Monate wieder zur Planung öffnen (Vorschlag Plan = Ist)."
     }
    ]
   },
@@ -3608,6 +3658,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Ein Foto einer fiktiven Verkäuferin, ein Produktbild eines fiktiven Fahrzeugmodells und das Logo eines erfundenen Autohauses sind eingefügt. Alle Bilder sind eigens erstellte, lizenzfreie Illustrationen ohne echte Personen oder Marken; in der interaktiven Fassung wechseln Foto und Produktbild mit der gewählten Region."
+    },
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Bitte das Personalfoto und des Produktes echter natürlicher aussehen lassen, wie eine richtige Person, Produkt"
+     ],
+     "ergebnis": "Rückfrage",
+     "text": "Rückfrage: Fotorealistische Bilder einer Person und eines Produkts können wir nicht selbst erstellen; dafür bräuchten wir echte Fotos. Dürfen wir lizenzfreie Stockfotos verwenden (z. B. Unsplash oder Pexels, kommerzielle Nutzung ohne Namensnennung erlaubt)? Bei Personen fehlt dort meist eine schriftliche Modelfreigabe, und der Verlag müsste die Lizenz akzeptieren. Oder stellen Sie eigene Fotos mit Nutzungsrecht bereit? Bis dahin bleiben die gezeichneten Bilder."
     }
    ]
   },

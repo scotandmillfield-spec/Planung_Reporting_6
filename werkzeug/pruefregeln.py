@@ -68,6 +68,8 @@ GEZIELT = {
               "SAP-IDES-Systems. Entnommen aus Schön 2004, S. 331)",
               "(Daten eines SAP-IDES-Systems; Quelle: Schön 2004, S. 331)",
               "Quellenangabe wiederholt den Titel – gekürzt")],
+    "4.21": [("Forderungs-Cockpit mit Power BI im Webbrowser", "Forderungs-Cockpit im Webbrowser",
+              "Produktname entfällt (Revision 13.11.2026)")],
     "5.2": [("(In Anlehnung an Gluchowski 2001, S. 7 und", "(In Anlehnung an Gluchowski 2001, S. 7, und", None)],
     "5.5": [(". Den BI-Einsatz im Controlling insbesondere im Reporting und in der Planung heben u. a. Seufert und "
              "Oehler hervor, vgl. Seufert und Oehler 2009)", ")",

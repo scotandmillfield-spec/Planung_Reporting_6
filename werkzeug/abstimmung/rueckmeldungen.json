@@ -952,6 +952,60 @@
    "kommentar": "Konsolidierung und Balanced Scorecard sind gestrichen, der Satz endet jetzt mit „wie z. B. Data Mining, Maschinelles Lernen und KI“; „OLAP-Engine“ ist entfernt. Cleansing und Staging reichen bis zur Unterkante von „Administration und Metadaten“, die Pfeile aus der Datenanbindung enden am gestrichelten Rahmen, und von den ETL-Pfeilen bleiben nur drei ohne Berührung der Kästchen (in Core Data Warehouse, ODS und CMS/DMS). Bei den internen Quellsystemen gibt es wieder ein Platzhalterkästchen „…“.",
    "auftrag": "d30aa5468464",
    "zeit": "2026-11-13T11:05"
+  },
+  {
+   "id": "2026-11-13-abb-3-183-1",
+   "schluessel": "abb-3-183",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der rollierende Monat funktioniert jetzt in beide Richtungen: Neben „Monat weiter ▶“ gibt es „◀ Monat zurück“. Ein Weiterrollen wird damit samt den bisherigen Planwerten rückgängig gemacht; vor dem Ausgangsstand lassen sich bis zu sechs abgeschlossene Monate wieder zur Planung öffnen (Vorschlag Plan = Ist).",
+   "auftrag": "6f1c2fe5e03d",
+   "zeit": "2026-11-13T11:07"
+  },
+  {
+   "id": "2026-11-13-abb-4-21-1",
+   "schluessel": "abb-4-21",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Im interaktiven Datenbeispiel lassen sich jetzt alle Debitoren durchscrollen. Ein Klick auf einen Debitor filtert das Dashboard und klappt seine offenen Posten bis auf den einzelnen Beleg auf (Rechnungsdatum, Fälligkeit, Tage überfällig, Mahnstufe, Betrag). Das Buchbild zeigt weiter die sechs größten Debitoren und „Übrige“; die Bildunterschrift lautet ohne Produktnamen „Forderungs-Cockpit im Webbrowser (…)“.",
+   "auftrag": "a546a3c7797d",
+   "zeit": "2026-11-13T11:10"
+  },
+  {
+   "id": "2026-11-13-abb-5-24-1",
+   "schluessel": "abb-5-24",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Soll das HTML-Beispiel die Tabelle im Buch ersetzen (Abb. 5.24 dann als Bild wie Abb. 5.25) oder nur auf der Lernplattform ergänzen? Und bedeutet „3 Kennzeilen und 5 Kennzahlen“: drei Berichtszeilen (Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz) und fünf Kennzahlen (Bruttoumsatz, Kundenrabatte, Aktionsrabatte, Sonderrabatte, Skonti)? Für die Rabattdifferenzierung schlagen wir vor, die bisherigen Rabatte aus Abb. 5.25 aufzuteilen (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte) – passt das?",
+   "auftrag": "2c4aff8a9b3d",
+   "zeit": "2026-11-13T11:10"
+  },
+  {
+   "id": "2026-11-13-abb-5-25-1",
+   "schluessel": "abb-5-25",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Abb. 5.23, 5.25, 5.26 und 5.27 beruhen auf demselben Datensatz. Sollen die Jahre 2018/2019 → 2027/2028 in allen vier Abbildungen geändert werden (so verstehen wir „Bitte alle“)? Für die Rabattdifferenzierung schlagen wir vor, Konto 8050 Rabatte unter dem Knoten „Rabatte“ in 8051 Kundenrabatte, 8052 Aktionsrabatte und 8053 Sonderrabatte aufzuteilen, im HTML-Beispiel umschaltbar mit/ohne Differenzierung und mit denselben Werten wie das neue Beispiel zu Abb. 5.24. Einverstanden? Umgesetzt wird erst nach der Antwort, damit die Abbildungen der Reihe zusammenpassen.",
+   "auftrag": "150a058d4631",
+   "zeit": "2026-11-13T11:10"
+  },
+  {
+   "id": "2026-11-13-abb-5-27-1",
+   "schluessel": "abb-5-27",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Laut Nachtrag ist „eigentlich nur Abb. 5.26 gemeint“. Soll die Erweiterung mit/ohne Rabattdifferenzierung also in Abb. 5.26 (Kontendimension ohne Parent-Child-Hierarchie) statt in Abb. 5.27 umgesetzt werden? Welche Abbildung entfällt im Buch: Wird Abb. 5.27 (Hierarchieaufbau) in Abb. 5.26 aufgenommen und gestrichen, oder umgekehrt? Abb. 5.26 steht derzeit nicht auf „Revision“.",
+   "auftrag": "d7de9806da5a",
+   "zeit": "2026-11-13T11:10"
+  },
+  {
+   "id": "2026-11-13-abb-3-78-1",
+   "schluessel": "abb-3-78",
+   "von": "Revision",
+   "status": "Klärung nötig",
+   "kommentar": "Rückfrage: Fotorealistische Bilder einer Person und eines Produkts können wir nicht selbst erstellen; dafür bräuchten wir echte Fotos. Dürfen wir lizenzfreie Stockfotos verwenden (z. B. Unsplash oder Pexels, kommerzielle Nutzung ohne Namensnennung erlaubt)? Bei Personen fehlt dort meist eine schriftliche Modelfreigabe, und der Verlag müsste die Lizenz akzeptieren. Oder stellen Sie eigene Fotos mit Nutzungsrecht bereit? Bis dahin bleiben die gezeichneten Bilder.",
+   "auftrag": "2251ae915221",
+   "zeit": "2026-11-13T11:10"
   }
  ],
  "neue_zeilen": [

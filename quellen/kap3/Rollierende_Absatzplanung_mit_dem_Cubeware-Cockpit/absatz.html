@@ -14,9 +14,9 @@
   /* Auswahl und Berichtsknöpfe in einer Zeile */
   #absatz .auswahl { display: flex; align-items: center; margin-bottom: 14px; }
   #absatz .auswahl .mk-label { flex: 0 0 auto; margin-right: 8px; }
-  #absatz .auswahl .mk-feld { flex: 0 0 auto; width: 210px; margin-right: 24px; }
-  #absatz .auswahl #f-auswahl { width: 180px; }
-  #absatz .auswahl #f-gruppe { width: 150px; }
+  #absatz .auswahl .mk-feld { flex: 0 0 auto; width: 210px; margin-right: 16px; }
+  #absatz .auswahl #f-auswahl { width: 150px; }
+  #absatz .auswahl #f-gruppe { width: 130px; }
   #absatz .auswahl .rechts { margin-left: auto; display: flex; gap: 8px; }
   /* Raster */
   #absatz .mx { display: grid; grid-template-columns: 110px 112px repeat(3, 40px) 54px repeat(17, 35px); }
@@ -56,7 +56,8 @@
       <label class="mk-label" for="f-gruppe">Kundengruppe</label>
       <select class="mk-feld" id="f-gruppe"><option value="nord" selected>Region Nord</option></select>
       <div class="rechts">
-        <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiterrollen</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-zurueck">◀ Monat zurück</button>
+        <button type="button" class="mk-knopf mk-zweit" id="k-rollieren">Monat weiter ▶</button>
         <button type="button" class="mk-knopf mk-zweit" id="k-tauschen">Kunde/Produkt tauschen</button>
       </div>
     </div>

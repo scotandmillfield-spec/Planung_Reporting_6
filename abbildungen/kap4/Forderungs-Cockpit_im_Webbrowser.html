@@ -641,7 +641,11 @@ const DK = (() => {
    gemahnte Forderungen; offene Posten nach Fälligkeit, Mahnstufe, Sammelkonto und Debitor. Neu: überfällige Posten
    je Monatsultimo (Zeitvergleich). Klick auf Band, Mahnstufe oder Debitor filtert die übrigen Visuals (das angeklickte
    hebt hervor), Klick auf ein Sammelkonto wirkt wie der Datenschnitt, Klick auf einen Monat wählt den Stichtag, Esc hebt auf.
-   Abb. 4.21 und 4.22 verwenden diese Datei unverändert bis auf UMGEBUNG. */
+   Abb. 4.21 und 4.22 verwenden diese Datei unverändert bis auf UMGEBUNG.
+   Revision 13.11.2026 (Abb. 4.21): In der interaktiven Fassung listet „Offene Posten nach Debitor“ alle Debitoren in
+   einer Bildlaufliste; ein Klick auf einen Debitor filtert wie bisher und klappt seine offenen Posten bis auf den
+   einzelnen Beleg auf (Rechnungsdatum, Fälligkeit, Tage überfällig, Mahnstufe, Betrag). Die Druckfassung bleibt bei
+   Top 6 und „Übrige“. */
 (() => {
   "use strict";
   const UMGEBUNG = "browser";                    // Abb. 4.21: "browser" · Abb. 4.22: "kanal"
@@ -667,7 +671,7 @@ const DK = (() => {
   ];
   const STUFEN = ["ohne Mahnung", "Mahnstufe 1", "Mahnstufe 2", "Mahnstufe 3"];
   const STUFE_TAGE = ["bis 7 Tage überfällig oder nicht fällig", "8–21 Tage überfällig", "22–35 Tage überfällig", "über 35 Tage überfällig"];
-  const TOP = 6;
+  const TOP = DK.PRINT ? 6 : Infinity;          // interaktiv: alle Debitoren in der Bildlaufliste
   const tsd = c => zahl(c / 1e5, 0);
   const pz = (a, b, nk = 1) => (b ? zahl(a / b * 100, nk) : "–") + NBSP + "%";
   const pd = (a, b) => (b ? delta((a / b - 1) * 100, 1, NBSP + "%") : "–");
@@ -927,6 +931,62 @@ const DK = (() => {
     return svg;
   }
 
+  /* ---------- E interaktiv: alle Debitoren als Bildlaufliste, Klick klappt die offenen Posten auf (Detailebene) ---------- */
+  DK.el("style", {}, document.head, `
+    #e-debitoren { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; }
+    #e-debitoren .fd-kopf { position: sticky; top: 0; background: #FFFFFF; z-index: 1; }
+    #e-debitoren table { width: calc(100% - 8px); border-collapse: collapse; margin: 0 0 6px 0; font-size: 12.5px; }
+    #e-debitoren th { font-weight: normal; color: var(--muted); text-align: right; padding: 2px 6px 2px 0; border-bottom: 1px solid #D4D4D4; }
+    #e-debitoren td { text-align: right; padding: 2px 6px 2px 0; border-bottom: 1px solid #EFEFEF; white-space: nowrap; }
+    #e-debitoren th:first-child, #e-debitoren td:first-child { text-align: left; padding-left: 18px; }
+    #e-debitoren tr.ue td.tage { font-weight: bold; }
+    #e-debitoren tr.fd-summe td { font-weight: bold; border-bottom: none; }`);
+  function debListe(f, zeilen, m) {
+    const box = el("div", { id: "e-debitoren", role: "list", "aria-label": "Offene Posten nach Debitor, mit Einzelposten" }, f.flaeche);
+    const W = f.breite - 12, rh = 19, bh = Math.round(rh * 0.66);
+    const label = z => (S.sel && S.sel.typ === "deb" && S.sel.key === z.key ? "▾ " : "▸ ") + z.label;
+    const lw = Math.ceil(Math.max(...zeilen.map(z => tw(label(z))))) + 10;
+    const sw = Math.max(Math.ceil(tw("überfällig")), ...zeilen.map(z => Math.ceil(tw(tsd(z.ue))))) + 12;
+    const vw = Math.ceil(Math.max(...zeilen.map(z => tw(tsd(z.ue + z.nf), 14, true)))) + 8;
+    const pw = W - lw - vw - sw, max = Math.max(...zeilen.map(z => z.ue + z.nf), 1);
+    const kopf = sv("svg", { width: W, height: 18, class: "fd-kopf" }, box);
+    sv("text", { x: W, y: 12, "text-anchor": "end", class: "muted" }, kopf, "überfällig");
+    sv("text", { x: lw, y: 12, class: "muted" }, kopf, passt(["offene Posten gesamt · Klick: Einzelposten", "offene Posten gesamt"],
+      W - lw - tw("überfällig") - 16));
+    const p = posten(m, "deb");
+    zeilen.forEach(z => {
+      const auf = S.sel && S.sel.typ === "deb" && S.sel.key === z.key;
+      const svg = sv("svg", { width: W, height: rh, role: "listitem", id: "e-deb-" + z.key }, box);
+      const g = sv("g", { class: "dk-klick" + (S.sel && S.sel.typ === "deb" && !auf ? " dk-blass" : "") }, svg);
+      sv("text", { x: lw - 10, y: rh / 2, dy: "0.35em", "text-anchor": "end", style: auf ? "font-weight:bold" : "" }, g, label(z));
+      const wu = z.ue / max * pw, wn = z.nf / max * pw;
+      if (z.ue > 0) sv("rect", { x: lw, y: rh / 2 - bh / 2, width: Math.max(1, wu), height: bh, fill: UE }, g);
+      if (z.nf > 0) sv("rect", { x: lw + wu, y: rh / 2 - bh / 2, width: wn, height: bh, fill: NF }, g);
+      sv("text", { x: lw + wu + wn + 5, y: rh / 2, dy: "0.35em" }, g, tsd(z.ue + z.nf));
+      sv("text", { x: W, y: rh / 2, dy: "0.35em", "text-anchor": "end", style: z.ue > 0 ? "font-weight:bold" : "" }, g, tsd(z.ue));
+      sv("line", { x1: 0, x2: W, y1: rh - 0.5, y2: rh - 0.5, stroke: "#EFEFEF", "stroke-width": 1 }, g);
+      const hit = sv("rect", { x: 0, y: 0, width: W, height: rh, fill: "transparent" }, g);
+      hit.addEventListener("click", () => waehlen("deb", z.key));
+      tooltip(hit, () => z.tip);
+      if (!auf) return;
+      // Detailebene: einzelne offene Posten des Debitors, älteste Fälligkeit zuerst
+      const q = p.filter(o => o.di === z.key).sort((a, b) => a.fd - b.fd || a.rd - b.rd);
+      const t = el("table", { id: "e-posten" }, box);
+      const kr = el("tr", {}, el("thead", {}, t));
+      ["Beleg", "Rechnung", "Fällig", "Tage überfällig", "Mahnstufe", "Betrag, €"].forEach(h => el("th", {}, kr, h));
+      const tb = el("tbody", {}, t);
+      q.forEach(o => {
+        const tr = el("tr", { class: o.ue ? "ue" : "" }, tb);
+        [String(o.b), dat(o.rd), dat(o.fd), o.ue ? zahl(o.tage) : "–", o.stufe ? String(o.stufe) : "–", zahl(o.c / 100, 2)]
+          .forEach((v, i) => el("td", { class: i === 3 ? "tage" : "" }, tr, v));
+      });
+      const sr = el("tr", { class: "fd-summe" }, tb);
+      [`${zahl(q.length)} Posten`, "", "", "", "", zahl(summe(q) / 100, 2)].forEach(v => el("td", {}, sr, v));
+    });
+    const an = box.querySelector("#e-posten");
+    if (an) { const zeile = an.previousElementSibling; box.scrollTop = Math.max(0, zeile.offsetTop - 18); }
+  }
+
   /* ---------- Datenschnitte ---------- */
   const monate = ST.map((_, m) => m).slice(1);                 // Dezember 2026 nur als Vormonat
   const knopfMonat = DK.schnitt(bFilter, "Stichtag (Monatsultimo 2027)", "knoepfe", {
@@ -1084,8 +1144,9 @@ const DK = (() => {
                                  `${eu.label}: ${pz(eu.ue, ueE, 0)} der Überfälligkeit`], L.E[2])
       : passt([`Größter Debitor: ${e[0].label} mit ${pz(e[0].ue + e[0].nf, eg)}`], L.E[2]);
     f = DK.visual(bE, { titel: "Offene Posten nach Debitor", einheit: "Tsd. €", botschaft: bE_ });
-    stapel(f, { id: "e-debitoren", aria: "Offene Posten nach Debitor", zeilen: e, zeilenhoehe: KANAL ? 18 : 19, spalteUe: true, trenner: true,
+    if (DK.PRINT) stapel(f, { id: "e-debitoren", aria: "Offene Posten nach Debitor", zeilen: e, zeilenhoehe: KANAL ? 18 : 19, spalteUe: true, trenner: true,
       blass: z => S.sel && S.sel.typ === "deb" && S.sel.key !== z.key, onClick: z => waehlen("deb", z.key) });
+    else debListe(f, e, S.m);
 
     unterhaltung();
     if (DK._ebenenNeu) DK._ebenenNeu();
@@ -1106,7 +1167,7 @@ const DK = (() => {
     { nr: 6, ziel: "c-stufen", anker: "links", versatz: [KANAL ? 160 : 212, 22], regel: "EXPRESS – Passende Darstellung", titel: "Balken statt Ringdiagrammen",
       text: "Mahnstufen und Sammelkonten sind Balken in natürlicher Reihenfolge mit direkter Beschriftung. Im Original waren es Ringdiagramme mit Legende, deren kleine Segmente (Mahnstufe 1–3) kaum zu erkennen waren." },
     { nr: 7, ziel: "e-debitoren", anker: "links", versatz: [KANAL ? 342 : 430, 0], regel: "CONDENSE – Verdichten", titel: "Top 6 und Übrige, Überfälligkeit je Kunde",
-      text: "Die sechs größten Debitoren stehen einzeln, der Rest als „Übrige“; jede Zeile zeigt den überfälligen Teil im Balken und als Zahl. Debitorennummer, älteste Fälligkeit, Mahnstufe und Zahlungsziel stehen im Tooltip. Das Original zeigte nur Gesamtbeträge mit Bildlaufleiste." },
+      text: "In der Buchabbildung stehen die sechs größten Debitoren einzeln, der Rest als „Übrige“; hier lassen sich alle Debitoren durchblättern. Jede Zeile zeigt den überfälligen Teil im Balken und als Zahl, Debitorennummer, älteste Fälligkeit, Mahnstufe und Zahlungsziel stehen im Tooltip. Ein Klick auf einen Debitor filtert das Dashboard und klappt seine offenen Posten bis auf den einzelnen Beleg auf – mit Rechnungsdatum, Fälligkeit, Tagen überfällig, Mahnstufe und Betrag. Das Original zeigte nur Gesamtbeträge mit Bildlaufleiste." },
     { nr: 8, ziel: "filter", anker: "links", versatz: [KANAL ? 600 : 650, -2], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Logo, Navigation und Programmrahmen",
       text: KANAL
         ? "Programmleisten, Logo, Navigationsknöpfe und Menüs entfallen; vom Kollaborationswerkzeug bleiben nur der Kanalname, die Registerkarte des Berichts und die Unterhaltung. Monat und Sammelkonto filtern das Dashboard, ein Klick auf Band, Mahnstufe oder Debitor filtert die übrigen Visuals, Esc hebt auf."

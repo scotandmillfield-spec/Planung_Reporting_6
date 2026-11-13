@@ -7,7 +7,10 @@
    Produkt × Kunde verteilt (Top-down, „Splashing“). Drei Produkte × drei Kunden; der dritte Kunde und das dritte Produkt sind ergänzt.
    Werte der Kundenblöcke wie im Original (Ebene „All Products“, Kunden 15548 und 15561); sie stimmen in sich:
    Ø 12/6/3 Monate und Trend folgen aus derselben Ist-Historie. Produkt „Kombi 2.0“ aus dem Block „A4“ des Originals,
-   auf die beiden Kunden aufgeteilt. Monatsachse um 15 Jahre und 8 Monate verschoben (2/2012 → 10/2027). */
+   auf die beiden Kunden aufgeteilt. Monatsachse um 15 Jahre und 8 Monate verschoben (2/2012 → 10/2027).
+   Rollieren in beide Richtungen (Revision 13.11.2026): „Monat weiter“ übernimmt die Plansumme des ersten Planmonats
+   als Ist; „Monat zurück“ macht das rückgängig bzw. öffnet vor dem Ausgangsstand den letzten Istmonat wieder zur
+   Planung (Vorschlag Ist/Plan = Ist). Dafür reicht die Ist-Historie sechs Monate weiter zurück (Apr–Sep 2026, fiktiv). */
 (() => {
   "use strict";
   const { el, sv, zahl, leseZahl, pruefeFeld } = MK;
@@ -28,10 +31,12 @@
   let schluessel = "ist12";
   const ARTEN = ["basis", "akb", "akg", "lst"];
   const ZEILEN = ["Trend (Vorjahr)", "Ist/Plan", "Aktion bestätigt", "Aktion geplant", "Listung geplant", "Summe"];
-  // Ist Okt 2026 bis Sep 2027 (m 0–11); Planzeilen ab Okt 2027 (m 12 ff.)
+  // Ist Okt 2026 bis Sep 2027 (m 0–11); Planzeilen ab Okt 2027 (m 12 ff.). Vorlauf Apr–Sep 2026 (m −6 bis −1) für das
+  // Zurückrollen: Ist der Monate Apr–Sep 2027 mit leichter Abweichung (Saisonmuster bleibt)
   function blatt(ist, plan) {
     const o = { ist: {} };
     ist.forEach((v, i) => { if (v) o.ist[i] = v; });
+    ist.slice(6).forEach((v, i) => { const w = Math.max(0, v + (i % 3) - 1); if (w) o.ist[i - 6] = w; });
     ARTEN.forEach((a, j) => { o[a] = {}; plan[j].forEach((v, i) => { if (v) o[a][12 + i] = v; }); });
     return o;
   }
@@ -233,10 +238,15 @@
   }
 
   /* ---------- Knöpfe ---------- */
+  const stapel = [];                                   // Planwerte der weitergerollten Monate
   $("k-tauschen").addEventListener("click", () => { hier = hier === "PK" ? "KP" : "PK"; auswahlFuellen(); aufbauen(); });
   $("k-rollieren").addEventListener("click", () => {
     if (document.querySelector("#absatz .mk-fehler")) { MK.meldung("Bitte zuerst die rot markierten Eingaben korrigieren."); return; }
     if (c >= 18) { MK.meldung("Beispielmaske: höchstens sechs Monate weiterrollen."); return; }
+    const schnapp = { c, d: {} };                     // Planwerte merken, damit „Monat zurück“ sie wiederherstellt
+    PROD.forEach(([p]) => { schnapp.d[p] = {}; KUND.forEach(([k]) => {
+      schnapp.d[p][k] = Object.fromEntries(ARTEN.map(art => [art, D[p][k][art][c] || 0])); }); });
+    stapel.push(schnapp);
     PROD.forEach(([p]) => KUND.forEach(([k]) => {
       const L = D[p][k], s = ARTEN.reduce((a, art) => a + (L[art][c] || 0), 0);
       if (s) L.ist[c] = s; else delete L.ist[c];
@@ -246,6 +256,24 @@
     c++;
     aufbauen();
     MK.meldung(`${mLang(alt)} abgeschlossen: Plansumme als Ist übernommen, Planung reicht jetzt bis ${mLang(c + 11)}.`);
+  });
+  $("k-zurueck").addEventListener("click", () => {
+    if (document.querySelector("#absatz .mk-fehler")) { MK.meldung("Bitte zuerst die rot markierten Eingaben korrigieren."); return; }
+    if (c <= 6) { MK.meldung("Beispielmaske: höchstens sechs Monate vor den Ausgangsstand zurückrollen."); return; }
+    c--;
+    const zurueck = stapel.length && stapel[stapel.length - 1].c === c ? stapel.pop() : null;
+    PROD.forEach(([p]) => KUND.forEach(([k]) => {
+      const L = D[p][k];
+      if (zurueck) {                                   // weitergerollten Monat wiederherstellen (Planwerte wie vorher)
+        const alt = zurueck.d[p][k];
+        ARTEN.forEach(art => { if (alt[art]) L[art][c] = alt[art]; else delete L[art][c]; });
+      } else if (L.ist[c]) L.basis[c] = L.ist[c];      // vor dem Ausgangsstand: Vorschlag Ist/Plan = Ist
+      delete L.ist[c];
+    }));
+    aufbauen();
+    MK.meldung(zurueck
+      ? `Zurückgerollt: ${mLang(c)} ist wieder Planmonat mit den bisherigen Planwerten, Planung reicht bis ${mLang(c + 11)}.`
+      : `Zurückgerollt: ${mLang(c)} ist wieder Planmonat (Vorschlag Ist/Plan = Ist), Planung reicht bis ${mLang(c + 11)}.`);
   });
 
   // Beispiel: Grundplanung „Alle Kunden“ Februar 2028 = 12 Stück, top-down nach Ist 12 Monate verteilt (Splashing)
@@ -267,7 +295,7 @@
         { nr: 3, ziel: "c1-2-6", versatz: [-6, 1], titel: "Ist der letzten fünf Monate",
           text: "Das Ist der jüngsten Monate schließt die Planung an die Vergangenheit an. Planende sehen, ob der zuletzt geplante Verlauf eingetreten ist, bevor sie die nächsten Monate planen." },
         { nr: 4, ziel: "h-plan", versatz: [-4, -2], titel: "Rollierender Planungshorizont",
-          text: "Geplant werden immer die nächsten zwölf Monate. Ist ein Monat abgeschlossen, rückt sein Ist in den Vergleich, und am Ende kommt ein neuer Planmonat hinzu – der Horizont bleibt gleich lang. Probieren Sie „Monat weiterrollen“." },
+          text: "Geplant werden immer die nächsten zwölf Monate. Ist ein Monat abgeschlossen, rückt sein Ist in den Vergleich, und am Ende kommt ein neuer Planmonat hinzu – der Horizont bleibt gleich lang. Probieren Sie „Monat weiter“ – „Monat zurück“ geht den Schritt zurück." },
         { nr: 5, ziel: "c1-0-8", versatz: [-6, 1], titel: "Trend aus dem Vorjahr",
           text: "Als Vorschlag zeigt die Zeile „Trend (Vorjahr)“ die Absatzmenge desselben Monats im Vorjahr. So wird die Saison sichtbar; wer davon abweicht, plant bewusst." },
         { nr: 6, ziel: "c1-3-15", versatz: [-6, 1], titel: "Planzeilen und Summe",
@@ -297,7 +325,7 @@
         { nr: "G", ziel: "z0-5", versatz: [-6, 1], regel: "AUFGABENANGEMESSENHEIT", titel: "Summen über alle Ebenen",
           text: "„Alle Kunden“ ist genau die Summe der drei gezeigten Kundenblöcke und rechnet bei jeder Eingabe mit; ein dritter Kunde und ein drittes Produkt sind ergänzt. Im Original enthielt die Summe weitere, nicht gezeigte Kunden." },
         { nr: "H", ziel: "c2-1-13", versatz: [-6, 1], regel: "ROBUSTHEIT GEGEN BENUTZUNGSFEHLER", titel: "Eingaben werden geprüft",
-          text: "Planzellen nehmen nur ganze Stückzahlen von 0 bis 999 an. Ungültige Eingaben werden rot markiert und nicht in die Summen übernommen; „Monat weiterrollen“ ist erst nach der Korrektur möglich." },
+          text: "Planzellen nehmen nur ganze Stückzahlen von 0 bis 999 an. Ungültige Eingaben werden rot markiert und nicht in die Summen übernommen; „Monat weiter“ und „Monat zurück“ sind erst nach der Korrektur möglich." },
       ],
     },
   });

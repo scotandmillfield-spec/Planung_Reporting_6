@@ -898,6 +898,60 @@
    "kommentar": "Die Abbildung ist jetzt ein Prozessschaubild: Die Informationsbedarfsanalyse und -änderungen stehen oben als Auslöser und stoßen die vier Prüfungen (Prozess, Organisation, Daten, Informationssystem) an, die nebeneinander parallel laufen.",
    "auftrag": "15cb88af9003",
    "zeit": "2026-11-12T11:14"
+  },
+  {
+   "id": "2026-11-13-abb-5-8-1",
+   "schluessel": "abb-5-8",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das doppelte Kästchen „Personalwirtschaft“ in der ERP-Ebene ist durch „Anlagenwirtschaft“ ersetzt.",
+   "auftrag": "3abba60b76f9",
+   "zeit": "2026-11-13T10:57"
+  },
+  {
+   "id": "2026-11-13-abb-5-33-1",
+   "schluessel": "abb-5-33",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "„Query“ und „New Data“ stehen wieder englisch in der Abbildung. Die Bildunterschrift lautet jetzt „Lambda-Architektur (λ-Architektur) zur Echtzeitdatenverarbeitung“.",
+   "auftrag": "1e543683b844",
+   "zeit": "2026-11-13T10:58"
+  },
+  {
+   "id": "2026-11-13-abb-5-5-1",
+   "schluessel": "abb-5-5",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Pfeil „Externe Daten“ endet jetzt an der Umrandung des Führungssystems und gilt damit für alle drei Ebenen. Auch die Pfeile „Planen, Steuern, Überwachen“ und „Interne Daten“ setzen an der Umrandung an, nicht mehr an der Ebene Lower.",
+   "auftrag": "2d698025b0d1",
+   "zeit": "2026-11-13T10:58"
+  },
+  {
+   "id": "2026-11-13-abb-5-7-1",
+   "schluessel": "abb-5-7",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Abbildung zeigt jetzt eine Pyramide mit Spitze und Seitenfläche, mittig gesetzt; die drei Dimensionen laufen als Pfeile an den Kanten der Pyramide (Grundlinie, obere und hintere Kante der Seitenfläche), „intern/extern“ steht auf der Seitenfläche. In jeder Ebene gibt es wieder ein Platzhalterkästchen „…“, die Kästchen sind auf die Ebenenbreite gezogen, und die Spitze heißt „BI-/KI-gestützt“.",
+   "auftrag": "1a1154fb94c9",
+   "zeit": "2026-11-13T11:02"
+  },
+  {
+   "id": "2026-11-13-abb-5-30-1",
+   "schluessel": "abb-5-30",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Kreisnamen sind um die deutschen Begriffe ergänzt (Konsistenz, Verfügbarkeit, Partitionstoleranz). Die Produktnamen sind entfernt und durch Systemklassen ersetzt: relationale Datenbanksysteme (CA), konsistenzorientierte NoSQL-Systeme (CP) und verfügbarkeitsorientierte NoSQL-Systeme mit Eventual Consistency (AP).",
+   "auftrag": "cfaef2a9627a",
+   "zeit": "2026-11-13T11:04"
+  },
+  {
+   "id": "2026-11-13-abb-5-16-1",
+   "schluessel": "abb-5-16",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Konsolidierung und Balanced Scorecard sind gestrichen, der Satz endet jetzt mit „wie z. B. Data Mining, Maschinelles Lernen und KI“; „OLAP-Engine“ ist entfernt. Cleansing und Staging reichen bis zur Unterkante von „Administration und Metadaten“, die Pfeile aus der Datenanbindung enden am gestrichelten Rahmen, und von den ETL-Pfeilen bleiben nur drei ohne Berührung der Kästchen (in Core Data Warehouse, ODS und CMS/DMS). Bei den internen Quellsystemen gibt es wieder ein Platzhalterkästchen „…“.",
+   "auftrag": "d30aa5468464",
+   "zeit": "2026-11-13T11:05"
   }
  ],
  "neue_zeilen": [

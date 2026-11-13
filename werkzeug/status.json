@@ -1510,7 +1510,17 @@
     "Top, Middle, Lower englisch belassen wie im Original – ggf. ‚Top-/Middle-/Lower-Management‘?",
     "Caption: ‚Vgl. Kemper et al. 2010, S. 9‘ → ‚In Anlehnung an Kemper et al. 2010, S. 9‘?; der Nachsatz zu Seufert und Oehler 2009 aus der alten Notiz gehört in den Text bzw. eine Fußnote, nicht in die Caption"
    ],
-   "alt": "Im Führungssystem steht die Managementpyramide mit Top-, Middle- und Lower-Management neben dem Bereich Koordination und Unterstützung; eine Klammer ordnet beides der Business Intelligence zu. Externe Daten fließen von außen, interne Daten aus dem Ausführungssystem in das Führungssystem; umgekehrt plant, steuert und überwacht das Führungssystem das Ausführungssystem mit seinen operativen Informations- und Kommunikationssystemen und wertschöpfenden Prozessen."
+   "alt": "Im Führungssystem steht die Managementpyramide mit Top-, Middle- und Lower-Management neben dem Bereich Koordination und Unterstützung; eine Klammer ordnet beides der Business Intelligence zu. Externe Daten fließen von außen, interne Daten aus dem Ausführungssystem in das Führungssystem; umgekehrt plant, steuert und überwacht das Führungssystem das Ausführungssystem mit seinen operativen Informations- und Kommunikationssystemen und wertschöpfenden Prozessen.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Externe Daten sind für alle Ebenen Top, Middle und Lower gemeint. Alle Pfeile bitte nur an die Umrandung führen. Nicht an Lower und Middle."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Pfeil „Externe Daten“ endet jetzt an der Umrandung des Führungssystems und gilt damit für alle drei Ebenen. Auch die Pfeile „Planen, Steuern, Überwachen“ und „Interne Daten“ setzen an der Umrandung an, nicht mehr an der Ebene Lower."
+    }
+   ]
   },
   "5.6": {
    "status": "pruefung",
@@ -1528,13 +1538,24 @@
    "status": "pruefung",
    "datei": "Dimensionsebenen_von_betrieblichen_IT-Systemen",
    "kommentare": [
-    "Pseudo-3D-Stufenpyramide flach gezeichnet, blaue Flächen → Grau; BI-gestützt als Schlüsselelement rot",
+    "Pyramide mit Spitze und rechter Seitenfläche wie im Original (ohne 3D-Schattierung und blaue Flächen), mittig gesetzt; BI-/KI-gestützt als Schlüsselelement rot in der Spitze (Revision 13.11.2026)",
     "Würfelsymbol (Data Warehouse) und 4V-Rad (Big Data) als beschriftete Boxen, die vier V (Volume, Velocity, Variety, Veracity) als Erläuterung",
-    "Dimensionen als Achsen: Systemebene unten, zeitlicher Horizont entlang der rechten Flanke (operativ bis operativ/strategisch), Inhalte/Objekte/Bereiche (intern/extern) rechts senkrecht – die dunkle Seitenfläche ‚Intern / extern‘ entfällt",
-    "„Auftragsabw.“ → „Auftragsabwicklung“, „Tabellenkalk.“ → „Tabellenkalkulation“; Platzhalter „…“ entfernt",
+    "Dimensionen als Pfeile an den Kanten der Pyramide: Systemebene an der Grundlinie, zeitlicher Horizont an der oberen Kante der Seitenfläche (operativ bis operativ/strategisch), Inhalte/Objekte/Bereiche an der hinteren Kante; „intern/extern“ auf der Seitenfläche",
+    "„Auftragsabw.“ → „Auftragsabwicklung“, „Tabellenkalk.“ → „Tabellenkalkulation“; Platzhalter „…“ je Ebene wie im Original, Boxen auf die Ebenenbreite gezogen (Revision 13.11.2026)",
     "Hinweis: BDE, ZDE, DNC werden im Bild nicht aufgelöst – im Text oder Abkürzungsverzeichnis erklärt?"
    ],
-   "alt": "Pyramide betrieblicher IT-Systeme mit vier Ebenen: Erfassungs- und Steuerungssysteme (BDE, ZDE, CAD, DNC), Administrations- und Dispositionssysteme (Materialwirtschaft, PPS, Auftragsabwicklung), Abrechnungssysteme (Finanz- und Rechnungswesen, Personalwesen) sowie Planungs- und Berichtssysteme (ERP-gestützt, Tabellenkalkulation) mit BI-gestützten Systemen an der Spitze, die aus dem Data Warehouse und Big Data gespeist werden. Achsen zeigen die Dimensionen Systemebene, zeitlicher Horizont von operativ bis operativ/strategisch und Inhalte/Objekte/Bereiche (intern/extern)."
+   "alt": "Pyramide betrieblicher IT-Systeme mit vier Ebenen: Erfassungs- und Steuerungssysteme (BDE, ZDE, CAD, DNC, weitere), Administrations- und Dispositionssysteme (Materialwirtschaft, PPS, Auftragsabwicklung, weitere), Abrechnungssysteme (Finanz- und Rechnungswesen, Personalwesen, weitere) sowie Planungs- und Berichtssysteme (ERP-gestützt, Tabellenkalkulation, weitere) mit BI-/KI-gestützten Systemen in der Spitze, die aus dem Data Warehouse und Big Data gespeist werden. Pfeile an den Kanten der Pyramide zeigen die Dimensionen Systemebene, zeitlicher Horizont von operativ bis operativ/strategisch und Inhalte/Objekte/Bereiche (intern/extern).",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Pyramide nicht Dreiecksdarstellung. Dann die Dimensionen wieder richtig an die Pyramide dranführen. Pyramide mittig setzen- Es fehlen die Kästchen für weitere Systeme ... (Platzhalter). BI-/KI-gestützt",
+      "13.11.2026 DS: Kästchenbreiten optisch anpassen (länger ziehen). Insbesondere im unteren Bereich."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Abbildung zeigt jetzt eine Pyramide mit Spitze und Seitenfläche, mittig gesetzt; die drei Dimensionen laufen als Pfeile an den Kanten der Pyramide (Grundlinie, obere und hintere Kante der Seitenfläche), „intern/extern“ steht auf der Seitenfläche. In jeder Ebene gibt es wieder ein Platzhalterkästchen „…“, die Kästchen sind auf die Ebenenbreite gezogen, und die Spitze heißt „BI-/KI-gestützt“."
+    }
+   ]
   },
   "5.8": {
    "status": "pruefung",
@@ -1546,7 +1567,17 @@
     "Beschriftung ‚Administrations- und Dispositionssysteme‘ aus Platzgründen etwas höher als im Original (Höhe Übergang mittlere/untere Ebene)",
     "Caption: ‚modifiziert übernommen aus Hansen (2019, S.9)‘ → ‚In Anlehnung an Hansen 2019, S. 9‘"
    ],
-   "alt": "Pyramide der Informationssysteme: An der Spitze Managementunterstützungssysteme (MUS) auf strategischer sowie auf operativer und taktischer Ebene und Abfrage- und Berichtssysteme, zusammengefasst als Planungs- und Kontrollsysteme; darunter Büroinformationssysteme (individuelle Unterstützung, Gruppenunterstützung, Vorgangsbearbeitung) und unten die ERP-Systeme als Administrations- und Dispositionssysteme der Funktionsbereiche wie Finanz- und Rechnungswesen, Personalwirtschaft, Forschung und Entwicklung, Materialwirtschaft, Produktion sowie Vertrieb und Marketing. Pfeile zeigen die horizontale Integration über die Funktionsbereiche und die vertikale Integration über die Ebenen."
+   "alt": "Pyramide der Informationssysteme: An der Spitze Managementunterstützungssysteme (MUS) auf strategischer sowie auf operativer und taktischer Ebene und Abfrage- und Berichtssysteme, zusammengefasst als Planungs- und Kontrollsysteme; darunter Büroinformationssysteme (individuelle Unterstützung, Gruppenunterstützung, Vorgangsbearbeitung) und unten die ERP-Systeme als Administrations- und Dispositionssysteme der Funktionsbereiche wie Finanz- und Rechnungswesen, Personalwirtschaft, Forschung und Entwicklung, Materialwirtschaft, Produktion sowie Vertrieb und Marketing. Pfeile zeigen die horizontale Integration über die Funktionsbereiche und die vertikale Integration über die Ebenen.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Ein Personalwirtschaft gegen Anlagenwirtschaft ersetzen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das doppelte Kästchen „Personalwirtschaft“ in der ERP-Ebene ist durch „Anlagenwirtschaft“ ersetzt."
+    }
+   ]
   },
   "5.9": {
    "status": "pruefung",
@@ -1637,12 +1668,23 @@
    "datei": "Drei_Ebenen_der_Data-Warehouse-Architektur",
    "kommentare": [
     "Ebenen als Bänder mit Titel oben links (Band 2 zweizeilig, damit die Leitungen frei bleiben); blau verlaufender Bereich → gestrichelter Container „Daten-Virtualisierung“ (Titel unten, oben kreuzen die Leitungen)",
-    "Zylinder und Würfel → beschriftete Boxen; Würfel heißen „Data Mart“, „OLAP-Engine“ unter dem mittleren; Core DWH und Data Marts box_hi, Quellsysteme box, kein Rot (Paket 5.1 nutzt Quellsysteme box_hi/DWH rot – angleichen?)",
+    "Zylinder und Würfel → beschriftete Boxen; Würfel heißen „Data Mart“ („OLAP-Engine“ gestrichen, Revision 13.11.2026); Core DWH und Data Marts box_hi, Quellsysteme box, kein Rot (Paket 5.1 nutzt Quellsysteme box_hi/DWH rot – angleichen?)",
     "Verbindungen nach der Folie (die Vorschau zeigte eine verzerrte Schräglinie): Core DWH → Sammelleitung → Data Marts und direkt zur Analyse, ODS → Core DWH, Rückfluss Core DWH → interne Quellen; Abzweige ohne Knotenpunkt",
-    "Korrekturen: „Daten - Virtualisierung“ → „Daten-Virtualisierung“, „BSC“ → „Balanced Scorecard“; „Excel“ → „Tabellenkalkulation“ (softwareneutral); unbeschrifteter Zylinder bei „Externe Quellen“ entfällt, „…“ zwischen den Quellen entfallen",
+    "Revision 13.11.2026: Konsolidierung und Balanced Scorecard gestrichen („… wie z. B. Data Mining, Maschinelles Lernen und KI“); Cleansing und Staging bündig mit „Administration und Metadaten“; Pfeile aus der Datenanbindung enden am gestrichelten Rahmen; keine Pfeile mehr an den ETL-Schritten, nur drei Pfeile (ohne Berührung der Kästchen) in Core DWH, ODS und CMS/DMS",
+    "Korrekturen: „Daten - Virtualisierung“ → „Daten-Virtualisierung“, „Excel“ → „Tabellenkalkulation“ (softwareneutral); unbeschrifteter Zylinder bei „Externe Quellen“ entfällt, Platzhalter „…“ für weitere interne Quellen (Revision 13.11.2026)",
     "ODS, CMS, DMS als Abkürzung belassen (Platz) – im Text eingeführt?"
    ],
-   "alt": "Data-Warehouse-Architektur in drei Ebenen. Unten die Datenanbindung mit internen Quellsystemen (ERP, CRM, Tabellenkalkulation) und externen Quellen; in der Mitte die Datenverwaltung mit Administration und Metadaten sowie den Schichten Staging, Cleansing, Core und Marts: ETL-Prozesse laden die Daten in Core Data Warehouse, ODS und CMS/DMS, das Core Data Warehouse versorgt drei Data Marts, alles umschlossen von der Daten-Virtualisierung. Oben greifen Analyse- und Planungswerkzeuge auf Data Marts, Core Data Warehouse, ODS und CMS/DMS zu."
+   "alt": "Data-Warehouse-Architektur in drei Ebenen. Unten die Datenanbindung mit internen Quellsystemen (ERP, CRM, Tabellenkalkulation, weitere) und externen Quellen; in der Mitte die Datenverwaltung mit Administration und Metadaten sowie den Schichten Staging, Cleansing, Core und Marts: die Daten gelangen in die Daten-Virtualisierung, ETL-Prozesse laden sie in Core Data Warehouse, ODS und CMS/DMS, das Core Data Warehouse versorgt drei Data Marts. Oben greifen Analyse- und Planungswerkzeuge auf Data Marts, Core Data Warehouse, ODS und CMS/DMS zu.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Konsolidierung und Balanced Scorecard löschen und Satz endung ändern \" wie z.B. Datamining, Maschinelles Lernen und KI. Cleansing- und Staging-Kasten auf die vertikale länger ziehen, so dass es bündig mit dem Kasten Adminstration ... liegt. Die Pfeile unten nicht auf die kleinen Kästchen, sondern von der Datenanbindungsebene auf den gestrichelten Rahmen enden. Die kleinen Pfeile bei den Kästchen wegnehmen. Nur drei Pfleile lassen, die ins Core Data Warehouse und ins ODS und ins CMS / DMS gehen. Dies Pfeile haben aber keine Berührung mit den kleinen Kästchen. Das Wort OLAP-Engine löschen. BEi den Internen Quellsystemen wieder ein Platzhalterkästchen für weitere Quellen belassen!"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Konsolidierung und Balanced Scorecard sind gestrichen, der Satz endet jetzt mit „wie z. B. Data Mining, Maschinelles Lernen und KI“; „OLAP-Engine“ ist entfernt. Cleansing und Staging reichen bis zur Unterkante von „Administration und Metadaten“, die Pfeile aus der Datenanbindung enden am gestrichelten Rahmen, und von den ETL-Pfeilen bleiben nur drei ohne Berührung der Kästchen (in Core Data Warehouse, ODS und CMS/DMS). Bei den internen Quellsystemen gibt es wieder ein Platzhalterkästchen „…“."
+    }
+   ]
   },
   "5.17": {
    "status": "pruefung",
@@ -1806,12 +1848,21 @@
    "datei": "CAP-Theorem",
    "kommentare": [
     "farbige, transparente Kreise → Grau, Überschneidungen dunkler (box_hi) wie die Überlagerung im Original",
-    "schräge Hinweislinien → waagerecht bzw. senkrecht zu den Beispielen",
-    "Korrektur: „Hbase“ → „HBase“",
-    "Datenbankprodukte (MongoDB, HBase, Redis, CouchDB, Cassandra, DynamoDB, Riak) als fachliche Beispiele belassen – trotz Regel „keine Produktnamen“ entfernen oder durch Systemklassen ersetzen?",
-    "Begriffe englisch (Consistency, Availability, Partition Tolerance) – deutsch ergänzen?"
+    "schräge Hinweislinien → waagerecht bzw. senkrecht zu den Hinweisen",
+    "Kreisnamen englisch mit deutscher Übersetzung (Konsistenz, Verfügbarkeit, Partitionstoleranz) (Revision 13.11.2026)",
+    "Produktnamen (MongoDB, HBase, Redis, CouchDB, Cassandra, DynamoDB, Riak) durch Systemklassen ersetzt: relationale Datenbanksysteme (CA), konsistenzorientierte NoSQL-Systeme (CP), verfügbarkeitsorientierte NoSQL-Systeme mit Eventual Consistency (AP) (Revision 13.11.2026)"
    ],
-   "alt": "Venn-Diagramm aus drei Kreisen für Consistency, Availability und Partition Tolerance. Die paarweisen Überschneidungen sind mit CA, CP und AP beschriftet und Beispielsystemen zugeordnet: CA relationalen Datenbanksystemen (RDBMS), CP MongoDB, HBase und Redis, AP CouchDB, Cassandra, DynamoDB und Riak."
+   "alt": "Venn-Diagramm aus drei Kreisen für Consistency (Konsistenz), Availability (Verfügbarkeit) und Partition Tolerance (Partitionstoleranz). Die paarweisen Überschneidungen sind mit CA, CP und AP beschriftet und Systemklassen zugeordnet: CA relationalen Datenbanksystemen (RDBMS), CP konsistenzorientierten NoSQL-Systemen, AP verfügbarkeitsorientierten NoSQL-Systemen mit Eventual Consistency.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Begriffe englisch (Consistency, Availability, Partition Tolerance) – bitte deutsch ergänzen Datenbankprodukte (MongoDB, HBase, Redis, CouchDB, Cassandra, DynamoDB, Riak) als fachliche Beispiele belassen – trotz Regel „keine Produktnamen“ entfernen durch Systemklassen ergänzen!"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Kreisnamen sind um die deutschen Begriffe ergänzt (Konsistenz, Verfügbarkeit, Partitionstoleranz). Die Produktnamen sind entfernt und durch Systemklassen ersetzt: relationale Datenbanksysteme (CA), konsistenzorientierte NoSQL-Systeme (CP) und verfügbarkeitsorientierte NoSQL-Systeme mit Eventual Consistency (AP)."
+    }
+   ]
   },
   "5.31": {
    "status": "pruefung",
@@ -1839,15 +1890,25 @@
   },
   "5.33": {
    "status": "pruefung",
-   "datei": "Architektur_Lambda-Architektur_zur_Echtzeitdatenverarbeitung",
+   "datei": "Lambda-Architektur_Lambda-Architektur_zur_Echtzeitdatenverarbeitung",
    "kommentare": [
     "Aufbau der Folie bleibt; Schichten als Karten mit Kopfleiste (wie Abb. 5.10), Master Dataset und Views box_hi, Abfrage und neue Daten als Ellipsen; kein Rot",
     "Schrägpfeile → senkrechte Pfeile, die an der Ellipse enden",
-    "Übertragen: „Query“ → „Abfrage“, „New Data“ → „Neue Daten“; Schichtnamen, Master Dataset und Views als Fachbegriffe englisch, „Batch view“/„Realtime view“ → „Batch View“/„Realtime View“ – ganz eindeutschen?",
+    "Übertragen: „Query“ und „New Data“ englisch (Revision 13.11.2026); Schichtnamen, Master Dataset und Views als Fachbegriffe englisch, „Batch view“/„Realtime view“ → „Batch View“/„Realtime View“",
     "Fachlich prüfen: Bei Marz liegt das Master Dataset im Batch Layer und die Batch Views im Serving Layer – in der Folie vertauscht, so übernommen",
-    "Caption: „λ-Architektur (Lambda-Architektur) …“ – Dateiname beginnt mit „Architektur_“, weil „λ“ entfällt"
+    "Caption: „Lambda-Architektur (λ-Architektur) …“ (Revision 13.11.2026) – im Dateinamen wird „λ“ zu „Lambda“"
    ],
-   "alt": "Lambda-Architektur: Neue Daten fließen parallel in den Batch Layer mit drei Batch Views und in den Speed Layer mit drei Realtime Views. Der Batch Layer speist den Serving Layer mit dem Master Dataset; Serving Layer und Speed Layer beantworten gemeinsam die Abfrage."
+   "alt": "Lambda-Architektur: Neue Daten fließen parallel in den Batch Layer mit drei Batch Views und in den Speed Layer mit drei Realtime Views. Der Batch Layer speist den Serving Layer mit dem Master Dataset; Serving Layer und Speed Layer beantworten gemeinsam die Abfrage.",
+   "revisionen": [
+    {
+     "datum": "13.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Query und New Data belassen und nicht eindeutschen. Überschrift Lamda-Architektur nach vorne und λ-Architektur in Klammern tauschen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "„Query“ und „New Data“ stehen wieder englisch in der Abbildung. Die Bildunterschrift lautet jetzt „Lambda-Architektur (λ-Architektur) zur Echtzeitdatenverarbeitung“."
+    }
+   ]
   },
   "5.34": {
    "status": "pruefung",

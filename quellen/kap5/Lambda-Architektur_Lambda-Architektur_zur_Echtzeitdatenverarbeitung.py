@@ -1,11 +1,11 @@
-"""Abb. 5.33 – λ-Architektur (Lambda-Architektur) zur Echtzeitdatenverarbeitung."""
+"""Abb. 5.33 – Lambda-Architektur (λ-Architektur) zur Echtzeitdatenverarbeitung."""
 # Muster: Aufbau der Folie – oben die Abfrage, links Serving Layer über Batch Layer, rechts der Speed Layer über die
 # volle Höhe, unten die neuen Daten. Schichten als Karten mit Kopfleiste (wie Abb. 5.10), Inhalte (Master Dataset,
 # Views) als Datenhaltung box_hi; Abfrage und neue Daten als Ellipsen wie im Original. Schrägpfeile → senkrechte
 # Pfeile, die an der Ellipse enden. Kein Rot (kein einzelnes Schlüsselelement).
-# Übertragen: „Query“ → „Abfrage“, „New Data“ → „Neue Daten“; Schichtnamen und Views als Fachbegriffe englisch,
+# „Query“ und „New Data“ bleiben englisch (Revision 13.11.2026); Schichtnamen und Views als Fachbegriffe englisch,
 # „Batch view“/„Realtime view“ → „Batch View“/„Realtime View“ (einheitliche Großschreibung).
-STEM = "Architektur_Lambda-Architektur_zur_Echtzeitdatenverarbeitung"
+STEM = "Lambda-Architektur_Lambda-Architektur_zur_Echtzeitdatenverarbeitung"
 import math
 from bookfig import Fig, P, Para, MM, MSO_SHAPE, Emu
 
@@ -75,8 +75,8 @@ def build(theme):
     A([(XP2, rand_y(N, XP2, True)), (XP2, SP.b)], name="Neue Daten → Speed Layer")
 
     # ---------------- Ellipsen
-    f.ellipse(Q.x, Q.y, Q.w, Q.h, role="box_plain", paras=[P("Abfrage", size="head", bold=True)], name="Abfrage")
-    f.ellipse(N.x, N.y, N.w, N.h, role="box_plain", paras=[P("Neue Daten", size="head", bold=True)],
+    f.ellipse(Q.x, Q.y, Q.w, Q.h, role="box_plain", paras=[P("Query", size="head", bold=True)], name="Abfrage")
+    f.ellipse(N.x, N.y, N.w, N.h, role="box_plain", paras=[P("New Data", size="head", bold=True)],
               name="Neue Daten")
 
     # ---------------- Serving Layer

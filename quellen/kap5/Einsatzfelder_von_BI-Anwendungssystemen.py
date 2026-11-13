@@ -1,7 +1,7 @@
 """Abb. 5.5 – Einsatzfelder von BI-Anwendungssystemen (vgl. Kemper et al. 2010, S. 9)."""
 # Muster: zwei Container (Führungssystem, Ausführungssystem). Oben die Managementpyramide (Top, Middle, Lower)
 # mit dem Keil „Koordination & Unterstützung“, links die rote Klammer „Business Intelligence“; unten die
-# wertschöpfenden Prozesse als Pfeilkette. Die Blockpfeile des Originals sind Pfeile mit kursiver Beschriftung.
+# wertschöpfenden Prozesse als Pfeilkette. Alle Datenflusspfeile enden an der Umrandung des Führungssystems. Die Blockpfeile des Originals sind Pfeile mit kursiver Beschriftung.
 # Entfernt: Weltkarte (Deko, „Externe Daten“ sagt es), Farbverlauf; Graustufen wie im Druck des Originals
 # (Top und Middle hell, Lower dunkler).
 STEM = "Einsatzfelder_von_BI-Anwendungssystemen"
@@ -67,13 +67,15 @@ def build(theme):
            align="r", anchor="m", name="Business Intelligence")
 
     # ------------------------------------------------------------ Datenflüsse
-    ye = yt + 18.5                             # Externe Daten → Middle
-    A([(W - 0.4, ye), (pcx + hw(ye), ye)], name="Externe Daten")
+    # Revision 13.11.2026: alle Pfeile enden an der Umrandung des Führungssystems – externe Daten gelten
+    # für alle Ebenen (Top, Middle, Lower), Planen/Interne Daten nicht an Lower
+    ye = yt + 18.5                             # Externe Daten → Führungssystem
+    A([(W - 0.4, ye), (CR, ye)], name="Externe Daten")
     f.text(CR + 1.2, ye - 3.6, W - CR - 1.6, 3.2, [P("Externe Daten", size=SZ, italic=True)], align="r",
            name="Beschriftung Externe Daten")
     xd, xu = pcx - 9.0, pcx + 9.0
-    A([(xd, yb), (xd, yA0)], name="Planen, Steuern, Überwachen")
-    A([(xu, yA0), (xu, yb)], name="Interne Daten")
+    A([(xd, yFb), (xd, yA0)], name="Planen, Steuern, Überwachen")
+    A([(xu, yA0), (xu, yFb)], name="Interne Daten")
     lh = SZ * 1.18 * 25.4 / 72
     ym2 = (yFb + yA0) / 2
     f.text(xd - 31.4, ym2 - 1.5 * lh - 0.2, 30.0, 3 * lh + 0.4,

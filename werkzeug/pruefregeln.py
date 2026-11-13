@@ -80,8 +80,8 @@ GEZIELT = {
     "5.20": [("Analyse gemäß eines Stern-Schemas in Power BI", "Analyse gemäß einem Star-Schema in Power BI",
               "„gemäß“ mit Dativ; Begriff einheitlich „Star-Schema“ (5.19, 5.77) statt „Stern-Schema“/„Sternschema“")],
     "5.28": [("Erlösschemata", "Erlösschema", "Singular: „Stufenorientiertes Erlösschema“")],
-    "5.33": [(chr(0x28E) + "-Architektur", "λ-Architektur (Lambda-Architektur)",
-              "Falsches Zeichen: statt λ (Lambda) steht ʎ (gedrehtes y, U+028E)")],
+    "5.33": [(chr(0x28E) + "-Architektur", "Lambda-Architektur (λ-Architektur)",
+              "Falsches Zeichen: statt λ (Lambda) steht ʎ (gedrehtes y, U+028E); Revision 13.11.2026: Lambda-Architektur vorn")],
     "5.39": [("(z. B. Select-Anweisung", "(z. B. SELECT-Anweisung)", "Schließende Klammer fehlt; SQL-Schlüsselwort in Großbuchstaben")],
     "5.52": [("; Quelle SAP Fiori (2017a)", " (Quelle: SAP Fiori 2017a)", "Quellenangabe in der üblichen Form")],
     "5.53": [("; Quelle SAP Fiori (2017a)", " (Quelle: SAP Fiori 2017a)", "Quellenangabe in der üblichen Form")],
@@ -174,6 +174,7 @@ def kurzname(caption):
     for a, b in UMLAUTE.items():
         t = t.replace(a, b)
     t = re.sub(r"[–—/]", "-", t)
+    t = t.replace("λ", "Lambda")                   # griechischer Buchstabe würde sonst ersatzlos entfallen
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
     t = re.sub(r"[^A-Za-z0-9 _-]", "", t)
     t = re.sub(r"_+", "_", re.sub(r"\s+", "_", t.strip()))

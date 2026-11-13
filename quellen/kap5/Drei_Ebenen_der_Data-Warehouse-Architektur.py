@@ -10,6 +10,10 @@
 # Softwareneutral: „Excel“ → „Tabellenkalkulation“; „BSC“ → „Balanced Scorecard“; „Daten - Virtualisierung“ →
 # „Daten-Virtualisierung“. Auslassungspunkte zwischen den Quellen entfallen (Vorgabe aus Revision 2.2), Abzweig
 # der Sammelleitung ohne Knotenpunkt (Revision 2.5/3.6).
+# Revision 13.11.2026: Konsolidierung und Balanced Scorecard gestrichen, „OLAP-Engine“ entfällt; Cleansing und
+# Staging reichen bis zur Unterkante von „Administration und Metadaten“; die Pfeile aus der Datenanbindung enden
+# am gestrichelten Rahmen, die ETL-Schritte haben keine eigenen Pfeile mehr – nur noch drei Pfeile (ohne
+# Berührung der Kästchen) in Core Data Warehouse, ODS und CMS/DMS; Platzhalter „…“ für weitere interne Quellen.
 STEM = "Drei_Ebenen_der_Data-Warehouse-Architektur"
 from bookfig import Fig, P
 
@@ -53,8 +57,8 @@ def build(theme):
     tmp = Fig(W, 30, theme)
     analyse_p = [P("Analyse- und Planungswerkzeuge (Dashboards, Cockpits, Portale etc.)\n"
                    "sowie spezielle Nutzungsmöglichkeiten wie\n"
-                   "Konsolidierung, Balanced Scorecard, Data Mining, Maschinelles Lernen, KI etc.")]
-    mart2_p = [P("Data Mart", bold=True), P("OLAP-Engine", size="small", color=t.text_muted)]
+                   "z. B. Data Mining, Maschinelles Lernen und KI")]
+    mart2_p = [P("Data Mart", bold=True)]
 
     # ------------------------------------------------------------ Geometrie (y)
     y3 = 0.3
@@ -64,7 +68,7 @@ def build(theme):
     ykl = y2 + 6.4                              # Oberkante Spalten und Container (unter dem zweizeiligen Bandtitel)
     yk = ykl
     ym = ykl + 2.0                              # Data Marts
-    mh = tmp.measure(mart2_p, MW) + 0.6
+    mh = 8.4
     ybus = ym + mh + 3.0                        # Sammelleitung
     yc = ybus + 3.0                             # Core DWH, ODS, CMS/DMS
     ch, oh = 6.4, 8.4
@@ -103,16 +107,20 @@ def build(theme):
     f.text(IQ.x + 1.0, IQ.y + 0.4, IQ.w - 2.0, 3.4, [P("Interne Quellsysteme und Quellen", size=6.5, bold=True)],
            align="c", anchor="t", bg=t.role("band").fill, name="Titel Interne Quellsysteme")
     qy = IQ.y + 4.0
-    qw = 17.0
-    qx = [IQ.x + 4.0, IQ.cx - qw / 2, IQ.r - 4.0 - qw]
-    for x, n in zip(qx, ("ERP", "CRM", f"Tabellen{SHY}kalkulation")):
-        f.box(x, qy, qw, qh, [P(n, bold=True)], role="box", name=f"Quelle {n}")
+    qw, pw = 17.0, 10.0                         # Quellen, Platzhalter
+    qg = (IQ.w - 3 * qw - pw - 2 * 3.0) / 3
+    qx = [IQ.x + 3.0 + i * (qw + qg) for i in range(4)]
+    for x, n in zip(qx, ("ERP", "CRM", f"Tabellen{SHY}kalkulation", "…")):
+        if n == "…":
+            f.box(x, qy, pw, qh, [P("…")], role="box_plain", name="Platzhalter weitere Quellen")
+        else:
+            f.box(x, qy, qw, qh, [P(n, bold=True)], role="box", name=f"Quelle {n}")
     f.box(EQ.x, EQ.y, EQ.w, EQ.h, [P("Externe Quellen", bold=True)], role="box", name="Externe Quellen")
 
     # ------------------------------------------------------------ Ebene 2: Spalten links
     f.box(XA, ykl, WA, kb - ykl, [P("Administration und Metadaten")], role="box_plain", rot=270,
           name="Administration und Metadaten")
-    gr = [ykl, ybus + 1.4, ycl - 1.8, yetl + 1.6, yst + SQ + 1.8]   # Grenzen der Schichten
+    gr = [ykl, ybus + 1.4, ycl - 1.8, yetl + 1.6, kb]   # Grenzen der Schichten, Staging bündig mit der Spalte
     for i, n in enumerate(("Marts", "Core", "Cleansing", "Staging")):
         y0, y1_ = gr[i] + (0 if i == 0 else 0.5), gr[i + 1] - (0 if i == 3 else 0.5)
         f.box(XS, y0, WS, y1_ - y0, [P(n)], role="box_plain", name=f"Schicht {n}")
@@ -139,14 +147,15 @@ def build(theme):
     f.line([(XD, ybus), (O.cx, ybus)], name="Sammelleitung")
     A([(C.cx, C.y), (C.cx, ybus)], size="sm", name="Core DWH → Sammelleitung")
     A([(O.x, C.cy), (C.r, C.cy)], size="sm", name="ODS → Core DWH")
-    # ETL: Quellen → Staging → Cleansing → Speicher
-    A([(48.0, IQ.y), (48.0, yst + SQ)], size="sm", name="Interne Quellen → Staging")
-    A([(104.0, EQ.y), (104.0, yst + SQ)], size="sm", name="Externe Quellen → Staging")
-    for x in (41.0, 69.0, 84.0):
-        A([(x, yst), (x, ycl + SQ)], size="sm", name="Staging → Cleansing")
-    A([(55.0, ycl), (55.0, C.b)], size="sm", name="Cleansing → Core DWH")
-    A([(84.0, ycl), (84.0, O.b)], size="sm", name="Cleansing → ODS")
-    A([(99.0, ycl), (99.0, CM.b)], size="sm", name="Cleansing → CMS/DMS")
+    # Datenanbindung → gestrichelter Rahmen; ETL → Speicher (drei Pfeile durch die Lücken der ETL-Schritte)
+    A([(48.0, IQ.y), (48.0, kb)], size="sm", name="Interne Quellen → Daten-Virtualisierung")
+    A([(104.0, EQ.y), (104.0, kb)], size="sm", name="Externe Quellen → Daten-Virtualisierung")
+    ys = yetl + 1.5
+    for x, ziel, nm in ((48.0, C, "Core DWH"), (76.5, O, "ODS"), (93.5, CM, "CMS/DMS")):
+        for xb in X_CLEANS:
+            if abs(x - xb) < SQ / 2 + 0.6:
+                f.warnings.append(f"[ETL → {nm}] Pfeil berührt einen ETL-Schritt")
+        A([(x, ys), (x, ziel.b)], size="sm", name=f"ETL → {nm}")
     # Rückfluss Core DWH → interne Quellen
     A([(XRUECK, C.b), (XRUECK, IQ.y)], size="sm", name="Core DWH → interne Quellen")
 
@@ -161,6 +170,6 @@ def build(theme):
         f.box(x - SQ / 2, ycl, SQ, SQ, None, role="box_plain", rounded=False, name="ETL-Schritt Cleansing")
     for x in X_STAGING:
         f.box(x - SQ / 2, yst, SQ, SQ, None, role="box_plain", rounded=False, name="ETL-Schritt Staging")
-    f.text(45.0, yetl, 22.0, 3.0, [P("ETL-Prozesse", italic=True)], align="c", anchor="m",
+    f.text(54.0, yetl, 19.0, 3.0, [P("ETL-Prozesse", italic=True)], align="c", anchor="m",
            bg=t.role("band").fill, name="ETL-Prozesse")
     return f

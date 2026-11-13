@@ -2,16 +2,18 @@
 # Muster: Venn-Diagramm aus drei Kreisen wie im Original. Farbige, transparente Kreise → einheitlich Grau; die
 # Überschneidungen (CA, CP, AP) sind dunkler (box_hi), wie die Überlagerung im Original.
 # Schräge Hinweislinien → waagerecht bzw. senkrecht zu den Beispielen geführt.
-# Korrektur: „Hbase“ → „HBase“. Beispielsysteme (Produktnamen) als fachliche Einordnung belassen – Rückfrage.
+# Revision 13.11.2026: Kreisnamen englisch mit deutscher Übersetzung; Produktnamen der Beispiele durch
+# Systemklassen ersetzt (RDBMS, konsistenz- bzw. verfügbarkeitsorientierte NoSQL-Systeme).
 STEM = "CAP-Theorem"
 import math
 from bookfig import Fig, P
 
 W = 110
-R = 19.0
-KC = (55.0, 20.8)                # Consistency (oben)
-KA = (44.5, 38.8)                # Availability (links unten)
-KP = (65.5, 38.8)                # Partition Tolerance (rechts unten)
+R = 17.5
+_k = R / 19.0                    # Lage wie bisher, auf den kleineren Radius skaliert
+KC = (55.0, 0.6 + R + 0.0)       # Consistency (oben)
+KA = (55.0 - 10.5 * _k, KC[1] + 18.0 * _k)   # Availability (links unten)
+KP = (55.0 + 10.5 * _k, KC[1] + 18.0 * _k)   # Partition Tolerance (rechts unten)
 SZ_K = 7.5                       # Kreisnamen
 SZ_R = 7.5                       # CA, CP, AP
 
@@ -51,7 +53,7 @@ def schwerpunkt(rein, raus):
 
 def build(theme):
     t = theme
-    H = 68.0
+    H = round(KA[1] + R + 2.6 + 8.0, 1)
     f = Fig(W, H, theme, STEM)
     box, hi = t.role("box"), t.role("box_hi")
 
@@ -64,14 +66,16 @@ def build(theme):
         f.ellipse(c[0] - R, c[1] - R, 2 * R, 2 * R, role="box", fill="none", line=hi.line, lw=0.5,
                   name=f"Kontur {nm}")
 
-    # ---------------- Kreisnamen
-    def name(x, y, w, h, txt, align="c"):
-        f.text(x, y, w, h, [P(txt, size=SZ_K, bold=True)], align=align, anchor="m", bg=box.fill, name=txt[:30])
+    # ---------------- Kreisnamen (englisch, darunter deutsch)
+    def name(x, y, w, h, en, de):
+        f.text(x, y, w, h, [P(en, size=SZ_K, bold=True), P(f"({de})", size=SZ_K - 1.0)], align="c", anchor="m",
+               bg=box.fill, name=en)
 
-    name(KC[0] - 12, KC[1] - 12.5, 24, 5, "Consistency")
-    name(KA[0] - 17.5, KA[1] + 1.5, 18, 5, "Availability")
-    f.text(KP[0] + 0.5, KP[1] + 0.2, 17, 7, [P("Partition", size=SZ_K, bold=True),
-                                            P("Tolerance", size=SZ_K, bold=True)],
+    name(KC[0] - 12, KC[1] - 13.0, 24, 7, "Consistency", "Konsistenz")
+    name(KA[0] - 17.0, KA[1] + 1.0, 19, 7, "Availability", "Verfügbarkeit")
+    f.text(KP[0] - 2.0, KP[1] - 2.5, 21, 10, [P("Partition", size=SZ_K, bold=True),
+                                             P("Tolerance", size=SZ_K, bold=True),
+                                             P("(Partitionstoleranz)", size=SZ_K - 1.0)],
            align="c", anchor="m", bg=box.fill, name="Partition Tolerance")
 
     # ---------------- Überschneidungen mit Beispielen
@@ -85,17 +89,19 @@ def build(theme):
 
     ln = dict(color=t.arrow, lw=0.5)
     # CA → links
-    xl = 15.0
+    xl = KA[0] - R - 1.6
     f.line([(ca[0] - 3.2, ca[1]), (xl + 0.8, ca[1])], name="Hinweis CA", **ln)
-    f.text(0.3, ca[1] - 2.0, xl - 0.3, 4.0, [P("RDBMS")], align="r", anchor="m", name="RDBMS")
+    f.text(0.3, ca[1] - 6.0, xl - 0.3, 12.0, [P("Relationale"), P("Datenbank-"), P("systeme"), P("(RDBMS)")],
+           align="r", anchor="m", name="CA-Systemklasse")
     # CP → rechts
-    xr = 95.0
+    xr = KP[0] + R + 1.6
     f.line([(cp[0] + 3.2, cp[1]), (xr - 0.8, cp[1])], name="Hinweis CP", **ln)
-    f.text(xr, cp[1] - 4.6, W - 0.3 - xr, 9.2, [P("MongoDB"), P("HBase"), P("Redis")], align="l", anchor="m",
-           name="CP-Beispiele")
+    f.text(xr, cp[1] - 4.6, W - 0.3 - xr, 9.2, [P("Konsistenz-"), P("orientierte"), P("NoSQL-Systeme")],
+           align="l", anchor="m", name="CP-Systemklasse")
     # AP → unten
     yb = KA[1] + R + 2.6
     f.line([(ap[0], ap[1] + 2.0), (ap[0], yb - 0.6)], name="Hinweis AP", **ln)
-    f.text(ap[0] - 20, yb, 40, H - 0.3 - yb, [P("CouchDB, Cassandra"), P("DynamoDB, Riak")], align="c",
-           anchor="t", name="AP-Beispiele")
+    f.text(ap[0] - 25, yb, 50, H - 0.3 - yb, [P("Verfügbarkeitsorientierte NoSQL-Systeme"),
+                                            P("(Eventual Consistency)")], align="c",
+           anchor="t", name="AP-Systemklasse")
     return f

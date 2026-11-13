@@ -71,7 +71,7 @@ def build(theme):
 
     mitte = ["Individuelle\nUnterstützung", "Gruppen-\nunterstützung", "Vorgangs-\nbearbeitung"]
     reihe(yM0 + 1.0, mitte, bw(mitte))
-    r1 = ["Finanz- &\nRechnungswesen", "Personal-\nwirtschaft", "Personal-\nwirtschaft"]
+    r1 = ["Finanz- &\nRechnungswesen", "Personal-\nwirtschaft", "Anlagen-\nwirtschaft"]
     r2 = ["Forschung &\nEntwicklung", "Material-\nwirtschaft", "Produktion", "Vertrieb &\nMarketing"]
     reihe(yB0 + 1.0, r1, bw(r1))
     reihe(yB0 + 1.0 + BH2 + 1.4, r2, bw(r2))

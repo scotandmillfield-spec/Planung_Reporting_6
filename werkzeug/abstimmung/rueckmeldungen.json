@@ -1006,6 +1006,51 @@
    "kommentar": "Rückfrage: Fotorealistische Bilder einer Person und eines Produkts können wir nicht selbst erstellen; dafür bräuchten wir echte Fotos. Dürfen wir lizenzfreie Stockfotos verwenden (z. B. Unsplash oder Pexels, kommerzielle Nutzung ohne Namensnennung erlaubt)? Bei Personen fehlt dort meist eine schriftliche Modelfreigabe, und der Verlag müsste die Lizenz akzeptieren. Oder stellen Sie eigene Fotos mit Nutzungsrecht bereit? Bis dahin bleiben die gezeichneten Bilder.",
    "auftrag": "2251ae915221",
    "zeit": "2026-11-13T11:10"
+  },
+  {
+   "id": "2026-11-14-abb-4-10-1",
+   "schluessel": "abb-4-10",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das Durchschnittszeichen ist gestrichen; Planungs- und Berichtsinhalte zeigen nur noch den Wert. Der Wert ist weiterhin der Mittelwert der Unterpunkte, d. h. die Summe der Teilbewertungen geteilt durch ihre Anzahl: Reporting (+1 ±0 −2 −1 −1 ±0) = −3 / 6 = −0,5, Planung (±0 +1 ±0 −1 ±0 −1) = −1 / 6 ≈ −0,2. Die im Kommentar genannten Werte (+2 +0 +1 +1 −1 +0) entsprechen nicht den Unterpunkten der Berichtsinhalte, sondern teils den Feldern darunter.",
+   "auftrag": "b8d94812fb86",
+   "zeit": "2026-11-14T11:00"
+  },
+  {
+   "id": "2026-11-14-abb-5-7-1",
+   "schluessel": "abb-5-7",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Platzhalterkästchen „…“ haben jetzt denselben Grauton wie die übrigen Kästchen, „intern/extern“ ist gelöscht. Pfeile und Beschriftungen für den zeitlichen Horizont und für Inhalte/Objekte/Bereiche laufen nun wie im Original parallel zur oberen bzw. hinteren Kante der Seitenfläche; „operativ/strategisch“ steht an der Spitze, „operativ“ am unteren Ende.",
+   "auftrag": "154f00d8b275",
+   "zeit": "2026-11-14T11:00"
+  },
+  {
+   "id": "2026-11-14-abb-5-16-1",
+   "schluessel": "abb-5-16",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das obere Kästchen der Datenauswertung ist jetzt zweizeilig; das Platzhalterkästchen „…“ bei den internen Quellen hat denselben Grauton wie ERP, CRM und Tabellenkalkulation.",
+   "auftrag": "239b5f5785c4",
+   "zeit": "2026-11-14T11:00"
+  },
+  {
+   "id": "2026-11-14-abb-5-30-1",
+   "schluessel": "abb-5-30",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "„(Partitionstoleranz)“ ist auf zwei Zeilen getrennt und steht nun vollständig innerhalb des Kreises.",
+   "auftrag": "7c0cef9ada4e",
+   "zeit": "2026-11-14T11:00"
+  },
+  {
+   "id": "2026-11-14-abb-5-33-1",
+   "schluessel": "abb-5-33",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Master Dataset und Batch Views sind getauscht wie bei Marz: Das Master Dataset liegt jetzt im Batch Layer, die drei Batch Views im Serving Layer.",
+   "auftrag": "4675f0e79ab2",
+   "zeit": "2026-11-14T11:00"
   }
  ],
  "neue_zeilen": [

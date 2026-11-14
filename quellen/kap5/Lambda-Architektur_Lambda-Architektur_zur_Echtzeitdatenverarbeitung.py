@@ -5,6 +5,7 @@
 # Pfeile, die an der Ellipse enden. Kein Rot (kein einzelnes Schlüsselelement).
 # „Query“ und „New Data“ bleiben englisch (Revision 13.11.2026); Schichtnamen und Views als Fachbegriffe englisch,
 # „Batch view“/„Realtime view“ → „Batch View“/„Realtime View“ (einheitliche Großschreibung).
+# Revision 13.11.2026 (2): Master Dataset im Batch Layer, Batch Views im Serving Layer (wie bei Marz).
 STEM = "Lambda-Architektur_Lambda-Architektur_zur_Echtzeitdatenverarbeitung"
 import math
 from bookfig import Fig, P, Para, MM, MSO_SHAPE, Emu
@@ -59,8 +60,8 @@ def build(theme):
     VH = 6.4                                   # View-Box
     GAP = 5.4                                  # Abstand für Pfeile
     Q = B(EX, 0.3, EW, EH)
-    SV = B(XL, Q.b + GAP + 0.6, WL, KH + PAD + 5.0 + PAD)
-    BL = B(XL, SV.b + GAP - 1.0, WL, KH + PAD + 7.0 + PAD)
+    SV = B(XL, Q.b + GAP + 0.6, WL, KH + PAD + 7.0 + PAD)
+    BL = B(XL, SV.b + GAP - 1.0, WL, KH + PAD + 5.0 + PAD)
     SP = B(XS, SV.y, WS, BL.b - SV.y)
     N = B(EX, BL.b + GAP + 0.6, EW, EH)
     H = round(N.b + 0.3, 1)
@@ -79,18 +80,18 @@ def build(theme):
     f.ellipse(N.x, N.y, N.w, N.h, role="box_plain", paras=[P("New Data", size="head", bold=True)],
               name="Neue Daten")
 
-    # ---------------- Serving Layer
+    # ---------------- Serving Layer (Batch Views, wie bei Marz)
     karte(f, SV, "Serving Layer")
-    f.box(SV.x + PAD, SV.y + KH + PAD, SV.w - 2 * PAD, 5.0, [P("Master Dataset")], role="box_hi",
-          name="Master Dataset")
-
-    # ---------------- Batch Layer
-    karte(f, BL, "Batch Layer")
     g = 1.6
-    bw = (BL.w - 2 * PAD - 2 * g) / 3
+    bw = (SV.w - 2 * PAD - 2 * g) / 3
     for i in range(3):
-        f.box(BL.x + PAD + i * (bw + g), BL.y + KH + PAD, bw, 7.0, [P("Batch"), P("View")], role="box_hi",
+        f.box(SV.x + PAD + i * (bw + g), SV.y + KH + PAD, bw, 7.0, [P("Batch"), P("View")], role="box_hi",
               name=f"Batch View {i + 1}")
+
+    # ---------------- Batch Layer (Master Dataset)
+    karte(f, BL, "Batch Layer")
+    f.box(BL.x + PAD, BL.y + KH + PAD, BL.w - 2 * PAD, 5.0, [P("Master Dataset")], role="box_hi",
+          name="Master Dataset")
 
     # ---------------- Speed Layer
     karte(f, SP, "Speed Layer")

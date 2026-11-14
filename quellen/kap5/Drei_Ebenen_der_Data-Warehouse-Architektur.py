@@ -14,6 +14,7 @@
 # Staging reichen bis zur Unterkante von „Administration und Metadaten“; die Pfeile aus der Datenanbindung enden
 # am gestrichelten Rahmen, die ETL-Schritte haben keine eigenen Pfeile mehr – nur noch drei Pfeile (ohne
 # Berührung der Kästchen) in Core Data Warehouse, ODS und CMS/DMS; Platzhalter „…“ für weitere interne Quellen.
+# Revision 13.11.2026 (2): Kasten der Ebene 3 zweizeilig; Platzhalter im Grau der übrigen Quellen.
 STEM = "Drei_Ebenen_der_Data-Warehouse-Architektur"
 from bookfig import Fig, P
 
@@ -55,9 +56,8 @@ class B:
 def build(theme):
     t = theme
     tmp = Fig(W, 30, theme)
-    analyse_p = [P("Analyse- und Planungswerkzeuge (Dashboards, Cockpits, Portale etc.)\n"
-                   "sowie spezielle Nutzungsmöglichkeiten wie\n"
-                   "z. B. Data Mining, Maschinelles Lernen und KI")]
+    analyse_p = [P("Analyse- und Planungswerkzeuge (Dashboards, Cockpits, Portale etc.) sowie spezielle\n"
+                   "Nutzungsmöglichkeiten wie z. B. Data Mining, Maschinelles Lernen und KI")]
     mart2_p = [P("Data Mart", bold=True)]
 
     # ------------------------------------------------------------ Geometrie (y)
@@ -112,7 +112,7 @@ def build(theme):
     qx = [IQ.x + 3.0 + i * (qw + qg) for i in range(4)]
     for x, n in zip(qx, ("ERP", "CRM", f"Tabellen{SHY}kalkulation", "…")):
         if n == "…":
-            f.box(x, qy, pw, qh, [P("…")], role="box_plain", name="Platzhalter weitere Quellen")
+            f.box(x, qy, pw, qh, [P("…")], role="box", name="Platzhalter weitere Quellen")
         else:
             f.box(x, qy, qw, qh, [P(n, bold=True)], role="box", name=f"Quelle {n}")
     f.box(EQ.x, EQ.y, EQ.w, EQ.h, [P("Externe Quellen", bold=True)], role="box", name="Externe Quellen")

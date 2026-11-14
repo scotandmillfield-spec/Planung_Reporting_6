@@ -1158,6 +1158,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Gesamtbewertung der Planungs- bzw. Berichtsinhalte ist jetzt der Durchschnitt ihrer Unterpunkte (Planung −0,2 statt −1, Reporting −0,5 statt 0) und mit Ø gekennzeichnet; alle Bewertungen stehen einheitlich mit einer Nachkommastelle."
+    },
+    {
+     "datum": "14.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Ich kann die Durchschnittsberechnung nicht nachvollziehen. Beispiel Reporting +2+0+1+1-1+0 =4? Vielleicht sollt man das Durchschnittszeichen streichen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das Durchschnittszeichen ist gestrichen; Planungs- und Berichtsinhalte zeigen nur noch den Wert. Der Wert ist weiterhin der Mittelwert der Unterpunkte, d. h. die Summe der Teilbewertungen geteilt durch ihre Anzahl: Reporting (+1 ±0 −2 −1 −1 ±0) = −3 / 6 = −0,5, Planung (±0 +1 ±0 −1 ±0 −1) = −1 / 6 ≈ −0,2. Die im Kommentar genannten Werte (+2 +0 +1 +1 −1 +0) entsprechen nicht den Unterpunkten der Berichtsinhalte, sondern teils den Feldern darunter."
     }
    ]
   },
@@ -1564,6 +1572,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Abbildung zeigt jetzt eine Pyramide mit Spitze und Seitenfläche, mittig gesetzt; die drei Dimensionen laufen als Pfeile an den Kanten der Pyramide (Grundlinie, obere und hintere Kante der Seitenfläche), „intern/extern“ steht auf der Seitenfläche. In jeder Ebene gibt es wieder ein Platzhalterkästchen „…“, die Kästchen sind auf die Ebenenbreite gezogen, und die Spitze heißt „BI-/KI-gestützt“."
+    },
+    {
+     "datum": "14.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: die Kästchen mit ... auch einfach im selben Grauton darstellen wie die anderen. Den Pfeil und die Texte an der hinteren und seitlichen Pyramidenseite besser an die Pyramide anpassen, wie im Original. intern / extern löschen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Platzhalterkästchen „…“ haben jetzt denselben Grauton wie die übrigen Kästchen, „intern/extern“ ist gelöscht. Pfeile und Beschriftungen für den zeitlichen Horizont und für Inhalte/Objekte/Bereiche laufen nun wie im Original parallel zur oberen bzw. hinteren Kante der Seitenfläche; „operativ/strategisch“ steht an der Spitze, „operativ“ am unteren Ende."
     }
    ]
   },
@@ -1693,6 +1709,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Konsolidierung und Balanced Scorecard sind gestrichen, der Satz endet jetzt mit „wie z. B. Data Mining, Maschinelles Lernen und KI“; „OLAP-Engine“ ist entfernt. Cleansing und Staging reichen bis zur Unterkante von „Administration und Metadaten“, die Pfeile aus der Datenanbindung enden am gestrichelten Rahmen, und von den ETL-Pfeilen bleiben nur drei ohne Berührung der Kästchen (in Core Data Warehouse, ODS und CMS/DMS). Bei den internen Quellsystemen gibt es wieder ein Platzhalterkästchen „…“."
+    },
+    {
+     "datum": "14.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: oberes Kästchen nur 2. Zeilen statt 3. Kästchen mit ... im selben Grauton darstellen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das obere Kästchen der Datenauswertung ist jetzt zweizeilig; das Platzhalterkästchen „…“ bei den internen Quellen hat denselben Grauton wie ERP, CRM und Tabellenkalkulation."
     }
    ]
   },
@@ -1902,6 +1926,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Die Kreisnamen sind um die deutschen Begriffe ergänzt (Konsistenz, Verfügbarkeit, Partitionstoleranz). Die Produktnamen sind entfernt und durch Systemklassen ersetzt: relationale Datenbanksysteme (CA), konsistenzorientierte NoSQL-Systeme (CP) und verfügbarkeitsorientierte NoSQL-Systeme mit Eventual Consistency (AP)."
+    },
+    {
+     "datum": "14.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Partitionstoleranz (Text besser in den Kreis einbinden. Nicht über den Kreisrand hinaus."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "„(Partitionstoleranz)“ ist auf zwei Zeilen getrennt und steht nun vollständig innerhalb des Kreises."
     }
    ]
   },
@@ -1948,6 +1980,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "„Query“ und „New Data“ stehen wieder englisch in der Abbildung. Die Bildunterschrift lautet jetzt „Lambda-Architektur (λ-Architektur) zur Echtzeitdatenverarbeitung“."
+    },
+    {
+     "datum": "14.11.2026",
+     "wunsch": [
+      "13.11.2026 DS: Master Dataset im Batch Layer und die Batch Views im Serving Layer tauschen wie bei März übernehmen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Master Dataset und Batch Views sind getauscht wie bei Marz: Das Master Dataset liegt jetzt im Batch Layer, die drei Batch Views im Serving Layer."
     }
    ]
   },

@@ -1,7 +1,7 @@
 /* Einzelvisual „Scoring-Analyse (hier der Bereich Planung)“ (Abb. 4.10). Seite 727 x 446 px = 110 x 67,5 mm.
    Daten: scoring.json (daten_scoring.py) – Analysefelder mit Bewertung von −4 (Worst Practice) über 0 (Durchschnitt)
    bis +4 (Best Practice); Bereich Planung mit den Werten des Originals, Bereich Reporting erfunden.
-   Felder mit Teilfeldern (Planungsinhalte, Berichtsinhalte) tragen den Durchschnitt ihrer Teilfelder (Ø, berechnet).
+   Felder mit Teilfeldern (Planungsinhalte, Berichtsinhalte) tragen den Durchschnitt ihrer Teilfelder (berechnet, ohne eigenes Zeichen).
    Statt Punkten vor einer Regenbogenskala Abweichungsbalken vom Durchschnitt auf fester, gleichabständiger Skala,
    gefärbt nach Wirkung (unter dem Durchschnitt rot, darüber blaugrün). Gliederung wie im Original; Schalter
    „Reihenfolge“ sortiert nach Bewertung. Klick hebt ein Feld hervor, Esc hebt auf. Gestaltung wie Abb. 3.27. */
@@ -15,7 +15,7 @@
     [{ key: `${i}`, name, v, ebene: 0, gruppe: teile.length > 0, pos: i },
      ...teile.map(([t, w], j) => ({ key: `${i}.${j}`, name: t, v: w, ebene: 1, eltern: name, pos: i + (j + 1) / 100 }))])]));
   const pkt = v => delta(v, 1);                         // ein Format je Spalte: eine Nachkommastelle
-  const pktZeile = r => (r.gruppe ? "Ø" + DK.NBSP : "") + pkt(r.v);
+  const pktZeile = r => pkt(r.v);   // Revision 13.11.2026: ohne Ø-Zeichen (Verwechslung mit „Durchschnitt“ der Skala)
 
   /* ---------- Zustand ---------- */
   const S = { bereich: BER[0], sort: "gliederung", auswahl: null };
@@ -77,7 +77,7 @@
   /* ---------- Profil (Abweichungsbalken auf fester Skala) ---------- */
   const ZH = 27, KOPF = 40;
   const LW = Math.ceil(Math.max(...Object.values(ZEILEN).flat().map(r => r.ebene * 16 + tw(r.name, 14, r.ebene === 0)))) + 16;
-  const VW = Math.ceil(tw("Ø" + DK.NBSP + "−0,0")) + 18;
+  const VW = Math.ceil(tw("−0,0")) + 18;
   function profil(ziel, breite, rows) {
     ziel.textContent = "";
     const h = KOPF + rows.length * ZH;
@@ -141,7 +141,7 @@
       { nr: 4, ziel: "z-1", anker: "links", versatz: [520, 2], regel: "EXPRESS – Passende Darstellung", titel: "Abweichungsbalken statt Punkte",
         text: "Jedes Feld ist ein Balken von der Durchschnittslinie aus; seine Länge zeigt den Abstand zum Durchschnitt, die Zahl daneben den Wert. Die weißen Punkte des Originals vor dem Farbverlauf ließen sich nur über die Lage im Verlauf ablesen." },
       { nr: 5, ziel: "sp-wert", anker: "links", versatz: [0, -2], regel: "CONDENSE – Informationsdichte", titel: "Wert als Zahl",
-        text: "Die Bewertung steht als Zahl mit Vorzeichen neben dem Feld, ±0,0 für durchschnittlich, einheitlich mit einer Nachkommastelle. Felder mit Teilfeldern tragen den Durchschnitt ihrer Teilfelder (Ø); im Original passte die Gesamtbewertung der Planungsinhalte (−1) nicht zum Mittelwert der Teilpläne. Der Tooltip nennt den Abstand zur Best und zur Worst Practice." },
+        text: "Die Bewertung steht als Zahl mit Vorzeichen neben dem Feld, ±0,0 für durchschnittlich, einheitlich mit einer Nachkommastelle. Felder mit Teilfeldern tragen den Mittelwert ihrer Teilfelder (Summe der Teilbewertungen geteilt durch ihre Anzahl, ohne eigenes Zeichen, damit es nicht mit dem Skalenpunkt „Durchschnitt“ verwechselt wird); im Original passte die Gesamtbewertung der Planungsinhalte (−1) nicht zum Mittelwert der Teilpläne. Der Tooltip nennt den Abstand zur Best und zur Worst Practice." },
       { nr: 6, ziel: "sp-feld", versatz: [26, -24], regel: "STRUCTURE – Inhalte ordnen", titel: "Gliederung wie im Original",
         text: "Die Planungsinhalte mit ihren Teilplänen stehen eingerückt oben, darauf folgen Prozesse, Organisation und IT-Unterstützung. Der Schalter „nach Bewertung“ stellt die schwächsten Felder nach oben; die Gliederung bleibt erhalten. „…“ heißt jetzt „weitere Teilpläne“." },
       { nr: 7, ziel: "filter", anker: "links", versatz: [196, 6], regel: "SIMPLIFY – Filtern statt vervielfachen", titel: "Bereich als Datenschnitt",

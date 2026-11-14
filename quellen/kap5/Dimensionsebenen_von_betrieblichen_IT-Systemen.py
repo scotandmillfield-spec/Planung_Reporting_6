@@ -3,7 +3,8 @@
 # gesetzt; vier Systemebenen als Bänder der Vorderfläche, Elemente als Boxen je Ebene, die Boxen füllen die
 # Ebenenbreite. BI-/KI-gestützte Systeme in der Spitze rot. Die drei Dimensionen als Pfeile an den Kanten der
 # Pyramide: Systemebene an der Grundlinie, zeitlicher Horizont an der oberen Kante der Seitenfläche,
-# Inhalte/Objekte/Bereiche (intern/extern) an der hinteren Kante der Seitenfläche.
+# Inhalte/Objekte/Bereiche an der hinteren Kante der Seitenfläche; Achsentitel parallel zu den Kanten.
+# Revision 13.11.2026 (2): Platzhalter im Grau der übrigen Kästchen, „intern/extern“ entfernt.
 # Entfernt: Farbverläufe und blaue Flächen, Würfelsymbol (Data Warehouse) und 4V-Rad (Big Data) – beide als
 # beschriftete Boxen, die vier V als Erläuterung. Platzhalter „…“ je Ebene wie im Original (Revision 13.11.2026).
 STEM = "Dimensionsebenen_von_betrieblichen_IT-Systemen"
@@ -104,11 +105,6 @@ def build(theme):
     yk = ya + 0.64 * (yb - ya)                 # hintere Ecke der Seitenfläche
     K = (xr + 6.0, yk)
     f.poly([(pc, ya), K, (xr, yb)], closed=True, fill=SEITE, name="Seitenfläche")
-    ysm = yk + 0.5 * (yb - yk)                 # „intern/extern“ auf der Seitenfläche (wie im Original)
-    lie = tw("intern/extern", SZ) + 1.0
-    xm = ((xr - s * (yb - ysm)) + (K[0] + (xr - K[0]) * (ysm - yk) / (yb - yk))) / 2
-    f.text(xm - (LH + 0.3) / 2, ysm - lie / 2, LH + 0.3, lie, [P("intern/extern", size=SZ)],
-           align="c", anchor="m", rot=270, bg=SEITE, name="intern/extern")
 
     # ------------------------------------------------------------ Ebenen
     for i, ((titel, el, zwei), (y0, y1)) in enumerate(zip(ebenen, lagen)):
@@ -135,7 +131,7 @@ def build(theme):
         ws = [w_ * k for w_ in ws]
         x = pc - (sum(ws) + GAPX * (len(ws) - 1)) / 2
         for e, w_ in zip(el, ws):
-            f.box(x, yr, w_, bh, [P(e, size=SZ)], role="box_plain" if e == "…" else "box", ins=INS,
+            f.box(x, yr, w_, bh, [P(e, size=SZ)], role="box", ins=INS,
                   name="Platzhalter" if e == "…" else e.replace("\n", ""))
             x += w_ + GAPX
 
@@ -166,26 +162,48 @@ def build(theme):
     A([(pc + gw / 2, ya_), (xr, ya_)], name="Systemebene rechts")
     f.text(pc - gw / 2, ya_ - 1.6, gw, 3.2, [P("Systemebene", size=SZ, bold=True)], align="c", anchor="m",
            name="Achse Systemebene")
-    # Zeitlicher Horizont: obere Kante der Seitenfläche, unterhalb von Big Data
-    yo = BD.b + 1.5 + 2 * LH
-    lam = (yo - ya) / (yk - ya)
-    po = (pc + lam * (K[0] - pc), yo)
-    p1, p2 = versatz(po, K, 2.4)
-    p2 = (p1[0] + 0.86 * (p2[0] - p1[0]), p1[1] + 0.86 * (p2[1] - p1[1]))   # Platz für „operativ“
-    A([p1, p2], head=True, tail=True, name="Zeitlicher Horizont")
-    f.text(p1[0] + 1.6, BD.b + 0.8, 16.0, 2 * LH + 0.2, [P("operativ/", size=SZ), P("strategisch", size=SZ)],
-           name="operativ/strategisch")
-    f.text(W - 12.3, p2[1] + 0.5, 12.0, LH + 0.2, [P("operativ", size=SZ)], align="r", name="operativ")
-    mx, my = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2       # links der Achse auf der Seitenfläche
-    f.text(mx - 3.0 - 14.0, my - LH - 0.1, 14.0, 2 * LH + 0.2,
-           [P("Zeitlicher", size=SZ, bold=True), P("Horizont", size=SZ, bold=True)], align="r", bg=SEITE,
-           name="Achse Zeitlicher Horizont")
-    # Inhalte/Objekte/Bereiche: hintere Kante der Seitenfläche
-    q1, q2 = versatz(K, (xr, yb), 2.2)
-    q1 = (q1[0] - 0.1, q1[1] + LH + 1.0)       # Platz für „operativ“ über der Spitze des Pfeils
-    A([q2, q1], head=True, tail=True, name="Inhalte/Objekte/Bereiche")
+    def entlang(p, q, t, d):
+        """Punkt bei Anteil t auf p–q, um d mm nach außen (rechts) versetzt."""
+        dx, dy = q[0] - p[0], q[1] - p[1]
+        n = math.hypot(dx, dy)
+        nx, ny = dy / n, -dx / n
+        if nx < 0:
+            nx, ny = -nx, -ny
+        return (p[0] + t * dx + nx * d, p[1] + t * dy + ny * d)
+
+    def schraeg(c, w, h, paras, winkel, name):
+        s_ = f.text(c[0] - w / 2, c[1] - h / 2, w, h, paras, align="c", anchor="m", name=name)
+        s_.rotation = winkel % 360
+        return s_
+
+    # Zeitlicher Horizont: parallel zur oberen Kante der Seitenfläche (Spitze → hintere Ecke), wie im Original
+    # zweigeteilt: oberer Pfeil zur Spitze (operativ/strategisch), Achsentitel auf der Linie, unterer Pfeil zur
+    # hinteren Ecke (operativ); die Lücke liegt dort, wo der Pfeil BI-/KI-gestützt ↔ Big Data kreuzt.
+    A0 = (pc, ya)
+    L1 = math.hypot(K[0] - pc, yk - ya)
+    w1 = math.degrees(math.atan2(yk - ya, K[0] - pc))
+    d1 = 2.6
+    tl = (BI.cy - ya) / (yk - ya)                       # Kreuzung mit der Waagerechten BI ↔ Big Data
+    mm = lambda v: v / L1
+    A([entlang(A0, K, tl - mm(1.6), d1), entlang(A0, K, 0.03, d1)], name="Zeitlicher Horizont strategisch")
+    tw_h = tw("Zeitlicher Horizont", SZ, True) + 1.6
+    t0 = tl + mm(2.6)
+    schraeg(entlang(A0, K, t0 + mm(tw_h / 2), d1), tw_h, LH + 0.3, [P("Zeitlicher Horizont", size=SZ, bold=True)],
+            w1, "Achse Zeitlicher Horizont")
+    A([entlang(A0, K, t0 + mm(tw_h + 0.4), d1), entlang(A0, K, 0.97, d1)], name="Zeitlicher Horizont operativ")
+    wl = tw("strategisch", SZ) + 1.2
+    schraeg(entlang(A0, K, 0.03 + mm(wl / 2 + 6.0), d1 + LH + 0.6), wl, 2 * LH + 0.3,
+            [P("operativ/", size=SZ), P("strategisch", size=SZ)], w1, "operativ/strategisch")
+    wo = tw("operativ", SZ) + 1.0
+    schraeg(entlang(A0, K, 0.97 - mm(wo / 2 + 0.5), d1 + 0.5 * LH + 1.0), wo, LH + 0.3,
+            [P("operativ", size=SZ)], w1, "operativ")
+    # Inhalte/Objekte/Bereiche: parallel zur hinteren Kante der Seitenfläche, Titel außen entlang der Kante
+    C0 = (xr, yb)
+    L2 = math.hypot(K[0] - xr, yk - yb)
+    w2 = math.degrees(math.atan2(yk - yb, K[0] - xr))   # Lesrichtung von unten nach oben
+    d2 = 2.2
+    A([entlang(C0, K, 0.04, d2), entlang(C0, K, 0.96, d2)], head=True, tail=True, name="Inhalte/Objekte/Bereiche")
     lg = tw("Inhalte/Objekte/Bereiche", SZ, True) + 1.0
-    xl = max(q1[0], q2[0]) + 0.8
-    f.text(xl, (q1[1] + q2[1]) / 2 - lg / 2, LH + 0.4, lg, [P("Inhalte/Objekte/Bereiche", size=SZ, bold=True)],
-           align="c", anchor="m", rot=270, name="Achse Inhalte/Objekte/Bereiche")
+    schraeg(entlang(C0, K, 0.5, d2 + 0.5 * LH + 1.0), lg, LH + 0.3, [P("Inhalte/Objekte/Bereiche", size=SZ, bold=True)],
+            w2, "Achse Inhalte/Objekte/Bereiche")
     return f

@@ -73,9 +73,10 @@ def build(theme):
 
     name(KC[0] - 12, KC[1] - 13.0, 24, 7, "Consistency", "Konsistenz")
     name(KA[0] - 17.0, KA[1] + 1.0, 19, 7, "Availability", "Verfügbarkeit")
-    f.text(KP[0] - 2.0, KP[1] - 2.5, 21, 10, [P("Partition", size=SZ_K, bold=True),
-                                             P("Tolerance", size=SZ_K, bold=True),
-                                             P("(Partitionstoleranz)", size=SZ_K - 1.0)],
+    # Revision 13.11.2026 (2): deutsche Übersetzung getrennt, damit der Text im Kreis bleibt
+    f.text(KP[0] + 0.5, KP[1] - 3.6, 15.0, 12.6, [P("Partition", size=SZ_K, bold=True),
+                                                P("Tolerance", size=SZ_K, bold=True),
+                                                P("(Partitions-", size=SZ_K - 1.0), P("toleranz)", size=SZ_K - 1.0)],
            align="c", anchor="m", bg=box.fill, name="Partition Tolerance")
 
     # ---------------- Überschneidungen mit Beispielen

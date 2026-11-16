@@ -1797,27 +1797,27 @@
    "status": "pruefung",
    "datei": "Kennzahlenmodell",
    "kommentare": [
+    "16.11.2026: Jahre 2018/2019 auf 2027/2028 geändert (Auftrag zu Abb. 5.25, Reihe 5.23–5.27).",
     "Datentabelle mit Beispieldaten als interaktives Einzelvisual 727 × 394 px (HTML, PNG) statt Bild: Dimensionstabellen oben nebeneinander, Faktentabelle darunter; Werte und Stammdaten exakt aus dem Original, alle vier Zeilen rechnen richtig",
     "Kopf: eine Rollenzeile Dim.-ID / Kennzahl / berechnet statt zweizeiliger „Berechnete Kennzahl“; „NettoNetto-Umsatz“ einzeilig; Schlüssel wie im Original unterstrichen; Excel-Gitter und Rahmen entfallen, echtes Minus, Tausenderpunkt",
     "Neu: Summenzeile (4.000 − 210 = 3.790; − 76 = 3.714) und Rechenregeln unter der Tabelle; Klick auf eine Dimensionszeile filtert, Tooltip rechnet jede Zeile vor",
     "Gleicher Datensatz wie die Serie Abb. 5.25–5.27 (dort als zwölf Buchungen auf drei Konten)",
     "Annahme: Werte in € (Original ohne Einheit)",
-    "Kundennamen „MTS GmbH“ und „SOT AG“ aus dem Original übernommen – falls reale Firmen gemeint, neutral ersetzen?"
+    "Kundennamen „MTS GmbH“ und „SOT AG“ aus dem Original übernommen – falls reale Firmen gemeint, neutral ersetzen?",
+    "Revision 16.11.2026 (Auftrag zu Abb. 5.25): Jahre 2018/2019 → 2027/2028 in der ganzen Reihe Abb. 5.23–5.27"
    ],
-   "alt": "Kennzahlenmodell mit drei Dimensionstabellen (Produkt 3312 Ring und 4512 Kette, Kunde 471 MTS GmbH und 236 SOT AG, Zeit 2018 und 2019) und einer Faktentabelle mit vier Zeilen, in der jede Kennzahl eine eigene Spalte hat. Bruttoumsatz, Rabatte und Skonti sind gespeichert, Nettoumsatz und NettoNetto-Umsatz werden je Zeile berechnet. In Summe ergeben 4.000 € Bruttoumsatz nach 210 € Rabatten und 76 € Skonti 3.714 € NettoNetto-Umsatz."
+   "alt": "Kennzahlenmodell mit drei Dimensionstabellen (Produkt 3312 Ring und 4512 Kette, Kunde 471 MTS GmbH und 236 SOT AG, Zeit 2027 und 2028) und einer Faktentabelle mit vier Zeilen, in der jede Kennzahl eine eigene Spalte hat. Bruttoumsatz, Rabatte und Skonti sind gespeichert, Nettoumsatz und NettoNetto-Umsatz werden je Zeile berechnet. In Summe ergeben 4.000 € Bruttoumsatz nach 210 € Rabatten und 76 € Skonti 3.714 € NettoNetto-Umsatz."
   },
   "5.24": {
-   "status": "latex",
-   "latex": "tabellen/Kennzahlenzuordnung_zu_Berichtszeilen.tex",
+   "status": "pruefung",
    "datei": "Kennzahlenzuordnung_zu_Berichtszeilen",
    "kommentare": [
-    "Reine Text-Zuordnungstabelle ohne Werte → LaTeX-Tabelle (booktabs, figure-Umgebung hält die Abbildungsnummer), mit pdflatex bei 110 mm Satzbreite geprüft",
-    "Die zwei Teiltabellen mit denselben Berichtszeilen zu einer Tabelle zusammengefasst: Berichtszeile | eine Kennzahl je Zeile | Summe mehrerer Kennzahlen – die Varianten stehen zeilengleich nebeneinander",
-    "Summe ausgeschrieben: „+“ vor Aktions- und Sonderrabatte statt eines „+“ vor Kundenrabatte",
-    "Kopfzeilen „eine Kennzahl je Zeile“ / „Summe mehrerer Kennzahlen“ neu – passt die Wortwahl zum Buchtext?",
-    "Fett wie im Original: Umsatzstufen Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz"
+    "Revision 16.11.2026: Bild wie Abb. 5.25 statt LaTeX-Tabelle – interaktives Einzelvisual 727 × 480 px (HTML, PNG) mit den Werten aus Abb. 5.23/5.25 (Jahre 2027/2028)",
+    "Drei Berichtszeilen (Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz); Schalter „Rabatte“: ohne Differenzierung drei Kennzahlen (Bruttoumsatz, Rabatte, Skonti), mit Differenzierung fünf (Bruttoumsatz, Kunden-, Aktions-, Sonderrabatte, Skonti; Rabatte aufgeteilt 60 : 30 : 10)",
+    "Oben die Faktentabelle des Kennzahlenmodells mit Summenzeile, darunter die Zuordnung: Betrag unter jeder zugeordneten Kennzahl, rechts der Betrag der Berichtszeile; die Kennzahlspalten stehen genau untereinander",
+    "Druckfassung zeigt die Variante mit Rabattdifferenzierung – falls das Buch die Variante ohne Differenzierung zeigen soll, bitte Rückmeldung"
    ],
-   "alt": "Tabelle mit den Berichtszeilen Bruttoumsatz, Rabatte, Nettoumsatz, Skonti und NettoNetto-Umsatz und zwei Varianten der Kennzahlenzuordnung. In der ersten Variante gehört zu jeder Berichtszeile genau eine Kennzahl; in der zweiten ergibt sich die Berichtszeile Rabatte als Summe der Kennzahlen Kundenrabatte, Aktionsrabatte und Sonderrabatte.",
+   "alt": "Kennzahlenzuordnung zu Berichtszeilen mit Rabattdifferenzierung: oben eine Faktentabelle mit vier Zeilen (Produkt, Kunde, Jahr 2027 oder 2028) und den Kennzahlen Bruttoumsatz, Kundenrabatte, Aktionsrabatte, Sonderrabatte und Skonti, in Summe 4.000 €, −126 €, −63 €, −21 € und −76 €. Darunter die Zuordnung zu drei Berichtszeilen: Bruttoumsatz enthält nur den Bruttoumsatz (4.000 €), Nettoumsatz zusätzlich die drei Rabattarten (3.790 €), NettoNetto-Umsatz zusätzlich die Skonti (3.714 €).",
    "revisionen": [
     {
      "datum": "13.11.2026",
@@ -1826,6 +1826,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Soll das HTML-Beispiel die Tabelle im Buch ersetzen (Abb. 5.24 dann als Bild wie Abb. 5.25) oder nur auf der Lernplattform ergänzen? Und bedeutet „3 Kennzeilen und 5 Kennzahlen“: drei Berichtszeilen (Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz) und fünf Kennzahlen (Bruttoumsatz, Kundenrabatte, Aktionsrabatte, Sonderrabatte, Skonti)? Für die Rabattdifferenzierung schlagen wir vor, die bisherigen Rabatte aus Abb. 5.25 aufzuteilen (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte) – passt das?"
+    },
+    {
+     "datum": "16.11.2026",
+     "wunsch": [
+      "16.11.2026 DS: Soll das HTML-Beispiel die Tabelle im Buch ersetzen? Ja (Abb. 5.24 dann als Bild wie Abb. 5.25) Und bedeutet „3 Kennzeilen und 5 Kennzahlen“: drei Berichtszeilen (Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz) und fünf Kennzahlen (Bruttoumsatz, Kundenrabatte, Aktionsrabatte, Sonderrabatte, Skonti)? Ja Für die Rabattdifferenzierung schlagen wir vor, die bisherigen Rabatte aus Abb. 5.25 aufzuteilen (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte) – passt das? Ja"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Abb. 5.24 ist jetzt ein Bild wie Abb. 5.25 statt der Texttabelle: oben die Faktentabelle des Kennzahlenmodells (Werte wie Abb. 5.23/5.25, Jahre 2027/2028), darunter die Zuordnung der Kennzahlen zu den drei Berichtszeilen Bruttoumsatz, Nettoumsatz und NettoNetto-Umsatz mit Beträgen (4.000 / 3.790 / 3.714 €). Im HTML-Beispiel schaltet „Rabatte“ zwischen drei Kennzahlen ohne und fünf Kennzahlen mit Rabattdifferenzierung (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte). Die Buchabbildung zeigt die Variante mit Differenzierung – bitte melden, falls das Buch die Variante ohne zeigen soll."
     }
    ]
   },
@@ -1837,7 +1845,8 @@
     "Werte exakt aus dem Original (Dimensionstabellen, zwölf Buchungen, Kontendimension); korrigiert: Konto 8050 „Rabatt“ → „Rabatte“ wie in Abb. 5.23, 5.24, 5.26 und 5.27",
     "Neu: daneben die aus Vorgänger und Sortiercode entstehende Hierarchie als Baum mit Beträgen (3.714 € NettoNetto-Umsatz = Summe der Buchungen, wie Abb. 5.23); Klick auf ein Konto zeigt Vorgänger, Kinder und Buchungen, Klick auf eine Dimensionszeile filtert",
     "Rollenzeile „Dim.-ID / Kennzahl“ einmal über der Faktentabelle statt über jeder Spalte; Schlüssel unterstrichen, Gitter entfällt, echtes Minus und Tausenderpunkt",
-    "Annahme: Betrag in €; „NULL“ als Vorgänger des obersten Knotens beibehalten; Kundennamen siehe Abb. 5.23"
+    "Annahme: Betrag in €; „NULL“ als Vorgänger des obersten Knotens beibehalten; Kundennamen siehe Abb. 5.23",
+    "Revision 16.11.2026: Jahre 2018/2019 → 2027/2028 (Reihe Abb. 5.23–5.27); im HTML Schalter „Rabatte gesamt/differenziert“ – 8050 Rabatte als Knoten über 8051 Kunden-, 8052 Aktions- und 8053 Sonderrabatte (60 : 30 : 10, Werte wie Abb. 5.24), ohne Parent-Child-Hierarchie mit vierter Ebene; Buchungen mit 0 € entfallen in der differenzierten Variante; Druckfassung „gesamt“, Ansichtsknöpfe gekürzt (gilt für die ganze Serie 5.25–5.27)"
    ],
    "alt": "Kontenmodell mit Parent-Child-Hierarchie: Dimensionstabellen Produkt, Kunde und Zeit, eine Faktentabelle mit zwölf Buchungen (Produkt, Kunde, Zeit, Konto, Betrag) auf den Konten 8000 Bruttoumsatz, 8050 Rabatte und 8090 Skonti sowie die Kontendimension mit Konten-ID, Bezeichnung, Vorgänger und Sortiercode. Daneben die daraus entstehende Hierarchie: Der NettoNetto-Umsatz (3.714 €) enthält Skonti (−76 €) direkt und den Nettoumsatz (3.790 €), der sich aus Rabatten (−210 €) und Bruttoumsatz (4.000 €) zusammensetzt.",
    "revisionen": [
@@ -1848,6 +1857,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Abb. 5.23, 5.25, 5.26 und 5.27 beruhen auf demselben Datensatz. Sollen die Jahre 2018/2019 → 2027/2028 in allen vier Abbildungen geändert werden (so verstehen wir „Bitte alle“)? Für die Rabattdifferenzierung schlagen wir vor, Konto 8050 Rabatte unter dem Knoten „Rabatte“ in 8051 Kundenrabatte, 8052 Aktionsrabatte und 8053 Sonderrabatte aufzuteilen, im HTML-Beispiel umschaltbar mit/ohne Differenzierung und mit denselben Werten wie das neue Beispiel zu Abb. 5.24. Einverstanden? Umgesetzt wird erst nach der Antwort, damit die Abbildungen der Reihe zusammenpassen."
+    },
+    {
+     "datum": "16.11.2026",
+     "wunsch": [
+      "16.11.2026 DS: Rückfrage: Abb. 5.23, 5.25, 5.26 und 5.27 beruhen auf demselben Datensatz. Sollen die Jahre 2018/2019 → 2027/2028 in allen vier Abbildungen geändert werden (so verstehen wir „Bitte alle“)? JA Für die Rabattdifferenzierung schlagen wir vor, Konto 8050 Rabatte unter dem Knoten „Rabatte“ in 8051 Kundenrabatte, 8052 Aktionsrabatte und 8053 Sonderrabatte aufzuteilen, im HTML-Beispiel umschaltbar mit/ohne Differenzierung und mit denselben Werten wie das neue Beispiel zu Abb. 5.24. Einverstanden? Ja"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Jahre 2018/2019 in Abb. 5.23, 5.25, 5.26 und 5.27 auf 2027/2028 geändert. Im HTML-Beispiel der Reihe 5.25–5.27 gibt es den neuen Schalter „Rabatte gesamt/differenziert“: Konto 8050 Rabatte wird zum Knoten über 8051 Kunden-, 8052 Aktions- und 8053 Sonderrabatte mit denselben Werten wie Abb. 5.24 (Buchungen mit 0 € entfallen in dieser Variante). Die Buchabbildung zeigt weiter die Variante „gesamt“; die Beschriftung der Ansichtsknöpfe ist kürzer, damit der neue Schalter in die Zeile passt."
     }
    ]
   },
@@ -1855,11 +1872,13 @@
    "status": "pruefung",
    "datei": "Kontenmodell_ohne_Parent-Child-Hierarchie",
    "kommentare": [
+    "16.11.2026: Jahre 2018/2019 auf 2027/2028 geändert (Auftrag zu Abb. 5.25, Reihe 5.23–5.27).",
     "Interaktives Einzelvisual 727 × 596 px (HTML, PNG), Serie mit Abb. 5.25 und 5.27: gleicher Datensatz und gleiches Raster, startet in der Ansicht „ohne Parent-Child-Hierarchie“",
     "Werte exakt aus dem Original; Spaltenkopf „Ebene  2“ (doppeltes Leerzeichen) korrigiert, Umbruch „NettoNetto-/Umsatz“ entfällt, Kontendimension einzeilig über die volle Breite",
     "Neu: Wiederholung „Skonti“ in Ebene 2 rot gestrichelt markiert (Konto ohne Zwischenebene) – leitet zu Abb. 5.27 über; Sortiercodes rechtsbündig, Schlüssel unterstrichen",
     "Klick auf ein Konto hebt seine Buchungen hervor, Tooltip nennt Pfad und Sortiercodes; Spaltenköpfe sortieren",
-    "Bitte prüfen: Rot für die Wiederholung gewünscht (im Original keine Markierung)?"
+    "Bitte prüfen: Rot für die Wiederholung gewünscht (im Original keine Markierung)?",
+    "Revision 16.11.2026 (Aufträge zu Abb. 5.25/5.27): Jahre 2027/2028; gemeinsame Serie mit Schalter „Rabatte gesamt/differenziert“ im HTML, Druckfassung „gesamt“, Ansichtsknöpfe gekürzt"
    ],
    "alt": "Kontenmodell ohne Parent-Child-Hierarchie: dieselben Dimensionstabellen und dieselbe Faktentabelle wie mit Parent-Child-Hierarchie, darunter die Kontendimension mit einer Zeile je bebuchtem Konto und den Spalten Werte, Ebene 2 und Ebene 1 mit je einem Sortiercode. Rabatte und Bruttoumsatz gehören zur Ebene 2 Nettoumsatz; Skonti hat keine Zwischenebene, deshalb wiederholt Ebene 2 den Wert Skonti, was markiert ist."
   },
@@ -1871,7 +1890,8 @@
     "Ebenen und Reihenfolge exakt wie im Original (aus den Sortiercodes nachgerechnet); eingerückt mit Verbindungslinien, Summen fett; neu: Beträge je Knoten aus den Buchungen",
     "Gelb hinterlegte Zeile „Werte Skonti“ → rot gestrichelt unterstrichen (graustufentauglich), ebenso der Ursprung in Ebene 2 der Kontendimension",
     "Klick auf einen Knoten zeigt ihn mit Knoten darüber und darunter samt Buchungen; Tooltip erklärt den Füllknoten",
-    "Abbildung deutlich größer als das Original (Kontext aus Abb. 5.26 wiederholt) – falls nur der Hierarchieaufbau gezeigt werden soll, bitte Rückmeldung"
+    "Abbildung deutlich größer als das Original (Kontext aus Abb. 5.26 wiederholt) – falls nur der Hierarchieaufbau gezeigt werden soll, bitte Rückmeldung",
+    "Revision 16.11.2026: Jahre 2027/2028; im HTML Schalter „Rabatte gesamt/differenziert“ – differenziert vier Ebenen, Hierarchieaufbau mit Füllknoten bei Bruttoumsatz und Skonti; Druckfassung „gesamt“"
    ],
    "alt": "Hierarchieaufbau aus der Kontendimension ohne Parent-Child-Hierarchie: Ebene 1 NettoNetto-Umsatz (3.714 €) mit den Knoten der Ebene 2 Skonti (−76 €) und Nettoumsatz (3.790 €); unter Nettoumsatz stehen die Werte Rabatte (−210 €) und Bruttoumsatz (4.000 €). Unter dem Knoten Skonti steht der Wert Skonti noch einmal mit demselben Betrag, weil die feste Ebenenstruktur eine Zwischenebene verlangt; diese Wiederholung ist markiert. Daneben stehen Faktentabelle und Kontendimension als Quelle.",
    "revisionen": [
@@ -1883,6 +1903,14 @@
      ],
      "ergebnis": "Rückfrage",
      "text": "Rückfrage: Laut Nachtrag ist „eigentlich nur Abb. 5.26 gemeint“. Soll die Erweiterung mit/ohne Rabattdifferenzierung also in Abb. 5.26 (Kontendimension ohne Parent-Child-Hierarchie) statt in Abb. 5.27 umgesetzt werden? Welche Abbildung entfällt im Buch: Wird Abb. 5.27 (Hierarchieaufbau) in Abb. 5.26 aufgenommen und gestrichen, oder umgekehrt? Abb. 5.26 steht derzeit nicht auf „Revision“."
+    },
+    {
+     "datum": "16.11.2026",
+     "wunsch": [
+      "16.11.2026 DS: Rückfrage: Laut Nachtrag ist „eigentlich nur Abb. 5.26 gemeint“. Soll die Erweiterung mit/ohne Rabattdifferenzierung also in Abb. 5.26 (Kontendimension ohne Parent-Child-Hierarchie) statt in Abb. 5.27 umgesetzt werden? Nein, der Nachtrag war ein Fehler. Die Hierarchie gehört im Buch zu Abb. 5.27 (Hierarchieaufbau)."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Abb. 5.27 bleibt die Abbildung mit dem Hierarchieaufbau und hat im HTML-Beispiel jetzt den Schalter „Rabatte gesamt/differenziert“: Mit Differenzierung entsteht eine vierte Ebene, Bruttoumsatz und Skonti werden mit Füllknoten aufgefüllt (rot markiert); Jahre 2027/2028, Buchabbildung unverändert in der Variante „gesamt“. Offen ist noch, ob Abb. 5.26 im Buch entfällt, weil ihr Inhalt in Abb. 5.27 enthalten ist – bitte entscheiden; Abb. 5.26 wurde bis dahin nur bei den Jahren angepasst."
     }
    ]
   },

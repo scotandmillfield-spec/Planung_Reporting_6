@@ -32,7 +32,7 @@ with open(os.path.join(HIER, "kennzahlenmodell.csv"), "w", encoding="utf-8-sig",
 
 print("Zeilen:", len(zeilen))
 print("Summen:", dict(zip(g["KENNZAHLEN"], [sum(r[i] for r in zeilen) for i in range(3, 8)])))
-for jahr in (2018, 2019):
+for jahr in (2027, 2028):
     print(f"  {jahr}:", [sum(r[i] for r in zeilen if r[2] == jahr) for i in range(3, 8)])
 for p, _ in g["PRODUKTE"]:
     print(f"  Produkt {p}: NettoNetto-Umsatz", sum(r[7] for r in zeilen if r[0] == p))

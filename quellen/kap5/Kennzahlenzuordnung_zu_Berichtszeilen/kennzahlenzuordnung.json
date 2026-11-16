@@ -1,0 +1,156 @@
+{
+ "titel": "Kennzahlenzuordnung zu Berichtszeilen",
+ "produkte": [
+  [
+   3312,
+   "Ring"
+  ],
+  [
+   4512,
+   "Kette"
+  ]
+ ],
+ "kunden": [
+  [
+   471,
+   "MTS GmbH"
+  ],
+  [
+   236,
+   "SOT AG"
+  ]
+ ],
+ "zeit": [
+  [
+   2027,
+   2027
+  ],
+  [
+   2028,
+   2028
+  ]
+ ],
+ "zeilen": [
+  [
+   3312,
+   471,
+   2027,
+   {
+    "Bruttoumsatz": 1000,
+    "Rabatte": -100,
+    "Skonti": -18,
+    "Kundenrabatte": -60,
+    "Aktionsrabatte": -30,
+    "Sonderrabatte": -10
+   }
+  ],
+  [
+   4512,
+   236,
+   2027,
+   {
+    "Bruttoumsatz": 800,
+    "Rabatte": -60,
+    "Skonti": -15,
+    "Kundenrabatte": -36,
+    "Aktionsrabatte": -18,
+    "Sonderrabatte": -6
+   }
+  ],
+  [
+   3312,
+   471,
+   2028,
+   {
+    "Bruttoumsatz": 950,
+    "Rabatte": -50,
+    "Skonti": -18,
+    "Kundenrabatte": -30,
+    "Aktionsrabatte": -15,
+    "Sonderrabatte": -5
+   }
+  ],
+  [
+   4512,
+   471,
+   2027,
+   {
+    "Bruttoumsatz": 1250,
+    "Rabatte": 0,
+    "Skonti": -25,
+    "Kundenrabatte": 0,
+    "Aktionsrabatte": 0,
+    "Sonderrabatte": 0
+   }
+  ]
+ ],
+ "varianten": {
+  "gesamt": {
+   "kennzahlen": [
+    "Bruttoumsatz",
+    "Rabatte",
+    "Skonti"
+   ],
+   "zuordnung": [
+    [
+     "Bruttoumsatz",
+     [
+      "Bruttoumsatz"
+     ]
+    ],
+    [
+     "Nettoumsatz",
+     [
+      "Bruttoumsatz",
+      "Rabatte"
+     ]
+    ],
+    [
+     "NettoNetto-Umsatz",
+     [
+      "Bruttoumsatz",
+      "Rabatte",
+      "Skonti"
+     ]
+    ]
+   ]
+  },
+  "differenziert": {
+   "kennzahlen": [
+    "Bruttoumsatz",
+    "Kundenrabatte",
+    "Aktionsrabatte",
+    "Sonderrabatte",
+    "Skonti"
+   ],
+   "zuordnung": [
+    [
+     "Bruttoumsatz",
+     [
+      "Bruttoumsatz"
+     ]
+    ],
+    [
+     "Nettoumsatz",
+     [
+      "Bruttoumsatz",
+      "Kundenrabatte",
+      "Aktionsrabatte",
+      "Sonderrabatte"
+     ]
+    ],
+    [
+     "NettoNetto-Umsatz",
+     [
+      "Bruttoumsatz",
+      "Kundenrabatte",
+      "Aktionsrabatte",
+      "Sonderrabatte",
+      "Skonti"
+     ]
+    ]
+   ]
+  }
+ },
+ "csv": "Variante Rabatte;Produkt-ID;Produkt-Bez.;Kunde-ID;Kunde-Bez.;Jahr;Kennzahl;Betrag (€);zugeordnet zu Berichtszeilen\ngesamt;3312;Ring;471;MTS GmbH;2027;Bruttoumsatz;1000;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ngesamt;3312;Ring;471;MTS GmbH;2027;Rabatte;-100;Nettoumsatz, NettoNetto-Umsatz\ngesamt;3312;Ring;471;MTS GmbH;2027;Skonti;-18;NettoNetto-Umsatz\ngesamt;4512;Kette;236;SOT AG;2027;Bruttoumsatz;800;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ngesamt;4512;Kette;236;SOT AG;2027;Rabatte;-60;Nettoumsatz, NettoNetto-Umsatz\ngesamt;4512;Kette;236;SOT AG;2027;Skonti;-15;NettoNetto-Umsatz\ngesamt;3312;Ring;471;MTS GmbH;2028;Bruttoumsatz;950;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ngesamt;3312;Ring;471;MTS GmbH;2028;Rabatte;-50;Nettoumsatz, NettoNetto-Umsatz\ngesamt;3312;Ring;471;MTS GmbH;2028;Skonti;-18;NettoNetto-Umsatz\ngesamt;4512;Kette;471;MTS GmbH;2027;Bruttoumsatz;1250;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ngesamt;4512;Kette;471;MTS GmbH;2027;Rabatte;0;Nettoumsatz, NettoNetto-Umsatz\ngesamt;4512;Kette;471;MTS GmbH;2027;Skonti;-25;NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2027;Bruttoumsatz;1000;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2027;Kundenrabatte;-60;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2027;Aktionsrabatte;-30;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2027;Sonderrabatte;-10;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2027;Skonti;-18;NettoNetto-Umsatz\ndifferenziert;4512;Kette;236;SOT AG;2027;Bruttoumsatz;800;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;236;SOT AG;2027;Kundenrabatte;-36;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;236;SOT AG;2027;Aktionsrabatte;-18;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;236;SOT AG;2027;Sonderrabatte;-6;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;236;SOT AG;2027;Skonti;-15;NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2028;Bruttoumsatz;950;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2028;Kundenrabatte;-30;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2028;Aktionsrabatte;-15;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2028;Sonderrabatte;-5;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;3312;Ring;471;MTS GmbH;2028;Skonti;-18;NettoNetto-Umsatz\ndifferenziert;4512;Kette;471;MTS GmbH;2027;Bruttoumsatz;1250;Bruttoumsatz, Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;471;MTS GmbH;2027;Kundenrabatte;0;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;471;MTS GmbH;2027;Aktionsrabatte;0;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;471;MTS GmbH;2027;Sonderrabatte;0;Nettoumsatz, NettoNetto-Umsatz\ndifferenziert;4512;Kette;471;MTS GmbH;2027;Skonti;-25;NettoNetto-Umsatz\n"
+}

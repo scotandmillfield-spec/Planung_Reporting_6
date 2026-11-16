@@ -1051,6 +1051,45 @@
    "kommentar": "Master Dataset und Batch Views sind getauscht wie bei Marz: Das Master Dataset liegt jetzt im Batch Layer, die drei Batch Views im Serving Layer.",
    "auftrag": "4675f0e79ab2",
    "zeit": "2026-11-14T11:00"
+  },
+  {
+   "id": "2026-11-16-abb-5-24-1",
+   "schluessel": "abb-5-24",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Abb. 5.24 ist jetzt ein Bild wie Abb. 5.25 statt der Texttabelle: oben die Faktentabelle des Kennzahlenmodells (Werte wie Abb. 5.23/5.25, Jahre 2027/2028), darunter die Zuordnung der Kennzahlen zu den drei Berichtszeilen Bruttoumsatz, Nettoumsatz und NettoNetto-Umsatz mit Beträgen (4.000 / 3.790 / 3.714 €). Im HTML-Beispiel schaltet „Rabatte“ zwischen drei Kennzahlen ohne und fünf Kennzahlen mit Rabattdifferenzierung (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte). Die Buchabbildung zeigt die Variante mit Differenzierung – bitte melden, falls das Buch die Variante ohne zeigen soll.",
+   "auftrag": "eab81dc46326",
+   "zeit": "2026-11-16T11:09"
+  },
+  {
+   "id": "2026-11-16-abb-5-25-1",
+   "schluessel": "abb-5-25",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Jahre 2018/2019 in Abb. 5.23, 5.25, 5.26 und 5.27 auf 2027/2028 geändert. Im HTML-Beispiel der Reihe 5.25–5.27 gibt es den neuen Schalter „Rabatte gesamt/differenziert“: Konto 8050 Rabatte wird zum Knoten über 8051 Kunden-, 8052 Aktions- und 8053 Sonderrabatte mit denselben Werten wie Abb. 5.24 (Buchungen mit 0 € entfallen in dieser Variante). Die Buchabbildung zeigt weiter die Variante „gesamt“; die Beschriftung der Ansichtsknöpfe ist kürzer, damit der neue Schalter in die Zeile passt.",
+   "auftrag": "1c5c2f7ff359",
+   "zeit": "2026-11-16T11:09"
+  },
+  {
+   "id": "2026-11-16-abb-5-27-1",
+   "schluessel": "abb-5-27",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Abb. 5.27 bleibt die Abbildung mit dem Hierarchieaufbau und hat im HTML-Beispiel jetzt den Schalter „Rabatte gesamt/differenziert“: Mit Differenzierung entsteht eine vierte Ebene, Bruttoumsatz und Skonti werden mit Füllknoten aufgefüllt (rot markiert); Jahre 2027/2028, Buchabbildung unverändert in der Variante „gesamt“. Offen ist noch, ob Abb. 5.26 im Buch entfällt, weil ihr Inhalt in Abb. 5.27 enthalten ist – bitte entscheiden; Abb. 5.26 wurde bis dahin nur bei den Jahren angepasst.",
+   "auftrag": "a6b89d29322f",
+   "zeit": "2026-11-16T11:09"
+  },
+  {
+   "id": "2026-11-16-abb-5-23-vermerk-1",
+   "schluessel": "abb-5-23",
+   "kommentar": "Jahre 2018/2019 auf 2027/2028 geändert (Auftrag zu Abb. 5.25, Reihe 5.23–5.27).",
+   "zeit": "2026-11-16T11:09"
+  },
+  {
+   "id": "2026-11-16-abb-5-26-vermerk-1",
+   "schluessel": "abb-5-26",
+   "kommentar": "Jahre 2018/2019 auf 2027/2028 geändert (Auftrag zu Abb. 5.25, Reihe 5.23–5.27).",
+   "zeit": "2026-11-16T11:09"
   }
  ],
  "neue_zeilen": [

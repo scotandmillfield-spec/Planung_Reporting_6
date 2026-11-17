@@ -1834,6 +1834,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "Abb. 5.24 ist jetzt ein Bild wie Abb. 5.25 statt der Texttabelle: oben die Faktentabelle des Kennzahlenmodells (Werte wie Abb. 5.23/5.25, Jahre 2027/2028), darunter die Zuordnung der Kennzahlen zu den drei Berichtszeilen Bruttoumsatz, Nettoumsatz und NettoNetto-Umsatz mit Beträgen (4.000 / 3.790 / 3.714 €). Im HTML-Beispiel schaltet „Rabatte“ zwischen drei Kennzahlen ohne und fünf Kennzahlen mit Rabattdifferenzierung (z. B. −100 = −60 Kunden-, −30 Aktions-, −10 Sonderrabatte). Die Buchabbildung zeigt die Variante mit Differenzierung – bitte melden, falls das Buch die Variante ohne zeigen soll."
+    },
+    {
+     "datum": "17.11.2026",
+     "wunsch": [
+      "17.11.2026 DS: Bitte die Kennzahlen unten im Bericht als Zeilen abziehen und nicht als Spalten. Die Zeilenanzahl erhöht sich mit Differenzierung."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Bericht unten in Abb. 5.24 ist jetzt eine Staffel: Die Kennzahlen stehen als Zeilen untereinander und werden abgezogen (Bruttoumsatz, Kunden-, Aktions- und Sonderrabatte, = Nettoumsatz, Skonti, = NettoNetto-Umsatz) statt als Spalten nebeneinander. Mit Rabattdifferenzierung hat der Bericht sieben Zeilen, ohne fünf (im HTML-Beispiel umschaltbar); die Buchabbildung zeigt weiter die Variante mit Differenzierung und ist dadurch etwas höher. Die Faktentabelle oben und alle Werte sind unverändert."
     }
    ]
   },

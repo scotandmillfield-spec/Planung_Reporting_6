@@ -634,19 +634,20 @@ const DK = (() => {
 </script>
 <script>
 /* Einzelvisual „Kennzahlenzuordnung zu Berichtszeilen“ (Abb. 5.24) – Revision 16.11.2026: Bild wie Abb. 5.25 statt
-   LaTeX-Tabelle. Seite 727 x 480 px = 110 x 72,6 mm.
+   LaTeX-Tabelle. Revision 17.11.2026: Bericht unten als Staffel – die Kennzahlen stehen als Zeilen untereinander
+   (nicht mehr als Spalten), mit Rabattdifferenzierung sieben statt fünf Zeilen. Seite 727 x 552 px = 110 x 83,6 mm.
    Daten: kennzahlenzuordnung.json (daten_kennzahlenzuordnung.py) – vier Zeilen des Kennzahlenmodells mit den Werten
    aus Abb. 5.23/5.25 (Jahre 2027/2028) und drei Berichtszeilen. Schalter „Rabatte“: ohne Differenzierung drei
    Kennzahlen (Bruttoumsatz, Rabatte, Skonti), mit Differenzierung fünf (Rabatte aufgeteilt 60 : 30 : 10 in Kunden-,
-   Aktions- und Sonderrabatte). Oben die Faktentabelle mit einer Spalte je Kennzahl und Summenzeile, darunter die
-   Zuordnung: je Berichtszeile steht unter jeder zugeordneten Kennzahl ihr Betrag, rechts die Summe = Betrag der
-   Berichtszeile. Die Kennzahlspalten beider Tabellen stehen genau untereinander.
+   Aktions- und Sonderrabatte). Oben die Faktentabelle mit einer Spalte je Kennzahl und Summenzeile, darunter der
+   Bericht als Staffel: jede Kennzahl ist eine Zeile mit ihrem Betrag, die Berichtszeilen Nettoumsatz und
+   NettoNetto-Umsatz sind Zwischensummen („=“) aller Kennzahlen darüber.
    Klick auf eine Zeile der Faktentabelle rechnet nur diese Zeile; Klick auf eine Berichtszeile hebt sie hervor und
    rechnet sie in der Aussage vor. Esc hebt auf. Druckfassung: mit Rabattdifferenzierung. */
 (() => {
   "use strict";
   const { zahl, el, tw } = DK;
-  const B = 695, H = 480;
+  const B = 695, H = 552;
   const PN = new Map(DATA.produkte), KN = new Map(DATA.kunden);
   const Z = DATA.zeilen.map(([p, k, t, w], i) => ({ i, p, k, t, w }));
   const eur = v => zahl(v);
@@ -680,8 +681,8 @@ const DK = (() => {
   DK.haarlinie(116);
   const bFakten = DK.box("z-fakten", 16, 126, B, 162);
   DK.haarlinie(296);
-  const bZuord = DK.box("z-zuordnung", 16, 306, B, 124);
-  const bLegende = DK.box("legende", 16, 436, B, 40);
+  const bZuord = DK.box("z-zuordnung", 16, 306, B, 196);
+  const bLegende = DK.box("legende", 16, 508, B, 40);
   DK.el("style", {}, document.head, `
     .zl { font-weight: bold; height: 20px; line-height: 18px; white-space: nowrap; }
     .kt { border-collapse: collapse; table-layout: fixed; font-size: 14px; }
@@ -696,7 +697,9 @@ const DK = (() => {
     .kt tbody tr.dk-zeile:hover td { background: var(--flaeche); }
     .kt tr.summe td { font-weight: bold; border-top: 1px solid var(--ac); border-bottom: none; }
     .kt .fett { font-weight: bold; }
-    .kt .grp { border-left: 1px solid #D9D9D9; }
+    .kt tr.stufe td { border-top: 1px solid var(--ac); }
+    .kt td.ein { padding-left: 18px !important; }
+    .kt td.neben { color: var(--muted); }
     #legende { color: var(--muted); line-height: 20px; }`);
 
   /* ---------- Tooltip ---------- */
@@ -737,7 +740,7 @@ const DK = (() => {
     });
     const tb = el("tbody", {}, t);
     o.zeilen.forEach(z => {
-      const tr = el("tr", { class: (z.summe ? "summe" : "dk-zeile") + (z.blass ? " dk-blass" : "") + (z.cls ? " " + z.cls : "") }, tb);
+      const tr = el("tr", { class: (z.summe ? "summe" : z.klick ? "dk-zeile" : "") + (z.blass ? " dk-blass" : "") + (z.cls ? " " + z.cls : "") }, tb);
       z.zellen.forEach((c, j) => {
         const x = typeof c === "object" && c !== null ? c : { text: c };
         el("td", { class: (o.spalten[j].re ? "re " : "") + (x.cls || ""), ...(x.id ? { id: x.id } : {}) }, tr, x.text);
@@ -774,24 +777,39 @@ const DK = (() => {
     const ff = gefiltert(), kz = KZ(), w = breiten(), zu = ZU(), a = S.auswahl;
     el("div", { class: "zl" }, bZuord, a && a.typ === "zeile"
       ? `Zuordnung zu Berichtszeilen – nur Zeile ${a.i + 1} (${zeileText(Z[a.i])})` : "Zuordnung zu Berichtszeilen");
+    /* Staffel: je Berichtszeile zuerst die neu hinzukommenden Kennzahlen als Zeilen, dann die Zwischensumme.
+       Bruttoumsatz ist Kennzahl und Berichtszeile zugleich (eine Zeile). */
+    const zeilen = [];
+    let bisher = [];
+    [...zu.keys()].forEach((b, n) => {
+      const l = zu.get(b), v = l.reduce((s, k) => s + summe(ff, k), 0);
+      const blassB = a && a.typ === "bz" && a.b !== b;
+      const tipB = () => [b, `${anzK(l.length)}: ${l.join(" + ")}`,
+        `${l.map(k => `${eur(summe(ff, k))} €`).join(" + ").replace(/\+ −/g, "− ")} = ${eur(v)} €`,
+        "Klick hebt die Berichtszeile hervor und rechnet sie vor, Esc hebt auf"];
+      const neu = l.filter(k => !bisher.includes(k));
+      if (neu.length === 1 && neu[0] === b) {
+        zeilen.push({ zellen: [{ text: b, cls: "fett" }, { text: "Kennzahl = Berichtszeile", cls: "neben" }, { text: eur(v), cls: "fett" }],
+                      blass: blassB, klick: () => waehlen({ typ: "bz", b }), tip: tipB });
+      } else {
+        neu.forEach(k => zeilen.push({
+          zellen: [{ text: k, cls: "ein" }, { text: "Kennzahl", cls: "neben" }, eur(summe(ff, k))],
+          blass: a && a.typ === "bz" && !zu.get(a.b).includes(k),
+          tip: () => [k, `${eur(summe(ff, k))} €`,
+            `geht ein in: ${und([...zu.keys()].filter(x => zu.get(x).includes(k)))}`] }));
+        zeilen.push({ cls: "stufe", zellen: [{ text: "= " + b, cls: "fett", id: n === 1 ? "m-netto" : undefined },
+                      { text: `Summe der ${l.length} Kennzahlen darüber`, cls: "neben" }, { text: eur(v), cls: "fett" }],
+                      blass: blassB, klick: () => waehlen({ typ: "bz", b }), tip: tipB });
+      }
+      bisher = l;
+    });
     tabelle(bZuord, {
       id: "t-zuordnung",
-      gruppe: [["", 1], ["zugeordnete Kennzahlen", kz.length, true], ["", 1]],
-      spalten: [{ titel: "Berichtszeile", breite: DIMBREITE, id: "sp-berichtszeile" },
-                ...kz.map((k, j) => ({ titel: k, breite: w[j], re: true })), { titel: "Betrag", breite: BETRAG, re: true, id: "sp-betrag" }],
-      zeilen: [...zu.keys()].map((b, n) => {
-        const l = zu.get(b), v = l.reduce((s, k) => s + summe(ff, k), 0);
-        return {
-          zellen: [{ text: b, cls: "fett", id: n === 1 ? "m-netto" : undefined },
-                   ...kz.map(k => (l.includes(k) ? eur(summe(ff, k)) : "")), { text: eur(v), cls: "fett" }],
-          blass: a && a.typ === "bz" && a.b !== b,
-          klick: () => waehlen({ typ: "bz", b }),
-          tip: () => [b, `${anzK(l.length)}: ${l.join(" + ")}`,
-            `${l.map(k => `${eur(summe(ff, k))} €`).join(" + ").replace(/\+ −/g, "− ")} = ${eur(v)} €`,
-            "Klick hebt die Berichtszeile hervor und rechnet sie vor, Esc hebt auf"],
-        };
-      }),
+      spalten: [{ titel: "Berichtszeile", breite: 230, id: "sp-berichtszeile" },
+                { titel: "Zuordnung", breite: 250 }, { titel: "Betrag", breite: 90, re: true, id: "sp-betrag" }],
+      zeilen,
     });
+    bLegende.style.top = 306 + 20 + 22 + zeilen.length * 21 + 13 + "px";
   }
   const anzK = n => `${n} ${n === 1 ? "Kennzahl" : "Kennzahlen"}`;
 
@@ -823,8 +841,8 @@ const DK = (() => {
     bLegende.textContent = "";
     const z1 = el("div", {}, bLegende);
     el("span", { style: "text-decoration:underline;text-underline-offset:2px;color:var(--text)" }, z1, "unterstrichen");
-    z1.appendChild(document.createTextNode(": Schlüssel   ·   Betrag unter einer Kennzahl: der Berichtszeile zugeordnet"));
-    el("div", {}, bLegende, "Betrag der Berichtszeile = Summe der zugeordneten Kennzahlen · Rabatte und Skonti als negative Werte");
+    z1.appendChild(document.createTextNode(": Schlüssel   ·   eingerückt: Kennzahl als Zeile im Bericht   ·   „=“: Zwischensumme"));
+    el("div", {}, bLegende, "Betrag der Berichtszeile = Summe der Kennzahlen darüber · Rabatte und Skonti als negative Werte");
   }
 
   /* ---------- Zeichnen ---------- */
@@ -849,12 +867,12 @@ const DK = (() => {
           text: "Unter dem Titel steht, was die Zuordnung leistet: Mit Rabattdifferenzierung summiert die Berichtszeile Nettoumsatz vier Kennzahlen – Bruttoumsatz und drei Rabattarten – und ergibt wie ohne Differenzierung 3.790 €. Die Aussage wird aus den Daten berechnet; das Original war eine reine Texttabelle ohne Werte." },
         { nr: 2, ziel: "schalter-rabatte", versatz: [28, 0], regel: "STRUCTURE – Varianten vergleichen", titel: "Ohne und mit Rabattdifferenzierung",
           text: "Der Schalter wechselt zwischen drei Kennzahlen (Bruttoumsatz, Rabatte, Skonti) und fünf Kennzahlen (Rabatte aufgeteilt in Kunden-, Aktions- und Sonderrabatte, 60 : 30 : 10). Die drei Berichtszeilen bleiben gleich, nur ihre Zuordnung ändert sich. Das Original zeigte die beiden Varianten als zwei Tabellen untereinander. Die Druckfassung zeigt die Variante mit Differenzierung." },
-        { nr: 3, ziel: "sp-rabatt", versatz: [0, -22], regel: "EXPRESS – Struktur zeigen", titel: "Spalten untereinander",
-          text: "Jede Kennzahl hat in der Faktentabelle und in der Zuordnung dieselbe Spalte. Ein Betrag unter einer Kennzahl heißt: Sie gehört zur Berichtszeile; leere Zellen gehören nicht dazu. So ist die Zuordnung ohne Pfeile oder Pluszeichen ablesbar." },
+        { nr: 3, ziel: "sp-rabatt", versatz: [0, -22], regel: "EXPRESS – Struktur zeigen", titel: "Spalten werden Zeilen",
+          text: "In der Faktentabelle ist jede Kennzahl eine Spalte, im Bericht darunter eine Zeile: Die Kennzahlen werden untereinander abgezogen, die Berichtszeilen Nettoumsatz und NettoNetto-Umsatz sind Zwischensummen aller Kennzahlen darüber. Mit Rabattdifferenzierung hat der Bericht deshalb sieben statt fünf Zeilen." },
         { nr: 4, ziel: "z-fakten", versatz: [0, 0], regel: "UNIFY – Semantische Notation", titel: "Wie Abb. 5.23 und 5.25",
           text: "Schlüssel unterstrichen, Rollenzeile Dim.-ID und Kennzahl, Summenzeile fett mit Linie – wie im Kennzahlenmodell (Abb. 5.23). Werte, Produkte, Kunden und Jahre stammen aus demselben Datensatz wie Abb. 5.23 und die Serie Kontenmodell (Abb. 5.25–5.27); die Rabattaufteilung ist dieselbe wie dort." },
         { nr: 5, ziel: "sp-betrag", versatz: [0, -22], regel: "CHECK – Visuelle Integrität", titel: "Nachrechenbar",
-          text: "Der Betrag einer Berichtszeile ist die Summe der Beträge links daneben, und jeder dieser Beträge steht als Summe direkt darüber in der Faktentabelle: 4.000 − 126 − 63 − 21 = 3.790 € Nettoumsatz, dazu −76 € Skonti = 3.714 € NettoNetto-Umsatz." },
+          text: "Der Betrag einer Berichtszeile ist die Summe der Beträge darüber, und jeder dieser Beträge steht als Spaltensumme in der Faktentabelle: 4.000 − 126 − 63 − 21 = 3.790 € Nettoumsatz, dazu −76 € Skonti = 3.714 € NettoNetto-Umsatz." },
         { nr: 6, ziel: "legende", versatz: [0, 6], regel: "SIMPLIFY – Einheitliche Zahlen", titel: "Zahlenformat, kein Gitter",
           text: "Beträge mit Tausenderpunkt und echtem Minus rechtsbündig, die Einheit einmal im Titel; Haarlinien statt Gitternetz. Die drei Umsatzstufen stehen fett wie im Original." },
         { nr: 7, ziel: "z-zuordnung", versatz: [-30, 0], regel: "CONDENSE – Details im Tooltip", titel: "Rechnung per Klick",
@@ -867,9 +885,9 @@ const DK = (() => {
         felder: "Zeilen: Kennzahlen[Produkt], Kennzahlen[Kunde], Kennzahlen[Jahr] (tabellarisches Layout); Spalten: Kennzahlen[Kennzahl] nach Sortierspalte; Werte: Measure Betrag = SUM(Kennzahlen[Betrag])",
         format: "Gesamtsumme der Zeilen an (fett, Linie oben); Zwischensummen aus; Kopf mit Unterstrich #3A3F44; Format #.##0 mit Minuszeichen" },
       { id: "B", ziel: "z-zuordnung", versatz: [0, 0], titel: "Zuordnung zu Berichtszeilen", visual: "Matrix",
-        felder: "Zeilen: Zuordnung[Berichtszeile] nach Sortierspalte; Spalten: Kennzahlen[Kennzahl]; Werte: Measure Betrag über die Brückentabelle (Kreuzfilter in beide Richtungen zwischen Zuordnung und Kennzahl)",
-        format: "Gesamtsumme der Spalten an und als „Betrag“ beschriftet, fett; Spaltenbreiten wie in A, damit die Kennzahlen untereinander stehen",
-        hinweis: "Nicht zugeordnete Kombinationen bleiben leer, weil die Brückentabelle sie herausfiltert – genau das Bild der Zuordnung." },
+        felder: "Zeilen: Berichtsstruktur[Zeile] nach Sortierspalte (Kennzahlen und Zwischensummen in Staffelfolge); Werte: Measure Betrag Bericht – für Kennzahlzeilen der Betrag der Kennzahl, für Zwischensummen die Summe über die Brückentabelle Zuordnung (Berichtszeile, Kennzahl)",
+        format: "Zwischensummen fett mit Linie oben (bedingte Formatierung über eine Spalte Zeilenart); Kennzahlzeilen eingerückt; Gesamtsumme aus",
+        hinweis: "Die Berichtsstruktur hat je Variante eigene Zeilen: fünf ohne, sieben mit Rabattdifferenzierung." },
       { id: "C", ziel: "schalter-rabatte", versatz: [28, 0], titel: "Rabatte", visual: "Datenschnitt (Kacheln)",
         felder: "Kennzahlen[Variante Rabatte]: ohne / mit Differenzierung, einfache Auswahl",
         format: "ausgewählt #3A3F44 mit weißer Schrift, sonst weiß mit Rahmen #9A9A9A" },
@@ -884,8 +902,14 @@ const DK = (() => {
       return [
         { titel: `Faktentabelle (Betrag in €, Rabatte ${S.rabatte === "gesamt" ? "ohne" : "mit"} Differenzierung)`,
           kopf: ["Produkt", "Kunde", "Zeit", ...kz], zeilen: Z.map(z => [String(z.p), String(z.k), String(z.t), ...kz.map(k => eur(z.w[k]))]) },
-        { titel: "Zuordnung zu Berichtszeilen (Betrag in €)", kopf: ["Berichtszeile", "zugeordnete Kennzahlen", "Betrag"],
-          zeilen: [...zu.entries()].map(([b, l]) => [b, l.join(" + "), eur(l.reduce((s, k) => s + summe(ff, k), 0))]) },
+        { titel: "Bericht (Betrag in €)", kopf: ["Zeile", "Zuordnung", "Betrag"],
+          zeilen: (() => { const out = []; let bisher = [];
+            [...zu.entries()].forEach(([b, l]) => {
+              const neu = l.filter(k => !bisher.includes(k)), v = l.reduce((s, k) => s + summe(ff, k), 0);
+              if (neu.length === 1 && neu[0] === b) out.push([b, "Kennzahl = Berichtszeile", eur(v)]);
+              else { neu.forEach(k => out.push([k, "Kennzahl", eur(summe(ff, k))])); out.push(["= " + b, l.join(" + "), eur(v)]); }
+              bisher = l; });
+            return out; })() },
       ];
     },
   });

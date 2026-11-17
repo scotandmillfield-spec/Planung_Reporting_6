@@ -1090,6 +1090,15 @@
    "schluessel": "abb-5-26",
    "kommentar": "Jahre 2018/2019 auf 2027/2028 geändert (Auftrag zu Abb. 5.25, Reihe 5.23–5.27).",
    "zeit": "2026-11-16T11:09"
+  },
+  {
+   "id": "2026-11-17-abb-5-24-1",
+   "schluessel": "abb-5-24",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Bericht unten in Abb. 5.24 ist jetzt eine Staffel: Die Kennzahlen stehen als Zeilen untereinander und werden abgezogen (Bruttoumsatz, Kunden-, Aktions- und Sonderrabatte, = Nettoumsatz, Skonti, = NettoNetto-Umsatz) statt als Spalten nebeneinander. Mit Rabattdifferenzierung hat der Bericht sieben Zeilen, ohne fünf (im HTML-Beispiel umschaltbar); die Buchabbildung zeigt weiter die Variante mit Differenzierung und ist dadurch etwas höher. Die Faktentabelle oben und alle Werte sind unverändert.",
+   "auftrag": "730e05c36b23",
+   "zeit": "2026-11-17T10:58"
   }
  ],
  "neue_zeilen": [

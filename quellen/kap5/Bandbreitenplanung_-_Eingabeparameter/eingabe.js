@@ -5,7 +5,11 @@
    Dreipunktschätzung Min / Wahrscheinlich / Max je Treiber (Grundlage für Worst Case, Plan, Best Case und die
    Monte-Carlo-Simulation in Abb. 5.71); Spalte „Ø Jahr“ = Spalte „Worst“ des Originals (Mittel der Monate).
    Ergänzt: Wirkung jeder Bandbreite auf den DB Business Unit im gewählten Zeitraum (Tornado) und die Bandbreite des
-   gewählten Treibers je Monat. Klick auf einen Treiber (Zeile, Balken, Diagramm) hebt ihn hervor, Esc hebt auf. */
+   gewählten Treibers je Monat. Klick auf einen Treiber (Zeile, Balken, Diagramm) hebt ihn hervor, Esc hebt auf.
+   Revision DS 24.11.2026: In der HTML-Fassung sind die Monatswerte der Prämissen als Planung editierbar (Klick auf
+   die Zelle, Enter übernimmt, Esc verwirft; Prüfung Min ≤ Wahrscheinlich ≤ Max). Botschaften, Ø Jahr, Tornado,
+   Bandbreite und CSV rechnen mit den geänderten Werten; „Zurücksetzen“ stellt die Ausgangswerte wieder her.
+   Die Druckfassung (PNG) zeigt unverändert die Ausgangswerte. */
 (() => {
   "use strict";
   const { zahl, delta, NBSP, el, sv, tw, FARBE } = DK;
@@ -42,7 +46,20 @@
     #v-praemissen .dk-matrix td:first-child, #v-praemissen .dk-matrix th:first-child { padding-left: 0; font-weight: bold; }
     #v-praemissen .dk-matrix td:nth-child(4), #v-praemissen .dk-matrix th:nth-child(4) { border-right: 1px solid #D9D9D9; }
     #v-praemissen .dk-matrix td:nth-child(3) { color: var(--muted); }
-    .bb-halo { paint-order: stroke; stroke: #FFFFFF; stroke-width: 3px; stroke-linejoin: round; }`);
+    .bb-halo { paint-order: stroke; stroke: #FFFFFF; stroke-width: 3px; stroke-linejoin: round; }
+    #v-praemissen .dk-matrix td.bb-edit { cursor: text; }
+    #v-praemissen .dk-matrix td.bb-edit:hover { box-shadow: inset 0 0 0 1px #9A9A9A; background: #FFFFFF; }
+    #v-praemissen .dk-matrix td.bb-geaendert { font-weight: bold; box-shadow: inset 0 -2px 0 var(--ac); }
+    #v-praemissen .dk-matrix td.bb-aktiv { padding: 0 1px; box-shadow: none; }
+    #v-praemissen .dk-matrix td.bb-aktiv input { width: 100%; height: 17px; font: inherit; font-size: 14px; text-align: right;
+      padding: 0 3px; border: 1px solid var(--ac); border-radius: 2px; background: #FFFFFF; color: var(--text); outline: none; }
+    #v-praemissen .dk-matrix td.bb-aktiv input.bb-fehler { border-color: var(--schlecht); }
+    .bb-planung { position: absolute; right: 0; top: -3px; display: flex; align-items: center; gap: 10px; color: var(--muted);
+      white-space: nowrap; }
+    .bb-planung button { font: inherit; font-size: 14px; height: 24px; padding: 0 10px; background: #FFFFFF; color: var(--text);
+      border: 1px solid #9A9A9A; border-radius: 3px; cursor: pointer; }
+    .bb-planung button[disabled] { color: #9A9A9A; cursor: default; }
+    .bb-planung span { line-height: 24px; }`);
 
   /* ---------- Berechnungen ---------- */
   const imFilter = z => { const [b, r, p, k] = D.zellen[z]; return b === S.bu && (S.region === null || r === S.region) &&
@@ -54,6 +71,12 @@
     return P;
   }
   const praem = (t, bu = S.bu) => D.praemissen[bu][t];              // [Min[12], Wahrscheinlich[12], Max[12]]
+  // Ausgangswerte: Die Planwerte des Datensatzes sind mit dem ursprünglichen „Wahrscheinlich“ gerechnet. Wird es in der
+  // HTML-Fassung geändert, wird der Plan der betroffenen Positionen entsprechend umgerechnet (Faktor planFaktor).
+  const PRAEM0 = JSON.parse(JSON.stringify(D.praemissen));
+  const planFaktor = (t, m, bu = S.bu) => (1 + D.praemissen[bu][t][1][m] / 100) / (1 + PRAEM0[bu][t][1][m] / 100);
+  const geaendert = (bu, t, kw, m) => D.praemissen[bu][t][kw][m] !== PRAEM0[bu][t][kw][m];
+  const irgendGeaendert = () => D.praemissen.some((b, bi) => b.some((tr, ti) => tr.some((k, kw) => k.some((_, m) => geaendert(bi, ti, kw, m)))));
   const kwWorst = t => (TR[t].richtung > 0 ? 0 : 2), kwBest = t => (TR[t].richtung > 0 ? 2 : 0);
   const mittel = a => a.reduce((s, x) => s + x, 0) / a.length;
   // Wirkung eines Treibers auf den DB Business Unit (Tsd. €), Kennwert kw statt „Wahrscheinlich“, Monate 0..bis
@@ -61,7 +84,7 @@
     const pr = praem(t);
     let s = 0;
     for (let m = 0; m <= bis; m++)
-      POS.forEach((p, j) => { if (p.tr === TR[t].key) s += p.vz * P[m][j] * ((1 + pr[kw][m] / 100) / (1 + pr[1][m] / 100) - 1); });
+      POS.forEach((p, j) => { if (p.tr === TR[t].key) s += p.vz * P[m][j] * planFaktor(t, m) * ((1 + pr[kw][m] / 100) / (1 + pr[1][m] / 100) - 1); });
     return s;
   }
   const betroffen = t => POS.filter(p => p.tr === TR[t].key);
@@ -109,6 +132,74 @@
   dd("Kundengruppe", D.kundengruppen, "kg", 120);
   DK.schnitt(bFilter, "Kumuliert bis", "dropdown", { optionen: MON.map((m, i) => [String(i), m + " " + J]), wert: String(S.bis), breite: 110,
     onChange: v => { S.bis = Number(v); zeichnen(); } });
+
+  /* ---------- Planung: Monatswerte in der HTML-Fassung editierbar ---------- */
+  let kZurueck = null, planHinweis = null, planLeiste = null;
+  const HINWEIS_STD = "Klick auf einen Monatswert ändert die Prämisse";
+  if (!DK.PRINT) {
+    const pl = planLeiste = el("div", { class: "bb-planung", id: "bb-planung" });      // steht rechts in der Titelzeile der Matrix
+    planHinweis = el("span", { id: "bb-hinweis" }, pl, HINWEIS_STD);
+    kZurueck = el("button", { type: "button", id: "bb-zurueck", disabled: "" }, pl, "Zurücksetzen");
+    kZurueck.addEventListener("click", () => { D.praemissen = JSON.parse(JSON.stringify(PRAEM0)); hinweis(HINWEIS_STD); zeichnen(); });
+  }
+  function hinweis(text, fehler) { if (planHinweis) { planHinweis.textContent = text; planHinweis.style.color = fehler ? "var(--schlecht)" : ""; } }
+  // Eingabe lesen: deutsches oder englisches Dezimalzeichen, Vorzeichen +, -, − oder ±, optional %
+  function lesen(text) {
+    const t = text.trim().replace(/[%\s]/g, "").replace("−", "-").replace("±", "").replace(",", ".");
+    if (!/^[+-]?\d+(\.\d+)?$/.test(t)) return null;
+    return Math.round(Number(t) * 10) / 10;
+  }
+  function pruefen(t, kw, m, v) {
+    if (v === null) return "Bitte eine Zahl eingeben, z. B. −2,5";
+    if (v < -50 || v > 100) return "Zulässig sind −50,0 bis +100,0 %";
+    const pr = praem(t), w = [pr[0][m], pr[1][m], pr[2][m]];
+    w[kw] = v;
+    if (w[0] > w[1] || w[1] > w[2]) return `${MLANG[m]}: Min ≤ Wahrscheinlich ≤ Max verletzt (${delta(w[0], 1)} / ${delta(w[1], 1)} / ${delta(w[2], 1)})`;
+    return null;
+  }
+  function bearbeiten(td, z, m) {
+    if (td.classList.contains("bb-aktiv")) return;
+    const alt = praem(z.t)[z.kwi][m];
+    td.textContent = ""; td.classList.add("bb-aktiv");
+    const inp = el("input", { type: "text", inputmode: "decimal", value: zahl(alt, 1),
+      "aria-label": `${TR[z.t].name}, ${KW[z.kwi]}, ${MLANG[m]} ${J}, Veränderung in %` }, td);
+    let fertig = false;
+    const ende = uebernehmen => {
+      if (fertig) return;
+      if (uebernehmen) {
+        const v = lesen(inp.value), f = pruefen(z.t, z.kwi, m, v);
+        if (f) { inp.classList.add("bb-fehler"); hinweis(f, true); inp.focus(); inp.select(); return; }
+        fertig = true;
+        praem(z.t)[z.kwi][m] = v;
+        hinweis(v === alt ? HINWEIS_STD : `${TR[z.t].name} ${KW[z.kwi]}, ${MLANG[m]}: ${delta(alt, 1)} → ${delta(v, 1)}${NBSP}%`);
+      } else { fertig = true; hinweis(HINWEIS_STD); }
+      zeichnen();
+    };
+    inp.addEventListener("click", e => e.stopPropagation());
+    inp.addEventListener("keydown", e => {
+      e.stopPropagation();
+      if (e.key === "Enter") { e.preventDefault(); ende(true); }
+      else if (e.key === "Escape") { e.preventDefault(); ende(false); }
+    });
+    inp.addEventListener("blur", () => { if (!fertig) { const v = lesen(inp.value); if (pruefen(z.t, z.kwi, m, v)) ende(false); else ende(true); } });
+    inp.focus(); inp.select();
+  }
+  function editierbar(tabelle, zeilen) {
+    if (DK.PRINT) return;
+    [...tabelle.querySelectorAll("tbody tr")].forEach((tr, i) => {
+      const z = zeilen[i];
+      MON.forEach((_, m) => {
+        const td = tr.children[4 + m];
+        td.classList.add("bb-edit");
+        td.tabIndex = 0;
+        td.title = "Klick ändert den Wert (Enter übernimmt, Esc verwirft)";
+        if (geaendert(S.bu, z.t, z.kwi, m)) { td.classList.add("bb-geaendert"); td.title = `Geändert, Ausgangswert ${delta(PRAEM0[S.bu][z.t][z.kwi][m], 1)}${NBSP}% – Klick ändert den Wert`; }
+        td.addEventListener("click", e => { e.stopPropagation(); bearbeiten(td, z, m); });
+        td.addEventListener("keydown", e => { if (e.target === td && (e.key === "Enter" || e.key === "F2")) { e.preventDefault(); bearbeiten(td, z, m); } });
+      });
+    });
+    if (kZurueck) kZurueck.disabled = !irgendGeaendert();
+  }
 
   /* ---------- Prämissenmatrix ---------- */
   const SPALTEN = [
@@ -243,7 +334,9 @@
       legende: [["#D4D4D4", "Bandbreite Min–Max"], ["#3A3F44", "Wahrscheinlich (Plan)"], [FARBE.gut, "günstig"], [FARBE.schlecht, "ungünstig"]] });
     let f = DK.visual(bMat, { titel: "Prämissen je Monat", einheit: "Veränderung in %", botschaft: botschaftMatrix() });
     const mt = el("div", { style: "position:absolute;left:0;right:0;top:0" }, f.flaeche);
-    DK.matrix(mt, { spalten: SPALTEN, zeilen: matrixZeilen(), auswahl: S.treiber === null ? null : TR[S.treiber].key,
+    if (planLeiste) bMat.appendChild(planLeiste);
+    const mz = matrixZeilen();
+    const tabelle = DK.matrix(mt, { spalten: SPALTEN, zeilen: mz, auswahl: S.treiber === null ? null : TR[S.treiber].key,
       onClick: key => setzeTreiber(TR.findIndex(t => t.key === key)),
       tooltip: z => {
         const pr = praem(z.t)[z.kwi];
@@ -252,9 +345,10 @@
         if (z.kwi === 1) z2.push("„Wahrscheinlich“ ist die Prämisse des Plans");
         else z2.push(`${z.werte.sz}: ${z.kwi === 0 ? "untere" : "obere"} Grenze der Dreiecksverteilung`);
         z2.push(`Wirkt auf ${betroffen(z.t).map(p => p.name).join(", ")}`);
-        z2.push("Klick hebt den Treiber hervor");
+        z2.push(DK.PRINT ? "Klick hebt den Treiber hervor" : "Klick auf Treiber, Kennwert oder Szenario hebt den Treiber hervor; Klick auf einen Monatswert ändert ihn");
         return z2;
       } });
+    editierbar(tabelle, mz);
     const T = tornado();
     f = DK.visual(bWirk, { titel: `Wirkung auf den DB Business Unit, ${zeitraum(S.bis).replace(" " + J, "")}`, einheit: "Mio. €", botschaft: botschaftTornado(T) });
     zeichneTornado(f, T);
@@ -274,7 +368,7 @@
       { nr: 3, ziel: "sp-m5", anker: "links", versatz: [28, 2], regel: "EXPRESS – Zahlen lesbar", titel: "Vorzeichen und Einheit einmal",
         text: "Veränderungen tragen ein echtes Vorzeichen (+5,0, −5,0, ±0,0), die Einheit % steht einmal im Titel. Das Original schrieb „-5,0%“ mit Bindestrich und Prozentzeichen in jede Zelle." },
       { nr: 4, ziel: "v-praemissen", anker: "links", versatz: [812, 26], regel: "UNIFY – Semantische Notation", titel: "Keine gelben Eingabezellen",
-        text: "Das Original hinterlegte alle Werte gelb (Eingabezellen der Tabellenkalkulation) und die Filter blau. Hier ist der Bericht neutral; Farbe tragen nur Wirkungen: Rot für ungünstig, Blaugrün für günstig. Erfasst werden die Prämissen in einer Planungsmaske." },
+        text: "Das Original hinterlegte alle Werte gelb (Eingabezellen der Tabellenkalkulation) und die Filter blau. Hier ist der Bericht neutral; Farbe tragen nur Wirkungen: Rot für ungünstig, Blaugrün für günstig. In der HTML-Fassung lassen sich die Monatswerte direkt ändern (Klick auf die Zelle); geänderte Werte sind fett und unterstrichen, eine Prüfung sichert Min ≤ Wahrscheinlich ≤ Max, „Zurücksetzen“ stellt die Ausgangswerte wieder her." },
       { nr: 5, ziel: "v-wirkung", anker: "links", versatz: [452, 4], regel: "CONDENSE – Wirkung statt nur Prozent", titel: "Was eine Bandbreite kostet",
         text: "Der Tornado rechnet jede Bandbreite in Mio. € Deckungsbeitrag um: Treiber einzeln auf Worst bzw. Best Case, die übrigen auf Plan, im gewählten Zeitraum. „Alle Treiber zusammen“ ist die Spanne zwischen Worst und Best Case in Abb. 5.71. Das Original zeigte nur Prozentsätze." },
       { nr: 6, ziel: "v-band", anker: "links", versatz: [470, 4], regel: "EXPRESS – Bandbreite als Fläche", titel: "Bandbreite je Monat",
@@ -289,7 +383,7 @@
       { id: "A", ziel: "v-praemissen", anker: "links", versatz: [347, 2], titel: "Prämissen je Monat", visual: "Matrix",
         felder: "Zeilen: Treiber, Kennwert (Sortierspalte 1–3), Szenario; Spalten: Monat; Werte: Prozent = AVERAGE(Prämissen[Prozent])",
         format: "Zeilenteilsummen aus, Spaltengesamtsumme „Ø Jahr“ als erste Spalte (Measure mit AVERAGE, Gesamtsumme links über die Spaltenposition); Zahlenformat +0,0;−0,0;±0,0",
-        hinweis: "Der Bericht zeigt die Prämissen; erfasst werden sie in einer Planungsmaske oder über eine Write-back-Lösung, nicht in der Matrix." },
+        hinweis: "Die Matrix von Power BI zeigt die Prämissen nur an. Die Eingabe je Zelle wie in dieser HTML-Fassung braucht eine Planungsmaske oder eine Write-back-Lösung; mit Standardmitteln lässt sich je Treiber ein Was-wäre-wenn-Parameter (Datenschnitt mit Schieberegler) nachbilden." },
       { id: "B", ziel: "v-wirkung", anker: "links", versatz: [452, 4], titel: "Wirkung auf den DB Business Unit", visual: "Gestapeltes Balkendiagramm (Tornado)",
         felder: "Y-Achse: Treiber; Werte: Wirkung Worst = SUMX(Plan; Plan[Vorzeichen] × Plan[Wert] × (DIVIDE(1 + [Prämisse Worst]; 1 + [Prämisse Wahrscheinlich]) − 1)) und Wirkung Best analog; Filter Monat ≤ Kumuliert bis",
         format: "Wirkung Worst #C62828, Wirkung Best #00806B, Überlappung 100 %, Datenbeschriftungen außen; X-Achse aus; Zeile „Alle Treiber zusammen“ als eigene Kategorie (Sortierspalte)" },

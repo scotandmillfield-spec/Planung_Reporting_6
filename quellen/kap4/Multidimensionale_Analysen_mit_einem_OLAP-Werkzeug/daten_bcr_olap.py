@@ -1,15 +1,15 @@
 """Daten für Abb. 4.23 – multidimensionale Analyse der Balanced Chance and Risk Card (BCR-Card).
 
-Würfel mit den Dimensionen Jahr › Quartal, Standort (Konzern › Dortmund, Hamburg, München), Produkt (A, B, C) und
+Würfel mit den Dimensionen Jahr › Quartal, Standort (Konzern › Dortmund, Hamburg, München), Business Unit (Antriebe, Steuerungen, Sensoren) und
 Kennzahlen (Perspektive › Chance/Risiko › Kennzahl). Gespeichert sind nur additive Basisgrößen je Quartal, Standort
-und Produkt; Quoten (ROI, ROS, WACC, Risikovorsorgequoten …) rechnet das Dashboard aus Zähler und Nenner, damit sie
+und Business Unit; Quoten (ROI, ROS, WACC, Risikovorsorgequoten …) rechnet das Dashboard aus Zähler und Nenner, damit sie
 auf jeder Ebene stimmen.
 Perspektive Finanzen: Konzern-Jahreswerte des Originals (2000–2002 → 2024–2026) – EVA, EBT, Cash Flow, Umsatz,
 Bruttoertrag, Risikovorsorgekosten exakt; die Nenner (Kapital, Kapitalkosten, Risikovorsorge intern/extern,
 Forderungsausfälle, Fremdkapital) sind so gewählt, dass WACC, ROI, ROS und die Risikoquoten auf zwei Nachkommastellen
 den Originalwerten entsprechen. Markt und Kunden, Prozesse, Potenziale: erfunden (im Original nicht sichtbar).
-Verteilung auf Quartal x Standort x Produkt ganzzahlig und summengetreu (größte Reste), Anteile je Größe leicht
-verschieden, damit Quoten zwischen Standorten und Produkten streuen.
+Verteilung auf Quartal x Standort x Business Unit ganzzahlig und summengetreu (größte Reste), Anteile je Größe leicht
+verschieden, damit Quoten zwischen Standorten und Business Units streuen.
 Ausgabe: bcr_olap.json und bcr_olap.csv.
 """
 import csv
@@ -20,7 +20,9 @@ import random
 HIER = os.path.dirname(os.path.abspath(__file__))
 JAHRE = [2024, 2025, 2026]
 STANDORTE = ["Dortmund", "Hamburg", "München"]
-PRODUKTE = ["Produkt A", "Produkt B", "Produkt C"]
+# Revision DS 24.11.2026: Business Units statt Produkte (Krankentage, Austritte usw. gibt es nicht je Produkt);
+# Namen wie in Abb. 5.70/5.71. Die Variablen heißen intern weiter „produkt“.
+PRODUKTE = ["Antriebe", "Steuerungen", "Sensoren"]
 PERSPEKTIVEN = ["Finanzen", "Markt und Kunden", "Prozesse", "Potenziale"]
 
 # Jahressummen je Basisgröße (Konzern); Finanzen aus dem Original
@@ -142,7 +144,7 @@ json.dump({"jahre": JAHRE, "standorte": STANDORTE, "produkte": PRODUKTE, "perspe
           open(os.path.join(HIER, "bcr_olap.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 with open(os.path.join(HIER, "bcr_olap.csv"), "w", newline="", encoding="utf-8-sig") as fh:
     w = csv.writer(fh, delimiter=";", lineterminator="\r\n")
-    w.writerow(["Jahr", "Quartal", "Standort", "Produkt"] + FELDER)
+    w.writerow(["Jahr", "Quartal", "Standort", "Business_Unit"] + FELDER)
     for z in saetze:
         w.writerow([JAHRE[z[0]], f"Q{z[1] + 1}", STANDORTE[z[2]], PRODUKTE[z[3]]] + z[4:])
 

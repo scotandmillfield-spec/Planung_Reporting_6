@@ -1,7 +1,8 @@
 """Abb. 5.68 – Arten von RPA-Lösungen."""
 # Muster: Pyramide mit drei Stufen wie im Original (unten einfache, in der Mitte erweiterte, oben intelligente
 # RPA-Systeme), Stufen als Freiformen mit weißer Fuge. Die einheitlich graue Pyramide des Originals wird zur
-# Helligkeitsleiter (hell → dunkel nach oben), die Spitze ist das Schlüsselelement (rot).
+# Helligkeitsleiter (hell → dunkel nach oben), die Spitze anthrazit mit weißer Schrift (Revision DS 24.11.2026:
+# dunkler Grauton statt Rot).
 # Der schräge Pfeil „Zunehmender Wert und Intelligenz“ entlang der linken Flanke → senkrechter Pfeil links mit
 # waagerechter Beschriftung oben (Pfeile orthogonal, gedrehte Beschriftung waagerecht).
 # Korrekturen: In der Spitze war die Beschreibung abgeschnitten („KI für Lernfähigkeit des“) – vollständig nach dem
@@ -29,7 +30,7 @@ def build(theme):
     # Stufen (Unterkanten in mm ab der Spitze): Spitze 23, Mitte und unten je 15,5
     hs = [23.0, (PH - 23.0 - 2 * FUGE) / 2, (PH - 23.0 - 2 * FUGE) / 2]
     stufen = [
-        ("Intelligente RPA-Systeme", "box_strong",
+        ("Intelligente RPA-Systeme", "header",
          [P("Intelligente", bold=True), P("RPA-Systeme", bold=True), P("KI für Lernfähigkeit"), P("des Systems")]),
         ("Erweiterte RPA-Systeme", "box_hi",
          [P("Erweiterte RPA-Systeme", bold=True), P("Selbständige Ausführungen von"),
@@ -49,7 +50,7 @@ def build(theme):
         f.poly(pts, fill=r.fill, line=r.line, lw=r.lw or 0.5, name=f"Stufe {name}")
         # Textblock: in der Spitze unten angesetzt (dort ist sie breit genug), sonst mittig
         th = len(paras) * ZL
-        ty = yb - 2.0 - th if role == "box_strong" else ya + (h - th) / 2
+        ty = yb - 2.0 - th if role == "header" else ya + (h - th) / 2
         tw = max(text_width_mm(p.text, 7.0, p.bold) for p in paras) + 1.6
         for k, p in enumerate(paras):                       # jede Zeile passt in die Pyramide
             breite = 2 * halb(ty + k * ZL) - 2.0

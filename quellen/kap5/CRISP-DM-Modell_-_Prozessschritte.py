@@ -4,6 +4,7 @@
 # Prozessschritte wie im Original.
 # Rückkopplungen des Originals als Pfeile im Innenring: 2 → 1 und 4 → 3 (Doppelpfeile 1 ⇄ 2, 3 ⇄ 4; die
 # Vorwärtsrichtung zeigen die Chevrons), 5 → 1 (Bogen von Evaluation zurück zu Business Understanding).
+# Revision DS 24.11.2026: zusätzlich Rücksprünge 5 → 2, 5 → 3 und 5 → 4; zwei Bahnen im Innenring, kreuzungsfrei.
 # Der äußere Kreis mit Drehpfeilen entfällt: Die geschlossene Chevron-Kette zeigt den Neubeginn nach Phase 6.
 # Entfernt: Listenüberschrift „CRISP DM Modell - Prozessschritte:“ (= Caption), Blau → Rollen.
 # Korrekturen: „CRISP DM“ → „CRISP-DM“, „Data“ → „Daten“, „Bewertung und Interpretation der Ereignisse“ →
@@ -13,9 +14,10 @@ import math
 from bookfig import Fig, P, arc_pts, polar, text_width_mm
 
 W = 110
-CX, CY = 30.6, 30.6
-R_OUT, R_IN, R_CORE = 30.0, 13.8, 7.4
-R_FB = 10.6                  # Radius der Rückkopplungspfeile
+CX, CY = 32.6, 32.6
+R_OUT, R_IN, R_CORE = 32.0, 16.0, 7.4
+R_FB = 13.9                  # äußere Bahn der Rückkopplungspfeile (benachbarte Phasen, 5 → 1)
+R_FB2 = 11.6                 # innere Bahn: lange Rücksprünge 5 → 2 und 5 → 3
 GAP_MM = 1.5
 TIP_MM = 4.0
 SEG = 60.0
@@ -34,8 +36,8 @@ SCHRITTE = ["Aufgabendefinition",
             "Auswahl und Anwendung von Methoden/Modellen",
             "Bewertung und Interpretation der Ergebnisse",
             "Anwendung der Ergebnisse"]
-XL = 65.0                    # Liste: Nummer
-XLT = 69.6                   # Liste: Text
+XL = 69.0                    # Liste: Nummer
+XLT = 73.6                   # Liste: Text
 
 
 def segment_polygon(c_ang):
@@ -51,9 +53,10 @@ def segment_polygon(c_ang):
     return pts
 
 
-def rueckpfeil(f, a_von, a_nach, name):
-    pts = [polar(CX, CY, R_IN - 0.2, a_von), polar(CX, CY, R_FB, a_von)]
-    pts += arc_pts(CX, CY, R_FB, a_von, a_nach, step=2.0)[1:]
+def rueckpfeil(f, a_von, a_nach, name, r=None):
+    r = r or R_FB
+    pts = [polar(CX, CY, R_IN - 0.2, a_von), polar(CX, CY, r, a_von)]
+    pts += arc_pts(CX, CY, r, a_von, a_nach, step=2.0)[1:]
     pts.append(polar(CX, CY, R_IN - 0.2, a_nach))
     f.arrow(pts, size="sm", name=name)
 
@@ -76,7 +79,11 @@ def build(theme):
     # Rückkopplungen im Innenring
     rueckpfeil(f, 72, 106, "Rückkopplung 2 → 1")
     rueckpfeil(f, -48, -14, "Rückkopplung 4 → 3")
-    rueckpfeil(f, 228, 134, "Rückkopplung 5 → 1")
+    rueckpfeil(f, 225, 134, "Rückkopplung 5 → 1")
+    # Revision DS 24.11.2026: Evaluation kann auch zu den Phasen 2, 3 und 4 zurückspringen
+    rueckpfeil(f, 255, 284, "Rückkopplung 5 → 4")
+    rueckpfeil(f, 247, 356, "Rückkopplung 5 → 3", r=R_FB2)
+    rueckpfeil(f, 233, 62, "Rückkopplung 5 → 2", r=R_FB2)
     # Kern
     f.ellipse(CX - R_CORE, CY - R_CORE, 2 * R_CORE, 2 * R_CORE, role="box_strong", name="Kern Daten")
     f.text(CX - R_CORE, CY - 2.0, 2 * R_CORE, 4.0, [P("Daten", bold=True)], align="c", anchor="m",

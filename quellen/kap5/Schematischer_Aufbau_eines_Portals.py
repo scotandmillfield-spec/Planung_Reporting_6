@@ -1,7 +1,7 @@
 """Abb. 5.47 – Schematischer Aufbau eines Portals (in Anlehnung an Kemper et al. 2010)."""
 # Muster: Seitenaufteilung als Raster aus Bereichen (Karten ohne Kopfleiste), Beschriftung oben links wie im
 # Original. Navigation & Konfiguration als Leiste über die ganze Breite, darunter drei Spalten: links Nachrichten
-# und Suche, Mitte der Detailbereich (Schlüsselelement rot – dort läuft die BI-Applikation), rechts Aktienkurse
+# und Suche, Mitte der Detailbereich (Schlüsselelement rot – dort läuft die BI-Applikation), rechts Kennzahlen/Marktdaten (Revision DS 24.11.2026, im Original „Aktienkurse“)
 # sowie Kommunikation & Kollaboration. Proportionen der Bereiche wie im Original.
 # Entfernt: Fenster, Menü-, Symbol- und Adressleiste des Webbrowsers (Produktname, Logo, „http://localhost“),
 # Bildlaufleiste und Copyright-Zeile (Quelle gehört in die Caption). Der Browser bleibt als gestrichelte Gruppe
@@ -67,8 +67,8 @@ def build(theme):
           [P("Detailbereich", size=SZ, bold=True),
            P(f"(z.{NB}B. für BI-Applikation/Analysesystem)", size=SZ, space_before=2.0)],
           role="box_strong", align="l", anchor="t", ins=ins, name="Detailbereich")
-    f.box(AKT.x, AKT.y, AKT.w, AKT.h, [P("Aktienkurse", size=SZ, bold=True)], align="l", anchor="t",
-          ins=ins, name="Aktienkurse")
+    f.box(AKT.x, AKT.y, AKT.w, AKT.h, [P("Kennzahlen/Marktdaten", size=SZ, bold=True)], align="l", anchor="t",
+          ins=ins, name="Kennzahlen/Marktdaten")
     f.box(KOM.x, KOM.y, KOM.w, KOM.h, [P("Kommunikation & Kollaboration", size=SZ, bold=True)], align="l",
           anchor="t", ins=ins, name="Kommunikation & Kollaboration")
     return f

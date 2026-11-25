@@ -1,11 +1,11 @@
 /* Abb. 4.23 – Multidimensionale Analyse der Balanced Chance and Risk Card (softwareneutraler Nachbau eines
    OLAP-Analysewerkzeugs). Seite 1024 x 646 px. Daten: bcr_olap.json (daten_bcr_olap.py) – additive Basisgrößen je
-   Jahr, Quartal, Standort und Produkt; alle Kennzahlen werden aus Zähler und Nenner gerechnet.
-   Aufbau wie im Original: links der Dimensionsbaum (Jahr, Standort, Produkt, Kennzahlen), oben die Dimensionsleiste mit
+   Jahr, Quartal, Standort und Business Unit; alle Kennzahlen werden aus Zähler und Nenner gerechnet.
+   Aufbau wie im Original: links der Dimensionsbaum (Jahr, Standort, Business Unit, Kennzahlen), oben die Dimensionsleiste mit
    der Schicht (Perspektive, „Schicht 1 von 4“) und der Spaltendimension, rechts die Kreuztabelle mit Chancen und
    Risiken je Perspektive, Jahren und Veränderungen; neu darunter ein Diagramm der gewählten Kennzahl.
    Drill-down: Klick auf einen Jahres- bzw. Standortkopf (oder die Säule, oder das Element im Baum) zeigt die nächste
-   Ebene (Quartale bzw. Produkte des Standorts), „↑ Ebene höher“ oder Esc gehen zurück. Elemente im Baum, deren
+   Ebene (Quartale bzw. Business Units des Standorts), „↑ Ebene höher“ oder Esc gehen zurück. Elemente im Baum, deren
    Dimension nicht in den Spalten steht, filtern (Schnitt). Klick auf eine Zeile wählt die Kennzahl für das Diagramm. */
 (() => {
   "use strict";
@@ -71,7 +71,7 @@
               { key: "sg", titel: STO[ds], lang: `Standort ${STO[ds]} gesamt`, pred: r => r[2] === ds, summe: true }];
     }
     return [...PRO.map((n, p) => ({ key: "p" + p, titel: n, lang: n, pred: r => r[3] === p })),
-            { key: "pa", titel: "alle Produkte", lang: "alle Produkte", pred: () => true, summe: true }];
+            { key: "pa", titel: "alle Business Units", lang: "alle Business Units", pred: () => true, summe: true }];
   }
   function matrixDaten() {
     const rs = basis(), sp = spaltenListe(), ks = KZ.filter(k => k.p === S.persp);
@@ -84,12 +84,12 @@
     return { rs, sp, zeilen };
   }
   const dimName = () => (S.spalten === "jahr" ? (S.drillJahr === null ? "Jahren" : `Quartalen ${J[S.drillJahr]}`)
-    : S.spalten === "standort" ? (S.drillStandort === null ? "Standorten" : `Produkten in ${STO[S.drillStandort]}`) : "Produkten");
+    : S.spalten === "standort" ? (S.drillStandort === null ? "Standorten" : `Business Units in ${STO[S.drillStandort]}`) : "Business Units");
   function schnittText() {
     const t = [];
     if (S.spalten !== "jahr") t.push(`Jahr ${J[S.jahr]}`);
     if (S.spalten !== "standort") t.push(S.standort === null ? "Konzern" : `Standort ${STO[S.standort]}`);
-    if (S.spalten !== "produkt" && !(S.spalten === "standort" && S.drillStandort !== null)) t.push(S.produkt === null ? "alle Produkte" : PRO[S.produkt]);
+    if (S.spalten !== "produkt" && !(S.spalten === "standort" && S.drillStandort !== null)) t.push(S.produkt === null ? "alle Business Units" : PRO[S.produkt]);
     return t;
   }
 
@@ -152,7 +152,7 @@
   /* ---------- Dimensionsleiste: Schicht und Spaltendimension ---------- */
   const knopfSchicht = DK.schnitt(bFilter, "Schicht (Perspektive)", "knoepfe", { optionen: PER.map((n, i) => [i, n]), wert: 0,
     onChange: v => { S.persp = Number(v); S.kz = null; zeichnen(); } });
-  const knopfSpalten = DK.schnitt(bFilter, "Spalten", "knoepfe", { optionen: [["jahr", "Jahr"], ["standort", "Standort"], ["produkt", "Produkt"]], wert: "jahr",
+  const knopfSpalten = DK.schnitt(bFilter, "Spalten", "knoepfe", { optionen: [["jahr", "Jahr"], ["standort", "Standort"], ["produkt", "Business Unit"]], wert: "jahr",
     onChange: v => { S.spalten = v; S.drillJahr = null; S.drillStandort = null; zeichnen(); } });
 
   /* ---------- Dimensionsbaum ---------- */
@@ -172,11 +172,11 @@
     dim("Standort", S.spalten === "standort", "bm-standort");
     eintrag("Konzern", S.spalten === "standort" ? S.drillStandort === null : S.standort === null,
       () => { if (S.spalten === "standort") S.drillStandort = null; else S.standort = null; zeichnen(); });
-    STO.forEach((n, s) => eintrag(n + (S.spalten === "standort" ? " › Produkte" : ""), S.spalten === "standort" ? S.drillStandort === s : S.standort === s,
+    STO.forEach((n, s) => eintrag(n + (S.spalten === "standort" ? " › Business Units" : ""), S.spalten === "standort" ? S.drillStandort === s : S.standort === s,
       () => { if (S.spalten === "standort") S.drillStandort = S.drillStandort === s ? null : s; else S.standort = S.standort === s ? null : s; zeichnen(); }, true));
     const prodAus = S.spalten === "produkt" || (S.spalten === "standort" && S.drillStandort !== null);
-    dim("Produkt", S.spalten === "produkt", "bm-produkt");
-    eintrag("alle Produkte", !prodAus && S.produkt === null, () => { S.produkt = null; zeichnen(); }, false, prodAus);
+    dim("Business Unit", S.spalten === "produkt", "bm-produkt");
+    eintrag("alle Business Units", !prodAus && S.produkt === null, () => { S.produkt = null; zeichnen(); }, false, prodAus);
     PRO.forEach((n, p) => eintrag(n, !prodAus && S.produkt === p, () => { S.produkt = S.produkt === p ? null : p; zeichnen(); }, true, prodAus));
     dim("Kennzahlen", false, "bm-kennzahlen");
     PER.forEach((n, i) => eintrag(n, S.persp === i, () => { S.persp = i; S.kz = null; zeichnen(); }, true));
@@ -313,9 +313,9 @@
   DK.ebenen({
     regeln: [
       { nr: 1, ziel: "kt-kopf-j2", anker: "links", versatz: [30, -2], regel: "STRUCTURE – Hierarchien öffnen", titel: "Echter Drill-down",
-        text: "Ein Klick auf einen Jahres- oder Standortkopf, auf eine Säule oder auf das Element im Dimensionsbaum zeigt die nächste Ebene: Jahr › Quartale, Konzern › Standorte › Produkte. „↑ Ebene höher“ oder Esc gehen zurück. Alle Kennzahlen werden dabei aus additiven Basisgrößen neu gerechnet, so stimmen Quoten wie ROI oder Risikovorsorgequote auf jeder Ebene." },
+        text: "Ein Klick auf einen Jahres- oder Standortkopf, auf eine Säule oder auf das Element im Dimensionsbaum zeigt die nächste Ebene: Jahr › Quartale, Konzern › Standorte › Business Units. „↑ Ebene höher“ oder Esc gehen zurück. Alle Kennzahlen werden dabei aus additiven Basisgrößen neu gerechnet, so stimmen Quoten wie ROI oder Risikovorsorgequote auf jeder Ebene." },
       { nr: 2, ziel: "dimensionen", anker: "links", versatz: [180, 2], regel: "CONDENSE – Schnitt und Würfel", titel: "Dimensionsbaum und Dimensionsleiste",
-        text: "Wie im Original stehen links die Dimensionen Jahr, Standort, Produkt und Kennzahlen. Ein Klick auf ein Element einer Dimension, die nicht in den Spalten steht, schneidet den Würfel (z. B. nur Hamburg oder nur Produkt B). Die Dimensionsleiste wählt die Schicht – die Perspektive, im Original „Schicht 1 von 4“ – und die Spaltendimension (Pivotieren)." },
+        text: "Wie im Original stehen links die Dimensionen Jahr, Standort, Business Unit und Kennzahlen. Ein Klick auf ein Element einer Dimension, die nicht in den Spalten steht, schneidet den Würfel (z. B. nur Hamburg oder nur die Business Unit Steuerungen). Die Dimensionsleiste wählt die Schicht – die Perspektive, im Original „Schicht 1 von 4“ – und die Spaltendimension (Pivotieren)." },
       { nr: 3, ziel: "kt-kopf-d02", anker: "links", versatz: [26, -2], regel: "EXPRESS – Richtige Veränderung", titel: "Prozentpunkte bei Quoten, Farbe nach Wirkung",
         text: "Bei Quoten steht die Veränderung in Prozentpunkten: ROI 7,68 % → 6,70 % ist −0,98 %-Pkt.; das Original zeigte −12,68 % (Veränderung der Quote in Prozent). Die Farbe folgt der Wirkung – bei Risiken ist ein Anstieg ungünstig. Das Original färbte alle Chancen grün und alle Risiken rot, unabhängig von der Entwicklung." },
       { nr: 4, ziel: "v-diagramm", anker: "links", versatz: [250, 2], regel: "SAY – Botschaft vermitteln", titel: "Diagramm der gewählten Kennzahl",
@@ -323,27 +323,27 @@
       { nr: 5, ziel: "kt-tabelle", anker: "links", versatz: [100, 24], regel: "UNIFY – Ohne Farbflächen", titel: "Chancen und Risiken als Gruppen",
         text: "Perspektive, Chancen und Risiken sind Gruppenüberschriften mit Linien statt dunkel- und hellblauer Bänder; grüne und rote Schrift für Chancen und Risiken entfällt. Die Einheit steht an der Kennzahl statt an jeder Zahl, Beträge in Tsd. €." },
       { nr: 6, ziel: "kt-kopf-j0", anker: "links", versatz: [-6, -4], regel: "CHECK – Werte des Originals", titel: "Konzernwerte wie im Original",
-        text: "Die Konzernwerte der Finanzperspektive entsprechen dem Original (2000–2002 als 2024–2026): EVA, EBT, Cash Flow, Umsatz, Bruttoertrag und Risikovorsorgekosten exakt, WACC, ROI, ROS und die Risikoquoten auf zwei Nachkommastellen. Die Verteilung auf Quartale, Standorte und Produkte und die übrigen Perspektiven sind erfunden." },
+        text: "Die Konzernwerte der Finanzperspektive entsprechen dem Original (2000–2002 als 2024–2026): EVA, EBT, Cash Flow, Umsatz, Bruttoertrag und Risikovorsorgekosten exakt, WACC, ROI, ROS und die Risikoquoten auf zwei Nachkommastellen. Die Verteilung auf Quartale, Standorte und Business Units und die übrigen Perspektiven sind erfunden." },
       { nr: 7, ziel: "kopf-titel", anker: "links", versatz: [384, 0], regel: "SIMPLIFY – Ohne Programmrahmen", titel: "Ohne Menüs, Symbolleisten und Logo",
-        text: "Titelleiste, Menü- und Symbolleisten, Statuszeile, Bildlaufleisten und die Titelgrafik mit Namen entfallen. Die Analyse heißt nach ihrem Inhalt; Standorte und Produkte bleiben als Dimensionselemente erhalten." },
+        text: "Titelleiste, Menü- und Symbolleisten, Statuszeile, Bildlaufleisten und die Titelgrafik mit Namen entfallen. Die Analyse heißt nach ihrem Inhalt; Standorte bleiben als Dimensionselemente erhalten; statt der Produkte des Originals stehen Business Units, weil Kennzahlen wie Krankenquote oder Austritte für Produkte nicht sinnvoll sind." },
     ],
-    nachbauIntro: "Seitengröße benutzerdefiniert 1024 × 646 px, Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle mit den Basisgrößen je Jahr, Quartal, Standort und Produkt (CSV), Dimensionstabellen Datum (Jahr › Quartal), Standort, Produkt sowie eine Kennzahlentabelle (Perspektive, Art, Kennzahl) für einen Feldparameter. Quoten als Measures mit DIVIDE, z. B. ROI = DIVIDE(SUM(Fakten[ebt]); SUM(Fakten[kapital])); Δ in %-Pkt. als Differenz der Quoten.",
+    nachbauIntro: "Seitengröße benutzerdefiniert 1024 × 646 px, Schrift Arial: Beschriftungen 10,5 pt, Visualtitel 12 pt. Datenmodell: Faktentabelle mit den Basisgrößen je Jahr, Quartal, Standort und Business Unit (CSV), Dimensionstabellen Datum (Jahr › Quartal), Standort, Produkt sowie eine Kennzahlentabelle (Perspektive, Art, Kennzahl) für einen Feldparameter. Quoten als Measures mit DIVIDE, z. B. ROI = DIVIDE(SUM(Fakten[ebt]); SUM(Fakten[kapital])); Δ in %-Pkt. als Differenz der Quoten.",
     nachbau: [
       { id: "A", ziel: "v-kreuztabelle", versatz: [0, 0], titel: "Kreuztabelle", visual: "Matrix",
-        felder: "Zeilen: Art (Chance/Risiko), Kennzahl (Feldparameter oder berechnete Gruppe); Spalten: Datum[Jahr] › Datum[Quartal] bzw. Standort › Produkt; Werte: [Kennzahlwert], dazu Δ-Measures",
+        felder: "Zeilen: Art (Chance/Risiko), Kennzahl (Feldparameter oder berechnete Gruppe); Spalten: Datum[Jahr] › Datum[Quartal] bzw. Standort › Business Unit; Werte: [Kennzahlwert], dazu Δ-Measures",
         format: "Drill-down über die Symbole „Eine Ebene nach unten“ bzw. „Zur nächsten Ebene wechseln“ (Spaltenhierarchie); Δ-Schriftfarbe bedingt nach Wirkung (#00806B/#C62828); Gruppenüberschriften fett ohne Hintergrund",
         hinweis: "Die Schicht (Perspektive) entspricht einem Filter auf die Kennzahlentabelle." },
       { id: "B", ziel: "v-diagramm", versatz: [0, 0], titel: "Diagramm der Kennzahl", visual: "Gruppiertes Säulendiagramm",
         felder: "X-Achse: dieselbe Hierarchie wie die Matrixspalten; Y-Achse: [Kennzahlwert] der in der Matrix gewählten Kennzahl (Interaktion „Filtern“)",
         format: "#3A3F44, Datenbeschriftungen ein, Y-Achse aus; Drill-down-Modus ein" },
       { id: "C", ziel: "dimensionen", anker: "links", versatz: [180, 2], titel: "Dimensionsbaum", visual: "Datenschnitt (Hierarchie) je Dimension",
-        felder: "Datum (Jahr › Quartal), Standort, Produkt, Perspektive", format: "Stil „Vertikale Liste“, Einzelauswahl; Kopfzeile fett" },
+        felder: "Datum (Jahr › Quartal), Standort, Business Unit, Perspektive", format: "Stil „Vertikale Liste“, Einzelauswahl; Kopfzeile fett" },
       { id: "D", ziel: "filter", anker: "links", versatz: [180, -2], titel: "Dimensionsleiste", visual: "Datenschnitt (Kacheln) und Feldparameter",
-        felder: "Schicht: Perspektive; Spalten: Feldparameter mit Jahr, Standort, Produkt für die Matrixspalten", format: "Ausgewählt #3A3F44 mit weißer Schrift" },
+        felder: "Schicht: Perspektive; Spalten: Feldparameter mit Jahr, Standort, Business Unit für die Matrixspalten", format: "Ausgewählt #3A3F44 mit weißer Schrift" },
     ],
     theme: DK.thema(),
     csv: { name: "bcr_wuerfel_basisgroessen.csv", text: () =>
-      [["Jahr", "Quartal", "Standort", "Produkt", ...D.felder].join(";"),
+      [["Jahr", "Quartal", "Standort", "Business_Unit", ...D.felder].join(";"),
        ...R.map(z => [J[z[0]], "Q" + (z[1] + 1), STO[z[2]], PRO[z[3]], ...z.slice(4)].join(";"))].join("\r\n") },
     tabellen: () => {
       const M = matrixDaten(), st = schnittText();

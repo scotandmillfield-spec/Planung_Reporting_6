@@ -1099,6 +1099,114 @@
    "kommentar": "Der Bericht unten in Abb. 5.24 ist jetzt eine Staffel: Die Kennzahlen stehen als Zeilen untereinander und werden abgezogen (Bruttoumsatz, Kunden-, Aktions- und Sonderrabatte, = Nettoumsatz, Skonti, = NettoNetto-Umsatz) statt als Spalten nebeneinander. Mit Rabattdifferenzierung hat der Bericht sieben Zeilen, ohne fünf (im HTML-Beispiel umschaltbar); die Buchabbildung zeigt weiter die Variante mit Differenzierung und ist dadurch etwas höher. Die Faktentabelle oben und alle Werte sind unverändert.",
    "auftrag": "730e05c36b23",
    "zeit": "2026-11-17T10:58"
+  },
+  {
+   "id": "2026-11-25-abb-4-23-1",
+   "schluessel": "abb-4-23",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Dimension „Produkt“ (Produkt A, B, C) ist durch „Business Unit“ (Antriebe, Steuerungen, Sensoren) ersetzt, im Dimensionsbaum, in der Spaltenauswahl und im Drill-down; die Werte sind unverändert. Die Caption lautet ohne Produktnamen „Multidimensionale Analysen mit einem OLAP-Werkzeug“.",
+   "auftrag": "bdfbce6f6852",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-18-1",
+   "schluessel": "abb-5-18",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die beiden unteren Tabellen sind getauscht: „Verkäufe“ steht jetzt links, „Verkaufsdetails“ rechts. Inhalte und obere Tabellen sind unverändert.",
+   "auftrag": "bba6ada78256",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-32-1",
+   "schluessel": "abb-5-32",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "„Hadoop HDFS“ im Data Lake heißt jetzt neutral „Verteiltes Dateisystem“; die Pfeile bleiben wie bestätigt unverändert. Hinweis: Abb. 5.38 und Abb. 5.56 zeigen weiterhin „Hadoop HDFS“ – dort wurde ohne Auftrag nichts geändert.",
+   "auftrag": "b91ea8a628f2",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-34-1",
+   "schluessel": "abb-5-34",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "„Business Analytics“ bezieht sich jetzt nur auf die explorative Spalte: Der durchgezogene Rahmen umschließt nur noch diese Spalte, die Beschriftung steht mittig direkt darunter. Der Rahmen „Business Intelligence“ um beide Spalten bleibt.",
+   "auftrag": "0c9f18f85021",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-40-1",
+   "schluessel": "abb-5-40",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Caption lautet ohne Produktnamen „SQL-Abfragegenerator“ (bisher „SQL-Abfragegenerator (MS Access)“). Die Abbildung selbst ist unverändert, Datenbankname und Feldkürzel bleiben wie bestätigt.",
+   "auftrag": "f41d0e17d6ef",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-47-1",
+   "schluessel": "abb-5-47",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das Beispiel-Portlet „Aktienkurse“ heißt jetzt „Kennzahlen/Marktdaten“. Die Caption trägt die Quelle „(In Anlehnung an Kemper et al. 2010)“; die Seitenzahl ist noch nicht ergänzt, weil sie hier nicht vorliegt – bitte nachtragen.",
+   "auftrag": "301e7beb4a19",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-48-1",
+   "schluessel": "abb-5-48",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Caption lautet ohne Produktnamen „Hauptseite eines Governance-Dashboards für eine BI-Plattform“. Die Abbildung selbst ist unverändert.",
+   "auftrag": "2551621cb2f9",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-62-1",
+   "schluessel": "abb-5-62",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Die Metadatenbeschreibung ist jetzt eine Abbildung statt einer gesetzten Tabelle: oben die Faktentabelle „Sales“ als Matrix (Kennzahlen je Dimension), darunter je Dimension (Kunde, Datum, Produkte) eine Karte mit Eigenschaften und Hierarchien. Inhalte wie im Original.",
+   "auftrag": "a7866a8bcae8",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-65-1",
+   "schluessel": "abb-5-65",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Von Phase 5 (Evaluation) führen jetzt zusätzlich Rückpfeile zu den Phasen 2, 3 und 4; der Rückpfeil zu Phase 1 und die Pfeile 2 → 1 und 4 → 3 bleiben. Für die zusätzlichen Pfeile ist der Kreis etwas größer und der Kern „Daten“ etwas kleiner.",
+   "auftrag": "2fc4533bbe66",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-68-1",
+   "schluessel": "abb-5-68",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der oberste Pyramidenabschnitt ist jetzt dunkelgrau (Anthrazit mit weißer Schrift) statt rot; die Abbildung enthält damit kein Rot mehr.",
+   "auftrag": "ed3216dc2656",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-69-1",
+   "schluessel": "abb-5-69",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Der Dialog ist ein eigenes Beispiel und unabhängig vom Original: Frage nach Budgetüberschreitungen der Kostenstellen im ersten Quartal, Rückfrage „Budget oder Forecast“, Antwort mit kleiner Tabelle (alle Zahlen erfunden). Die Caption lautet ohne Produktnamen „Sprachassistent in einer Rechnungswesensoftware“; die Quellenangabe „In Anlehnung an Diamant Software 2021“ ist entfallen und kann bei Bedarf wieder ergänzt werden.",
+   "auftrag": "6f80dd8bcba3",
+   "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-25-abb-5-70-1",
+   "schluessel": "abb-5-70",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "In der HTML-Fassung lassen sich die Monatswerte der Prämissen jetzt direkt in der Zelle ändern (Klick, Enter übernimmt); geprüft wird Min ≤ Wahrscheinlich ≤ Max, geänderte Werte sind hervorgehoben, „Zurücksetzen“ stellt die Ausgangswerte wieder her. Jahresmittel, Tornado und Bandbreitendiagramm rechnen sofort mit; die Druckfassung ist unverändert, Tornado und Bandbreite je Monat bleiben.",
+   "auftrag": "18f8cc15e325",
+   "zeit": "2026-11-25T11:07"
   }
  ],
  "neue_zeilen": [

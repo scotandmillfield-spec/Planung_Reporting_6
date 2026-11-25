@@ -636,7 +636,7 @@ const DK = (() => {
 /* Einzelvisual „Normalisierte Tabellenstruktur in der 3. Normalform“ (Abb. 5.18).
    Seite 727 x 500 px = 110 x 75,6 mm. Daten: tabellen.json (daten_3nf.py) – die vier Tabellen des Originals mit
    unveränderten Werten. Anordnung wie im Original: Stammdaten (Produkte, Kunden) oben, Bewegungsdaten
-   (Verkaufsdetails, Verkäufe) unten. Schlüssel als Text „PK“/„FK“ über den Spalten (Original: unterstrichen).
+   (Verkäufe, Verkaufsdetails) unten. Schlüssel als Text „PK“/„FK“ über den Spalten (Original: unterstrichen).
    Interaktion: Klick auf eine Zeile hebt in allen vier Tabellen die über Schlüssel verknüpften Zeilen hervor
    (Schlüsselwerte fett, übrige Zeilen blass) – so wird sichtbar, wie die Normalisierung die Daten verteilt,
    ohne Information zu verlieren. Esc hebt auf, Klick auf einen Spaltenkopf sortiert. */
@@ -665,8 +665,8 @@ const DK = (() => {
     kunden: { titel: "Kunden", liste: KUND, key: r => r.id, spalten: [
       { key: "id", titel: "KundenID", tag: "PK", breite: 66, fmt: v => String(v) },
       { key: "name", titel: "Name", breite: 73, typ: "text" },
-      { key: "karte", titel: "DreamCardNr", breite: 95, fmt: v => String(v) },
-      { key: "vegan", titel: "VeganePraeferenz", breite: 124, typ: "text" }] },
+      { key: "karte", titel: "DreamCardNr", breite: 91, fmt: v => String(v) },
+      { key: "vegan", titel: "VeganePraeferenz", breite: 118, typ: "text" }] },
     details: { titel: "Verkaufsdetails", liste: DET, key: r => r.key, spalten: [
       { key: "v", titel: "VerkaufsID", tag: "PK, FK", breite: 72, fmt: v => String(v) },
       { key: "p", titel: "ProduktID", tag: "PK, FK", breite: 70, fmt: v => String(v) },
@@ -674,7 +674,7 @@ const DK = (() => {
       { key: "vegan", titel: "Vegan", breite: 48, typ: "text" }] },
     verkaeufe: { titel: "Verkäufe", liste: VERK, key: r => r.id, spalten: [
       { key: "id", titel: "VerkaufsID", tag: "PK", breite: 72, fmt: v => String(v) },
-      { key: "k", titel: "KundenID", tag: "FK", breite: 70, fmt: v => String(v) },
+      { key: "k", titel: "KundenID", tag: "FK", breite: 66, fmt: v => String(v) },
       { key: "d", titel: "Verkaufsdatum", breite: 101, fmt: v => datum(v), sortKey: v => v },
       { key: "ort", titel: "Verkaufsort", breite: 90, typ: "text" }] },
   };
@@ -685,7 +685,7 @@ const DK = (() => {
   addEventListener("keydown", e => { if (e.key === "Escape" && S.auswahl) { S.auswahl = null; zeichnen(); } });
 
   /* ---------- Layout ---------- */
-  const H = 500, XR = 711 - Math.max(breite("kunden"), breite("verkaeufe"));
+  const H = 500, XR = 711 - Math.max(breite("kunden"), breite("details"));   // Revision DS 24.11.2026: Verkäufe links, Verkaufsdetails rechts
   DK.init({ titel: "Normalisierte Tabellenstruktur in der 3. Normalform", breite: 727, hoehe: H });
   const bTitel = DK.box("v-titel", 16, 8, 695, 46);
   DK.haarlinie(60);
@@ -695,8 +695,8 @@ const DK = (() => {
   const B = {
     produkte: DK.box("t-produkte", 16, y1, breite("produkte"), hoehe("produkte")),
     kunden: DK.box("t-kunden", XR, y1, breite("kunden"), hoehe("kunden")),
-    details: DK.box("t-details", 16, y2, breite("details"), hoehe("details")),
-    verkaeufe: DK.box("t-verkaeufe", XR, y2, breite("verkaeufe"), hoehe("verkaeufe")),
+    verkaeufe: DK.box("t-verkaeufe", 16, y2, breite("verkaeufe"), hoehe("verkaeufe")),
+    details: DK.box("t-details", XR, y2, breite("details"), hoehe("details")),
   };
   DK.el("style", {}, document.head, `
     .t3nf .dk-matrix th, .t3nf .dk-matrix td { padding: 0 4px; }
@@ -854,7 +854,7 @@ const DK = (() => {
       { nr: 3, ziel: "t-details", anker: "links", versatz: [280, 90], regel: "CONDENSE – Verknüpfung zeigen", titel: "Klick folgt den Schlüsseln",
         text: "Ein Klick auf eine Zeile hebt in allen vier Tabellen die Zeilen hervor, die über die Schlüssel dazugehören; die Schlüsselwerte werden fett, alles andere blass. So wird sichtbar, dass die Normalisierung die Daten auf Tabellen verteilt, ohne Information zu verlieren. Esc hebt auf." },
       { nr: 4, ziel: "t-kunden", anker: "links", versatz: [6, 136], regel: "STRUCTURE – Inhalte ordnen", titel: "Stammdaten oben, Bewegungsdaten unten",
-        text: "Wie im Original stehen die Stammdaten (Produkte, Kunden) oben und die Bewegungsdaten (Verkaufsdetails, Verkäufe) darunter; die Schlüssel stehen in jeder Tabelle links. Ein Klick auf einen Spaltenkopf sortiert, die Richtung zeigt der Pfeil in der Schlüsselzeile." },
+        text: "Wie im Original stehen die Stammdaten (Produkte, Kunden) oben und die Bewegungsdaten (Verkäufe, Verkaufsdetails) darunter; die Schlüssel stehen in jeder Tabelle links. Ein Klick auf einen Spaltenkopf sortiert, die Richtung zeigt der Pfeil in der Schlüsselzeile." },
       { nr: 5, ziel: "kopf-verkaeufe", versatz: [287, 2], regel: "UNIFY – Einheitliche Formate", titel: "Text links, Zahlen rechts",
         text: "Texte stehen linksbündig, Zahlen und Datumswerte rechtsbündig; das Original setzte auch Namen und „Ja/Nein“ rechtsbündig. Preise mit zwei Nachkommastellen, Einheit einmal im Titel, Datum im deutschen Format (Original: 2024-10-01)." },
       { nr: 6, ziel: "t-produkte", anker: "links", versatz: [300, -2], regel: "SIMPLIFY – Überflüssiges weglassen", titel: "Ohne Rahmen und Farbflächen",

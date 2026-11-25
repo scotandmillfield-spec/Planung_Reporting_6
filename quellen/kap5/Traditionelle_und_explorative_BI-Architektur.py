@@ -182,8 +182,13 @@ def zeichne(theme, variante="traditionell"):
         f.text(D.x + ip, D.y + 0.6, D.w - 2 * ip, iy - 0.4 - (D.y + 0.6), [P("Data Lake", italic=True, bold=True)],
                align="c", anchor="m", name="Titel Data Lake")
     ix = D.x + ip
-    for w_, s in zip(iw, (f"Analytische Datenbank", "Hadoop HDFS", "NoSQL")):
-        f.box(ix, iy, w_, ih, [P(s)], role="box_hi", ins=(0.5, 0.6), name=f"Data Lake {s}")
+    # Revision DS 24.11.2026 (Abb. 5.32): „Hadoop HDFS“ → neutral „Verteiltes Dateisystem“; dafür 6,5 pt und
+    # angepasste Breiten. Die Sandboxing-Variante (Abb. 5.38) bleibt bis zu einem eigenen Auftrag unverändert.
+    speicher, sz = ("Analytische Datenbank", "Hadoop HDFS", "NoSQL"), 7.0
+    if not sb:
+        speicher, sz, iw = ("Analytische Datenbank", "Verteiltes Dateisystem", "NoSQL"), 6.5, [13.9, 14.8, 9.5]
+    for w_, s in zip(iw, speicher):
+        f.box(ix, iy, w_, ih, [P(s, size=sz)], role="box_hi", ins=(0.5, 0.6), name=f"Data Lake {s}")
         ix += w_ + ig
 
     # ------------------------------------------------------------ Abb. 5.38: Sandboxing und Cloud

@@ -544,7 +544,7 @@
   },
   "5.40": {
    "status": "pruefung",
-   "datei": "SQL-Abfragegenerator_MS_Access",
+   "datei": "SQL-Abfragegenerator",
    "quer": true,
    "kommentare": [
     "Produktscreenshot (Abfrageentwurf) softwareneutral als Maske nachgebaut, Querformat 1024 px = 155 × 107 mm (breites Entwurfsraster): Programm-, Datenbank- und Taskleistenfenster, Menü-, Symbol- und Statusleiste, Bildlaufleisten und Produktname entfallen; Fenstertitel „Verdichtete Summenwerte : Auswahlabfrage“ als Titelzeile",
@@ -552,9 +552,20 @@
     "Raster zeigt 7 vollständige Spalten (6 × Gruppierung, Umsatz Flaschen als Summe), die übrigen über „Weitere Spalten“ statt abgeschnittener 8. Spalte; Zeile „Feld“ nennt den Feldnamen statt des abgeschnittenen Alias „Summe von Umsatz…“",
     "Kardinalität „∞“ → „n“, Verbindungslinien rechtwinklig; Tabelle als Anzeigefeld (folgt aus dem Feld); grüne Häkchen → anthrazit; Pfeil nur in der aktiven Zelle wie im Original",
     "Datenbankname „Glashersteller_Schön“ entfernt („Auftragsdatenbank“); Feldkürzel im Tooltip gedeutet (PLIKZ Plan-/Ist-Kennzeichen, KHIER Kundenhierarchie, FKART Fakturaart) – bitte prüfen",
-    "Caption ohne Produktnamen? z. B. ‚SQL-Abfragegenerator (grafischer Abfrageentwurf)‘ – „MS Access“ ggf. in den Text"
+    "Revision DS 24.11.2026: Datenbankname und Deutung der Feldkürzel bestätigt; Caption ohne Produktnamen: „SQL-Abfragegenerator (MS Access)“ → „SQL-Abfragegenerator“ (Abbildung unverändert)"
    ],
-   "alt": "Grafischer Abfrageentwurf: Oben stehen die Tabellen Kunden, Auftrag, Artikel und Farbe mit ihren Feldlisten, verbunden über Kundennummer (1:n), Artikelnummer und Farbnummer. Unten legt das Entwurfsraster je Spalte Feld, Tabelle, Funktion, Sortierung, Anzeige und Kriterien fest – sechs Felder werden gruppiert, die Umsatz- und Konditionsfelder summiert. Daraus erzeugt der Generator die SELECT-Anweisung aus Abb. 5.39."
+   "alt": "Grafischer Abfrageentwurf: Oben stehen die Tabellen Kunden, Auftrag, Artikel und Farbe mit ihren Feldlisten, verbunden über Kundennummer (1:n), Artikelnummer und Farbnummer. Unten legt das Entwurfsraster je Spalte Feld, Tabelle, Funktion, Sortierung, Anzeige und Kriterien fest – sechs Felder werden gruppiert, die Umsatz- und Konditionsfelder summiert. Daraus erzeugt der Generator die SELECT-Anweisung aus Abb. 5.39.",
+   "caption": "SQL-Abfragegenerator",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Datenbankname „Glashersteller_Schön“ entfernt („Auftragsdatenbank“); Feldkürzel im Tooltip gedeutet (PLIKZ Plan-/Ist-Kennzeichen, KHIER Kundenhierarchie, FKART Fakturaart) – bitte prüfen, OK Caption ohne Produktnamen"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Caption lautet ohne Produktnamen „SQL-Abfragegenerator“ (bisher „SQL-Abfragegenerator (MS Access)“). Die Abbildung selbst ist unverändert, Datenbankname und Feldkürzel bleiben wie bestätigt."
+    }
+   ]
   },
   "5.41": {
    "status": "pruefung",
@@ -638,14 +649,26 @@
     "Fenster, Menü-, Symbol- und Adressleiste des Webbrowsers (Produktname, Logo, „http://localhost“) und Bildlaufleiste entfernt; der Browser bleibt als gestrichelte Gruppe „Portalseite im Webbrowser“ erkennbar",
     "Sechs Bereiche in Anordnung und Proportionen des Originals, Beschriftung oben links; Detailbereich als Schlüsselelement rot (Ort der BI-Applikation), übrige Bereiche grau",
     "„z.B.“ → „z. B.“",
-    "Copyright-Zeile im Bild entfernt; Caption: ‚In Anlehnung an Kemper et al. 2010‘ (Seite ergänzen)?",
-    "Hinweis: „Aktienkurse“ als Beispiel-Portlet etwas zeitgebunden – ggf. „Kennzahlen/Marktdaten“?"
+    "Copyright-Zeile im Bild entfernt",
+    "Revision DS 24.11.2026: Caption mit Quelle „(In Anlehnung an Kemper et al. 2010)“ – die Seitenzahl ist noch zu ergänzen (liegt hier nicht vor)",
+    "Revision DS 24.11.2026: Beispiel-Portlet „Aktienkurse“ → „Kennzahlen/Marktdaten“"
    ],
-   "alt": "Schematische Portalseite im Webbrowser: Oben liegt über die ganze Breite der Bereich Navigation & Konfiguration. Darunter stehen links Nachrichten und Suche, in der Mitte der hervorgehobene Detailbereich, etwa für eine BI-Applikation oder ein Analysesystem, und rechts Aktienkurse sowie Kommunikation & Kollaboration."
+   "alt": "Schematische Portalseite im Webbrowser: Oben liegt über die ganze Breite der Bereich Navigation & Konfiguration. Darunter stehen links Nachrichten und Suche, in der Mitte der hervorgehobene Detailbereich, etwa für eine BI-Applikation oder ein Analysesystem, und rechts Kennzahlen/Marktdaten sowie Kommunikation & Kollaboration.",
+   "caption": "Schematischer Aufbau eines Portals (In Anlehnung an Kemper et al. 2010)",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Caption: ‚In Anlehnung an Kemper et al. 2010‘ (Seite ergänzen)? OK Hinweis: „Aktienkurse“ als Beispiel-Portlet etwas zeitgebunden – ggf. „Kennzahlen/Marktdaten“? OK"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das Beispiel-Portlet „Aktienkurse“ heißt jetzt „Kennzahlen/Marktdaten“. Die Caption trägt die Quelle „(In Anlehnung an Kemper et al. 2010)“; die Seitenzahl ist noch nicht ergänzt, weil sie hier nicht vorliegt – bitte nachtragen."
+    }
+   ]
   },
   "5.48": {
    "status": "pruefung",
-   "datei": "Main_Dashboard_des_QlikView_Governance_Dashboards",
+   "datei": "Hauptseite_eines_Governance-Dashboards_fuer_eine_BI-Plattform",
    "kommentare": [
     "Produktscreenshot softwareneutral als interaktives Dashboard 1024 × 646 px nachgebaut; Reiterleiste (Operations, Applications, Scan Details …), grüner Produkttitel, Hilfesymbol und unscharf gemachte Nutzer-/App-Namen entfallen; Titel „Governance-Dashboard der BI-Plattform“, Namen erfunden (Frau Brandt …, „Sales 360“ → Vertriebsanalyse)",
     "Alle Bereiche des Originals erhalten: Serverbetrieb und Nutzung (Heute/Gestern/7 Tage/28 Tage + Verlauf), Ladevorgänge mit Ladedauer, Tage seit letzter Aktualisierung, aktivste Nutzer und genutzte Apps (90 Tage, ohne anonyme), komplexeste Apps, Datenquellen; Kreisdiagramm (5 Segmente) → Balken, neutrale Bezeichnungen (QVD → Zwischendatei, Resident → Speichertabelle, Excel → Tabellenkalkulation)",
@@ -653,9 +676,20 @@
     "Korrekturen/Annahmen: Ladedauer-Klassen ergaben 9.008 ≠ 9.009 → „1–5 Min“ 196; Klasse „0–7 Tage“ mit 26 Apps ergänzt (28 Ladeaufträge = 28 aktuelle Apps, 252 ohne Auftrag veraltet); Zeitraum der Ladevorgänge als 90 Tage angenommen; Fehler je Dauerklasse und Anteile der Datenquellen (aus dem Kreis geschätzt) erfunden – ok?",
     "Farben: Rot nur für Warnungen, Fehler, fehlerhafte Ladevorgänge und veraltete Apps, sonst Anthrazit (Original: grüne/rote Balken ohne Bedeutung, komplexeste Apps rot); Verlauf über 28 Tage ab null statt zwei Wochen; Botschaft je Visual (z. B. „2 von 280 Apps genutzt“)",
     "Online: Klick auf Nutzer oder App filtert die Nutzungstabelle, Klick auf Zeilen/Balken hebt hervor, Esc hebt auf",
-    "Caption ohne Produktnamen? z. B. ‚Hauptseite eines Governance-Dashboards für eine BI-Plattform‘"
+    "Revision DS 24.11.2026: Caption ohne Produktnamen: „Main Dashboard des QlikView Governance Dashboards“ → „Hauptseite eines Governance-Dashboards für eine BI-Plattform“ (Abbildung unverändert)"
    ],
-   "alt": "Governance-Dashboard einer BI-Plattform zum Stichtag 15.12.2026: Links oben zeigen zwei Tabellen Serverbetrieb (Fehler, Warnungen, Arbeitsspeicher, CPU-Last, geladene Apps) und Nutzung (aktive Nutzer, genutzte Apps, Sitzungen, gleichzeitige Sitzungen) für heute, gestern, 7 und 28 Tage mit Verlauf; rechts stehen die Ladevorgänge nach Dauer mit fehlerhaften Anteilen und die Apps nach Tagen seit letzter Aktualisierung. Unten folgen die aktivsten Nutzer und genutzten Apps der letzten 90 Tage, die komplexesten Apps und die Datenquellen. Auffällig sind 1.312 Serverwarnungen in 28 Tagen, 39,6 % fehlerhafte Ladevorgänge und 252 von 280 Apps, die seit über 60 Tagen nicht aktualisiert wurden."
+   "alt": "Governance-Dashboard einer BI-Plattform zum Stichtag 15.12.2026: Links oben zeigen zwei Tabellen Serverbetrieb (Fehler, Warnungen, Arbeitsspeicher, CPU-Last, geladene Apps) und Nutzung (aktive Nutzer, genutzte Apps, Sitzungen, gleichzeitige Sitzungen) für heute, gestern, 7 und 28 Tage mit Verlauf; rechts stehen die Ladevorgänge nach Dauer mit fehlerhaften Anteilen und die Apps nach Tagen seit letzter Aktualisierung. Unten folgen die aktivsten Nutzer und genutzten Apps der letzten 90 Tage, die komplexesten Apps und die Datenquellen. Auffällig sind 1.312 Serverwarnungen in 28 Tagen, 39,6 % fehlerhafte Ladevorgänge und 252 von 280 Apps, die seit über 60 Tagen nicht aktualisiert wurden.",
+   "caption": "Hauptseite eines Governance-Dashboards für eine BI-Plattform",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Caption ohne Produktnamen? z. B. ‚Hauptseite eines Governance-Dashboards für eine BI-Plattform‘ OK"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Caption lautet ohne Produktnamen „Hauptseite eines Governance-Dashboards für eine BI-Plattform“. Die Abbildung selbst ist unverändert."
+    }
+   ]
   },
   "5.49": {
    "status": "pruefung",
@@ -830,17 +864,26 @@
    "alt": "Maske mit vier einfachen Eingabefunktionen für Touch-Oberflächen: links eine Kalenderauswahl für Januar 2027 mit Pfeilen zum Monatswechsel, rechts eine Zylinder-Zeitauswahl mit drei Walzen für Datum, Stunde und Minute (gewählt Mo 25.01., 20:00), darunter ein An- und Ausschalter im Zustand „Aus“ und ein Plus- und Minusschalter für das Jahr 2026."
   },
   "5.62": {
-   "status": "latex",
-   "latex": "tabellen/Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart.tex",
+   "status": "pruefung",
    "datei": "Metadatenbeschreibung_Star-Schema_fuer_einen_Sales_Data_Mart",
    "kommentare": [
-    "Reine Metadatenbeschreibung ohne Werte → LaTeX-Tabellen (booktabs, figure-Umgebung hält die Abbildungsnummer), mit pdflatex bei 110 mm Satzbreite geprüft",
-    "Oben die Kennzahlen der Faktentabelle Sales je Dimension (× und – statt x und Leerfeld), unten Eigenschaften und Hierarchien der drei Dimensionen in drei Spalten wie im Original",
-    "Hellblaue Kopfzeile, graue und rote Balken entfallen; Gruppenzeilen „Eigenschaften“ und „Hierarchien“ kursiv; Hierarchien mit Halbgeviertstrich, lange Pfade mit Einzug umbrochen",
+    "Revision DS 24.11.2026: als Abbildung statt als gesetzte LaTeX-Tabelle (PNG, PDF, PPTX; 110 mm breit)",
+    "Aufbau wie im Original: oben mittig die Faktentabelle „Sales“ als Matrix (Kennzahlen Umsatz, Menge, Bonuspunkte je Dimension; × = auswertbar, – = nicht auswertbar statt x und Leerfeld), darunter je Dimension eine Karte mit den Abschnitten „Eigenschaften“ und „Hierarchien“ auf gleicher Höhe",
+    "Hellblaue Kopfzeile → anthrazitfarbene Kopfleiste, graue und rote Balken → graue Zwischenleisten, kein Rot (kein Element hervorgehoben); Hierarchien mit Halbgeviertstrich, die lange Datumshierarchie mit Einzug umbrochen",
     "Caption: Speaker Notes sagen „Sternschema“, Inventur „Star-Schema“ – einheitlich wählen",
     "„DreamCard“ aus dem Original übernommen – falls Markenname, durch „Kundenkarte“ ersetzen?"
    ],
-   "alt": "Metadatenbeschreibung eines Sales Data Mart im Star-Schema. Eine Matrix zeigt, nach welchen Dimensionen die Kennzahlen der Faktentabelle Sales auswertbar sind: Umsatz und Menge nach Kunden, Datum und Produkten, Bonuspunkte nur nach Kunden und Datum. Darunter stehen die Eigenschaften der Dimensionen Kunde, Datum und Produkte sowie ihre Hierarchien, etwa Jahr – Quartal – Monat – Tag und Produktlinie – Produktgruppe."
+   "alt": "Metadatenbeschreibung eines Sales Data Mart im Star-Schema. Eine Matrix zeigt, nach welchen Dimensionen die Kennzahlen der Faktentabelle Sales auswertbar sind: Umsatz und Menge nach Kunden, Datum und Produkten, Bonuspunkte nur nach Kunden und Datum. Darunter stehen die Eigenschaften der Dimensionen Kunde, Datum und Produkte sowie ihre Hierarchien, etwa Jahr – Quartal – Monat – Tag und Produktlinie – Produktgruppe.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Bitte nicht als Tabellen sondern als Abbildung darstellen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Metadatenbeschreibung ist jetzt eine Abbildung statt einer gesetzten Tabelle: oben die Faktentabelle „Sales“ als Matrix (Kennzahlen je Dimension), darunter je Dimension (Kunde, Datum, Produkte) eine Karte mit Eigenschaften und Hierarchien. Inhalte wie im Original."
+    }
+   ]
   },
   "5.63": {
    "status": "pruefung",
@@ -870,11 +913,22 @@
    "datei": "CRISP-DM-Modell_-_Prozessschritte",
    "kommentare": [
     "Kreislauf nach Muster Abb. 2.1: sechs Chevron-Segmente im Uhrzeigersinn an den Positionen des Originals, Kern „Daten“ rot (statt Datenbanksymbol); Liste der Prozessschritte rechts wie im Original",
-    "Rückkopplungen des Originals als Pfeile im Innenring: 2 → 1, 4 → 3 (zusammen mit den Chevrons 1 ⇄ 2, 3 ⇄ 4) und 5 → 1; äußerer Kreis mit Drehpfeilen entfällt – die geschlossene Chevron-Kette zeigt den Neubeginn nach Phase 6",
     "Listenüberschrift „CRISP DM Modell - Prozessschritte:“ entfällt (= Caption); Blau → Rollen",
-    "Korrekturen: „CRISP DM“ → „CRISP-DM“, „Data“ → „Daten“, „Bewertung und Interpretation der Ereignisse“ → „… der Ergebnisse“ (bitte prüfen); Phasennamen bleiben englisch (Fachbegriffe des Modells)"
+    "Korrekturen: „CRISP DM“ → „CRISP-DM“, „Data“ → „Daten“, „Bewertung und Interpretation der Ereignisse“ → „… der Ergebnisse“ (bitte prüfen); Phasennamen bleiben englisch (Fachbegriffe des Modells)",
+    "Rückkopplungen des Originals als Pfeile im Innenring: 2 → 1, 4 → 3 (zusammen mit den Chevrons 1 ⇄ 2, 3 ⇄ 4) und 5 → 1; äußerer Kreis mit Drehpfeilen entfällt – die geschlossene Chevron-Kette zeigt den Neubeginn nach Phase 6",
+    "Revision DS 24.11.2026: zusätzliche Rücksprünge von 5. Evaluation zu den Phasen 2, 3 und 4 als Pfeile im Innenring (zwei Bahnen, kreuzungsfrei); Kreis dafür etwas größer (Durchmesser 64 statt 60 mm), Kern kleiner"
    ],
-   "alt": "Das CRISP-DM-Modell als Kreislauf aus sechs Phasen um den Kern Daten: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation und Deployment. Zwischen den ersten beiden sowie zwischen Data Preparation und Modeling wird hin und her gewechselt, von der Evaluation führt eine Rückkopplung zum Business Understanding. Eine Liste erläutert die Schritte auf Deutsch, von der Aufgabendefinition bis zur Anwendung der Ergebnisse."
+   "alt": "Das CRISP-DM-Modell als Kreislauf aus sechs Phasen um den Kern Daten: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation und Deployment. Zwischen den ersten beiden sowie zwischen Data Preparation und Modeling wird hin und her gewechselt, von der Evaluation führen Rückkopplungen zum Business Understanding, zum Data Understanding, zur Data Preparation und zum Modeling. Eine Liste erläutert die Schritte auf Deutsch, von der Aufgabendefinition bis zur Anwendung der Ergebnisse.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Die Phase 5 Evaluation kann auch Rücksprünge zu den Phasen 2., 3. und 4 haben. Hier würden dann Pfeile fehlen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Von Phase 5 (Evaluation) führen jetzt zusätzlich Rückpfeile zu den Phasen 2, 3 und 4; der Rückpfeil zu Phase 1 und die Pfeile 2 → 1 und 4 → 3 bleiben. Für die zusätzlichen Pfeile ist der Kreis etwas größer und der Kern „Daten“ etwas kleiner."
+    }
+   ]
   },
   "5.66": {
    "status": "pruefung",
@@ -904,25 +958,46 @@
    "status": "pruefung",
    "datei": "Arten_von_RPA-Loesungen",
    "kommentare": [
-    "Pyramide mit drei Stufen wie im Original; einheitliches Grau → Helligkeitsleiter nach oben (hellgrau, grau, Spitze rot als Schlüsselelement) – oder Spitze ohne Rot (anthrazit), falls der Text keine Stufe hervorhebt?",
     "Schräger Pfeil entlang der linken Flanke mit gedrehter Beschriftung → senkrechter Pfeil links, „Zunehmender Wert und Intelligenz“ waagerecht oben",
     "In der Spitze war die Beschreibung abgeschnitten („KI für Lernfähigkeit des“) – vollständig nach dem Folientext „… des Systems“; Spitze dafür etwas höher als die übrigen Stufen",
-    "„Anstoßen und kontrollieren“ → „Anstoßen und Kontrollieren“ (substantiviertes Verb); weiße Schrift auf Grau des Originals (zu schwacher Kontrast) → dunkle Schrift"
+    "„Anstoßen und kontrollieren“ → „Anstoßen und Kontrollieren“ (substantiviertes Verb); weiße Schrift auf Grau des Originals (zu schwacher Kontrast) → dunkle Schrift",
+    "Pyramide mit drei Stufen wie im Original; einheitliches Grau → Helligkeitsleiter nach oben (hellgrau, grau, Spitze anthrazit mit weißer Schrift)",
+    "Revision DS 24.11.2026: Spitze in dunklem Grau (Anthrazit) statt Rot"
    ],
-   "alt": "Pyramide mit drei Stufen: Unten einfache RPA-Systeme, bei denen ein menschlicher Anwender die Ausführung von Aufgaben anstößt und kontrolliert; in der Mitte erweiterte RPA-Systeme, die Aufgaben selbstständig ausführen; an der hervorgehobenen Spitze intelligente RPA-Systeme mit KI für die Lernfähigkeit des Systems. Ein Pfeil links zeigt nach oben: Wert und Intelligenz nehmen zu."
+   "alt": "Pyramide mit drei Stufen: Unten einfache RPA-Systeme, bei denen ein menschlicher Anwender die Ausführung von Aufgaben anstößt und kontrolliert; in der Mitte erweiterte RPA-Systeme, die Aufgaben selbstständig ausführen; an der dunkel abgesetzten Spitze intelligente RPA-Systeme mit KI für die Lernfähigkeit des Systems. Ein Pfeil links zeigt nach oben: Wert und Intelligenz nehmen zu.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Oberste Pyramidenabschnitt dunklerer Grauton statt rot."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der oberste Pyramidenabschnitt ist jetzt dunkelgrau (Anthrazit mit weißer Schrift) statt rot; die Abbildung enthält damit kein Rot mehr."
+    }
+   ]
   },
   "5.69": {
    "status": "pruefung",
-   "datei": "Isi_Sprachassistentin_in_der_Diamant-Software_Diamant-4",
+   "datei": "Sprachassistent_in_einer_Rechnungswesensoftware",
    "kommentare": [
     "Produktscreenshot softwareneutral als Dialogfenster „Assistent“ nachgebaut: Startseite im Hintergrund, Favoritenleiste, Produkt- und Assistentenname („Isi“), Mandantenname „Futura GmbH“ (→ Mandant 025), schwebender Logo-Knopf und Symbole entfallen",
-    "Gesprächsverlauf und Werte des Originals übernommen (Juli 7,23–7,95 Mio. €; Mai 7,56, Juni 9,12, Juli 7,44 Mio. €); 27.05.2021 → 27.05.2027 (wieder Donnerstag), EUR → €, „3 Monate“ → „drei Monate“, „BWA Basisgrößen“ → „BWA-Basisgrößen“; Anrede „du“ → „Sie“ – bitte prüfen",
-    "Antwort zusätzlich als kleiner Bericht (Tabelle Vorjahr, Vorschau, Bandbreite, ΔVJ, Summe Mai–Juli); Vorjahreswerte und Bandbreiten für Mai/Juni erfunden, passend zur Textaussage (meist höher, kumuliert stets höher)",
     "Fragen weiß mit Rahmen, Antworten grau (Eingabe/Anzeige wie in den Masken) statt blauer/weißer Sprechblasen mit Schatten",
-    "HTML bedienbar: vier vorgeschlagene Fragen (Umsatzerlöse mit Rückfrage BWA/HGB, Liquidität, überfällige Forderungen, Personalkosten) bzw. freie Eingabe → Antwort mit Tabelle; Spracheingabe nur als Hinweis",
-    "Caption ohne Produktnamen? z. B. ‚Sprachassistent in einer Rechnungswesensoftware (in Anlehnung an Diamant Software 2021)‘"
+    "Revision DS 24.11.2026: eigenes Dialogbeispiel, unabhängig vom Original (dort Prognose der Umsatzerlöse): Frage nach Budgetüberschreitungen der Kostenstellen im ersten Quartal 2027, Rückfrage zur Vergleichsbasis (Budget oder Forecast), Antwort mit kleinem Bericht (Budget, Ist, Abweichung je Kostenstelle); alle Zahlen erfunden, Datum 12.04.2027",
+    "HTML bedienbar: vier vorgeschlagene Fragen (Kostenstellen mit Rückfrage Budget/Forecast, Liquidität, überfällige Forderungen, Personalkosten) bzw. freie Eingabe → Antwort mit Tabelle; Spracheingabe nur als Hinweis",
+    "Revision DS 24.11.2026: Caption ohne Produktnamen: „Sprachassistent in einer Rechnungswesensoftware“; die Quellenangabe „(In Anlehnung an Diamant Software 2021)“ entfällt, weil Dialog und Gestaltung nun eigenständig sind – bei Bedarf wieder ergänzen"
    ],
-   "alt": "Dialogfenster eines KI-Assistenten im Rechnungswesen: Auf die Frage, wie sich die Umsatzerlöse entwickeln werden, fragt der Assistent nach der Basisgröße (BWA oder HGB). Nach der Wahl „BWA-Basisgrößen“ antwortet er mit einer Prognose für Mai bis Juli 2027 – im Juli voraussichtlich 7,23 bis 7,95 Mio. € – und einer kleinen Tabelle mit Vorjahr, Vorschau, Bandbreite und Abweichung; kumuliert liegen die Umsatzerlöse 2,9 % über dem Vorjahr. Unten stehen das Eingabefeld, Knöpfe für Spracheingabe und Senden sowie eine Auswahl vorgeschlagener Fragen."
+   "alt": "Dialogfenster eines KI-Assistenten im Rechnungswesen: Auf die Frage, welche Kostenstellen ihr Budget im ersten Quartal überschritten haben, fragt der Assistent nach der Vergleichsbasis (Budget oder Forecast). Nach der Wahl „Budget“ antwortet er, dass drei von acht Kostenstellen zusammen 96 Tsd. € über dem Budget liegen, am stärksten die Instandhaltung mit 58 Tsd. € (+12,1 %), und belegt dies mit einer kleinen Tabelle aus Budget, Ist und Abweichung; insgesamt liegen die Kosten 51 Tsd. € (+1,2 %) über dem Budget. Unten stehen das Eingabefeld, Knöpfe für Spracheingabe und Senden sowie eine Auswahl vorgeschlagener Fragen.",
+   "caption": "Sprachassistent in einer Rechnungswesensoftware",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Bitte Dialogbeispiel vom Original lösen und eigenes entwickeln, wenn es Softwareunabhängig sein soll. Dann Caption ohne Produktnamen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Der Dialog ist ein eigenes Beispiel und unabhängig vom Original: Frage nach Budgetüberschreitungen der Kostenstellen im ersten Quartal, Rückfrage „Budget oder Forecast“, Antwort mit kleiner Tabelle (alle Zahlen erfunden). Die Caption lautet ohne Produktnamen „Sprachassistent in einer Rechnungswesensoftware“; die Quellenangabe „In Anlehnung an Diamant Software 2021“ ist entfallen und kann bei Bedarf wieder ergänzt werden."
+    }
+   ]
   },
   "5.70": {
    "status": "pruefung",
@@ -932,9 +1007,20 @@
     "Prämissen des Originals exakt übernommen (BU HB1 → Business Unit „Antriebe“): Worst/Mittel/Best → je Treiber Min/Wahrscheinlich/Max (Dreipunktschätzung) mit Spalte „Szenario“ (bei Einkaufspreisen und Löhnen ist Max der Worst Case); Spalte „Worst“ → „Ø Jahr“ (EKP +10,5/−3,3, Tarif +3,0/+1,0 wie im Original); leere Tarifzellen Jan–Jun → ±0,0",
     "Ergänzt: Tornado „Wirkung auf den DB Business Unit“ (je Treiber Worst/Best Case in Mio. €, abhängig von Filtern und Zeitraum; „Alle Treiber zusammen“ = Spanne Worst–Best Case in Abb. 5.71) und Bandbreite je Monat für den gewählten Treiber – bitte prüfen, ob gewünscht",
     "Annahmen: Einheit Mio. € (fehlte im Original), Juni 2018 → Stichtag 30.06.2027; Tarifsteigerung für alle Business Units gleich; Business Units „Steuerungen“, „Sensoren“ sowie Regionen, Produkt- und Kundengruppen erfunden",
-    "Hinweis: Die Dreipunktschätzungen sind in Abb. 5.71 zugleich Dreiecksverteilungen einer Monte-Carlo-Simulation (vgl. Abb. 3.193) – Buchtext ggf. um einen Satz ergänzen"
+    "Hinweis: Die Dreipunktschätzungen sind in Abb. 5.71 zugleich Dreiecksverteilungen einer Monte-Carlo-Simulation (vgl. Abb. 3.193) – Buchtext ggf. um einen Satz ergänzen",
+    "Revision DS 24.11.2026: HTML-Fassung: Monatswerte der Prämissen als Planung editierbar (Klick auf die Zelle, Enter übernimmt, Esc verwirft; Prüfung Min ≤ Wahrscheinlich ≤ Max, zulässig −50 bis +100 %); geänderte Werte fett und unterstrichen, „Zurücksetzen“ stellt die Ausgangswerte wieder her; Ø Jahr, Botschaften, Tornado, Bandbreite und CSV rechnen mit den geänderten Werten. Druckfassung (PNG) unverändert; Tornado und Bandbreite je Monat bleiben wie bestätigt"
    ],
-   "alt": "Dashboard mit den Prämissen einer Bandbreitenplanung der Business Unit Antriebe für 2027. Oben stehen je Treiber – Verkaufspreise, Einkaufspreise, Fertigungslöhne – Minimum, wahrscheinlicher Wert und Maximum je Monat mit Jahresmittel; die Einkaufspreise haben die größte Bandbreite (−6 % bis +16 % im Dezember). Unten zeigt ein Tornado die Wirkung der Bandbreiten auf den DB Business Unit von Januar bis Juni (zusammen −10,4 bis +7,1 Mio. €), daneben die zum Jahresende wachsende Bandbreite der Einkaufspreise als Fläche."
+   "alt": "Dashboard mit den Prämissen einer Bandbreitenplanung der Business Unit Antriebe für 2027. Oben stehen je Treiber – Verkaufspreise, Einkaufspreise, Fertigungslöhne – Minimum, wahrscheinlicher Wert und Maximum je Monat mit Jahresmittel; die Einkaufspreise haben die größte Bandbreite (−6 % bis +16 % im Dezember). Unten zeigt ein Tornado die Wirkung der Bandbreiten auf den DB Business Unit von Januar bis Juni (zusammen −10,4 bis +7,1 Mio. €), daneben die zum Jahresende wachsende Bandbreite der Einkaufspreise als Fläche.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Bitte in HTML-Version die Zellwerte als Planung editierbar gestalten. Ergänzt: Tornado „Wirkung auf den DB Business Unit“ (je Treiber Worst/Best Case in Mio. €, abhängig von Filtern und Zeitraum; „Alle Treiber zusammen“ = Spanne Worst–Best Case in Abb. 5.71) und Bandbreite je Monat für den gewählten Treiber – bitte prüfen, ob gewünscht: Antwort JA"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "In der HTML-Fassung lassen sich die Monatswerte der Prämissen jetzt direkt in der Zelle ändern (Klick, Enter übernimmt); geprüft wird Min ≤ Wahrscheinlich ≤ Max, geänderte Werte sind hervorgehoben, „Zurücksetzen“ stellt die Ausgangswerte wieder her. Jahresmittel, Tornado und Bandbreitendiagramm rechnen sofort mit; die Druckfassung ist unverändert, Tornado und Bandbreite je Monat bleiben."
+    }
+   ]
   },
   "5.71": {
    "status": "pruefung",
@@ -1432,16 +1518,28 @@
   },
   "4.23": {
    "status": "pruefung",
-   "datei": "Multidimensionale_Analysen_mit_Powerplay_von_Cognos",
+   "datei": "Multidimensionale_Analysen_mit_einem_OLAP-Werkzeug",
    "kommentare": [
     "Produktscreenshot softwareneutral als interaktive OLAP-Analyse 1024 × 646 px nachgebaut (HTML, PNG): Dimensionsbaum, Dimensionsleiste (Schicht = Perspektive, „Schicht 1 von 4“; Spaltendimension), Kreuztabelle; neu: Säulendiagramm der gewählten Kennzahl; Titel-, Menü-, Symbol- und Statusleisten sowie Titelgrafik mit Namen entfallen",
-    "Echter Drill-down: Jahr › Quartale, Konzern › Standorte › Produkte (Klick auf Spaltenkopf, Säule oder Baumelement; „↑ Ebene höher“/Esc zurück); Schnitte über den Baum; alle Quoten aus additiven Basisgrößen gerechnet, daher auf jeder Ebene stimmig",
     "Konzernwerte Finanzen = Original (2000–2002 → 2024–2026): EVA, EBT, Cash Flow, Umsatz, Bruttoertrag, Risikovorsorgekosten exakt, WACC/ROI/ROS/Risikoquoten/Verschuldungsgrad auf zwei Nachkommastellen; Verteilung auf Quartale, Standorte (Dortmund, Hamburg, München wie im Original), Produkte sowie die Perspektiven Markt und Kunden, Prozesse, Potenziale erfunden",
     "Korrigiert: Veränderungen von Quoten in %-Pkt. statt in % (z. B. ROI −0,98 %-Pkt. statt −12,68 %); Farbe nach Wirkung statt „Chancen grün, Risiken rot“; dunkel-/hellblaue Bänder → Gruppenzeilen; Beträge in Tsd. € statt €, Einheit an der Kennzahl",
     "Bitte prüfen: Wirkungsrichtung WACC (Anstieg ungünstig) und Verschuldungsgrad (Rückgang günstig); Jahre auf 2024–2026 verschoben",
-    "Caption ohne Produktnamen? z. B. ‚Multidimensionale Analyse der Balanced Chance and Risk Card in einem OLAP-Werkzeug‘"
+    "Echter Drill-down: Jahr › Quartale, Konzern › Standorte › Business Units (Klick auf Spaltenkopf, Säule oder Baumelement; „↑ Ebene höher“/Esc zurück); Schnitte über den Baum; alle Quoten aus additiven Basisgrößen gerechnet, daher auf jeder Ebene stimmig",
+    "Revision DS 24.11.2026: Dimension „Produkt“ (Produkt A, B, C) durch „Business Unit“ (Antriebe, Steuerungen, Sensoren – Namen wie in Abb. 5.70/5.71) ersetzt, weil Kennzahlen wie Krankenquote oder Austritte je Produkt nicht sinnvoll sind; Werte unverändert",
+    "Revision DS 24.11.2026: Caption ohne Produktnamen: „Multidimensionale Analysen mit Powerplay von Cognos“ → „Multidimensionale Analysen mit einem OLAP-Werkzeug“"
    ],
-   "alt": "Multidimensionale Analyse der Balanced Chance and Risk Card mit einem Dimensionsbaum links (Jahr, Standort, Produkt, Kennzahlen) und einer Dimensionsleiste für Schicht und Spaltendimension. Die Kreuztabelle zeigt für die Perspektive Finanzen acht Chancen- und fünf Risikokennzahlen des Konzerns für 2024 bis 2026 mit Veränderungen, farbig nach Wirkung; sieben von 13 Kennzahlen haben sich verbessert, die Risikovorsorgekosten aber um 322,5 % erhöht. Darunter zeigt ein Säulendiagramm den EVA, der von 56 auf 241 Tsd. € steigt; ein Klick auf Jahr oder Standort öffnet Quartale bzw. Produkte."
+   "alt": "Multidimensionale Analyse der Balanced Chance and Risk Card mit einem Dimensionsbaum links (Jahr, Standort, Business Unit, Kennzahlen) und einer Dimensionsleiste für Schicht und Spaltendimension. Die Kreuztabelle zeigt für die Perspektive Finanzen acht Chancen- und fünf Risikokennzahlen des Konzerns für 2024 bis 2026 mit Veränderungen, farbig nach Wirkung; sieben von 13 Kennzahlen haben sich verbessert, die Risikovorsorgekosten aber um 322,5 % erhöht. Darunter zeigt ein Säulendiagramm den EVA, der von 56 auf 241 Tsd. € steigt; ein Klick auf Jahr oder Standort öffnet Quartale bzw. Business Units.",
+   "caption": "Multidimensionale Analysen mit einem OLAP-Werkzeug",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Produkte gegen Segement, Sparte oder Business Unit tauschen. (Produkte, können z. B. keine Krankentage haben, Segemente/Sparten/Business Unit hingegen schon) Caption ohne Produktnamen fassen"
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die Dimension „Produkt“ (Produkt A, B, C) ist durch „Business Unit“ (Antriebe, Steuerungen, Sensoren) ersetzt, im Dimensionsbaum, in der Spaltenauswahl und im Drill-down; die Werte sind unverändert. Die Caption lautet ohne Produktnamen „Multidimensionale Analysen mit einem OLAP-Werkzeug“."
+    }
+   ]
   },
   "4.24": {
    "status": "pruefung",
@@ -1740,9 +1838,20 @@
     "Werte unverändert aus dem Original; Anordnung wie im Original (Stammdaten oben, Bewegungsdaten unten); Schlüssel als „PK“/„FK“ über den Spalten statt fett/unterstrichen",
     "Hellblaue Kopfzeilen und Rahmen entfallen; Text linksbündig, Zahlen rechtsbündig (Original: alles rechtsbündig); Datum „2024-10-01“ → „01.10.2024“; „VerkaufsDatum“/„VerkaufsOrt“ → „Verkaufsdatum“/„Verkaufsort“ wie in 5.17 und 5.19–5.22",
     "Frage: „Vegan“ in Verkaufsdetails als Merkmal der Position gedeutet (Verkauf 2, Cappuccino: Nein, obwohl VeganeOption = Ja) – hinge es nur von ProduktID ab, verletzte die Tabelle die 2NF; im Text klarstellen?",
-    "Frage: „Coffeebike“ ist auch ein Markenname – ggf. neutral „Kaffeefahrrad“? (unverändert übernommen, ebenso in 5.20)"
+    "Frage: „Coffeebike“ ist auch ein Markenname – ggf. neutral „Kaffeefahrrad“? (unverändert übernommen, ebenso in 5.20)",
+    "Revision DS 24.11.2026: Die beiden unteren Tabellen getauscht: „Verkäufe“ steht jetzt links, „Verkaufsdetails“ rechts; Spalten von „Kunden“ und „Verkäufe“ dafür wenige Pixel schmaler"
    ],
-   "alt": "Vier verknüpfte Tabellen mit Beispieldaten in dritter Normalform: Produkte mit sechs Artikeln von Latte Macchiato bis Cold Brew samt Preis und veganer Option, Kunden mit Max, Anna und Lisa-Marie, Verkaufsdetails mit sieben Positionen (VerkaufsID, ProduktID, Menge, Vegan) und Verkäufe mit sechs Verkäufen vom 01. bis 03.10.2024 an drei Verkaufsorten. Primär- und Fremdschlüssel sind über den Spalten gekennzeichnet; jeder Produkt- und Kundendatensatz steht nur einmal, die Schlüssel verbinden die Tabellen."
+   "alt": "Vier verknüpfte Tabellen mit Beispieldaten in dritter Normalform: Produkte mit sechs Artikeln von Latte Macchiato bis Cold Brew samt Preis und veganer Option, Kunden mit Max, Anna und Lisa-Marie, Verkäufe mit sechs Verkäufen vom 01. bis 03.10.2024 an drei Verkaufsorten und Verkaufsdetails mit sieben Positionen (VerkaufsID, ProduktID, Menge, Vegan). Primär- und Fremdschlüssel sind über den Spalten gekennzeichnet; jeder Produkt- und Kundendatensatz steht nur einmal, die Schlüssel verbinden die Tabellen.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Verkäufe und Verkaufsdetails von der Anordnung rechts bzw. links tauschen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Die beiden unteren Tabellen sind getauscht: „Verkäufe“ steht jetzt links, „Verkaufsdetails“ rechts. Inhalte und obere Tabellen sind unverändert."
+    }
+   ]
   },
   "5.19": {
    "status": "pruefung",
@@ -1992,10 +2101,20 @@
     "blau verlaufender Bereich → gestrichelter Container „Daten-Virtualisierung“; Würfel und Zylinder → beschriftete Boxen; Rollen Kap. 5: Quellen box, Datenhaltung (Data Marts, Core DWH, ODS, CMS/DMS, Speicher im Data Lake) box_hi, kein Rot (Rot erst für Sandboxing in Abb. 5.38)",
     "Verbindungen nach der Folie, orthogonal und ohne Knotenpunkte; ODS und CMS/DMS zur Analyse als Sammelleitung (eine Kreuzung mit dem Zweig zum Data Mart statt zwei); Data Marts rechts vom Bandtitel, damit die Pfeile frei bleiben",
     "Korrekturen: „Daten - Virtualisierung“ → „Daten-Virtualisierung“, „Core DWH“ → „Core Data Warehouse“, „Analytische DB“ → „Analytische Datenbank“, „Sensor-Daten“ → „Sensordaten“, „Portal etc.“ → „Portale etc.“ (wie Abb. 5.16), „Excel“ → „Tabellenkalkulation“ (softwareneutral); „…“ bei den Quellen entfallen",
-    "Frage: Die ETL-Leitung führt in der Folie auch direkt zum zweiten Data Mart (rechts hoch) – so übernommen; gemeint vielleicht Data Lake → Data Mart?",
-    "Frage: „Hadoop HDFS“ (Open-Source-Technik) belassen – oder neutral „verteiltes Dateisystem“?"
+    "Revision DS 24.11.2026: ETL-Leitung zum zweiten Data Mart bleibt wie in der Folie (wechselseitiger Datenaustausch möglich)",
+    "Revision DS 24.11.2026: „Hadoop HDFS“ → neutral „Verteiltes Dateisystem“; die drei Speicher im Data Lake dafür in 6,5 pt. Abb. 5.38 (Sandboxing) und Abb. 5.56 (mobile BI) zeigen weiterhin „Hadoop HDFS“ – ohne Auftrag nicht geändert"
    ],
-   "alt": "BI-Architektur in drei Ebenen, links traditionelle, rechts explorative BI. Traditionell laden ETL-Prozesse Daten aus internen Quellsystemen (ERP, CRM, Tabellenkalkulation) in Core Data Warehouse, ODS, CMS/DMS und Data Marts; explorativ gelangen externe Daten (Sensordaten, Web-Logs, Web-Dokumente) per ELT in den Data Lake mit analytischer Datenbank, Hadoop HDFS und NoSQL oder per Streaming direkt in die Analyse- und Planungswerkzeuge. Die Datenhaltung ist als Daten-Virtualisierung zusammengefasst, Self-Service BI reicht über alle Ebenen, Big Data nimmt zur explorativen Seite hin zu."
+   "alt": "BI-Architektur in drei Ebenen, links traditionelle, rechts explorative BI. Traditionell laden ETL-Prozesse Daten aus internen Quellsystemen (ERP, CRM, Tabellenkalkulation) in Core Data Warehouse, ODS, CMS/DMS und Data Marts; explorativ gelangen externe Daten (Sensordaten, Web-Logs, Web-Dokumente) per ELT in den Data Lake mit analytischer Datenbank, verteiltem Dateisystem und NoSQL oder per Streaming direkt in die Analyse- und Planungswerkzeuge. Die Datenhaltung ist als Daten-Virtualisierung zusammengefasst, Self-Service BI reicht über alle Ebenen, Big Data nimmt zur explorativen Seite hin zu.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Frage: Die ETL-Leitung führt in der Folie auch direkt zum zweiten Data Mart (rechts hoch) – so übernommen; gemeint vielleicht Data Lake → Data Mart? Antwort: Die Pfeile sind so in Ordnung! Wechselseitiger Datenaustausch möglich. Frage: „Hadoop HDFS“ (Open-Source-Technik) belassen – oder neutral „verteiltes Dateisystem“? Antwort: Bitte auf verteiltes Dateisystem umstellen."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "„Hadoop HDFS“ im Data Lake heißt jetzt neutral „Verteiltes Dateisystem“; die Pfeile bleiben wie bestätigt unverändert. Hinweis: Abb. 5.38 und Abb. 5.56 zeigen weiterhin „Hadoop HDFS“ – dort wurde ohne Auftrag nichts geändert."
+    }
+   ]
   },
   "5.33": {
    "status": "pruefung",
@@ -2031,12 +2150,22 @@
    "status": "pruefung",
    "datei": "Technologien_sowie_Analyse-_und_Prognosemethoden_im_Einsatz_von_Business_Intelligence_bzw_Business_Analytics",
    "kommentare": [
-    "Aufbau bleibt: gestrichelter Rahmen „Business Intelligence“ (Titel oben), darin durchgezogener Rahmen mit „Business Analytics“ unten rechts, darin zwei Spalten als Karten mit Kopfleiste",
     "blaue Umrandung der explorativen Spalte (Hervorhebung) → Kartenrumpf grau (box_hi); Unterstreichungen und Serifenschrift entfallen; Unterpunkte mit „–“",
     "Korrekturen: „DWH-Technologien“ → „Data-Warehouse-Technologien“, „KDD“ aufgelöst (Knowledge Discovery in Databases), „Deskriptive“ nach Doppelpunkt klein, „(Budget-, Mittelfrist-, Strategischer Planung …)“ → „(Budget-, Mittelfrist- und strategische Planung …)“, „Machine und Deep Learning“ → „Machine Learning und Deep Learning“, Trennstriche aus Zeilenumbrüchen entfernt",
-    "Frage: Bezieht sich „Business Analytics“ auf den inneren Rahmen (beide Spalten) oder nur auf die explorative Spalte? Lage wie im Original übernommen"
+    "Aufbau: gestrichelter Rahmen „Business Intelligence“ (Titel oben), darin zwei Spalten als Karten mit Kopfleiste",
+    "Revision DS 24.11.2026: „Business Analytics“ bezieht sich nur auf die explorative Spalte: Der durchgezogene Rahmen umschließt nur noch diese Spalte, die Beschriftung steht mittig direkt darunter"
    ],
-   "alt": "Zwei Spalten innerhalb der Rahmen Business Intelligence und Business Analytics. Traditionelle Business Intelligence umfasst Data-Warehouse-Technologien, Dashboards und Cockpits, Data Mining, OLAP-Analysen, Kommentierung, integrierte Unternehmensplanung und unternehmensweite Maßnahmenableitung; explorative Business Intelligence umfasst In-Memory-Technik, NoSQL-Datenbanken, Hadoop und Big-Data-Analytics mit modellbasierten, prädiktiven, präskriptiven und KI-gestützten Analysen, Data Discovery und Data Visualization sowie modellbasierter Maßnahmenableitung."
+   "alt": "Zwei Spalten innerhalb des Rahmens Business Intelligence; die rechte, explorative Spalte ist zusätzlich als Business Analytics umrahmt und beschriftet. Traditionelle Business Intelligence umfasst Data-Warehouse-Technologien, Dashboards und Cockpits, Data Mining, OLAP-Analysen, Kommentierung, integrierte Unternehmensplanung und unternehmensweite Maßnahmenableitung; explorative Business Intelligence umfasst In-Memory-Technik, NoSQL-Datenbanken, Hadoop und Big-Data-Analytics mit modellbasierten, prädiktiven, präskriptiven und KI-gestützten Analysen, Data Discovery und Data Visualization sowie modellbasierter Maßnahmenableitung.",
+   "revisionen": [
+    {
+     "datum": "25.11.2026",
+     "wunsch": [
+      "24.11.2026 DS: Frage: Bezieht sich „Business Analytics“ auf den inneren Rahmen (beide Spalten) oder nur auf die explorative Spalte? Antwort nur auf die explorative Spalte. Von daher kann das Wort auch direkt unter dieser Spalte dargestellt werden."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "„Business Analytics“ bezieht sich jetzt nur auf die explorative Spalte: Der durchgezogene Rahmen umschließt nur noch diese Spalte, die Beschriftung steht mittig direkt darunter. Der Rahmen „Business Intelligence“ um beide Spalten bleibt."
+    }
+   ]
   },
   "5.35": {
    "status": "pruefung",

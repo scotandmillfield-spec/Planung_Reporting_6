@@ -1,8 +1,8 @@
 """Abb. 5.34 – Technologien sowie Analyse- und Prognosemethoden im Einsatz von Business Intelligence bzw.
 Business Analytics."""
-# Muster: Aufbau der Folie – äußerer gestrichelter Rahmen „Business Intelligence“ (Titel oben mittig), darin ein
-# durchgezogener Rahmen, den „Business Analytics“ unten rechts beschriftet, darin zwei Spalten als Karten mit
-# Kopfleiste. Die blaue Umrandung der explorativen Spalte (Hervorhebung) → Kartenrumpf box_hi.
+# Muster: Aufbau der Folie – äußerer gestrichelter Rahmen „Business Intelligence“ (Titel oben mittig), darin zwei
+# Spalten als Karten mit Kopfleiste. Revision DS 24.11.2026: „Business Analytics“ bezieht sich nur auf die explorative
+# Spalte – der durchgezogene Rahmen umschließt daher nur diese Spalte, die Beschriftung steht direkt darunter. Die blaue Umrandung der explorativen Spalte (Hervorhebung) → Kartenrumpf box_hi.
 # Entfernt: Unterstreichungen der Titel, Serifenschrift. Aufzählungen über bullet= (2. Ebene „–“).
 # Korrekturen: „DWH-Technologien“ → „Data-Warehouse-Technologien“, „KDD“ aufgelöst, Kleinschreibung nach Doppelpunkt
 # („deskriptive …“), „(Budget-, Mittelfrist-, Strategischer Planung …)“ → „(Budget-, Mittelfrist- und strategische
@@ -64,26 +64,28 @@ def build(theme):
               for i, (s, lv) in enumerate(EXPL)]
 
     XO, WO = 0.3, W - 0.6               # Rahmen Business Intelligence
-    XI, WI = 2.0, W - 4.0               # Rahmen Business Analytics
     G = 2.0
-    KW = (WI - 3 * G) / 2
+    PAD = 1.4                           # Abstand Rahmen Business Analytics – Karte
+    XL = XO + G                         # linke Karte
+    KW = (WO - 3 * G - 2 * PAD) / 2
+    XR = XL + KW + G + PAD              # rechte Karte
     th = max(tmp.measure(p_trad, KW, ins=(1.6, 1.2)), tmp.measure(p_expl, KW, ins=(1.6, 1.2)))
     KHH = KH + th + 0.2
     yt = 0.3
-    yi = yt + 5.6                       # Oberkante innerer Rahmen
-    yk = yi + G
-    ib = yk + KHH + G                   # Unterkante innerer Rahmen
-    yb = ib + 0.6                       # Beschriftung Business Analytics
-    ob = yb + 4.0 + 0.8
+    yi = yt + 5.6                       # Oberkante Rahmen Business Analytics
+    yk = yi + PAD
+    yb = yk + KHH + 0.6                 # Beschriftung Business Analytics (unter der explorativen Spalte)
+    ib = yb + 4.0 + 0.4                 # Unterkante Rahmen Business Analytics
+    ob = ib + G
     H = round(ob + 0.3, 1)
     f = Fig(W, H, theme, STEM)
 
     f.box(XO, yt, WO, ob - yt, None, role="container", name="Rahmen Business Intelligence")
     f.text(XO, yt + 0.6, WO, 4.4, [P("Business Intelligence", size="head", bold=True)], align="c", anchor="m",
            name="Titel Business Intelligence")
-    f.box(XI, yi, WI, ib - yi, None, role="box_plain", name="Rahmen Business Analytics")
-    f.text(XI, yb, WI - 1.0, 4.0, [P("Business Analytics", size="head", bold=True)], align="r", anchor="m",
+    f.box(XR - PAD, yi, KW + 2 * PAD, ib - yi, None, role="box_plain", name="Rahmen Business Analytics")
+    f.text(XR, yb, KW, 4.0, [P("Business Analytics", size="head", bold=True)], align="c", anchor="m",
            name="Titel Business Analytics")
-    karte(f, XI + G, yk, KW, KHH, "Traditionelle Business Intelligence", p_trad, rumpf="box")
-    karte(f, XI + 2 * G + KW, yk, KW, KHH, "Explorative Business Intelligence", p_expl, rumpf="box_hi")
+    karte(f, XL, yk, KW, KHH, "Traditionelle Business Intelligence", p_trad, rumpf="box")
+    karte(f, XR, yk, KW, KHH, "Explorative Business Intelligence", p_expl, rumpf="box_hi")
     return f

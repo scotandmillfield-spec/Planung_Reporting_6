@@ -2113,6 +2113,14 @@
      ],
      "ergebnis": "umgesetzt",
      "text": "„Hadoop HDFS“ im Data Lake heißt jetzt neutral „Verteiltes Dateisystem“; die Pfeile bleiben wie bestätigt unverändert. Hinweis: Abb. 5.38 und Abb. 5.56 zeigen weiterhin „Hadoop HDFS“ – dort wurde ohne Auftrag nichts geändert."
+    },
+    {
+     "datum": "26.11.2026",
+     "wunsch": [
+      "26.11.2026 DS: Kästchen Core Data Warehouse größer stellen und weißer Kasten Data Lake kleiner darstellen in der Höhe. „Hadoop HDFS“ im Data Lake heißt jetzt neutral „Verteiltes Dateisystem“; die Pfeile bleiben wie bestätigt unverändert. Hinweis: Abb. 5.38 und Abb. 5.56 zeigen weiterhin „Hadoop HDFS“ – wenn dort später Änderungen gewünscht werden, sollte die Benennung und die Anordnung der Kästchen ähnlich sein."
+     ],
+     "ergebnis": "umgesetzt",
+     "text": "Das Kästchen „Core Data Warehouse“ ist jetzt deutlich größer (höher und breiter; ODS und CMS/DMS rücken dafür etwas nach rechts), der weiße Kasten „Data Lake“ ist in der Höhe verkleinert. Pfeile und Beschriftungen sind unverändert. Abb. 5.38 und Abb. 5.56 wurden ohne Auftrag nicht geändert; bei einer späteren Überarbeitung werden Benennung und Anordnung der Kästchen an Abb. 5.32 angeglichen."
     }
    ]
   },

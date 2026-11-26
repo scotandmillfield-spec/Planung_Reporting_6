@@ -1207,6 +1207,15 @@
    "kommentar": "In der HTML-Fassung lassen sich die Monatswerte der Prämissen jetzt direkt in der Zelle ändern (Klick, Enter übernimmt); geprüft wird Min ≤ Wahrscheinlich ≤ Max, geänderte Werte sind hervorgehoben, „Zurücksetzen“ stellt die Ausgangswerte wieder her. Jahresmittel, Tornado und Bandbreitendiagramm rechnen sofort mit; die Druckfassung ist unverändert, Tornado und Bandbreite je Monat bleiben.",
    "auftrag": "18f8cc15e325",
    "zeit": "2026-11-25T11:07"
+  },
+  {
+   "id": "2026-11-26-abb-5-32-1",
+   "schluessel": "abb-5-32",
+   "von": "Revision",
+   "status": "Nächste Version",
+   "kommentar": "Das Kästchen „Core Data Warehouse“ ist jetzt deutlich größer (höher und breiter; ODS und CMS/DMS rücken dafür etwas nach rechts), der weiße Kasten „Data Lake“ ist in der Höhe verkleinert. Pfeile und Beschriftungen sind unverändert. Abb. 5.38 und Abb. 5.56 wurden ohne Auftrag nicht geändert; bei einer späteren Überarbeitung werden Benennung und Anordnung der Kästchen an Abb. 5.32 angeglichen.",
+   "auftrag": "fc5085a0bc55",
+   "zeit": "2026-11-26T10:57"
   }
  ],
  "neue_zeilen": [

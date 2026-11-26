@@ -78,11 +78,16 @@ def zeichne(theme, variante="traditionell"):
     mh = 7.0
     yb2 = ym + mh + 2.2                         # Leitung Core DWH → Data Marts
     yj = yb2 + 1.8                              # Sammelleitung ODS, CMS/DMS → Analyse
-    yB = yj + 2.2                               # Core DWH, ODS, CMS/DMS
+    # Revision DS 26.11.2026 (Abb. 5.32): Core Data Warehouse größer (höher und breiter, ODS und CMS/DMS rücken
+    # dafür nach rechts), der weiße Kasten Data Lake niedriger. Abb. 5.38 bleibt bis zu einem eigenen Auftrag gleich.
+    gross = not sb
+    yB = yj + 2.2 + (1.0 if gross else 0.0)     # Core DWH, ODS, CMS/DMS
     bh = 7.0
+    ch_core = 10.0 if gross else bh             # Höhe Core DWH (Unterkante bündig mit ODS, CMS/DMS)
+    dx = 2.0 if gross else 0.0                  # Core DWH breiter, ODS und CMS/DMS nach rechts
     ybus = yB + bh + 2.6                        # ETL-Sammelleitung
-    ydl = ym + 5.4                              # Data Lake (darüber Platz für „Cloud“ in Abb. 5.38)
     dlb = ybus + 2.2
+    ydl = dlb - 13.6 if gross else ym + 5.4     # Data Lake (in Abb. 5.38 darüber Platz für „Cloud“)
     kb = dlb + 3.8                              # Unterkante Container
     h2 = kb + 1.2 - y2
     y1 = y2 + h2 + GAPB
@@ -121,9 +126,9 @@ def zeichne(theme, variante="traditionell"):
     f.text(XI - 0.2, yk + 0.5, MARTS[0] - XI, 3.2, [P("Daten-Virtualisierung", size=6.5, bold=True)],
            align="l", anchor="t", bg=t.role("band").fill, name="Titel Daten-Virtualisierung")
 
-    C = B(CORE[0], yB, CORE[1], bh)
-    O = B(ODS[0], yB, ODS[1], bh)
-    CM = B(CMS[0], yB, CMS[1], bh)
+    C = B(CORE[0], yB + bh - ch_core, CORE[1] + dx, ch_core)
+    O = B(ODS[0] + dx, yB, ODS[1], bh)
+    CM = B(CMS[0] + dx, yB, CMS[1], bh)
     M = [B(x, ym, MW, mh) for x in MARTS]
     D = B(DL[0], ydl, DL[1], dlb - ydl)
 
@@ -138,7 +143,7 @@ def zeichne(theme, variante="traditionell"):
     # Core DWH → Data Marts (bzw. Sandboxing)
     A([(C.cx, C.y), (C.cx, yb2), (M[1].cx, yb2), (M[1].cx, M[1].b)], size="sm", name="Core DWH → Data Mart 2")
     A([(M[0].cx, yb2), (M[0].cx, M[0].b)], size="sm", name="Core DWH → " + ("Sandboxing" if sb else "Data Mart 1"))
-    A([(O.x, C.cy), (C.r, C.cy)], size="sm", name="ODS → Core DWH")
+    A([(O.x, O.cy), (C.r, O.cy)], size="sm", name="ODS → Core DWH")
     # ETL-Sammelleitung
     A([(XETL, y1 + TOP), (XETL, ybus)], size="sm", name="ETL interne Quellen → Sammelleitung")
     A([(C.cx, ybus), (D.x, ybus)], size="sm", name="ETL-Sammelleitung → Data Lake")
